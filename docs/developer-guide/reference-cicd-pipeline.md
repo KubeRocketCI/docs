@@ -1,12 +1,12 @@
 # Reference CI/CD Pipeline
 
-This document provides an in-depth overview of the Continuous Integration and Continuous Delivery (CI/CD) pipeline reference architecture implemented within the EPAM Delivery Platform (EDP). The pipeline is designed to facilitate efficient and automated software deployment across diverse environments, leveraging a suite of tools and methodologies for enhanced reliability, scalability, and security.
+This document provides an in-depth overview of the Continuous Integration and Continuous Delivery (CI/CD) pipeline reference architecture implemented within the KubeRocketCI. The pipeline is designed to facilitate efficient and automated software deployment across diverse environments, leveraging a suite of tools and methodologies for enhanced reliability, scalability, and security.
 
 ## CI/CD Pipeline Architecture
 
-The CI/CD pipeline within EDP orchestrates the software delivery process, encompassing several sequential stages to ensure robustness and reliability.
+The CI/CD pipeline within KubeRocketCI orchestrates the software delivery process, encompassing several sequential stages to ensure robustness and reliability.
 
-![EPAM Delivery Platform Reference CI/CD Pipeline](../assets/developer-guide/architecture/reference-cicd-pipeline.png)
+![KubeRocketCI CI/CD Pipeline](../assets/developer-guide/architecture/reference-cicd-pipeline.png)
 
 The CI/CD Pipeline follows a modular and scalable architecture that leverages various tools to ensure the reliability and efficiency of the software delivery process. The architecture can be divided into stages, each responsible for specific tasks. Explore the key components involved in the pipeline and their functionalities:
 

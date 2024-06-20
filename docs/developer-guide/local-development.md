@@ -1,12 +1,12 @@
 # Operator Development
 
-This page is intended for developers with the aim to share details on how to set up the local environment and start coding in Go language for EPAM Delivery Platform.
+This page is intended for developers with the aim to share details on how to set up the local environment and start coding in Go language for KubeRocketCI.
 
 ## Prerequisites
 
 * [Git](https://github.com/git-guides/install-git) is installed;
 
-* One of our [repositories](https://github.com/epam/edp-install/blob/master/README.md) where you would like to contribute is cloned locally;
+* One of our [repositories](https://github.com/epam/edp-install/blob/master/README.md#edp-repositories-description) where you would like to contribute is cloned locally;
 
 * [Docker](https://docs.docker.com/engine/install/) is installed;
 
@@ -120,4 +120,4 @@ That's it, you're all set! Good luck in coding!
 
 ## Related Articles
 
-* [KubeRocketCI Project Rules. Working Process](edp-workflow.md)
+* [KubeRocketCI Project Rules. Working Process](./edp-workflow.mdx)

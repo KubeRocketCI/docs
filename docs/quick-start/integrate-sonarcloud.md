@@ -1,10 +1,10 @@
 # Integrate SonarQube
 
-It is mandatory for EDP to have SonarQube integrated with the platform as all the pipelines include the `sonar` step.
+It is essential for KubeRocketCI to have SonarQube integrated with the platform as all the pipelines include the `sonar` step.
 
-SonarQube is a robust tool employed in build and code review pipelines to elevate code quality by detecting and reporting issues, along with offering improvement recommendations. SonarCloud, the SaaS solution provided by SonarQube, serves this purpose.
+SonarQube is a powerful tool used in build and code review pipelines to enhance code quality by identifying and reporting issues, as well as providing recommendations for improvement. SonarCloud, the SaaS solution offered by SonarQube, serves this purpose.
 
-This guide will lead you through the configuration process of SonarCloud for your project.
+This guide will walk you through the configuration process of SonarCloud for your project.
 
 :::note
   An alternative option is to use an independent [SonarQube instance](../operator-guide/sonarqube.md).
@@ -18,25 +18,25 @@ To integrate SonarCloud with the platform, follow the steps below:
 
 2. Once you are logged in with GitHub, import an organization from GitHub:
 
-  ![Import organization](../assets/quick-start/import_from_github.png "Import organization")
+    ![Import organization](../assets/quick-start/import_from_github.png "Import organization")
 
-  :::note
-    It is crucial to have the organization created in SonarCloud. If you were signed up in SonarCloud using a GitHub account, SonarCloud will suggest you creating an organization with name that is equivalent to your GitHub account name.
-  :::
+    :::note
+      It is crucial to have the organization created in SonarCloud. If you were signed up in SonarCloud using a GitHub account, SonarCloud will suggest you creating an organization with name that is equivalent to your GitHub account name.
+    :::
 
 3. In the Create an organization menu, choose the free plan and click **Create organization**:
 
-  ![Create organization](../assets/quick-start/free_plan.png "Choose plan")
+    ![Create organization](../assets/quick-start/free_plan.png "Choose plan")
 
 4. In your account menu, select the **Security** tab and generate token:
 
-  ![Create organization](../assets/quick-start/generate_token.png "Generate token")
+    ![Create organization](../assets/quick-start/generate_token.png "Generate token")
 
-5. In EDP Portal, navigate to `EDP` -> `Configuration` -> `Code Quality`. Define the following values and click **Save**:
+5. In the UI Portal, navigate to `Configuration` -> `Code Quality`. Define the following values and click **Save**:
 
-  * URL: `https://sonarcloud.io`
-  * Token: `account token generated in SonarCloud`
+    * URL: `https://sonarcloud.io`
+    * Token: `account token generated in SonarCloud`
 
-  ![SonarQube integration](../assets/quick-start/sonarqube_integrated.png "SonarQube integration")
+    ![SonarQube integration](../assets/quick-start/sonarqube_integrated.png "SonarQube integration")
 
-After completing the SonarQube integration, proceed to integrate the platform with GitHub. Navigate to the [Integrate GitHub](integrate-github.md) page for further instructions.
+After completing the SonarQube integration, proceed to integrate the platform with GitHub. Navigate to the [Integrate GitHub](./integrate-github.md) page for further instructions.

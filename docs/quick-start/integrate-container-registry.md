@@ -1,10 +1,10 @@
 # Integrate DockerHub
 
-EDP utilizes container registries for storing and distributing application images. This page provides instructions on integrating your platform with DockerHub.
+KubeRocketCI utilizes container registries for storing and distributing application images. This page provides instructions on integrating your platform with DockerHub.
 
 ## Integration Procedure
 
-To integrate EPAM Delivery Platform with DockerHub, complete the guidelines below:
+To integrate KubeRocketCI with DockerHub, follow the steps below:
 
 1. Log in to your DockerHub account.
 
@@ -16,22 +16,22 @@ To integrate EPAM Delivery Platform with DockerHub, complete the guidelines belo
 
 5. Copy the generated token:
 
-  ![DockerHub token](../assets/quick-start/dockerhub_token.png "DockerHub token")
+    ![DockerHub token](../assets/quick-start/dockerhub_token.png "DockerHub token")
 
-6. In EDP Portal, navigate to `EDP` -> `Configuration` -> `Registry` and click the **Add Registry** button.
+6. In the UI Portal, navigate to **Configuration** -> **Registry** and click the **Add Registry** button.
 
-7. In the **Registry Provider** field, select DockerHub. Define the following values and click **Save**:
+7. In the **Registry Provider** field, select `DockerHub`. Define the following values and click **Save**:
 
-  * Registry Endpoint: `https://docker.io`
-  * Registry Space: `DockerHub account name`
-  * User: `DockerHub account name`
-  * Password/Token: `Your generated access token`
-  * Use the Push Account's credentials: `check`
+    - Registry Endpoint: `https://docker.io`
+    - Registry Space: `DockerHub account name`
+    - User: `DockerHub account name`
+    - Password/Token: `Your generated access token`
+    - Use the Push Account's credentials: `check`
 
-  ![DockerHub integration](../assets/quick-start/integrate_docker.png "DockerHub integration")
+    ![DockerHub integration](../assets/quick-start/integrate_docker.png "DockerHub integration")
 
 :::note
   In the DockerHub context, the **Registry Space** field is equivalent to the account/organization name.
 :::
 
-With all integrations in place, let us move forward with creating applications. Please proceed to the [Create Application](create-application.md) page for further instructions.
+With all integrations in place, let's proceed to the [Create Application](./create-application.md) page for further instructions on how to create applications using KubeRocketCI.

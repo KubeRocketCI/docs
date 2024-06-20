@@ -1,6 +1,6 @@
 # Quality Control
 
-In EPAM Delivery Platform, we guarantee the quality of the product not only by using the most advanced tools and best practices but also by covering the whole product functionality with our dedicated automated tests.
+In KubeRocketCI, we guarantee the quality of the product not only by using the most advanced tools and best practices but also by covering the whole product functionality with our dedicated automated tests.
 
 ## Autotest Coverage Scheme
 
@@ -23,5 +23,5 @@ In our testing flow, each release is verified by the following tests:
 
 ## Related Articles
 
-* [EDP Project Rules. Working Process](edp-workflow.md)
+* [KubeRocketCI Project Rules. Working Process](edp-workflow.mdx)
 * [Operator Development](local-development.md)

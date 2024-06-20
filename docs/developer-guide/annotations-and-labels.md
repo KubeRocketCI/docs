@@ -1,10 +1,10 @@
 # Annotations and Labels
 
-EPAM Delivery Platform uses labels to interact with various resources in a Kubernetes cluster. This guide details the resources, annotations, and labels used by the platform to streamline operations, enhance monitoring, and enforce governance.
+KubeRocketCI uses labels to interact with various resources in a Kubernetes cluster. This guide details the resources, annotations, and labels used by the platform to streamline operations, enhance monitoring, and enforce governance.
 
 ## Labels
 
-The table below contains all the labels used in EDP:
+The table below contains all the labels used in KubeRocketCI:
 
 | Label Key                           | Target Resources     | Possible Values                                                         | Description                                                               |
 |:------------------------------------|:---------------------|:------------------------------------------------------------------------|:--------------------------------------------------------------------------|
@@ -12,10 +12,10 @@ The table below contains all the labels used in EDP:
 | app.edp.epam.com/integration-secret | Secrets              | `true`                                                                  | Indicates if the secret is used for integration.                          |
 | app.edp.epam.com/codebase           | PipelineRun          | `<codebase_name>`                                                       | Identifies the codebase associated with the PipelineRun.                  |
 | app.edp.epam.com/codebasebranch     | PipelineRun          | `<codebase_name>-<branch_name>`                                         | Identifies the codebase branch associated with the PipelineRun.           |
-| app.edp.epam.com/pipeline           | PipelineRun, Taskrun | `<environment_name>`                                                    | Used by the EDP Portal to display autotests status(on Deploy environment) |
+| app.edp.epam.com/pipeline           | PipelineRun, Taskrun | `<environment_name>`                                                    | Used by the KubeRocketCI to display autotests status(on Deploy environment) |
 | app.edp.epam.com/pipelinetype       | PipelineRun, Taskrun | `autotestRunner`, `build`, `review`, `deploy`                           | Identifies the type of the Pipeline.                                      |
-| app.edp.epam.com/parentPipelineRun  | PipelineRun          | `<cd-pipeline-autotest-runner-name>`                                    | Used by the EDP Portal to display autotests status(on Deploy environment) |
-| app.edp.epam.com/stage              | PipelineRun, Taskrun | `<stage_name>`                                                          | Used by the EDP Portal to display autotests status(on Deploy environment) |
+| app.edp.epam.com/parentPipelineRun  | PipelineRun          | `<cd-pipeline-autotest-runner-name>`                                    | Used by the KubeRocketCI to display autotests status(on Deploy environment) |
+| app.edp.epam.com/stage              | PipelineRun, Taskrun | `<stage_name>`                                                          | Used by the KubeRocketCI to display autotests status(on Deploy environment) |
 | app.edp.epam.com/branch             | PipelineRun          | `<branch_name>`                                                         | Identifies the branch associated with the PipelineRun.                    |
 | app.edp.epam.com/codebaseType       | Codebase             | `system`,`application`                                                  | Identify the type of the codebase.                                        |
 | app.edp.epam.com/systemType         | Codebase             | `gitops`                                                                | Identify system repositories.                                             |
@@ -53,7 +53,7 @@ The table below displays what labels are used in specific Tekton pipelines:
 
 ### Pipeline Usage Example
 
-To demonstrate label usage in the EDP Tekton pipelines, find below some EDP resource examples:
+To demonstrate label usage in the Tekton pipelines, find below some KubeRocketCI resource examples:
 
   ```yaml title="Codebase specification"
   metadata:

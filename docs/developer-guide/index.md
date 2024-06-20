@@ -1,16 +1,16 @@
 # Overview
 
-The EPAM Delivery Platform (EDP) Developer Guide serves as a comprehensive technical resource specifically designed for developers. It offers detailed insights into expanding the functionalities of EDP. This section focuses on explaining the development approach and fundamental architectural blueprints that form the basis of the platform's ecosystem.
+The KubeRocketCI Developer Guide serves as a comprehensive technical resource specifically designed for developers. It offers detailed insights into expanding the functionalities of KubeRocketCI. This section focuses on explaining the development approach and fundamental architectural blueprints that form the basis of the platform's ecosystem.
 
 Within these pages, you'll find architectural diagrams, component schemas, and deployment strategies essential for grasping the structural elements of EDP. These technical illustrations serve as references, providing a detailed understanding of component interactions and deployment methodologies. Understanding the architecture of EDP and integrating third-party solutions into its established framework enables the creation of efficient, scalable, and customizable solutions within the EPAM Delivery Platform.
 
-The diagram below illustrates how GitHub repositories and Docker registries are interconnected within the EDP ecosystem.
+The diagram below illustrates how GitHub repositories and Docker registries are interconnected within the KubeRocketCI ecosystem.
 
-![EDP Components Diagram](../assets/developer-guide/architecture/edp-components.inline.svg)
+![KubeRocketCI Components Diagram](../assets/developer-guide/architecture/edp-components.inline.svg)
 
 # Release Channels
 
-As a publicly available product, the EPAM Delivery Platform relies on various channels to share information, gather feedback, and distribute new releases effectively. This section outlines the diverse channels through which users can engage with our platform and stay informed about the latest developments and enhancements.
+As a publicly available product, the KubeRocketCI relies on various channels to share information, gather feedback, and distribute new releases effectively. This section outlines the diverse channels through which users can engage with our platform and stay informed about the latest developments and enhancements.
 
 ## Marketplaces
 
@@ -35,7 +35,7 @@ Our platform components, optional enhancements, add-ons, and deployment resource
 
 Each platform component is available in its corresponding GitHub project:
 
-- [EDP Portal UI](https://github.com/epam/edp-headlamp/releases)
+- [KubeRocketCI UI](https://github.com/epam/edp-headlamp/releases)
 - [Codebase Operator](https://github.com/epam/edp-codebase-operator/releases)
 - [Tekton](https://github.com/epam/edp-tekton/releases)
 - [CD Pipeline Operator](https://github.com/epam/edp-cd-pipeline-operator/releases)
@@ -81,7 +81,7 @@ Our DockerHub repository hosts Docker images for various platform components:
 - [Keycloak Operator](https://hub.docker.com/repository/docker/epamedp/keycloak-operator/)
 - [Nexus Operator](https://hub.docker.com/repository/docker/epamedp/nexus-operator/)
 - [Sonar Operator](https://hub.docker.com/repository/docker/epamedp/sonar-operator/)
-- [EDP Portal UI](https://hub.docker.com/repository/docker/epamedp/edp-headlamp/)
+- [KubeRocketCI UI](https://hub.docker.com/repository/docker/epamedp/edp-headlamp/)
 - [Codebase Operator](https://hub.docker.com/repository/docker/epamedp/codebase-operator/)
 - [Tekton](https://hub.docker.com/repository/docker/epamedp/edp-tekton)
 - [Tekton Cache](https://hub.docker.com/repository/docker/epamedp/tekton-cache)

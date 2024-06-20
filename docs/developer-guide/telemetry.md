@@ -1,6 +1,6 @@
 # Telemetry
 
-The codebase operator for the EPAM Delivery Platform gathers anonymous data through telemetry. This data provides a clear picture of how the platform is being used and empowers the development team to make informed decisions and strategic enhancements to meet evolving operational needs. The anonymous data collected also plays an essential role in adopting a Software Development Life Cycle (SDLC) process strategically.
+The codebase operator for the KubeRocketCI gathers anonymous data through telemetry. This data provides a clear picture of how the platform is being used and empowers the development team to make informed decisions and strategic enhancements to meet evolving operational needs. The anonymous data collected also plays an essential role in adopting a Software Development Life Cycle (SDLC) process strategically.
 
 ## Telemetry Data
 
@@ -44,7 +44,7 @@ You can verify the code which collects the data in the [codebase-operator](https
 
 ## Collecting Timeline
 
-The codebase-operator collects the data every 24 hours and sends it to the EDP Telemetry Service. The first data points are collected 24 hours after the codebase-operator is deployed to allow users to opt-out of telemetry.
+The codebase-operator collects the data every 24 hours and sends it to the KubeRocketCI Telemetry Service. The first data points are collected 24 hours after the codebase-operator is deployed to allow users to opt-out of telemetry.
 
 ## Disabling Telemetry
 

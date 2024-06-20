@@ -59,7 +59,7 @@ const sidebars: SidebarsConfig = {
             },
           ],
         },
-        'features', // Basic Concepts
+        'basic-concepts', // Basic Concepts
         'glossary', // Glossary
         'supported-versions', // Supported Versions
         'compliance', // Compliance

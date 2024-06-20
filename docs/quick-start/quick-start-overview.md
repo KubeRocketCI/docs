@@ -31,6 +31,6 @@ Before deploying KubeRocketCI, it is important to ensure that a local Kubernetes
 
 ## Starting Point
 
-The first step of the guide is to prepare the cluster environment for the KubeRocketCI setup process by installing the Tekton tool. Once this is done, you can proceed with the installation of the platform itself. Detailed guidelines for the platform installation can be found in the [Platform Installation](./platform-installation.mdx) page. Alternatively, you can watch our [video tutorial](https://www.youtube.com/watch?v=QjZoPnIKDtA) which provides a clear demonstration of the installation process.
+The first step of the guide is to prepare the cluster environment for the KubeRocketCI setup process by installing the Tekton tool. Once this is done, you can proceed with the installation of the platform itself. Detailed guidelines for the platform installation can be found in the [Platform Installation](./platform-installation.md) page. Alternatively, you can watch our [video tutorial](https://www.youtube.com/watch?v=QjZoPnIKDtA) which provides a clear demonstration of the installation process.
 
 Good luck with your installation!

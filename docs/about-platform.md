@@ -79,7 +79,7 @@ There is **no limitation** to run KubeRocketCI on vanilla Kubernetes.
 
 ## Related Articles
 
-- [Quick Start](./quick-start/platform-installation.mdx)
+- [Quick Start](./quick-start/platform-installation.md)
 - [Basic Concepts](basic-concepts.md)
 - [Glossary](glossary.md)
 - [Supported Versions and Compatibility](supported-versions.md)

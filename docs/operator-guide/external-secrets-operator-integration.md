@@ -223,8 +223,8 @@ In order to [install EDP](./install-kuberocketci.mdx), a list of passwords must 
 
 2. Create a secret in the AWS Parameter Store with the name `/edp/my-json-secret`. This secret is represented as a parameter of type string within the AWS Parameter Store:<a name="step 2"></a>
 
-  ??? note "View: Parameter Store JSON"
-
+    <details>
+      <summary><b>View: Parameter Store JSON</b></summary>
       ```json
       {
         "keycloak":
@@ -303,6 +303,9 @@ In order to [install EDP](./install-kuberocketci.mdx), a list of passwords must 
         }
       }
       ```
+    </details>
+
+
 
 3. Set External Secret operator enabled by updating the values.yaml file:
 

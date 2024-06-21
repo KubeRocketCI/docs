@@ -29,32 +29,32 @@ To import custom certificates to Keycloak, follow the steps below:
 
 1. Generate the `cacerts` local keystore and import the certificate there using the keytool tool:
 
-  ```bash
-  keytool -importcert -file CA.crt \
-   -alias CA.crt -keystore ./cacerts \
-   -storepass changeit -trustcacerts \
-   -noprompt
-  ```
+    ```bash
+    keytool -importcert -file CA.crt \
+    -alias CA.crt -keystore ./cacerts \
+    -storepass changeit -trustcacerts \
+    -noprompt
+    ```
 
 2. Create the `custom-keycloak-keystore` keystore secret from the `cacerts` file in the `security` namespace:
 
-  ```bash
-  kubectl -n security create secret generic custom-keycloak-keystore \
-  --from-file=./cacerts
-  ```
+    ```bash
+    kubectl -n security create secret generic custom-keycloak-keystore \
+    --from-file=./cacerts
+    ```
 
 3. Create the `spi-truststore-data` SPI truststore secret in the `security` namespace:
 
-  ```bash
-  kubectl -n security create secret generic spi-truststore-data \
-  --from-literal=KC_SPI_TRUSTSTORE_FILE_FILE=/opt/keycloak/spi-certs/cacerts \
-  --from-literal=KC_SPI_TRUSTSTORE_FILE_PASSWORD=changeit
-  ```
+    ```bash
+    kubectl -n security create secret generic spi-truststore-data \
+    --from-literal=KC_SPI_TRUSTSTORE_FILE_FILE=/opt/keycloak/spi-certs/cacerts \
+    --from-literal=KC_SPI_TRUSTSTORE_FILE_PASSWORD=changeit
+    ```
 
 4. Update the Keycloak `values.yaml` file from the [Install Keycloak](advanced-installation/keycloak.md) page.
 
-  ??? note "View: values.yaml"
-
+   <details>
+      <summary><b>values.yaml</b></summary>
       ```yaml
       ...
       extraVolumeMounts: |
@@ -80,6 +80,8 @@ To import custom certificates to Keycloak, follow the steps below:
             name: spi-truststore-data
       ...
       ```
+    </details>
+
 
 ## Enable Custom Certificates in EDP Components
 
@@ -94,60 +96,62 @@ Creating custom certificates is a necessary but not sufficient condition for app
 
 2. Add the certificate by mounting the `custom-ca-certificates` secret to the operator pod as a volume.<br />
 
-  Example of specifying custom certificates for the `keycloak-operator`:
+    Example of specifying custom certificates for the `keycloak-operator`:
 
-  ```yaml
-  ...
-  keycloak-operator:
-    enabled: true
+    ```yaml
+    ...
+    keycloak-operator:
+      enabled: true
 
-    # -- Additional volumes to be added to the pod
-    extraVolumes:
-      - name: custom-ca
-        secret:
-          defaultMode: 420
-          secretName: custom-ca-certificates
+      # -- Additional volumes to be added to the pod
+      extraVolumes:
+        - name: custom-ca
+          secret:
+            defaultMode: 420
+            secretName: custom-ca-certificates
 
-    # -- Additional volumeMounts to be added to the container
-    extraVolumeMounts:
-      - name: custom-ca
-        mountPath: /etc/ssl/certs/CA.crt
-        readOnly: true
-        subPath: CA.crt
-  ...
-  ```
+      # -- Additional volumeMounts to be added to the container
+      extraVolumeMounts:
+        - name: custom-ca
+          mountPath: /etc/ssl/certs/CA.crt
+          readOnly: true
+          subPath: CA.crt
+    ...
+    ```
 
-!!! note
-    Before moving ahead, be aware that starting from version 3.3.0, our development team has officially deprecated the Jenkins deploy scenario. This means that as of version 3.3.0 and in all subsequent versions (3.3.x and above), the Jenkins deploy scenario is no longer supported or actively maintained.<br />
-    For users running versions 3.3.x and below, the Jenkins deploy scenario remains available. However, we encourage you to plan for the transition to a supported deployment method to ensure continued compatibility and access to the latest features and enhancements. To perform migration, please familiarize yourself with the [Migrate CI Pipelines From Jenkins to Tekton](migrate-ci-pipelines-from-jenkins-to-tekton.md).<br />
-    For those who still use EDP v3.3.x and below, the information below remains valid and applicable.
+    :::note
+      Before moving ahead, be aware that starting from version 3.3.0, our development team has officially deprecated the Jenkins deploy scenario. This means that as of version 3.3.0 and in all subsequent versions (3.3.x and above), the Jenkins deploy scenario is no longer supported or actively maintained.<br />
+      For users running versions 3.3.x and below, the Jenkins deploy scenario remains available. However, we encourage you to plan for the transition to a supported deployment method to ensure continued compatibility and access to the latest features and enhancements. To perform migration, please familiarize yourself with the [Migrate CI Pipelines From Jenkins to Tekton](migrate-ci-pipelines-from-jenkins-to-tekton.md).<br />
+      For those who still use EDP v3.3.x and below, the information below remains valid and applicable.
+    :::
 
 3. For Sonar, Jenkins and Gerrit, change the flag in the `caCerts.enabled` field to `true`. Also, change the name of the secret in the `caCerts.secret` field to `custom-ca-certificates`.
 
-  Example of specifying custom certificates for `Gerrit` via the `gerrit-operator` helm chart values:
+    Example of specifying custom certificates for `Gerrit` via the `gerrit-operator` helm chart values:
 
-  ```yaml
-  ...
-  gerrit-operator:
-    enabled: true
-    gerrit:
-      caCerts:
-        # -- Flag for enabling additional CA certificates
-        enabled: true
-        # -- Change init CA certificates container image
-        image: adoptopenjdk/openjdk11:alpine
-        # -- Name of the secret containing additional CA certificates
-        secret: custom-ca-certificates
-  ...
-  ```
+    ```yaml
+    ...
+    gerrit-operator:
+      enabled: true
+      gerrit:
+        caCerts:
+          # -- Flag for enabling additional CA certificates
+          enabled: true
+          # -- Change init CA certificates container image
+          image: adoptopenjdk/openjdk11:alpine
+          # -- Name of the secret containing additional CA certificates
+          secret: custom-ca-certificates
+    ...
+    ```
 
 
 ## Integrate Custom Certificates Into Jenkins Agents
 
 This section describes how to add custom certificates to Jenkins agents to use them from Java applications.
 
-!!! info
+  :::info
     For example, `curl` doesn't use keystore files specified in this part of the documentation.
+  :::
 
 EDP Jenkins agents keep keystore files in two places:
 
@@ -161,8 +165,9 @@ and imports the custom certificate into the keystore files, after which it creat
 `jenkins-agent-opt-java-openjdk-lib-security-cacerts` and `jenkins-agent-etc-ssl-certs-java-cacerts` secrets from updated keystore files in EDP namespace.
 Also, the `jenkins-agent-opt-java-openjdk-lib-security-cacerts` secret contains three additional files: `blocked.certs`, `default.policy` and `public_suffix_list.dat` which managed by the `copy_certs.sh` script as well. Expand the drop-down button below to see the contents of the `copy_certs.sh` script.
 
-  ??? note "View: copy_certs.sh"
 
+   <details>
+      <summary><b>copy_certs.sh</b></summary>
       ```bash
       # Fill in the variables `ns` and `ca_file`
       ns="edp-project"
@@ -200,7 +205,7 @@ Also, the `jenkins-agent-opt-java-openjdk-lib-security-cacerts` secret contains 
 
       kubectl delete -n "${ns}" pod "${pod_name}" --force --grace-period=0
       ```
-
+    </details>
 
    Before using the `copy_certs.sh` script, keep in mind the following:
 
@@ -215,46 +220,46 @@ Also, the `jenkins-agent-opt-java-openjdk-lib-security-cacerts` secret contains 
 
 3. Update manually the `jenkins-slaves` ConfigMap.
 
-  Add this block with the mount of secrets to the `<volumes></volumes>` block of each Jenkins agent:
+    Add this block with the mount of secrets to the `<volumes></volumes>` block of each Jenkins agent:
 
-  ```xml
-  ...
-          <org.csanchez.jenkins.plugins.kubernetes.volumes.SecretVolume>
-            <mountPath>/etc/ssl/certs/java</mountPath>
-            <secretName>jenkins-agent-etc-ssl-certs-java-cacerts</secretName>
-          </org.csanchez.jenkins.plugins.kubernetes.volumes.SecretVolume>
-          <org.csanchez.jenkins.plugins.kubernetes.volumes.SecretVolume>
-            <mountPath>/opt/java/openjdk/lib/security</mountPath>
-            <secretName>jenkins-agent-opt-java-openjdk-lib-security-cacerts</secretName>
-          </org.csanchez.jenkins.plugins.kubernetes.volumes.SecretVolume>
-  ...
-  ```
+    ```xml
+    ...
+            <org.csanchez.jenkins.plugins.kubernetes.volumes.SecretVolume>
+              <mountPath>/etc/ssl/certs/java</mountPath>
+              <secretName>jenkins-agent-etc-ssl-certs-java-cacerts</secretName>
+            </org.csanchez.jenkins.plugins.kubernetes.volumes.SecretVolume>
+            <org.csanchez.jenkins.plugins.kubernetes.volumes.SecretVolume>
+              <mountPath>/opt/java/openjdk/lib/security</mountPath>
+              <secretName>jenkins-agent-opt-java-openjdk-lib-security-cacerts</secretName>
+            </org.csanchez.jenkins.plugins.kubernetes.volumes.SecretVolume>
+    ...
+    ```
 
-  As an example, the template of `gradle-java11-template` is shown below:<br />
+    As an example, the template of `gradle-java11-template` is shown below:<br />
 
-  ```xml
-  ...
-        </workspaceVolume>
-        <volumes>
-          <org.csanchez.jenkins.plugins.kubernetes.volumes.SecretVolume>
-            <mountPath>/etc/ssl/certs/java</mountPath>
-            <secretName>jenkins-agent-etc-ssl-certs-java-cacerts</secretName>
-          </org.csanchez.jenkins.plugins.kubernetes.volumes.SecretVolume>
-          <org.csanchez.jenkins.plugins.kubernetes.volumes.SecretVolume>
-            <mountPath>/opt/java/openjdk/lib/security</mountPath>
-            <secretName>jenkins-agent-opt-java-openjdk-lib-security-cacerts</secretName>
-          </org.csanchez.jenkins.plugins.kubernetes.volumes.SecretVolume>
-        </volumes>
-        <containers>
-  ...
-  ```
+    ```xml
+    ...
+          </workspaceVolume>
+          <volumes>
+            <org.csanchez.jenkins.plugins.kubernetes.volumes.SecretVolume>
+              <mountPath>/etc/ssl/certs/java</mountPath>
+              <secretName>jenkins-agent-etc-ssl-certs-java-cacerts</secretName>
+            </org.csanchez.jenkins.plugins.kubernetes.volumes.SecretVolume>
+            <org.csanchez.jenkins.plugins.kubernetes.volumes.SecretVolume>
+              <mountPath>/opt/java/openjdk/lib/security</mountPath>
+              <secretName>jenkins-agent-opt-java-openjdk-lib-security-cacerts</secretName>
+            </org.csanchez.jenkins.plugins.kubernetes.volumes.SecretVolume>
+          </volumes>
+          <containers>
+    ...
+    ```
 
 4. Reload the Jenkins pod:
 
-  ```bash
-  ns="edp"
-  kubectl rollout restart -n "${ns}" deployment/jenkins
-  ```
+    ```bash
+    ns="edp"
+    kubectl rollout restart -n "${ns}" deployment/jenkins
+    ```
 
 
 ## Related Articles

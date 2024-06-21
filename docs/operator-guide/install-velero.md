@@ -11,26 +11,34 @@ To install Velero, follow the steps below:
 
 1. Create **velero** namespace:
 
-        kubectl create namespace velero
+    ```bash
+    kubectl create namespace velero
+    ```
 
-  !!! note
+    :::note
       On an OpenShift cluster, run the `oc` command instead of `kubectl` one.
+    :::
 
 2. Add a chart repository:
 
-        helm repo add vmware-tanzu https://vmware-tanzu.github.io/helm-charts
-        helm repo update
+    ```bash
+    helm repo add vmware-tanzu https://vmware-tanzu.github.io/helm-charts
+    helm repo update
+    ```
 
-  !!! note
-       [Velero AWS Plugin](https://github.com/vmware-tanzu/velero-plugin-for-aws) requires access to AWS resources.
-       To configure access, please refer to the [IRSA for Velero](./velero-irsa.md) documentation.
+    :::note
+      [Velero AWS Plugin](https://github.com/vmware-tanzu/velero-plugin-for-aws) requires access to AWS resources.
+      To configure access, please refer to the [IRSA for Velero](./velero-irsa.md) documentation.
+    :::
 
 3. Install **Velero v.2.14.13**:
 
-        helm install velero vmware-tanzu/velero \
-        --version 2.14.13 \
-        --values values.yaml \
-        --namespace velero
+    ```bash
+    helm install velero vmware-tanzu/velero \
+      --version 2.14.13 \
+      --values values.yaml \
+      --namespace velero
+    ```
 
   Check out the *values.yaml* file sample of the Velero customization:
 
@@ -76,9 +84,10 @@ initContainers:
 
   </details>
 
-  !!! note
-      In case of using cluster scheduling and [amazon-eks-pod-identity-webhook](https://github.com/aws/amazon-eks-pod-identity-webhook), it is necessary to restart the Velero pod after the cluster is up and running.
-      Please refer to the [Schedule Pods Restart](schedule-pods-restart.md) documentation.
+  :::note
+    In case of using cluster scheduling and [amazon-eks-pod-identity-webhook](https://github.com/aws/amazon-eks-pod-identity-webhook), it is necessary to restart the Velero pod after the cluster is up and running.
+    Please refer to the [Schedule Pods Restart](schedule-pods-restart.md) documentation.
+  :::
 
 4. Install the client side (velero cli) according to the official [documentation](https://velero.io/docs/v1.5/basic-install/).
 

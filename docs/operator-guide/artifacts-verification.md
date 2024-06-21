@@ -1,4 +1,4 @@
-# Verification of EDP Artifacts
+# Verification of KubeRocketCI Artifacts
 
 This documentation outlines platform SLSA integration and guides verifying image authenticity and provenance.
 
@@ -13,7 +13,7 @@ Ensure you have installed [rekor-cli](https://docs.sigstore.dev/logging/installa
 
 ## Release Assets
 
-The table below represents a list of EDP components with corresponding images that are signed and pushed to DockerHub:
+The table below represents a list of KubeRocketCI components with corresponding images that are signed and pushed to DockerHub:
 
 | Asset                   | Description                   |
 |-------------------------|-------------------------------|
@@ -28,7 +28,7 @@ The table below represents a list of EDP components with corresponding images th
 
 ## Verify Container Images
 
-EPAM Delivery Platform's container images are signed using cosign with the [cosign.pub](https://raw.githubusercontent.com/epam/edp-install/master/cosign.pub) key for signing and transparency. You can verify a container image's signature by executing the `cosign verify` command.
+KubeRocketCI's container images are signed using cosign with the [cosign.pub](https://raw.githubusercontent.com/epam/edp-install/master/cosign.pub) key for signing and transparency. You can verify a container image's signature by executing the `cosign verify` command.
 
 To confirm the authenticity of the image, run the `cosign verify` command. See the example below:
 

@@ -1,3 +1,6 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 # Protect Endpoints
 
 OAuth2-Proxy is a versatile tool that serves as a reverse proxy, utilizing the OAuth 2.0 protocol with various providers like Google, GitHub, and Keycloak to provide both authentication and authorization.
@@ -5,8 +8,9 @@ This guide instructs readers on how to protect their applications' endpoints usi
 By following these steps, users can strengthen their endpoints' security without modifying their current application code.
 In the context of EDP, it has integration with the Keycloak OIDC provider, enabling it to link with any component that lacks built-in authentication.
 
-!!! note
+  :::note
     OAuth2-Proxy is disabled by default when installing EDP.
+  :::
 
 ## Prerequisites
 
@@ -27,33 +31,42 @@ This will deploy and connect OAuth2-Proxy to your application endpoint.
 
 The example below illustrates how to use OAuth2-Proxy in practice when using the Tekton dashboard:
 
-=== "Kubernetes"
+    <Tabs
+      defaultValue="kubernetes"
+      values={[
+        {label: 'Kubernetes', value: 'kubernetes'},
+        {label: 'Openshift', value: 'openshift'}
+      ]}>
 
-    1. Run `helm upgrade` to update edp-install release:
-    ```bash
-    helm upgrade --version <version> --set 'sso.enabled=true' edp-install --namespace edp
-    ```
-    2. Check that OAuth2-Proxy is deployed successfully.
-    3. Edit the Tekton dashboard Ingress annotation by adding `auth-signin` and `auth-url` of oauth2-proxy by `kubectl` command:
-    ```bash
-    kubectl annotate ingress <application-ingress-name> nginx.ingress.kubernetes.io/auth-signin='https://<oauth-ingress-host>/oauth2/start?rd=https://$host$request_uri' nginx.ingress.kubernetes.io/auth-url='http://oauth2-proxy.edp.svc.cluster.local:8080/oauth2/auth'
-    ```
+      <TabItem value="kubernetes">
+          1. Run `helm upgrade` to update edp-install release:
+          ```bash
+          helm upgrade --version <version> --set 'sso.enabled=true' edp-install --namespace edp
+          ```
+          2. Check that OAuth2-Proxy is deployed successfully.
+          3. Edit the Tekton dashboard Ingress annotation by adding `auth-signin` and `auth-url` of oauth2-proxy by `kubectl` command:
+          ```bash
+          kubectl annotate ingress <application-ingress-name> nginx.ingress.kubernetes.io/auth-signin='https://<oauth-ingress-host>/oauth2/start?rd=https://$host$request_uri' nginx.ingress.kubernetes.io/auth-url='http://oauth2-proxy.edp.svc.cluster.local:8080/oauth2/auth'
+          ```
+      </TabItem>
 
-=== "Openshift"
+      <TabItem value="openshift">
+          1. Generate a cookie-secret for proxy with the following command:
+          ```bash
+          tekton_dashboard_cookie_secret=$(openssl rand -base64 32 | head -c 32)
+          ```
+          2. Create `tekton-dashboard-proxy-cookie-secret` in the edp namespace:
+          ```bash
+          kubectl -n edp create secret generic tekton-dashboard-proxy-cookie-secret \
+              --from-literal=cookie-secret=${tekton_dashboard_cookie_secret}
+          ```
+          3. Run `helm upgrade` to update edp-install release:
+          ```bash
+          helm upgrade --version <version> --set 'edp-tekton.dashboard.openshift_proxy.enabled=true' edp-install --namespace edp
+          ```
+      </TabItem>
+    </Tabs>
 
-    1. Generate a cookie-secret for proxy with the following command:
-    ```bash
-    tekton_dashboard_cookie_secret=$(openssl rand -base64 32 | head -c 32)
-    ```
-    2. Create `tekton-dashboard-proxy-cookie-secret` in the edp namespace:
-    ```bash
-    kubectl -n edp create secret generic tekton-dashboard-proxy-cookie-secret \
-        --from-literal=cookie-secret=${tekton_dashboard_cookie_secret}
-    ```
-    3. Run `helm upgrade` to update edp-install release:
-    ```bash
-    helm upgrade --version <version> --set 'edp-tekton.dashboard.openshift_proxy.enabled=true' edp-install --namespace edp
-    ```
 
 ## Related Articles
 

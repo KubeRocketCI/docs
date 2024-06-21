@@ -10,8 +10,9 @@ As soon as the library is successfully provisioned, the following will be create
 - With the **Create** strategy, a new project will be generated on GitHub or another integrated VCS. When **Clone** is chosen, the repository will be forked from the original and copied to the KubeRocketCI-integrated repository. If **Import** is selected, the platform connects to the chosen repository.
 
 
-!!! info
+:::info
     To navigate quickly to OpenShift, Tekton, Gerrit, SonarQube, Nexus, and other resources, click the **Overview** section on the navigation bar and hit the necessary link.
+:::
 
 The added library will be listed in the Libraries list allowing to do the following:
 
@@ -25,9 +26,9 @@ The added library will be listed in the Libraries list allowing to do the follow
 * **Edit library** - edit the library by selecting the options icon next to its name in the libraries list, and then selecting **Edit**. For details see the [Edit Existing Library](#edit-existing-library) section.
 * **Delete Library** - remove library by clicking the vertical ellipsis button and then selecting **Delete**.
 
-  !!! note
-      The library that is used in a CD pipeline cannot be removed.
-
+  :::note
+    The library that is used in a CD pipeline cannot be removed.
+  :::
 There are also options to sort the libraries:
 
 * Sort the existing libraries in a table by clicking the sorting icons in the table header. Sort the libraries alphabetically by their name, language, build tool, framework, and CI tool. You can also sort the libraries by their status: Created, Failed, or In progress.

@@ -2,9 +2,11 @@
 
 Git Server is responsible for integration with Version Control System, whether it is GitHub, GitLab or Gerrit.
 
-![type:video](https://www.youtube.com/embed/pzheGwBLZvU)
+<div style={{ display: 'flex', justifyContent: 'center' }}>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/pzheGwBLZvU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen"></iframe>
+</div><br />
 
-The Git Server is set via the **global.gitProviders** parameter of the [values.yaml](https://github.com/epam/edp-install/blob/release/3.8/deploy-templates/values.yaml#L14) file.
+The Git Server is set via the **global.gitProviders** parameter of the [values.yaml](https://github.com/epam/edp-install/blob/release/3.9/deploy-templates/values.yaml#L12) file.
 
 To view the current Git Server, you can open `KubeRocketCI` -> `Configuration` -> `Git Servers` and inspect the following properties:
 

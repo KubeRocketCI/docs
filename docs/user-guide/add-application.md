@@ -1,6 +1,6 @@
 # Add Application
 
-KubeRocketCI portal allows you to create an application, clone an existing repository with the application to your Version Control System (VCS), or using an external repository and importing an application to the environment. When an application is created or cloned, the system automatically generates a corresponding repository within the integrated Version Control System. You can create an Application [in YAML](#YAML) or [via the two-step menu](#menu) in the dialog.
+KubeRocketCI portal allows you to create an application, clone an existing repository with the application to your Version Control System (VCS), or using an external repository and importing an application to the environment. When an application is created or cloned, the system automatically generates a corresponding repository within the integrated Version Control System. You can create an Application [in YAML](#create-application-in-yaml) or [via the two-step menu](#create-application-via-ui) in the dialog.
 
 To add an application, navigate to the **Components** section on the navigation bar and click **+ Create component**:
 
@@ -18,14 +18,15 @@ Choose one of the strategies and click **Create**:
 
 * **Import project** - allows using existing VCS repository to integrate with KubeRocketCI. While importing the existing repository, select the Git server from the drop-down list and define the relative path to the repository, such as `epmd-edp/python-python-flask`.
 
-  !!! note
+  :::note
       In order to use the **Import project** strategy, make sure to adjust it with the [Integrate GitLab/GitHub in Tekton](../operator-guide/import-strategy-tekton.md) page.
+  :::
 
 * **Clone project** – clones the indicated repository into KubeRocketCI. While cloning the existing repository, it is required to fill in the **Repository URL** field and specify the credentials if needed:
 
   ![Clone application](../assets/user-guide/edp-portal-clone-application.png "Clone application")
 
-## Create Application in YAML <a name="YAML"></a>
+## Create Application in YAML
 
 Click **Edit YAML** in the upper-right corner of the **Create Application** dialog to open the YAML editor and create the Application.
 
@@ -35,7 +36,7 @@ To edit YAML in the minimal editor, turn on the **Use minimal editor** toggle in
 
 To save the changes, select the **Save & Apply** button.
 
-## Create Application via UI <a name="menu"></a>
+## Create Application via UI
 
 The **Create Application** dialog contains two steps:
 
@@ -69,8 +70,9 @@ Follow the instructions below to fill in the fields of the **Codebase Info** men
     * C# - selecting C# allows using the .Net v.3.1 and .Net v.6.0 frameworks.
     * Helm - selecting Helm allows using the Helm framework.
     * Other - selecting Other allows extending the default code languages when creating a codebase with the clone/import strategy.
-    !!! note
+    :::note
         The **Create from template** strategy does not allow to customize the default code language set.
+    :::
 
   - **Language version/framework** - defines the specific framework or language version of the application. The field depends on the selected code language.
   - **Select Build Tool** -  allows to choose the build tool to use. A set tools and can be changed in accordance with the selected code language.
@@ -82,12 +84,13 @@ Follow the instructions below to fill in the fields of the **Codebase Info** men
     * Go - selecting Go allows using Go tool.
     * Helm - selecting Helm allows using Helm tool.
 
-    !!! note
+    :::note
         The **Select Build Tool** field disposes of the default tools and can be changed in accordance with the selected code language.
+    :::
 
-    !!! note
+    :::note
         Tekton pipelines offer built-in support for Java Maven Multi-Module projects. These pipelines are capable of recognizing Java deployable modules based on the information in the **pom.xml** file and performing relevant deployment actions. It's important to note that although the Dockerfile is typically located in the root directory, Kaniko, the tool used for building container images, uses the targets folder within the deployable module's context. For a clear illustration of a Multi-Module project structure, please refer to this [example](https://github.com/epmd-edp/java-maven-java17-multimodule.git) on GitHub, which showcases a commonly used structure for Java Maven Multi-Module projects.
-
+    :::
 
 ### Advanced Settings Menu
 
@@ -97,8 +100,9 @@ In the **Advanced Settings** menu, specify the branch options and define the Jir
 
 * **Default branch** - the name of the branch where you want the development to be performed.
 
-  !!! note
+  :::note
       The default branch cannot be deleted.
+  :::
 
 * **Codebase versioning type** - defines how will the application tag be changed once the new image version is built. There are two versioning types:
   * **default**: Using the default versioning type, in order to specify the version of the current artifacts, images, and tags in the Version Control System, a developer should navigate to the corresponding file and change the version **manually**.
@@ -106,8 +110,9 @@ In the **Advanced Settings** menu, specify the branch options and define the Jir
 
       ![Edp versioning](../assets/user-guide/edp-portal-edp-versioning-application.png "Edp versioning")
 
-    !!! note
+    :::note
         The **Start Version From** field should be filled out in compliance with the semantic versioning rules, e.g. 1.2.3 or 10.10.10. Please refer to the [Semantic Versioning](https://semver.org/) page for details.
+    :::
 
 * **Specify the pattern to validate a commit message** - the regular expression used to indicate the pattern that is followed on the project to validate a commit message in the code review pipeline. An example of the pattern: `^[PROJECT_NAME-d{4}]:.*$`.
 
@@ -116,9 +121,10 @@ In the **Advanced Settings** menu, specify the branch options and define the Jir
 * **Integrate with Jira server** - this check box is used in case it is required to connect Jira tickets with the commits
 and have a respective label in the **Fix Version** field.
 
-!!! note
+:::note
     To adjust the Jira integration functionality, first apply the necessary changes described on the [Adjust Jira Integration](../operator-guide/jira-integration.md) page,
     and [Adjust VCS Integration With Jira](../operator-guide/jira-gerrit-integration.md).
+:::
 
 * **Jira Server** - the integrated Jira server with related Jira tasks.
 
@@ -142,8 +148,9 @@ and have a respective label in the **Fix Version** field.
 
 Click the **Apply** button to add the application to the Components list.
 
-!!! note
+:::note
     After the complete adding of the application, inspect the [Manage Applications](application.md) page to learn how you can operate applications.
+:::
 
 ## Related Articles
 

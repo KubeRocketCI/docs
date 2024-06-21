@@ -1,8 +1,8 @@
 # Add Git Server
 
-To add a Git server, navigate to the **Git servers** section on the navigation bar and click **Create** (the plus sign icon in the lower-right corner of the screen). Once clicked, the **Create Git server** dialog will appear. You can create a Git server [in YAML](#YAML) or [via the three-step menu](#menu) in the dialog.
+To add a Git server, navigate to the **Git servers** section on the navigation bar and click **Create** (the plus sign icon in the lower-right corner of the screen). Once clicked, the **Create Git server** dialog will appear. You can create a Git server [in YAML](#create-git-server-in-yaml) or [via the three-step menu](#create-git-server-in-the-dialog) in the dialog.
 
-## Create Git Server in YAML <a name="YAML"></a>
+## Create Git Server in YAML
 
 Click **Edit YAML** in the upper-right corner of the **Create Git server** dialog to open the YAML editor and create a Git server.
 
@@ -12,7 +12,7 @@ To edit YAML in the minimal editor, turn on the **Use minimal editor** toggle in
 
 To save the changes, select the **Save & Apply** button.
 
-## Create Git Server in the Dialog <a name="menu"></a>
+## Create Git Server in the Dialog
 
 Fill in the following fields:
 

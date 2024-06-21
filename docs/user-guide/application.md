@@ -21,8 +21,9 @@ The added application will be listed in the Applications list allowing you to do
 * **Edit application** - edit the application by selecting the options icon next to its name in the applications list, and then selecting **Edit**. For details see the [Edit Existing Application](#edit-existing-application) section.
 * **Delete application** - remove application by clicking the vertical ellipsis button and then selecting **Delete**.
 
-  !!! note
+  :::note
       The application that is used in a CD pipeline cannot be removed.
+  :::
 
 There are also options to sort the applications:
 

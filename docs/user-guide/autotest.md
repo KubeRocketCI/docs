@@ -9,8 +9,9 @@ As soon as the autotest is successfully provisioned, the following will be creat
 - An Autotest Codebase type will appear in the Codebase list of the Components section.
 - With the **Create** strategy, a new project will be generated on GitHub or another integrated VCS. When **Clone** is chosen, the repository will be forked from the original and copied to the KubeRocketCI-integrated repository. If **Import** is selected, the platform connects to the chosen repository.
 
-!!! info
+:::info
     To navigate quickly to Tekton, Version Control System, SonarQube, Nexus, and other resources, click the **Overview** section on the navigation bar and hit the necessary link.
+:::
 
 The added autotest will be listed in the Autotests list allowing you to do the following:
 
@@ -24,8 +25,9 @@ The added autotest will be listed in the Autotests list allowing you to do the f
 * **Edit autotest** - edit the autotest by selecting the options icon next to its name in the autotests list, and then selecting **Edit**. For details see the [Edit Existing Autotest](#edit-existing-autotest) section.
 * **Delete autotest** - remove autotest by clicking the vertical ellipsis button and then selecting **Delete**.
 
-  !!! note
-      The autotest that is used in a CD pipeline cannot be removed.
+  :::note
+    The autotest that is used in a CD pipeline cannot be removed.
+  :::
 
 There are also options to sort the autotests:
 
@@ -53,8 +55,9 @@ KubeRocketCI portal provides the ability to enable, disable or edit the Jira Int
 
    b. Click the **Apply** button to apply the changes.
 
-  !!! note
-      To adjust the Jira integration functionality, first apply the necessary changes described on the [Adjust Jira Integration](../operator-guide/jira-integration.md) and [Adjust VCS Integration With Jira](../operator-guide/jira-gerrit-integration.md) pages.
+  :::note
+    To adjust the Jira integration functionality, first apply the necessary changes described on the [Adjust Jira Integration](../operator-guide/jira-integration.md) and [Adjust VCS Integration With Jira](../operator-guide/jira-gerrit-integration.md) pages.
+  :::
 
 3. To disable Jira integration, in the **Edit Autotest** dialog do the following:
 

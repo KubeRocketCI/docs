@@ -404,7 +404,6 @@ const sidebars: SidebarsConfig = {
           items: [
             'user-guide/add-cd-pipeline',
             'user-guide/manage-environments',
-            'user-guide/add-quality-gate',
           ],
         },
         {
@@ -424,6 +423,7 @@ const sidebars: SidebarsConfig = {
               type: 'category',
               label: 'Git Server',
               items: [
+                'user-guide/add-git-server', // Add Git Servers
                 'user-guide/git-server-overview', // Manage Git Servers
               ],
             },

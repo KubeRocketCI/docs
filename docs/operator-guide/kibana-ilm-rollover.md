@@ -3,6 +3,7 @@
 This documentation describes the advantages of EFK stack over the traditional ELK stack, explains the value that this stack brings to EDP and instructs how to set up the EFK stack to integrate the advanced logging system with your application.
 
 ### ELK Stack Overview
+
 The __ELK__ (Elasticsearch, Logstash and Kibana) stack gives the ability to aggregate logs from all the managed systems and applications, analyze these logs and create visualizations for application and infrastructure monitoring, faster troubleshooting, security analytics and more.
 
 Here is a brief description of the ELK stack default components:
@@ -15,6 +16,7 @@ Here is a brief description of the ELK stack default components:
 ![Default components of ELK Stack](../assets/drawio-diagrams/elk_stack01.drawio.png "ELK Stack")
 
 ### EFK Stack Overview
+
 We use __FEK (also called EFK)__ (Fluent Bit, Elasticsearch, Kibana) stack in Kubernetes instead of __ELK__ because this stack provides us with the support for [Logsight](https://docs.logsight.ai/#/) for Stage Verification and Incident Detection. In addition to it, __Fluent Bit__ has a smaller memory fingerprint than Logstash.
 __Fluent Bit__ has the Inputs, Parsers, Filters and Outputs plugins similarly to Logstash.
 

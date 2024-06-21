@@ -475,4 +475,4 @@ Please find the detailed description of the variables in the [argo-cd/variables.
 ## Related Articles
 
 * [Cluster Add-Ons Overview](add-ons-overview.md)
-* [Install EDP](install-edp.md)
+* [Install EDP](install-kuberocketci.mdx)

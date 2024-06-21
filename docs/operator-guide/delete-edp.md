@@ -225,5 +225,5 @@ To uninstall EDP, perform the following steps:
 5. In Keycloak, delete the `edp-main` realm, also delete client which is supposed to be called by the `edp-main` pattern in the **openshift** realm.
 
 ## Related Articles
-* [Install EDP](install-edp.md)
+* [Install EDP](install-kuberocketci.mdx)
 * [Keycloak Integration](reportportal-keycloak.md)

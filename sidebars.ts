@@ -72,6 +72,7 @@ const sidebars: SidebarsConfig = {
     {
       type: 'category',
       label: 'Operator Guide',
+      collapsible: false,
       items: [
         'operator-guide/index',
         {
@@ -102,7 +103,7 @@ const sidebars: SidebarsConfig = {
                     'operator-guide/install-tekton',
                   ],
                 },
-                'operator-guide/install-edp',
+                'operator-guide/install-kuberocketci',
               ],
             },
             'operator-guide/aws-marketplace-install',
@@ -213,7 +214,6 @@ const sidebars: SidebarsConfig = {
                 'operator-guide/report-portal-integration-tekton',
               ],
             },
-            'operator-guide/logsight-integration',
             'operator-guide/dependency-track',
             {
               type: 'category',
@@ -512,6 +512,7 @@ const sidebars: SidebarsConfig = {
     {
       type: 'category',
       label: 'Use Cases',
+      collapsible: false,
       items: [
         'use-cases/index', // Overview
         'use-cases/application-scaffolding',

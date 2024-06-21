@@ -4,8 +4,8 @@ Inspect the prerequisites and the main steps to perform for installing [Install 
 
 ## Prerequisites
 
-* Kubectl version 1.23.0 is installed. Please refer to the [Kubernetes official website](https://v1-23.docs.kubernetes.io/releases/download/) for details.
-* [Helm](https://helm.sh) version 3.10.2 is installed. Please refer to the [Helm page](https://github.com/helm/helm/releases/tag/v3.10.2) on GitHub for details.
+* Kubectl version 1.26+ is installed. Please refer to the [Kubernetes official website](https://kubernetes.io/releases/) for details.
+* [Helm](https://helm.sh) version 3.10+ is installed. Please refer to the [Helm page](https://github.com/helm/helm/releases) on GitHub for details.
 
 ## Installation
 
@@ -13,21 +13,27 @@ To install the ingress-nginx chart, follow the steps below:
 
 1. Create an ingress-nginx namespace:
 
-      kubectl create namespace ingress-nginx
+    ```bash
+    kubectl create namespace ingress-nginx
+    ```
 
 2. Add a chart repository:
 
-      helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
-      helm repo update
+    ```bash
+    helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
+    helm repo update
+    ```
 
 3. Install the ingress-nginx chart:
 
-      helm install ingress ingress-nginx/ingress-nginx \
-      --version 4.7.0 \
-      --values values.yaml \
-      --namespace ingress-nginx
+    ```bash
+    helm install ingress ingress-nginx/ingress-nginx \
+    --version 4.7.0 \
+    --values values.yaml \
+    --namespace ingress-nginx
+    ```
 
-   Check out the *values.yaml* file sample of the ingress-nginx chart customization:
+   Check out the _values.yaml_ file sample of the ingress-nginx chart customization:
 
 <details>
 <summary><b>View: values.yaml</b></summary>
@@ -79,13 +85,15 @@ serviceAccount:
 
 </details>
 
-!!! warning
-    Align value **controller.config.proxy-real-ip-cidr** with [AWS VPC CIDR](https://kubernetes.github.io/ingress-nginx/user-guide/miscellaneous/#source-ip-address).
+:::info
+  Align value **controller.config.proxy-real-ip-cidr** with your [network settings](https://kubernetes.github.io/ingress-nginx/user-guide/miscellaneous/#source-ip-address).
+:::
 
-!!! note
-    It is also possible to install the ingress controller via cluster add-ons. For details, please refer to the [Install via Add-Ons](add-ons-overview.md) page.
+:::note
+  It is also possible to install the ingress controller via cluster add-ons. For details, please refer to the [Install via Add-Ons](add-ons-overview.md) page.
+:::
 
 ## Related Articles
 
 * [Install via Add-Ons](add-ons-overview.md)
-* [Install EDP](install-edp.md)
+* [Install EDP](install-kuberocketci.mdx)

@@ -76,7 +76,7 @@ To establish robust authentication and precise access control, generating a Sona
     More details about External Secrets Operator integration can be found in the [External Secrets Operator Integration](https://epam.github.io/edp-install/operator-guide/external-secrets-operator-integration/) page.
 
 ## Related Articles
-* [Install EDP With Values File](install-edp.md)
+* [Install EDP With Values File](install-kuberocketci.mdx)
 * [Install External Secrets Operator](install-external-secrets-operator.md)
 * [External Secrets Operator Integration](external-secrets-operator-integration.md)
 * [Cluster Add-Ons Overview](add-ons-overview.md)

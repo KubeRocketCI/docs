@@ -57,7 +57,7 @@ To proceed with the Keycloak configuration, perform the following:
 
 Headlamp can be integrated in Kubernetes in three steps:
 
-1. Update the [values.yaml](install-edp.md#values) file by enabling OIDC:
+1. Update the [values.yaml](install-kuberocketci.mdx#values) file by enabling OIDC:
 
   ??? note "View: values.yaml"
       ```yaml

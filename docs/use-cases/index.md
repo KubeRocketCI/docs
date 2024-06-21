@@ -1,4 +1,4 @@
-# Use Cases
+# Overview
 
 The Use Cases section provides useful recommendations of how to operate with the EPAM Delivery Platform tools and manage the custom resources. Get acquainted with the description of technical scenarios and solutions.
 

@@ -18,7 +18,7 @@ const FeatureList: FeatureItem[] = [
         Accelerate your delivery process with our versatile Application templates. Expand your possibilities by extending our comprehensive library with your personalized templates.
       </>
     ),
-    link: "user-guide/add-application/",
+    link: "docs/user-guide/add-application/",
   },
   {
     title: 'CI/CD pipelines',
@@ -28,7 +28,7 @@ const FeatureList: FeatureItem[] = [
         Leverage the power of Kubernetes native pipelines for seamless application management with the comprehensive EDP Library.
       </>
     ),
-    link: "user-guide/application/",
+    link: "docs/user-guide/application/",
   },
   {
     title: 'GitOps',
@@ -38,7 +38,7 @@ const FeatureList: FeatureItem[] = [
         Implement the GitOps approach for efficient deployment of your code and infrastructure. Maintain your state in code and manage changes effortlessly with our platform.
       </>
     ),
-    link: "user-guide/add-cd-pipeline/",
+    link: "docs/user-guide/add-cd-pipeline/",
   },
   {
     title: 'Single sign-on',
@@ -48,7 +48,7 @@ const FeatureList: FeatureItem[] = [
         Seamlessly integrate with your Enterprise Single Sign-On for a smooth and efficient user onboarding experience. Our platform is designed to enhance user accessibility and security, promoting a user-friendly environment that aligns with your enterprise’s unique needs.
       </>
     ),
-    link: "operator-guide/install-keycloak/",
+    link: "docs/operator-guide/install-keycloak/",
   },
   {
     title: 'Optimized for Kubernetes',
@@ -58,7 +58,7 @@ const FeatureList: FeatureItem[] = [
         Experience the power of Kubernetes-native functionality. Our platform is designed to run seamlessly in your preferred Kubernetes or OpenShift clusters, offering you flexibility and control.
       </>
     ),
-    link: "operator-guide/install-edp/",
+    link: "docs/operator-guide/install-kuberocketci/",
   },
   {
     title: 'Advanced Security Analysis',
@@ -68,7 +68,7 @@ const FeatureList: FeatureItem[] = [
         Achieve excellence in DevSecOps with our platform. We prioritize security, making it a mandatory quality gate for all operations. Experience enhanced protection and peace of mind.
       </>
     ),
-    link: "operator-guide/overview-devsecops/",
+    link: "docs/operator-guide/overview-devsecops/",
   },
   {
     title: 'Automated Test Analysis',
@@ -78,7 +78,7 @@ const FeatureList: FeatureItem[] = [
         Streamline your operations with our automated test analysis. Ensure your regressions pass seamlessly and predictably, enhancing the reliability of your systems. Leverage automation to increase your delivery speed and efficiency.
       </>
     ),
-    link: "operator-guide/install-reportportal/",
+    link: "docs/operator-guide/install-reportportal/",
   },
   {
     title: 'Comprehensive Metrics',
@@ -88,7 +88,7 @@ const FeatureList: FeatureItem[] = [
         Gain access to your application logs and metrics with ease. Explore your application in real-time, gaining valuable insights and enhancing your understanding of its performance.
       </>
     ),
-    link: "operator-guide/multitenant-logging/",
+    link: "docs/operator-guide/multitenant-logging/",
   },
   {
     title: 'Open-Source Software Solutions',
@@ -98,7 +98,7 @@ const FeatureList: FeatureItem[] = [
         Experience the power of open-source with EDP. Licensed under Apache 2.0, we equip you with leading open-source tools designed to enhance the reliability of your delivery process.
       </>
     ),
-    link: "overview",
+    link: "docs/about-platform",
   },
 ];
 

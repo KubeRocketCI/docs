@@ -657,7 +657,7 @@ spec:
 
 ## Related Articles
 
-* [Install EDP](install-edp.md)
+* [Install EDP](install-kuberocketci.mdx)
 * [Install via AWS Marketplace](aws-marketplace-install.md)
 * [Install via Civo](install-via-civo.md)
 * [Install via Add-Ons](add-ons-overview.md)

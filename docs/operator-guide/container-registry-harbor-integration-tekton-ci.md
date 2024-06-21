@@ -228,7 +228,7 @@ Harbor projects can be added and retained with a retention policy generated thro
 
 ## Related Articles
 
-* [Install EDP](install-edp.md)
+* [Install EDP](install-kuberocketci.mdx)
 * [Install Harbor](install-harbor.md)
 * [Adjust Jira Integration](jira-integration.md)
 * [Custom SonarQube Integration](sonarqube.md)

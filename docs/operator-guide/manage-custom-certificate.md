@@ -259,5 +259,5 @@ Also, the `jenkins-agent-opt-java-openjdk-lib-security-cacerts` secret contains 
 
 ## Related Articles
 
-* [Install EDP](install-edp.md)
+* [Install EDP](install-kuberocketci.mdx)
 * [Install Keycloak](install-keycloak.md)

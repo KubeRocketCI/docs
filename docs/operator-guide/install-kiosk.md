@@ -11,7 +11,7 @@ Inspect the main steps to set up Kiosk for the proceeding EDP installation.
 
 !!! note
     Kiosk deploy is mandatory for EDP v.2.8. In earlier versions, Kiosk is not implemented. Since EDP v.2.9.0, integration with Kiosk is an optional feature.
-    You may not want to use it, so just skip those steps and disable in Helm parameters during [EDP deploy](./install-edp.md).
+    You may not want to use it, so just skip those steps and disable in Helm parameters during [EDP deploy](./install-kuberocketci.mdx).
 
         ```yaml
         # global.kioskEnabled: <true/false>

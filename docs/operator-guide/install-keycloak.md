@@ -346,7 +346,7 @@ To prepare Keycloak for integration with EDP, follow the steps below:
 2. Create the `edp_<EDP_PROJECT>` user and set the password in the `Master` realm.
 
   !!! note
-      This user should be used by EDP to access Keycloak. Please refer to the [Install EDP](install-edp.md) page for details.
+      This user should be used by EDP to access Keycloak. Please refer to the [Install EDP](install-kuberocketci.mdx) page for details.
 
 3. In the `Role Mapping` tab, assign the proper roles to the user:
 
@@ -372,6 +372,6 @@ To prepare Keycloak for integration with EDP, follow the steps below:
 
 ## Related Articles
 
-* [Install EDP](install-edp.md)
+* [Install EDP](install-kuberocketci.mdx)
 * [Install Harbor](install-harbor.md)
 * [Install via Add-Ons](add-ons-overview.md)

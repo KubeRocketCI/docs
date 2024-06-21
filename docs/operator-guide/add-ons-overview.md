@@ -1,27 +1,27 @@
 # Install via Add-Ons
 
-This page describes the entity of Cluster Add-Ons for EPAM Delivery Platform, as well as their purpose, benefits and usage.
+This page provides an overview of Cluster Add-Ons for KubeRocketCI, including their purpose, benefits, and usage.
 
 ## What Are Add-Ons
 
-EDP Add-Ons is basically a Kubernetes-based structure that enables users to quickly install additional components for the platform using Argo CD applications.
+KubeRocketCI Add-Ons is essentially a Kubernetes-based deployment pattern that allows users to easily install additional components for the platform using Argo CD applications.
 
-Add-Ons have been introduced into EDP starting from version 3.4.0. They empower users to seamlessly incorporate the platform with various additional components, such as SonarQube, Nexus, Keycloak, Jira, and more. This eliminates the need for manual installations, as outlined in the [Install EDP](../operator-guide/install-edp.md) page.
+Add-Ons have been introduced into KubeRocketCI starting from version 3.4.0. They empower users to seamlessly integrate the platform with various additional components, such as SonarQube, Nexus, Keycloak, Jira, and more. This eliminates the need for manual installations, as described in the [Install KubeRocketCI](../operator-guide/install-kuberocketci.mdx) page.
 
-In a nutshell, Add-Ons represent separate Helm Charts that imply to be installed by one click using the Argo CD tool.
+In a nutshell, Add-Ons are separate Helm Charts that can be installed with just one click using the Argo CD tool.
 
 ## Add-Ons Repository Structure
 
-All the Add-Ons are stored in our public [GitHub repository](https://github.com/epam/edp-cluster-add-ons) adhering to the GitOps approach. Apart from default Helm and Git files, it contains both custom resources called Applications for Argo CD and application source code. The repository follows the GitOps approach to enable Add-Ons with the capability to rollback changes when needed. The repository structure is the following:
+All the Add-Ons for KubeRocketCI are stored in our [GitHub repository](https://github.com/epam/edp-cluster-add-ons) following the GitOps approach. In addition to default Helm and Git files, the repository contains custom resources called Applications for Argo CD and application source code. The repository adheres to the GitOps approach, allowing for easy rollback of changes when necessary. The structure of the repository is as follows:
 
-
-      ├── CHANGELOG.md
-      ├── LICENSE
-      ├── Makefile
-      ├── README.md
-      ├── add-ons
-      └── chart
-
+    ```bash
+    ├── CHANGELOG.md
+    ├── LICENSE
+    ├── Makefile
+    ├── README.md
+    ├── add-ons
+    └── chart
+    ```
 
 * **add-ons** - the directory that contains Helm charts of the applications that can be integrated with EDP using Add-Ons.
 
@@ -29,7 +29,7 @@ All the Add-Ons are stored in our public [GitHub repository](https://github.com/
 
 ## Enable EDP Add-Ons
 
-To enable EDP Add-Ons, it is necessary to have the configured Argo CD, and connect and synchronize the forked repository. To do this, follow the guidelines below:
+To enable Add-Ons, it is necessary to have the configured Argo CD, and connect and synchronize the forked repository. To do this, follow the guidelines below:
 
 1. Fork the Add-Ons repository to your personal account.
 
@@ -37,42 +37,41 @@ To enable EDP Add-Ons, it is necessary to have the configured Argo CD, and conne
 
 3. Navigate to **Argo CD** -> **Settings** -> **Repositories**. Connect your forked repository where you have the values.yaml files changed by clicking the **+ Connect repo** button:
 
-  ![Connect the forked repository](../assets/operator-guide/connect_repo.png "Connect the forked repository")
+    ![Connect the forked repository](../assets/operator-guide/connect_repo.png "Connect the forked repository")
 
 4. In the appeared window, fill in the following fields and click the **Connect** button:
 
-  * Name - select the namespace where the project is going to be deployed;
-  * Choose your connection method - choose Via SSH;
-  * Type - choose Helm;
-  * Repository URL - enter the URL of your forked repository.
+    * Name - select the namespace where the project is going to be deployed;
+    * Choose your connection method - choose Via SSH;
+    * Type - choose Helm;
+    * Repository URL - enter the URL of your forked repository.
 
-  ![Repository parameters](../assets/operator-guide/argo_cd_repo_fields.png "Repository parameters")
-
+    ![Repository parameters](../assets/operator-guide/argo_cd_repo_fields.png "Repository parameters")
 
 5. As soon as the repository is connected, the new item in the repository list will appear:
 
-  ![Connected repository](../assets/operator-guide/connected_repo.png "Connected repository")
+    ![Connected repository](../assets/operator-guide/connected_repo.png "Connected repository")
 
 6. Navigate to **Argo CD** -> **Applications**. Click the **+ New app** button:
 
-  ![Adding Argo CD application](../assets/operator-guide/argo_cd_add_app.png "Adding Argo CD application")
+    ![Adding Argo CD application](../assets/operator-guide/argo_cd_add_app.png "Adding Argo CD application")
 
 7. Fill in the required fields:
 
-  * Application Name - addons-demo;
-  * Project name - select the namespace where the project is going to be deployed;
-  * Sync policy - select **Manual**;
-  * Repository URL - enter the URL of your forked repository;
-  * Revision - **Head**;
-  * Path - select **chart**;
-  * Cluster URL - enter the URL of your cluster;
-  * Namespace - enter the namespace which must be equal to the **Project name** field.
+    * Application Name - addons-demo;
+    * Project name - select the namespace where the project is going to be deployed;
+    * Sync policy - select **Manual**;
+    * Repository URL - enter the URL of your forked repository;
+    * Revision - **Head**;
+    * Path - select **chart**;
+    * Cluster URL - enter the URL of your cluster;
+    * Namespace - enter the namespace which must be equal to the **Project name** field.
 
 8. As soon as the repository is synchronized, the list of applications that can be installed by Add-Ons will be shown:
 
-  ![Add-Ons list](../assets/operator-guide/add_ons_to_install.png "Add-Ons list")
+    ![Add-Ons list](../assets/operator-guide/add_ons_to_install.png "Add-Ons list")
 
-## Install EDP Add-Ons
+## Install Add-Ons
 
 Now that Add-Ons are enabled in Argo CD, they can be installed by following the steps below:
 
@@ -80,29 +79,33 @@ Now that Add-Ons are enabled in Argo CD, they can be installed by following the 
 
 2. On the chosen Add-On, click the **⋮** button and then **Details**:
 
-  ![Open the Add-On](../assets/operator-guide/sync.png "Open Add-Ons")
+    ![Open the Add-On](../assets/operator-guide/sync.png "Open Add-Ons")
 
 3. To install the Add-On, click the **⋮** button -> **Sync**:
 
-  ![Install Add-Ons](../assets/operator-guide/synchronize.png "Install Add-Ons")
+    ![Install Add-Ons](../assets/operator-guide/synchronize.png "Install Add-Ons")
 
 4. Once the Add-On is installed, the *Sync OK* message will appear in the Add-On status bar:
 
-  ![Sync OK message](../assets/operator-guide/sync_ok.png "Sync OK message")
+    ![Sync OK message](../assets/operator-guide/sync_ok.png "Sync OK message")
 
 5. Open the application details by clicking on the little square with an arrow underneath the Add-On name:
 
-  ![Open details](../assets/operator-guide/open_details.png "Open details")
+    ![Open details](../assets/operator-guide/open_details.png "Open details")
 
 6. Track application resources and status in the **App details** menu:
 
-  ![Application details](../assets/operator-guide/application_resources.png "Application details")
+    ![Application details](../assets/operator-guide/application_resources.png "Application details")
 
-As we see, Argo CD offers great observability and monitoring tools for its resources which comes in handy when using EDP Add-Ons.
+Argo CD provides excellent observability and monitoring capabilities for its resources, which is particularly beneficial when utilizing KubeRocketCI Add-Ons.
 
 ## Available Add-Ons List
 
 The list of the available Add-Ons:
+
+:::info
+  Consult repository [README.md](https://github.com/epam/edp-cluster-add-ons?tab=readme-ov-file#available-add-ons) for the most up-to-date information.
+:::
 
 |Name|Description|Default|
 |:-|:-|:-:|

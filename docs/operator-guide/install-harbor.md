@@ -176,5 +176,5 @@ To install Harbor with Helm, follow the steps below:
 
 ## Related Articles
 
-* [Install EDP](install-edp.md)
+* [Install EDP](install-kuberocketci.mdx)
 * [Integrate Harbor With EDP Pipelines](container-registry-harbor-integration-tekton-ci.md)

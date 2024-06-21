@@ -1,6 +1,6 @@
 # Integrate Capsule
 
-This article outlines how the EPAM Delivery Platform (EDP) leverages Capsule capabilities to enable isolation for both the [core](install-edp.md) platform components and the business applications [workload](../user-guide/add-cd-pipeline.md).
+This article outlines how the EPAM Delivery Platform (EDP) leverages Capsule capabilities to enable isolation for both the [core](install-kuberocketci.mdx) platform components and the business applications [workload](../user-guide/add-cd-pipeline.md).
 
 EPAM Delivery Platform uses Capsule to ensure resource isolation. It is crucial to define constraints through the Capsule tenant approach. This approach serves two primary objectives: limiting the resources allocated to the EDP components and regulating the resources utilized by each deployed environment.
 
@@ -220,7 +220,7 @@ As a result of following these instructions, Capsule policies are used to manage
 
 ## Related Articles
 
-* [Install EDP With Values File](install-edp.md)
+* [Install EDP With Values File](install-kuberocketci.mdx)
 * [Cluster Add-Ons Overview](add-ons-overview.md)
 * [Set Up Kiosk](install-kiosk.md)
 * [EDP Kiosk Usage](edp-kiosk-usage.md)

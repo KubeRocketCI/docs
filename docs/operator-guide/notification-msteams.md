@@ -68,5 +68,5 @@ After customization, the following message is supposed to appear in the channel 
 
 ## Related Articles
 
-* [Install EDP](install-edp.md)
+* [Install EDP](install-kuberocketci.mdx)
 * [Install Tekton](install-tekton.md)

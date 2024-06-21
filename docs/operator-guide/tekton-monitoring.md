@@ -78,4 +78,4 @@ As soon as the dashboard procedure is completed, you can track the newcoming met
 ## Related Articles
 
 * [Install Tekton](install-tekton.md)
-* [Install EDP](install-edp.md)
+* [Install EDP](install-kuberocketci.mdx)

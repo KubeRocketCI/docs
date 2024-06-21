@@ -21,7 +21,7 @@ Explore the way [Kiosk, a multi-tenancy extension for Kubernetes](https://github
 
 ## Usage
 
-* **EDP installation** area on a diagram is described by following [link](install-edp.md);
+* **EDP installation** area on a diagram is described by following [link](install-kuberocketci.mdx);
 
 * Once the above step is executed, **edp-cd-pipeline-operator** service account will be linked to **kiosk-edit** ClusterRole
   to get an ability for leveraging Kiosk specific resources (e.g. Space);
@@ -34,5 +34,5 @@ Explore the way [Kiosk, a multi-tenancy extension for Kubernetes](https://github
 
 ## Related Articles
 
-- [Install EDP](install-edp.md)
+- [Install EDP](install-kuberocketci.mdx)
 - [Set Up Kiosk](install-kiosk.md)

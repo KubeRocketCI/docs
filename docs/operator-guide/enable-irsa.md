@@ -53,7 +53,7 @@ To successfully associate the IAM role with the service account, follow the step
 
     2.1. Provide the [stable](https://hub.docker.com/r/amazon/amazon-eks-pod-identity-webhook)(ed8c41f) version of the Docker image in the _deploy/deployment-base.yaml_ file.
 
-    2.2. Provide _${CA_BUNDLE}_in the_deploy/mutatingwebhook.yaml_ file:
+    2.2. Provide _$\{CA_BUNDLE\}_ in the _deploy/mutatingwebhook.yaml_ file:
 
         ```bash
         secret_name=$(kubectl -n default get sa default -o jsonpath='{.secrets[0].name}') \

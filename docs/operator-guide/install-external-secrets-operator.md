@@ -21,8 +21,9 @@ helm install external-secrets \
     --create-namespace
 ```
 
-!!! info
+:::info
     It is also possible to install External Secrets Operator using the [Cluster Add-Ons](add-ons-overview.md) or [Operator Lifecycle Manager (OLM)](https://operatorhub.io/operator/external-secrets-operator).
+:::
 
 ## Related Articles
 

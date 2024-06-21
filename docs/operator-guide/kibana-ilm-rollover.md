@@ -35,18 +35,19 @@ They are going to be created them using Kibana Dev Tools.
 
 2. Create index lifecycle policy with the index [rollover](https://www.elastic.co/guide/en/elasticsearch/reference/8.6/ilm-rollover.html):
 
-  !!! Note
-      This policy can also be created in GUI in `Management` → `Stack Management` → `Index Lifecycle Policies`.
+    :::note
+        This policy can also be created in GUI in `Management` → `Stack Management` → `Index Lifecycle Policies`.
+    :::
 
-  [Index Lifecycle](https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-index-lifecycle.html) has several phases: Hot, Warm, Cold, Frozen, Delete. Indices also have different [priorities](https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-set-priority.html) in each phase. The warmer the phase, the higher the priority is supposed to be, e.g., 100 for the hot phase, 50 for the warm phase, and 0 for the cold phase.
+    [Index Lifecycle](https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-index-lifecycle.html) has several phases: Hot, Warm, Cold, Frozen, Delete. Indices also have different [priorities](https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-set-priority.html) in each phase. The warmer the phase, the higher the priority is supposed to be, e.g., 100 for the hot phase, 50 for the warm phase, and 0 for the cold phase.
 
-  In this Use Case, only the Hot and Delete phases are configured. So an index will be created, rolled over to a new index when 1gb in size or 1day in time and deleted in 7 days.
-  The rollover may not happen exactly at 1GB because it depends on how often Kibana checks the index size. Kibana usually checks the index size every 10 minutes but this can be changed by setting the [indices.lifecycle.poll_interval](https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-settings.html) monitoring timer.
+    In this Use Case, only the Hot and Delete phases are configured. So an index will be created, rolled over to a new index when 1gb in size or 1day in time and deleted in 7 days.
+    The rollover may not happen exactly at 1GB because it depends on how often Kibana checks the index size. Kibana usually checks the index size every 10 minutes but this can be changed by setting the [indices.lifecycle.poll_interval](https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-settings.html) monitoring timer.
 
-  The index lifecycle policy example:
+    The index lifecycle policy example:
 
    <details>
-      <Summary><b>Index Lifecycle Policy</b></Summary>
+      <summary><b>Index Lifecycle Policy</b></summary>
     ```json
     PUT _ilm/policy/fluent-bit-policy
     {
@@ -79,17 +80,18 @@ They are going to be created them using Kibana Dev Tools.
     ```
    </details>
 
-  Insert the code above into the `Dev Tools` and click the arrow to send the `PUT` request.
+    Insert the code above into the `Dev Tools` and click the arrow to send the `PUT` request.
 
 3. Create an [index template](https://www.elastic.co/guide/en/elasticsearch/reference/current/index-templates.html) so that a new index is created according to this template after the rollover:
 
-  !!! Note
-      This policy can also be created in GUI in `Management` → `Stack Management` → `Index Management` → `Index Templates`.
+    :::note
+        This policy can also be created in GUI in `Management` → `Stack Management` → `Index Management` → `Index Templates`.
+    :::
 
-  Expand the menu below to see the index template example:
+    Expand the menu below to see the index template example:
 
    <details>
-      <Summary><b>Index Template</b></Summary>
+      <summary><b>Index Template</b></summary>
     ```json
     PUT /_index_template/fluent-bit
     {
@@ -110,7 +112,7 @@ They are going to be created them using Kibana Dev Tools.
     ```
    </details>
 
-  !!! Note
+    :::note
       * `index.lifecycle.rollover_alias` is required when using a policy containing the rollover action and specifies which alias to rollover on behalf of this index. The intention here is that the rollover [alias](https://www.elastic.co/guide/en/elasticsearch/reference/8.6/aliases.html) is also defined on the index.
 
       * `number_of_shards` is the quantity of the primary shards. Elasticsearch index is really just a logical grouping of one or more physical shards, where each shard is actually a self-contained index. By distributing the documents in an index across multiple shards and distributing those shards across multiple nodes, Elasticsearch can ensure redundancy, which both protects against hardware failures and increases query capacity as nodes are added to a cluster. As the cluster grows (or shrinks), Elasticsearch automatically migrates shards to re-balance the cluster. Please refer to the official documentation [here](https://www.elastic.co/guide/en/elasticsearch/reference/current/scalability.html).
@@ -122,16 +124,18 @@ They are going to be created them using Kibana Dev Tools.
           ```
 
       Since we use one node, the number_of_shards  is 1 and number_of_replicas is 0. If you put more replicas within one node, your index will get yellow status in Kibana, yet still be working.
+    :::
 
 4. Create an empty [index](https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-create-index.html) with write permissions:
 
-  !!! Note
-      This index can also be created in GUI in `Management` → `Stack Management` → `Index Management` → `Indices`.
+    :::note
+        This index can also be created in GUI in `Management` → `Stack Management` → `Index Management` → `Indices`.
+    :::
 
-  Index example with the [date math](https://www.elastic.co/guide/en/elasticsearch/reference/current/api-conventions.html) format:
+    Index example with the [date math](https://www.elastic.co/guide/en/elasticsearch/reference/current/api-conventions.html) format:
 
    <details>
-      <Summary><b>Index</b></Summary>
+      <summary><b>Index</b></summary>
     ```json
     # URI encoded /<fluent-bit-kube-{now/d}-000001>
     PUT /%3Cfluent-bit-kube-%7Bnow%2Fd%7D-000001%3E
@@ -145,15 +149,15 @@ They are going to be created them using Kibana Dev Tools.
     ```
    </details>
 
-  The code above will create an index in the`{index_name}-{current_date}-{rollover_index_increment}` format. For example: `fluent-bit-kube-2023.03.17-000001`.
+    The code above will create an index in the`{index_name}-{current_date}-{rollover_index_increment}` format. For example: `fluent-bit-kube-2023.03.17-000001`.
 
-  Please refer to the official documentation on the index rollover with Date Math [here](https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-rollover-index.html#_using_date_math_with_the_rollover_api).
+    Please refer to the official documentation on the index rollover with Date Math [here](https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-rollover-index.html#_using_date_math_with_the_rollover_api).
 
-  !!! Note
+    :::note
       It is also possible to use index pattern below if the date math format does not seem applicable:
 
       <details>
-          <Summary><b>Index</b></Summary>
+          <summary><b>Index</b></summary>
         ```json
         PUT fluent-bit-kube-000001
         {
@@ -166,20 +170,21 @@ They are going to be created them using Kibana Dev Tools.
         ```
       </details>
 
-  Check the status of the created index:
+      Check the status of the created index:
 
-    ```json
-    GET fluent-bit-kube*-000001/_ilm/explain
-    ```
+      ```json
+      GET fluent-bit-kube*-000001/_ilm/explain
+      ```
+    :::
 
 5. Configure Fluent Bit. Play attention to the [Elasticsearch Output](https://docs.fluentbit.io/manual/pipeline/outputs/elasticsearch) plugin configuration.
 
-  The important fields in the `[OUTPUT]` section are `Index fluent-bit-kube` since we should use the index with the same name as Rollover Alias in Kibana and `Logstash_Format Off` as we use the Rollover index pattern in Kibana that increments by 1.
+    The important fields in the `[OUTPUT]` section are `Index fluent-bit-kube` since we should use the index with the same name as Rollover Alias in Kibana and `Logstash_Format Off` as we use the Rollover index pattern in Kibana that increments by 1.
 
-  ConfigMap example with [Configuration Variables](https://docs.fluentbit.io/manual/v/1.0/configuration/variables) for `HTTP_User` and `HTTP_Passwd`:
+    ConfigMap example with [Configuration Variables](https://docs.fluentbit.io/manual/v/1.0/configuration/variables) for `HTTP_User` and `HTTP_Passwd`:
 
    <details>
-      <Summary><b>ConfigMap fluent-bit</b></Summary>
+      <summary><b>ConfigMap fluent-bit</b></summary>
     ```yaml
     data:
       fluent-bit.conf: |
@@ -260,43 +265,45 @@ They are going to be created them using Kibana Dev Tools.
 
 6. Create index pattern (Data View starting from Kibana v8.0):
 
-  Go to `Management` → `Stack Management` → `Kibana` → `Index patterns` and create an index with the `fluent-bit-kube-*` pattern:
+    Go to `Management` → `Stack Management` → `Kibana` → `Index patterns` and create an index with the `fluent-bit-kube-*` pattern:
 
-  ![Index Pattern](../assets/operator-guide/elk-stack01.png "Index Pattern")
+    ![Index Pattern](../assets/operator-guide/elk-stack01.png "Index Pattern")
 
 7. Check logs in Kibana. Navigate to `Analytics` → `Discover`:
 
-  ![Logs in Kibana](../assets/operator-guide/elk-stack02.png "Logs in Kibana")
+    ![Logs in Kibana](../assets/operator-guide/elk-stack02.png "Logs in Kibana")
 
-  !!! Note
+    :::note
       In addition, in the top-right corner of the `Discover` window, there is a button called `Inspect`. Clicking on it will reveal the query that Kibana is sending to Elasticsearch. These queries can be used in Dev Tools.
 
 8. Monitor the created indices:
 
-  ```json
-  GET _cat/indices/fluent-bit-kube-*
-  ```
+    ```json
+    GET _cat/indices/fluent-bit-kube-*
+    ```
 
-  !!! Note
-      Physically, the indices are located on the `elasticsearch` Kubernetes pod in `/usr/share/elasticsearch/data/nodes/0/indices`. It is recommended to backup indices only via [Snapshots](https://www.elastic.co/guide/en/elasticsearch/reference/current/snapshot-restore.html).
+    :::note
+        Physically, the indices are located on the `elasticsearch` Kubernetes pod in `/usr/share/elasticsearch/data/nodes/0/indices`. It is recommended to backup indices only via [Snapshots](https://www.elastic.co/guide/en/elasticsearch/reference/current/snapshot-restore.html).
+    :::
 
-We've configured the index rollover process. Now the index will be rolled over to a new one once it reaches the indicated size or time in the policy, and old indices will be removed according to the policy as well.
+    We've configured the index rollover process. Now the index will be rolled over to a new one once it reaches the indicated size or time in the policy, and old indices will be removed according to the policy as well.
 
-When you create an empty index that corresponds to the pattern indicated in the index template, the index template attaches `rollover_alias` with the `fluent-bit-kube` name, policy and other configured data. Then the Fluent Bit Elasticsearch output plugin sends logs to the `Index fluent-bit-kube` rollover alias. The index rollover process is managed by ILM that increments our indices united by the `rollover_alias` and distributes the log data to the latest index.
+    When you create an empty index that corresponds to the pattern indicated in the index template, the index template attaches `rollover_alias` with the `fluent-bit-kube` name, policy and other configured data. Then the Fluent Bit Elasticsearch output plugin sends logs to the `Index fluent-bit-kube` rollover alias. The index rollover process is managed by ILM that increments our indices united by the `rollover_alias` and distributes the log data to the latest index.
 
 ### ILM Without Rollover Policy
 
 It is also possible to manage index lifecycle without rollover indicated in the policy. If this is the case, this section will explain how to refactor the index to make it look that way: `fluent-bit-kube-2023.03.18`.
 
-!!! Note
+:::note
     The main drawback of this method is that the indices can be managed only by their creation date.
+:::
 
 To manage index lifecycle without rollover policy, follow the steps below:
 
 1. Create a Policy without `rollover` but with indices deletion:
 
    <details>
-      <Summary><b>Index Lifecycle Policy</b></Summary>
+      <summary><b>Index Lifecycle Policy</b></summary>
     ```json
     PUT _ilm/policy/fluent-bit-policy
     {
@@ -327,7 +334,7 @@ To manage index lifecycle without rollover policy, follow the steps below:
 2. Create an index template with the `rollover_alias` parameter:
 
    <details>
-      <Summary><b>Index Template</b></Summary>
+      <summary><b>Index Template</b></summary>
     ```json
     PUT /_index_template/fluent-bit
     {
@@ -351,7 +358,7 @@ To manage index lifecycle without rollover policy, follow the steps below:
 3. Change the Fluent Bit `[OUTPUT]` config to this one:
 
    <details>
-      <Summary><b>ConfigMap fluent-bit</b></Summary>
+      <summary><b>ConfigMap fluent-bit</b></summary>
     ```yaml
     [OUTPUT]
         Name            es

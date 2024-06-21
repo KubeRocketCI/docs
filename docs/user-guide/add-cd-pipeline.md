@@ -5,13 +5,9 @@ Portal provides the ability to deploy an environment on your own and specify the
 Navigate to the **Environments** section on the navigation bar and click **Create** (the plus sign icon on the right side of the screen). Once clicked, the **Create CD Pipeline** dialog will appear.
 
 The creation of the environment becomes available as soon as an application is created including its provisioning
-in a branch and the necessary entities for the environment. You can create the environment [in YAML](#YAML) or [via the three-step menu](#menu) in the dialog.
+in a branch and the necessary entities for the environment. You can create the environment [in YAML](#create-environment-in-yaml) or [via the three-step menu](#create-environment-in-the-dialog) in the dialog.
 
-[//]: # (After the complete adding of the CD pipeline, inspect the [Check CD Pipeline Availability]&#40;#check-cd-pipeline-availability&#41;)
-
-[//]: # (part.)
-
-## Create Environment in YAML <a name="YAML"></a>
+## Create Environment in YAML
 Click **Edit YAML** in the upper-right corner of the **Create CD Pipeline** dialog to open the YAML editor and create the environment.
 
 ![Edit YAML](../assets/user-guide/edp-portal-yaml-editor.png "Edit YAML")
@@ -20,7 +16,7 @@ To edit YAML in the minimal editor, turn on the **Use minimal editor** toggle in
 
 To save the changes, select the **Save & Apply** button.
 
-## Create Environment in the Dialog <a name="menu"></a>
+## Create Environment in the Dialog
 The **Create CD Pipeline** dialog contains the three steps:
 
 * The Pipeline Menu
@@ -50,9 +46,10 @@ To create an environment, follow the steps below:
 3. Type the name of the pipeline in the **Pipeline Name** field by entering at least two characters and by using
 the lower-case letters, numbers and inner dashes.
 
-  !!! note
-      The namespace created by the environment has the following pattern combination: **[kuberocketci namespace]-[environment name]-[stage name]**.
-      Please be aware that the namespace length should not exceed 63 symbols.
+  :::note
+    The namespace created by the environment has the following pattern combination: **[kuberocketci namespace]-[environment name]-[stage name]**.
+    Please be aware that the namespace length should not exceed 63 symbols.
+  :::
 
 4. Select the deployment type from the drop-down list:
 
@@ -75,10 +72,10 @@ The **Pipeline** tab of the **Create CD Pipeline** menu is presented below:
   the same codebase Docker stream will be deployed regardless of the stage, i.e. the codebase Docker stream input,
   which was selected for the pipeline, will always be used.
 
-  !!! note
-      If there is another deployed environment stage with the respective codebase Docker stream (= image stream as an OpenShift term),
-      the pattern combination will be as follows: [pipeline name]-[stage name]-[application name]-[verified].
-
+  :::note
+    If there is another deployed environment stage with the respective codebase Docker stream (= image stream as an OpenShift term),
+    the pattern combination will be as follows: [pipeline name]-[stage name]-[application name]-[verified].
+  :::
 3. Click the **Proceed** button to switch to the next menu.
 
 ### The Stages Menu
@@ -98,8 +95,9 @@ Stages are created the following way:
     * **Description** - Enter the description for this stage;
     * **Trigger type** - Select the trigger type. The key benefit of the automatic deploy feature is to keep environments up-to-date. The available trigger types are _Manual_ and _Auto_. When the _Auto_ trigger type is chosen, the environment will initiate automatically once the image is built. _Manual_ implies that user has to perform deploy manually by clicking the **Deploy** button in the environment menu. Please refer to the [Architecture Scheme of CD Pipeline Operator](https://github.com/epam/edp-cd-pipeline-operator/blob/master/docs/arch.md) page for additional details.
 
-      !!! note
-          Automatic deploy will start working only after the first manual deploy.
+      :::note
+        Automatic deploy will start working only after the first manual deploy.
+      :::
 
     * **Pipeline template** - Choose a predefined blueprint outlining the deployment process for your application. While you have the option to incorporate custom deployment templates by generating a resource of the PipelineTemplate category, you can also opt for one of the preexisting options: with autotests or without.
 
@@ -111,9 +109,9 @@ Stages are created the following way:
     * **Autotest** - Select the previously created [autotest](add-autotest.md) name;
     * **Autotest branch** - Specify a branch for the autotest.
 
-    !!! note
-        Execution sequence. The image promotion and execution of the pipelines depend on the sequence in which
-        the environments are added.
+      :::note
+        Execution sequence. The image promotion and execution of the pipelines depend on the sequence in which the environments are added.
+      :::
 
   3. Click the **Apply** button to display the stage in the Stages menu.
 

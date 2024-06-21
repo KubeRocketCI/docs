@@ -4,8 +4,9 @@ This page describes how to manage branches in the created component, whether it 
 
 ## Add New Branch
 
-!!! note
+:::note
     When working with libraries, pay attention when specifying the branch name: the branch name is involved in the formation of the library version, so it must comply with the [Semantic Versioning](https://semver.org/) rules for the library.
+:::
 
 When adding a component, the default branch is a **master** branch. In order to add a new branch, follow the steps below:
 
@@ -31,8 +32,9 @@ When adding a component, the default branch is a **master** branch. In order to 
 
   f. Click the **Apply** button and wait until the new branch will be added to the list.
 
-  !!! info
-      Adding of a new branch is indicated in the context of the EDP versioning type.
+  :::info
+    Adding of a new branch is indicated in the context of the EDP versioning type.
+  :::
 
 The default component repository is cloned and changed to the new indicated version before the build, i.e. the new indicated version will not be committed to the repository; thus, the existing repository will keep the default version.
 
@@ -64,8 +66,9 @@ The tree diagram window is presented below:
 
 ## Delete Branch
 
-!!! note
-    The default **master/main** branch cannot be removed.
+:::note
+  The default **master/main** branch cannot be removed.
+:::
 
 In order to delete the added branch with the corresponding record in the KubeRocketCI portal database, do the following:
 

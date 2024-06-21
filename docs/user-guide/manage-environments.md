@@ -12,8 +12,9 @@ This page describes actions that can be performed to an already created environm
 * **Edit environment** - edit the environment by selecting the options icon next to its name in the environment list, and then selecting Edit. For details see the [Edit Existing Environment](#edit-existing-environment) section.
 * **Delete environment** - remove environment by clicking the vertical ellipsis button and then selecting Delete.
 
-  !!! note
-      Please keep in mind that after deleting the environment, all the created resources within the environment will be deleted.
+  :::note
+    Please keep in mind that after deleting the environment, all the created resources within the environment will be deleted.
+  :::
 
 ### View Environment Details
 
@@ -82,8 +83,9 @@ In order to edit a stage for the existing environment, follow the steps below:
 
 ### Delete Stage<a name="delete-stage"></a>
 
-!!! note
-    You cannot remove the last stage, as the environment does not exist without at least one.
+:::note
+  You cannot remove the last stage, as the environment does not exist without at least one.
+::::
 
 In order to delete a stage for the existing environment, follow the steps below:
 
@@ -128,8 +130,9 @@ To deploy an application, follow the steps below:
 
 4. Click **Deploy**. The application will be deployed in the Argo CD tool as well.
 
-!!! info
-    In case of using OpenShift internal registry, if the deployment fails with the ImagePullBackOff error, delete the pod that was created for this application.
+:::info
+  In case of using OpenShift internal registry, if the deployment fails with the ImagePullBackOff error, delete the pod that was created for this application.
+:::
 
 To update application, use the **Deploy** button:
 
@@ -141,8 +144,9 @@ To uninstall the application, click the **Uninstall** button:
 
 As a result, the application will be updated or uninstalled in the Argo CD tool as well.
 
-!!! note
-    In a nutshell, the **Update** button updates your image version in the Helm chart, whereas the **Uninstall** button deletes the Helm chart from the namespace where the Argo CD application is deployed.
+:::note
+  In a nutshell, the **Update** button updates your image version in the Helm chart, whereas the **Uninstall** button deletes the Helm chart from the namespace where the Argo CD application is deployed.
+:::
 
 ### Troubleshoot Application
 

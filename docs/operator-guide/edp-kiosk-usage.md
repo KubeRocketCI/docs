@@ -34,5 +34,4 @@ Explore the way [Kiosk, a multi-tenancy extension for Kubernetes](https://github
 
 ## Related Articles
 
-- [Install EDP](install-kuberocketci.mdx)
-- [Set Up Kiosk](install-kiosk.md)
+* [Install EDP](install-kuberocketci.mdx)

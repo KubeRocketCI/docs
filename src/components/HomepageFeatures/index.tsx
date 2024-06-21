@@ -78,7 +78,7 @@ const FeatureList: FeatureItem[] = [
         Streamline your operations with our automated test analysis. Ensure your regressions pass seamlessly and predictably, enhancing the reliability of your systems. Leverage automation to increase your delivery speed and efficiency.
       </>
     ),
-    link: "docs/operator-guide/install-reportportal/",
+    link: "docs/operator-guide/advanced-install/reportportal/",
   },
   {
     title: 'Comprehensive Metrics',

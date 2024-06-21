@@ -112,27 +112,12 @@ const sidebars: SidebarsConfig = {
               type: 'category',
               label: 'Advanced Installation',
               items: [
-                'operator-guide/advanced-installation-overview',
-                'operator-guide/install-harbor',
-                {
-                  type: 'category',
-                  label: 'Multi-Tenancy',
-                  items: [
-                    'operator-guide/overview-multi-tenancy',
-                    'operator-guide/capsule',
-                    {
-                      type: 'category',
-                      label: 'Kiosk',
-                      items: [
-                        'operator-guide/install-kiosk',
-                        'operator-guide/edp-kiosk-usage',
-                      ],
-                    },
-                  ],
-                },
-                'operator-guide/install-keycloak',
-                'operator-guide/install-defectdojo',
-                'operator-guide/install-reportportal',
+                'operator-guide/advanced-installation/overview',
+                'operator-guide/advanced-installation/harbor',
+                'operator-guide/advanced-installation/keycloak',
+                'operator-guide/advanced-installation/capsule',
+                'operator-guide/advanced-installation/defectdojo',
+                'operator-guide/advanced-installation/reportportal',
               ],
             },
           ],

@@ -25,6 +25,7 @@ helm install external-secrets \
     It is also possible to install External Secrets Operator using the [Cluster Add-Ons](add-ons-overview.md) or [Operator Lifecycle Manager (OLM)](https://operatorhub.io/operator/external-secrets-operator).
 
 ## Related Articles
+
 * [External Secrets Operator Integration](external-secrets-operator-integration.md)
 * [Install via Add-Ons](add-ons-overview.md)
-* [Install Harbor](install-harbor.md)
+* [Install Harbor](advanced-installation/harbor.md)

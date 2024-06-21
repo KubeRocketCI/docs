@@ -9,7 +9,7 @@ The following tools must be installed:
 * [KubeRocketCI](./install-kuberocketci.mdx)
 * [Kubectl version 1.23+](https://kubernetes.io/docs/tasks/tools/)
 * [Helm version 3.10+](https://github.com/helm/helm/releases)
-* [Keycloak](./install-keycloak.md) (optional)
+* [Keycloak](./advanced-installation/keycloak.md) (optional)
 
 ## Installation
 

@@ -20,4 +20,4 @@ To get and then manage a SAST report after scanning, it is necessary to deploy t
 
 [DefectDojo](https://www.defectdojo.com/) is a vulnerability management and security orchestration platform that allows managing the uploaded security reports.
 
-Inspect the prerequisites and the main steps for [installing DefectDojo](./install-defectdojo.md) on Kubernetes or OpenShift platforms.
+Inspect the prerequisites and the main steps for [installing DefectDojo](./advanced-installation/defectdojo.md) on Kubernetes or OpenShift platforms.

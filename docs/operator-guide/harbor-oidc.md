@@ -6,7 +6,7 @@ This page provides instructions for configuring [OIDC authorization](https://ope
 
 Before the beginning, ensure your cluster meets the following requirements:
 
-* [Keycloak](install-keycloak.md) is installed;
+* [Keycloak](advanced-installation/keycloak.md) is installed;
 * [EPAM Delivery Platform](install-kuberocketci.mdx) is installed.
 
 ## Configure Keycloak

@@ -6,7 +6,7 @@ This page is a detailed guide on integrating Keycloak with the edp-keycloak-oper
 
 * [EKS Configuration](https://epam.github.io/edp-install/operator-guide/configure-keycloak-oidc-eks/?h=oidc#eks-configuration) is performed;
 * [Helm v3.10.0](https://github.com/helm/helm/releases/tag/v3.10.0) is installed;
-* [Keycloak](../operator-guide/install-keycloak.md) is installed.
+* [Keycloak](../operator-guide/advanced-installation/keycloak.md) is installed.
 
 ## Configure Keycloak
 
@@ -217,5 +217,5 @@ The next stage after installing Keycloak is to integrate it with the Keycloak op
 
 ## Related Articles
 
-* [Keycloak Installation](install-keycloak.md)
+* [Keycloak Installation](advanced-installation/keycloak.md)
 * [EKS OIDC With Keycloak](configure-keycloak-oidc-eks.md)

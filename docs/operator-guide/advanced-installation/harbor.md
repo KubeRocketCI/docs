@@ -1,13 +1,13 @@
 # Install Harbor
 
-EPAM Delivery Platform uses Harbor as a storage for application images that are created when building applications.
+One of the storage options for application images within KubeRocketCI is Harbor, utilized during the application build process.
 
-Inspect the prerequisites and the main steps to perform for enabling [Harbor](https://goharbor.io/docs/2.8.0/) in EDP.
+Inspect the prerequisites and the main steps to perform for enabling [Harbor](https://goharbor.io/docs/2.8.0/) on the platform.
 
 ## Prerequisites
 
-* [Kubectl](https://v1-26.docs.kubernetes.io/releases/download/) version 1.26.0 is installed.
-* [Helm](https://helm.sh) version 3.12.0+ is installed.
+* Kubectl version 1.29.0+ is installed. Please refer to the [Kubernetes official website](https://kubernetes.io/releases/download/) for details.
+* [Helm](https://helm.sh) version 3.14.0+ is installed. Please refer to the [Helm page](https://github.com/helm/helm/releases) on GitHub for details.
 
 ## Installation
 
@@ -15,64 +15,67 @@ To install Harbor with Helm, follow the steps below:
 
 1. Create a namespace for Harbor:
 
-  ```bash
-  kubectl create namespace harbor
-  ```
+    ```bash
+    kubectl create namespace harbor
+    ```
 
 2. Create a secret for administrator user and registry:
 
-  === "Manually"
+    1. Manually
 
-      ```bash
-      kubectl create secret generic harbor \
-          --from-literal=HARBOR_ADMIN_PASSWORD=<secret> \
-          --from-literal=REGISTRY_HTPASSWD=<secret> \
-          --from-literal=REGISTRY_PASSWD=<secret> \
-          --from-literal=secretKey=<secret> \
-          --namespace harbor
-      ```
+        ```bash
+        kubectl create secret generic harbor \
+            --from-literal=HARBOR_ADMIN_PASSWORD=<secret> \
+            --from-literal=REGISTRY_HTPASSWD=<secret> \
+            --from-literal=REGISTRY_PASSWD=<secret> \
+            --from-literal=secretKey=<secret> \
+            --namespace harbor
+        ```
 
-  === "External Secret Operator"
+    2. Using `External Secret Operator` (ESO)
 
-      ```yaml
-      apiVersion: external-secrets.io/v1beta1
-      kind: ExternalSecret
-      metadata:
-        name: harbor
-        namespace: harbor
-      spec:
-        refreshInterval: 1h
-        secretStoreRef:
-          kind: SecretStore
-          name: aws-parameterstore
-      data:
-      - secretKey: HARBOR_ADMIN_PASSWORD
-        remoteRef:
-          conversionStrategy: Default
-          decodingStrategy: None
-          key: /control-plane/deploy-secrets
-          property: harbor.HARBOR_ADMIN_PASSWORD
-      - secretKey: secretKey
-        remoteRef:
-          conversionStrategy: Default
-          decodingStrategy: None
-          key: /control-plane/deploy-secrets
-          property: harbor.secretKey
-      - secretKey: REGISTRY_HTPASSWD
-        remoteRef:
-          conversionStrategy: Default
-          decodingStrategy: None
-          key: /control-plane/deploy-secrets
-          property: harbor.REGISTRY_HTPASSWD
-      - secretKey: REGISTRY_PASSWD
-        remoteRef:
-          conversionStrategy: Default
-          decodingStrategy: None
-          key: /control-plane/deploy-secrets
-          property: harbor.REGISTRY_PASSWD
-      ```
+      <details>
+      <summary><b>Create Secret data with ESO</b></summary>
+        ```yaml
+        apiVersion: external-secrets.io/v1beta1
+        kind: ExternalSecret
+        metadata:
+          name: harbor
+          namespace: harbor
+        spec:
+          refreshInterval: 1h
+          secretStoreRef:
+            kind: SecretStore
+            name: aws-parameterstore
+        data:
+        - secretKey: HARBOR_ADMIN_PASSWORD
+          remoteRef:
+            conversionStrategy: Default
+            decodingStrategy: None
+            key: /control-plane/deploy-secrets
+            property: harbor.HARBOR_ADMIN_PASSWORD
+        - secretKey: secretKey
+          remoteRef:
+            conversionStrategy: Default
+            decodingStrategy: None
+            key: /control-plane/deploy-secrets
+            property: harbor.secretKey
+        - secretKey: REGISTRY_HTPASSWD
+          remoteRef:
+            conversionStrategy: Default
+            decodingStrategy: None
+            key: /control-plane/deploy-secrets
+            property: harbor.REGISTRY_HTPASSWD
+        - secretKey: REGISTRY_PASSWD
+          remoteRef:
+            conversionStrategy: Default
+            decodingStrategy: None
+            key: /control-plane/deploy-secrets
+            property: harbor.REGISTRY_PASSWD
+        ```
+      </details>
 
-  !!! note
+    :::note
       The `HARBOR_ADMIN_PASSWORD` is the initial password of Harbor admin.<br />
       The `secretKey` is the secret key that is used for encryption. Must be 16 characters long.<br />
       The `REGISTRY_PASSWD` is Harbor registry password.<br />
@@ -80,33 +83,37 @@ To install Harbor with Helm, follow the steps below:
       file generated by the `htpasswd` command where the username is `harbor_registry_user` and the encryption type
       is `bcrypt`.<br />
       See the example below:
+
       ```bash
       htpasswd -bBc passwordfile harbor_registry_user harbor_registry_password
       ```
+
       The username must be `harbor_registry_user`.
       The password must be the value from `REGISTRY_PASSWD`.
+    :::
 
 3. Add the Helm Harbor Charts for the local client.
 
-  ```bash
-  helm repo add harbor https://helm.goharbor.io
-  ```
+    ```bash
+    helm repo add harbor https://helm.goharbor.io
+    ```
 
 4. Check the parameters in the Harbor installation chart. For details, please refer to
-   the [values.yaml](https://github.com/goharbor/harbor-helm/blob/master/values.yaml) file.
+the [values.yaml](https://github.com/goharbor/harbor-helm/blob/master/values.yaml) file.
 
-5. Install Harbor in the &#8249;harbor&#8250; namespace with the Helm tool.
+5. Install Harbor in the _harbor_ namespace with the Helm tool.
 
-  ```bash
-  helm install harbor harbor/harbor
-      --version 1.12.2 \
-      --namespace harbor \
-      --values values.yaml
-  ```
+    ```bash
+    helm install harbor harbor/harbor
+        --version 1.12.2 \
+        --namespace harbor \
+        --values values.yaml
+    ```
 
-  See the details on the parameters below:
+    See the details on the parameters below:
 
-  !!! Note "Example values.yaml file"
+    :::note Example values.yaml
+
       ```yaml
       # we use Harbor secret to consolidate all the Harbor secrets
       existingSecretAdminPassword: harbor
@@ -164,17 +171,21 @@ To install Harbor with Helm, follow the steps below:
           password: "changeit"
       ```
 
+      :::
+
 6. To check if the installation is successful, run the command below:
 
     ```bash
     helm status <harbor-release> -n harbor
     ```
+
     You can also check ingress endpoints to get Harbor endpoint to enter Harbor UI:
+
     ```bash
     kubectl describe ingress <harbor_ingress> -n harbor
     ```
 
 ## Related Articles
 
-* [Install EDP](install-kuberocketci.mdx)
-* [Integrate Harbor With EDP Pipelines](container-registry-harbor-integration-tekton-ci.md)
+* [Install EDP](../install-kuberocketci.mdx)
+* [Integrate Harbor With EDP Pipelines](../container-registry-harbor-integration-tekton-ci.md)

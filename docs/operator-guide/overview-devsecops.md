@@ -30,7 +30,7 @@ For obtaining and managing report post scanning, deployment of various vulnerabi
 
 ### DefectDojo
 
-[DefectDojo](https://www.defectdojo.com/) is a comprehensive vulnerability management and security orchestration platform facilitating the handling of uploaded security reports. Examine the prerequisites and fundamental instructions for [installing DefectDojo](./install-defectdojo.md) on Kubernetes or OpenShift platforms.
+[DefectDojo](https://www.defectdojo.com/) is a comprehensive vulnerability management and security orchestration platform facilitating the handling of uploaded security reports. Examine the prerequisites and fundamental instructions for [installing DefectDojo](./advanced-installation/defectdojo.md) on Kubernetes or OpenShift platforms.
 
 ### OWASP Dependency Track
 

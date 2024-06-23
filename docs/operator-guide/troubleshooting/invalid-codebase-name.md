@@ -34,4 +34,4 @@ To solve this issue, follow the steps below:
 
 ## Related Articles
 
-* [Integrate GitHub/GitLab in Tekton](../../operator-guide/import-strategy-tekton.md)
+* [Manage Git Providers](../../user-guide/add-git-server.md)

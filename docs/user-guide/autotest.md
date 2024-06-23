@@ -56,7 +56,7 @@ KubeRocketCI portal provides the ability to enable, disable or edit the Jira Int
    b. Click the **Apply** button to apply the changes.
 
   :::note
-    To adjust the Jira integration functionality, first apply the necessary changes described on the [Adjust Jira Integration](../operator-guide/jira-integration.md) and [Adjust VCS Integration With Jira](../operator-guide/jira-gerrit-integration.md) pages.
+    To adjust the Jira integration functionality, first apply the necessary changes described on the [Adjust Jira Integration](../operator-guide/jira-integration.md).
   :::
 
 3. To disable Jira integration, in the **Edit Autotest** dialog do the following:
@@ -105,5 +105,4 @@ There is an ability to run the autotests locally using the IDEA (Integrated Deve
 * [Add Autotests](add-autotest.md)
 * [Add CD Pipeline](add-cd-pipeline.md)
 * [Adjust Jira Integration](../operator-guide/jira-integration.md)
-* [Adjust VCS Integration With Jira](../operator-guide/jira-gerrit-integration.md)
 * [Manage Branches](../user-guide/manage-branches.md)

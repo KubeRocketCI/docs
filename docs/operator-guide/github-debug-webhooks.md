@@ -117,6 +117,6 @@ In case of any issues with webhooks, try the following solutions:
 ### Related Articles
 
 * [GitHub Webhooks](https://docs.github.com/en/developers/webhooks-and-events/webhooks)
-* [Integrate GitHub/GitLab in Tekton](../operator-guide/import-strategy-tekton.md)
+* [Manage Git Providers](../user-guide/add-git-server.md)
 * [GitHub Plugin](https://plugins.jenkins.io/github/)
 * [GitHub Pull Request Builder](https://plugins.jenkins.io/ghprb/)

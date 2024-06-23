@@ -6,7 +6,7 @@ This documentation provides a concise introduction to the KubeRocketCI installat
 * [Install via Add-Ons](add-ons-overview.md): Recommended for advanced KubeRocketCI users, this installation streamlines the setup of supported integrations and follows the GitOps approach. Familiarity with Argo CD is recommended.
 * [Install via Helm Charts](install-kuberocketci.mdx): While more complex, this method offers the highest level of flexibility, allowing for customization to suit specific needs. It requires a good understanding of KubeRocketCI.
 * [Install via AWS Marketplace](aws-marketplace-install.md): Optimal for users leveraging AWS infrastructure, offering a minimal setup for testing KubeRocketCI functionality.
-* [Install via Civo](install-via-civo.md): Preferred for users deploying KubeRocketCI in a Civo Kubernetes cluster. Follow our step-by-step [video tutorial](https://www.youtube.com/watch?v=QjZoPnIKDtA) for onboarding KubeRocketCI to a new Civo cluster.
+* [Install via Civo Marketplace](install-via-civo.md): Preferred for users deploying KubeRocketCI in a Civo Kubernetes cluster. Follow our step-by-step [video tutorial](https://www.youtube.com/watch?v=QjZoPnIKDtA) for onboarding KubeRocketCI to a new Civo cluster.
 
 ## Related Articles
 
@@ -14,4 +14,4 @@ This documentation provides a concise introduction to the KubeRocketCI installat
 * [Install KubeRocketCI](install-kuberocketci.mdx)
 * [Install via Add-Ons](add-ons-overview.md)
 * [Install via AWS Marketplace](aws-marketplace-install.md)
-* [Install via Civo](install-via-civo.md)
+* [Install via Civo Marketplace](install-via-civo.md)

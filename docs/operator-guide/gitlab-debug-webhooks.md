@@ -89,6 +89,6 @@ In case of any issues with webhooks, try the following solutions:
 ### Related Articles
 
 * [GitLab Webhooks](https://docs.gitlab.com/ee/user/project/integrations/webhooks.html)
-* [Integrate GitHub/GitLab in Tekton](../operator-guide/import-strategy-tekton.md)
+* [Manage Git Providers](../user-guide/add-git-server.md)
 * [Jenkins Integration With GitLab](https://docs.gitlab.com/ee/integration/jenkins.html)
 * [GitLab Plugin](https://plugins.jenkins.io/gitlab-plugin/)

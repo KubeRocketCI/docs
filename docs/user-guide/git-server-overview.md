@@ -8,7 +8,7 @@ Git Server is responsible for integration with Version Control System, whether i
 
 The Git Server is set via the **global.gitProviders** parameter of the [values.yaml](https://github.com/epam/edp-install/blob/release/3.9/deploy-templates/values.yaml#L12) file.
 
-To view the current Git Server, you can open `KubeRocketCI` -> `Configuration` -> `Git Servers` and inspect the following properties:
+To view the current Git Server, you can open Portal **Configuration** -> **Git Servers** and inspect the following properties:
 
 ![Git Server menu](../assets/user-guide/edp-portal-git-server-overview.png "Git Server menu")
 
@@ -35,5 +35,5 @@ To remove a Git Server from the Git Servers list, utilize the `kubectl delete` c
 
 ## Related Articles
 
-* [Add Git Server](../user-guide/add-git-server.md)
-* [Integrate GitHub/GitLab in Tekton](../operator-guide/import-strategy-tekton.md)
+* [Add Git Server](add-git-server.md)
+* [Manage Git Providers](../user-guide/add-git-server.md)

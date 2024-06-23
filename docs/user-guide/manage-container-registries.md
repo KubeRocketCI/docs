@@ -106,7 +106,7 @@ The required fields vary depending on which container registry is chosen:
                   |:-|:-|
                   |Registry Space|The unique identifier/name of the user or company linked to your GitHub account.|
                   |User|The user account ID or community user account ID with push permission.|
-                  |Password/Token|Provide the [Token](https://docs.github.com/en/enterprise-server@3.9/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens) corresponding to your  GitHub account. The minimal set of permissions required for the token is described in the [Integrate GitHub/GitLab in Tekton](../operator-guide/import-strategy-tekton.md).|
+                  |Password/Token|Provide the [Token](https://docs.github.com/en/enterprise-server@3.9/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens) corresponding to your  GitHub account. The minimal set of permissions required for the token is described in the [Manage Git Providers](../user-guide/add-git-server.md).|
                   |Checkbox/Use the Push Account's credentials|Check this to use the same account for pulling and pushing operations. If unchecked, please enter the user account ID and Token for your GitHub account or community user account ID with pull permission.|
             </TabItem>
       </Tabs>

@@ -93,5 +93,4 @@ The Build pipeline can be started manually. To set the necessary stages and trig
 * [Add Autotest](add-autotest.md)
 * [Add Library](add-library.md)
 * [Adjust Jira Integration](../operator-guide/jira-integration.md)
-* [Adjust VCS Integration With Jira](../operator-guide/jira-gerrit-integration.md)
 * [Autotest as Quality Gate](../use-cases/autotest-as-quality-gate.md)

@@ -21,7 +21,7 @@ In the **Create new component** menu, select the necessary configuration strateg
 * **Import project** - allows using existing VCS repository to integrate with KubeRocketCI. While importing the existing repository, select the Git server from the drop-down list and define the relative path to the repository, such as `epmd-edp/python-python-flask`.
 
 :::note
-  In order to use the **Import project** strategy, make sure to adjust it with the [Integrate GitLab/GitHub With Tekton](../operator-guide/import-strategy-tekton.md) page.
+  In order to use the **Import project** strategy, make sure to adjust it with the [Integrate GitLab/GitHub With Tekton](../user-guide/add-git-server.md) page.
 :::
 
 * **Clone project** – clones the indicated repository into KubeRocketCI. While cloning the existing repository, it is required to fill in the **Repository URL** field and specify the **Repository credentials** field if needed:
@@ -96,8 +96,7 @@ Follow the instructions below to fill in the fields of the **Advanced Setting** 
 and have a respective label in the **Fix Version** field.
 
 :::note
-    To adjust the Jira integration functionality, first apply the necessary changes described on the [Adjust Jira Integration](../operator-guide/jira-integration.md) page,
-    and [Adjust VCS Integration With Jira](../operator-guide/jira-gerrit-integration.md).
+    To adjust the Jira integration functionality, first apply the necessary changes described on the [Adjust Jira Integration](../operator-guide/jira-integration.md) page.
 :::
 
 - **Jira Server** - the integrated Jira server with related Jira tasks.
@@ -130,4 +129,3 @@ Click the **Apply** button to add the infrastructure to the Components list.
 * [Application Overview](application.md)
 * [Add CD Pipelines](add-cd-pipeline.md)
 * [Adjust Jira Integration](../operator-guide/jira-integration.md)
-* [Adjust VCS Integration With Jira](../operator-guide/jira-gerrit-integration.md)

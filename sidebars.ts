@@ -127,26 +127,11 @@ const sidebars: SidebarsConfig = {
           label: 'Configuration',
           items: [
             'operator-guide/edp-access-model',
-            {
-              type: 'category',
-              label: 'Version Control Systems',
-              items: [
-                'operator-guide/vcs',
-                'operator-guide/import-strategy-tekton',
-              ],
-            },
             'operator-guide/headlamp-oidc',
             'operator-guide/namespace-management',
             'operator-guide/customize_deployment',
             'operator-guide/eks-oidc-integration',
-            {
-              type: 'category',
-              label: 'Jira',
-              items: [
-                'operator-guide/jira-integration',
-                'operator-guide/jira-gerrit-integration',
-              ],
-            },
+            'operator-guide/jira-integration',
           ],
         },
         {

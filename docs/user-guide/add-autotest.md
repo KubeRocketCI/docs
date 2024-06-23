@@ -24,7 +24,7 @@ Choose one of the strategies and click **Create**:
 * **Import project** - allows using existing VCS repository to integrate with KubeRocketCI. While importing the existing repository, select the Git server from the drop-down list and define the relative path to the repository, such as `/epmd-edp/examples/basic/edp-auto-tests-simple-example`.
 
   :::note
-    In order to use the **Import project** strategy, make sure to adjust it with the [Integrate GitLab/GitHub With Tekton](../operator-guide/import-strategy-tekton.md) page.
+    In order to use the **Import project** strategy, make sure to adjust it with the [Integrate GitLab/GitHub With Tekton](../user-guide/add-git-server.md) page.
   :::
 ## Create Autotest in YAML
 
@@ -96,7 +96,7 @@ In the **Advanced Settings** menu, specify the branch options and define the Jir
 and have a respective label in the **Fix Version** field.
 
   :::note
-    To adjust the Jira integration functionality, first apply the necessary changes described on the [Adjust Jira Integration](../operator-guide/jira-integration.md) page, and [Adjust VCS Integration With Jira](../operator-guide/jira-gerrit-integration.md).
+    To adjust the Jira integration functionality, first apply the necessary changes described on the [Adjust Jira Integration](../operator-guide/jira-integration.md) page.
   :::
 * **Jira Server** - the integrated Jira server with related Jira tasks.
 
@@ -126,5 +126,4 @@ After the complete adding of the autotest, inspect the [Autotest Overview](autot
 * [Add Application](add-application.md)
 * [Add CD Pipelines](add-cd-pipeline.md)
 * [Adjust Jira Integration](../operator-guide/jira-integration.md)
-* [Adjust VCS Integration With Jira](../operator-guide/jira-gerrit-integration.md)
-* [Integrate GitHub/GitLab in Tekton](../operator-guide/import-strategy-tekton.md)
+* [Manage Git Providers](../user-guide/add-git-server.md)

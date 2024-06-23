@@ -1,4 +1,4 @@
-# Adjust Jira Integration
+# Jira Integration
 
 This documentation guide provides step-by-step instructions for enabling the Jira integration option in the EDP Portal UI for EPAM Delivery Platform. Jira integration allows including useful metadata in Jira tickets.
 
@@ -132,5 +132,4 @@ If metadata is not visible in a Jira ticket, check the status field of the **Jir
 
 ## Related Articles
 
-* [Adjust VCS Integration With Jira](jira-gerrit-integration.md)
 * [Add Application](../user-guide/add-application.md)

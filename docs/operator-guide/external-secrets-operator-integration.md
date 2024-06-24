@@ -47,7 +47,7 @@ See a diagram below for more details:
 
 ![eso-with-kubernetes](../assets/operator-guide/eso-k8s.png)
 
-In order to [install EDP](./install-kuberocketci.mdx), a list of passwords must be created. Secrets are provided automatically when using ESO.
+In order to [Install KubeRocketCI](./install-kuberocketci.mdx), a list of passwords must be created. Secrets are provided automatically when using ESO.
 
 1. Create a common namespace for secrets and EDP:
 
@@ -179,7 +179,7 @@ AWS SSM Parameter Store can be used as a [Secret Provider for ESO](https://exter
 ![eso-with-ssm](../assets/operator-guide/eso-ssm.png)
 
 ### AWS Parameter Store in EDP Scenario
-In order to [install EDP](./install-kuberocketci.mdx), a list of passwords must be created. Follow the steps below, to get secrets from the SSM:
+In order to [Install KubeRocketCI](./install-kuberocketci.mdx), a list of passwords must be created. Follow the steps below, to get secrets from the SSM:
 
 1. In the AWS, create an AWS IAM policy and an IAM role used by `ServiceAccount` in `SecretStore`. The IAM role must have permissions to get values from the SSM Parameter Store.<a name="step 1"></a>
 

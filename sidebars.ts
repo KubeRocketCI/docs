@@ -118,6 +118,7 @@ const sidebars: SidebarsConfig = {
                 'operator-guide/advanced-installation/capsule',
                 'operator-guide/advanced-installation/defectdojo',
                 'operator-guide/advanced-installation/reportportal',
+                'operator-guide/advanced-installation/custom-certificates',
               ],
             },
           ],
@@ -137,6 +138,47 @@ const sidebars: SidebarsConfig = {
           type: 'category',
           label: 'Integration',
           items: [
+            {
+              type: 'category',
+              label: 'GitOps',
+              items: [
+                'operator-guide/argocd-integration',
+              ],
+            },
+            {
+              type: 'category',
+              label: 'Secrets Management',
+              items: [
+                'operator-guide/install-external-secrets-operator',
+                'operator-guide/external-secrets-operator-integration',
+              ],
+            },
+            {
+              type: 'category',
+              label: 'DevSecOps',
+              items: [
+                'operator-guide/overview-devsecops',
+                'operator-guide/artifacts-verification',
+              ],
+            },
+            {
+              type: 'category',
+              label: 'Backup With Velero',
+              items: [
+                'operator-guide/install-velero',
+                'operator-guide/restore-edp-with-velero',
+              ],
+            },
+            {
+              type: 'category',
+              label: 'Logging',
+              items: [
+                'operator-guide/install-loki',
+                'operator-guide/multitenant-logging',
+                'operator-guide/schedule-pods-restart',
+                'operator-guide/kibana-ilm-rollover',
+              ],
+            },
             'operator-guide/customize_deployment',
             'operator-guide/jira-integration',
             {
@@ -194,54 +236,6 @@ const sidebars: SidebarsConfig = {
               ],
             },
             'operator-guide/nexus-sonatype',
-          ],
-        },
-        {
-          type: 'category',
-          label: 'Platform Capabilities',
-          items: [
-            {
-              type: 'category',
-              label: 'GitOps',
-              items: [
-                'operator-guide/argocd-integration',
-              ],
-            },
-            {
-              type: 'category',
-              label: 'Secrets Management',
-              items: [
-                'operator-guide/install-external-secrets-operator',
-                'operator-guide/external-secrets-operator-integration',
-              ],
-            },
-            {
-              type: 'category',
-              label: 'DevSecOps',
-              items: [
-                'operator-guide/overview-devsecops',
-                'operator-guide/artifacts-verification',
-              ],
-            },
-            {
-              type: 'category',
-              label: 'Backup With Velero',
-              items: [
-                'operator-guide/install-velero',
-                'operator-guide/restore-edp-with-velero',
-              ],
-            },
-            {
-              type: 'category',
-              label: 'Logging',
-              items: [
-                'operator-guide/install-loki',
-                'operator-guide/multitenant-logging',
-                'operator-guide/schedule-pods-restart',
-                'operator-guide/kibana-ilm-rollover',
-              ],
-            },
-            'operator-guide/manage-custom-certificate',
           ],
         },
         {

@@ -66,4 +66,4 @@ The "build-image-kaniko" stage manages [ECR](https://aws.amazon.com/ecr/) throug
 ## Related Articles
 
 * [Associate IAM Roles With Service Accounts](../operator-guide/enable-irsa.md)
-* [Install EDP](../operator-guide/install-kuberocketci.mdx)
+* [Install KubeRocketCI](../operator-guide/install-kuberocketci.mdx)

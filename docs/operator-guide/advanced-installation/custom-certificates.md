@@ -1,14 +1,12 @@
-# Manage Custom Certificates
+# Custom Certificates
 
-Familiarize yourself with the detailed instructions on adding certificates to EDP resources as well as with the respective setup for Keycloak.
+Familiarize yourself with the detailed instructions on adding certificates to KubeRocketCI resources as well as with the respective setup for Keycloak.
 
-EDP components that support custom certificates can be found in the table below:
+KubeRocketCI components that support custom certificates can be found in the table below:
 
 | Helm Chart | Sub Resources |
 | - | - |
-| admin-console-operator | admin-console |
 | gerrit-operator | edp-gerrit |
-| jenkins-operator | jenkins-operator, edp-jenkins, jenkins agents |
 | sonar-operator | sonar-operator, edp-sonar |
 | keycloak-operator | keycloak-operator |
 | nexus-operator | oauth2-proxy |
@@ -18,8 +16,8 @@ EDP components that support custom certificates can be found in the table below:
 ## Prerequisites
 
 * The certificate in the `*.crt` format is used;
-* [Kubectl](https://v1-23.docs.kubernetes.io/releases/download/) version 1.23.0 is installed;
-* [Helm](https://helm.sh/docs/intro/install/) version 3.10.2 is installed;
+* Kubectl version 1.26.0+ is installed. Please refer to the [Kubernetes official website](https://kubernetes.io/releases/download/) for details.
+* [Helm](https://helm.sh) version 3.14.0+ is installed. Please refer to the [Helm page](https://github.com/helm/helm/releases) on GitHub for details.
 * [Java](https://www.oracle.com/in/java/technologies/downloads/) with the `keytool` command inside;
 * [jq](https://stedolan.github.io/jq/) is installed.
 
@@ -51,43 +49,42 @@ To import custom certificates to Keycloak, follow the steps below:
     --from-literal=KC_SPI_TRUSTSTORE_FILE_PASSWORD=changeit
     ```
 
-4. Update the Keycloak `values.yaml` file from the [Install Keycloak](advanced-installation/keycloak.md) page.
+4. Update the Keycloak `values.yaml` file from the [Install Keycloak](../advanced-installation/keycloak.md) page.
 
    <details>
       <summary><b>values.yaml</b></summary>
-      ```yaml
-      ...
-      extraVolumeMounts: |
+        ```yaml
         ...
-        # Use the Keycloak truststore for SPI connection over HTTPS/TLS
-        - name: spi-certificates
-          mountPath: /opt/keycloak/spi-certs
-          readOnly: true
-        ...
+        extraVolumeMounts: |
+          ...
+          # Use the Keycloak truststore for SPI connection over HTTPS/TLS
+          - name: spi-certificates
+            mountPath: /opt/keycloak/spi-certs
+            readOnly: true
+          ...
 
-      extraVolumes: |
-        ...
-        # Use the Keycloak truststore for SPI connection over HTTPS/TLS
-        - name: spi-certificates
-          secret:
-            secretName: custom-keycloak-keystore
-            defaultMode: 420
-        ...
+        extraVolumes: |
+          ...
+          # Use the Keycloak truststore for SPI connection over HTTPS/TLS
+          - name: spi-certificates
+            secret:
+              secretName: custom-keycloak-keystore
+              defaultMode: 420
+          ...
 
-      ...
-      extraEnvFrom: |
-        - secretRef:
-            name: spi-truststore-data
-      ...
-      ```
+        ...
+        extraEnvFrom: |
+          - secretRef:
+              name: spi-truststore-data
+        ...
+        ```
     </details>
 
-
-## Enable Custom Certificates in EDP Components
+## Enable Custom Certificates in KubeRocketCI Components
 
 Creating custom certificates is a necessary but not sufficient condition for applying, therefore, certificates should be enabled as well.
 
-1. Create the `custom-ca-certificates` secret in the EDP namespace.
+1. Create the `custom-ca-certificates` secret in the platform namespace (e.g `edp`).
 
    ```bash
    kubectl -n edp create secret generic custom-ca-certificates \
@@ -119,9 +116,9 @@ Creating custom certificates is a necessary but not sufficient condition for app
     ...
     ```
 
-    :::note
-      Before moving ahead, be aware that starting from version 3.3.0, our development team has officially deprecated the Jenkins deploy scenario. This means that as of version 3.3.0 and in all subsequent versions (3.3.x and above), the Jenkins deploy scenario is no longer supported or actively maintained.<br />
-      For users running versions 3.3.x and below, the Jenkins deploy scenario remains available. However, we encourage you to plan for the transition to a supported deployment method to ensure continued compatibility and access to the latest features and enhancements. To perform migration, please familiarize yourself with the [Migrate CI Pipelines From Jenkins to Tekton](migrate-ci-pipelines-from-jenkins-to-tekton.md).<br />
+    :::warning
+      Before moving ahead, be aware that starting from version 3.3.0, our development team has officially deprecated the Jenkins deploy scenario. This means that as of version 3.3.0 and in all subsequent versions (3.3.x and above), the Jenkins deploy scenario is no longer supported.<br />
+      For users running versions 3.3.x and below, the Jenkins deploy scenario remains available. However, we encourage you to plan for the transition to a supported deployment method to ensure continued compatibility and access to the latest features and enhancements. To perform migration, please familiarize yourself with the [Migrate CI Pipelines From Jenkins to Tekton](../migrate-ci-pipelines-from-jenkins-to-tekton.md).<br />
       For those who still use EDP v3.3.x and below, the information below remains valid and applicable.
     :::
 
@@ -144,7 +141,6 @@ Creating custom certificates is a necessary but not sufficient condition for app
     ...
     ```
 
-
 ## Integrate Custom Certificates Into Jenkins Agents
 
 This section describes how to add custom certificates to Jenkins agents to use them from Java applications.
@@ -153,11 +149,10 @@ This section describes how to add custom certificates to Jenkins agents to use t
     For example, `curl` doesn't use keystore files specified in this part of the documentation.
   :::
 
-EDP Jenkins agents keep keystore files in two places:
+Jenkins agents keep keystore files in two places:
 
- - `/etc/ssl/certs/java` folder with the `cacerts` file;
- - `/opt/java/openjdk/lib/security` folder with the `blocked.certs`, `cacerts`, `default.policy` and `public_suffix_list.dat` files.
-
+* `/etc/ssl/certs/java` folder with the `cacerts` file;
+* `/opt/java/openjdk/lib/security` folder with the `blocked.certs`, `cacerts`, `default.policy` and `public_suffix_list.dat` files.
 
 1. Copy the files in `/etc/ssl/certs/java` and `/opt/java/openjdk/lib/security` directories from Jenkins agent pod to the local `tmp` folder.<br />
 There is a `copy_certs.sh` script below that can manage this. It copies the files in `/etc/ssl/certs/java` and `/opt/java/openjdk/lib/security` directories from Jenkins agent pod to the local `tmp` folder
@@ -165,9 +160,9 @@ and imports the custom certificate into the keystore files, after which it creat
 `jenkins-agent-opt-java-openjdk-lib-security-cacerts` and `jenkins-agent-etc-ssl-certs-java-cacerts` secrets from updated keystore files in EDP namespace.
 Also, the `jenkins-agent-opt-java-openjdk-lib-security-cacerts` secret contains three additional files: `blocked.certs`, `default.policy` and `public_suffix_list.dat` which managed by the `copy_certs.sh` script as well. Expand the drop-down button below to see the contents of the `copy_certs.sh` script.
 
-
-   <details>
+    <details>
       <summary><b>copy_certs.sh</b></summary>
+
       ```bash
       # Fill in the variables `ns` and `ca_file`
       ns="edp-project"
@@ -205,16 +200,16 @@ Also, the `jenkins-agent-opt-java-openjdk-lib-security-cacerts` secret contains 
 
       kubectl delete -n "${ns}" pod "${pod_name}" --force --grace-period=0
       ```
+
     </details>
 
-   Before using the `copy_certs.sh` script, keep in mind the following:
+    Before using the `copy_certs.sh` script, keep in mind the following:
 
-   - assign actual values to the variables `ns` and `ca_file`;
-   - the script collects all the images from the `jenkins-slaves` ConfigMap and uses the image of
-    the `maven-java8` agent as the base image of the temporary pod to get the keystore files;
-   - custom certificate is imported using the `keytool` application;
-   - the `jenkins-agent-opt-java-openjdk-lib-security-cacerts` and `jenkins-agent-etc-ssl-certs-java-cacerts` secrets will be created
-    in the EDP namespace.
+    * assign actual values to the variables `ns` and `ca_file`;
+    * the script collects all the images from the `jenkins-slaves` ConfigMap and uses the image of
+      the `maven-java8` agent as the base image of the temporary pod to get the keystore files;
+    * custom certificate is imported using the `keytool` application;
+    * the `jenkins-agent-opt-java-openjdk-lib-security-cacerts` and `jenkins-agent-etc-ssl-certs-java-cacerts` secrets will be created in the `edp` namespace.
 
 2. Run the `copy_certs.sh` script from the previous point after the requirements are met.
 
@@ -261,8 +256,7 @@ Also, the `jenkins-agent-opt-java-openjdk-lib-security-cacerts` secret contains 
     kubectl rollout restart -n "${ns}" deployment/jenkins
     ```
 
-
 ## Related Articles
 
-* [Install EDP](install-kuberocketci.mdx)
-* [Install Keycloak](advanced-installation/keycloak.md)
+* [Install KubeRocketCI](../install-kuberocketci.mdx)
+* [Install Keycloak](../advanced-installation/keycloak.md)

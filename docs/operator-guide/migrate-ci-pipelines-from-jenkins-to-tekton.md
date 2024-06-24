@@ -90,5 +90,5 @@ Configure webhooks plugin in Gerrit configuration (typically located at  **/var/
 Go to the codebase Custom Resource and change the `spec.ciTool` field from `jenkins` to `tekton`.
 
 ## Related Articles
-* [Install EDP](install-kuberocketci.mdx)
+* [Install KubeRocketCI](install-kuberocketci.mdx)
 * [Install Tekton](install-tekton.md)

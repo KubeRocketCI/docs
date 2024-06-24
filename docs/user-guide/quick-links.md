@@ -47,4 +47,4 @@ Quick Links are deleted the following way:
 * [Add Git Server](add-git-server.md)
 * [Add Cluster](add-cluster.md)
 * [Manage GitOps](gitops.md)
-* [Manage Registries](manage-container-registries.md)
+* [Manage Registries](manage-change-container-registry.md)

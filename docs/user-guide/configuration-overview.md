@@ -27,4 +27,4 @@ Here is the list of all the sections provided in the Configuration tab. Familiar
 * [Add Git Server](add-git-server.md)
 * [Add Cluster](add-cluster.md)
 * [Manage GitOps](gitops.md)
-* [Manage Container Registries](manage-container-registries.md)
+* [Manage Container Registries](manage-change-container-registry.md)

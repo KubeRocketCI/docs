@@ -152,7 +152,6 @@ const sidebars: SidebarsConfig = {
               type: 'category',
               label: 'Container Registry',
               items: [
-                'operator-guide/container-registries',
                 {
                   type: 'category',
                   label: 'Harbor',
@@ -404,7 +403,8 @@ const sidebars: SidebarsConfig = {
               type: 'category',
               label: 'Container Registry',
               items: [
-                'user-guide/manage-container-registries', // Manage Registries
+                'user-guide/manage-container-registries',
+                'user-guide/change-container-registry',
               ],
             },
           ],

@@ -244,6 +244,6 @@ For example, the following configuration map contains the `nuget.config` file wi
 
 ## Related Articles
 
-* [Manage Container Registries](../user-guide/manage-container-registries.md)
+* [Manage Container Registries](../user-guide/manage-change-container-registry.md)
 * [Nexus Sonatype Integration](nexus-sonatype.md)
 * [Manage Git Servers](../user-guide/git-server-overview.md)

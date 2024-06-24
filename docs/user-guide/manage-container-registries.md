@@ -116,7 +116,7 @@ The required fields vary depending on which container registry is chosen:
 To remove container registry integration from KubeRocketCI, follow the steps below:
 
 :::warning
-    Proceed with caution, removing registry settings might disrupt your CI/CD process. All new components created after changing the registry such as Components and Environments will start working out of the box. To work with existing codebases and pipelines familiarize with the [change container registry guide](../operator-guide/container-registries.md).
+    Proceed with caution, removing registry settings might disrupt your CI/CD process. All new components created after changing the registry such as Components and Environments will start working out of the box. To work with existing codebases and pipelines familiarize with the [change container registry guide](../operator-guide/change-container-registry.md).
 :::
 
   1. In the **KubeRocketCI** -> **Configuration** -> **Registry**.
@@ -129,4 +129,4 @@ To remove container registry integration from KubeRocketCI, follow the steps bel
 
 * [Install EDP](../operator-guide/install-kuberocketci.mdx)
 * [Install Harbor](../operator-guide/advanced-installation/harbor.md)
-* [Change Container Registry](../operator-guide/container-registries.md)
+* [Change Container Registry](../operator-guide/change-container-registry.md)

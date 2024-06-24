@@ -315,4 +315,4 @@ To access the Kubernetes cluster via [Lens](https://k8slens.dev/), follow the st
 
 ## Related Articles
 
-* [Headlamp OIDC Configuration](headlamp-oidc.md)
+* [Headlamp OIDC Configuration](auth/ui-portal-oidc.md)

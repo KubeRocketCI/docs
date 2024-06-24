@@ -124,20 +124,21 @@ const sidebars: SidebarsConfig = {
         },
         {
           type: 'category',
-          label: 'Configuration',
+          label: 'Authentication and Authorization',
           items: [
-            'operator-guide/edp-access-model',
-            'operator-guide/headlamp-oidc',
-            'operator-guide/namespace-management',
-            'operator-guide/customize_deployment',
-            'operator-guide/eks-oidc-integration',
-            'operator-guide/jira-integration',
+            'operator-guide/auth/platform-auth-model',
+            'operator-guide/auth/ui-portal-oidc',
+            'operator-guide/auth/namespace-management',
+            'operator-guide/auth/eks-oidc-integration',
+            'operator-guide/auth/oauth2-proxy',
           ],
         },
         {
           type: 'category',
           label: 'Integration',
           items: [
+            'operator-guide/customize_deployment',
+            'operator-guide/jira-integration',
             {
               type: 'category',
               label: 'Tekton',
@@ -242,13 +243,6 @@ const sidebars: SidebarsConfig = {
               ],
             },
             'operator-guide/manage-custom-certificate',
-            {
-              type: 'category',
-              label: 'Single Sign-on',
-              items: [
-                'operator-guide/oauth2-proxy',
-              ],
-            },
           ],
         },
         {

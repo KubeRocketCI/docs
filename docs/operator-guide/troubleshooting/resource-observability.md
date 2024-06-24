@@ -40,7 +40,7 @@ To fix the problem, follow the steps below:
   kubectl desribe role <role-name> -n edp
   ```
 
-5. Adjust resources to have sufficient permission set. Refer to the [KubeRocketCI Access Model](../../operator-guide/edp-access-model.md) page for more details about permissions required for proper resource visibility.
+5. Adjust resources to have sufficient permission set. Refer to the [KubeRocketCI Access Model](../../operator-guide/auth/platform-auth-model.md) page for more details about permissions required for proper resource visibility.
 
 ### Solution 2 (Keycloak)
 
@@ -50,10 +50,10 @@ To fix the problem, follow the steps below:
 
 1. Log into your Keycloak portal.
 
-2. Check you user membership among the predefined Keycloak groups. Please refer to the [KubeRocketCI Access Model](../../operator-guide/edp-access-model.md) page for details on the available Keycloak groups.
+2. Check you user membership among the predefined Keycloak groups. Please refer to the [KubeRocketCI Access Model](../../operator-guide/auth/platform-auth-model.md) page for details on the available Keycloak groups.
 
 3. Add your user to the groups depending on which permissions you need to grant.
 
 ## Related Articles
 
-* [KubeRocketCI Access Model](../../operator-guide/edp-access-model.md)
+* [KubeRocketCI Access Model](../../operator-guide/auth/platform-auth-model.md)

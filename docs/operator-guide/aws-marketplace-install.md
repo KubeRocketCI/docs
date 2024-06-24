@@ -90,4 +90,4 @@ As a result, you will get access to KubeRocketCI components via KubeRocketCI Por
 * [Set Up Kubernetes](kubernetes-cluster-settings.mdx)
 * [Set Up OpenShift](openshift-cluster-settings.mdx)
 * [KubeRocketCI Installation Prerequisites Overview](prerequisites.md)
-* [UI Portal OIDC Integration](headlamp-oidc.md)
+* [UI Portal OIDC Integration](auth/ui-portal-oidc.md)

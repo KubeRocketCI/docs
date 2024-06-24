@@ -1,4 +1,4 @@
-# Authentication and Authorization
+# Overview
 
 In KubeRocketCI, access control is implemented through various authorization methods. User and group permissions are regulated using Keycloak, which integrates with RBAC. Permissions for third-party tools are managed using [custom resources](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/). This document provides an overview of the access management entities in KubeRocketCI, including Kubernetes groups, custom resources, and Keycloak realm roles. It also details their respective permissions and the tools they are applied to.
 
@@ -288,6 +288,6 @@ in Keycloak. This ensures that only authorized users can access and modify appli
 
 ## Related Articles
 
-* [KubeRocketCI Portal Overview](../user-guide/index.md)
-* [EKS OIDC With Keycloak](configure-keycloak-oidc-eks.md)
-* [Argo CD Integration](argocd-integration.md)
+* [KubeRocketCI Portal Overview](../../user-guide/index.md)
+* [EKS OIDC With Keycloak](../configure-keycloak-oidc-eks.md)
+* [Argo CD Integration](../argocd-integration.md)

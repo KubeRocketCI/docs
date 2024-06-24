@@ -139,7 +139,7 @@ Now that the Tekton Helm library is created, it is time to clone, modify and the
 
 4. Browse Gerrit Repositories and select `custom-tekton-chart` project:
 
-    ![Browse Gerrit repositories](../assets/use-cases/fastapi-scaffolding/gerrit-1.png)
+    ![Browse Gerrit repositories](../assets/use-cases/tekton-custom/tekton-gerrit01.png)
 
 5. Clone the repository with `SSH` using `Clone with commit-msg hook` command:
 
@@ -315,7 +315,7 @@ Perform the below steps to merge new code (Merge Request) that passes the Code R
 
 2. Browse Gerrit Repositories and select `tekton-hello-world` project:
 
-    ![Browse Gerrit repositories](../assets/use-cases/fastapi-scaffolding/gerrit-1.png)
+    ![Browse Gerrit repositories](../assets/use-cases/tekton-custom/tekton-gerrit01.png)
 
 3. Clone the  `tekton-hello-world` repository to make the necessary changes or click the `Create Change` button in the `Commands` section of the project to make changes via Gerrit GUI:
 

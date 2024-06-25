@@ -9,7 +9,7 @@ Here is the list of all the sections provided in the Configuration tab. Familiar
 |Configuration Section|Description|
 |:-|:-|
 |[Links](quick-links.md)|Configure links for quick access to required tools that will be displayed on the Overview page or in specific resource details, such as application or stage details. Additionally, this section is used to configure widgets, such as SonarQube and DependencyTrack.|
-|[Nexus](../operator-guide/nexus-sonatype.md)|Integrate Nexus to store and manage your application artifacts, facilitating a Continuous Integration flow within the platform.|
+|[Nexus](../operator-guide/artifacts-management/nexus-sonatype.md)|Integrate Nexus to store and manage your application artifacts, facilitating a Continuous Integration flow within the platform.|
 |[Registry](../quick-start/integrate-container-registry.md)|Integrate platform with a container registry to store container artifacts.|
 |[Clusters](add-cluster.md)|Integrate platform with external clusters to enable remote cluster deployment.|
 |[GitOps](gitops.md)|Onboard a specific repository used for the GitOps approach purposes.|

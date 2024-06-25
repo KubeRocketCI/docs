@@ -48,5 +48,5 @@ To make all the current projects private, follow the steps below:
 ## Related Articles
 
 * [SonarQube Integration](sonarqube.md)
-* [Nexus Sonatype Integration](nexus-sonatype.md)
+* [Nexus Sonatype Integration](artifacts-management/nexus-sonatype.md)
 * [Integrate SonarQube](../quick-start/integrate-sonarcloud.md)

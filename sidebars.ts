@@ -121,6 +121,7 @@ const sidebars: SidebarsConfig = {
                 'operator-guide/advanced-installation/custom-certificates',
               ],
             },
+            'operator-guide/uninstall-kuberocketci',
           ],
         },
         {
@@ -275,10 +276,8 @@ const sidebars: SidebarsConfig = {
             'operator-guide/deploy-okd-4.10',
             'operator-guide/ssl-automation-okd',
             'operator-guide/migrate-ci-pipelines-from-jenkins-to-tekton',
-            'operator-guide/delete-edp',
           ],
         },
-        'faq',
         {
           type: 'category',
           label: 'Troubleshooting',

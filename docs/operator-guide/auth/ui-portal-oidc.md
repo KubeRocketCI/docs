@@ -82,8 +82,16 @@ Portal is integrated in Kubernetes in three steps:
 
 As a result, it is possible to control access and rights from the Keycloak endpoint.
 
+## Changing the Lifespan of an Access Token
+
+Change the Access Token Lifespan: go to your Keycloak and select *Openshift realm* > *Realm settings* > *Tokens* >
+*Access Token Lifespan* > set a new value to the field and save this change.
+
+By default, "Access Token Lifespan" value is 5 minutes.
+
+![Access Token Lifespan](../../assets/faq/keycloak-access-token-lifespan.png "Access Token Lifespan")
+
 ## Related Articles
 
-* [Configure Access Token Lifetime](../../faq.md#how-to-change-the-lifespan-of-an-access-token-that-is-used-for-headlamp-and-oidc-login-plugin)
 * [EKS OIDC With Keycloak](../configure-keycloak-oidc-eks.md)
 * [External Secrets Operator](../external-secrets-operator-integration.md)

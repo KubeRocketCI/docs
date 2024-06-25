@@ -86,10 +86,8 @@ The next stage is to configure Harbor. Proceed with following the steps below:
 
 As a result, users will be prompted to authenticate themselves when logging in to Harbor UI.
 
-
 ## Related Articles
 
-* [Configure Access Token Lifetime](../faq.md#how-to-change-the-lifespan-of-an-access-token-that-is-used-for-headlamp-and-oidc-login-plugin)
 * [EKS OIDC With Keycloak](configure-keycloak-oidc-eks.md)
 * [External Secrets Operator Integration](external-secrets-operator-integration.md)
 * [Integrate Harbor With EDP Pipelines](container-registry-harbor-integration-tekton-ci.md)

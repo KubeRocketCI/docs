@@ -4,7 +4,7 @@ Welcome to the Troubleshooting Guide for the EPAM Delivery Platform. Here, we of
 
 Currently, this section covers the following issues:
 
-* [Container Registry Reset](troubleshoot-change-container-registry.md)
+* [Container Registry Reset](troubleshoot-container-registries.md)
 * [Application Is Not deployed](troubleshoot-stages.md)
 * [Troubleshoot Codebase Creation](troubleshoot-git-server.md)
 * [Resource Observability Issue](resource-observability.md)

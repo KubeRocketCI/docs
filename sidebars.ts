@@ -159,6 +159,15 @@ const sidebars: SidebarsConfig = {
         },
         {
           type: 'category',
+          label: 'Disaster Recovery',
+          items: [
+            'operator-guide/disaster-recovery/install-velero',
+            'operator-guide/disaster-recovery/velero-irsa',
+            'operator-guide/disaster-recovery/velero-restore-platform',
+          ],
+        },
+        {
+          type: 'category',
           label: 'Integration',
           items: [
             {
@@ -182,14 +191,6 @@ const sidebars: SidebarsConfig = {
               items: [
                 'operator-guide/overview-devsecops',
                 'operator-guide/artifacts-verification',
-              ],
-            },
-            {
-              type: 'category',
-              label: 'Backup With Velero',
-              items: [
-                'operator-guide/install-velero',
-                'operator-guide/restore-edp-with-velero',
               ],
             },
             {
@@ -221,7 +222,6 @@ const sidebars: SidebarsConfig = {
                 'operator-guide/ebs-csi-driver',
                 'operator-guide/enable-irsa',
                 'operator-guide/kaniko-irsa',
-                'operator-guide/velero-irsa',
                 'operator-guide/loki-irsa',
                 'operator-guide/configure-keycloak-oidc-eks',
               ],

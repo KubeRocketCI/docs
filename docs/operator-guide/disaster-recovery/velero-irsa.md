@@ -1,11 +1,12 @@
-# IAM Roles for Velero Service Accounts
+# IAM Roles for Velero Kubernetes Service Accounts
 
-!!! note
-    Make sure that IRSA is enabled and [amazon-eks-pod-identity-webhook](https://github.com/aws/amazon-eks-pod-identity-webhook/tree/master) is deployed according to the [Associate IAM Roles With Service Accounts](./enable-irsa.md) documentation.
+:::note
+  Make sure that IRSA is enabled and [amazon-eks-pod-identity-webhook](https://github.com/aws/amazon-eks-pod-identity-webhook/tree/master) is deployed according to the [Associate IAM Roles With Service Accounts](../enable-irsa.md) documentation.
+:::
 
 [Velero AWS plugin](https://github.com/vmware-tanzu/velero-plugin-for-aws) requires access to AWS resources. Follow the steps below to create a required role:
 
-1. Create AWS IAM Policy "AWSIRSA&#8249;CLUSTER_NAME&#8250;&#8249;VELERO_NAMESPACE&#8250;Velero_policy":
+1. Create AWS IAM Policy `AWSIRSA<CLUSTER_NAME><VELERO_NAMESPACE>Velero_policy`:
 
     ```json
       {
@@ -49,7 +50,7 @@
       }
     ```
 
-2. Create AWS IAM Role "AWSIRSA&#8249;CLUSTER_NAME&#8250;&#8249;VELERO_NAMESPACE&#8250;Velero" with trust relationships:
+2. Create AWS IAM Role `AWSIRSA<CLUSTER_NAME><VELERO_NAMESPACE>Velero` with trust relationships:
 
     ```json
       {
@@ -71,13 +72,13 @@
       }
     ```
 
-3. Attach the "AWSIRSA&#8249;CLUSTER_NAME&#8250;&#8249;VELERO_NAMESPACE&#8250;Velero_policy" policy to the "AWSIRSA&#8249;CLUSTER_NAME&#8250;&#8249;VELERO_NAMESPACE&#8250;Velero" role.
+3. Attach the `AWSIRSA<CLUSTER_NAME><VELERO_NAMESPACE>Velero_policy` policy to the `AWSIRSA<CLUSTER_NAME><VELERO_NAMESPACE>Velero` role.
 
-4. Make sure that [Amazon S3](https://aws.amazon.com/s3/) bucket with name velero-&#8249;CLUSTER_NAME&#8250; exists.
+4. Make sure that [Amazon S3](https://aws.amazon.com/s3/) bucket with name `velero-<CLUSTER_NAME>` exists.
 
-5. Provide key value **eks.amazonaws.com/role-arn: "arn:aws:iam::\<AWS_ACCOUNT_ID\>:role/AWSIRSA‹CLUSTER_NAME›‹VELERO_NAMESPACE›Velero"** into the **serviceAccount.server.annotations** parameter in *values.yaml* during the [Velero Installation](./install-velero.md#installation).
+5. Provide key value **eks.amazonaws.com/role-arn: "arn:aws:iam::\<AWS_ACCOUNT_ID\>:role/AWSIRSA‹CLUSTER_NAME›‹VELERO_NAMESPACE›Velero"** into the **serviceAccount.server.annotations** parameter in _values.yaml_ during the [Velero Installation](install-velero.md#installation).
 
 ## Related Articles
 
-* [Associate IAM Roles With Service Accounts](../operator-guide/enable-irsa.md)
-* [Install Velero](../operator-guide/install-velero.md)
+* [Associate IAM Roles With Service Accounts](../enable-irsa.md)
+* [Install Velero](install-velero.md)

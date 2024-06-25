@@ -26,6 +26,7 @@ Choose one of the strategies and click **Create**:
   :::note
     In order to use the **Import project** strategy, make sure to adjust it with the [Integrate GitLab/GitHub With Tekton](../user-guide/add-git-server.md) page.
   :::
+
 ## Create Autotest in YAML
 
 Click **Edit YAML** in the upper-right corner of the **Create Autotest** dialog to open the YAML editor and create an autotest:
@@ -51,17 +52,17 @@ In our case, we will use the **Clone** strategy:
 
 1. Select all the settings that define how the autotest will be added to Git server:
 
-  * **Git server** - the pre-configured server where the component will be hosted. Select one from the from the drop-down list. Please refer to the [Manage Git Servers](git-server-overview.md) page to learn how to create the one.
-  * **Repository name** - the relative path to the repository, such as `/epmd-edp/examples/basic/edp-auto-tests-simple-example`.
-  * **Component name** - the name of the autotest. Must be at least two characters using the lower-case letters, numbers and inner dashes.
-  * **Description** - brief and concise description that explains the purpose of the autotest.
+    * **Git server** - the pre-configured server where the component will be hosted. Select one from the from the drop-down list. Please refer to the [Manage Git Servers](git-server-overview.md) page to learn how to create the one.
+    * **Repository name** - the relative path to the repository, such as `/epmd-edp/examples/basic/edp-auto-tests-simple-example`.
+    * **Component name** - the name of the autotest. Must be at least two characters using the lower-case letters, numbers and inner dashes.
+    * **Description** - brief and concise description that explains the purpose of the autotest.
 
 2. Specify the autotest language properties:
 
-  * **Autotest code language** - defines the code language with its supported frameworks. Selecting **Other** allows extending the default code languages and get the necessary build tool.
-  * **Language version/framework** - defines the specific framework or language version of the autotest. The field depends on the selected code language. Specify Java 8, Java 11 or Java 17 to be used.
-  * **Build Tool** - allows to choose the build tool to use. In case of autotests, Gradle and Maven are available.
-  * **Autotest report framework** - all the autotest reports will be created in the Allure framework by default.
+    * **Autotest code language** - defines the code language with its supported frameworks. Selecting **Other** allows extending the default code languages and get the necessary build tool.
+    * **Language version/framework** - defines the specific framework or language version of the autotest. The field depends on the selected code language. Specify Java 8, Java 11 or Java 17 to be used.
+    * **Build Tool** - allows to choose the build tool to use. In case of autotests, Gradle and Maven are available.
+    * **Autotest report framework** - all the autotest reports will be created in the Allure framework by default.
 
 Click the **Proceed** button to switch to the next menu.
 
@@ -106,7 +107,7 @@ and have a respective label in the **Fix Version** field.
 
 * **Mapping field name** - the section where the additional Jira fields are specified the names of the Jira fields that should be filled in with attributes from KubeRocketCI:
 
-  * Select the name of the field in a Jira ticket. The available fields are the following: *Fix Version/s*, *Component/s* and *Labels*.
+  * Select the name of the field in a Jira ticket. The available fields are the following: _Fix Version/s_, _Component/s_ and _Labels_.
 
   * Click the **Add** button to add the mapping field name.
 

@@ -158,6 +158,20 @@ const sidebars: SidebarsConfig = {
         },
         {
           type: 'category',
+          label: 'Code Quality',
+          items: [
+            {
+              type: 'category',
+              label: 'SonarQube',
+              items: [
+                'operator-guide/code-quality/sonarqube',
+                'operator-guide/code-quality/sonarqube-visibility',
+              ],
+            },
+          ],
+        },
+        {
+          type: 'category',
           label: 'Project Management and Reporting',
           items: [
             'operator-guide/project-management-and-reporting/jira-integration',
@@ -241,14 +255,6 @@ const sidebars: SidebarsConfig = {
               ],
             },
             'operator-guide/dependency-track',
-            {
-              type: 'category',
-              label: 'SonarQube',
-              items: [
-                'operator-guide/sonarqube',
-                'operator-guide/sonarqube-visibility',
-              ],
-            },
           ],
         },
         {

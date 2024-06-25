@@ -42,25 +42,25 @@ To review the Build pipeline, take the following steps:
 
 2. Review stages for the application and library codebases:
 
-  - Init - initialization of the Code Review pipeline inputs;
+    * Init - initialization of the Code Review pipeline inputs;
 
-  - Checkout - checkout of the application code;
+    * Checkout - checkout of the application code;
 
-  - Get-version - get the version from the pom.XML file and add the build number;
+    * Get-version - get the version from the pom.XML file and add the build number;
 
-  - Compile - code compilation;
+    * Compile - code compilation;
 
-  - Tests - tests execution;
+    * Tests - tests execution;
 
-  - Sonar - Sonar launch that checks the whole code;
+    * Sonar - Sonar launch that checks the whole code;
 
-  - Build - artifact building and adding to Nexus;
+    * Build - artifact building and adding to Nexus;
 
-  - Build-image - docker image building and adding to Docker Registry. The Build pipeline for the library has the same stages as the application except the **Build-image** stage, i.e. the Docker image is not building.
+    * Build-image - docker image building and adding to Docker Registry. The Build pipeline for the library has the same stages as the application except the **Build-image** stage, i.e. the Docker image is not building.
 
-  - Push - artifact docker image pushing to Nexus and Docker Registry;
+    * Push - artifact docker image pushing to Nexus and Docker Registry;
 
-  - Git-tag - adding of the corresponding Git tag of the current commit to relate with the image, artifact, and build version.
+    * Git-tag - adding of the corresponding Git tag of the current commit to relate with the image, artifact, and build version.
 
 After the Build pipeline runs all the stages successfully, the corresponding tag numbers will be created in Kubernetes/OpenShift and Nexus.
 
@@ -68,8 +68,9 @@ After the Build pipeline runs all the stages successfully, the corresponding tag
 
 1. After the Build pipeline is completed, check the tag name and the same with the commit revision. Simply navigate to Gerrit → Projects → List → select the project → Tags.
 
-  !!! note
+    :::note
       For the Import strategy, navigate to the repository from which a codebase is imported → Tags. It is actual both for GitHub and GitLab.
+    :::
 
 2. Open the Kubernetes/OpenShift Overview page and click the link to Nexus and check the build of a new version.
 
@@ -83,7 +84,7 @@ The Build pipeline can be started manually. To set the necessary stages and trig
 
 1. Open the Build pipeline for the created library.
 
-2. Click the **Build with parameters** option from the left-side menu. Modify the stages by removing the whole objects massive:**\{"name". "tests"\}** where _name_ is a key and _tests_ is a stage name that should be executed.
+2. Click the **Build with parameters** option from the left-side menu. Modify the stages by removing the whole objects massive:`{"name". "tests"}` where _name_ is a key and _tests_ is a stage name that should be executed.
 
 3. Open Tekton Dashboard or Component details page and check the successful execution of all stages.
 

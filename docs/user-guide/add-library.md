@@ -53,35 +53,35 @@ In our example, we will use the **Create from template** strategy:
 
 1. Select all the settings that define how the library will be added to Git server:
 
-  * **Git server** - the pre-configured server where the component will be hosted. Select one from the from the drop-down list. Please refer to the [Manage Git Servers](git-server-overview.md) page to learn how to create the one.
-  * **Repository name** - the relative path to the repository, such as `epmd-edp/python-python-flask`.
-  * **Component name** - the name of the library. Must be at least two characters using the lower-case letters, numbers and inner dashes.
-  * **Description** - brief and concise description that explains the purpose of the library.
-  * **Empty project** - check this box to create a library with an empty repository. The empty repository option is available only for the **Create from template** strategy.
+    * **Git server** - the pre-configured server where the component will be hosted. Select one from the from the drop-down list. Please refer to the [Manage Git Servers](git-server-overview.md) page to learn how to create the one.
+    * **Repository name** - the relative path to the repository, such as `epmd-edp/python-python-flask`.
+    * **Component name** - the name of the library. Must be at least two characters using the lower-case letters, numbers and inner dashes.
+    * **Description** - brief and concise description that explains the purpose of the library.
+    * **Empty project** - check this box to create a library with an empty repository. The empty repository option is available only for the **Create from template** strategy.
 
 2. Specify the library language properties:
 
-  * **Library code language** - defines the code language with its supported frameworks:
+    * **Library code language** - defines the code language with its supported frameworks:
 
-    * Java – selecting specific Java version available.
-    * JavaScript - selecting JavaScript allows using the NPM tool.
-    * Python - selecting Python allows using the Python v.3.8, FastAPI, Flask.
-    * Groovy-pipeline - selecting Groovy-pipeline allows having the ability to customize a stages logic.
-    * Terraform - selecting Terraform allows using the Terraform different versions via the **Terraform version manager** ([tfenv](https://github.com/tfutils/tfenv#usage)).
-        KubeRocketCI supports all the actions available in Terraform, thus providing the ability to modify the virtual infrastructure and launch some checks with the help of linters.
-        For details, please refer to the [Use Terraform Library in KubeRocketCI](../user-guide/terraform-stages.md) page.
-    * Rego - this option allows using Rego code language with an Open Policy Agent (OPA) Library. For details, please refer to the [Use Open Policy Agent](../user-guide/opa-stages.md) page.
-    * Container - this option allows using the Kaniko tool for building the container images from a Dockerfile.
-    * Helm - this option allows using the [chart testing lint](https://github.com/helm/chart-testing) (Pipeline) for Helm charts or using Helm chart as a set of other Helm charts organized according to the [example](https://github.com/argoproj/argo-helm/tree/main).
-    * C# - selecting C# allows using .Net v.3.1 and .Net v.6.0.
-    * Other - selecting Other allows extending the default code languages when creating a codebase with the Clone/Import strategy.
+      * Java – selecting specific Java version available.
+      * JavaScript - selecting JavaScript allows using the NPM tool.
+      * Python - selecting Python allows using the Python v.3.8, FastAPI, Flask.
+      * Groovy-pipeline - selecting Groovy-pipeline allows having the ability to customize a stages logic.
+      * Terraform - selecting Terraform allows using the Terraform different versions via the **Terraform version manager** ([tfenv](https://github.com/tfutils/tfenv#usage)).
+          KubeRocketCI supports all the actions available in Terraform, thus providing the ability to modify the virtual infrastructure and launch some checks with the help of linters.
+          For details, please refer to the [Use Terraform Library in KubeRocketCI](../user-guide/terraform-stages.md) page.
+      * Rego - this option allows using Rego code language with an Open Policy Agent (OPA) Library. For details, please refer to the [Use Open Policy Agent](../user-guide/opa-stages.md) page.
+      * Container - this option allows using the Kaniko tool for building the container images from a Dockerfile.
+      * Helm - this option allows using the [chart testing lint](https://github.com/helm/chart-testing) (Pipeline) for Helm charts or using Helm chart as a set of other Helm charts organized according to the [example](https://github.com/argoproj/argo-helm/tree/main).
+      * C# - selecting C# allows using .Net v.3.1 and .Net v.6.0.
+      * Other - selecting Other allows extending the default code languages when creating a codebase with the Clone/Import strategy.
 
-  :::note
-      The **Create** strategy does not allow to customize the default code language set.
-  :::
+    :::note
+        The **Create** strategy does not allow to customize the default code language set.
+    :::
 
-  * **Language version/framework** - defines the specific framework or language version of the library. The field depends on the selected code language.
-  * **Build Tool** - allows to choose the build tool to use. A set tools and can be changed in accordance with the selected code language.
+    * **Language version/framework** - defines the specific framework or language version of the library. The field depends on the selected code language.
+    * **Build Tool** - allows to choose the build tool to use. A set tools and can be changed in accordance with the selected code language.
 
 Click the **Proceed** button to switch to the next menu.
 
@@ -104,7 +104,7 @@ In the Advanced Settings menu, specify the branch options and define the Jira se
       ![EDP versioning](../assets/user-guide/edp-portal-library-edp-versioning.png "EDP versioning")
 
     :::note
-        The **Start Version From** field should be filled out in compliance with the semantic versioning rules, e.g. 1.2.3 or 10.10.10. Please refer to the [Semantic Versioning](https://semver.org/) page for details.
+      The **Start Version From** field should be filled out in compliance with the semantic versioning rules, e.g. 1.2.3 or 10.10.10. Please refer to the [Semantic Versioning](https://semver.org/) page for details.
     :::
 
 * **Specify the pattern to validate a commit message** - the regular expression used to indicate the pattern that is followed on the project to validate a commit message in the code review pipeline. An example of the pattern: `^[PROJECT_NAME-d{4}]:.*$`.
@@ -115,7 +115,7 @@ In the Advanced Settings menu, specify the branch options and define the Jira se
 and have a respective label in the **Fix Version** field.
 
 :::note
-    To adjust the Jira integration functionality, first apply the necessary changes described on the [Adjust Jira Integration](../operator-guide/project-management-and-reporting/jira-integration.md) page.
+  To adjust the Jira integration functionality, first apply the necessary changes described on the [Adjust Jira Integration](../operator-guide/project-management-and-reporting/jira-integration.md) page.
 :::
 
 * **Jira Server** - the integrated Jira server with related Jira tasks.
@@ -126,7 +126,7 @@ and have a respective label in the **Fix Version** field.
 
 * **Mapping field name** - the section where the additional Jira fields are specified the names of the Jira fields that should be filled in with attributes from KubeRocketCI:
 
-  * Select the name of the field in a Jira ticket. The available fields are the following: *Fix Version/s*, *Component/s* and *Labels*.
+  * Select the name of the field in a Jira ticket. The available fields are the following: _Fix Version/s_, _Component/s_ and _Labels_.
 
   * Click the **Add** button to add the mapping field name.
 

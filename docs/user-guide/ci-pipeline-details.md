@@ -14,7 +14,7 @@ There are three codebase types in EPAM Delivery Platform:
 
 ![EDP CI pipeline](../assets/user-guide/edp-ci-pipeline.png "EDP CI pipeline")
 
-### Related Articles
+## Related Articles
 
 * [Add Application](add-application.md)
 * [Add Autotest](add-autotest.md)

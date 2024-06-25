@@ -6,11 +6,11 @@ This section describes the subsequent possible actions that can be performed wit
 
 As soon as the autotest is successfully provisioned, the following will be created:
 
-- An Autotest Codebase type will appear in the Codebase list of the Components section.
-- With the **Create** strategy, a new project will be generated on GitHub or another integrated VCS. When **Clone** is chosen, the repository will be forked from the original and copied to the KubeRocketCI-integrated repository. If **Import** is selected, the platform connects to the chosen repository.
+* An Autotest Codebase type will appear in the Codebase list of the Components section.
+* With the **Create** strategy, a new project will be generated on GitHub or another integrated VCS. When **Clone** is chosen, the repository will be forked from the original and copied to the KubeRocketCI-integrated repository. If **Import** is selected, the platform connects to the chosen repository.
 
 :::info
-    To navigate quickly to Tekton, Version Control System, SonarQube, Nexus, and other resources, click the **Overview** section on the navigation bar and hit the necessary link.
+  To navigate quickly to Tekton, Version Control System, SonarQube, Nexus, and other resources, click the **Overview** section on the navigation bar and hit the necessary link.
 :::
 
 The added autotest will be listed in the Autotests list allowing you to do the following:
@@ -41,29 +41,29 @@ KubeRocketCI portal provides the ability to enable, disable or edit the Jira Int
 
 1. To edit an autotest directly from the Autotests overview page or when viewing the autotest data:
 
-  - Select **Edit** in the options icon menu:
+    Select **Edit** in the options icon menu:
 
-    ![Edit autotest on the autotests overview page](../assets/user-guide/edp-portal-edit-autotest-1.png "Edit autotest on the autotests overview page")
+      ![Edit autotest on the autotests overview page](../assets/user-guide/edp-portal-edit-autotest-1.png "Edit autotest on the autotests overview page")
 
-    ![Edit autotest when viewing the autotest data](../assets/user-guide/edp-portal-edit-autotest-2.png "Edit autotest when viewing the autotest data")
+      ![Edit autotest when viewing the autotest data](../assets/user-guide/edp-portal-edit-autotest-2.png "Edit autotest when viewing the autotest data")
 
 2. To enable Jira integration, on the **Edit Autotest** page do the following:
 
-   ![Edit autotest](../assets/user-guide/edp-portal-edit-autotest-jira.png "Edit library")
+    ![Edit autotest](../assets/user-guide/edp-portal-edit-autotest-jira.png "Edit library")
 
-   a. Mark the **Integrate with Jira server** check box and fill in the necessary fields. Please see steps d-h on the [Add Autotests](add-autotest.md#the-advanced-settings-menu) page.
+    a. Mark the **Integrate with Jira server** check box and fill in the necessary fields. Please see steps d-h on the [Add Autotests](add-autotest.md#the-advanced-settings-menu) page.
 
-   b. Click the **Apply** button to apply the changes.
+    b. Click the **Apply** button to apply the changes.
 
-  :::note
-    To adjust the Jira integration functionality, first apply the necessary changes described on the [Adjust Jira Integration](../operator-guide/project-management-and-reporting/jira-integration.md).
-  :::
+    :::note
+      To adjust the Jira integration functionality, first apply the necessary changes described on the [Adjust Jira Integration](../operator-guide/project-management-and-reporting/jira-integration.md).
+    :::
 
 3. To disable Jira integration, in the **Edit Autotest** dialog do the following:
 
-   - Clear the **Integrate with Jira server** check box.
+    * Clear the **Integrate with Jira server** check box.
 
-   - Click the **Apply** button to apply the changes.
+    * Click the **Apply** button to apply the changes.
 
 4. To create, edit and delete application branches, please refer to the [Manage Branches](../user-guide/manage-branches.md) page.
 

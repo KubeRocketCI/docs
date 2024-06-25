@@ -53,36 +53,36 @@ Follow the instructions below to fill in the fields of the **Codebase Info** men
 
 1. Select all the settings that define how the application will be added to Git server:
 
-  * **Git server** - the pre-configured server where the component will be hosted. Select one from the from the drop-down list. Please refer to the [Manage Git Servers](git-server-overview.md) page to learn how to create the one.
-  * **Repository name** - the relative path to the repository, such as `epmd-edp/python-python-flask`.
-  * **Component name** - the name of the application. Must be at least two characters using the lower-case letters, numbers and inner dashes.
-  * **Description** - brief and concise description that explains the purpose of the application.
-  * **Empty project** - check this box to create a application with an empty repository. The empty repository option is available only for the **Create from template** strategy.
+    * **Git server** - the pre-configured server where the component will be hosted. Select one from the from the drop-down list. Please refer to the [Manage Git Servers](git-server-overview.md) page to learn how to create the one.
+    * **Repository name** - the relative path to the repository, such as `epmd-edp/python-python-flask`.
+    * **Component name** - the name of the application. Must be at least two characters using the lower-case letters, numbers and inner dashes.
+    * **Description** - brief and concise description that explains the purpose of the application.
+    * **Empty project** - check this box to create a application with an empty repository. The empty repository option is available only for the **Create from template** strategy.
 
 2. Specify the application language properties:
 
-  - **Application Code Language** - defines the code language with its supported frameworks:
+    * **Application Code Language** - defines the code language with its supported frameworks:
 
-    * Java – selecting specific Java version (8,11,17 are available).
-    * JavaScript - selecting JavaScript allows using React, Vue, Angular, Express, Next.js and Antora frameworks.
-    * Python - selecting Python allows using the Python v.3.8, FastAPI, Flask frameworks.
-    * Go - selecting Go allows using the Beego, Gin and Operator SDK frameworks.
-    * C# - selecting C# allows using the .Net v.3.1 and .Net v.6.0 frameworks.
-    * Helm - selecting Helm allows using the Helm framework.
-    * Other - selecting Other allows extending the default code languages when creating a codebase with the clone/import strategy.
-    :::note
-        The **Create from template** strategy does not allow to customize the default code language set.
-    :::
+      * Java – selecting specific Java version (8,11,17 are available).
+      * JavaScript - selecting JavaScript allows using React, Vue, Angular, Express, Next.js and Antora frameworks.
+      * Python - selecting Python allows using the Python v.3.8, FastAPI, Flask frameworks.
+      * Go - selecting Go allows using the Beego, Gin and Operator SDK frameworks.
+      * C# - selecting C# allows using the .Net v.3.1 and .Net v.6.0 frameworks.
+      * Helm - selecting Helm allows using the Helm framework.
+      * Other - selecting Other allows extending the default code languages when creating a codebase with the clone/import strategy.
+      :::note
+          The **Create from template** strategy does not allow to customize the default code language set.
+      :::
 
-  - **Language version/framework** - defines the specific framework or language version of the application. The field depends on the selected code language.
-  - **Select Build Tool** -  allows to choose the build tool to use. A set tools and can be changed in accordance with the selected code language.
+    * **Language version/framework** - defines the specific framework or language version of the application. The field depends on the selected code language.
+    * **Select Build Tool** -  allows to choose the build tool to use. A set tools and can be changed in accordance with the selected code language.
 
-    * Java - selecting Java allows using the Gradle or Maven tool.
-    * JavaScript - selecting JavaScript allows using the NPM tool.
-    * C# - selecting C# allows using the .Net tool.
-    * Python - selecting Python allows using Python tool.
-    * Go - selecting Go allows using Go tool.
-    * Helm - selecting Helm allows using Helm tool.
+      * Java - selecting Java allows using the Gradle or Maven tool.
+      * JavaScript - selecting JavaScript allows using the NPM tool.
+      * C# - selecting C# allows using the .Net tool.
+      * Python - selecting Python allows using Python tool.
+      * Go - selecting Go allows using Go tool.
+      * Helm - selecting Helm allows using Helm tool.
 
     :::note
         The **Select Build Tool** field disposes of the default tools and can be changed in accordance with the selected code language.
@@ -133,7 +133,7 @@ and have a respective label in the **Fix Version** field.
 
 * **Mapping field name** - the section where the additional Jira fields are specified the names of the Jira fields that should be filled in with attributes from KubeRocketCI:
 
-  * Select the name of the field in a Jira ticket. The available fields are the following: *Fix Version/s*, *Component/s* and *Labels*.
+  * Select the name of the field in a Jira ticket. The available fields are the following: _Fix Version/s_, _Component/s_ and _Labels_.
 
   * Click the **Add** button to add the mapping field name.
 

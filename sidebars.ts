@@ -116,7 +116,6 @@ const sidebars: SidebarsConfig = {
                 'operator-guide/advanced-installation/keycloak',
                 'operator-guide/advanced-installation/capsule',
                 'operator-guide/advanced-installation/defectdojo',
-                'operator-guide/advanced-installation/reportportal',
                 'operator-guide/advanced-installation/custom-certificates',
               ],
             },
@@ -153,6 +152,22 @@ const sidebars: SidebarsConfig = {
                     'operator-guide/artifacts-management/harbor-integration',
                   ],
                 },
+              ],
+            },
+          ],
+        },
+        {
+          type: 'category',
+          label: 'Project Management and Reporting',
+          items: [
+            'operator-guide/project-management-and-reporting/jira-integration',
+            {
+              type: 'category',
+              label: 'ReportPortal',
+              items: [
+                'operator-guide/project-management-and-reporting/install-reportportal',
+                'operator-guide/project-management-and-reporting/reportportal-keycloak',
+                'operator-guide/project-management-and-reporting/reportportal-tekton',
               ],
             },
           ],
@@ -204,7 +219,6 @@ const sidebars: SidebarsConfig = {
               ],
             },
             'operator-guide/customize_deployment',
-            'operator-guide/jira-integration',
             {
               type: 'category',
               label: 'Tekton',
@@ -224,14 +238,6 @@ const sidebars: SidebarsConfig = {
                 'operator-guide/kaniko-irsa',
                 'operator-guide/loki-irsa',
                 'operator-guide/configure-keycloak-oidc-eks',
-              ],
-            },
-            {
-              type: 'category',
-              label: 'ReportPortal',
-              items: [
-                'operator-guide/reportportal-keycloak',
-                'operator-guide/report-portal-integration-tekton',
               ],
             },
             'operator-guide/dependency-track',

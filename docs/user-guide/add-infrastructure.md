@@ -96,7 +96,7 @@ Follow the instructions below to fill in the fields of the **Advanced Setting** 
 and have a respective label in the **Fix Version** field.
 
 :::note
-    To adjust the Jira integration functionality, first apply the necessary changes described on the [Adjust Jira Integration](../operator-guide/jira-integration.md) page.
+    To adjust the Jira integration functionality, first apply the necessary changes described on the [Adjust Jira Integration](../operator-guide/project-management-and-reporting/jira-integration.md) page.
 :::
 
 - **Jira Server** - the integrated Jira server with related Jira tasks.
@@ -128,4 +128,4 @@ Click the **Apply** button to add the infrastructure to the Components list.
 
 * [Application Overview](application.md)
 * [Add CD Pipelines](add-cd-pipeline.md)
-* [Adjust Jira Integration](../operator-guide/jira-integration.md)
+* [Adjust Jira Integration](../operator-guide/project-management-and-reporting/jira-integration.md)

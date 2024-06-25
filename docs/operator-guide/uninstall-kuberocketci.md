@@ -35,4 +35,3 @@ To uninstall platform, perform the following steps:
 ## Related Articles
 
 * [Install KubeRocketCI](install-kuberocketci.mdx)
-* [Keycloak Integration](../operator-guide/reportportal-keycloak.md)

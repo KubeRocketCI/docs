@@ -15,7 +15,7 @@ Here's the table with the added 'Description' column containing a short descript
 |[NGINX Ingress Controller](../install-ingress-nginx.md)[^1]| Mandatory|Manages external access to HTTP services in a Kubernetes cluster.|
 |[Keycloak](keycloak.md)|Optional|An open-source identity and access management solution.|
 |[DefectDojo](defectdojo.md)|Optional|An open-source application vulnerability management tool.|
-|[ReportPortal](reportportal.md)|Optional|An AI-powered test automation dashboard for analyzing test results.|
+|[ReportPortal](../project-management-and-reporting/install-reportportal.md)|Optional|An AI-powered test automation dashboard for analyzing test results.|
 |[Capsule](capsule.md)[^2]|Optional|A lightweight tool for managing Kubernetes namespaces.|
 |[External Secrets](../install-external-secrets-operator.md)|Optional|Manages external secret storage like AWS Secrets Manager, integrating with Kubernetes.|
 |[Nexus](../artifacts-management/nexus-sonatype.md)|Optional|A repository manager supporting various formats including Docker, npm, and Helm charts.|

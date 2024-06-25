@@ -92,5 +92,5 @@ The Build pipeline can be started manually. To set the necessary stages and trig
 * [Add Application](add-application.md)
 * [Add Autotest](add-autotest.md)
 * [Add Library](add-library.md)
-* [Adjust Jira Integration](../operator-guide/jira-integration.md)
+* [Adjust Jira Integration](../operator-guide/project-management-and-reporting/jira-integration.md)
 * [Autotest as Quality Gate](../use-cases/autotest-as-quality-gate.md)

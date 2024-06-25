@@ -96,7 +96,7 @@ In the **Advanced Settings** menu, specify the branch options and define the Jir
 and have a respective label in the **Fix Version** field.
 
   :::note
-    To adjust the Jira integration functionality, first apply the necessary changes described on the [Adjust Jira Integration](../operator-guide/jira-integration.md) page.
+    To adjust the Jira integration functionality, first apply the necessary changes described on the [Adjust Jira Integration](../operator-guide/project-management-and-reporting/jira-integration.md) page.
   :::
 * **Jira Server** - the integrated Jira server with related Jira tasks.
 
@@ -125,5 +125,5 @@ After the complete adding of the autotest, inspect the [Autotest Overview](autot
 * [Manage Autotests](autotest.md)
 * [Add Application](add-application.md)
 * [Add CD Pipelines](add-cd-pipeline.md)
-* [Adjust Jira Integration](../operator-guide/jira-integration.md)
+* [Adjust Jira Integration](../operator-guide/project-management-and-reporting/jira-integration.md)
 * [Manage Git Providers](../user-guide/add-git-server.md)

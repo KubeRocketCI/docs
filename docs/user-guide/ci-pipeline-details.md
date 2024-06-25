@@ -19,7 +19,7 @@ There are three codebase types in EPAM Delivery Platform:
 * [Add Application](add-application.md)
 * [Add Autotest](add-autotest.md)
 * [Add Library](add-library.md)
-* [Adjust Jira Integration](../operator-guide/jira-integration.md)
+* [Adjust Jira Integration](../operator-guide/project-management-and-reporting/jira-integration.md)
 * [Autotest as Quality Gate](../use-cases/autotest-as-quality-gate.md)
 * [Build Pipeline](build-pipeline.md)
 * [Code Review Pipeline](code-review-pipeline.md)

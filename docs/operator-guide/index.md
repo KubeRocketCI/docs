@@ -7,6 +7,6 @@ The Operator guide is intended for DevOps and provides information on KubeRocket
 
 * The **Configuration** section indicates the options to set the project, [backup](disaster-recovery/velero-restore-platform.md), [Tekton](../user-guide/add-git-server.md) and [logging](install-loki.md).
 
-* The **Integration** section comprises the [AWS](enable-irsa.md), [Jira](jira-integration.md) integration options.
+* The **Integration** section comprises the [AWS](enable-irsa.md), [Jira](project-management-and-reporting/jira-integration.md) integration options.
 
 * The **Tutorials** section provides information on working with various aspects, for example, [using cert-manager in OpenShift](ssl-automation-okd.md), [deploying AWS EKS cluster](deploy-aws-eks.md), [deploying OKD 4.9 cluster](deploy-okd.md), [deploying OKD 4.10 cluster](deploy-okd-4.10.md) and [upgrading Keycloak v.17.0.x-legacy to v.19.0.x on Kubernetes](upgrade-keycloak-19.0.md).

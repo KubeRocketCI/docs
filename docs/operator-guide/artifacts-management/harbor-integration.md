@@ -263,5 +263,5 @@ Harbor projects can be added and retained with a retention policy generated thro
 
 * [Install KubeRocketCI](../install-kuberocketci.mdx)
 * [Install Harbor](../artifacts-management/harbor-installation.md)
-* [Adjust Jira Integration](../jira-integration.md)
+* [Adjust Jira Integration](../project-management-and-reporting/jira-integration.md)
 * [Custom SonarQube Integration](../sonarqube.md)

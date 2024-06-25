@@ -29,4 +29,4 @@ helm install external-secrets \
 
 * [External Secrets Operator Integration](external-secrets-operator-integration.md)
 * [Install via Add-Ons](add-ons-overview.md)
-* [Install Harbor](advanced-installation/harbor.md)
+* [Install Harbor](artifacts-management/harbor-installation.md)

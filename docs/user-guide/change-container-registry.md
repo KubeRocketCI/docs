@@ -67,5 +67,5 @@ kubectl get stages -n edp -o jsonpath='{range .items[*]}{.spec.namespace}{"\n"}{
 ## Related Articles
 
 * [Manage Registries](./manage-container-registries.md)
-* [Integrate Harbor With EDP Pipelines](../operator-guide/container-registry-harbor-integration-tekton-ci.md)
+* [Integrate Harbor With EDP Pipelines](../operator-guide/artifacts-management/harbor-integration.md)
 * [Integrate Docker](../quick-start/integrate-container-registry.md)

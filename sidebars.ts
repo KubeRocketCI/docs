@@ -113,7 +113,6 @@ const sidebars: SidebarsConfig = {
               label: 'Advanced Installation',
               items: [
                 'operator-guide/advanced-installation/overview',
-                'operator-guide/advanced-installation/harbor',
                 'operator-guide/advanced-installation/keycloak',
                 'operator-guide/advanced-installation/capsule',
                 'operator-guide/advanced-installation/defectdojo',
@@ -141,6 +140,21 @@ const sidebars: SidebarsConfig = {
           items: [
             'operator-guide/artifacts-management/nexus-sonatype',
             'operator-guide/artifacts-management/package-registry',
+            {
+              type: 'category',
+              label: 'Container Registry',
+              items: [
+                {
+                  type: 'category',
+                  label: 'Harbor',
+                  items: [
+                    'operator-guide/artifacts-management/harbor-installation',
+                    'operator-guide/artifacts-management/harbor-oidc',
+                    'operator-guide/artifacts-management/harbor-integration',
+                  ],
+                },
+              ],
+            },
           ],
         },
         {
@@ -197,20 +211,6 @@ const sidebars: SidebarsConfig = {
                 'operator-guide/tekton-overview',
                 'operator-guide/tekton-monitoring',
                 'operator-guide/notification-msteams',
-              ],
-            },
-            {
-              type: 'category',
-              label: 'Container Registry',
-              items: [
-                {
-                  type: 'category',
-                  label: 'Harbor',
-                  items: [
-                    'operator-guide/container-registry-harbor-integration-tekton-ci',
-                    'operator-guide/harbor-oidc',
-                  ],
-                },
               ],
             },
             {

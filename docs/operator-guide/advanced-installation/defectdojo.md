@@ -292,4 +292,4 @@ After following the instructions provided, you should be able to integrate your 
 
 * [Install External Secrets Operator](../install-external-secrets-operator.md)
 * [External Secrets Operator Integration](../external-secrets-operator-integration.md)
-* [Install Harbor](harbor.md)
+* [Install Harbor](../artifacts-management/harbor-installation.md)

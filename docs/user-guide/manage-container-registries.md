@@ -73,8 +73,8 @@ The required fields vary depending on which container registry is chosen:
                   |:-|:-|
                   |Registry Endpoint|Enter Harbor registry endpoint URL, for example, registry.example.com.|
                   |Registry Space|The project name in registry.|
-                  |User|Provide the [robot account](../operator-guide/container-registry-harbor-integration-tekton-ci.md#set-up-robot-account) name with push permissions.|
-                  |Password/Token|Provide the [secret](../operator-guide/container-registry-harbor-integration-tekton-ci.md#set-up-robot-account) corresponding to your harbor account.|
+                  |User|Provide the [robot account](../operator-guide/artifacts-management/harbor-integration.md#set-up-robot-account) name with push permissions.|
+                  |Password/Token|Provide the [secret](../operator-guide/artifacts-management/harbor-integration.md#set-up-robot-account) corresponding to your harbor account.|
                   |Checkbox/Use the Push Account's credentials|Check this to use the same account for pulling and pushing operations. Provide the account name with pull permissions.|
             </TabItem>
 
@@ -128,5 +128,5 @@ To remove container registry integration from KubeRocketCI, follow the steps bel
 ## Related Articles
 
 * [Install KubeRocketCI](../operator-guide/install-kuberocketci.mdx)
-* [Install Harbor](../operator-guide/advanced-installation/harbor.md)
+* [Install Harbor](../operator-guide/artifacts-management/harbor-installation.md)
 * [Change Container Registry](../operator-guide/change-container-registry.md)

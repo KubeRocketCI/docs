@@ -372,5 +372,5 @@ To create a Keycloak user in the Master realm who can manage other realms, follo
 ## Related Articles
 
 * [Install KubeRocketCI](../install-kuberocketci.mdx)
-* [Install Harbor](harbor.md)
+* [Install Harbor](../artifacts-management/harbor-installation.md)
 * [Install via Add-Ons](../add-ons-overview.md)

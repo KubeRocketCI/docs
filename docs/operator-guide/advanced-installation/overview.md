@@ -19,7 +19,7 @@ Here's the table with the added 'Description' column containing a short descript
 |[Capsule](capsule.md)[^2]|Optional|A lightweight tool for managing Kubernetes namespaces.|
 |[External Secrets](../install-external-secrets-operator.md)|Optional|Manages external secret storage like AWS Secrets Manager, integrating with Kubernetes.|
 |[Nexus](../artifacts-management/nexus-sonatype.md)|Optional|A repository manager supporting various formats including Docker, npm, and Helm charts.|
-|[Harbor](harbor.md)|Optional|An open-source trusted cloud native registry project that stores, signs, and scans content.|
+|[Harbor](../artifacts-management/harbor-installation.md)|Optional|An open-source trusted cloud native registry project that stores, signs, and scans content.|
 
 Although we have dedicated instructions for all of these third-party tools, we recommend installing them via [add-ons approach](../add-ons-overview.md).
 

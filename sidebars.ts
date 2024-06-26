@@ -115,7 +115,6 @@ const sidebars: SidebarsConfig = {
                 'operator-guide/advanced-installation/overview',
                 'operator-guide/advanced-installation/keycloak',
                 'operator-guide/advanced-installation/capsule',
-                'operator-guide/advanced-installation/defectdojo',
                 'operator-guide/advanced-installation/custom-certificates',
               ],
             },
@@ -198,9 +197,9 @@ const sidebars: SidebarsConfig = {
           type: 'category',
           label: 'Security and Compliance',
           items: [
-            'operator-guide/overview-devsecops',
-            'operator-guide/artifacts-verification',
-            'operator-guide/dependency-track',
+            'operator-guide/devsecops/overview',
+            'operator-guide/devsecops/dependency-track',
+            'operator-guide/devsecops/defectdojo',
             {
               type: 'category',
               label: 'AWS Integration',
@@ -209,7 +208,6 @@ const sidebars: SidebarsConfig = {
                 'operator-guide/ebs-csi-driver',
                 'operator-guide/enable-irsa',
                 'operator-guide/kaniko-irsa',
-                'operator-guide/loki-irsa',
                 'operator-guide/configure-keycloak-oidc-eks',
               ],
             },
@@ -220,6 +218,7 @@ const sidebars: SidebarsConfig = {
           label: 'Monitoring and Observability',
           items: [
             'operator-guide/install-loki',
+            'operator-guide/loki-irsa',
             'operator-guide/multitenant-logging',
             'operator-guide/kibana-ilm-rollover',
           ],
@@ -481,6 +480,7 @@ const sidebars: SidebarsConfig = {
             'developer-guide/mk-docs-development', // Working With Documentation
           ],
         },
+        'developer-guide/artifacts-verification',
         'developer-guide/autotest-coverage', // Quality Control
         'developer-guide/telemetry', // Telemetry
         'developer-guide/annotations-and-labels', // Annotations and Labels
@@ -494,7 +494,7 @@ const sidebars: SidebarsConfig = {
       label: 'Use Cases',
       collapsible: false,
       items: [
-        'use-cases/index', // Overview
+        'use-cases/index',
         'use-cases/application-scaffolding',
         'use-cases/external-secrets',
         'use-cases/autotest-as-quality-gate',

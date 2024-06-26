@@ -68,7 +68,7 @@ const FeatureList: FeatureItem[] = [
         Achieve excellence in DevSecOps with our platform. We prioritize security, making it a mandatory quality gate for all operations. Experience enhanced protection and peace of mind.
       </>
     ),
-    link: "docs/operator-guide/overview-devsecops/",
+    link: "docs/operator-guide/devsecops/overview/",
   },
   {
     title: 'Automated Test Analysis',

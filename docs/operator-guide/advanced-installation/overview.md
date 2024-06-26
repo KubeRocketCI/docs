@@ -14,10 +14,10 @@ Here's the table with the added 'Description' column containing a short descript
 |[Argo CD](../install-argocd.md)|Mandatory|A declarative, GitOps continuous delivery tool for Kubernetes.|
 |[NGINX Ingress Controller](../install-ingress-nginx.md)[^1]| Mandatory|Manages external access to HTTP services in a Kubernetes cluster.|
 |[Keycloak](keycloak.md)|Optional|An open-source identity and access management solution.|
-|[DefectDojo](defectdojo.md)|Optional|An open-source application vulnerability management tool.|
+|[DefectDojo](../devsecops/defectdojo.md)|Optional|An open-source application vulnerability management tool.|
 |[ReportPortal](../project-management-and-reporting/install-reportportal.md)|Optional|An AI-powered test automation dashboard for analyzing test results.|
 |[Capsule](capsule.md)[^2]|Optional|A lightweight tool for managing Kubernetes namespaces.|
-|[External Secrets](../install-external-secrets-operator.md)|Optional|Manages external secret storage like AWS Secrets Manager, integrating with Kubernetes.|
+|[External Secrets](../secrets-management/install-external-secrets-operator.md)|Optional|Manages external secret storage like AWS Secrets Manager, integrating with Kubernetes.|
 |[Nexus](../artifacts-management/nexus-sonatype.md)|Optional|A repository manager supporting various formats including Docker, npm, and Helm charts.|
 |[Harbor](../artifacts-management/harbor-installation.md)|Optional|An open-source trusted cloud native registry project that stores, signs, and scans content.|
 

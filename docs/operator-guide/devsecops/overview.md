@@ -1,12 +1,10 @@
-# Secure Delivery on the Platform
+# Overview
 
-The EPAM Delivery Platform emphasizes the importance of incorporating security practices into the software development lifecycle through the DevSecOps approach. By integrating a diverse range of open-source and enterprise security tools tailored to specific functionalities, organizations can ensure efficient and secure software development. These tools, combined with fundamental DevSecOps principles such as collaboration, continuous security, and automation, contribute to the identification and remediation of vulnerabilities early in the process, minimizes risks, and fosters a security-first culture across the organization.
-
-The EPAM Delivery Platform enabling seamless integration with various security tools and vulnerability management systems, enhancing the security of source code and ensuring compliance.
+KubeRocketCI emphasizes the importance of incorporating security practices into the software development lifecycle through the DevSecOps approach. By integrating a diverse range of open-source and enterprise security tools tailored to specific functionalities, organizations can ensure efficient and secure software development. These tools, combined with fundamental DevSecOps principles such as collaboration, continuous security, and automation, contribute to the identification and remediation of vulnerabilities early in the process, minimizes risks, and fosters a security-first culture across the organization.
 
 ## Supported Solutions
 
-The below table categorizes various open-source and enterprise security tools based on their specific functionalities. It provides a comprehensive view of the available options for each security aspect. This classification facilitates informed decision-making when selecting and integrating security tools into a development pipeline, ensuring an efficient and robust security stance. EDP supports the integration of both open-source and enterprise security tools, providing a flexible and versatile solution for security automation. See table below for more details.
+The below table categorizes various open-source and enterprise security tools based on their specific functionalities. It provides a comprehensive view of the available options for each security aspect. This classification facilitates informed decision-making when selecting and integrating security tools into a development pipeline, ensuring an efficient and robust security stance. KubeRocketCI supports the integration of both open-source and enterprise security tools, providing a flexible and versatile solution for security automation. See table below for more details.
 
 | Functionality                          | Open-Source Tools (integrated in Pipelines) | Enterprise Tools (available for Integration)           |
 |:--------------------------------------:|---------------------------------------------|--------------------------------------------------------|
@@ -20,9 +18,9 @@ The below table categorizes various open-source and enterprise security tools ba
 | Security Audits and Assessments        | OpenVAS                                     | Tenable Nessus, QualysGuard, BurpSuite Professional    |
 | Vulnerability Management and Reporting | DefectDojo, OWASP Dependency-Track          | Metasploit                                             |
 
-For better visualization, see the scheme below:
+See visualization the scheme below:
 
-  ![Security tools in EDP](../assets/operator-guide/security-tools.png "Security tools in EDP")
+  ![Security tools in KubeRocketCI](../../assets/operator-guide/security-tools.png "Security tools in KubeRocketCI")
 
 ## Integrated Tools
 
@@ -30,7 +28,7 @@ For obtaining and managing report post scanning, deployment of various vulnerabi
 
 ### DefectDojo
 
-[DefectDojo](https://www.defectdojo.com/) is a comprehensive vulnerability management and security orchestration platform facilitating the handling of uploaded security reports. Examine the prerequisites and fundamental instructions for [installing DefectDojo](./advanced-installation/defectdojo.md) on Kubernetes or OpenShift platforms.
+[DefectDojo](https://www.defectdojo.com/) is a comprehensive vulnerability management and security orchestration platform facilitating the handling of uploaded security reports. Examine the prerequisites and fundamental instructions for [installing DefectDojo](../devsecops/defectdojo.md) on Kubernetes or OpenShift platforms.
 
 ### OWASP Dependency Track
 
@@ -42,7 +40,7 @@ For obtaining and managing report post scanning, deployment of various vulnerabi
 
 ### Trivy
 
-[Trivy](https://github.com/aquasecurity/trivy) is a simple and comprehensive vulnerability scanner for containers and other artifacts, providing insight into potential security issues across multiple ecosystems.
+[Trivy](https://github.com/aquasecurity/trivy) is a simple and comprehensive vulnerability scanner for containers and other artifacts, providing insight into potential security issues across multiple ecosystems. Trivy can be seamlessly integrated into CI/CD pipelines or utilized as part of Harbor, enhancing the security posture of your development and deployment environments.
 
 ### Grype
 
@@ -82,7 +80,7 @@ For obtaining and managing report post scanning, deployment of various vulnerabi
 
 ### ELK Stack
 
-[ELK Stack](../operator-guide/kibana-ilm-rollover.md) (Fluent Bit, Elasticsearch, Kibana) stack is used in Kubernetes instead of ELK because this stack provides us with the support for Logsight for Stage Verification and Incident Detection. In addition to it, Fluent Bit has a smaller memory fingerprint than Logstash. Fluent Bit has the Inputs, Parsers, Filters and Outputs plugins similarly to Logstash.
+[ELK Stack](../../operator-guide/kibana-ilm-rollover.md) (Fluent Bit, Elasticsearch, Kibana) stack is used in Kubernetes instead of ELK because this stack provides us with the support for Logsight for Stage Verification and Incident Detection. In addition to it, Fluent Bit has a smaller memory fingerprint than Logstash. Fluent Bit has the Inputs, Parsers, Filters and Outputs plugins similarly to Logstash.
 
 ### Loki
 

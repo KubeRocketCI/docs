@@ -37,6 +37,7 @@ Before the OKD cluster deployment and configuration, make sure to check the prer
       ```
 
 4. Build the `ccoctl` tool:
+
    * Clone the `cloud-credential-operator` repository.
 
       ```bash
@@ -74,14 +75,13 @@ Create the AWS resources with the Cloud Credential Operator utility (the `ccoctl
     --public-key-file=./serviceaccount-signer.public
     ```
 
-   where:
-
-   * NAME - is the name used to tag any cloud resources created for tracking,
-   * AWS_REGION - is the AWS region in which cloud resources will be created.
+    where:
+    * NAME - is the name used to tag any cloud resources created for tracking,
+    * AWS_REGION - is the AWS region in which cloud resources will be created.
 
 3. Create the IAM roles for each component in the cluster:
 
-   * Extract the list of the `CredentialsRequest` objects from the OpenShift Container Platform release image:
+    * Extract the list of the `CredentialsRequest` objects from the OpenShift Container Platform release image:
 
       ```bash
       oc adm release extract \
@@ -91,10 +91,11 @@ Create the AWS resources with the Cloud Credential Operator utility (the `ccoctl
       --quay.io/openshift-release-dev/ocp-release:4.10.25-x86_64
       ```
 
-    !!! note
+      :::note
         A version of the openshift-release-dev docker image can be found in the [Quay registry](https://quay.io/repository/openshift-release-dev/ocp-release?tab=tags).
+      :::
 
-   * Use the `ccoctl` tool to process all `CredentialsRequest` objects in the `credrequests` directory:
+    * Use the `ccoctl` tool to process all `CredentialsRequest` objects in the `credrequests` directory:
 
       ```bash
       ccoctl aws create-iam-roles \
@@ -112,145 +113,148 @@ Before deploying the OKD cluster, please perform the steps below:
 
 2. Extract the installation program:
 
-      tar -xvf openshift-install-linux.tar.gz
+    ```bash
+    tar -xvf openshift-install-linux.tar.gz
+    ```
 
 3. Download the installation pull secret for any private registry. This pull secret allows to authenticate with the services that are provided by the authorities, including [Quay.io](https://quay.io/), serving the container images for OKD components. For example, here is a pull secret for Docker Hub:
 
-   <details>
-      <Summary><b>The pull secret for the private registry</b></Summary>
-    ```json
-    {
-      "auths":{
-        "https://index.docker.io/v1/":{
-          "auth":"$TOKEN"
+    <details>
+      <summary><b>The pull secret for the private registry</b></summary>
+        ```json
+        {
+          "auths":{
+            "https://index.docker.io/v1/":{
+              "auth":"$TOKEN"
+            }
+          }
         }
-      }
-    }
-    ```
-   </details>
+        ```
+    </details>
 
 4. Create a deployment directory and the **install-config.yaml** file:
 
-   ```bash
-   mkdir okd-deployment
-   touch okd-deployment/install-config.yaml
-   ```
+    ```bash
+    mkdir okd-deployment
+    touch okd-deployment/install-config.yaml
+    ```
 
     To specify more details about the OKD cluster platform or to modify the values of the required parameters, customize the **install-config.yaml** file for the AWS. Please see below an example of the customized file:
 
-   <details>
-      <Summary><b>install-config.yaml - OKD cluster’s platform installation configuration file</b></Summary>
-    ```yaml
-    apiVersion: v1
-    baseDomain: <YOUR_DOMAIN>
-    credentialsMode: Manual
-    compute:
-    - architecture: amd64
-      hyperthreading: Enabled
-      name: worker
-      platform:
-        aws:
-          rootVolume:
-            size: 30
-          zones:
-            - eu-central-1a
-          type: r5.large
-      replicas: 3
-    controlPlane:
-      architecture: amd64
-      hyperthreading: Enabled
-      name: master
-      platform:
-        aws:
-          rootVolume:
-            size: 50
-          zones:
-            - eu-central-1a
-          type: m5.xlarge
-      replicas: 3
-    metadata:
-      creationTimestamp: null
-      name: 4-10-okd-sandbox
-    networking:
-      clusterNetwork:
-      - cidr: 10.128.0.0/14
-        hostPrefix: 23
-      machineNetwork:
-      - cidr: 10.0.0.0/16
-      networkType: OVNKubernetes
-      serviceNetwork:
-      - 172.30.0.0/16
-    platform:
-      aws:
-        region: eu-central-1
-        userTags:
-          user:tag: 4-10-okd-sandbox
-    publish: External
-    pullSecret: <PULL_SECRET>
-    sshKey: |
-      <SSH_KEY>
-    ```
-   </details>
+    <details>
+      <summary><b>install-config.yaml - OKD cluster’s platform installation configuration file</b></summary>
+        ```yaml
+        apiVersion: v1
+        baseDomain: <YOUR_DOMAIN>
+        credentialsMode: Manual
+        compute:
+        - architecture: amd64
+          hyperthreading: Enabled
+          name: worker
+          platform:
+            aws:
+              rootVolume:
+                size: 30
+              zones:
+                - eu-central-1a
+              type: r5.large
+          replicas: 3
+        controlPlane:
+          architecture: amd64
+          hyperthreading: Enabled
+          name: master
+          platform:
+            aws:
+              rootVolume:
+                size: 50
+              zones:
+                - eu-central-1a
+              type: m5.xlarge
+          replicas: 3
+        metadata:
+          creationTimestamp: null
+          name: 4-10-okd-sandbox
+        networking:
+          clusterNetwork:
+          - cidr: 10.128.0.0/14
+            hostPrefix: 23
+          machineNetwork:
+          - cidr: 10.0.0.0/16
+          networkType: OVNKubernetes
+          serviceNetwork:
+          - 172.30.0.0/16
+        platform:
+          aws:
+            region: eu-central-1
+            userTags:
+              user:tag: 4-10-okd-sandbox
+        publish: External
+        pullSecret: <PULL_SECRET>
+        sshKey: |
+          <SSH_KEY>
+        ```
+    </details>
 
     where:
-
-   * YOUR_DOMAIN - is a base domain,
-   * PULL_SECRET - is a created pull secret for a private registry,
-   * SSH_KEY - is a created SSH key.
+    * YOUR_DOMAIN - is a base domain,
+    * PULL_SECRET - is a created pull secret for a private registry,
+    * SSH_KEY - is a created SSH key.
 
 5. Create the required OpenShift Container Platform installation manifests:
 
-   ```bash
-   ./openshift-install create manifests --dir okd-deployment
-   ```
+    ```bash
+    ./openshift-install create manifests --dir okd-deployment
+    ```
 
 6. Copy the manifests generated by the `ccoctl` tool to the `manifests` directory created by the installation program:
 
-   ```bash
-   cp ./manifests/* ./okd-deployment/manifests/
-   ```
+    ```bash
+    cp ./manifests/* ./okd-deployment/manifests/
+    ```
 
 7. Copy the private key generated in the `tls` directory by the `ccoctl` tool to the installation directory:
 
-   ```bash
-   cp -a ./tls ./okd-deployment
-   ```
+    ```bash
+    cp -a ./tls ./okd-deployment
+    ```
 
 ## Deploy the Cluster
 
 To initialize the cluster deployment, run the following command:
 
-   ```bash
-   ./openshift-install create cluster --dir okd-deployment --log-level=info
-   ```
+  ```bash
+  ./openshift-install create cluster --dir okd-deployment --log-level=info
+  ```
 
-!!! note
+  :::note
     If the cloud provider account configured on the host does not have sufficient permissions to deploy the cluster, the installation process stops, and the missing permissions are displayed.
+  :::
 
 When the cluster deployment is completed, directions for accessing the cluster are displayed in the terminal, including a link to the web console and credentials for the **kubeadmin** user. The `kubeconfig` for the cluster will be located in **okd-deployment/auth/kubeconfig**.
 
   <details>
-  <Summary><b>Example output</b></Summary>
-```
-...
-INFO Install complete!
-INFO To access the cluster as the system:admin user when using 'oc', run 'export KUBECONFIG=/home/myuser/install_dir/auth/kubeconfig'
-INFO Access the OpenShift web-console here: https://console-openshift-console.apps.mycluster.example.com
-INFO Login to the console with the user: "kubeadmin", and password: "4vYBz-Ee6gm-ymBZj-Wt5AL"
-INFO Time elapsed: 36m22s:
-```
+    <summary><b>Example output</b></summary>
+      ```bash
+      ...
+      INFO Install complete!
+      INFO To access the cluster as the system:admin user when using 'oc', run 'export KUBECONFIG=/home/myuser/install_dir/auth/kubeconfig'
+      INFO Access the OpenShift web-console here: https://console-openshift-console.apps.mycluster.example.com
+      INFO Login to the console with the user: "kubeadmin", and password: "4vYBz-Ee6gm-ymBZj-Wt5AL"
+      INFO Time elapsed: 36m22s:
+      ```
   </details>
 
-!!! warning
-    The Ignition config files contain certificates that expire after 24 hours, which are then renewed at that time. Do not turn off the cluster for this time, or you will have to update the certificates manually. See [OpenShift Container Platform documentation](https://docs.openshift.com/container-platform/4.10/installing/installing_aws/installing-aws-customizations.html#installation-launching-installer_installing-aws-customizations) for more information.
+:::warning
+  The Ignition config files contain certificates that expire after 24 hours, which are then renewed at that time. Do not turn off the cluster for this time, or you will have to update the certificates manually. See [OpenShift Container Platform documentation](https://docs.openshift.com/container-platform/4.10/installing/installing_aws/installing-aws-customizations.html#installation-launching-installer_installing-aws-customizations) for more information.
+:::
 
 ## Log Into the Cluster
 
 To log into the cluster, export the `kubeconfig`:
 
-      ```bash
-      export KUBECONFIG=<installation_directory>/auth/kubeconfig
-      ```
+  ```bash
+  export KUBECONFIG=<installation_directory>/auth/kubeconfig
+  ```
 
 ## Manage OKD Cluster Without the Inbound Rules
 
@@ -258,46 +262,46 @@ In order to manage the OKD cluster without the `0.0.0.0/0` inbound rules, please
 
 1. Create a Security Group with a list of your external IPs:
 
-   ```bash
-   aws ec2 create-security-group --group-name <SECURITY_GROUP_NAME> --description "<DESCRIPTION_OF_SECURITY_GROUP>" --vpc-id <VPC_ID>
-   aws ec2 authorize-security-group-ingress \
-   --group-id '<SECURITY_GROUP_ID>' \
-   --ip-permissions 'IpProtocol=all,PrefixListIds=[{PrefixListId=<PREFIX_LIST_ID>}]'
-   ```
+    ```bash
+    aws ec2 create-security-group --group-name <SECURITY_GROUP_NAME> --description "<DESCRIPTION_OF_SECURITY_GROUP>" --vpc-id <VPC_ID>
+    aws ec2 authorize-security-group-ingress \
+    --group-id '<SECURITY_GROUP_ID>' \
+    --ip-permissions 'IpProtocol=all,PrefixListIds=[{PrefixListId=<PREFIX_LIST_ID>}]'
+    ```
 
 2. Manually attach this new Security Group to all master nodes of the cluster.
 
 3. Create another Security Group with an Elastic IP of the Cluster VPC:
 
-   ```bash
-   aws ec2 create-security-group --group-name custom-okd-4-10 --description "Cluster Ip to 80, 443" --vpc-id <VPC_ID>
-   aws ec2 authorize-security-group-ingress \
+    ```bash
+    aws ec2 create-security-group --group-name custom-okd-4-10 --description "Cluster Ip to 80, 443" --vpc-id <VPC_ID>
+    aws ec2 authorize-security-group-ingress \
     --group-id '<SECURITY_GROUP_ID>' \
     --protocol all \
     --port 80 \
     --cidr <ELASTIC_IP_OF_CLUSTER_VPC>
-   aws ec2 authorize-security-group-ingress \
+    aws ec2 authorize-security-group-ingress \
     --group-id '<SECURITY_GROUP_ID>' \
     --protocol all \
     --port 443 \
     --cidr <ELASTIC_IP_OF_CLUSTER_VPC>
-   ```
+    ```
 
 4. Modify the cluster load balancer via the `router-default` svc in the `openshift-ingress` namespace, paste two Security Groups created on previous steps:
 
    <details>
-      <Summary><b>The pull secret for the private registry</b></Summary>
-    ```
-    apiVersion: v1
-    kind: Service
-    metadata:
-      name: router-default
-      namespace: openshift-ingress
-      annotations:
-        service.beta.kubernetes.io/aws-load-balancer-additional-resource-tags: "tag_name=some_value"
-        service.beta.kubernetes.io/aws-load-balancer-security-groups: "<SECURITY_GROUP_IDs>"
-        ...
-    ```
+      <summary><b>The pull secret for the private registry</b></summary>
+        ```yaml
+        apiVersion: v1
+        kind: Service
+        metadata:
+          name: router-default
+          namespace: openshift-ingress
+          annotations:
+            service.beta.kubernetes.io/aws-load-balancer-additional-resource-tags: "tag_name=some_value"
+            service.beta.kubernetes.io/aws-load-balancer-security-groups: "<SECURITY_GROUP_IDs>"
+            ...
+        ```
    </details>
 
 ## Optimize Spot Instances Usage
@@ -312,6 +316,6 @@ providerSpec:
 
 ## Related Articles
 
-* [Deploy AWS EKS Cluster](deploy-aws-eks.md)
-* [Associate IAM Roles With Service Accounts](infrastructure-providers/aws/enable-irsa.md)
-* [Deploy OKD 4.9 Cluster](deploy-okd.md)
+* [Deploy AWS EKS Cluster](../aws/deploy-aws-eks.md)
+* [Associate IAM Roles With Service Accounts](../aws/enable-irsa.md)
+* [Deploy OKD 4.9 Cluster](deploy-okd-4.9.md)

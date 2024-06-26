@@ -945,4 +945,4 @@ keycloak_pgdb_export
 
 ## Related Articles
 
-* [Deploy OKD 4.10 Cluster](../deploy-okd-4.10.md)
+* [Install Keycloak](../auth/keycloak.md)

@@ -278,6 +278,15 @@ const sidebars: SidebarsConfig = {
                 'operator-guide/infrastructure-providers/aws/kaniko-irsa',
               ],
             },
+            {
+              type: 'category',
+              label: 'OpenShift (OKD) Integration',
+              items: [
+                'operator-guide/infrastructure-providers/okd/deploy-okd-4.9',
+                'operator-guide/infrastructure-providers/okd/deploy-okd-4.10',
+                'operator-guide/infrastructure-providers/okd/ssl-automation-okd',
+              ],
+            },
           ],
         },
         {
@@ -316,16 +325,6 @@ const sidebars: SidebarsConfig = {
             },
             'operator-guide/upgrade/upgrade-keycloak-19.0',
             'operator-guide/upgrade/migrate-ci-pipelines-from-jenkins-to-tekton',
-          ],
-        },
-        {
-          type: 'category',
-          label: 'Tutorials',
-          items: [
-
-            'operator-guide/deploy-okd',
-            'operator-guide/deploy-okd-4.10',
-            'operator-guide/ssl-automation-okd',
           ],
         },
         {

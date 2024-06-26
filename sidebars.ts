@@ -225,13 +225,13 @@ const sidebars: SidebarsConfig = {
             },
           ],
         },
-        {
-          type: 'category',
-          label: 'Search and Analytics',
-          items: [
-            'operator-guide/monitoring-and-observability/install-loki',
-          ],
-        },
+        // {
+        //   type: 'category',
+        //   label: 'Search and Analytics',
+        //   items: [
+        //     'operator-guide/monitoring-and-observability/install-loki',
+        //   ],
+        // },
         {
           type: 'category',
           label: 'Continues Integration (CI)',
@@ -240,9 +240,9 @@ const sidebars: SidebarsConfig = {
               type: 'category',
               label: 'Tekton',
               items: [
-                'operator-guide/tekton-overview',
-                'operator-guide/tekton-monitoring',
-                'operator-guide/notification-msteams',
+                'operator-guide/ci/tekton-overview',
+                'operator-guide/ci/tekton-monitoring',
+                'operator-guide/ci/notification-msteams',
               ],
             },
           ],

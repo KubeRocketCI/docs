@@ -11,10 +11,8 @@ To initiate the installation process, navigate to our dedicated [AWS Marketplace
 ## Prerequisites
 
 :::note
-
   * A basic understanding of AWS services and navigation is preferred to facilitate smoother setup and deployment processes. If you are new to AWS, please refer to the [AWS Documentation](https://docs.aws.amazon.com/index.html) for detailed information on the services and their usage.
   * Understanding of Kubernetes: Knowledge of Kubernetes concepts and architecture is recommended for effective management and operation of clusters.
-
 :::
 
 Please ensure that you review the [Prerequisites](prerequisites.md) page before proceeding with the deployment of the product. To perform a minimal installation, please ensure that you meet the following requirements:

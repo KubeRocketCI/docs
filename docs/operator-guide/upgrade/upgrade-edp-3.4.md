@@ -1,11 +1,11 @@
 # Upgrade EDP v3.3 to 3.4
 
-::important
-    We suggest making a backup of the EDP environment before starting the upgrade procedure.
+::warning
+  We suggest making a backup of the EDP environment before starting the upgrade procedure.
 :::
 
 :::note
-    Pay attention that the following components: `perf-operator`, `edp-admin-console`, `edp-admin-console-operator`, and `edp-jenkins-operator` are deprecated and should be additionally migrated in order to avoid their deletion. For migration details, please refer to the [Migrate CI Pipelines From Jenkins to Tekton](migrate-ci-pipelines-from-jenkins-to-tekton.md) instruction.
+  Pay attention that the following components: `perf-operator`, `edp-admin-console`, `edp-admin-console-operator`, and `edp-jenkins-operator` are deprecated and should be additionally migrated in order to avoid their deletion. For migration details, please refer to the [Migrate CI Pipelines From Jenkins to Tekton](migrate-ci-pipelines-from-jenkins-to-tekton.md) instruction.
 :::
 
 This section provides the details on the EDP upgrade to v3.4.1. Explore the actions and requirements below.
@@ -37,7 +37,6 @@ This section provides the details on the EDP upgrade to v3.4.1. Explore the acti
     kubectl apply -f https://raw.githubusercontent.com/epam/edp-gerrit-operator/v2.16.0/deploy-templates/crds/v2.edp.epam.com_gerrits.yaml
     ```
 
-
 2. Remove deprecated components:
 
       <details>
@@ -51,8 +50,8 @@ This section provides the details on the EDP upgrade to v3.4.1. Explore the acti
       jenkins-operator:
         enabled: false
       ```
-      </details>
 
+      </details>
 
 3. Since the [values.yaml](https://github.com/epam/edp-install/blob/master/deploy-templates/values.yaml#L37) file structure has been modified, move the **dockerRegistry** subsection to the **global** section:
 
@@ -66,7 +65,6 @@ This section provides the details on the EDP upgrade to v3.4.1. Explore the acti
           # -- Docker Registry endpoint
           url: "<AWS_ACCOUNT_ID>.dkr.ecr.<AWS_REGION>.amazonaws.com"
       ```
-
 
 4. (Optional) To integrate EDP with Jira, rename the default values from `epam-jira-user` to `jira-user` for a secret name. In case Jira is already integrated, it will continue working.
 
@@ -84,6 +82,7 @@ This section provides the details on the EDP upgrade to v3.4.1. Explore the acti
     ```json
     "kaniko-docker-config": {"secret-string"} //base64 format
     ```
+
     </details>
 
     <details>

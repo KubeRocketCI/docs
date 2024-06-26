@@ -245,6 +245,7 @@ const sidebars: SidebarsConfig = {
                 'operator-guide/ci/notification-msteams',
               ],
             },
+            'operator-guide/ci/ci-pipeline-terraform',
           ],
         },
         {
@@ -293,37 +294,37 @@ const sidebars: SidebarsConfig = {
           items: [
             {
               type: 'category',
-              label: 'EDP',
+              label: 'KubeRocketCI',
               items: [
-                'operator-guide/upgrade-edp-3.8',
-                'operator-guide/upgrade-edp-3.7',
-                'operator-guide/upgrade-edp-3.6',
-                'operator-guide/upgrade-edp-3.5',
+                'operator-guide/upgrade/upgrade-edp-3.8',
+                'operator-guide/upgrade/upgrade-edp-3.7',
+                'operator-guide/upgrade/upgrade-edp-3.6',
+                'operator-guide/upgrade/upgrade-edp-3.5',
                 {
                   type: 'category',
                   label: 'Older Versions',
                   items: [
-                    'operator-guide/upgrade-edp-3.4',
-                    'operator-guide/upgrade-edp-3.3',
-                    'operator-guide/upgrade-edp-3.2',
-                    'operator-guide/upgrade-edp-3.1',
+                    'operator-guide/upgrade/upgrade-edp-3.4',
+                    'operator-guide/upgrade/upgrade-edp-3.3',
+                    'operator-guide/upgrade/upgrade-edp-3.2',
+                    'operator-guide/upgrade/upgrade-edp-3.1',
+                    'operator-guide/upgrade/upgrade-edp-3.0',
                   ],
                 },
               ],
             },
-            'operator-guide/upgrade-keycloak-19.0',
+            'operator-guide/upgrade/upgrade-keycloak-19.0',
+            'operator-guide/upgrade/migrate-ci-pipelines-from-jenkins-to-tekton',
           ],
         },
         {
           type: 'category',
           label: 'Tutorials',
           items: [
-            'user-guide/terraform-stages',
             'operator-guide/deploy-aws-eks',
             'operator-guide/deploy-okd',
             'operator-guide/deploy-okd-4.10',
             'operator-guide/ssl-automation-okd',
-            'operator-guide/migrate-ci-pipelines-from-jenkins-to-tekton',
           ],
         },
         {

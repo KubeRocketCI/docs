@@ -2,34 +2,34 @@
 
 Starting from Keycloak v.18.x.x, the Keycloak server has been moved from the Wildfly (JBoss) Application Server to [Quarkus](https://quarkus.io/) framework and is called Keycloak.X.
 
-There are two ways to upgrade Keycloak v.17.0.x-legacy to v.19.0.x on Kubernetes, please perform the steps described in the [Prerequisites](#Prrqsts) section of this tutorial, and then select a suitable upgrade strategy for your environment:
+There are two ways to upgrade Keycloak v.17.0.x-legacy to v.19.0.x on Kubernetes, please perform the steps described in the [Prerequisites](#prerequisites) section of this tutorial, and then select a suitable upgrade strategy for your environment:
 
-* [Upgrade Postgres database to a minor release v.11.17](#KPU)
-* [Migrate Postgres database from Postgres v.11.x to v.14.5](#KPM)
+* [Upgrade Postgres database to a minor release v.11.17](#upgrade-postgres-database-to-a-minor-release-v1117)
+* [Migrate Postgres database from Postgres v.11.x to v.14.5](#migrate-postgres-database-from-postgres-v11x-to-v145)
 
-## Prerequisites <a name="Prrqsts"></a>
+## Prerequisites
 
 Before upgrading Keycloak, please perform the steps below:
 
 1. Create a backup/snapshot of the Keycloak database volume. Locate the AWS `volumeID` and then create its [snapshot](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-creating-snapshot.html) on AWS:
 
-  * Find the `PVC` name attached to the Postgres pod. It can be similar to `data-keycloak-postgresql-0` if the Postgres `StatefulSet` name is `keycloak-postgresql`:
+    * Find the `PVC` name attached to the Postgres pod. It can be similar to `data-keycloak-postgresql-0` if the Postgres `StatefulSet` name is `keycloak-postgresql`:
 
-    ```bash
-    kubectl get pods keycloak-postgresql-0 -n security -o jsonpath='{.spec.volumes[*].persistentVolumeClaim.claimName}{"\n"}'
-    ```
+      ```bash
+      kubectl get pods keycloak-postgresql-0 -n security -o jsonpath='{.spec.volumes[*].persistentVolumeClaim.claimName}{"\n"}'
+      ```
 
-  * Locate the `PV` `volumeName` in the `data-keycloak-postgresql-0` Persistent Volume Claim:
+    * Locate the `PV` `volumeName` in the `data-keycloak-postgresql-0` Persistent Volume Claim:
 
-    ```bash
-    kubectl get pvc data-keycloak-postgresql-0 -n security -o jsonpath='{.spec.volumeName}{"\n"}'
-    ```
+      ```bash
+      kubectl get pvc data-keycloak-postgresql-0 -n security -o jsonpath='{.spec.volumeName}{"\n"}'
+      ```
 
-  * Get `volumeID` in the Persistent Volume:
+    * Get `volumeID` in the Persistent Volume:
 
-    ```bash
-    kubectl get pv ${pv_name} -n security -o jsonpath='{.spec.awsElasticBlockStore.volumeID}{"\n"}'
-    ```
+      ```bash
+      kubectl get pv ${pv_name} -n security -o jsonpath='{.spec.awsElasticBlockStore.volumeID}{"\n"}'
+      ```
 
 2. Add two additional keys: `password` and `postgres-password`, to the `keycloak-postgresql` secret in the Keycloak namespace.
 
@@ -61,13 +61,13 @@ Before upgrading Keycloak, please perform the steps below:
     keycloak-postgresql   1/1     18h
     ```
 
-## Upgrade Postgres Database to a Minor Release v.11.17 <a name="KPU"></a>
+## Upgrade Postgres Database to a Minor Release v.11.17
 
-To upgrade Keycloak by upgrading [Postgres Database](https://www.postgresql.org/) to a minor release v.11.17, perform the steps described in the [Prerequisites](#Prrqsts) section of this tutorial, and then perform the following steps:
+To upgrade Keycloak by upgrading [Postgres Database](https://www.postgresql.org/) to a minor release v.11.17, perform the steps described in the [Prerequisites](#prerequisites) section of this tutorial, and then perform the following steps:
 
 ### Delete Keycloak Resources
 
-1. Delete `Keycloak` and `Prostgres` `StatefulSets`:
+1. Delete `Keycloak` and `Postgres` `StatefulSets`:
 
     ```bash
     kubectl delete statefulset keycloak keycloak-postgresql -n security
@@ -105,6 +105,7 @@ To upgrade Keycloak by upgrading [Postgres Database](https://www.postgresql.org/
           ```bash
           bin/kc.sh start --features-disabled=admin2
           ```
+
     :::
 
     <details>
@@ -216,12 +217,13 @@ To upgrade Keycloak by upgrading [Postgres Database](https://www.postgresql.org/
       username: admin
       database: keycloak
     ```
+
     </details>
 
 3. Upgrade the Keycloak Helm chart:
 
     :::note
-      * The Helm chart is substituted with the new Keyacloak.X instance.
+      * The Helm chart is substituted with the new KeyacloakX instance.
       * Change the namespace and the values file name if required.
     :::
 
@@ -235,6 +237,7 @@ To upgrade Keycloak by upgrading [Postgres Database](https://www.postgresql.org/
       ```bash
       helm upgrade keycloak codecentric/keycloakx --version 1.6.0 --values keycloak-values.yaml -n security --force
       ```
+
     :::
 
 ### Install Postgres
@@ -295,6 +298,7 @@ To upgrade Keycloak by upgrading [Postgres Database](https://www.postgresql.org/
         # If the default StorageClass will be used - change "gp2-retain" to "gp2"
         storageClass: "gp2-retain"
     ```
+
     </details>
 
 3. Install the Postgres database chart:
@@ -319,19 +323,20 @@ Optionally, run the [vacuumdb](https://www.postgresql.org/docs/current/app-vacuu
 ```bash
 PGPASSWORD="${postgresql_postgres-password}" vacuumdb --analyze --verbose -d keycloak -U postgres
 ```
+
 For all databases, run the following command:
 
 ```bash
 PGPASSWORD="${postgresql_postgres-password}" vacuumdb --analyze --verbose --all -U postgres
 ```
 
-## Migrate Postgres Database From Postgres v.11.x to v.14.5 <a name="KPM"></a>
+## Migrate Postgres Database From Postgres v.11.x to v.14.5
 
 :::info
-    There is a [Postgres database migration script](#Pdms) at the end of this tutorial. Please read the section below before using the script.
+  There is a [Postgres database migration script](#postgres-database-migration-script) at the end of this tutorial. Please read the section below before using the script.
 :::
 
-To upgrade Keycloak by migrating Postgres database from Postgres v.11.x to v.14.5, perform the steps described in the [Prerequisites](#Prrqsts) section of this tutorial, and then perform the following steps:
+To upgrade Keycloak by migrating Postgres database from Postgres v.11.x to v.14.5, perform the steps described in the [Prerequisites](#prerequisites) section of this tutorial, and then perform the following steps:
 
 ### Export Postgres Databases
 
@@ -355,6 +360,7 @@ To upgrade Keycloak by migrating Postgres database from Postgres v.11.x to v.14.
       ```bash
       PGPASSWORD="${postgresql_password}" pg_dump -h localhost -p 5432 -U admin -d keycloak > /tmp/keycloak_wildfly_db_dump.sql
       ```
+
     :::
 
     :::info
@@ -374,6 +380,7 @@ To upgrade Keycloak by migrating Postgres database from Postgres v.11.x to v.14.
       kubectl exec -n security ${postgresql_pod} "--" sh -c "PGPASSWORD='"${postgresql_postgres-password}"' pg_dumpall -h localhost -p 5432 -U postgres" > keycloak_wildfly_db_dump.sql
       kubectl exec -n security ${postgresql_pod} "--" sh -c "PGPASSWORD='"${postgresql_password}"' pg_dump -h localhost -p 5432 -U admin -d keycloak" > keycloak_wildfly_db_dump.sql
       ```
+
     :::
 
 3. Delete the dumped file from the pod for security reasons:
@@ -452,6 +459,7 @@ To upgrade Keycloak by migrating Postgres database from Postgres v.11.x to v.14.
         # If the default StorageClass will be used - change "gp2-retain" to "gp2"
         storageClass: "gp2-retain"
     ```
+
     </details>
 
 3. Install the Postgres database:
@@ -512,7 +520,7 @@ To upgrade Keycloak by migrating Postgres database from Postgres v.11.x to v.14.
       psql -U postgres -d keycloak -f /tmp/keycloak_wildfly_db_dump.sql
       ```
 
-     * If the `postgres` Superuser is not accessible in the Postgres pod, run the command under the `admin` or any other user that has the database permissions. In this case, indicate the database as well:
+    * If the `postgres` Superuser is not accessible in the Postgres pod, run the command under the `admin` or any other user that has the database permissions. In this case, indicate the database as well:
 
         ```bash
         psql -U admin -d keycloak -f /tmp/keycloak_wildfly_db_dump.sql
@@ -528,11 +536,11 @@ To upgrade Keycloak by migrating Postgres database from Postgres v.11.x to v.14.
       Please find below the alternative commands for importing the database from the local machine to the pod without storing the backup on a pod for `postgres` or `admin` users:
     :::
 
-      ```bash
-      cat "keycloak_wildfly_db_dump.sql" | kubectl exec -i -n "${keycloak_namespace}" "${postgres_pod_name}" "--" sh -c "cat | PGPASSWORD='"${postgresql_superuser_password}"' psql -h "${db_host}" -p "${db_port}" -U "${postgres_username}""
-      cat "keycloak_wildfly_db_dump.sql" | kubectl exec -i -n "${keycloak_namespace}" "${postgres_pod_name}" "--" sh -c "cat | PGPASSWORD='"${postgresql_superuser_password}"' psql -h "${db_host}" -p "${db_port}" -U "${postgres_username}" -d "${database_name}""
-      cat "keycloak_wildfly_db_dump.sql" | kubectl exec -i -n "${keycloak_namespace}" "${postgres_pod_name}" "--" sh -c "cat | PGPASSWORD='"${postgresql_admin_password}"' psql -h "${db_host}" -p "${db_port}" -U "${postgres_username}" -d "${database_name}""
-      ```
+    ```bash
+    cat "keycloak_wildfly_db_dump.sql" | kubectl exec -i -n "${keycloak_namespace}" "${postgres_pod_name}" "--" sh -c "cat | PGPASSWORD='"${postgresql_superuser_password}"' psql -h "${db_host}" -p "${db_port}" -U "${postgres_username}""
+    cat "keycloak_wildfly_db_dump.sql" | kubectl exec -i -n "${keycloak_namespace}" "${postgres_pod_name}" "--" sh -c "cat | PGPASSWORD='"${postgresql_superuser_password}"' psql -h "${db_host}" -p "${db_port}" -U "${postgres_username}" -d "${database_name}""
+    cat "keycloak_wildfly_db_dump.sql" | kubectl exec -i -n "${keycloak_namespace}" "${postgres_pod_name}" "--" sh -c "cat | PGPASSWORD='"${postgresql_admin_password}"' psql -h "${db_host}" -p "${db_port}" -U "${postgres_username}" -d "${database_name}""
+    ```
 
 ### Install Keycloak
 
@@ -555,6 +563,7 @@ To upgrade Keycloak by migrating Postgres database from Postgres v.11.x to v.14.
           ```bash
           bin/kc.sh start --features-disabled=admin2
           ```
+
     :::
 
     :::info
@@ -569,7 +578,7 @@ To upgrade Keycloak by migrating Postgres database from Postgres v.11.x to v.14.
 
     replicas: 1
 
-    # Deploy the latest verion
+    # Deploy the latest version
     image:
       tag: "19.0.1"
 
@@ -670,6 +679,7 @@ To upgrade Keycloak by migrating Postgres database from Postgres v.11.x to v.14.
       username: admin
       database: keycloak
     ```
+
     </details>
 
 3. Deploy Keycloak:
@@ -691,34 +701,41 @@ Optionally, run the [vacuumdb](https://www.postgresql.org/docs/current/app-vacuu
 ```bash
 PGPASSWORD="${postgresql_postgres-password}" vacuumdb --analyze --verbose -d keycloak -U postgres
 ```
+
 For all databases, run the following command:
 
 ```bash
 PGPASSWORD="${postgresql_postgres-password}" vacuumdb --analyze --verbose --all -U postgres
 ```
 
-### Postgres Database Migration Script<a name="Pdms"></a>
+### Postgres Database Migration Script
 
 :::info
-    Please read the [Migrate Postgres Database From Postgres v.11.x to v.14.5](#KPM) section of this tutorial before using the script.
+  Please read the [Migrate Postgres Database From Postgres v.11.x to v.14.5](#migrate-postgres-database-from-postgres-v11x-to-v145) section of this tutorial before using the script.
 :::
 
 :::note
-    * The [`kubectl`](https://github.com/kubernetes/kubectl) tool is required for using this script.
-    * This script will likely work for any other Postgres database besides Keycloak after some adjustments. It queries the `pg_dump`, `pg_dumpall`, `psql`, and `vacuumdb` commands under the hood.
+
+  * The [`kubectl`](https://github.com/kubernetes/kubectl) tool is required for using this script.
+  * This script will likely work for any other Postgres database besides Keycloak after some adjustments. It queries the `pg_dump`, `pg_dumpall`, `psql`, and `vacuumdb` commands under the hood.
+
 :::
 
 The following script can be used for exporting and importing Postgres databases as well as optimizing them with the [vacuumdb](https://www.postgresql.org/docs/current/app-vacuumdb.html) application. Please examine the code and make the adjustments if required.
 
 * By default, the following command exports Keycloak Postgres databases from a Kubernetes pod to a local machine:
 
-      ./script.sh
+    ```bash
+    ./script.sh
+    ```
 
   After running the command, please follow the prompt.
 
 * To import a database backup to a newly created Postgres Kubernetes pod, pass a database dump sql file to the script:
 
+    ```bash
       ./script.sh path-to/db_dump.sql
+    ```
 
 * The `-h` flag prints help, and `-c|-v` runs the `vacuumdb` garbage collector and analyzer.
 
@@ -923,8 +940,9 @@ postgres_user
 pgdb_host_info
 keycloak_pgdb_export
 ```
+
 </details>
 
 ## Related Articles
 
-* [Deploy OKD 4.10 Cluster](deploy-okd-4.10.md)
+* [Deploy OKD 4.10 Cluster](../deploy-okd-4.10.md)

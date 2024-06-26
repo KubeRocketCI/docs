@@ -1,11 +1,11 @@
 # Upgrade EDP v3.2 to 3.3
 
-:::important
-    We suggest making a backup of the EDP environment before starting the upgrade procedure.
+:::warning
+  We suggest making a backup of the EDP environment before starting the upgrade procedure.
 :::
 
 ::note
-    We currently disabled cache volumes for go and npm in the EDP 3.3 release.
+  We currently disabled cache volumes for go and npm in the EDP 3.3 release.
 :::
 
 This section provides the details on the EDP upgrade to v3.3.0. Explore the actions and requirements below.
@@ -22,6 +22,7 @@ This section provides the details on the EDP upgrade to v3.3.0. Explore the acti
     ```bash
     kubectl -n edp delete EDPComponent gerrit
     ```
+
     The deployment will create a new EDPComponent called `gerrit` instead.
 
 3. To upgrade EDP to the v3.3.0, run the following command:
@@ -40,11 +41,11 @@ To enable the re-trigger feature for applications that were added before the upg
 
     4.1 For Gerrit VCS, add the following event to the `webhooks.config` configuration file in the `All-Projects` repository:
 
-        ```
-        [remote "commentadded"]
-          url = http://el-gerrit-listener:8080
-          event = comment-added
-        ```
+    ```bash
+    [remote "commentadded"]
+      url = http://el-gerrit-listener:8080
+      event = comment-added
+    ```
 
     4.2 For GitHub VCS, check the `Issue comments` permission for each webhook in every application added before the EDP upgrade to 3.3.0.
 

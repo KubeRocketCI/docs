@@ -69,7 +69,7 @@ In our example, we will use the **Create from template** strategy:
       * Groovy-pipeline - selecting Groovy-pipeline allows having the ability to customize a stages logic.
       * Terraform - selecting Terraform allows using the Terraform different versions via the **Terraform version manager** ([tfenv](https://github.com/tfutils/tfenv#usage)).
           KubeRocketCI supports all the actions available in Terraform, thus providing the ability to modify the virtual infrastructure and launch some checks with the help of linters.
-          For details, please refer to the [Use Terraform Library in KubeRocketCI](../user-guide/terraform-stages.md) page.
+          For details, please refer to the [Use Terraform Library in KubeRocketCI](../operator-guide/ci/ci-pipeline-terraform.md) page.
       * Rego - this option allows using Rego code language with an Open Policy Agent (OPA) Library. For details, please refer to the [Use Open Policy Agent](../user-guide/opa-stages.md) page.
       * Container - this option allows using the Kaniko tool for building the container images from a Dockerfile.
       * Helm - this option allows using the [chart testing lint](https://github.com/helm/chart-testing) (Pipeline) for Helm charts or using Helm chart as a set of other Helm charts organized according to the [example](https://github.com/argoproj/argo-helm/tree/main).
@@ -148,7 +148,3 @@ After the complete adding of the library, inspect the [Library Overview](library
 * [Add CD Pipeline](add-cd-pipeline.md)
 * [Adjust Jira Integration](../operator-guide/project-management-and-reporting/jira-integration.md)
 * [Manage Git Providers](../user-guide/add-git-server.md)
-
-[//]: # (* [Use Terraform Library in KubeRocketCI]&#40;terraform-stages.md&#41;)
-
-[//]: # (* [Use Open Policy Agent Library in EDP]&#40;opa-stages.md&#41;)

@@ -45,4 +45,4 @@ Explore the main flow that is displayed on the diagram below:
 * [CI Pipeline Details](ci-pipeline-details.md)
 * [CD Pipeline Details](cd-pipeline-details.md)
 * [Glossary](../glossary.md)
-* [Use Terraform Library in EDP](terraform-stages.md)
+* [Use Terraform Library in EDP](../operator-guide/ci/ci-pipeline-terraform.md)

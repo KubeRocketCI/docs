@@ -1,8 +1,8 @@
 # Upgrade EDP v3.5 to 3.6
 
-  :::important
-    We suggest backing up the EDP environment before starting the upgrade procedure.
-  :::
+:::warning
+  We suggest backing up the EDP environment before starting the upgrade procedure.
+:::
 
 This section provides detailed instructions for upgrading the EPAM Delivery Platform to version 3.6.0. Follow the steps and requirements outlined below:
 
@@ -28,7 +28,7 @@ This section provides detailed instructions for upgrading the EPAM Delivery Plat
         space: "edp"
     ```
 
-    2.2 Subcomponents, such as [sonar-operator](https://github.com/epam/edp-sonar-operator), [nexus-operator](https://github.com/epam/edp-nexus-operator), and [keycloak-operator](https://github.com/epam/edp-keycloak-operator), have been removed since dependencies are no longer provisioned by the [edp-install](https://github.com/epam/edp-install/blob/v3.6.0/deploy-templates/values.yaml) Helm Chart. To install and integrate shared components with EDP, please use the [edp-cluster-add-ons](https://github.com/epam/edp-cluster-add-ons) approach or refer to the [SonarQube Integration](sonarqube.md) and [Nexus Sonatype Integration](artifacts-management/nexus-sonatype.md) documentation pages.
+    2.2 Sub components, such as [sonar-operator](https://github.com/epam/edp-sonar-operator), [nexus-operator](https://github.com/epam/edp-nexus-operator), and [keycloak-operator](https://github.com/epam/edp-keycloak-operator), have been removed since dependencies are no longer provisioned by the [edp-install](https://github.com/epam/edp-install/blob/v3.6.0/deploy-templates/values.yaml) Helm Chart. To install and integrate shared components with EDP, please use the [edp-cluster-add-ons](https://github.com/epam/edp-cluster-add-ons) approach or refer to the [SonarQube Integration](sonarqube.md) and [Nexus Sonatype Integration](artifacts-management/nexus-sonatype.md) documentation pages.
 
     2.3 The Argo CD integration dependency has been deleted as now we implement it using [edp-cluster-add-ons](https://github.com/epam/edp-cluster-add-ons) approach. To install and integrate Argo CD as a shared component, use the [edp-cluster-add-ons](https://github.com/epam/edp-cluster-add-ons) approach.
 
@@ -50,6 +50,6 @@ This section provides detailed instructions for upgrading the EPAM Delivery Plat
     ```
 
     :::note
-        To verify the installation, it is possible to test the deployment before applying it to the cluster with the `--dry-run` tag:<br />
+      To verify the installation, it is possible to test the deployment before applying it to the cluster with the `--dry-run` tag:<br />
         `helm upgrade edp epamedp/edp-install -n edp --values values.yaml --version=3.6.0 --dry-run`
     :::

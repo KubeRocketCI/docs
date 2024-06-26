@@ -118,7 +118,7 @@ Creating custom certificates is a necessary but not sufficient condition for app
 
     :::warning
       Before moving ahead, be aware that starting from version 3.3.0, our development team has officially deprecated the Jenkins deploy scenario. This means that as of version 3.3.0 and in all subsequent versions (3.3.x and above), the Jenkins deploy scenario is no longer supported.<br />
-      For users running versions 3.3.x and below, the Jenkins deploy scenario remains available. However, we encourage you to plan for the transition to a supported deployment method to ensure continued compatibility and access to the latest features and enhancements. To perform migration, please familiarize yourself with the [Migrate CI Pipelines From Jenkins to Tekton](../migrate-ci-pipelines-from-jenkins-to-tekton.md).<br />
+      For users running versions 3.3.x and below, the Jenkins deploy scenario remains available. However, we encourage you to plan for the transition to a supported deployment method to ensure continued compatibility and access to the latest features and enhancements. To perform migration, please familiarize yourself with the [Migrate CI Pipelines From Jenkins to Tekton](../upgrade/migrate-ci-pipelines-from-jenkins-to-tekton.md).<br />
       For those who still use EDP v3.3.x and below, the information below remains valid and applicable.
     :::
 

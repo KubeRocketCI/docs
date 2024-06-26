@@ -3,8 +3,8 @@ import TabItem from '@theme/TabItem';
 
 # Upgrade EDP v3.4 to 3.5
 
-:::important
-    We suggest making a backup of the EDP environment before starting the upgrade procedure.
+:::warning
+  We suggest making a backup of the EDP environment before starting the upgrade procedure.
 :::
 
 This section provides detailed instructions for upgrading EPAM Delivery Platform to version 3.5.3. Follow the steps and requirements outlined below:
@@ -84,7 +84,7 @@ This section provides detailed instructions for upgrading EPAM Delivery Platform
             - "stub_user_two@example.com"
         ```
 
-     5. (Optional) The default secret name for Jira integration has been changed from `jira-user` to `ci-jira`. Please adjust the secret name in the parameters accordingly:
+    5. (Optional) The default secret name for Jira integration has been changed from `jira-user` to `ci-jira`. Please adjust the secret name in the parameters accordingly:
 
         ```yaml
         codebase-operator:
@@ -107,128 +107,157 @@ This section provides detailed instructions for upgrading EPAM Delivery Platform
       ]}>
 
       <TabItem value="sonarqube">
-        Old format:
-        ```json
-        "sonar-ciuser-token": {
-          "username": "xxxxx",
-          "secret": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
-          }
-        ```
-        New format:
-        ```json
-        "ci-sonarqube": {
-          "token": "xxxxxxxxxxxxxxxxxxxxxxx",
-          "url":"https://sonar.example.com"
-          }
-        ```
+      Old format:
+
+      ```json
+      "sonar-ciuser-token": {
+        "username": "xxxxx",
+        "secret": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+        }
+      ```
+
+      New format:
+
+      ```json
+      "ci-sonarqube": {
+        "token": "xxxxxxxxxxxxxxxxxxxxxxx",
+        "url":"https://sonar.example.com"
+        }
+      ```
+
       </TabItem>
 
       <TabItem value="dependencytrack">
-        Old format:
-        ```json
-        "ci-dependency-track": {
-          "token": "xxxxxxxxxxxxxxxxxx"
-          }
-        ```
-        New format:
-        ```json
-        "ci-dependency-track": {
-          "token": "xxxxxxxxxxxxxxxxxx",
-          "url": "http://dependency-track.example.com"}
-        ```
+      Old format:
+
+      ```json
+      "ci-dependency-track": {
+        "token": "xxxxxxxxxxxxxxxxxx"
+        }
+      ```
+
+      New format:
+
+      ```json
+      "ci-dependency-track": {
+        "token": "xxxxxxxxxxxxxxxxxx",
+        "url": "http://dependency-track.example.com"}
+      ```
+
       </TabItem>
 
       <TabItem value="defectdojo">
-        Old format:
-        ```json
-        "defectdojo-ciuser-token": {
-          "token": "xxxxxxxxxxxxxxxxxx"
-          "url": "http://defectdojo.example.com"
-          }
-        ```
-        New format:
-        ```json
-        "ci-defectdojo": {
-          "token": "xxxxxxxxxxxxxxxxxx",
-          "url": "http://defectdojo.example.com"
-          }
-        ```
+      Old format:
+
+      ```json
+      "defectdojo-ciuser-token": {
+        "token": "xxxxxxxxxxxxxxxxxx"
+        "url": "http://defectdojo.example.com"
+        }
+      ```
+
+      New format:
+
+      ```json
+      "ci-defectdojo": {
+        "token": "xxxxxxxxxxxxxxxxxx",
+        "url": "http://defectdojo.example.com"
+        }
+      ```
+
       </TabItem>
 
       <TabItem value="jira">
-        Old format:
-        ```json
-        "jira-user": {
-          "username": "xxxxx",
-          "password": "xxxxx"
-          }
-        ```
-        New format:
-        ```json
-        "ci-jira": {
-          "username": "xxxxx",
-          "password": "xxxxx"
+      Old format:
+
+      ```json
+      "jira-user": {
+        "username": "xxxxx",
+        "password": "xxxxx"
         }
-        ```
+      ```
+
+      New format:
+
+      ```json
+      "ci-jira": {
+        "username": "xxxxx",
+        "password": "xxxxx"
+      }
+      ```
+
       </TabItem>
 
       <TabItem value="gitlab">
-        Old format:
-        ```json
-        "gitlab": {
-          "id_rsa": "xxxxxxxxxxxxxx",
-          "token": "xxxxxxxxxxxxxx",
-          "secretString": "xxxxxxxxxxxxxx"
-          }
-        ```
-        New format:
-        ```json
-        "ci-gitlab": {
-          "id_rsa": "xxxxxxxxxxxxxx",
-          "token": "xxxxxxxxxxxxxx",
-          "secretString": "xxxxxxxxxxxxxx"
-          }
-        ```
+      Old format:
+
+      ```json
+      "gitlab": {
+        "id_rsa": "xxxxxxxxxxxxxx",
+        "token": "xxxxxxxxxxxxxx",
+        "secretString": "xxxxxxxxxxxxxx"
+        }
+      ```
+
+      New format:
+
+      ```json
+      "ci-gitlab": {
+        "id_rsa": "xxxxxxxxxxxxxx",
+        "token": "xxxxxxxxxxxxxx",
+        "secretString": "xxxxxxxxxxxxxx"
+        }
+
+      ```
+
       </TabItem>
 
       <TabItem value="github">
-        Old format:
-        ```json
-        "github": {
-          "id_rsa": "xxxxxxxxxxxxxx",
-          "token": "xxxxxxxxxxxxxx",
-          "secretString": "xxxxxxxxxxxxxx"
-          }
-        ```
-        New format:
-        ```json
-        "ci-github": {
-          "id_rsa": "xxxxxxxxxxxxxx",
-          "token": "xxxxxxxxxxxxxx",
-          "secretString": "xxxxxxxxxxxxxx"
-          }
-        ```
+      Old format:
+
+      ```json
+      "github": {
+        "id_rsa": "xxxxxxxxxxxxxx",
+        "token": "xxxxxxxxxxxxxx",
+        "secretString": "xxxxxxxxxxxxxx"
+        }
+      ```
+
+      New format:
+
+      ```json
+      "ci-github": {
+        "id_rsa": "xxxxxxxxxxxxxx",
+        "token": "xxxxxxxxxxxxxx",
+        "secretString": "xxxxxxxxxxxxxx"
+        }
+
+      ```
+
       </TabItem>
 
       <TabItem value="nexus">
-        Old format:
-        ```json
-        "nexus-ci-user": {
-          "username": "xxxxx",
-          "password": "xxxxxxxxxxxxxxxxxx"
-          }
-        ```
-        New format:
-        ```json
-        "ci-nexus": {
-          "username": "xxxxx",
-          "password": "xxxxx",
-          "url": "http://nexus.example.com"
-          }
-        ```
+      Old format:
+
+      ```json
+      "nexus-ci-user": {
+        "username": "xxxxx",
+        "password": "xxxxxxxxxxxxxxxxxx"
+        }
+      ```
+
+      New format:
+
+      ```json
+      "ci-nexus": {
+        "username": "xxxxx",
+        "password": "xxxxx",
+        "url": "http://nexus.example.com"
+        }
+      ```
+
       </TabItem>
     </Tabs>
-
 
     The tables below illustrate the difference between the old and new format:
 
@@ -252,7 +281,7 @@ This section provides detailed instructions for upgrading EPAM Delivery Platform
     |ci-defectdojo|||:white_check_mark:|:white_check_mark:|
     |ci-dependency-track|||:white_check_mark:|:white_check_mark:|
 
-1. To upgrade EDP to the v3.5.3, run the following command:
+4. To upgrade EDP to the v3.5.3, run the following command:
 
     ```bash
     helm upgrade edp epamedp/edp-install -n edp --values values.yaml --version=3.5.3

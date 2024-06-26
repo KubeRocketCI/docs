@@ -3,7 +3,7 @@ import TabItem from '@theme/TabItem';
 
 # Upgrade KubeRocketCI v3.7 to 3.8
 
-:::important
+:::warning
   We suggest backing up the KubeRocketCI environment before starting the upgrade procedure.
 :::
 
@@ -26,9 +26,11 @@ This section provides detailed instructions for upgrading the KubeRocketCI to th
 
     :::info
       Prior to deleting CRDs, please remove all the complementing resources:
+
       ```bash
       kubectl -n edp get edpcomponent -o custom-columns=":metadata.name" | xargs -I {} kubectl -n edp delete edpcomponent {}
       ```
+
     :::
 
 3. In Keycloak, update the KubeRocketCI portal URL:
@@ -37,16 +39,17 @@ This section provides detailed instructions for upgrading the KubeRocketCI to th
 
     Old value:
 
-    ```text
+    ```bash
     https://edp-headlamp-edp.<dns_wildcard>/*
     ```
 
     New value:
-    ```
+
+    ```bash
     https://portal-edp.<dns_wildcard>/*
     ```
 
-    ![Keycloak client](../assets/operator-guide/portal-keycloak.png "Keycloak client")
+    ![Keycloak client](../../assets/operator-guide/portal-keycloak.png "Keycloak client")
 
 4. Remove all the Argo CD applications:
 
@@ -56,10 +59,11 @@ This section provides detailed instructions for upgrading the KubeRocketCI to th
       ```bash
       kubectl -n edp get application -o custom-columns=":metadata.name" | xargs -I {} kubectl -n edp get application {} -o json | jq 'del(.metadata.finalizers)' | kubectl replace -f -
       ```
+
     :::
 
     :::info
-      Beginning from version 3.8.x, KubeRocketCI uses Argo CD application set instead apllications to manage deploy environments, please ensure to upgrade your Argo CD instance to v2.10.3 and higher to work with this kind of resource. An example of how to install it is provided in the [edp-cluster-addons](https://github.com/epam/edp-cluster-add-ons/blob/main/add-ons/argo-cd/values.yaml#L30) repository.
+      Beginning from version 3.8.x, KubeRocketCI uses Argo CD application set instead applications to manage deploy environments, please ensure to upgrade your Argo CD instance to v2.10.3 and higher to work with this kind of resource. An example of how to install it is provided in the [edp-cluster-addons](https://github.com/epam/edp-cluster-add-ons/blob/main/add-ons/argo-cd/values.yaml#L30) repository.
     :::
 
 5. Familiarize yourself with the updated file structure of the [values.yaml](https://raw.githubusercontent.com/epam/edp-install/v3.8.1/deploy-templates/values.yaml) file and adjust your values.yaml file accordingly:
@@ -102,9 +106,10 @@ This section provides detailed instructions for upgrading the KubeRocketCI to th
                     enabled: true
         ```
 
-     2. The `EDP-components` custom resources migrated to the `quick-links` section:
+    2. The `EDP-components` custom resources migrated to the `quick-links` section:
 
         Old format:
+
         ```yaml
         EDPComponents:
           - prometheus:
@@ -122,6 +127,7 @@ This section provides detailed instructions for upgrading the KubeRocketCI to th
         ```
 
         New format for default components:
+
         ```yaml
         quickLinks:
           argocd: "https://argocd.example.com"
@@ -135,6 +141,7 @@ This section provides detailed instructions for upgrading the KubeRocketCI to th
         ```
 
         New format for extra components:
+
         ```yaml
         extraQuickLinks:
           - prometheus:
@@ -168,41 +175,44 @@ This section provides detailed instructions for upgrading the KubeRocketCI to th
       ]}>
 
       <TabItem value="command">
-        ```bash
-        kubectl -n edp get codebases -o custom-columns=":metadata.name" | xargs -I {} kubectl patch codebases -n edp {} --subresource=status --type=json -p '[{"op": "remove", "path": "/status/webHookID"}]'
-        kubectl delete pod -l name=codebase-operator
-        ```
+      ```bash
+      kubectl -n edp get codebases -o custom-columns=":metadata.name" | xargs -I {} kubectl patch codebases -n edp {} --subresource=status --type=json -p '[{"op": "remove", "path": "/status/webHookID"}]'
+      kubectl delete pod -l name=codebase-operator
+      ```
       </TabItem>
 
       <TabItem value="manual">
-        <Tabs
-          defaultValue="github"
-          values={[
-            {label: 'GitHub', value: 'github'},
-            {label: 'GitLab', value: 'gitlab'}
-          ]}>
+      <Tabs
+        defaultValue="github"
+        values={[
+          {label: 'GitHub', value: 'github'},
+          {label: 'GitLab', value: 'gitlab'}
+        ]}>
 
-          <TabItem value="github">
-            Open repository in Github, navigate to `Settings` -> `Webhooks` -> Select exist webhook and click `edit`.
-            Change Payload URL:
+        <TabItem value="github">
 
-            ```text
-            Old value: https://el-github-listener-edp.<dns_wildcard>
+        Open repository in Github, navigate to **Settings** -> **Webhooks** -> Select exist webhook and click `edit`.
+        Change Payload URL:
 
-            New value: https://el-github-edp.<dns_wildcard>
-            ```
-          </TabItem>
+        ```bash
+        Old value: https://el-github-listener-edp.<dns_wildcard>
 
-          <TabItem value="gitlab">
-          Open repository in Github, navigate to `Settings` -> `Webhooks` -> Select exist webhook and click `edit`.
-          Change URL:
+        New value: https://el-github-edp.<dns_wildcard>
+        ```
+        </TabItem>
 
-          ```text
-          Old value: https://el-gitlab-listener-edp.<dns_wildcard>
+        <TabItem value="gitlab">
+        Open repository in Github, navigate to **Settings** -> **Webhooks** -> Select exist webhook and click `edit`.
+        Change Payload URL:
 
-          New value: https://el-gitlab-edp.<dns_wildcard>
-          ```
-          </TabItem>
-        </Tabs>
+        ```bash
+        Old value: https://el-gitlab-listener-edp.<dns_wildcard>
+
+        New value: https://el-gitlab-edp.<dns_wildcard>
+        ```
+        </TabItem>
+      </Tabs>
+
       </TabItem>
+
     </Tabs>

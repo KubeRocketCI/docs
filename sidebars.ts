@@ -251,12 +251,12 @@ const sidebars: SidebarsConfig = {
           type: 'category',
           label: 'Continues Delivery and Deployment (CD)',
           items: [
-            'operator-guide/customize_deployment',
+            'operator-guide/cd/customize-deploy-pipeline',
             {
               type: 'category',
               label: 'GitOps',
               items: [
-                'operator-guide/argocd-integration',
+                'operator-guide/cd/argocd-integration',
               ],
             },
           ],

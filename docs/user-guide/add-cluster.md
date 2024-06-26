@@ -4,7 +4,7 @@ This page provides comprehensive instructions on how to integrate a new cluster 
 
 ## Prerequisites
 
-Before moving ahead, ensure you have already performed the guidelines outlined in the [Argo CD Integration](../operator-guide/argocd-integration.md#deploy-argo-cd-application-to-remote-cluster-optional) page.
+Before moving ahead, ensure you have already performed the guidelines outlined in the [Argo CD Integration](../operator-guide/cd/argocd-integration.md#deploy-argo-cd-application-to-remote-cluster-optional) page.
 
 ## Deploy to Remote Cluster
 
@@ -35,7 +35,7 @@ As a result, the Kubernetes secret will be created for further integration and y
 
 ## Related Articles
 
-* [Argo CD Integration](../operator-guide/argocd-integration.md)
+* [Argo CD Integration](../operator-guide/cd/argocd-integration.md)
 * [Add Application](add-application.md)
 * [Add Library](add-library.md)
 * [Add Autotest](add-autotest.md)

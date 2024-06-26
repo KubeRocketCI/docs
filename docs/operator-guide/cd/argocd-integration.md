@@ -3,7 +3,7 @@ import TabItem from '@theme/TabItem';
 
 # Argo CD Integration
 
-KubeRocketCI uses Argo CD as a [part of the Continues Delivery/Continues Deployment](../user-guide/cd-pipeline-details.md)
+KubeRocketCI uses Argo CD as a [part of the Continues Delivery/Continues Deployment](../../user-guide/cd-pipeline-details.md)
 implementation. Argo CD follows the best GitOps practices, uses Kubernetes native approach for the Deployment Management, has rich UI and
 required RBAC capabilities.
 
@@ -17,23 +17,23 @@ Argo CD can be installed using [two different approaches](https://argo-cd.readth
 Both approaches can be deployed with High Availability (HA) or Non High Availability (non HA) installation manifests.
 
 KubeRocketCI uses the HA deployment with the cluster-admin permissions, to minimize cluster resources consumption by sharing
-single Argo CD instance across multiple EDP Tenants. Please follow [the installation instructions](./install-argocd.md) to deploy Argo CD.
+single Argo CD instance across multiple EDP Tenants. Please follow [the installation instructions](../install-argocd.md) to deploy Argo CD.
 
-## Argo CD Integration
+## Integration
 
 See a diagram below for the details:
 
-![edp-argocd](../assets/operator-guide/edp-argocd.png "Argo CD Diagram")
+![edp-argocd](../../assets/operator-guide/edp-argocd.png "Argo CD Diagram")
 
 * Argo CD is deployed in a separate `argocd` namespace.
 * Argo CD uses a `cluster-admin` role for managing cluster-scope resources.
 * The `control-plane` application is created using the App of Apps approach, and its code is managed by the `control-plane` members.
 * The `control-plane` is used to onboard new Argo CD Tenants (Argo CD Projects - AppProject).
-* The `EDP Tenant Member` manages `Argo CD Applications` using `kind: Application` in the `edpTenant` namespace.
+* The `KubeRocketCI Tenant Member` manages `Argo CD Applications` using `kind: Application` in the `edpTenant` namespace.
 
 The [App Of Apps approach](https://argo-cd.readthedocs.io/en/stable/operator-manual/cluster-bootstrapping/) is used to
-manage the `EDP Tenants`. Inspect the [edp-grub](https://github.com/SergK/edp-grub) repository structure that is used to
-provide the EDP Tenants for the Argo CD Projects:
+manage the `KubeRocketCI Tenants`. Inspect the [edp-grub](https://github.com/SergK/edp-grub) repository structure that is used to
+provide the KubeRocketCI Tenants for the Argo CD Projects:
 
 ```bash
 edp-grub
@@ -87,8 +87,6 @@ Now that Argo CD is integrated, it is time to configure it properly. To configur
 2. Add a [credential template](https://argo-cd.readthedocs.io/en/stable/user-guide/private-repositories/#private-repositories)
 for GitHub, GitLab, Gerrit integrations. The credential template must be created for each Git server.
 
-
-
     <Tabs
       defaultValue="github"
       values={[
@@ -98,38 +96,33 @@ for GitHub, GitLab, Gerrit integrations. The credential template must be created
 
       <TabItem value="github">
 
-        Generate an SSH key pair and add a public key to GitLab or GitHub account.
+      Generate an SSH key pair and add a public key to GitLab or GitHub account.
 
       :::warning
-        Use an additional GitHub/GitLab User to access a repository.<br />
-          For example:<br />
+        Use an additional GitHub/GitLab User to access a repository. For example:<br />
           - GitHub, add a User to a repository with a "Read" role.<br />
           - GitLab, add a User to a repository with a "Guest" role.
-
       :::
 
+      ```bash
+      ssh-keygen -t ed25519 -C "email@example.com" -f argocd
+      ```
 
+      Copy SSH private key to Argo CD namespace
 
-        ```bash
-        ssh-keygen -t ed25519 -C "email@example.com" -f argocd
-        ```
+      ```bash
+      EDP_NAMESPACE="edp"
+      VCS_HOST="<github.com_or_gitlab.com>"
+      ACCOUNT_NAME="<ACCOUNT_NAME>"
+      URL="ssh://git@${VCS_HOST}:22/${ACCOUNT_NAME}"
 
-        Copy SSH private key to Argo CD namespace
-
-        ```bash
-        EDP_NAMESPACE="edp"
-        VCS_HOST="<github.com_or_gitlab.com>"
-        ACCOUNT_NAME="<ACCOUNT_NAME>"
-        URL="ssh://git@${VCS_HOST}:22/${ACCOUNT_NAME}"
-
-        kubectl create secret generic ${EDP_NAMESPACE} -n argocd \
+      kubectl create secret generic ${EDP_NAMESPACE} -n argocd \
         --from-file=sshPrivateKey=argocd \
         --from-literal=url="${URL}"
-        kubectl label --overwrite secret ${EDP_NAMESPACE} -n argocd "argocd.argoproj.io/secret-type=repo-creds"
-        ```
+      kubectl label --overwrite secret ${EDP_NAMESPACE} -n argocd "argocd.argoproj.io/secret-type=repo-creds"
+      ```
 
-        Add public SSH key to GitHub/GitLab account.
-
+      Add public SSH key to GitHub/GitLab account.
       </TabItem>
 
       <TabItem value="gerrit">
@@ -189,7 +182,7 @@ for GitHub, GitLab, Gerrit integrations. The credential template must be created
       </TabItem>
     </Tabs>
 
-4. Create an Argo CD Project (EDP Tenant), for example, with the `edp` name:
+4. Create an Argo CD Project (Tenant), for example, with the `edp` name:
 
     ```yaml title="AppProject"
     apiVersion: argoproj.io/v1alpha1
@@ -234,28 +227,28 @@ for GitHub, GitLab, Gerrit integrations. The credential template must be created
 
 6. Generate Argo CD project token for deploy integration:
 
-  ```bash
-  URL=<ARGO CD URL>
-  TOKEN=$(argocd proj role create-token edp developer -i argocd-ci -t)
+    ```bash
+    URL=<ARGO CD URL>
+    TOKEN=$(argocd proj role create-token edp developer -i argocd-ci -t)
 
 
-  cat <<EOF | kubectl apply -f -
-  apiVersion: v1
-  kind: Secret
-  metadata:
-    name: argocd-ci
-    namespace: edp
-    labels:
-      app.edp.epam.com/integration-secret: "true"
-      app.edp.epam.com/secret-type: "argocd"
-  type: Opaque
-  stringData:
-    token: $TOKEN
-    url: $URL
-  EOF
-  ```
+    cat <<EOF | kubectl apply -f -
+    apiVersion: v1
+    kind: Secret
+    metadata:
+      name: argocd-ci
+      namespace: edp
+      labels:
+        app.edp.epam.com/integration-secret: "true"
+        app.edp.epam.com/secret-type: "argocd"
+    type: Opaque
+    stringData:
+      token: $TOKEN
+      url: $URL
+    EOF
+    ```
 
-Once Argo CD is successfully integrated, EDP user can utilize Argo CD to deploy [CD pipelines](../user-guide/add-cd-pipeline.md#deploy-application).
+Once Argo CD is successfully integrated, EDP user can utilize Argo CD to deploy [CD pipelines](../../user-guide/add-cd-pipeline.md#deploy-application).
 
 ## Check Argo CD Integration (Optional)
 
@@ -265,6 +258,7 @@ This section provides the information on how to test the integration with Argo C
 
     <details>
       <summary><b>View: argocd-values.yaml</b></summary>
+
         ```yaml
         apiVersion: argoproj.io/v1alpha1
         kind: Application
@@ -294,6 +288,7 @@ This section provides the information on how to test the integration with Argo C
               selfHeal: true
               prune: true
         ```
+
     </details>
 
 
@@ -345,7 +340,7 @@ KubeRocketCI also supports deploying Argo CD applications to a remote cluster. T
           name: edp-remote-cluster
     ```
 
-5. Add a remote cluster in the KubeRocketCI portal. Please refer to the [Add Cluster](../user-guide/add-cluster.md) page for details.
+5. Add a remote cluster in the KubeRocketCI portal. Please refer to the [Add Cluster](../../user-guide/add-cluster.md) page for details.
 
 ## Keycloak Integration (Optional)
 
@@ -357,11 +352,11 @@ To provide Argo CD with the Keycloak SSO authorization mechanism, follow the gui
 
 1. Create secret `keycloak-client-argocd-secret`.
 
-  ```bash
-  kubectl create secret generic keycloak-client-argocd-secret \
-  --from-literal=clientSecret=$(openssl rand -base64 32) \
-  --namespace=argocd
-  ```
+    ```bash
+    kubectl create secret generic keycloak-client-argocd-secret \
+    --from-literal=clientSecret=$(openssl rand -base64 32) \
+    --namespace=argocd
+    ```
 
 2. Update the `argocd-cm` ConfigMap:
 
@@ -373,25 +368,26 @@ To provide Argo CD with the Keycloak SSO authorization mechanism, follow the gui
       ]}>
 
       <TabItem value="kubectl">
-          ```bash
-          kubectl patch configmap argocd-cm -n argocd --patch "$(cat <<EOF
-          data:
-            oidc.config: |
-              name: Keycloak
-              issuer: https://<keycloakEndpoint>/auth/realms/edp
-              clientID: argocd-tenant
-              clientSecret: $keycloak-client-argocd-secret:clientSecret
-              requestedScopes:
-                - openid
-                - profile
-                - email
-                - groups
-          EOF
-          )"
-          ```
+        ```bash
+        kubectl patch configmap argocd-cm -n argocd --patch "$(cat <<EOF
+        data:
+          oidc.config: |
+            name: Keycloak
+            issuer: https://<keycloakEndpoint>/auth/realms/edp
+            clientID: argocd-tenant
+            clientSecret: $keycloak-client-argocd-secret:clientSecret
+            requestedScopes:
+              - openid
+              - profile
+              - email
+              - groups
+        EOF
+        )"
+        ```
       </TabItem>
 
       <TabItem value="manifest">
+
         ```yaml
         data:
           oidc.config:
@@ -408,6 +404,7 @@ To provide Argo CD with the Keycloak SSO authorization mechanism, follow the gui
                 - email
                 - groups
         ```
+
       </TabItem>
     </Tabs>
 
@@ -479,4 +476,4 @@ To provide Argo CD with the Keycloak SSO authorization mechanism, follow the gui
 
 ## Related Articles
 
-* [Install Argo CD](install-argocd.md)
+* [Install Argo CD](../install-argocd.md)

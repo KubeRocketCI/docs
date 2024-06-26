@@ -13,7 +13,7 @@ Here is the list of all the sections provided in the Configuration tab. Familiar
 |[Registry](../quick-start/integrate-container-registry.md)|Integrate platform with a container registry to store container artifacts.|
 |[Clusters](add-cluster.md)|Integrate platform with external clusters to enable remote cluster deployment.|
 |[GitOps](gitops.md)|Onboard a specific repository used for the GitOps approach purposes.|
-|[Argo CD](../operator-guide/argocd-integration.md)|Integrate platform with Argo CD to enable the GitOps approach.|
+|[Argo CD](../operator-guide/cd/argocd-integration.md)|Integrate platform with Argo CD to enable the GitOps approach.|
 |[DefectDojo](../operator-guide/devsecops/defectdojo.md)|Connect platform with DefectDojo to manage and track security defects in applications.|
 |[DependencyTrack](../operator-guide/devsecops/dependency-track.md)|Connect the platform with the DependencyTrack tool for monitoring and managing vulnerabilities within third-party components.|
 |[SonarQube](../operator-guide/code-quality/sonarqube.md)|Integrate SonarQube to enable static code analysis.|

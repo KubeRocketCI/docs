@@ -190,5 +190,5 @@ Follow the steps below to install Argo CD using Helm:
 
 ## Related Articles
 
-* [Argo CD Integration](argocd-integration.md)
+* [Argo CD Integration](cd/argocd-integration.md)
 * [Install via Add-Ons](add-ons-overview.md)

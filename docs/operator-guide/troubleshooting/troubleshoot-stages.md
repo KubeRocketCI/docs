@@ -33,7 +33,7 @@ The `AppProject` custom resource may not be created or created incorrectly.
 
   It is supposed there are no resources or they are deployed incorrectly.
 
-3. Create the `AppProject` custom resource. Please refer to the 4th step of the [Argo CD Integration](../../operator-guide/argocd-integration.md#argo-cd-configuration) page.
+3. Create the `AppProject` custom resource. Please refer to the 4th step of the [Argo CD Integration](../../operator-guide/cd/argocd-integration.md#argo-cd-configuration) page.
 
 4. Apply the resource using the `kubectl apply` command and wait until the application is synced with Argo CD.
 
@@ -43,4 +43,4 @@ The `AppProject` custom resource may not be created or created incorrectly.
 
 ## Related Articles
 
-* [Argo CD Integration](https://epam.github.io/edp-install/operator-guide/argocd-integration/#argo-cd-configuration)
+* [Argo CD Integration](https://epam.github.io/edp-install/operator-guide/cd/argocd-integration/#argo-cd-configuration)

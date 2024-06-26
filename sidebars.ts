@@ -201,16 +201,6 @@ const sidebars: SidebarsConfig = {
             'operator-guide/devsecops/overview',
             'operator-guide/devsecops/dependency-track',
             'operator-guide/devsecops/defectdojo',
-            {
-              type: 'category',
-              label: 'AWS Integration',
-              items: [
-                'operator-guide/waf-tf-configuration',
-                'operator-guide/ebs-csi-driver',
-                'operator-guide/enable-irsa',
-                'operator-guide/kaniko-irsa',
-              ],
-            },
           ],
         },
         {
@@ -248,6 +238,23 @@ const sidebars: SidebarsConfig = {
               label: 'GitOps',
               items: [
                 'operator-guide/argocd-integration',
+              ],
+            },
+          ],
+        },
+        {
+          type: 'category',
+          label: 'Infrastructure Providers',
+          items: [
+            'operator-guide/infrastructure-providers/overview',
+            {
+              type: 'category',
+              label: 'AWS Integration',
+              items: [
+                'operator-guide/infrastructure-providers/aws/waf-tf-configuration',
+                'operator-guide/infrastructure-providers/aws/ebs-csi-driver',
+                'operator-guide/infrastructure-providers/aws/enable-irsa',
+                'operator-guide/infrastructure-providers/aws/kaniko-irsa',
               ],
             },
           ],

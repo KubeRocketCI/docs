@@ -9,8 +9,8 @@ To follow the instruction, check the following prerequisites:
 1. Deployed infrastructure includes Nginx Ingress Controller
 2. Deployed services for testing
 3. Separate and exposed AWS ALB
-5. terraform 0.14.10
-6. hishicorp/aws = 4.8.0
+4. terraform 0.14.10
+5. hashicorp/aws = 4.8.0
 
 ## Solution Overview
 
@@ -21,7 +21,7 @@ The solution includes two parts:
 
 The WAF ACL resource is the main resource used for the configuration; The default web ACL option is Block.
 
-![Overview WAF Solution](../assets/operator-guide/waf-configuration.drawio.png)
+![Overview WAF Solution](../../../assets/operator-guide/waf-configuration.drawio.png)
 
 The ACL includes three managed AWS rules that secure the exposed traffic:
 
@@ -45,14 +45,14 @@ resource "aws_wafv2_regex_pattern_set" "common" {
   scope = "REGIONAL"
 
   regular_expression {
-    regex_string = "^.*(some-url).*((.edp-epam)+)\\.com$"
+    regex_string = "^.*(some-url).*((.example)+)\\.com$"
   }
 
   #  Add here additional regular expressions for other endpoints, they are merging with OR operator, e.g.
 
   /*
    regular_expression {
-      regex_string = "^.*(keycloak).*((.edp-epam)+)\\.com$"
+      regex_string = "^.*(keycloak).*((.example)+)\\.com$"
    }
    */
 
@@ -60,7 +60,7 @@ resource "aws_wafv2_regex_pattern_set" "common" {
 }
 ```
 
-It includes 'regex_string', for example: url - some-url.edp-epam.com,
+It includes 'regex_string', for example: url - some-url.example.com,
 In addition, it is possible to add other links to the same resource using the regular_expression element.
 
 There is the Terraform code for the aws_wafv2_web_acl resource:
@@ -196,8 +196,9 @@ resource "aws_wafv2_web_acl_association" "waf_alb" {
 }
 ```
 
-!!! note
-    AWS ALB can be created in the scope of this Terraform code or created previously. When creating ALB to expose links, the ALB should have a security group that allows some external traffic.
+:::note
+  AWS ALB can be created in the scope of this Terraform code or created previously. When creating ALB to expose links, the ALB should have a security group that allows some external traffic.
+:::
 
 When ALB is associated with the WAF ACL, direct the traffic to the ALB by the Route53 CNAME record:
 
@@ -206,7 +207,7 @@ module "some_url_exposure" {
   source  = "terraform-aws-modules/route53/aws//modules/records"
   version = "2.0.0"
 
-  zone_name = "edp-epam.com"
+  zone_name = "example.com"
 
   records = [
     {

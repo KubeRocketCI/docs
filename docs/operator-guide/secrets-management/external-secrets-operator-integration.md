@@ -202,7 +202,7 @@ In order to [Install KubeRocketCI](../install-kuberocketci.mdx), a list of passw
     }
     ```
 
-    b. Create an AWS IAM role with trust relationships (defined below) and attach the IAM policy. Put your string for `Federated` value ([see more](../enable-irsa.md) on IRSA enablement for EKS Cluster) and AWS region.
+    b. Create an AWS IAM role with trust relationships (defined below) and attach the IAM policy. Put your string for `Federated` value ([see more](../infrastructure-providers/aws/enable-irsa.md) on IRSA enablement for EKS Cluster) and AWS region.
 
     ```json
     {

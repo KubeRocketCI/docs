@@ -88,7 +88,7 @@ const FeatureList: FeatureItem[] = [
         Gain access to your application logs and metrics with ease. Explore your application in real-time, gaining valuable insights and enhancing your understanding of its performance.
       </>
     ),
-    link: "docs/operator-guide/multitenant-logging/",
+    link: "docs/operator-guide/monitoring-and-observability/multitenant-logging/",
   },
   {
     title: 'Open-Source Software Solutions',

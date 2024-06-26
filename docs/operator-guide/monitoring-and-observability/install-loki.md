@@ -12,10 +12,6 @@ To install Loki, follow the steps below:
     kubectl create namespace logging
     ```
 
-    :::note
-      On the OpenShift cluster, run the `oc` command instead of the `kubectl` command.
-    :::
-
 2. Add a chart repository:
 
     ```bash

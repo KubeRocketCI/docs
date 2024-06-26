@@ -1,26 +1,26 @@
-# Aggregate Application Logs Using EFK Stack
+# Configuring Fluent Bit for Elasticsearch ILM Rollover
 
-This documentation describes the advantages of EFK stack over the traditional ELK stack, explains the value that this stack brings to EDP and instructs how to set up the EFK stack to integrate the advanced logging system with your application.
+This guide delves into the benefits of adopting the EFK stack over the conventional ELK stack, highlighting the significant enhancements it brings to KubeRocketCI. It provides a comprehensive walkthrough on configuring the EFK stack, enabling the integration of a sophisticated logging system with your applications.
 
-### ELK Stack Overview
+## Overview of the ELK Stack
 
-The __ELK__ (Elasticsearch, Logstash and Kibana) stack gives the ability to aggregate logs from all the managed systems and applications, analyze these logs and create visualizations for application and infrastructure monitoring, faster troubleshooting, security analytics and more.
+The **ELK** (Elasticsearch, Logstash, and Kibana) stack is renowned for its capability to consolidate logs from various systems and applications. It facilitates the analysis of these logs and the creation of visualizations for monitoring applications and infrastructure, expediting troubleshooting, enhancing security analytics, and more.
 
-Here is a brief description of the ELK stack default components:
+Below is an overview of the default components within the ELK stack:
 
-* __Beats family__ - The logs shipping tool that conveys logs from the source locations, such as Filebeat, Metricbeat, Packetbeat, etc. Beats can work instead of Logstash or along with it.
-* __Logstash__ - The log processing framework for log collecting, processing, storing and searching activities.
-* __Elasticsearch__ - The distributed search and analytics engine based on [Lucene](https://lucene.apache.org/) Java library.
-* __Kibana__ - The visualization engine that queries the data from Elasticsearch.
+* **Beats family** - A suite of log shippers that transport logs from their sources to the stack, including Filebeat, Metricbeat, Packetbeat, among others. Beats can either replace Logstash or complement it.
+* **Logstash** - A robust log processing framework that collects, processes, stores, and searches logs.
+* **Elasticsearch** - A highly scalable search and analytics engine built on the [Lucene](https://lucene.apache.org/) Java library.
+* **Kibana** - A powerful visualization tool that queries data from Elasticsearch, enabling insightful data analysis.
 
-![Default components of ELK Stack](../assets/drawio-diagrams/elk_stack01.drawio.png "ELK Stack")
+![Overview of ELK Stack Components](../../assets/drawio-diagrams/elk_stack01.drawio.png "ELK Stack")
 
 ### EFK Stack Overview
 
-We use __FEK (also called EFK)__ (Fluent Bit, Elasticsearch, Kibana) stack in Kubernetes instead of __ELK__ because this stack provides us with the support for [Logsight](https://docs.logsight.ai/#/) for Stage Verification and Incident Detection. In addition to it, __Fluent Bit__ has a smaller memory fingerprint than Logstash.
-__Fluent Bit__ has the Inputs, Parsers, Filters and Outputs plugins similarly to Logstash.
+We use **FEK (also called EFK)** (Fluent Bit, Elasticsearch, Kibana) stack in Kubernetes instead of **ELK** because this stack provides us with the support for [Logsight](https://logsight.ai/#/) for Stage Verification and Incident Detection. In addition to it, **Fluent Bit** has a smaller memory fingerprint than Logstash.
+**Fluent Bit** has the Inputs, Parsers, Filters and Outputs plugins similarly to Logstash.
 
-![Default components of FEK Stack](../assets/drawio-diagrams/elk_stack02.drawio.png "FEK Stack")
+![Default components of FEK Stack](../../assets/drawio-diagrams/elk_stack02.drawio.png "FEK Stack")
 
 ### Automate Elasticsearch Index Rollover With ILM
 
@@ -29,14 +29,14 @@ In this guide, index rollover with the Index Lifecycle Management [ILM](https://
 The resources can be created via API using curl, Postman, Kibana Dev Tools console or via GUI.
 They are going to be created them using Kibana Dev Tools.
 
-1. Go to `Management` → `Dev Tools` in the Kibana dashboard:
+1. Go to **Management** -> **Dev Tools** in the Kibana dashboard:
 
-   ![Index Pattern](../assets/operator-guide/dev-tools.png "Dev Tools")
+    ![Index Pattern](../../assets/operator-guide/dev-tools.png "Dev Tools")
 
 2. Create index lifecycle policy with the index [rollover](https://www.elastic.co/guide/en/elasticsearch/reference/8.6/ilm-rollover.html):
 
     :::note
-        This policy can also be created in GUI in `Management` → `Stack Management` → `Index Lifecycle Policies`.
+        This policy can also be created in GUI in **Management** -> **Stack Management** -> **Index Lifecycle Policies**
     :::
 
     [Index Lifecycle](https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-index-lifecycle.html) has several phases: Hot, Warm, Cold, Frozen, Delete. Indices also have different [priorities](https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-set-priority.html) in each phase. The warmer the phase, the higher the priority is supposed to be, e.g., 100 for the hot phase, 50 for the warm phase, and 0 for the cold phase.
@@ -48,36 +48,38 @@ They are going to be created them using Kibana Dev Tools.
 
    <details>
       <summary><b>Index Lifecycle Policy</b></summary>
-    ```json
-    PUT _ilm/policy/fluent-bit-policy
-    {
-      "policy": {
-        "phases": {
-          "hot": {
-            "min_age": "0ms",
-            "actions": {
-              "set_priority": {
-                "priority": 100
+
+        ```bash
+        PUT _ilm/policy/fluent-bit-policy
+        {
+          "policy": {
+            "phases": {
+              "hot": {
+                "min_age": "0ms",
+                "actions": {
+                  "set_priority": {
+                    "priority": 100
+                  },
+                  "rollover": {
+                    "max_size": "1gb",
+                    "max_primary_shard_size": "1gb",
+                    "max_age": "1d"
+                  }
+                }
               },
-              "rollover": {
-                "max_size": "1gb",
-                "max_primary_shard_size": "1gb",
-                "max_age": "1d"
-              }
-            }
-          },
-          "delete": {
-            "min_age": "7d",
-            "actions": {
               "delete": {
-                "delete_searchable_snapshot": true
+                "min_age": "7d",
+                "actions": {
+                  "delete": {
+                    "delete_searchable_snapshot": true
+                  }
+                }
               }
             }
           }
         }
-      }
-    }
-    ```
+        ```
+
    </details>
 
     Insert the code above into the `Dev Tools` and click the arrow to send the `PUT` request.
@@ -85,31 +87,33 @@ They are going to be created them using Kibana Dev Tools.
 3. Create an [index template](https://www.elastic.co/guide/en/elasticsearch/reference/current/index-templates.html) so that a new index is created according to this template after the rollover:
 
     :::note
-        This policy can also be created in GUI in `Management` → `Stack Management` → `Index Management` → `Index Templates`.
+      This policy can also be created in GUI in `Management` -> `Stack Management` -> `Index Management` -> `Index Templates`.
     :::
 
     Expand the menu below to see the index template example:
 
    <details>
       <summary><b>Index Template</b></summary>
-    ```json
-    PUT /_index_template/fluent-bit
-    {
-      "index_patterns": ["fluent-bit-kube-*"],
-      "template": {
-        "settings": {
-          "index": {
-            "lifecycle": {
-              "name": "fluent-bit-policy",
-              "rollover_alias": "fluent-bit-kube"
-            },
-            "number_of_shards": "1",
-            "number_of_replicas": "0"
+
+        ```bash
+        PUT /_index_template/fluent-bit
+        {
+          "index_patterns": ["fluent-bit-kube-*"],
+          "template": {
+            "settings": {
+              "index": {
+                "lifecycle": {
+                  "name": "fluent-bit-policy",
+                  "rollover_alias": "fluent-bit-kube"
+                },
+                "number_of_shards": "1",
+                "number_of_replicas": "0"
+              }
+            }
           }
         }
-      }
-    }
-    ```
+        ```
+
    </details>
 
     :::note
@@ -119,9 +123,9 @@ They are going to be created them using Kibana Dev Tools.
 
       * `number_of_replicas` is the number of replica shards. A replica shard is a copy of a primary shard. Elasticsearch will never assign a replica to the same node as the primary shard, so make sure you have more than one node in your Elasticsearch cluster if you need to use replica shards. The Elasticsearch cluster details and the quantity of nodes can be checked with:
 
-          ```json
-          GET _cluster/health
-          ```
+            ```bash
+            GET _cluster/health
+            ```
 
       Since we use one node, the number_of_shards  is 1 and number_of_replicas is 0. If you put more replicas within one node, your index will get yellow status in Kibana, yet still be working.
     :::
@@ -129,24 +133,26 @@ They are going to be created them using Kibana Dev Tools.
 4. Create an empty [index](https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-create-index.html) with write permissions:
 
     :::note
-        This index can also be created in GUI in `Management` → `Stack Management` → `Index Management` → `Indices`.
+      This index can also be created in GUI in `Management` -> `Stack Management` -> `Index Management` -> `Indices`.
     :::
 
     Index example with the [date math](https://www.elastic.co/guide/en/elasticsearch/reference/current/api-conventions.html) format:
 
    <details>
       <summary><b>Index</b></summary>
-    ```json
-    # URI encoded /<fluent-bit-kube-{now/d}-000001>
-    PUT /%3Cfluent-bit-kube-%7Bnow%2Fd%7D-000001%3E
-    {
-      "aliases": {
-        "fluent-bit-kube": {
-          "is_write_index": true
+
+        ```bash
+        # URI encoded /<fluent-bit-kube-{now/d}-000001>
+        PUT /%3Cfluent-bit-kube-%7Bnow%2Fd%7D-000001%3E
+        {
+          "aliases": {
+            "fluent-bit-kube": {
+              "is_write_index": true
+            }
+          }
         }
-      }
-    }
-    ```
+        ```
+
    </details>
 
     The code above will create an index in the`{index_name}-{current_date}-{rollover_index_increment}` format. For example: `fluent-bit-kube-2023.03.17-000001`.
@@ -158,23 +164,25 @@ They are going to be created them using Kibana Dev Tools.
 
       <details>
           <summary><b>Index</b></summary>
-        ```json
-        PUT fluent-bit-kube-000001
-        {
-          "aliases": {
-            "fluent-bit-kube": {
-              "is_write_index": true
+
+            ```bash
+            PUT fluent-bit-kube-000001
+            {
+              "aliases": {
+                "fluent-bit-kube": {
+                  "is_write_index": true
+                }
+              }
             }
-          }
-        }
-        ```
+            ```
+
       </details>
 
       Check the status of the created index:
 
-      ```json
-      GET fluent-bit-kube*-000001/_ilm/explain
-      ```
+        ```bash
+        GET fluent-bit-kube*-000001/_ilm/explain
+        ```
     :::
 
 5. Configure Fluent Bit. Play attention to the [Elasticsearch Output](https://docs.fluentbit.io/manual/pipeline/outputs/elasticsearch) plugin configuration.
@@ -183,102 +191,105 @@ They are going to be created them using Kibana Dev Tools.
 
     ConfigMap example with [Configuration Variables](https://docs.fluentbit.io/manual/v/1.0/configuration/variables) for `HTTP_User` and `HTTP_Passwd`:
 
-   <details>
+    <details>
       <summary><b>ConfigMap fluent-bit</b></summary>
-    ```yaml
-    data:
-      fluent-bit.conf: |
-        [SERVICE]
-            Daemon Off
-            Flush 10
-            Log_Level info
-            Parsers_File parsers.conf
-            Parsers_File custom_parsers.conf
-            HTTP_Server On
-            HTTP_Listen 0.0.0.0
-            HTTP_Port 2020
-            Health_Check On
 
-        [INPUT]
-            Name tail
-            Tag kube.*
-            Path /var/log/containers/*.log
-            Parser docker
-            Mem_Buf_Limit 5MB
-            Skip_Long_Lines Off
-            Refresh_Interval 10
-        [INPUT]
-            Name systemd
-            Tag host.*
-            Systemd_Filter _SYSTEMD_UNIT=kubelet.service
-            Read_From_Tail On
-            Strip_Underscores On
+        ```yaml
+        data:
+          fluent-bit.conf: |
+            [SERVICE]
+                Daemon Off
+                Flush 10
+                Log_Level info
+                Parsers_File parsers.conf
+                Parsers_File custom_parsers.conf
+                HTTP_Server On
+                HTTP_Listen 0.0.0.0
+                HTTP_Port 2020
+                Health_Check On
 
-        [FILTER]
-            Name                kubernetes
-            Match               kube.*
-            Kube_Tag_Prefix     kube.var.log.containers.
-            Kube_URL            https://kubernetes.default.svc:443
-            Kube_CA_File        /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
-            Kube_Token_File     /var/run/secrets/kubernetes.io/serviceaccount/token
-            Merge_Log           Off
-            Merge_Log_Key       log_processed
-            K8S-Logging.Parser  On
-            K8S-Logging.Exclude On
-        [FILTER]
-            Name nest
-            Match kube.*
-            Operation lift
-            Nested_under kubernetes
-            Add_prefix kubernetes.
-        [FILTER]
-            Name modify
-            Match kube.*
-            Copy kubernetes.container_name tags.container
-            Copy log message
-            Copy kubernetes.container_image tags.image
-            Copy kubernetes.namespace_name tags.namespace
-        [FILTER]
-            Name nest
-            Match kube.*
-            Operation nest
-            Wildcard tags.*
-            Nested_under tags
-            Remove_prefix tags.
+            [INPUT]
+                Name tail
+                Tag kube.*
+                Path /var/log/containers/*.log
+                Parser docker
+                Mem_Buf_Limit 5MB
+                Skip_Long_Lines Off
+                Refresh_Interval 10
+            [INPUT]
+                Name systemd
+                Tag host.*
+                Systemd_Filter _SYSTEMD_UNIT=kubelet.service
+                Read_From_Tail On
+                Strip_Underscores On
 
-        [OUTPUT]
-            Name            es
-            Match           kube.*
-            Index           fluent-bit-kube
-            Host            elasticsearch-master
-            Port            9200
-            HTTP_User       ${ES_USER}
-            HTTP_Passwd     ${ES_PASSWORD}
-            Logstash_Format Off
-            Time_Key       @timestamp
-            Type            flb_type
-            Replace_Dots    On
-            Retry_Limit     False
-            Trace_Error     Off
-    ```
-   </details>
+            [FILTER]
+                Name                kubernetes
+                Match               kube.*
+                Kube_Tag_Prefix     kube.var.log.containers.
+                Kube_URL            https://kubernetes.default.svc:443
+                Kube_CA_File        /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
+                Kube_Token_File     /var/run/secrets/kubernetes.io/serviceaccount/token
+                Merge_Log           Off
+                Merge_Log_Key       log_processed
+                K8S-Logging.Parser  On
+                K8S-Logging.Exclude On
+            [FILTER]
+                Name nest
+                Match kube.*
+                Operation lift
+                Nested_under kubernetes
+                Add_prefix kubernetes.
+            [FILTER]
+                Name modify
+                Match kube.*
+                Copy kubernetes.container_name tags.container
+                Copy log message
+                Copy kubernetes.container_image tags.image
+                Copy kubernetes.namespace_name tags.namespace
+            [FILTER]
+                Name nest
+                Match kube.*
+                Operation nest
+                Wildcard tags.*
+                Nested_under tags
+                Remove_prefix tags.
+
+            [OUTPUT]
+                Name            es
+                Match           kube.*
+                Index           fluent-bit-kube
+                Host            elasticsearch-master
+                Port            9200
+                HTTP_User       ${ES_USER}
+                HTTP_Passwd     ${ES_PASSWORD}
+                Logstash_Format Off
+                Time_Key       @timestamp
+                Type            flb_type
+                Replace_Dots    On
+                Retry_Limit     False
+                Trace_Error     Off
+        ```
+
+    </details>
 
 6. Create index pattern (Data View starting from Kibana v8.0):
 
-    Go to `Management` → `Stack Management` → `Kibana` → `Index patterns` and create an index with the `fluent-bit-kube-*` pattern:
+    Go to **Management** -> **Stack Management** -> **Kibana** -> **Index patterns** and create an index with the `fluent-bit-kube-*` pattern:
 
-    ![Index Pattern](../assets/operator-guide/elk-stack01.png "Index Pattern")
+    ![Index Pattern](../../assets/operator-guide/elk-stack01.png "Index Pattern")
 
-7. Check logs in Kibana. Navigate to `Analytics` → `Discover`:
+7. Check logs in Kibana. Navigate to **Analytics** -> **Discover**:
 
-    ![Logs in Kibana](../assets/operator-guide/elk-stack02.png "Logs in Kibana")
+    ![Logs in Kibana](../../assets/operator-guide/elk-stack02.png "Logs in Kibana")
 
     :::note
       In addition, in the top-right corner of the `Discover` window, there is a button called `Inspect`. Clicking on it will reveal the query that Kibana is sending to Elasticsearch. These queries can be used in Dev Tools.
+    :::
 
 8. Monitor the created indices:
 
-    ```json
+    ```bash
     GET _cat/indices/fluent-bit-kube-*
     ```
 

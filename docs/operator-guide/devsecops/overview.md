@@ -80,7 +80,7 @@ For obtaining and managing report post scanning, deployment of various vulnerabi
 
 ### ELK Stack
 
-[ELK Stack](../../operator-guide/kibana-ilm-rollover.md) (Fluent Bit, Elasticsearch, Kibana) stack is used in Kubernetes instead of ELK because this stack provides us with the support for Logsight for Stage Verification and Incident Detection. In addition to it, Fluent Bit has a smaller memory fingerprint than Logstash. Fluent Bit has the Inputs, Parsers, Filters and Outputs plugins similarly to Logstash.
+[ELK Stack](../../operator-guide/monitoring-and-observability/kibana-ilm-rollover.md) (Fluent Bit, Elasticsearch, Kibana) stack is used in Kubernetes instead of ELK because this stack provides us with the support for Logsight for Stage Verification and Incident Detection. In addition to it, Fluent Bit has a smaller memory fingerprint than Logstash. Fluent Bit has the Inputs, Parsers, Filters and Outputs plugins similarly to Logstash.
 
 ### Loki
 

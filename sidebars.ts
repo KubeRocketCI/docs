@@ -207,10 +207,29 @@ const sidebars: SidebarsConfig = {
           type: 'category',
           label: 'Monitoring and Observability',
           items: [
-            'operator-guide/install-loki',
-            'operator-guide/loki-irsa',
-            'operator-guide/multitenant-logging',
-            'operator-guide/kibana-ilm-rollover',
+            {
+              type: 'category',
+              label: 'Grafana Loki Stack',
+              items: [
+                'operator-guide/monitoring-and-observability/install-loki',
+                'operator-guide/monitoring-and-observability/loki-irsa',
+                'operator-guide/monitoring-and-observability/multitenant-logging',
+              ],
+            },
+            {
+              type: 'category',
+              label: 'Elasticsearch Stack',
+              items: [
+                'operator-guide/monitoring-and-observability/kibana-ilm-rollover',
+              ],
+            },
+          ],
+        },
+        {
+          type: 'category',
+          label: 'Search and Analytics',
+          items: [
+            'operator-guide/monitoring-and-observability/install-loki',
           ],
         },
         {

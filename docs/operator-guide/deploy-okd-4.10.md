@@ -313,5 +313,5 @@ providerSpec:
 ## Related Articles
 
 * [Deploy AWS EKS Cluster](deploy-aws-eks.md)
-* [Associate IAM Roles With Service Accounts](enable-irsa.md)
+* [Associate IAM Roles With Service Accounts](infrastructure-providers/aws/enable-irsa.md)
 * [Deploy OKD 4.9 Cluster](deploy-okd.md)

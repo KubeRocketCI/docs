@@ -6,8 +6,9 @@ The CD pipeline can include the essential set of applications with its specific 
 
 In other words, the CD pipeline allows the selected image stream (Docker container in Kubernetes terms) to pass a set of stages for the verification process (SIT - system integration testing with the automatic type of a quality gate, QA - quality assurance, UAT - user acceptance testing with the manual testing).
 
-!!! note
-    It is possible to change the image stream for the application in the CD pipeline. Please refer to the [Edit CD Pipeline](add-cd-pipeline.md#edit-cd-pipeline) section for the details.
+:::note
+  It is possible to change the image stream for the application in the CD pipeline. Please refer to the [Edit CD Pipeline](add-cd-pipeline.md#edit-cd-pipeline) section for the details.
+:::
 
 A CI/CD pipeline helps to automate steps in a software delivery process, such as the code build initialization, automated tests running, and deploying to a staging or production environment.
 Automated pipelines remove manual errors, provide standardized development feedback cycle, and enable the fast product iterations. To get more information on the CI pipeline, please refer to the [CI Pipeline Details](ci-pipeline-details.md) chapter.
@@ -15,10 +16,11 @@ Automated pipelines remove manual errors, provide standardized development feedb
 The codebase stream is used as a holder for the output of the stage, i.e. after the Docker container (or an image stream in OpenShift terms) passes the stage verification, it will be placed to the new codebase stream.
 Every codebase has a branch that has its own codebase stream - a Docker container that is an output of the build for the corresponding branch.
 
-!!! note
-    For more information on the main terms used in EPAM Delivery Platform, please refer to the [EDP Glossary](../glossary.md)
+:::note
+  For more information on the main terms used in EPAM Delivery Platform, please refer to the [KubeRocketCI Glossary](../glossary.md)
+:::
 
-![EDP CD pipeline](../assets/user-guide/edp-cd-pipeline.png "EDP CD pipeline")
+![KubeRocketCI CD pipeline](../assets/user-guide/edp-cd-pipeline.png "KubeRocketCI CD pipeline")
 
 Explore the details of the CD pipeline below.
 
@@ -34,8 +36,9 @@ The Deploy pipeline is used by default on any stage of the Continuous Delivery p
 
 Find below the functional diagram of the Deploy pipeline with the default stages:
 
-!!! note
-    The input for a CD pipeline depends on the Trigger Type for a deploy stage and can be either Manual or Auto.
+:::note
+  The input for a CD pipeline depends on the Trigger Type for a deploy stage and can be either Manual or Auto.
+:::
 
 ![Deploy pipeline stages](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/epam/edp-install/master/docs/user-guide/deploy-pipeline.puml)
 

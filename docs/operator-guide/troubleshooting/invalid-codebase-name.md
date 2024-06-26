@@ -18,19 +18,19 @@ To solve this issue, follow the steps below:
 
 2. Create a new one but with the correct Git repository relative path format specified.
 
-  When creating a new codebase, ensure that the Git repository relative path is formatted correctly. This entails prefixing the repository name with the respective account or organization name. For example:
+    When creating a new codebase, ensure that the Git repository relative path is formatted correctly. This entails prefixing the repository name with the respective account or organization name. For example:
 
-  ```bash
-  account_or_organisation_name/repository_name
-  ```
+    ```bash
+    account_or_organisation_name/repository_name
+    ```
 
-  Please refer to the [Add Application](https://epam.github.io/edp-install/user-guide/add-application/) page for more details.
+    Please refer to the [Add Application](https://epam.github.io/edp-install/user-guide/add-application/) page for more details.
 
-3. Check if the porblem disappeared. It may take several minutes for the codebase to update its status.
+3. Check if the problem disappeared. It may take several minutes for the codebase to update its status.
 
-  After creating the new codebase with the corrected repository path, check if the problem persists. It's important to note that it may take a few minutes for the codebase to update its status. Once the codebase is synced, ensure that the "invalid project ID" error no longer occurs:
+    After creating the new codebase with the corrected repository path, check if the problem persists. It's important to note that it may take a few minutes for the codebase to update its status. Once the codebase is synced, ensure that the "invalid project ID" error no longer occurs:
 
-  ![Codebase created](../../assets/operator-guide/codebase_synced.png "Codebase created")
+    ![Codebase created](../../assets/operator-guide/codebase_synced.png "Codebase created")
 
 ## Related Articles
 

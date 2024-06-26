@@ -89,7 +89,7 @@ Change the Access Token Lifespan: go to your Keycloak and select *Openshift real
 
 By default, "Access Token Lifespan" value is 5 minutes.
 
-![Access Token Lifespan](../../assets/faq/keycloak-access-token-lifespan.png "Access Token Lifespan")
+![Access Token Lifespan](../../assets/keycloak-access-token-lifespan.png "Access Token Lifespan")
 
 ## Related Articles
 

@@ -21,7 +21,7 @@ Prerequisites:
 
 * Docker is installed.
 
-* ````make```` utility is installed.
+* `make` utility is installed.
 
 * Git is installed. Please refer to the [Git downloads](https://git-scm.com/downloads).
 
@@ -31,9 +31,9 @@ To work with MkDocs, take the following steps:
 
 2. Run the following command:
 
-    ``
+    ```bash
     make docs
-    ``
+    ```
 
 3. Enter the localhost:8000 address in the browser and check that documentation pages are available.
 
@@ -65,12 +65,14 @@ To work with MkDocs without Docker, take the following steps:
     mkdocs serve --dev-addr 0.0.0.0:8000
     ```
 
-  :::note
-    This command may not work on Windows, so a quick solution is:
-    ```bash
-    python -m mkdocs serve --dev-addr 0.0.0.0:8000
-    ```
-  :::
+    :::note
+      This command may not work on Windows, so a quick solution is:
+
+      ```bash
+      python -m mkdocs serve --dev-addr 0.0.0.0:8000
+      ```
+
+    :::
 
 4. Enter the localhost:8000 address in the browser and check that documentation pages are available.
 

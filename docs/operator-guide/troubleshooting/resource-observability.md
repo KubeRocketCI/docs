@@ -8,7 +8,7 @@ Users can't see resources within the KubeRocketCI dedicated namespace via KubeRo
 
 ## Cause
 
-The problem might be caused by several factors. First of all, default and allowed namespaces may be either unset or set incorrectly. Secondly, service account used for browsing the KubeRocketCI portal may have insufficient permission set. Thirdly, if Keycloak is used for as an authication mechanism, then the problem might be related to improper group membership.
+The problem might be caused by several factors. First of all, default and allowed namespaces may be either unset or set incorrectly. Secondly, service account used for browsing the KubeRocketCI portal may have insufficient permission set. Thirdly, if Keycloak is used for as an authentication mechanism, then the problem might be related to improper group membership.
 
 ## Solution
 
@@ -24,21 +24,21 @@ To fix the problem, follow the steps below:
 
 2. Check access rights of the service account at your disposal using the `kubectl describe` command:
 
-  ```bash
-  kubectl describe serviceaccount <service-account-name>> -n edp
-  ```
+    ```bash
+    kubectl describe serviceaccount <service-account-name>> -n edp
+    ```
 
-3. Сheck the role binding associated with the account:
+3. Check the role binding associated with the account:
 
-  ```bash
-  kubectl describe serviceaccount <role-binding-name> -n edp
-  ```
+    ```bash
+    kubectl describe serviceaccount <role-binding-name> -n edp
+    ```
 
 4. Check permissions of the role used in the role binding:
 
-  ```bash
-  kubectl desribe role <role-name> -n edp
-  ```
+    ```bash
+    kubectl describe role <role-name> -n edp
+    ```
 
 5. Adjust resources to have sufficient permission set. Refer to the [KubeRocketCI Access Model](../../operator-guide/auth/platform-auth-model.md) page for more details about permissions required for proper resource visibility.
 

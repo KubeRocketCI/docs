@@ -189,5 +189,5 @@ The next stage after installing Keycloak is to integrate it with the Keycloak op
 
 ## Related Articles
 
-* [Keycloak Installation](../auth/keycloak.md)
+* [Keycloak Installation](keycloak.md)
 * [EKS OIDC With Keycloak](configure-keycloak-oidc-eks.md)

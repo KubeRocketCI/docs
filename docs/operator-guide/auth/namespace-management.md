@@ -54,7 +54,7 @@ The error highlighted above indicates the necessity for users to manually create
 
 The `manageNamespace` parameter also defines the resources that will be created depending on the cluster deployed whether it is OpenShift or Kubernetes. This scheme displays the nesting of operator input parameters:
 
-  ![CD Pipeline Operator Input Parameter Scheme](../../assets/operator-guide/manage-namespace.png)
+![CD Pipeline Operator Input Parameter Scheme](../../assets/operator-guide/manage-namespace.png)
 
 :::note
   When deploying application on the OpenShift cluster, the `registry-view` RoleBinding is created in the main namespace.

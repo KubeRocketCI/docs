@@ -18,7 +18,7 @@ To fix the problem, try the following method:
 
 1. Adjust token rights or create a new token with the required set of permissions. Please refer to the [Manage Git Providers](../../user-guide/add-git-server.md) for details.
 
-2. Ensure to set correct Git Server properties. The process of adding a Git Server is described in the [Manage Git Servers](https://epam.github.io/edp-install/user-guide/git-server-overview/) page.
+2. Ensure to set correct Git Server properties. The process of adding a Git Server is described in the [Manage Git Servers](../../user-guide/add-git-server.md) page.
 
 3. Retry to create application.
 

@@ -11,7 +11,7 @@ import TabItem from '@theme/TabItem';
 
 ## Prerequisites
 
-* [Keycloak](../auth/keycloak.md) with OIDC authentication is installed.
+* [Keycloak](keycloak.md) with OIDC authentication is installed.
 * [Keycloak operator](../add-ons-overview.md) is installed.
 
 ## Enable OAuth2-Proxy
@@ -76,6 +76,6 @@ The example below illustrates how to use OAuth2-Proxy in practice when using the
 
 ## Related Articles
 
-* [Keycloak Installation](../auth/keycloak.md)
+* [Keycloak Installation](keycloak.md)
 * [Keycloak OIDC Installation](configure-keycloak-oidc-eks.md)
 * [Tekton Installation](../install-tekton.md)

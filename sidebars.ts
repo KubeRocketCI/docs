@@ -271,6 +271,7 @@ const sidebars: SidebarsConfig = {
               type: 'category',
               label: 'AWS Integration',
               items: [
+                'operator-guide/infrastructure-providers/aws/deploy-aws-eks',
                 'operator-guide/infrastructure-providers/aws/waf-tf-configuration',
                 'operator-guide/infrastructure-providers/aws/ebs-csi-driver',
                 'operator-guide/infrastructure-providers/aws/enable-irsa',
@@ -321,7 +322,7 @@ const sidebars: SidebarsConfig = {
           type: 'category',
           label: 'Tutorials',
           items: [
-            'operator-guide/deploy-aws-eks',
+
             'operator-guide/deploy-okd',
             'operator-guide/deploy-okd-4.10',
             'operator-guide/ssl-automation-okd',

@@ -19,7 +19,7 @@ Here is the list of all the sections provided in the Configuration tab. Familiar
 |[SonarQube](../operator-guide/code-quality/sonarqube.md)|Integrate SonarQube to enable static code analysis.|
 |[Git Server](add-git-server.md)|Connect the platform to Version Control Systems, such as GitHub, GitLab, or Gerrit for source code management.|
 |[Jira](../operator-guide/project-management-and-reporting/jira-integration.md)|Integrate Jira to track and deliver the status of your projects on a dedicated dashboard.|
-|[SSO](../operator-guide/advanced-installation/keycloak.md)|Integrate platform with identity provider to enable the Single Sign-On approach.|
+|[SSO](../operator-guide/auth/keycloak.md)|Integrate platform with identity provider to enable the Single Sign-On approach.|
 
 ## Related Articles
 

@@ -4,9 +4,9 @@ This page serves as a comprehensive guide on integrating Keycloak with the [edp-
 
 ## Prerequisites
 
-* [EKS Configuration](../../operator-guide/configure-keycloak-oidc-eks/#eks-configuration) is performed;
+* [EKS Configuration](configure-keycloak-oidc-eks/#eks-configuration) is performed;
 * [Helm v3.10.0](https://github.com/helm/helm/releases/tag/v3.10.0) is installed;
-* [Keycloak](../../operator-guide/advanced-installation/keycloak.md) is installed.
+* [Keycloak](../../operator-guide/auth/keycloak.md) is installed.
 
 ## Install Keycloak Operator
 
@@ -29,7 +29,7 @@ To install the Keycloak operator, follow the steps below:
 
 The next stage after installing Keycloak is to integrate it with the Keycloak operator. It can be implemented with the following steps:
 
-1. Create the **keycloak** secret that contains username and password defined on the [configuration step](../../operator-guide/advanced-installation/keycloak.md#configuration):
+1. Create the **keycloak** secret that contains username and password defined on the [configuration step](../../operator-guide/auth/keycloak.md#configuration):
 
     ```bash
     kubectl -n security create secret generic keycloak \
@@ -189,5 +189,5 @@ The next stage after installing Keycloak is to integrate it with the Keycloak op
 
 ## Related Articles
 
-* [Keycloak Installation](../advanced-installation/keycloak.md)
-* [EKS OIDC With Keycloak](../configure-keycloak-oidc-eks.md)
+* [Keycloak Installation](../auth/keycloak.md)
+* [EKS OIDC With Keycloak](configure-keycloak-oidc-eks.md)

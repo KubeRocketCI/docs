@@ -289,5 +289,5 @@ in Keycloak. This ensures that only authorized users can access and modify appli
 ## Related Articles
 
 * [KubeRocketCI Portal Overview](../../user-guide/index.md)
-* [EKS OIDC With Keycloak](../configure-keycloak-oidc-eks.md)
+* [EKS OIDC With Keycloak](configure-keycloak-oidc-eks.md)
 * [Argo CD Integration](../argocd-integration.md)

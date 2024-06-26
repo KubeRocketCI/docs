@@ -6,7 +6,7 @@ This guide outlines the steps for integrating [OIDC (OpenID Connect) authorizati
 
 Before the beginning, ensure your installation meets the following criteria:
 
-* [Keycloak](../advanced-installation/keycloak.md) is installed;
+* [Keycloak](../auth/keycloak.md) is installed;
 * [KubeRocketCI](../install-kuberocketci.mdx) is installed.
 
 ## Configure Keycloak
@@ -94,6 +94,6 @@ As a result, users will be prompted to authenticate themselves when logging in t
 
 ## Related Articles
 
-* [EKS OIDC With Keycloak](../configure-keycloak-oidc-eks.md)
+* [EKS OIDC With Keycloak](../auth/configure-keycloak-oidc-eks.md)
 * [External Secrets Operator Integration](../secrets-management/external-secrets-operator-integration.md)
 * [Integrate Harbor With EDP Pipelines](harbor-integration.md)

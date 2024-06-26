@@ -63,4 +63,4 @@ The `manageNamespace` parameter also defines the resources that will be created 
 ## Related Articles
 
 * [KubeRocketCI Access Model](platform-auth-model.md)
-* [EKS OIDC With Keycloak](../configure-keycloak-oidc-eks.md)
+* [EKS OIDC With Keycloak](configure-keycloak-oidc-eks.md)

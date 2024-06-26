@@ -22,30 +22,30 @@ const sidebars: SidebarsConfig = {
       collapsed: false,
       collapsible: false,
       items: [
-        'about-platform', // Overview
+        'about-platform',
         {
           type: 'category',
           label: 'Quick Start',
           collapsible: false,
           items: [
-            'quick-start/quick-start-overview', // Overview
+            'quick-start/quick-start-overview',
             {
               type: 'category',
               label: 'CI Pipelines - Build',
               collapsible: false,
               items: [
-                'quick-start/platform-installation', // Install EDP
+                'quick-start/platform-installation',
                 {
                   type: 'category',
                   label: 'Integrate Tools',
                   collapsible: false,
                   items: [
-                    'quick-start/integrate-sonarcloud', // Integrate SonarQube
-                    'quick-start/integrate-github', // Integrate GitHub
-                    'quick-start/integrate-container-registry', // Integrate DockerHub
+                    'quick-start/integrate-sonarcloud',
+                    'quick-start/integrate-github',
+                    'quick-start/integrate-container-registry',
                   ],
                 },
-                'quick-start/create-application', // Create Application
+                'quick-start/create-application',
               ],
             },
             {
@@ -113,7 +113,6 @@ const sidebars: SidebarsConfig = {
               label: 'Advanced Installation',
               items: [
                 'operator-guide/advanced-installation/overview',
-                'operator-guide/advanced-installation/keycloak',
                 'operator-guide/advanced-installation/capsule',
                 'operator-guide/advanced-installation/custom-certificates',
               ],
@@ -126,10 +125,12 @@ const sidebars: SidebarsConfig = {
           label: 'Authentication and Authorization',
           items: [
             'operator-guide/auth/platform-auth-model',
+            'operator-guide/auth/keycloak',
             'operator-guide/auth/ui-portal-oidc',
-            'operator-guide/auth/namespace-management',
             'operator-guide/auth/eks-oidc-integration',
+            'operator-guide/auth/configure-keycloak-oidc-eks',
             'operator-guide/auth/oauth2-proxy',
+            'operator-guide/auth/namespace-management',
           ],
         },
         {
@@ -208,7 +209,6 @@ const sidebars: SidebarsConfig = {
                 'operator-guide/ebs-csi-driver',
                 'operator-guide/enable-irsa',
                 'operator-guide/kaniko-irsa',
-                'operator-guide/configure-keycloak-oidc-eks',
               ],
             },
           ],

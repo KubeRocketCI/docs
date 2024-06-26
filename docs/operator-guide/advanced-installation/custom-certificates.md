@@ -49,7 +49,7 @@ To import custom certificates to Keycloak, follow the steps below:
     --from-literal=KC_SPI_TRUSTSTORE_FILE_PASSWORD=changeit
     ```
 
-4. Update the Keycloak `values.yaml` file from the [Install Keycloak](../advanced-installation/keycloak.md) page.
+4. Update the Keycloak `values.yaml` file from the [Install Keycloak](../auth/keycloak.md) page.
 
    <details>
       <summary><b>values.yaml</b></summary>
@@ -259,4 +259,4 @@ Also, the `jenkins-agent-opt-java-openjdk-lib-security-cacerts` secret contains 
 ## Related Articles
 
 * [Install KubeRocketCI](../install-kuberocketci.mdx)
-* [Install Keycloak](../advanced-installation/keycloak.md)
+* [Install Keycloak](../auth/keycloak.md)

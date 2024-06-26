@@ -16,14 +16,14 @@ Ensure the following values are set first before starting the Portal OIDC config
 
 :::note
   The values indicated above are the result of the Keycloak configuration as an OIDC identity provider.
-  To obtain these values, please refer to the guidelines on the [Keycloak OIDC EKS Configuration](../configure-keycloak-oidc-eks.md) page.
+  To obtain these values, please refer to the guidelines on the [Keycloak OIDC EKS Configuration](configure-keycloak-oidc-eks.md) page.
 :::
 
 ## Configure Keycloak
 
 To proceed with the Keycloak configuration, perform the following:
 
-1. Add the URL of the Headlamp to the `valid_redirect_uris` variable in [Keycloak](../configure-keycloak-oidc-eks.md#keycloak_client):
+1. Add the URL of the Headlamp to the `valid_redirect_uris` variable in [Keycloak](configure-keycloak-oidc-eks.md#keycloak_client):
 
     :::note keycloak_openid_client
 
@@ -93,5 +93,5 @@ By default, "Access Token Lifespan" value is 5 minutes.
 
 ## Related Articles
 
-* [EKS OIDC With Keycloak](../configure-keycloak-oidc-eks.md)
+* [EKS OIDC With Keycloak](configure-keycloak-oidc-eks.md)
 * [External Secrets Operator](../secrets-management/external-secrets-operator-integration.md)

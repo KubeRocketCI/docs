@@ -11,7 +11,7 @@ KubeRocketCI leverages a variety of secrets to facilitate the integration of dif
 
 |Secret Name|Fields|Description|Used by|
 |:-|:-|:-|:-|
-|keycloak|username<br />password|Username and password with [specific permissions](../advanced-installation/keycloak.md#configuration) for the Platform tenant management in Keycloak|keycloak-operator|
+|keycloak|username<br />password|Username and password with [specific permissions](../auth/keycloak.md#configuration) for the Platform tenant management in Keycloak|keycloak-operator|
 |ci-defectdojo|token<br />url|DefectDojo token<br />DefectDojo URL|edp-tekton|
 |kaniko-docker-config|.dockerconfigjson|Serialized JSON that follows docker config patterns|edp-tekton|
 |regcred|.dockerconfigjson|Serialized JSON that follows docker config patterns|cd-pipeline-operator|

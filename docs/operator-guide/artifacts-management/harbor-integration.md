@@ -120,7 +120,7 @@ To facilitate seamless interaction between KubeRocketCI and a Harbor project, it
       ![Registry managed by external secret operator](../../assets/operator-guide/kaniko-secret.png "Registry managed by external secret operator")
 
       :::note
-        More details of External Secrets Operator Integration can be found in the [External Secrets Operator Integration](../external-secrets-operator-integration.md) page.
+        More details of External Secrets Operator Integration can be found in the [External Secrets Operator Integration](../secrets-management/external-secrets-operator-integration.md) page.
       :::
       </TabItem>
 
@@ -198,7 +198,7 @@ To facilitate seamless interaction between KubeRocketCI and a Harbor project, it
       ![Registry managed by external secret operator](../../assets/operator-guide/kaniko-externalsecret.png "Registry managed by external secret operator")
 
       :::note
-        More details of External Secrets Operator Integration can be found in the [External Secrets Operator Integration](../external-secrets-operator-integration.md) page.
+        More details of External Secrets Operator Integration can be found in the [External Secrets Operator Integration](../secrets-management/external-secrets-operator-integration.md) page.
       :::
       </TabItem>
     </Tabs>
@@ -264,4 +264,4 @@ Harbor projects can be added and retained with a retention policy generated thro
 * [Install KubeRocketCI](../install-kuberocketci.mdx)
 * [Install Harbor](../artifacts-management/harbor-installation.md)
 * [Adjust Jira Integration](../project-management-and-reporting/jira-integration.md)
-* [Custom SonarQube Integration](../sonarqube.md)
+* [Custom SonarQube Integration](../code-quality/sonarqube.md)

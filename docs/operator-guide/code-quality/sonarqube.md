@@ -96,6 +96,6 @@ To establish robust authentication and precise access control, generating a Sona
 ## Related Articles
 
 * [Install EDP With Values File](../install-kuberocketci.mdx)
-* [Install External Secrets Operator](../install-external-secrets-operator.md)
-* [External Secrets Operator Integration](../external-secrets-operator-integration.md)
+* [Install External Secrets Operator](../secrets-management/install-external-secrets-operator.md)
+* [External Secrets Operator Integration](../secrets-management/external-secrets-operator-integration.md)
 * [Cluster Add-Ons Overview](../add-ons-overview.md)

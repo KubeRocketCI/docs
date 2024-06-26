@@ -282,7 +282,7 @@ To prepare DefectDojo for integration with EDP, follow the steps below:
 
       Go to **EDP Portal** -> **EDP** -> **Configuration** -> **DefectDojo** and see the `Managed by External Secret` message.
 
-      More details about the External Secrets Operator integration procedure can be found in the [External Secrets Operator Integration](../external-secrets-operator-integration.md) page.
+      More details about the External Secrets Operator integration procedure can be found in the [External Secrets Operator Integration](../secrets-management/external-secrets-operator-integration.md) page.
       </TabItem>
     </Tabs>
 
@@ -290,6 +290,6 @@ After following the instructions provided, you should be able to integrate your 
 
 ## Related Articles
 
-* [Install External Secrets Operator](../install-external-secrets-operator.md)
-* [External Secrets Operator Integration](../external-secrets-operator-integration.md)
+* [Install External Secrets Operator](../secrets-management/install-external-secrets-operator.md)
+* [External Secrets Operator Integration](../secrets-management/external-secrets-operator-integration.md)
 * [Install Harbor](../artifacts-management/harbor-installation.md)

@@ -95,5 +95,5 @@ As a result, users will be prompted to authenticate themselves when logging in t
 ## Related Articles
 
 * [EKS OIDC With Keycloak](../configure-keycloak-oidc-eks.md)
-* [External Secrets Operator Integration](../external-secrets-operator-integration.md)
+* [External Secrets Operator Integration](../secrets-management/external-secrets-operator-integration.md)
 * [Integrate Harbor With EDP Pipelines](harbor-integration.md)

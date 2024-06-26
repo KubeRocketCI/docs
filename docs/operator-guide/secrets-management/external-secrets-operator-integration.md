@@ -1,55 +1,57 @@
 # External Secrets Operator Integration
 
-[External Secrets Operator (ESO)](https://external-secrets.io/) can be integrated with EDP.
+[External Secrets Operator (ESO)](https://external-secrets.io/) can be integrated with KubeRocketCI.
 
-There are [multiple Secrets Providers](https://external-secrets.io/latest/introduction/stability-support) that can be used within ESO. EDP is integrated with two major providers:
+There are [multiple Secrets Providers](https://external-secrets.io/latest/introduction/stability-support) that can be used within ESO. On this page, we detail the integration of KubeRocketCI with the two foremost providers:
 
 * [Kubernetes Secrets](https://kubernetes.io/docs/concepts/configuration/secret/)
 * [AWS Systems Manager Parameter Store](https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-parameter-store.html)
 
-EDP uses various secrets to integrate various applications. Below is a list of secrets that are used in the EPAM Delivery Platform and their description. All the secrets are encoded in Base64 format.
+KubeRocketCI leverages a variety of secrets to facilitate the integration of different solutions. This document provides a comprehensive overview of the secrets utilized within the KubeRocketCI platform, along with their respective descriptions. Please note that all secrets are encoded in Base64 format.
 
 |Secret Name|Fields|Description|Used by|
 |:-|:-|:-|:-|
-|keycloak|username<br /><br />password|Username and password with [specific rights](advanced-installation/keycloak.md#configuration) for EDP tenant in Keycloak|keycloak-operator|
-|ci-defectdojo|token<br /><br />url|DefectDojo token<br /><br />DefectDojo URL|edp-tekton|
+|keycloak|username<br />password|Username and password with [specific permissions](../advanced-installation/keycloak.md#configuration) for the Platform tenant management in Keycloak|keycloak-operator|
+|ci-defectdojo|token<br />url|DefectDojo token<br />DefectDojo URL|edp-tekton|
 |kaniko-docker-config|.dockerconfigjson|Serialized JSON that follows docker config patterns|edp-tekton|
 |regcred|.dockerconfigjson|Serialized JSON that follows docker config patterns|cd-pipeline-operator|
-|ci-github|id_rsa<br /><br />token<br /><br />secretString|Private key from github repo <br /><br />API token<br /><br />Random string|edp-tekton|
-|ci-gitlab|id_rsa<br /><br />token<br /><br />secretString|Private key from gitlab repo <br /><br />API token<br /><br />Random string|edp-tekton|
-|ci-jira|username<br /><br />password|Jira username <br /><br />Jira password|edp-codebase-operator|
-|ci-sonarqube|token<br /><br />url|SonarQube token<br /><br />SonarQube URL|edp-tekton|
-|ci-nexus|username<br /><br />password<br /><br />url|Nexus username<br /><br />Nexus password<br /><br />Nexus URL|edp-tekton|
-|ci-dependency-track|token<br /><br />url<br />|Dependency-Track token<br /><br />Dependency-Track URL<br /><br />|edp-tekton|
+|ci-github|id_rsa<br />token<br />secretString|Private key from github repo <br />API token<br />Random string|edp-tekton|
+|ci-gitlab|id_rsa<br />token<br />secretString|Private key from gitlab repo <br />API token<br />Random string|edp-tekton|
+|ci-jira|username<br />password|Jira username <br />Jira password|edp-codebase-operator|
+|ci-sonarqube|token<br />url|SonarQube token<br />SonarQube URL|edp-tekton|
+|ci-nexus|username<br />password<br />url|Nexus username<br />Nexus password<br />Nexus URL|edp-tekton|
+|ci-dependency-track|token<br />url<br />|Dependency-Track token<br />Dependency-Track URL<br />|edp-tekton|
 |oauth2-proxy-cookie-secret|cookie-secret|Secret key for oauth2-proxy|edp-install|
 |keycloak-client-headlamp-secret|clientSecret|Secret key for keycloak client |keycloak-operator|
-|ci-argocd|token<br /><br />url<br />|Argo CD token<br /><br />Argo CD URL<br /><br />|edp-tekton|
+|ci-argocd|token<br />url<br />|Argo CD token<br />Argo CD URL<br />|edp-tekton|
 
-## EDP Core Secrets
+## Platform Core Secrets
 
-The list below represents the baseline required for full operation within EDP:
+The list below represents the baseline required for full operation within platform core components:
 
-* kaniko-docker-config: Used for pushing docker images to a specific registry.
+* kaniko-docker-config: Used for pushing container images to a specific registry.
 * ci-sonarqube: Used in the CI process for SonarQube integration.
 * ci-nexus: Used for pushing artifacts to the Nexus storage.
 
-These secrets are mandatory for Tekton pipelines to work properly.
+:::warning
+  These secrets are mandatory for Tekton pipelines to work properly.
+:::
 
 ## Kubernetes Provider
 
-All secrets are stored in Kubernetes in pre-defined namespaces. EDP suggests using the following approach for secrets management:
+All secrets are stored in Kubernetes in pre-defined namespaces. Platform suggests using the following approach for secrets management:
 
-* `EDP_NAMESPACE-vault`, where EDP_NAMESPACE is a name of the namespace where EDP is deployed, such as `edp-vault`. This namespace is used by EDP platform. Access to secrets in the `edp-vault` is permitted only for `EDP Administrators`.
+* `EDP_NAMESPACE-vault`, where `EDP_NAMESPACE` is a name of the namespace where KubeRocketCI is deployed, such as `edp-vault`. This namespace is used by the platform. Access to secrets in the `edp-vault` is granted only for `Administrators`.
 
-* `EDP_NAMESPACE-cicd-vault`, where EDP_NAMESPACE is a name of the namespace where EDP is deployed, such as `edp-cicd-vault`. Development team uses access to secrets in the `edp-cicd-vault`for microservices development.
+* `EDP_NAMESPACE-cicd-vault`, where `EDP_NAMESPACE` is a name of the namespace where KubeRocketCI is deployed, such as `edp-cicd-vault`. Development team uses secrets in the `edp-cicd-vault` for microservices development.
 
 See a diagram below for more details:
 
-![eso-with-kubernetes](../assets/operator-guide/eso-k8s.png)
+![eso-with-kubernetes](../../assets/operator-guide/eso-k8s.png)
 
-In order to [Install KubeRocketCI](./install-kuberocketci.mdx), a list of passwords must be created. Secrets are provided automatically when using ESO.
+In order to [Install KubeRocketCI](../install-kuberocketci.mdx), a list of passwords must be created. Secrets are provided automatically when using ESO.
 
-1. Create a common namespace for secrets and EDP:
+1. Create a common namespace for secrets and platform:
 
     ```bash
     kubectl create namespace edp-vault
@@ -174,14 +176,15 @@ Apply the same approach for enabling secrets management in the namespaces used f
 
 ## AWS Systems Manager Parameter Store
 
-AWS SSM Parameter Store can be used as a [Secret Provider for ESO](https://external-secrets.io/latest/provider/aws-parameter-store). For EDP, it is recommended to use the [IAM Roles For Service Accounts approach](https://external-secrets.io/latest/provider/aws-parameter-store/#eks-service-account-credentials) (see a diagram below).
+AWS SSM Parameter Store can be used as a [Secret Provider for ESO](https://external-secrets.io/latest/provider/aws-parameter-store). For the platform, it is recommended to use the [IAM Roles For Service Accounts approach](https://external-secrets.io/latest/provider/aws-parameter-store/#eks-service-account-credentials) (see a diagram below).
 
-![eso-with-ssm](../assets/operator-guide/eso-ssm.png)
+![eso-with-ssm](../../assets/operator-guide/eso-ssm.png)
 
-### AWS Parameter Store in EDP Scenario
-In order to [Install KubeRocketCI](./install-kuberocketci.mdx), a list of passwords must be created. Follow the steps below, to get secrets from the SSM:
+### AWS Parameter Store Scenario in KubeRocketCI
 
-1. In the AWS, create an AWS IAM policy and an IAM role used by `ServiceAccount` in `SecretStore`. The IAM role must have permissions to get values from the SSM Parameter Store.<a name="step 1"></a>
+In order to [Install KubeRocketCI](../install-kuberocketci.mdx), a list of passwords must be created. Follow the steps below, to get secrets from the SSM:
+
+1. In the AWS, create an AWS IAM policy and an IAM role used by `ServiceAccount` in `SecretStore`. The IAM role must have permissions to get values from the SSM Parameter Store.
 
     a. Create an IAM policy that allows to get values from the Parameter Store with the `edp/` path. Use your `AWS Region` and `AWS Account Id`:
 
@@ -199,7 +202,7 @@ In order to [Install KubeRocketCI](./install-kuberocketci.mdx), a list of passwo
     }
     ```
 
-    b. Create an AWS IAM role with trust relationships (defined below) and attach the IAM policy. Put your string for `Federated` value ([see more](./enable-irsa.md) on IRSA enablement for EKS Cluster) and AWS region.<a name="step 1.b"></a>
+    b. Create an AWS IAM role with trust relationships (defined below) and attach the IAM policy. Put your string for `Federated` value ([see more](../enable-irsa.md) on IRSA enablement for EKS Cluster) and AWS region.
 
     ```json
     {
@@ -221,7 +224,7 @@ In order to [Install KubeRocketCI](./install-kuberocketci.mdx), a list of passwo
     }
     ```
 
-2. Create a secret in the AWS Parameter Store with the name `/edp/my-json-secret`. This secret is represented as a parameter of type string within the AWS Parameter Store:<a name="step 2"></a>
+2. Create a secret in the AWS Parameter Store with the name `/edp/my-json-secret`. This secret is represented as a parameter of type string within the AWS Parameter Store:
 
     <details>
       <summary><b>View: Parameter Store JSON</b></summary>
@@ -290,7 +293,7 @@ In order to [Install KubeRocketCI](./install-kuberocketci.mdx), a list of passwo
         {
           "cookie-secret": "XXXXXXXXXXXX"
         },
-        "keycloak-client-headlamp-secret":  "XXXXXXXXXXXX",
+        "keycloak-client-headlamp-secret": "XXXXXXXXXXXX",
         "ci-argocd":
         {
           "token": "argocd-token",
@@ -305,11 +308,9 @@ In order to [Install KubeRocketCI](./install-kuberocketci.mdx), a list of passwo
       ```
     </details>
 
-
-
 3. Set External Secret operator enabled by updating the values.yaml file:
 
-    ```yaml title="EDP install values.yaml"
+    ```yaml install values.yaml
     externalSecrets:
       enabled: true
     ```
@@ -324,6 +325,6 @@ In order to [Install KubeRocketCI](./install-kuberocketci.mdx), a list of passwo
     --atomic
     ```
 
-
 ## Related Articles
+
 * [Install External Secrets Operator](install-external-secrets-operator.md)

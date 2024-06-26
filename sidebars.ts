@@ -188,60 +188,19 @@ const sidebars: SidebarsConfig = {
         },
         {
           type: 'category',
-          label: 'Disaster Recovery',
+          label: 'Secrets Management',
           items: [
-            'operator-guide/disaster-recovery/install-velero',
-            'operator-guide/disaster-recovery/velero-irsa',
-            'operator-guide/disaster-recovery/velero-restore-platform',
+            'operator-guide/secrets-management/install-external-secrets-operator',
+            'operator-guide/secrets-management/external-secrets-operator-integration',
           ],
         },
         {
           type: 'category',
-          label: 'Integration',
+          label: 'Security and Compliance',
           items: [
-            {
-              type: 'category',
-              label: 'GitOps',
-              items: [
-                'operator-guide/argocd-integration',
-              ],
-            },
-            {
-              type: 'category',
-              label: 'Secrets Management',
-              items: [
-                'operator-guide/install-external-secrets-operator',
-                'operator-guide/external-secrets-operator-integration',
-              ],
-            },
-            {
-              type: 'category',
-              label: 'DevSecOps',
-              items: [
-                'operator-guide/overview-devsecops',
-                'operator-guide/artifacts-verification',
-              ],
-            },
-            {
-              type: 'category',
-              label: 'Logging',
-              items: [
-                'operator-guide/install-loki',
-                'operator-guide/multitenant-logging',
-                'operator-guide/schedule-pods-restart',
-                'operator-guide/kibana-ilm-rollover',
-              ],
-            },
-            'operator-guide/customize_deployment',
-            {
-              type: 'category',
-              label: 'Tekton',
-              items: [
-                'operator-guide/tekton-overview',
-                'operator-guide/tekton-monitoring',
-                'operator-guide/notification-msteams',
-              ],
-            },
+            'operator-guide/overview-devsecops',
+            'operator-guide/artifacts-verification',
+            'operator-guide/dependency-track',
             {
               type: 'category',
               label: 'AWS Integration',
@@ -254,7 +213,53 @@ const sidebars: SidebarsConfig = {
                 'operator-guide/configure-keycloak-oidc-eks',
               ],
             },
-            'operator-guide/dependency-track',
+          ],
+        },
+        {
+          type: 'category',
+          label: 'Monitoring and Observability',
+          items: [
+            'operator-guide/install-loki',
+            'operator-guide/multitenant-logging',
+            'operator-guide/kibana-ilm-rollover',
+          ],
+        },
+        {
+          type: 'category',
+          label: 'Continues Integration (CI)',
+          items: [
+            {
+              type: 'category',
+              label: 'Tekton',
+              items: [
+                'operator-guide/tekton-overview',
+                'operator-guide/tekton-monitoring',
+                'operator-guide/notification-msteams',
+              ],
+            },
+          ],
+        },
+        {
+          type: 'category',
+          label: 'Continues Delivery and Deployment (CD)',
+          items: [
+            'operator-guide/customize_deployment',
+            {
+              type: 'category',
+              label: 'GitOps',
+              items: [
+                'operator-guide/argocd-integration',
+              ],
+            },
+          ],
+        },
+        {
+          type: 'category',
+          label: 'Disaster Recovery',
+          items: [
+            'operator-guide/disaster-recovery/install-velero',
+            'operator-guide/disaster-recovery/velero-irsa',
+            'operator-guide/disaster-recovery/velero-restore-platform',
           ],
         },
         {

@@ -18,7 +18,7 @@ There are multiple ways to deploy KubeRocketCI:
   KubeRocketCI is aligned with industry standards for storing and managing sensitive data, ensuring optimal security. However, the use of custom solutions introduces uncertainties, thus the responsibility for the safety of your data is fully covered by the platform administrator.
 :::
 
-1. (Optional) KubeRocketCI manages secrets via `External Secret Operator` to integrate with a variety of tools. For more information about the secrets being used and how they are utilized, please refer to the [External Secrets Operator Integration](./external-secrets-operator-integration.md) guide.
+1. (Optional) KubeRocketCI manages secrets via `External Secret Operator` to integrate with a variety of tools. For more information about the secrets being used and how they are utilized, please refer to the [External Secrets Operator Integration](./secrets-management/external-secrets-operator-integration.md) guide.
 
 2. (Optional) Deploy and configure Keycloak to enable Single Sign-On approach. To see the details on how to configure Keycloak correctly, please refer to the [Install Keycloak](./advanced-installation/keycloak.md#configuration) page.
 
@@ -158,7 +158,7 @@ There are multiple ways to deploy KubeRocketCI:
     The supported container registries include AWS ECR, DockerHub, Harbor, OpenShift (OCR), Nexus, and GitHub (GHCR). This integration simplifies the process
     of storing and managing container images across various environments.
 
-    For more details on integrating these container registries with KubeRocketCI, refer to the following documentation: [Container Registries Integration Guide](./change-container-registry.md) and [Manage Container Registries](../user-guide/manage-change-container-registry.md)
+    For more details on integrating these container registries with KubeRocketCI, refer to the following documentation: [Container Registries Integration Guide](../user-guide/change-container-registry.md) and [Manage Container Registries](../user-guide/manage-container-registries.md)
 
     For example, to enable [Harbor](artifacts-management/harbor-integration.md) as a registry storage, use the values below:
 

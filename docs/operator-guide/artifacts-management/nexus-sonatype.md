@@ -141,13 +141,13 @@ To create the Nexus `ci.user` and define repository parameters follow the steps 
 
       ![Nexus managed by external secret operator](../../assets/operator-guide/nexus-externalsecret-password.png "Nexus managed by external secret operator")
 
-      More detail of External Secrets Operator Integration can found on [the following page](https://epam.github.io/edp-install/operator-guide/external-secrets-operator-integration/)
+      More detail of External Secrets Operator Integration can found on [the following page](../secrets-management/external-secrets-operator-integration.md)
       </TabItem>
   </Tabs>
 
 ## Related Articles
 
 * [Install KubeRocketCI](../install-kuberocketci.mdx)
-* [Install External Secrets Operator](../install-external-secrets-operator.md)
-* [External Secrets Operator Integration](../external-secrets-operator-integration.md)
+* [Install External Secrets Operator](../secrets-management/install-external-secrets-operator.md)
+* [External Secrets Operator Integration](../secrets-management/external-secrets-operator-integration.md)
 * [Cluster Add-Ons Overview](../add-ons-overview.md)

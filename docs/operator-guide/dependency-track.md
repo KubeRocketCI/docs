@@ -67,12 +67,12 @@ To install DependencyTrack use [EDP addons](add-ons-overview.md) approach.
 
     ![DependencyTrack managed by external secret operator](../assets/operator-guide/dependency-track-external-secret.png "DependencyTrack managed by external secret operator")
 
-    More detail on External Secrets Operator Integration can be found on [the following page](external-secrets-operator-integration.md)
+    More detail on External Secrets Operator Integration can be found on [the following page](./secrets-management/external-secrets-operator-integration.md)
 
 After following the instructions provided, you should be able to integrate your DependencyTrack with the EPAM Delivery Platform.
 
 ## Related Articles
 
-* [Install External Secrets Operator](install-external-secrets-operator.md)
-* [External Secrets Operator Integration](external-secrets-operator-integration.md)
+* [Install External Secrets Operator](./secrets-management/install-external-secrets-operator.md)
+* [External Secrets Operator Integration](./secrets-management/external-secrets-operator-integration.md)
 * [Cluster Add-Ons Overview](add-ons-overview.md)

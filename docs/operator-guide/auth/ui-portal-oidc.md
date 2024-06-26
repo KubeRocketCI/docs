@@ -40,7 +40,7 @@ To proceed with the Keycloak configuration, perform the following:
 
     ![Keycloak client configuration](../../assets/operator-guide/headlamp-oidc-keycloak-2.png "Keycloak client configuration")
 
-2. Configure the Keycloak client key in Kubernetes using the Kubernetes secrets or the [External Secrets Operator](../external-secrets-operator-integration.md):
+2. Configure the Keycloak client key in Kubernetes using the Kubernetes secrets or the [External Secrets Operator](../secrets-management/external-secrets-operator-integration.md):
 
     ```yaml
     apiVersion: v1
@@ -94,4 +94,4 @@ By default, "Access Token Lifespan" value is 5 minutes.
 ## Related Articles
 
 * [EKS OIDC With Keycloak](../configure-keycloak-oidc-eks.md)
-* [External Secrets Operator](../external-secrets-operator-integration.md)
+* [External Secrets Operator](../secrets-management/external-secrets-operator-integration.md)

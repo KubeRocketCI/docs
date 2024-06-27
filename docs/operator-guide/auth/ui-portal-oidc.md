@@ -59,7 +59,7 @@ To proceed with the Keycloak configuration, perform the following:
 
 Portal is integrated in Kubernetes in three steps:
 
-1. Update the [values.yaml](../install-kuberocketci.mdx#values) file by enabling OIDC:
+1. Update the [values.yaml](../install-kuberocketci.md#values) file by enabling OIDC:
 
     :::note values.yaml
 

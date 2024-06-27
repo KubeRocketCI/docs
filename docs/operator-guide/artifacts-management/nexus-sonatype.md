@@ -147,7 +147,7 @@ To create the Nexus `ci.user` and define repository parameters follow the steps 
 
 ## Related Articles
 
-* [Install KubeRocketCI](../install-kuberocketci.mdx)
+* [Install KubeRocketCI](../install-kuberocketci.md)
 * [Install External Secrets Operator](../secrets-management/install-external-secrets-operator.md)
 * [External Secrets Operator Integration](../secrets-management/external-secrets-operator-integration.md)
 * [Cluster Add-Ons Overview](../add-ons-overview.md)

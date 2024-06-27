@@ -62,7 +62,7 @@ The "build-image-kaniko" stage manages [ECR](https://aws.amazon.com/ecr/) throug
 
 3. Attach the `AWSIRSA<CLUSTER_NAME><EDP_NAMESPACE>Kaniko_policy` policy to the `AWSIRSA<CLUSTER_NAME><EDP_NAMESPACE>Kaniko` role.
 
-4. Define the resulted **arn** role value into the **kaniko.roleArn** parameter in values.yaml during the [KubeRocketCI installation](../../install-kuberocketci.mdx).
+4. Define the resulted **arn** role value into the **kaniko.roleArn** parameter in values.yaml during the [KubeRocketCI installation](../../install-kuberocketci.md).
 
 ## Related Articles
 

@@ -347,7 +347,7 @@ To create a Keycloak user in the Master realm who can manage other realms, follo
 1. Create the `edp_<EDP_PROJECT>` user and set the password in the `Master` realm.
 
     :::note
-      This user should be used by Keycloak Operator to access Keycloak. Please refer to the [Install KubeRocketCI](../install-kuberocketci.mdx) page for details.
+      This user should be used by Keycloak Operator to access Keycloak. Please refer to the [Install KubeRocketCI](../install-kuberocketci.md) page for details.
     :::
 
 2. In the `Role Mapping` tab, assign the proper roles to the user:
@@ -371,6 +371,6 @@ To create a Keycloak user in the Master realm who can manage other realms, follo
 
 ## Related Articles
 
-* [Install KubeRocketCI](../install-kuberocketci.mdx)
+* [Install KubeRocketCI](../install-kuberocketci.md)
 * [Install Harbor](../artifacts-management/harbor-installation.md)
 * [Install via Add-Ons](../add-ons-overview.md)

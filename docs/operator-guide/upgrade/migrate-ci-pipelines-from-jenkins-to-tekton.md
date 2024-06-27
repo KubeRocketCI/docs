@@ -91,5 +91,5 @@ Go to the codebase Custom Resource and change the `spec.ciTool` field from `jenk
 
 ## Related Articles
 
-* [Install KubeRocketCI](../install-kuberocketci.mdx)
+* [Install KubeRocketCI](../install-kuberocketci.md)
 * [Install Tekton](../install-tekton.md)

@@ -1,7 +1,7 @@
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-# KubeRocketCI Project Rules. Working Process
+# KubeRocketCI Contribution
 
 This page contains the details on the project rules and working process for KubeRocketCI team and contributors. Explore the main points about working with GitHub, following the main commit flow, as well as the details about commit types and message below.
 
@@ -126,35 +126,34 @@ With KubeRocketCI, the main workflow is based on the getting a Jira task and cre
 
     b. Commit message:
 
-    * brief, for example:
+        * brief, for example:
 
-      ``fix: Remove secretKey duplication from registry secrets (#63)``
+          `fix: Remove secretKey duplication from registry secrets (#63)`
 
-      or
+          or
 
-    * descriptive, for example:
+        * descriptive, for example:
 
-      ```bash
-      feat: Provide the ability to configure hadolint check (#88)
+          ```bash
+          feat: Provide the ability to configure hadolint check (#88)
 
-      * Add configuration files .hadolint.yaml and .hadolint.yml to stash
-      ```
+          * Add configuration files .hadolint.yaml and .hadolint.yml to stash
+          ```
 
-      :::note
-        It is mandatory to start a commit message from a capital letter.
-      :::
+          :::note
+            It is mandatory to start a commit message from a capital letter.
+          :::
 
     c. GitHub tickets are typically identified using a number preceded by the **#** sign and enclosed in parentheses.
 
     :::note
       Make sure there is a descriptive commit message for a breaking change Pull Request. For example:
+        ```bash
+          feat!: Add ingress links column into Applications table on stage page (#77)
 
-      ```bash
-        feat!: Add ingress links column into Applications table on stage page (#77)
-
-        BREAKING CHANGE: Ingress links column has been added into the Applications
-        table on the stage details page
-      ```
+          BREAKING CHANGE: Ingress links column has been added into the Applications
+          table on the stage details page
+        ```
     :::
 
 4. Create a Pull Request, for details, please refer to the [Code Review Process](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/reviewing-changes-in-pull-requests/about-pull-request-reviews):
@@ -163,15 +162,14 @@ With KubeRocketCI, the main workflow is based on the getting a Jira task and cre
 
   :::caution
     If a Pull Request contains both new functionality and breaking changes, make sure the functionality description is placed before the breaking changes. For example:
+      ```bash
+        feat!: Update CRD version to the v1beta1
 
-    ```bash
-      feat!: Update CRD version to the v1beta1
+        * Implement Developers group creation process
+        * Align group permissions
 
-      * Implement Developers group creation process
-      * Align group permissions
-
-      BREAKING CHANGES: Update CRD version to the v1beta1
-    ```
+        BREAKING CHANGES: Update CRD version to the v1beta1
+      ```
   :::
 
 ## Related Articles

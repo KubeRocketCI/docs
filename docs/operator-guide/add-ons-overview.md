@@ -6,7 +6,7 @@ This page provides an overview of Cluster Add-Ons for KubeRocketCI, including th
 
 KubeRocketCI Add-Ons is essentially a Kubernetes-based deployment pattern that allows users to easily install additional components for the platform using Argo CD applications.
 
-Add-Ons have been introduced into KubeRocketCI starting from version 3.4.0. They empower users to seamlessly integrate the platform with various additional components, such as SonarQube, Nexus, Keycloak, Jira, and more. This eliminates the need for manual installations, as described in the [Install KubeRocketCI](../operator-guide/install-kuberocketci.mdx) page.
+Add-Ons have been introduced into KubeRocketCI starting from version 3.4.0. They empower users to seamlessly integrate the platform with various additional components, such as SonarQube, Nexus, Keycloak, Jira, and more. This eliminates the need for manual installations, as described in the [Install KubeRocketCI](../operator-guide/install-kuberocketci.md) page.
 
 In a nutshell, Add-Ons are separate Helm Charts that can be installed with just one click using the Argo CD tool.
 

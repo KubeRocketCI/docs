@@ -672,7 +672,7 @@ To install ReportPortal, follow the steps below:
 
 ## Related Articles
 
-* [Install KubeRocketCI](../install-kuberocketci.mdx)
+* [Install KubeRocketCI](../install-kuberocketci.md)
 * [Install via AWS Marketplace](../aws-marketplace-install.md)
 * [Install via Civo Marketplace](../install-via-civo.md)
 * [Install via Add-Ons](../add-ons-overview.md)

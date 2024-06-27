@@ -258,5 +258,5 @@ Also, the `jenkins-agent-opt-java-openjdk-lib-security-cacerts` secret contains 
 
 ## Related Articles
 
-* [Install KubeRocketCI](../install-kuberocketci.mdx)
+* [Install KubeRocketCI](../install-kuberocketci.md)
 * [Install Keycloak](../auth/keycloak.md)

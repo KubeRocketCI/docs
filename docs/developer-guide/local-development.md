@@ -120,4 +120,4 @@ That's it, you're all set! Good luck in coding!
 
 ## Related Articles
 
-* [KubeRocketCI Project Rules. Working Process](./edp-workflow.mdx)
+* [KubeRocketCI Project Rules. Working Process](./edp-workflow.md)

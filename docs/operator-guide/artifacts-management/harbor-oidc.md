@@ -7,7 +7,7 @@ This guide outlines the steps for integrating [OIDC (OpenID Connect) authorizati
 Before the beginning, ensure your installation meets the following criteria:
 
 * [Keycloak](../auth/keycloak.md) is installed;
-* [KubeRocketCI](../install-kuberocketci.mdx) is installed.
+* [KubeRocketCI](../install-kuberocketci.md) is installed.
 
 ## Configure Keycloak
 

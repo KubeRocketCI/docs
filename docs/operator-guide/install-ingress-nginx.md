@@ -96,4 +96,4 @@ serviceAccount:
 ## Related Articles
 
 * [Install via Add-Ons](add-ons-overview.md)
-* [Install KubeRocketCI](install-kuberocketci.mdx)
+* [Install KubeRocketCI](install-kuberocketci.md)

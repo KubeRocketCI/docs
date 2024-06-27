@@ -127,6 +127,6 @@ To remove container registry integration from KubeRocketCI, follow the steps bel
 
 ## Related Articles
 
-* [Install KubeRocketCI](../operator-guide/install-kuberocketci.mdx)
+* [Install KubeRocketCI](../operator-guide/install-kuberocketci.md)
 * [Install Harbor](../operator-guide/artifacts-management/harbor-installation.md)
 * [Change Container Registry](../operator-guide/change-container-registry.md)

@@ -71,5 +71,5 @@ After customization, the following message is supposed to appear in the channel 
 
 ## Related Articles
 
-* [Install KubeRocketCI](../install-kuberocketci.mdx)
+* [Install KubeRocketCI](../install-kuberocketci.md)
 * [Install Tekton](../install-tekton.md)

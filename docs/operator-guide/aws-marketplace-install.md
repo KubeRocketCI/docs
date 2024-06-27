@@ -85,7 +85,7 @@ As a result, you will get access to KubeRocketCI components via KubeRocketCI Por
 
 * [KubeRocketCI on AWS Marketplace](https://aws.amazon.com/marketplace/pp/prodview-u7xcz6pvwwwoa#pdp-overview)
 * [Manage Git Providers](../user-guide/add-git-server.md)
-* [Set Up Kubernetes](kubernetes-cluster-settings.mdx)
-* [Set Up OpenShift](openshift-cluster-settings.mdx)
+* [Set Up Kubernetes](kubernetes-cluster-settings.md)
+* [Set Up OpenShift](openshift-cluster-settings.md)
 * [KubeRocketCI Installation Prerequisites Overview](prerequisites.md)
 * [UI Portal OIDC Integration](auth/ui-portal-oidc.md)

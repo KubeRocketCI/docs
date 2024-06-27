@@ -187,5 +187,5 @@ the [values.yaml](https://github.com/goharbor/harbor-helm/blob/master/values.yam
 
 ## Related Articles
 
-* [Install KubeRocketCI](../install-kuberocketci.mdx)
+* [Install KubeRocketCI](../install-kuberocketci.md)
 * [Integrate Harbor With EDP Pipelines](../artifacts-management/harbor-integration.md)

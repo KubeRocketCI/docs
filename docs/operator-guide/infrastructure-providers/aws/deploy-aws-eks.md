@@ -489,4 +489,4 @@ Please find the detailed description of the variables in the [argo-cd/variables.
 ## Related Articles
 
 * [Cluster Add-Ons Overview](../../add-ons-overview.md)
-* [Install KubeRocketCI](../../install-kuberocketci.mdx)
+* [Install KubeRocketCI](../../install-kuberocketci.md)

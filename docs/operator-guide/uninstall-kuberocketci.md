@@ -34,4 +34,4 @@ To uninstall platform, perform the following steps:
 
 ## Related Articles
 
-* [Install KubeRocketCI](install-kuberocketci.mdx)
+* [Install KubeRocketCI](install-kuberocketci.md)

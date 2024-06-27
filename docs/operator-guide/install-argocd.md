@@ -6,7 +6,7 @@ Review the necessary prerequisites and follow the detailed steps to successfully
 
 The following tools must be installed:
 
-* [KubeRocketCI](./install-kuberocketci.mdx)
+* [KubeRocketCI](./install-kuberocketci.md)
 * [Kubectl version 1.23+](https://kubernetes.io/docs/tasks/tools/)
 * [Helm version 3.10+](https://github.com/helm/helm/releases)
 * [Keycloak](./auth/keycloak.md) (optional)

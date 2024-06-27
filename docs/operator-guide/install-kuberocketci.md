@@ -3,7 +3,7 @@ import TabItem from '@theme/TabItem';
 
 # Install KubeRocketCI
 
-Inspect the main steps to install KubeRocketCI. Please check the [Prerequisites Overview](prerequisites.md) page before starting the installation. Also, to authenticate each of the release artifacts, please refer to the [Verification of KubeRocketCI Artifacts](devsecops/artifacts-verification.md) guide.
+Inspect the main steps to install KubeRocketCI. Please check the [Prerequisites Overview](prerequisites.md) page before starting the installation. Also, to authenticate each of the release artifacts, please refer to the [Verification of KubeRocketCI Artifacts](../developer-guide/artifacts-verification.md) guide.
 There are multiple ways to deploy KubeRocketCI:
 
 * Using Helm (see below);
@@ -262,8 +262,8 @@ There are multiple ways to deploy KubeRocketCI:
 
 * [Quick Start](../quick-start/platform-installation.md)
 * [Manage Git Providers](../user-guide/add-git-server.md)
-* [Set Up Kubernetes](kubernetes-cluster-settings.mdx)
-* [Set Up OpenShift](openshift-cluster-settings.mdx)
+* [Set Up Kubernetes](kubernetes-cluster-settings.md)
+* [Set Up OpenShift](openshift-cluster-settings.md)
 * [EDP Installation Prerequisites Overview](prerequisites.md)
 * [UI Portal OIDC Integration](auth/ui-portal-oidc.md)
-* [Verification of EDP Artifacts](devsecops/artifacts-verification.md)
+* [Verification of EDP Artifacts](../developer-guide/artifacts-verification.md)

@@ -100,5 +100,5 @@ Navigate to the [Integrate SonarQube](../quick-start/integrate-sonarcloud.md) pa
 ## Related Articles
 
 * [Install via AWS Marketplace](aws-marketplace-install.md)
-* [Install KubeRocketCI](install-kuberocketci.mdx)
+* [Install KubeRocketCI](install-kuberocketci.md)
 * [Integrate SonarQube](../quick-start/integrate-sonarcloud.md)

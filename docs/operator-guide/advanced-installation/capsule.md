@@ -1,6 +1,6 @@
 # Install Capsule
 
-This article explains how the KubeRocketCI leverages Capsule capabilities to enable isolation for both the [core](../install-kuberocketci.mdx) platform components and the business applications [workload](../../user-guide/add-cd-pipeline.md).
+This article explains how the KubeRocketCI leverages Capsule capabilities to enable isolation for both the [core](../install-kuberocketci.md) platform components and the business applications [workload](../../user-guide/add-cd-pipeline.md).
 
 KubeRocketCI uses Capsule to ensure resource isolation. It is essential to define constraints through the Capsule tenant approach. This approach serves two primary objectives: limiting the resources allocated to the KubeRocketCI components and regulating the resources utilized by each deployed environment.
 
@@ -219,5 +219,5 @@ By following these instructions, Capsule policies are utilized to manage the Kub
 
 ## Related Articles
 
-* [Install KubeRocketCI With Values File](../install-kuberocketci.mdx)
+* [Install KubeRocketCI With Values File](../install-kuberocketci.md)
 * [Cluster Add-Ons Overview](../add-ons-overview.md)

@@ -23,5 +23,5 @@ In our testing flow, each release is verified by the following tests:
 
 ## Related Articles
 
-* [KubeRocketCI Project Rules. Working Process](edp-workflow.mdx)
+* [KubeRocketCI Project Rules. Working Process](edp-workflow.md)
 * [Operator Development](local-development.md)

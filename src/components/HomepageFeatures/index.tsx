@@ -1,6 +1,14 @@
 import clsx from "clsx";
 import Heading from "@theme/Heading";
 import styles from "./styles.module.css";
+import RocketLaunchIcon from "@mui/icons-material/RocketLaunch";
+import ScienceOutlinedIcon from '@mui/icons-material/ScienceOutlined';
+import AutoGraphIcon from '@mui/icons-material/AutoGraph';
+import TroubleshootIcon from '@mui/icons-material/Troubleshoot';
+import KeyIcon from '@mui/icons-material/Key';
+import HandymanIcon from '@mui/icons-material/Handyman';
+import SyncIcon from '@mui/icons-material/Sync';
+import RecommendIcon from '@mui/icons-material/Recommend';
 
 type FeatureItem = {
   title: string;
@@ -12,7 +20,7 @@ type FeatureItem = {
 const FeatureList: FeatureItem[] = [
   {
     title: "Application scaffolding",
-    Svg: require("@site/static/img/logo.svg").default,
+    Svg: HandymanIcon,
     description: (
       <>
         Accelerate your delivery process with our versatile Application
@@ -24,7 +32,7 @@ const FeatureList: FeatureItem[] = [
   },
   {
     title: "CI/CD pipelines",
-    Svg: require("@site/static/img/logo.svg").default,
+    Svg: RocketLaunchIcon,
     description: (
       <>
         Leverage the power of Kubernetes native pipelines for seamless
@@ -35,7 +43,7 @@ const FeatureList: FeatureItem[] = [
   },
   {
     title: "GitOps",
-    Svg: require("@site/static/img/logo.svg").default,
+    Svg: SyncIcon,
     description: (
       <>
         Implement the GitOps approach for efficient deployment of your code and
@@ -47,7 +55,7 @@ const FeatureList: FeatureItem[] = [
   },
   {
     title: "Single sign-on",
-    Svg: require("@site/static/img/logo.svg").default,
+    Svg: KeyIcon,
     description: (
       <>
         Seamlessly integrate with your Enterprise Single Sign-On for a smooth
@@ -60,7 +68,7 @@ const FeatureList: FeatureItem[] = [
   },
   {
     title: "Optimized for Kubernetes",
-    Svg: require("@site/static/img/logo.svg").default,
+    Svg: require("@site/static/img/kubernetes.svg").default,
     description: (
       <>
         Experience the power of Kubernetes-native functionality. Our platform is
@@ -72,7 +80,7 @@ const FeatureList: FeatureItem[] = [
   },
   {
     title: "Advanced Security Analysis",
-    Svg: require("@site/static/img/logo.svg").default,
+    Svg: TroubleshootIcon,
     description: (
       <>
         Achieve excellence in DevSecOps with our platform. We prioritize
@@ -84,7 +92,7 @@ const FeatureList: FeatureItem[] = [
   },
   {
     title: "Automated Test Analysis",
-    Svg: require("@site/static/img/logo.svg").default,
+    Svg: ScienceOutlinedIcon,
     description: (
       <>
         Streamline your operations with our automated test analysis. Ensure your
@@ -97,7 +105,7 @@ const FeatureList: FeatureItem[] = [
   },
   {
     title: "Comprehensive Metrics",
-    Svg: require("@site/static/img/logo.svg").default,
+    Svg: AutoGraphIcon,
     description: (
       <>
         Gain access to your application logs and metrics with ease. Explore your
@@ -109,7 +117,7 @@ const FeatureList: FeatureItem[] = [
   },
   {
     title: "Open-Source Software Solutions",
-    Svg: require("@site/static/img/logo.svg").default,
+    Svg: RecommendIcon,
     description: (
       <>
         Experience the power of open-source with KubeRocketCI. Licensed under Apache 2.0,

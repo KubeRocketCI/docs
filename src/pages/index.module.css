@@ -21,3 +21,10 @@
   align-items: center;
   gap: 10px;
 }
+
+.buttonsGrid {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}

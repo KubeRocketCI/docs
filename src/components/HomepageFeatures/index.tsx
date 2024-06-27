@@ -64,7 +64,7 @@ const FeatureList: FeatureItem[] = [
         environment that aligns with your enterprise’s unique needs.
       </>
     ),
-    link: "docs/operator-guide/install-keycloak/",
+    link: "docs/operator-guide/auth/platform-auth-model/",
   },
   {
     title: "Optimized for Kubernetes",
@@ -101,7 +101,7 @@ const FeatureList: FeatureItem[] = [
         efficiency.
       </>
     ),
-    link: "docs/operator-guide/advanced-install/reportportal/",
+    link: "docs/operator-guide/project-management-and-reporting/install-reportportal/",
   },
   {
     title: "Comprehensive Metrics",

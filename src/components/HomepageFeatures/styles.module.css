@@ -9,3 +9,13 @@
   height: 20px;
   width: 20px;
 }
+
+.grid {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.title {
+  margin: 0;
+}

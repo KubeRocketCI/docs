@@ -11,7 +11,7 @@ export default function Hello() {
           <div className="section__content">
             <h1 className="h1">Pricing</h1>
             <p className="page-description">
-              Experience the flexibility of deploying the EPAM Delivery Platform
+              Experience the flexibility of deploying the KubeRocketCI
               on your on-premises infrastructure or in the Cloud. Your valuable
               data remains securely within your perimeter, ensuring
               uncompromising security at every step.
@@ -217,7 +217,7 @@ export default function Hello() {
                     </td>
                     <td>
                       Onboard new Framework or Build tool with CI Pipelines:
-                      Implement EDP standard CI Pipeline steps (build, test,
+                      Implement KubeRocketCI standard CI Pipeline steps (build, test,
                       lint, push)
                     </td>
                     <td>40</td>
@@ -225,7 +225,7 @@ export default function Hello() {
                   <tr>
                     <td>
                       Marketplace Template Development: Create new Template,
-                      Implement EDP standard CI Pipeline steps (build, test,
+                      Implement KubeRocketCI standard CI Pipeline steps (build, test,
                       lint, push)
                     </td>
                     <td>40</td>
@@ -241,13 +241,13 @@ export default function Hello() {
                   </tr>
                   <tr>
                     <td>
-                      Integrate custom tool with EDP Portal UI over Kubernetes
+                      Integrate custom tool with KubeRocketCI Portal UI over Kubernetes
                       API
                     </td>
                     <td>40</td>
                   </tr>
                   <tr>
-                    <td>Integrate custom tool with EDP Portal UI over API</td>
+                    <td>Integrate custom tool with KubeRocketCI Portal UI over API</td>
                     <td>80</td>
                   </tr>
                   <tr>
@@ -272,11 +272,11 @@ export default function Hello() {
               within your subscription plan, encompassing expertise from diverse
               specialists such as business analysts, architects, lead automation
               engineers, DevOps (System Engineers), and performance engineers.
-              These multi-functional hours cater to EDP installation,
+              These multi-functional hours cater to KubeRocketCI installation,
               configuration, integration, customization, feature implementation,
               updates, and use case implementation. They empower you to leverage
               a range of expertise for various aspects of optimizing and
-              enhancing your EDP experience.
+              enhancing your KubeRocketCI experience.
             </p>
             <p className="definition">
               <sup>**</sup>

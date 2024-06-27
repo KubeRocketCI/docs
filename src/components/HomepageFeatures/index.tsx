@@ -28,7 +28,7 @@ const FeatureList: FeatureItem[] = [
     description: (
       <>
         Leverage the power of Kubernetes native pipelines for seamless
-        application management with the comprehensive EDP Library.
+        application management with the comprehensive KubeRocketCI Library.
       </>
     ),
     link: "docs/user-guide/application/",
@@ -112,7 +112,7 @@ const FeatureList: FeatureItem[] = [
     Svg: require("@site/static/img/logo.svg").default,
     description: (
       <>
-        Experience the power of open-source with EDP. Licensed under Apache 2.0,
+        Experience the power of open-source with KubeRocketCI. Licensed under Apache 2.0,
         we equip you with leading open-source tools designed to enhance the
         reliability of your delivery process.
       </>

@@ -1,6 +1,6 @@
 # Working With Documentation
 
-This section defines necessary steps to start developing the EDP documentation in the MkDocs Framework.
+This section defines necessary steps to start developing the KubeRocketCI documentation in the MkDocs Framework.
 The framework presents a static site generator with documentation written in Markdown. All the docs are configured with
 a YAML configuration file.
 

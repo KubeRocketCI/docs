@@ -53,16 +53,16 @@ const sidebars: SidebarsConfig = {
               label: 'CD Pipelines - Deploy',
               collapsible: false,
               items: [
-                'quick-start/integrate-argocd', // Integrate Argo CD
-                'quick-start/deploy-application', // Deploy Application
+                'quick-start/integrate-argocd',
+                'quick-start/deploy-application',
               ],
             },
           ],
         },
-        'basic-concepts', // Basic Concepts
-        'glossary', // Glossary
-        'supported-versions', // Supported Versions
-        'compliance', // Compliance
+        'basic-concepts',
+        'glossary',
+        'supported-versions',
+        'compliance',
       ],
     },
   ],
@@ -462,10 +462,10 @@ const sidebars: SidebarsConfig = {
       label: 'Developer Guide',
       collapsible: false,
       items: [
-        'developer-guide/index', // Overview
-        'developer-guide/reference-architecture', // Reference Architecture
-        'developer-guide/kubernetes-deployment', // Kubernetes Deployment
-        'developer-guide/reference-cicd-pipeline', // Reference CI/CD Pipeline
+        'developer-guide/index',
+        'developer-guide/reference-architecture',
+        'developer-guide/kubernetes-deployment',
+        'developer-guide/reference-cicd-pipeline',
         {
           type: 'category',
           label: 'Cloud Providers',
@@ -475,9 +475,9 @@ const sidebars: SidebarsConfig = {
               type: 'category',
               label: 'AWS',
               items: [
-                'developer-guide/aws-reference-architecture', // EDP Reference Architecture on AWS
-                'developer-guide/aws-deployment-diagram', // EDP Deployment on AWS
-                'developer-guide/aws-infrastructure-cost-estimation', // AWS Infrastructure Cost Estimation
+                'developer-guide/aws-reference-architecture',
+                'developer-guide/aws-deployment-diagram',
+                'developer-guide/aws-infrastructure-cost-estimation',
               ],
             },
             // Uncomment or add more cloud providers as needed
@@ -503,15 +503,15 @@ const sidebars: SidebarsConfig = {
           type: 'category',
           label: 'Development',
           items: [
-            'developer-guide/edp-workflow', // KubeRocketCI Project Rules. Working Process
-            'developer-guide/local-development', // Operator Development
-            'developer-guide/mk-docs-development', // Working With Documentation
+            'developer-guide/edp-workflow',
+            'developer-guide/local-development',
+            'developer-guide/mk-docs-development',
           ],
         },
         'developer-guide/artifacts-verification',
-        'developer-guide/autotest-coverage', // Quality Control
-        'developer-guide/telemetry', // Telemetry
-        'developer-guide/annotations-and-labels', // Annotations and Labels
+        'developer-guide/autotest-coverage',
+        'developer-guide/telemetry',
+        'developer-guide/annotations-and-labels',
       ],
     },
   ],

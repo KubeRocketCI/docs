@@ -18,7 +18,7 @@ The diagram above describes the following:
 * `Common-library` is the Helm chart of Library type which stores the common logic shareable across all Tekton pipelines.
 This library contains Helm templates that generate common Tekton resources.
 
-* `Pipelines-library` is the Helm chart of the Application type which stores the core logic for the EDP pipelines.
+* `Pipelines-library` is the Helm chart of the Application type which stores the core logic for the KubeRocketCI pipelines.
 Tekton CRs like Pipelines, Tasks, EventListeners, Triggers, TriggerTemplates, and other resources are delivered with
 this chart.
 

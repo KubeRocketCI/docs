@@ -17,8 +17,7 @@ function HomepageHeader() {
         </Heading>
         <p className="hero__subtitle">{siteConfig.tagline}</p>
         Boost your delivery with the development culture based on the modern
-        CI/CD stack, golden path and self-service capabilities of the EPAM
-        Delivery Platform (EDP).
+        CI/CD stack, golden path and self-service capabilities of the KubeRocketCI.
         <div className={styles.buttonsGrid}>
           <div className={styles.buttons}>
             <Link
@@ -31,7 +30,7 @@ function HomepageHeader() {
           <div className={styles.buttons}>
             <Link
               className="button button--primary button--lg"
-              to="mailto:SupportEPMD-EDP@epam.com?subject=EDP Demo Request"
+              to="mailto:SupportEPMD-EDP@epam.com?subject=KubeRocketCI Demo Request"
             >
               Request Demo
             </Link>

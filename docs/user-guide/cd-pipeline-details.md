@@ -17,7 +17,7 @@ The codebase stream is used as a holder for the output of the stage, i.e. after 
 Every codebase has a branch that has its own codebase stream - a Docker container that is an output of the build for the corresponding branch.
 
 :::note
-  For more information on the main terms used in EPAM Delivery Platform, please refer to the [KubeRocketCI Glossary](../glossary.md)
+  For more information on the main terms used in KubeRocketCI, please refer to the [KubeRocketCI Glossary](../glossary.md)
 :::
 
 ![KubeRocketCI CD pipeline](../assets/user-guide/edp-cd-pipeline.png "KubeRocketCI CD pipeline")

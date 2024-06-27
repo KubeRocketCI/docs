@@ -93,7 +93,7 @@ To start from, it is required to add both Secret with SSH key, API token, and Gi
       <TabItem value="portal">
       Navigate to **Configuration** -> **Git Servers**. Fill in the required fields:
 
-      ![VCS Integration in EDP portal](../assets/operator-guide/github_integration.png "Project access tokens")
+      ![VCS Integration in KubeRocketCI portal](../assets/operator-guide/github_integration.png "Project access tokens")
       </TabItem>
 
       <TabItem value="kubectl">

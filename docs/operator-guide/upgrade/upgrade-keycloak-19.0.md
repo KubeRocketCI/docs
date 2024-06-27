@@ -120,7 +120,7 @@ To upgrade Keycloak by upgrading [Postgres Database](https://www.postgresql.org/
     image:
       tag: "19.0.1"
 
-    # start: create OpenShift realm which is required by EDP
+    # start: create OpenShift realm which is required by KubeRocketCI
     extraInitContainers: |
       - name: realm-provider
         image: busybox
@@ -582,7 +582,7 @@ To upgrade Keycloak by migrating Postgres database from Postgres v.11.x to v.14.
     image:
       tag: "19.0.1"
 
-    # start: create OpenShift realm which is required by EDP
+    # start: create OpenShift realm which is required by KubeRocketCI
     extraInitContainers: |
       - name: realm-provider
         image: busybox

@@ -4,7 +4,7 @@ This page provides a concise overview of the advanced components available in Ku
 
 ## Third-Party Components
 
-Find below the list of the key components used by EPAM Delivery Platform:
+Find below the list of the key components used by KubeRocketCI:
 
 Here's the table with the added 'Description' column containing a short description for each component:
 

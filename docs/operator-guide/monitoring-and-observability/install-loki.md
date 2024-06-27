@@ -1,6 +1,6 @@
 # Install Grafana Loki
 
-EDP configures the logging with the help of [Grafana Loki](https://grafana.com/oss/loki/) aggregation system.
+KubeRocketCI configures the logging with the help of [Grafana Loki](https://grafana.com/oss/loki/) aggregation system.
 
 ## Installation
 

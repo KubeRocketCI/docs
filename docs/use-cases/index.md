@@ -1,6 +1,6 @@
 # Overview
 
-The Use Cases section provides useful recommendations of how to operate with the EPAM Delivery Platform tools and manage the custom resources. Get acquainted with the description of technical scenarios and solutions.
+The Use Cases section provides useful recommendations of how to operate with the KubeRocketCI tools and manage the custom resources. Get acquainted with the description of technical scenarios and solutions.
 
 ## Scaffold And Deploy FastAPI Application
 
@@ -14,7 +14,7 @@ The Use Cases section provides useful recommendations of how to operate with the
 
     ---
 
-    Facilitate the onboarding of custom tools and frameworks into the EPAM Delivery Platform by integrating custom Tekton libraries, empowering the modification of pipelines and tasks for tailored workflows.
+    Facilitate the onboarding of custom tools and frameworks into the KubeRocketCI by integrating custom Tekton libraries, empowering the modification of pipelines and tasks for tailored workflows.
 
     [Summon the Kraken](tekton-custom-pipelines)
 
@@ -22,7 +22,7 @@ The Use Cases section provides useful recommendations of how to operate with the
 
     ---
 
-    Ensure secure handling of sensitive data by leveraging an external secret store within the EPAM Delivery Platform, allowing secure transmission and usage of confidential information across namespaces, facilitating secure connections to databases during development and deployment, tailored for Developers.
+    Ensure secure handling of sensitive data by leveraging an external secret store within the KubeRocketCI, allowing secure transmission and usage of confidential information across namespaces, facilitating secure connections to databases during development and deployment, tailored for Developers.
 
     [Run Securely](external-secrets)
 

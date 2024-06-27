@@ -1,6 +1,6 @@
 # Supported Versions and Compatibility
 
-At the EPAM Delivery Platform, our commitment to providing a robust and reliable service involves supporting the latest innovations while ensuring stability and security. To maintain this balance, we focus our active **support on our platform's three most** recent versions.
+At the KubeRocketCI, our commitment to providing a robust and reliable service involves supporting the latest innovations while ensuring stability and security. To maintain this balance, we focus our active **support on our platform's three most** recent versions.
 This approach allows us to dedicate our resources to delivering cutting-edge features, enhancing performance, and fortifying security measures while ensuring a consistent and optimized user experience across the platform.
 
 ```mermaid
@@ -38,7 +38,7 @@ gantt
 
 By concentrating our support on the last three versions, we prioritize staying current with evolving technology landscapes. This enables us to swiftly adapt to advancements in Kubernetes and OpenShift environments, incorporating the latest enhancements, fixes, and optimizations into our platform.
 
-This support model not only fosters innovation but also enables us to deliver a secure, high-performing, and dependable EPAM Delivery Platform that meets the dynamic needs of our users and exceeds expectations for reliability and functionality.
+This support model not only fosters innovation but also enables us to deliver a secure, high-performing, and dependable KubeRocketCI that meets the dynamic needs of our users and exceeds expectations for reliability and functionality.
 
 Get acquainted with the list of the latest releases and component versions on which the platform is tested and verified:
 

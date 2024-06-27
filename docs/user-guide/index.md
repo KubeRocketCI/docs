@@ -1,6 +1,6 @@
 # Overview
 
-The KubeRocketCI (a.k.a. EPAM Delivery Platform) portal user guide is intended for developers and provides details on working with the KubeRocketCI portal, different codebase types, and the KubeRocketCI CI/CD flow.
+The KubeRocketCI (former EPAM Delivery Platform) portal user guide is intended for developers and provides details on working with the KubeRocketCI portal, different codebase types, and the KubeRocketCI CI/CD flow.
 
 ## KubeRocketCI Portal
 

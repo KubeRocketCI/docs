@@ -23,11 +23,11 @@ All the Add-Ons for KubeRocketCI are stored in our [GitHub repository](https://g
     └── chart
     ```
 
-* **add-ons** - the directory that contains Helm charts of the applications that can be integrated with EDP using Add-Ons.
+* **add-ons** - the directory that contains Helm charts of the applications that can be integrated with KubeRocketCI using Add-Ons.
 
 * **chart** - the directory that contains Helm charts with application templates that will be used to create custom resources called Applications for Argo CD.
 
-## Enable EDP Add-Ons
+## Enable KubeRocketCI Add-Ons
 
 To enable Add-Ons, it is necessary to have the configured Argo CD, and connect and synchronize the forked repository. To do this, follow the guidelines below:
 
@@ -114,8 +114,8 @@ The list of the available Add-Ons:
 |Cert Manager|A native Kubernetes certificate management controller that automates the issuance and renewal of TLS certificates.|true|
 |DefectDojo|A security vulnerability management tool that allows tracking and managing security findings in applications.|true|
 |DependencyTrack|A Software Composition Analysis (SCA) platform that helps identify and manage open-source dependencies and their associated vulnerabilities.|true|
-|EDP|An internal platform created by EPAM to enhance software delivery processes using DevOps principles and tools.|false|
-|Extensions OIDC|EDP Helm chart to provision OIDC clients for different Add-Ons using EDP Keycloak Operator.|true|
+|KubeRocketCI|An internal platform created by EPAM to enhance software delivery processes using DevOps principles and tools.|false|
+|Extensions OIDC|KubeRocketCI Helm chart to provision OIDC clients for different Add-Ons using EDP Keycloak Operator.|true|
 |External Secrets|A Kubernetes Operator that fetches secrets from external secret management systems and injects them as Kubernetes Secrets.|true|
 |Fluent Bit|A lightweight and efficient log processor and forwarder that collects and routes logs from various sources in Kubernetes clusters.|false|
 |Harbor|A cloud-native container image registry that provides support for vulnerability scanning, policy-based image replication, and more.|true|

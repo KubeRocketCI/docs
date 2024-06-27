@@ -6,7 +6,7 @@ import TabItem from '@theme/TabItem';
 Inspect the main steps to perform for installing DefectDojo via Helm Chart.
 
 :::info
-  It is also possible to install DefectDojo using the add-ons approach. For details, please refer to the [EDP addons approach](https://github.com/epam/edp-cluster-add-ons).
+  It is also possible to install DefectDojo using the add-ons approach. For details, please refer to the [KubeRocketCI addons approach](https://github.com/epam/edp-cluster-add-ons).
 :::
 
 ## Prerequisites
@@ -210,7 +210,7 @@ To install DefectDojo, follow the steps below:
 
 ## Configuration
 
-To prepare DefectDojo for integration with EDP, follow the steps below:
+To prepare DefectDojo for integration with KubeRocketCI, follow the steps below:
 
 1. Create ci user in DefectDojo UI:
 
@@ -238,7 +238,7 @@ To prepare DefectDojo for integration with EDP, follow the steps below:
 
     * Copy the API key.
 
-3. Provision the secret using `EDP Portal`, `Manifest` or with the `externalSecrets` operator:
+3. Provision the secret using `UI Portal`, `Manifest` or with the `externalSecrets` operator:
 
     <Tabs
       defaultValue="edp-portal"

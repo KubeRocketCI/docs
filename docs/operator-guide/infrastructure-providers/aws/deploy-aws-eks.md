@@ -333,7 +333,7 @@ Please find the detailed description of the variables in the [eks/variables.tf](
     aws eks update-kubeconfig --region <REGION> --name <CLUSTER_NAME>
     ```
 
-6. Once AWS EKS Cluster is successfully deployed, you can navigate to our [EDP addons](../../add-ons-overview.md) to install and manage cluster applications using the GitOps approach.
+6. Once AWS EKS Cluster is successfully deployed, you can navigate to our [KubeRocketCI addons](../../add-ons-overview.md) to install and manage cluster applications using the GitOps approach.
 
 ## Argo CD Configuration (Optional)
 

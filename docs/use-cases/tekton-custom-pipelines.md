@@ -9,8 +9,8 @@ This use case outlines the steps for adding custom Tekton libraries that contain
 
 ## __Preconditions__
 
-- EDP instance with Gerrit and Tekton inside is [configured](../operator-guide/prerequisites.md);
-- Developer has access to the EDP instances using the Single-Sign-On approach;
+- KubeRocketCI instance with Gerrit and Tekton inside is [configured](../operator-guide/prerequisites.md);
+- Developer has access to the KubeRocketCI instances using the Single-Sign-On approach;
 - Developer has the `Administrator` role to perform merge in Gerrit.
 
 ## Scenario
@@ -21,7 +21,7 @@ This use case outlines the steps for adding custom Tekton libraries that contain
 
 To create and then modify a custom Tekton library, please follow the steps below:
 
-### Add Custom Application to EDP
+### Add Custom Application to KubeRocketCI
 
 1. Open the UI Portal. Use the Sign-In option:
 

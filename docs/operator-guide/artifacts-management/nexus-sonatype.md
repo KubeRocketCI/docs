@@ -20,7 +20,7 @@ Before proceeding, ensure that you have the following prerequisites:
 
 To install Nexus in your environment, it's recommended to use the resources provided in the [Cluster Add-Ons](https://github.com/epam/edp-cluster-add-ons) repository. This approach involves installing both the Nexus repository manager and the [nexus-operator](https://github.com/epam/edp-nexus-operator). Leveraging the Cluster Add-Ons simplifies the deployment and management process, providing a streamlined method to integrate Nexus into your infrastructure.
 
-1. **Nexus Repository Manager**: First, navigate to the [Nexus section within the EDP Cluster Add-Ons](https://github.com/epam/edp-cluster-add-ons/tree/main/add-ons/nexus) repository. Follow the instructions to deploy Nexus, ensuring it's correctly configured to serve as your artifact repository.
+1. **Nexus Repository Manager**: First, navigate to the [Nexus section within the KubeRocketCI Cluster Add-Ons](https://github.com/epam/edp-cluster-add-ons/tree/main/add-ons/nexus) repository. Follow the instructions to deploy Nexus, ensuring it's correctly configured to serve as your artifact repository.
 
 2. **Nexus-Operator**: Then, proceed with the [nexus-operator](https://github.com/epam/edp-nexus-operator) installation. The operator facilitates easier management and automation of Nexus, allowing for seamless updates, configuration changes, and monitoring.
 

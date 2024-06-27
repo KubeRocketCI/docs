@@ -21,9 +21,9 @@ To install Tekton resources, follow the steps below:
 1. Install Tekton pipelines v0.53.4 using the release file:
 
     :::note
-      Tekton Pipeline resources are used for managing and running EDP Tekton Pipelines and Tasks.
-      Please refer to the [EDP Tekton Pipelines](https://github.com/epam/edp-tekton/tree/master/charts/pipelines-library/templates/pipelines) and
-      [EDP Tekton Tasks](https://github.com/epam/edp-tekton/tree/master/charts/pipelines-library/templates/tasks) pages for details.
+      Tekton Pipeline resources are used for managing and running KubeRocketCI Tekton Pipelines and Tasks.
+      Please refer to the [KubeRocketCI Tekton Pipelines](https://github.com/epam/edp-tekton/tree/master/charts/pipelines-library/templates/pipelines) and
+      [KubeRocketCI Tekton Tasks](https://github.com/epam/edp-tekton/tree/master/charts/pipelines-library/templates/tasks) pages for details.
     :::
 
     ```bash
@@ -33,8 +33,8 @@ To install Tekton resources, follow the steps below:
 2. Install Tekton Triggers v0.25.3 using the release file:
 
     :::note
-      Tekton Trigger resources are used for managing and running EDP Tekton EventListeners, Triggers, TriggerBindings and TriggerTemplates.
-      Please refer to the [EDP Tekton Triggers](https://github.com/epam/edp-tekton/tree/master/charts/pipelines-library/templates/triggers) page for details.
+      Tekton Trigger resources are used for managing and running KubeRocketCI Tekton EventListeners, Triggers, TriggerBindings and TriggerTemplates.
+      Please refer to the [KubeRocketCI Tekton Triggers](https://github.com/epam/edp-tekton/tree/master/charts/pipelines-library/templates/triggers) page for details.
     :::
 
     ```bash

@@ -2,7 +2,7 @@
 
 **CI Pipeline (Continuous Integration Pipeline)** - KubeRocketCI business entity that describes the integration of changes made to a codebase into a single project. The main idea of the CI pipeline is to review the changes in the code submitted through a Version Control System (VCS) and build a new codebase version so that it can be transmitted to the Continuous Delivery Pipeline for the rest of the delivery process.
 
-There are three codebase types in EPAM Delivery Platform:
+There are three codebase types in KubeRocketCI:
 
 1. **Applications** - a codebase that is developed in the Version Control System, has the full lifecycle starting from the Code Review stage to its deployment to the environment;
 2. **Libraries** - this codebase is similar to the Application type, but it is not deployed and stored in the Artifactory. The library can be connected to other applications/libraries;

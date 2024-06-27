@@ -25,7 +25,7 @@ To streamline the installation of SonarQube in your environment, it is advised t
 
 ## Configuration
 
-To establish robust authentication and precise access control, generating a SonarQube token is essential. This token is a distinct identifier, enabling effortless integration between SonarQube and EDP. To generate the SonarQube token, proceed with the following steps:
+To establish robust authentication and precise access control, generating a SonarQube token is essential. This token is a distinct identifier, enabling effortless integration between SonarQube and KubeRocketCI. To generate the SonarQube token, proceed with the following steps:
 
 1. Open the SonarQube UI and navigate to **Administration** -> **Security** -> **User**. Create a new user or select an existing one. Click the `Options List` icon to create a token:
 
@@ -39,7 +39,7 @@ To establish robust authentication and precise access control, generating a Sona
 
     ![SonarQube token](../../assets/operator-guide/sonar-copy-token.png "SonarQube token")
 
-4. Provision secrets using Manifest, EDP Portal or with the externalSecrets operator:
+4. Provision secrets using Manifest, UI Portal or with the externalSecrets operator:
 
 <Tabs
   defaultValue="portal"
@@ -95,7 +95,7 @@ To establish robust authentication and precise access control, generating a Sona
 
 ## Related Articles
 
-* [Install EDP With Values File](../install-kuberocketci.md)
+* [Install KubeRocketCI With Values File](../install-kuberocketci.md)
 * [Install External Secrets Operator](../secrets-management/install-external-secrets-operator.md)
 * [External Secrets Operator Integration](../secrets-management/external-secrets-operator-integration.md)
 * [Cluster Add-Ons Overview](../add-ons-overview.md)

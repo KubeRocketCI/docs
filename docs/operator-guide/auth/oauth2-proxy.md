@@ -6,7 +6,7 @@ import TabItem from '@theme/TabItem';
 [OAuth2-Proxy](https://oauth2-proxy.github.io/oauth2-proxy/) is a versatile tool that serves as a reverse proxy, utilizing the OAuth 2.0 protocol with various providers like Google, GitHub, and Keycloak to provide both authentication and authorization. This guide instructs readers on how to protect their applications' endpoints using OAuth2-Proxy. By following these steps, users can enhance the security of their endpoints without modifying their current application code. In the context of KubeRocketCI, it has integration with the Keycloak OIDC provider, enabling it to connect with any component that lacks built-in authentication.
 
   :::note
-    OAuth2-Proxy is disabled by default when installing EDP.
+    OAuth2-Proxy is disabled by default when installing KubeRocketCI.
   :::
 
 ## Prerequisites
@@ -18,7 +18,7 @@ import TabItem from '@theme/TabItem';
 
 Enabling OAuth2-Proxy implies the following general steps:
 
-1. Update your EDP deployment using command `--set 'sso.enabled=true'` **or** the `--values` file by enabling the sso parameter.
+1. Update your KubeRocketCI deployment using command `--set 'sso.enabled=true'` **or** the `--values` file by enabling the sso parameter.
 2. Check that OAuth2-Proxy is deployed successfully.
 3. Enable authentication for your Ingress by adding `auth-signin` and `auth-url` of OAuth2-Proxy to its annotation.
 

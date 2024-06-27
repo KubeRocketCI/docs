@@ -40,8 +40,8 @@ edp-grub
 ├── LICENSE
 ├── README.md
 ├── apps                      ### All Argo CD Applications are stored here
-│   ├── grub-argocd.yaml      # Application that provisions Argo CD Resources - Argo Projects (EDP Tenants)
-│   └── grub-keycloak.yaml    # Application that provisions Keycloak Resources - Argo CD Groups (EDP Tenants)
+│   ├── grub-argocd.yaml      # Application that provisions Argo CD Resources - Argo Projects (KubeRocketCI Tenants)
+│   └── grub-keycloak.yaml    # Application that provisions Keycloak Resources - Argo CD Groups (KubeRocketCI Tenants)
 ├── apps-configs
 │   └── grub
 │       ├── argocd            ### Argo CD resources definition
@@ -215,7 +215,7 @@ for GitHub, GitLab, Gerrit integrations. The credential template must be created
       namespaceResourceWhitelist:
       - group: '*'
         kind: '*'
-      # enable access only for specific git server. The example below 'edp' - it is namespace where EDP deployed
+      # enable access only for specific git server. The example below 'edp' - it is namespace where KubeRocketCI deployed
       sourceRepos:
         - ssh://git@github.com/*
       # enable capability to deploy objects from namespaces
@@ -248,7 +248,7 @@ for GitHub, GitLab, Gerrit integrations. The credential template must be created
     EOF
     ```
 
-Once Argo CD is successfully integrated, EDP user can utilize Argo CD to deploy [CD pipelines](../../user-guide/add-cd-pipeline.md).
+Once Argo CD is successfully integrated, KubeRocketCI user can utilize Argo CD to deploy [CD pipelines](../../user-guide/add-cd-pipeline.md).
 
 ## Check Argo CD Integration (Optional)
 

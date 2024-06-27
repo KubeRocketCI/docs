@@ -23,7 +23,7 @@ This documentation is tailored for the Developers and Team Leads.
 ### __Preconditions__
 
 - KubeRocketCI instance is [configured](../operator-guide/prerequisites.md) with Gerrit, Tekton and [Argo CD](../operator-guide/cd/argocd-integration.md).
-- Developer has access to the EDP instances using the Single-Sign-On approach.
+- Developer has access to the KubeRocketCI instances using the Single-Sign-On approach.
 - Developer has the `Administrator` role (to perform merge in Gerrit).
 
 ## Scenario
@@ -196,7 +196,7 @@ Perform the below steps to merge new code (Pull Request) that passes the Code Re
 
     ![Pipeline Status Gerrit](../assets/use-cases/fastapi-scaffolding/gerrit-6.png)
 
-    - EDP Portal.
+    - UI Portal.
 
     ![Pipeline Status Portal](../assets/use-cases/fastapi-scaffolding/gerrit-7.png)
 

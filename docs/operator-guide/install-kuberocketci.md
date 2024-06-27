@@ -244,7 +244,7 @@ There are multiple ways to deploy KubeRocketCI:
       The full installation with integration between tools will take at least 10 minutes.
     :::
 
-9. To check if the installation is successful, run the command below:
+8. To check if the installation is successful, run the command below:
 
     ```bash
     helm status edp -n edp
@@ -256,7 +256,7 @@ There are multiple ways to deploy KubeRocketCI:
     kubectl describe ingress -n edp
     ```
 
-10. Once KubeRocketCI is successfully installed, you can explore our [Use Cases](../use-cases/index.md) to try out the functionality of the KubeRocketCI platform.
+9. Once KubeRocketCI is successfully installed, you can explore our [Use Cases](../use-cases/index.md) to try out the functionality of the KubeRocketCI platform.
 
 ## Related Articles
 
@@ -264,6 +264,6 @@ There are multiple ways to deploy KubeRocketCI:
 * [Manage Git Providers](../user-guide/add-git-server.md)
 * [Set Up Kubernetes](kubernetes-cluster-settings.md)
 * [Set Up OpenShift](openshift-cluster-settings.md)
-* [EDP Installation Prerequisites Overview](prerequisites.md)
+* [KubeRocketCI Installation Prerequisites Overview](prerequisites.md)
 * [UI Portal OIDC Integration](auth/ui-portal-oidc.md)
-* [Verification of EDP Artifacts](../developer-guide/artifacts-verification.md)
+* [Verification of KubeRocketCI Artifacts](../developer-guide/artifacts-verification.md)

@@ -3,7 +3,7 @@ import TabItem from '@theme/TabItem';
 
 # Jira Integration
 
-This documentation guide provides step-by-step instructions for enabling the Jira integration option in the EDP Portal UI for EPAM Delivery Platform. Jira integration allows including useful metadata in Jira tickets.
+This documentation guide provides step-by-step instructions for enabling the Jira integration option in the Portal UI for KubeRocketCI. Jira integration allows including useful metadata in Jira tickets.
 
 ## Overview
 

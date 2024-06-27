@@ -96,4 +96,4 @@ As a result, users will be prompted to authenticate themselves when logging in t
 
 * [EKS OIDC With Keycloak](../auth/configure-keycloak-oidc-eks.md)
 * [External Secrets Operator Integration](../secrets-management/external-secrets-operator-integration.md)
-* [Integrate Harbor With EDP Pipelines](harbor-integration.md)
+* [Integrate Harbor With KubeRocketCI Pipelines](harbor-integration.md)

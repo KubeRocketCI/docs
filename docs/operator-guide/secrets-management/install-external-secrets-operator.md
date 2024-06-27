@@ -1,6 +1,6 @@
 # Install External Secrets Operator
 
-Inspect the prerequisites and the main steps to perform for enabling [External Secrets Operator](https://external-secrets.io/) in EDP.
+Inspect the prerequisites and the main steps to perform for enabling [External Secrets Operator](https://external-secrets.io/) in KubeRocketCI.
 
 ## Prerequisites
 

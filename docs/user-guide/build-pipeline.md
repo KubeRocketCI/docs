@@ -38,7 +38,7 @@ The Build pipeline is triggered automatically after the Code Review pipeline is 
 
 To review the Build pipeline, take the following steps:
 
-1. Open Tekton Dashboard via Overview page of the EDP Portal.
+1. Open Tekton Dashboard via Overview page of the UI Portal.
 
 2. Review stages for the application and library codebases:
 

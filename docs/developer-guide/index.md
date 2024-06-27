@@ -2,24 +2,24 @@
 
 The KubeRocketCI Developer Guide serves as a comprehensive technical resource specifically designed for developers. It offers detailed insights into expanding the functionalities of KubeRocketCI. This section focuses on explaining the development approach and fundamental architectural blueprints that form the basis of the platform's ecosystem.
 
-Within these pages, you'll find architectural diagrams, component schemas, and deployment strategies essential for grasping the structural elements of EDP. These technical illustrations serve as references, providing a detailed understanding of component interactions and deployment methodologies. Understanding the architecture of EDP and integrating third-party solutions into its established framework enables the creation of efficient, scalable, and customizable solutions within the EPAM Delivery Platform.
+Within these pages, you'll find architectural diagrams, component schemas, and deployment strategies essential for grasping the structural elements of the platform. These technical illustrations serve as references, providing a detailed understanding of component interactions and deployment methodologies. Understanding the architecture of the KubeRocketCI and integrating third-party solutions into its established framework enables the creation of efficient, scalable, and customizable solutions within the KubeRocketCI.
 
 The diagram below illustrates how GitHub repositories and Docker registries are interconnected within the KubeRocketCI ecosystem.
 
 ![KubeRocketCI Components Diagram](../assets/developer-guide/architecture/edp-components.inline.svg)
 
-# Release Channels
+## Release Channels
 
 As a publicly available product, the KubeRocketCI relies on various channels to share information, gather feedback, and distribute new releases effectively. This section outlines the diverse channels through which users can engage with our platform and stay informed about the latest developments and enhancements.
 
-## Marketplaces
+### Marketplaces
 
 Our product is presented on AWS and Civo marketplaces. It's essential to ensure that the product information on these platforms is up-to-date and accurately reflects the latest version of our software:
 
 - [AWS Marketplace](https://aws.amazon.com/marketplace/pp/prodview-u7xcz6pvwwwoa)
 - [CIVO Marketplace](https://www.civo.com/marketplace/edp)
 
-## OperatorHub
+### OperatorHub
 
 Our product operators are showcased on OperatorHub, enabling seamless integration and management capabilities:
 

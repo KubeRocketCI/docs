@@ -8,9 +8,9 @@ It may become essential to modify the container registry settings. This section 
 
 ## Remove Container Registry
 
-To remove container registry integration from the EDP, follow the steps below:
+To remove container registry integration from the KubeRocketCI, follow the steps below:
 
-  1. In the `EDP Portal` main menu, navigate to **Configuration** -> **Registry**.
+  1. In the `UI Portal` main menu, navigate to **Configuration** -> **Registry**.
 
   2. Click the `Reset registry` button, type the `confirm` word and then click `Confirm`:
 
@@ -67,5 +67,5 @@ kubectl get stages -n edp -o jsonpath='{range .items[*]}{.spec.namespace}{"\n"}{
 ## Related Articles
 
 * [Manage Registries](./manage-container-registries.md)
-* [Integrate Harbor With EDP Pipelines](../operator-guide/artifacts-management/harbor-integration.md)
+* [Integrate Harbor With KubeRocketCI Pipelines](../operator-guide/artifacts-management/harbor-integration.md)
 * [Integrate Docker](../quick-start/integrate-container-registry.md)

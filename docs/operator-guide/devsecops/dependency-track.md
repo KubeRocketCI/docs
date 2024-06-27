@@ -12,7 +12,7 @@ This documentation guide provides comprehensive instructions for installing and 
 
 ## Installation
 
-To install DependencyTrack use [EDP addons](../add-ons-overview.md) approach.
+To install DependencyTrack use [KubeRocketCI addons](../add-ons-overview.md) approach.
 
 ## Configuration
 

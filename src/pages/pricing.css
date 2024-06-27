@@ -11,6 +11,7 @@
   display: flex;
   flex-wrap: wrap;
   gap: 30px;
+  margin-bottom: 100px;
 }
 
 .pricing-grid__item {

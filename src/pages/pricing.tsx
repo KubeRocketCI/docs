@@ -3,13 +3,13 @@ import Layout from "@theme/Layout";
 import CheckIcon from "@mui/icons-material/Check";
 import "./pricing.css";
 
-export default function Hello() {
+export default function Pricing() {
   return (
-    <Layout title="Hello" description="Pricing">
+    <Layout title="Professional Service Pricing" description="Professional Service Pricing">
       <section className="section section--pricing gradient-to-bottom">
         <div className="md-grid">
           <div className="section__content">
-            <h1 className="h1">Pricing</h1>
+            <h1 className="h1">Professional Service Pricing</h1>
             <p className="page-description">
               Experience the flexibility of deploying the KubeRocketCI
               on your on-premises infrastructure or in the Cloud. Your valuable
@@ -26,6 +26,26 @@ export default function Hello() {
                     <div className="pricing-card__description">
                       The essentials for when you're just getting started.
                     </div>
+                    <ul className="pricing-card__features">
+                      <li className="pricing-card__feature">
+                        <span className="twemoji pricing-card__feature-marker">
+                          <CheckIcon />
+                        </span>
+                        Community Support
+                      </li>
+                      <li className="pricing-card__feature">
+                        <span className="twemoji pricing-card__feature-marker">
+                          <CheckIcon />
+                        </span>
+                        Run on any Kubernetes Cluster
+                      </li>
+                      <li className="pricing-card__feature">
+                        <span className="twemoji pricing-card__feature-marker">
+                          <CheckIcon />
+                        </span>
+                        Pipelines for Polyglot Microservice
+                      </li>
+                    </ul>
                   </div>
                   <div className="pricing-card__footer">
                     <a href="/edp-install/getting-started" className="button">
@@ -143,6 +163,24 @@ export default function Hello() {
                 </div>
               </div>
             </div>
+
+            <p className="definition">
+              <sup>*</sup>
+              Professional service hours are versatile blended hours bundled
+              within your subscription plan, encompassing expertise from diverse
+              specialists such as business analysts, architects, lead automation
+              engineers, DevOps (System Engineers), and performance engineers.
+              These multi-functional hours cater to KubeRocketCI installation,
+              configuration, integration, customization, feature implementation,
+              updates, and use case implementation. They empower you to leverage
+              a range of expertise for various aspects of optimizing and
+              enhancing your KubeRocketCI experience.
+            </p>
+            <p className="definition">
+              <sup>**</sup>
+              Minimum commitment of time for use of a certain subscription
+              package.
+            </p>
 
             <div className="table-wrapper">
               <table className="table table--services">
@@ -267,22 +305,10 @@ export default function Hello() {
             </div>
 
             <p className="definition">
-              <sup>*</sup>
-              Professional service hours are versatile blended hours bundled
-              within your subscription plan, encompassing expertise from diverse
-              specialists such as business analysts, architects, lead automation
-              engineers, DevOps (System Engineers), and performance engineers.
-              These multi-functional hours cater to KubeRocketCI installation,
-              configuration, integration, customization, feature implementation,
-              updates, and use case implementation. They empower you to leverage
-              a range of expertise for various aspects of optimizing and
-              enhancing your KubeRocketCI experience.
+                <sup>*</sup>
+                The values presented in the table are provided for reference purposes only and are subject to change based on the final scope of the work. Please note that these figures serve as estimates and may be adjusted accordingly as the project details are finalized.
             </p>
-            <p className="definition">
-              <sup>**</sup>
-              Minimum commitment of time for use of a certain subscription
-              package.
-            </p>
+
           </div>
         </div>
       </section>

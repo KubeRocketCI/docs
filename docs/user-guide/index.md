@@ -6,9 +6,9 @@ The KubeRocketCI (a.k.a. EPAM Delivery Platform) portal user guide is intended f
 
 The KubeRocketCI portal is a central management tool in the KubeRocketCI ecosystem that provides the ability to define pipelines, project resources and new technologies in a simple way. Using the KubeRocketCI portal enables to manage business entities:
 
-- Create such codebase types as Applications, Libraries, Autotests and Infrastructures;
-- Create/Update CD Pipelines;
-- Add external Git servers and Clusters.
+* Create such codebase types as Applications, Libraries, Autotests and Infrastructures;
+* Create/Update CD Pipelines;
+* Add external Git servers and Clusters.
 
 Below is the Overview page of the KubeRocketCI portal:
 
@@ -23,9 +23,9 @@ KubeRocketCI portal is a complete tool allowing to manage and control the codeba
 
 Inspect the main features available in the KubeRocketCI portal by following the corresponding link:
 
-- [Add Application](add-application.md)
-- [Add Autotest](add-autotest.md)
-- [Add Library](add-library.md)
-- [Add Git Server](add-git-server.md)
-- [Add CD Pipeline](add-cd-pipeline.md)
-- [Add Quality Gate](add-quality-gate.md)
+* [Add Application](add-application.md)
+* [Add Autotest](add-autotest.md)
+* [Add Library](add-library.md)
+* [Add Git Server](add-git-server.md)
+* [Add CD Pipeline](add-cd-pipeline.md)
+* [Add Quality Gate](add-quality-gate.md)

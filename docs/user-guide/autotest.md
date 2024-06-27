@@ -41,7 +41,7 @@ KubeRocketCI portal provides the ability to enable, disable or edit the Jira Int
 
 1. To edit an autotest directly from the Autotests overview page or when viewing the autotest data:
 
-    Select **Edit** in the options icon menu:
+      Select **Edit** in the options icon menu:
 
       ![Edit autotest on the autotests overview page](../assets/user-guide/edp-portal-edit-autotest-1.png "Edit autotest on the autotests overview page")
 

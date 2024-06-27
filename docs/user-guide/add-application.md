@@ -8,18 +8,18 @@ To add an application, navigate to the **Components** section on the navigation 
 
 Once clicked, the **Create new component** dialog will appear, then select **Application** and click **Next**:
 
-   ![Application info](../assets/user-guide/create-new-component.png "Application info")
+  ![Application info](../assets/user-guide/create-new-component.png "Application info")
 
 Choose one of the strategies and click **Create**:
 
-   ![Select strategy](../assets/user-guide/select_strategy.png  "Select strategy")
+  ![Select strategy](../assets/user-guide/select_strategy.png  "Select strategy")
 
 * **Create from template** – creates a project on the pattern in accordance with an application language, a build tool, and a framework. This strategy is recommended for projects that start developing their applications from scratch.
 
 * **Import project** - allows using existing VCS repository to integrate with KubeRocketCI. While importing the existing repository, select the Git server from the drop-down list and define the relative path to the repository, such as `epmd-edp/python-python-flask`.
 
   :::note
-      In order to use the **Import project** strategy, make sure to adjust it with the [Integrate GitLab/GitHub in Tekton](../user-guide/add-git-server.md) page.
+    In order to use the **Import project** strategy, make sure to adjust it with the [Integrate GitLab/GitHub in Tekton](../user-guide/add-git-server.md) page.
   :::
 
 * **Clone project** – clones the indicated repository into KubeRocketCI. While cloning the existing repository, it is required to fill in the **Repository URL** field and specify the credentials if needed:
@@ -84,13 +84,13 @@ Follow the instructions below to fill in the fields of the **Codebase Info** men
       * Go - selecting Go allows using Go tool.
       * Helm - selecting Helm allows using Helm tool.
 
-    :::note
+      :::note
         The **Select Build Tool** field disposes of the default tools and can be changed in accordance with the selected code language.
-    :::
+      :::
 
-    :::note
-        Tekton pipelines offer built-in support for Java Maven Multi-Module projects. These pipelines are capable of recognizing Java deployable modules based on the information in the **pom.xml** file and performing relevant deployment actions. It's important to note that although the Dockerfile is typically located in the root directory, Kaniko, the tool used for building container images, uses the targets folder within the deployable module's context. For a clear illustration of a Multi-Module project structure, please refer to this [example](https://github.com/epmd-edp/java-maven-java17-multimodule.git) on GitHub, which showcases a commonly used structure for Java Maven Multi-Module projects.
-    :::
+:::info
+  Tekton pipelines offer built-in support for Java Maven Multi-Module projects. These pipelines are capable of recognizing Java deployable modules based on the information in the **pom.xml** file and performing relevant deployment actions. It's important to note that although the Dockerfile is typically located in the root directory, Kaniko, the tool used for building container images, uses the targets folder within the deployable module's context. For a clear illustration of a Multi-Module project structure, please refer to this [example](https://github.com/epmd-edp/java-maven-java17-multimodule.git) on GitHub, which showcases a commonly used structure for Java Maven Multi-Module projects.
+:::
 
 ### Advanced Settings Menu
 
@@ -101,7 +101,7 @@ In the **Advanced Settings** menu, specify the branch options and define the Jir
 * **Default branch** - the name of the branch where you want the development to be performed.
 
   :::note
-      The default branch cannot be deleted.
+    The default branch cannot be deleted.
   :::
 
 * **Codebase versioning type** - defines how will the application tag be changed once the new image version is built. There are two versioning types:
@@ -110,26 +110,26 @@ In the **Advanced Settings** menu, specify the branch options and define the Jir
 
       ![Edp versioning](../assets/user-guide/edp-portal-edp-versioning-application.png "Edp versioning")
 
-    :::note
+      :::note
         The **Start Version From** field should be filled out in compliance with the semantic versioning rules, e.g. 1.2.3 or 10.10.10. Please refer to the [Semantic Versioning](https://semver.org/) page for details.
-    :::
+      :::
 
 * **Specify the pattern to validate a commit message** - the regular expression used to indicate the pattern that is followed on the project to validate a commit message in the code review pipeline. An example of the pattern: `^[PROJECT_NAME-d{4}]:.*$`.
 
-  ![JIRA integration](../assets/user-guide/edp-portal-integrate-jira-server.png "JIRA integration")
+    ![JIRA integration](../assets/user-guide/edp-portal-integrate-jira-server.png "JIRA integration")
 
 * **Integrate with Jira server** - this check box is used in case it is required to connect Jira tickets with the commits
 and have a respective label in the **Fix Version** field.
 
-:::note
-    To adjust the Jira integration functionality, first apply the necessary changes described on the [Adjust Jira Integration](../operator-guide/project-management-and-reporting/jira-integration.md) page.
-:::
+    :::note
+      To adjust the Jira integration functionality, first apply the necessary changes described on the [Adjust Jira Integration](../operator-guide/project-management-and-reporting/jira-integration.md) page.
+    :::
 
 * **Jira Server** - the integrated Jira server with related Jira tasks.
 
 * **Specify the pattern to find a Jira ticket number in a commit message** - based on this pattern, the value from KubeRocketCI will be displayed in Jira.
 
-  ![Mapping field name](../assets/user-guide/edp-portal-advanced-mapping.png "Mapping fields")
+    ![Mapping field name](../assets/user-guide/edp-portal-advanced-mapping.png "Mapping fields")
 
 * **Mapping field name** - the section where the additional Jira fields are specified the names of the Jira fields that should be filled in with attributes from KubeRocketCI:
 
@@ -148,7 +148,7 @@ and have a respective label in the **Fix Version** field.
 Click the **Apply** button to add the application to the Components list.
 
 :::note
-    After the complete adding of the application, inspect the [Manage Applications](application.md) page to learn how you can operate applications.
+  After the complete adding of the application, inspect the [Manage Applications](application.md) page to learn how you can operate applications.
 :::
 
 ## Related Articles

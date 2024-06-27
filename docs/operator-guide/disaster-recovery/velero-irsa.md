@@ -1,7 +1,7 @@
 # IAM Roles for Velero Kubernetes Service Accounts
 
 :::note
-  Make sure that IRSA is enabled and [amazon-eks-pod-identity-webhook](https://github.com/aws/amazon-eks-pod-identity-webhook/tree/master) is deployed according to the [Associate IAM Roles With Service Accounts](../infrastructure-providers/aws/) documentation.
+  Make sure that IRSA is enabled and [amazon-eks-pod-identity-webhook](https://github.com/aws/amazon-eks-pod-identity-webhook/tree/master) is deployed according to the [Associate IAM Roles With Service Accounts](../infrastructure-providers/aws/enable-irsa.md) documentation.
 :::
 
 [Velero AWS plugin](https://github.com/vmware-tanzu/velero-plugin-for-aws) requires access to AWS resources. Follow the steps below to create a required role:

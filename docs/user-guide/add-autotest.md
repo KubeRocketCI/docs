@@ -3,7 +3,7 @@
 KubeRocketCI portal allows you to clone an existing repository with the autotest to your Version Control System (VCS), or using an external repository and adding an autotest for further running in stages or using them as quality gates for applications. When an autotest is cloned, the system automatically generates a corresponding repository within the integrated VCS. You can create an autotest [in YAML](#create-autotest-in-yaml) or [via the two-step menu](#create-autotest-via-ui) in the dialog.
 
 :::info
-    Please refer to the [Add Application](add-application.md) section for the details on how to add an application codebase type.
+  Please refer to the [Add Application](add-application.md) section for the details on how to add an application codebase type.
     For the details on how to use autotests as quality gates, please refer to the [Stages Menu](add-cd-pipeline.md#the-stages-menu) section of the [Add Environment](add-cd-pipeline.md) documentation.
 :::
 
@@ -17,15 +17,15 @@ Once clicked, the **Create new component** dialog will appear, then select **Aut
 
 Choose one of the strategies and click **Create**:
 
-   ![Select strategy](../assets/user-guide/select_strategy_autotest.png  "Select strategy")
+  ![Select strategy](../assets/user-guide/select_strategy_autotest.png  "Select strategy")
 
 * **Clone project** – clones the indicated repository into KubeRocketCI. While cloning the existing repository, it is required to fill in the **Repository URL** field and specify the credentials if needed.
 
 * **Import project** - allows using existing VCS repository to integrate with KubeRocketCI. While importing the existing repository, select the Git server from the drop-down list and define the relative path to the repository, such as `/epmd-edp/examples/basic/edp-auto-tests-simple-example`.
 
-  :::note
-    In order to use the **Import project** strategy, make sure to adjust it with the [Integrate GitLab/GitHub With Tekton](../user-guide/add-git-server.md) page.
-  :::
+    :::note
+      In order to use the **Import project** strategy, make sure to adjust it with the [Integrate GitLab/GitHub With Tekton](../user-guide/add-git-server.md) page.
+    :::
 
 ## Create Autotest in YAML
 
@@ -48,7 +48,7 @@ The **Create Autotest** dialog contains the two steps:
 
 In our case, we will use the **Clone** strategy:
 
-  ![Clone autotest](../assets/user-guide/edp-portal-clone-autotest.png "Clone autotest")
+    ![Clone autotest](../assets/user-guide/edp-portal-clone-autotest.png "Clone autotest")
 
 1. Select all the settings that define how the autotest will be added to Git server:
 
@@ -64,46 +64,48 @@ In our case, we will use the **Clone** strategy:
     * **Build Tool** - allows to choose the build tool to use. In case of autotests, Gradle and Maven are available.
     * **Autotest report framework** - all the autotest reports will be created in the Allure framework by default.
 
-Click the **Proceed** button to switch to the next menu.
+3. Click the **Next** button to proceed.
 
 ### The Advanced Settings Menu
 
 In the **Advanced Settings** menu, specify the branch options and define the Jira settings:
 
-  ![Advanced settings](../assets/user-guide/edp-portal-advanced-settings-autotest.png "Advanced settings")
+    ![Advanced settings](../assets/user-guide/edp-portal-advanced-settings-autotest.png "Advanced settings")
 
 * **Default branch** - the name of the branch where you want the development to be performed.
 
-  :::note
-    The default branch cannot be deleted.
-  :::
+    :::info
+      The default branch cannot be deleted.
+    :::
+
 * **Codebase versioning type** - defines how will the autotest tag be changed once the new image version is built. There are two versioning types:
   * **default**: Using the default versioning type, in order to specify the version of the current artifacts, images, and tags in the Version Control System, a developer should navigate to the corresponding file and change the version **manually**.
   * **edp**: Using the edp versioning type, a developer indicates the version number from which all the artifacts will be versioned and, as a result, **automatically** registered in the corresponding file (e.g. pom.xml). When selecting the edp versioning type, the extra fields will appear, type the version number from which you want the artifacts to be versioned:
 
-  ![Edp versioning](../assets/user-guide/edp-portal-edp-versioning-autotest.png "Edp versioning")
+    ![Edp versioning](../assets/user-guide/edp-portal-edp-versioning-autotest.png "Edp versioning")
 
-  Type the version number from which you want the artifacts to be versioned.
+    Type the version number from which you want the artifacts to be versioned.
 
-  :::note
-    The **Start Version From** field must be filled out in compliance with the semantic versioning rules, e.g. 1.2.3 or 10.10.10. Please refer to the [Semantic Versioning](https://semver.org/) page for details.
-  :::
+    :::note
+      The **Start Version From** field must be filled out in compliance with the semantic versioning rules, e.g. 1.2.3 or 10.10.10. Please refer to the [Semantic Versioning](https://semver.org/) page for details.
+    :::
 
 * **Specify the pattern to validate a commit message** - the regular expression used to indicate the pattern that is followed on the project to validate a commit message in the code review pipeline. An example of the pattern: `^[PROJECT_NAME-d{4}]:.*$`.
 
-  ![Jira integration](../assets/user-guide/edp-portal-integrate-jira-server-autotest.png)
+    ![Jira integration](../assets/user-guide/edp-portal-integrate-jira-server-autotest.png)
 
 * **Integrate with Jira server** - this check box is used in case it is required to connect Jira tickets with the commits
 and have a respective label in the **Fix Version** field.
 
-  :::note
-    To adjust the Jira integration functionality, first apply the necessary changes described on the [Adjust Jira Integration](../operator-guide/project-management-and-reporting/jira-integration.md) page.
-  :::
+    :::note
+      To adjust the Jira integration functionality, first apply the necessary changes described on the [Adjust Jira Integration](../operator-guide/project-management-and-reporting/jira-integration.md) page.
+    :::
+
 * **Jira Server** - the integrated Jira server with related Jira tasks.
 
 * **Specify the pattern to find a Jira ticket number in a commit message** - based on this pattern, the value from KubeRocketCI will be displayed in Jira.
 
-  ![Mapping field name](../assets/user-guide/edp-portal-autotest-advanced-mapping.png "Mapping field name")
+    ![Mapping field name](../assets/user-guide/edp-portal-autotest-advanced-mapping.png "Mapping field name")
 
 * **Mapping field name** - the section where the additional Jira fields are specified the names of the Jira fields that should be filled in with attributes from KubeRocketCI:
 

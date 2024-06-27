@@ -368,5 +368,5 @@ This chart will be using the core of `common-library` and `pipelines-library` an
 
 ## Related Articles
 
-- [Tekton Overview](../operator-guide/tekton-overview.md)
+- [Tekton Overview](../operator-guide/ci/tekton-overview.md)
 - [Add Application using EDP Portal](../user-guide/add-application.md)

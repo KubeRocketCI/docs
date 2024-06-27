@@ -6,8 +6,8 @@ This section describes the subsequent possible actions that can be performed wit
 
 As soon as the infrastructure is successfully provisioned, the following will be created:
 
-- An Infrastructure Codebase type will appear in the Codebase list of the Components section.
-- With the **Create** strategy, a new project will be generated on GitHub or another integrated VCS. When **Clone** is chosen, the repository will be forked from the original and copied to the KubeRocketCI-integrated repository. If **Import** is selected, the platform connects to the chosen repository.
+* An Infrastructure Codebase type will appear in the Codebase list of the Components section.
+* With the **Create** strategy, a new project will be generated on GitHub or another integrated VCS. When **Clone** is chosen, the repository will be forked from the original and copied to the KubeRocketCI-integrated repository. If **Import** is selected, the platform connects to the chosen repository.
 
 The added infrastructure will be listed in the infrastructure list allowing you to do the following:
 
@@ -33,27 +33,27 @@ KubeRocketCI portal provides the ability to enable, disable or edit the Jira Int
 
 1. To edit an infrastructure directly from the infrastructures overview page or when viewing the infrastructure data:
 
-  - Select **Edit** in the options icon menu:
+    * Select **Edit** in the options icon menu:
 
-  ![Edit infrastructure on the Infrastructures overview page](../assets/user-guide/edp-portal-edit-infrastructure-1.png "Edit infrastructure on the Infrastructures overview page")
+    ![Edit infrastructure on the Infrastructures overview page](../assets/user-guide/edp-portal-edit-infrastructure-1.png "Edit infrastructure on the Infrastructures overview page")
 
-  ![Edit infrastructure when viewing the infrastructure data](../assets/user-guide/edp-portal-edit-infrastructure-2.png "Edit infrastructure when viewing the infrastructure data")
+    ![Edit infrastructure when viewing the infrastructure data](../assets/user-guide/edp-portal-edit-infrastructure-2.png "Edit infrastructure when viewing the infrastructure data")
 
-  - The **Edit Infrastructure** dialog opens.
+    * The **Edit Infrastructure** dialog opens.
 
 2. To enable Jira integration, in the **Edit Infrastructure** dialog do the following:
 
-   ![Edit infrastructure](../assets/user-guide/edp-portal-edit-codebase-infrastructure.png "Edit infrastructure")
+    ![Edit infrastructure](../assets/user-guide/edp-portal-edit-codebase-infrastructure.png "Edit infrastructure")
 
-   a. Mark the **Integrate with Jira server** check box and fill in the necessary fields. Please see steps d-h on the [Add Infrastructure page](add-infrastructure.md#the-advanced-settings-menu).
+    a. Mark the **Integrate with Jira server** check box and fill in the necessary fields. Please see steps d-h on the [Add Infrastructure page](add-infrastructure.md#the-advanced-settings-menu).
 
-   b. Select the **Apply** button to apply the changes.
+    b. Select the **Apply** button to apply the changes.
 
 3. To disable Jira integration, in the **Edit Infrastructure** dialog do the following:
 
-   a. Clear the **Integrate with Jira server** check box.
+    a. Clear the **Integrate with Jira server** check box.
 
-   b. Select the **Apply** button to apply the changes.
+    b. Select the **Apply** button to apply the changes.
 
 4. To create, edit and delete infrastructure branches, please refer to the [Manage Branches](../user-guide/manage-branches.md) page.
 

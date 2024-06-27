@@ -7,7 +7,7 @@ SonarQube is a powerful tool used in build and code review pipelines to enhance 
 This guide will walk you through the configuration process of SonarCloud for your project.
 
 :::note
-  An alternative option is to use an independent [SonarQube instance](../operator-guide/sonarqube.md).
+  An alternative option is to use an independent [SonarQube instance](../operator-guide/code-quality/sonarqube.md).
 :::
 
 ## Integrate SonarCloud

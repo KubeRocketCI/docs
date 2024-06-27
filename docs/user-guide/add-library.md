@@ -12,7 +12,7 @@ Once clicked, the **Create new component** dialog will appear. Select **Library*
 
 Choose one of the strategies and click **Create**:
 
-   ![Select strategy](../assets/user-guide/select_strategy.png  "Select strategy")
+  ![Select strategy](../assets/user-guide/select_strategy.png  "Select strategy")
 
 In the **Create new component** menu, select the necessary configuration strategy. The choice will define the parameters you will need to specify:
 
@@ -20,9 +20,9 @@ In the **Create new component** menu, select the necessary configuration strateg
 
 * **Import project** - allows using existing VCS repository to integrate with KubeRocketCI. While importing the existing repository, select the Git server from the drop-down list and define the relative path to the repository, such as `epmd-edp/python-python-flask`.
 
-:::note
+  :::note
     In order to use the **Import project** strategy, make sure to adjust it with the [Integrate GitLab/GitHub With Tekton](../user-guide/add-git-server.md) page.
-:::
+  :::
 
 * **Clone project** – clones the indicated repository into KubeRocketCI. While cloning the existing repository, it is required to fill in the **Repository URL** field and specify the **Repository credentials** field if needed:
 
@@ -76,9 +76,9 @@ In our example, we will use the **Create from template** strategy:
       * C# - selecting C# allows using .Net v.3.1 and .Net v.6.0.
       * Other - selecting Other allows extending the default code languages when creating a codebase with the Clone/Import strategy.
 
-    :::note
-        The **Create** strategy does not allow to customize the default code language set.
-    :::
+        :::info
+          The **Create** strategy does not allow to customize the default code language set.
+        :::
 
     * **Language version/framework** - defines the specific framework or language version of the library. The field depends on the selected code language.
     * **Build Tool** - allows to choose the build tool to use. A set tools and can be changed in accordance with the selected code language.
@@ -114,9 +114,9 @@ In the Advanced Settings menu, specify the branch options and define the Jira se
 * **Integrate with Jira server** - this check box is used in case it is required to connect Jira tickets with the commits
 and have a respective label in the **Fix Version** field.
 
-:::note
-  To adjust the Jira integration functionality, first apply the necessary changes described on the [Adjust Jira Integration](../operator-guide/project-management-and-reporting/jira-integration.md) page.
-:::
+  :::note
+    To adjust the Jira integration functionality, first apply the necessary changes described on the [Adjust Jira Integration](../operator-guide/project-management-and-reporting/jira-integration.md) page.
+  :::
 
 * **Jira Server** - the integrated Jira server with related Jira tasks.
 

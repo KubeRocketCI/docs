@@ -1,6 +1,6 @@
 # CD Pipeline Details
 
-**CD Pipeline (Continuous Delivery Pipeline)** - an EDP business entity that describes the whole delivery process of the selected application set via the respective stages.
+**CD Pipeline (Continuous Delivery Pipeline)** - KubeRocketCI business entity that describes the whole delivery process of the selected application set via the respective stages.
 The main idea of the CD pipeline is to promote the application build version between the stages by applying the sequential verification (i.e. the second stage will be available if the verification on the first stage is successfully completed).
 The CD pipeline can include the essential set of applications with its specific stages as well.
 
@@ -40,8 +40,6 @@ Find below the functional diagram of the Deploy pipeline with the default stages
   The input for a CD pipeline depends on the Trigger Type for a deploy stage and can be either Manual or Auto.
 :::
 
-![Deploy pipeline stages](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/epam/edp-install/master/docs/user-guide/deploy-pipeline.puml)
-
 ### Related Articles
 
 * [Add Application](add-application.md)
@@ -49,6 +47,4 @@ Find below the functional diagram of the Deploy pipeline with the default stages
 * [Add CD Pipeline](add-cd-pipeline.md)
 * [Add Library](add-library.md)
 * [CI Pipeline Details](ci-pipeline-details.md)
-* [CI/CD Overview](cicd-overview.md)
-* [EDP Glossary](../glossary.md)
-* [Prepare for Release](prepare-for-release.md)
+* [KubeRocketCI Glossary](../glossary.md)

@@ -1,6 +1,6 @@
 # Code Review Pipeline
 
-This section provides details on the Code Review pipeline of the EDP CI/CD framework. Explore below the pipeline purpose, stages and possible actions to perform.
+This section provides details on the Code Review pipeline of the KubeRocketCI CI/CD framework. Explore below the pipeline purpose, stages and possible actions to perform.
 
 ## Code Review Pipeline Purpose
 

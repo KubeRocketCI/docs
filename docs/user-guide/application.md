@@ -6,8 +6,8 @@ This section describes the subsequent possible actions that can be performed wit
 
 As soon as the application is successfully provisioned, the following will be created:
 
-- An Application Codebase type will appear in the Codebase list of the Components section.
-- With the **Create** strategy, a new project will be generated on GitHub or another integrated VCS. When **Clone** is chosen, the repository will be forked from the original and copied to the KubeRocketCI-integrated repository. If **Import** is selected, the platform connects to the chosen repository.
+* An Application Codebase type will appear in the Codebase list of the Components section.
+* With the **Create** strategy, a new project will be generated on GitHub or another integrated VCS. When **Clone** is chosen, the repository will be forked from the original and copied to the KubeRocketCI-integrated repository. If **Import** is selected, the platform connects to the chosen repository.
 
 The added application will be listed in the Applications list allowing you to do the following:
 
@@ -21,8 +21,8 @@ The added application will be listed in the Applications list allowing you to do
 * **Edit application** - edit the application by selecting the options icon next to its name in the applications list, and then selecting **Edit**. For details see the [Edit Existing Application](#edit-existing-application) section.
 * **Delete application** - remove application by clicking the vertical ellipsis button and then selecting **Delete**.
 
-  :::note
-      The application that is used in a CD pipeline cannot be removed.
+  :::warning
+    The application that is used in a CD pipeline cannot be removed.
   :::
 
 There are also options to sort the applications:
@@ -39,27 +39,27 @@ KubeRocketCI Portal provides the ability to enable, disable or edit the Jira Int
 
 1. To edit an application directly from the Applications overview page or when viewing the application data:
 
-  - Select **Edit** in the options icon menu:
+    * Select **Edit** in the options icon menu:
 
-  ![Edit application on the Applications overview page](../assets/user-guide/edp-portal-edit-codebase-1.png "Edit application on the Applications overview page")
+    ![Edit application on the Applications overview page](../assets/user-guide/edp-portal-edit-codebase-1.png "Edit application on the Applications overview page")
 
-  ![Edit application when viewing the application data](../assets/user-guide/edp-portal-edit-codebase-2.png "Edit application when viewing the application data")
+    ![Edit application when viewing the application data](../assets/user-guide/edp-portal-edit-codebase-2.png "Edit application when viewing the application data")
 
-  - The Edit Application dialog opens.
+    * The Edit Application dialog opens.
 
 2. To enable Jira integration, in the **Edit Application** dialog do the following:
 
-   ![Edit application](../assets/user-guide/edp-portal-edit-codebase-application.png "Edit application")
+    ![Edit application](../assets/user-guide/edp-portal-edit-codebase-application.png "Edit application")
 
-   a. Mark the **Integrate with Jira server** check box and fill in the necessary fields. Please see steps d-h of the [Add Application](add-application.md#the-advanced-settings-menu) page.
+    a. Mark the **Integrate with Jira server** check box and fill in the necessary fields. Please see steps d-h of the [Add Application](add-application.md#the-advanced-settings-menu) page.
 
-   b. Select the **Apply** button to apply the changes.
+    b. Select the **Apply** button to apply the changes.
 
 3. To disable Jira integration, in the **Edit Application** dialog do the following:
 
-   a. Clear the **Integrate with Jira server** check box.
+    a. Clear the **Integrate with Jira server** check box.
 
-   b. Select the **Apply** button to apply the changes.
+    b. Select the **Apply** button to apply the changes.
 
 4. To create, edit and delete application branches, please refer to the [Manage Branches](../user-guide/manage-branches.md) page.
 

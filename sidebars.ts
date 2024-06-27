@@ -357,7 +357,7 @@ const sidebars: SidebarsConfig = {
           label: 'Marketplace',
           collapsed: false,
           items: [
-            'user-guide/marketplace', // Marketplace Overview
+            'user-guide/marketplace',
             'user-guide/add-marketplace',
           ],
         },
@@ -372,7 +372,7 @@ const sidebars: SidebarsConfig = {
               label: 'Application',
               items: [
                 'user-guide/add-application',
-                'user-guide/application', // Manage Applications
+                'user-guide/application',
               ],
             },
             {
@@ -380,7 +380,7 @@ const sidebars: SidebarsConfig = {
               label: 'Autotest',
               items: [
                 'user-guide/add-autotest',
-                'user-guide/autotest', // Manage Autotests
+                'user-guide/autotest',
               ],
             },
             {
@@ -388,7 +388,7 @@ const sidebars: SidebarsConfig = {
               label: 'Library',
               items: [
                 'user-guide/add-library',
-                'user-guide/library', // Manage Libraries
+                'user-guide/library',
               ],
             },
             {
@@ -396,10 +396,10 @@ const sidebars: SidebarsConfig = {
               label: 'Infrastructure',
               items: [
                 'user-guide/add-infrastructure',
-                'user-guide/infrastructure', // Manage Infrastructures
+                'user-guide/infrastructure',
               ],
             },
-            'user-guide/manage-branches', // Manage Branches
+            'user-guide/manage-branches',
           ],
         },
         {
@@ -409,6 +409,7 @@ const sidebars: SidebarsConfig = {
           items: [
             'user-guide/add-cd-pipeline',
             'user-guide/manage-environments',
+            'user-guide/add-quality-gate',
           ],
         },
         {
@@ -416,20 +417,20 @@ const sidebars: SidebarsConfig = {
           label: 'Configuration',
           collapsed: false,
           items: [
-            'user-guide/configuration-overview', // Configuration Overview
+            'user-guide/configuration-overview',
             {
               type: 'category',
               label: 'Links',
               items: [
-                'user-guide/quick-links', // Manage Quick Links
+                'user-guide/quick-links',
               ],
             },
             {
               type: 'category',
               label: 'Git Server',
               items: [
-                'user-guide/add-git-server', // Add Git Servers
-                'user-guide/git-server-overview', // Manage Git Servers
+                'user-guide/add-git-server',
+                'user-guide/git-server-overview',
               ],
             },
             {
@@ -437,7 +438,7 @@ const sidebars: SidebarsConfig = {
               label: 'Cluster',
               items: [
                 'user-guide/add-cluster',
-                'user-guide/cluster', // Manage Clusters
+                'user-guide/cluster',
               ],
             },
             'user-guide/gitops',

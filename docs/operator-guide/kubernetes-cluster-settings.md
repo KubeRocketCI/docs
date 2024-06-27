@@ -104,6 +104,6 @@ Make sure the cluster meets the following conditions:
 
 ## Related Articles
 
-* [Install Amazon EBS CSI Driver](ebs-csi-driver.md)
+* [Install Amazon EBS CSI Driver](infrastructure-providers/aws/ebs-csi-driver.md)
 * [Install NGINX Ingress Controller](install-ingress-nginx.md)
 * [Install Keycloak](auth/keycloak.md)

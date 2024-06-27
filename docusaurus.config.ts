@@ -112,7 +112,7 @@ const config: Config = {
           items: [
             {
               label: 'Quick Start',
-              to: '/docs/overview',
+              to: '/docs/about-platform',
             },
           ],
         },
@@ -136,10 +136,6 @@ const config: Config = {
         {
           title: 'More',
           items: [
-            {
-              label: 'Blog',
-              to: '/blog',
-            },
             {
               label: 'GitHub',
               href: 'https://github.com/kuberocketci/docs',

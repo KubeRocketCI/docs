@@ -27,7 +27,7 @@ This documentation is tailored for the Developers and Team Leads.
 ## __Preconditions__
 
 - KubeRocketCI instance is [configured](../operator-guide/prerequisites.md) with Gerrit, Tekton and [Argo CD](../operator-guide/cd/argocd-integration.md);
-- External Secrets is [installed](../operator-guide/install-external-secrets-operator.md);
+- External Secrets is [installed](../operator-guide/secrets-management/install-external-secrets-operator.md);
 - Developer has access to the EDP instances using the Single-Sign-On approach;
 - Developer has the `Administrator` role (to perform merge in Gerrit);
 - Developer has access to manage secrets in demo-vault namespace.

@@ -4,7 +4,7 @@
   We suggest making a backup of the EDP environment before starting the upgrade procedure.
 :::
 
-::note
+:::note
   We currently disabled cache volumes for go and npm in the EDP 3.3 release.
 :::
 

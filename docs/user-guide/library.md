@@ -6,9 +6,8 @@ This section describes the subsequent possible actions that can be performed wit
 
 As soon as the library is successfully provisioned, the following will be created:
 
-- A Library Codebase type will appear in the Codebase list of the Components section.
-- With the **Create** strategy, a new project will be generated on GitHub or another integrated VCS. When **Clone** is chosen, the repository will be forked from the original and copied to the KubeRocketCI-integrated repository. If **Import** is selected, the platform connects to the chosen repository.
-
+* A Library Codebase type will appear in the Codebase list of the Components section.
+* With the **Create** strategy, a new project will be generated on GitHub or another integrated VCS. When **Clone** is chosen, the repository will be forked from the original and copied to the KubeRocketCI-integrated repository. If **Import** is selected, the platform connects to the chosen repository.
 
 :::info
     To navigate quickly to OpenShift, Tekton, Gerrit, SonarQube, Nexus, and other resources, click the **Overview** section on the navigation bar and hit the necessary link.
@@ -26,9 +25,6 @@ The added library will be listed in the Libraries list allowing to do the follow
 * **Edit library** - edit the library by selecting the options icon next to its name in the libraries list, and then selecting **Edit**. For details see the [Edit Existing Library](#edit-existing-library) section.
 * **Delete Library** - remove library by clicking the vertical ellipsis button and then selecting **Delete**.
 
-  :::note
-    The library that is used in a CD pipeline cannot be removed.
-  :::
 There are also options to sort the libraries:
 
 * Sort the existing libraries in a table by clicking the sorting icons in the table header. Sort the libraries alphabetically by their name, language, build tool, framework, and CI tool. You can also sort the libraries by their status: Created, Failed, or In progress.
@@ -40,30 +36,29 @@ KubeRocketCI portal provides the ability to enable, disable or edit the Jira Int
 
 1. To edit a library directly from the Libraries overview page or when viewing the library data:
 
-  - Select **Edit** in the options icon menu:
+    * Select **Edit** in the options icon menu:
 
-    ![Edit library on the libraries overview page](../assets/user-guide/edp-portal-edit-library-1.png "Edit library on the libraries overview page")
+      ![Edit library on the libraries overview page](../assets/user-guide/edp-portal-edit-library-1.png "Edit library on the libraries overview page")
 
-  - Select **Edit** in the library details menu:
+    * Select **Edit** in the library details menu:
 
-    ![Edit library when viewing the library data](../assets/user-guide/edp-portal-edit-library-2.png "Edit library when viewing the library data")
-
+      ![Edit library when viewing the library data](../assets/user-guide/edp-portal-edit-library-2.png "Edit library when viewing the library data")
 
 2. To enable Jira integration, in the **Edit Library** dialog do the following:
 
-   ![Edit library](../assets/user-guide/edp-portal-edit-library-jira.png "Edit library")
+    ![Edit library](../assets/user-guide/edp-portal-edit-library-jira.png "Edit library")
 
-   a. Mark the **Integrate with Jira server** check box and fill in the necessary fields. Please see the steps d-h of the [Add Library](add-library.md#the-advanced-settings-menu) page.
+    a. Mark the **Integrate with Jira server** check box and fill in the necessary fields. Please see the steps of the [Add Library](add-library.md#the-advanced-settings-menu) page.
 
-   b. Select the **Apply** button to apply the changes.
+    b. Select the **Apply** button to apply the changes.
 
 3. To disable Jira integration, in the **Edit Library** dialog do the following:
 
-   a. Clear the **Integrate with Jira server** check box.
+    a. Clear the **Integrate with Jira server** check box.
 
-   b. Select the **Apply** button to apply the changes.
+    b. Select the **Apply** button to apply the changes.
 
-  As a result, the necessary changes will be applied.
+    As a result, the necessary changes will be applied.
 
 4. To create, edit and delete library branches, please refer to the [Manage Branches](../user-guide/manage-branches.md) page.
 

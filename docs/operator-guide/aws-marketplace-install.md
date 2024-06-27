@@ -17,7 +17,7 @@ To initiate the installation process, navigate to our dedicated [AWS Marketplace
 
 Please ensure that you review the [Prerequisites](prerequisites.md) page before proceeding with the deployment of the product. To perform a minimal installation, please ensure that you meet the following requirements:
 
-* You have an available AWS Elastic Kubernetes Service (EKS) cluster for deployment. For detailed instructions on creating a new cluster, please refer to the [AWS EKS Cluster Creation Guide](https://docs.aws.amazon.com/eks/latest/userguide/create-cluster.html). Additionally, you can consult our [EKS Deployment Guide](deploy-aws-eks.md) for step-by-step instructions tailored to your specific needs.
+* You have an available AWS Elastic Kubernetes Service (EKS) cluster for deployment. For detailed instructions on creating a new cluster, please refer to the [AWS EKS Cluster Creation Guide](https://docs.aws.amazon.com/eks/latest/userguide/create-cluster.html). Additionally, you can consult our [EKS Deployment Guide](infrastructure-providers/aws/deploy-aws-eks.md) for step-by-step instructions tailored to your specific needs.
 * You have a domain name available and associated with the ingress object in the cluster.
 * You have cluster administrator access.
 * The [Tekton](install-tekton.md) resources are deployed.

@@ -23,7 +23,7 @@ Ensure the following values are set first before starting the Portal OIDC config
 
 To proceed with the Keycloak configuration, perform the following:
 
-1. Add the URL of the Headlamp to the `valid_redirect_uris` variable in [Keycloak](configure-keycloak-oidc-eks.md#keycloak_client):
+1. Add the URL of the Headlamp to the `valid_redirect_uris` variable in [Keycloak](configure-keycloak-oidc-eks.md):
 
     :::note keycloak_openid_client
 
@@ -59,7 +59,7 @@ To proceed with the Keycloak configuration, perform the following:
 
 Portal is integrated in Kubernetes in three steps:
 
-1. Update the [values.yaml](../install-kuberocketci.md#values) file by enabling OIDC:
+1. Update the [values.yaml](../install-kuberocketci.md) file by enabling OIDC:
 
     :::note values.yaml
 

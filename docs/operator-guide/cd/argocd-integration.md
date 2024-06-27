@@ -248,7 +248,7 @@ for GitHub, GitLab, Gerrit integrations. The credential template must be created
     EOF
     ```
 
-Once Argo CD is successfully integrated, EDP user can utilize Argo CD to deploy [CD pipelines](../../user-guide/add-cd-pipeline.md#deploy-application).
+Once Argo CD is successfully integrated, EDP user can utilize Argo CD to deploy [CD pipelines](../../user-guide/add-cd-pipeline.md).
 
 ## Check Argo CD Integration (Optional)
 

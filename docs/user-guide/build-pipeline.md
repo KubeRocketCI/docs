@@ -1,6 +1,6 @@
 # Build Pipeline
 
-This section provides details on the Build pipeline of the EDP CI/CD pipeline framework. Explore below the pipeline purpose, stages and possible actions to perform.
+This section provides details on the Build pipeline of the KubeRocket CI/CD pipeline framework. Explore below the pipeline purpose, stages and possible actions to perform.
 
 ## Build Pipeline Purpose
 

@@ -1,6 +1,6 @@
 # Upgrade EDP v3.3 to 3.4
 
-::warning
+:::warning
   We suggest making a backup of the EDP environment before starting the upgrade procedure.
 :::
 

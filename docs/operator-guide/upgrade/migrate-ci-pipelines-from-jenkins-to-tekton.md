@@ -2,7 +2,7 @@
 
 To migrate the CI pipelines for a codebase from Jenkins to Tekton, follow the steps below:
 
-* [Migrate CI Pipelines From Jenkins to Tekton](#migrate-ci-pipelines-from-jenkins-to-tekton)
+* Migrate CI Pipelines From Jenkins to Tekton
 * [Deploy a Custom EDP Scenario With Tekton and Jenkins CI Tools](#deploy-a-custom-edp-scenario-with-tekton-and-jenkins-ci-tools)
 * [Disable Jenkins Triggers](#disable-jenkins-triggers)
 * [Manage Tekton Triggers the Codebase(s)](#manage-tekton-triggers-the-codebases)
@@ -10,7 +10,7 @@ To migrate the CI pipelines for a codebase from Jenkins to Tekton, follow the st
 
 ## Deploy a Custom EDP Scenario With Tekton and Jenkins CI Tools
 
-Make sure that Tekton stack is deployed according to the [documentation](../../operator-guide/prerequisites.md#edp-installation-scenarios).
+Make sure that Tekton stack is deployed according to the [documentation](../../operator-guide/prerequisites.md).
 Enable Tekton as sub component during platform installation:
 
 ```yaml title="values.yaml"

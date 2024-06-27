@@ -4,7 +4,7 @@ KubeRocketCI portal allows you to clone an existing repository with the autotest
 
 :::info
   Please refer to the [Add Application](add-application.md) section for the details on how to add an application codebase type.
-    For the details on how to use autotests as quality gates, please refer to the [Stages Menu](add-cd-pipeline.md#the-stages-menu) section of the [Add Environment](add-cd-pipeline.md) documentation.
+    For the details on how to use autotests as quality gates, please refer to the [Stages Menu](add-cd-pipeline.md) section of the [Add Environment](add-cd-pipeline.md) documentation.
 :::
 
 To add an autotest, navigate to the **Components** section on the navigation bar and click **+ Create component**:

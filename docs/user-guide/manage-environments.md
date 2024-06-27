@@ -61,7 +61,7 @@ In order to create a new stage for the existing environment, follow the steps be
 
     ![Add environment stage](../assets/user-guide/edp-portal-add-cd-pipeline-stage.png "Add environment stage")
 
-3. Fill in the required fields in the dialog. Alternatively, click **Edit YAML** in the upper-right corner of the **Create stage** dialog to open the YAML editor and add a stage. Please see the [Stages Menu](../user-guide/add-cd-pipeline.md#the-stages-menu) section for details.
+3. Fill in the required fields in the dialog. Alternatively, click **Edit YAML** in the upper-right corner of the **Create stage** dialog to open the YAML editor and add a stage. Please see the [Stages Menu](../user-guide/add-cd-pipeline.md) section for details.
 
 4. Click the **Apply** button.
 
@@ -77,7 +77,7 @@ In order to edit a stage for the existing environment, follow the steps below:
 
     ![Edit environment stage dialog](../assets/user-guide/edp-portal-edit-cd-pipeline-stage-dialog.png "Edit environment stage dialog")
 
-3. In the **Edit Stage** dialog, change the stage trigger type. See more about this field in the [Stages Menu](#the-stages-menu) section.
+3. In the **Edit Stage** dialog, change the stage trigger type. See more about this field in the [Stages Menu](#edit-stage) section.
 
 4. Click the **Apply** button.
 

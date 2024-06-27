@@ -118,11 +118,11 @@ This section provides the details on upgrading EDP to 3.0. Explore the actions a
 
     ```bash
     kubectl -n <edp-namespace> patch secret gerrit-ciuser-sshkey\
-      --patch="{\"data\": { \"username\": \"$(echo -n edp-ci |base64 -w0)\" }}" -oyaml
+      --patch="{\"data\": { \"username\": \"$(echo -n edp-ci |base64 -w0)\" }}" -o yaml
     ```
 
   :::warning
-    In EDP v.3.0.x, [Admin Console](../../user-guide/index.md#admin-console) is deprecated, and EDP interface is available only via [EDP Portal](../../user-guide/index.md#overview).
+    In EDP v.3.0.x, [Admin Console](../../user-guide/index.md) is deprecated, and EDP interface is available only via [EDP Portal](../../user-guide/index.md).
   :::
 
 ## Related Articles

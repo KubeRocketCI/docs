@@ -51,7 +51,7 @@ KubeRocketCI Portal provides the ability to enable, disable or edit the Jira Int
 
     ![Edit application](../assets/user-guide/edp-portal-edit-codebase-application.png "Edit application")
 
-    a. Mark the **Integrate with Jira server** check box and fill in the necessary fields. Please see steps d-h of the [Add Application](add-application.md#the-advanced-settings-menu) page.
+    a. Mark the **Integrate with Jira server** check box and fill in the necessary fields. Please see steps d-h of the [Add Application](add-application.md) page.
 
     b. Select the **Apply** button to apply the changes.
 

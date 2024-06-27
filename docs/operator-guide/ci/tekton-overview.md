@@ -64,4 +64,4 @@ in the Pipeline.
 Also, Tasks can have a different number of steps that are executed as a Container in Pod.
 
 9. The Kubernetes native approach allows the creation of PipelineRun either with the kubectl tool or
-using the [Portal UI](../../user-guide/application.md#manage-applications).
+using the [Portal UI](../../user-guide/application.md).

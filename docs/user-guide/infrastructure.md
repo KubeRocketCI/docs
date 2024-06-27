@@ -45,7 +45,7 @@ KubeRocketCI portal provides the ability to enable, disable or edit the Jira Int
 
     ![Edit infrastructure](../assets/user-guide/edp-portal-edit-codebase-infrastructure.png "Edit infrastructure")
 
-    a. Mark the **Integrate with Jira server** check box and fill in the necessary fields. Please see steps d-h on the [Add Infrastructure page](add-infrastructure.md#the-advanced-settings-menu).
+    a. Mark the **Integrate with Jira server** check box and fill in the necessary fields. Please see steps d-h on the [Add Infrastructure page](add-infrastructure.md).
 
     b. Select the **Apply** button to apply the changes.
 

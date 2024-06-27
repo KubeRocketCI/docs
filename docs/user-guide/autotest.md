@@ -51,7 +51,7 @@ KubeRocketCI portal provides the ability to enable, disable or edit the Jira Int
 
     ![Edit autotest](../assets/user-guide/edp-portal-edit-autotest-jira.png "Edit library")
 
-    a. Mark the **Integrate with Jira server** check box and fill in the necessary fields. Please see steps d-h on the [Add Autotests](add-autotest.md#the-advanced-settings-menu) page.
+    a. Mark the **Integrate with Jira server** check box and fill in the necessary fields. Please see steps d-h on the [Add Autotests](add-autotest.md) page.
 
     b. Click the **Apply** button to apply the changes.
 

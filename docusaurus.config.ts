@@ -48,8 +48,22 @@ const config: Config = {
   ],
 
   themeConfig: {
-    // Replace with your project's social card
-    image: 'img/docusaurus-social-card.jpg',
+    metadata: [
+      {name: 'keywords', content: 'KubeRocketCI, CI/CD, DevOps, Kubernetes, Tekton, Helm Charts, AWS, Argo CD, Add-Ons, Installation Guide, User Guide, Developer Guide, Operator Guide'},
+      {name: 'description', content: 'Explore KubeRocketCI Documentation for detailed guides, tutorials, and insights into KubeRocketCI CI/CD flow, platform components, and add-ons. Learn how to enhance your DevOps practices with KubeRocketCI.'},
+      {name: 'author', content: 'KubeRocketCI Team'},
+      {name: 'og:type', content: 'website'},
+      {name: 'og:url', content: 'https://docs.kuberocketci.io'},
+      {name: 'og:title', content: 'KubeRocketCI Documentation | Comprehensive Guide and Tutorials'},
+      {name: 'og:description', content: 'Explore KubeRocketCI Documentation for detailed guides, tutorials, and insights into KubeRocketCI CI/CD flow, platform components, and add-ons. Learn how to enhance your DevOps practices with KubeRocketCI.'},
+      {name: 'og:image', content: 'https://kuberocketci.example.com/img/kuberocketci-social-card.png'},
+      {name: 'twitter:card', content: 'summary_large_image'},
+      {name: 'twitter:url', content: 'https://docs.kuberocketci.io'},
+      {name: 'twitter:title', content: 'KubeRocketCI Documentation | Comprehensive Guide and Tutorials'},
+      {name: 'twitter:description', content: 'Explore KubeRocketCI Documentation for detailed guides, tutorials, and insights into KubeRocketCI CI/CD flow, platform components, and add-ons. Learn how to enhance your DevOps practices with KubeRocketCI.'},
+      {name: 'twitter:image', content: 'https://kuberocketci.example.com/img/kuberocketci-social-card.png'},
+    ],
+
     navbar: {
       title: 'KubeRocketCI',
       logo: {
@@ -93,7 +107,7 @@ const config: Config = {
           position: 'left',
         },
         {
-          href: 'https://github.com/kuberocketci/docs',
+          href: 'https://github.com/epam/edp-install/blob/master/RELEASES.md',
           label: 'Releases',
           position: 'right',
         },
@@ -120,16 +134,16 @@ const config: Config = {
           title: 'Community',
           items: [
             {
-              label: 'Stack Overflow',
-              href: 'https://stackoverflow.com/questions/tagged/docusaurus',
+              label: 'YouTube',
+              href: 'https://www.youtube.com/@theplatformteam',
             },
             {
-              label: 'Discord',
-              href: 'https://discordapp.com/invite/docusaurus',
+              label: 'Medium',
+              href: 'https://medium.com/epam-delivery-platform',
             },
             {
-              label: 'Twitter',
-              href: 'https://twitter.com/docusaurus',
+              label: 'Docker Hub',
+              href: 'https://hub.docker.com/u/epamedp',
             },
           ],
         },

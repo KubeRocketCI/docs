@@ -16,7 +16,7 @@ Below is the Overview page of the KubeRocketCI portal:
 
 * **Application widgets** – shows the information on codebases created in the default and allowed namespaces, reflecting the overall amount of entities and their statuses.
 * **Top bar panel** – contains documentation link, notifications, KubeRocketCI portal settings, and cluster settings, such as default and allowed namespaces.
-* **Quick links** – displays the corresponding links to the major adjusted toolset.
+* **Quick links** – displays the corresponding links to the major adjusted tool set.
 * **Pipeline runs** – displays all the pipeline runs initiated in both the default and allowed namespaces.
 
 KubeRocketCI portal is a complete tool allowing to manage and control the codebases (applications, autotests, libraries and infrastructures) added to the environment as well as to create a CD pipeline.

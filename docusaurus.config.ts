@@ -1,5 +1,5 @@
-import {themes as prismThemes} from 'prism-react-renderer';
-import type {Config} from '@docusaurus/types';
+import { themes as prismThemes } from 'prism-react-renderer';
+import type { Config } from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
 
 const config: Config = {
@@ -50,20 +50,26 @@ const config: Config = {
 
   themeConfig: {
     metadata: [
-      {name: 'keywords', content: 'KubeRocketCI, CI/CD, DevOps, Kubernetes, Tekton, Helm Charts, AWS, Argo CD, Add-Ons, Installation Guide, User Guide, Developer Guide, Operator Guide'},
-      {name: 'description', content: 'Explore KubeRocketCI Documentation for detailed guides, tutorials, and insights into KubeRocketCI CI/CD flow, platform components, and add-ons. Learn how to enhance your DevOps practices with KubeRocketCI.'},
-      {name: 'author', content: 'KubeRocketCI Team'},
-      {name: 'og:type', content: 'website'},
-      {name: 'og:url', content: 'https://docs.kuberocketci.io'},
-      {name: 'og:title', content: 'KubeRocketCI Documentation | Comprehensive Guide and Tutorials'},
-      {name: 'og:description', content: 'Explore KubeRocketCI Documentation for detailed guides, tutorials, and insights into KubeRocketCI CI/CD flow, platform components, and add-ons. Learn how to enhance your DevOps practices with KubeRocketCI.'},
-      {name: 'og:image', content: 'https://docs.kuberocketci.io/img/kuberocketci-social-card.png'},
-      {name: 'twitter:card', content: 'summary_large_image'},
-      {name: 'twitter:url', content: 'https://docs.kuberocketci.io'},
-      {name: 'twitter:title', content: 'KubeRocketCI Documentation | Comprehensive Guide and Tutorials'},
-      {name: 'twitter:description', content: 'Explore KubeRocketCI Documentation for detailed guides, tutorials, and insights into KubeRocketCI CI/CD flow, platform components, and add-ons. Learn how to enhance your DevOps practices with KubeRocketCI.'},
-      {name: 'twitter:image', content: 'https://docs.kuberocketci.io/img/kuberocketci-social-card.png'},
+      { name: 'keywords', content: 'KubeRocketCI, CI/CD, DevOps, Kubernetes, Tekton, Helm Charts, AWS, Argo CD, Add-Ons, Installation Guide, User Guide, Developer Guide, Operator Guide' },
+      { name: 'description', content: 'Explore KubeRocketCI Documentation for detailed guides, tutorials, and insights into KubeRocketCI CI/CD flow, platform components, and add-ons. Learn how to enhance your DevOps practices with KubeRocketCI.' },
+      { name: 'author', content: 'KubeRocketCI Team' },
+      { name: 'og:type', content: 'website' },
+      { name: 'og:url', content: 'https://docs.kuberocketci.io' },
+      { name: 'og:title', content: 'KubeRocketCI Documentation | Comprehensive Guide and Tutorials' },
+      { name: 'og:description', content: 'Explore KubeRocketCI Documentation for detailed guides, tutorials, and insights into KubeRocketCI CI/CD flow, platform components, and add-ons. Learn how to enhance your DevOps practices with KubeRocketCI.' },
+      { name: 'og:image', content: 'https://docs.kuberocketci.io/img/kuberocketci-social-card.png' },
+      { name: 'twitter:card', content: 'summary_large_image' },
+      { name: 'twitter:url', content: 'https://docs.kuberocketci.io' },
+      { name: 'twitter:title', content: 'KubeRocketCI Documentation | Comprehensive Guide and Tutorials' },
+      { name: 'twitter:description', content: 'Explore KubeRocketCI Documentation for detailed guides, tutorials, and insights into KubeRocketCI CI/CD flow, platform components, and add-ons. Learn how to enhance your DevOps practices with KubeRocketCI.' },
+      { name: 'twitter:image', content: 'https://docs.kuberocketci.io/img/kuberocketci-social-card.png' },
     ],
+
+    announcementBar: {
+      id: 'announcement', // Increment on change
+      content: `KubeRocketCI Team Supports Ukraine 🇺🇦. In solidarity, we ask that you consider financially supporting the organizations below: <a href="https://epamuafund.pinkaloo.com/causes/159bdd2f71854adf8ed5251fe26d2fe0" target="_blank">EPAM’s Global Partners for the Ukraine Humanitarian Crisis</a>`,
+      isCloseable: true,
+    },
 
     navbar: {
       title: 'KubeRocketCI',

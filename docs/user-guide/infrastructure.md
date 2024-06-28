@@ -2,7 +2,7 @@
 
 This section describes the subsequent possible actions that can be performed with the newly added or existing infrastructures.
 
-## Check and Remove Inrastructure
+## Check and Remove Infrastructure
 
 As soon as the infrastructure is successfully provisioned, the following will be created:
 

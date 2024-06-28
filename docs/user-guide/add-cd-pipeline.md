@@ -39,7 +39,7 @@ To create an environment, follow the steps below:
 the lower-case letters, numbers and inner dashes.
 
     :::note
-      The namespace created by the environment has the following pattern combination: **[kuberocketci namespace]-[environment name]-[stage name]**.
+      The namespace created by the environment has the following pattern combination: **[KubeRocketCI namespace]-[environment name]-[stage name]**.
       Please be aware that the namespace length should not exceed 63 symbols.
     :::
 

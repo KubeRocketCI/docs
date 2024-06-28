@@ -18,6 +18,7 @@ const config: Config = {
   // If you aren't using GitHub pages, you don't need these.
   organizationName: 'KubeRocketCI', // Usually your GitHub org/user name.
   projectName: 'docs', // Usually your repo name.
+  deploymentBranch: 'gh-pages',
 
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
@@ -34,12 +35,11 @@ const config: Config = {
     [
       'classic',
       {
+        gtag: {
+          trackingID: 'G-4V1NZ8PQWG',
+        },
         docs: {
           sidebarPath: './sidebars.ts',
-          // Please change this to your repo.
-          // Remove this to remove the "edit this page" links.
-          editUrl:
-            'https://github.com/kuberocketci/docs/tree/main/packages/create-docusaurus/templates/shared/',
         },
         theme: {
           customCss: './src/css/custom.css',

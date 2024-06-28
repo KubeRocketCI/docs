@@ -12,6 +12,7 @@ const config: Config = {
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
   baseUrl: '/',
+  trailingSlash: false,
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
@@ -56,12 +57,12 @@ const config: Config = {
       {name: 'og:url', content: 'https://docs.kuberocketci.io'},
       {name: 'og:title', content: 'KubeRocketCI Documentation | Comprehensive Guide and Tutorials'},
       {name: 'og:description', content: 'Explore KubeRocketCI Documentation for detailed guides, tutorials, and insights into KubeRocketCI CI/CD flow, platform components, and add-ons. Learn how to enhance your DevOps practices with KubeRocketCI.'},
-      {name: 'og:image', content: 'https://kuberocketci.example.com/img/kuberocketci-social-card.png'},
+      {name: 'og:image', content: 'https://docs.kuberocketci.io/img/kuberocketci-social-card.png'},
       {name: 'twitter:card', content: 'summary_large_image'},
       {name: 'twitter:url', content: 'https://docs.kuberocketci.io'},
       {name: 'twitter:title', content: 'KubeRocketCI Documentation | Comprehensive Guide and Tutorials'},
       {name: 'twitter:description', content: 'Explore KubeRocketCI Documentation for detailed guides, tutorials, and insights into KubeRocketCI CI/CD flow, platform components, and add-ons. Learn how to enhance your DevOps practices with KubeRocketCI.'},
-      {name: 'twitter:image', content: 'https://kuberocketci.example.com/img/kuberocketci-social-card.png'},
+      {name: 'twitter:image', content: 'https://docs.kuberocketci.io/img/kuberocketci-social-card.png'},
     ],
 
     navbar: {

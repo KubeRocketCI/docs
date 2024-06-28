@@ -8,7 +8,7 @@ The Use Cases section provides useful recommendations of how to operate with the
 
     Rapidly create, customize, and deploy FastAPI applications using a scaffolding tool and standardized processes, streamlining development and enhancing code quality for quicker and reliable feature releases.
 
-    [Scaffold Now](application-scaffolding)
+    [Scaffold Now](application-scaffolding.md)
 
 ## Bring Your Own Framework
 
@@ -16,7 +16,7 @@ The Use Cases section provides useful recommendations of how to operate with the
 
     Facilitate the onboarding of custom tools and frameworks into the KubeRocketCI by integrating custom Tekton libraries, empowering the modification of pipelines and tasks for tailored workflows.
 
-    [Summon the Kraken](tekton-custom-pipelines)
+    [Summon the Kraken](tekton-custom-pipelines.md)
 
 ## Secrets Management For Application Deployment
 
@@ -24,7 +24,7 @@ The Use Cases section provides useful recommendations of how to operate with the
 
     Ensure secure handling of sensitive data by leveraging an external secret store within the KubeRocketCI, allowing secure transmission and usage of confidential information across namespaces, facilitating secure connections to databases during development and deployment, tailored for Developers.
 
-    [Run Securely](external-secrets)
+    [Run Securely](external-secrets.md)
 
 ## Autotest As the Quality Gate
 

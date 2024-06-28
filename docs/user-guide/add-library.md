@@ -70,7 +70,7 @@ In our example, we will use the **Create from template** strategy:
       * Terraform - selecting Terraform allows using the Terraform different versions via the **Terraform version manager** ([tfenv](https://github.com/tfutils/tfenv#usage)).
           KubeRocketCI supports all the actions available in Terraform, thus providing the ability to modify the virtual infrastructure and launch some checks with the help of linters.
           For details, please refer to the [Use Terraform Library in KubeRocketCI](../operator-guide/ci/ci-pipeline-terraform.md) page.
-      * Rego - this option allows using Rego code language with an Open Policy Agent (OPA) Library. For details, please refer to the [Use Open Policy Agent](../operator-guide/ci/ci-pipeline-opa.md) page.
+      * Rego - this option allows using Rego code language with an Open Policy Agent (OPA) Library.
       * Container - this option allows using the Kaniko tool for building the container images from a Dockerfile.
       * Helm - this option allows using the [chart testing lint](https://github.com/helm/chart-testing) (Pipeline) for Helm charts or using Helm chart as a set of other Helm charts organized according to the [example](https://github.com/argoproj/argo-helm/tree/main).
       * C# - selecting C# allows using .Net v.3.1 and .Net v.6.0.

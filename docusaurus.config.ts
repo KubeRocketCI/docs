@@ -117,6 +117,12 @@ const config: Config = {
           to: '/pricing',
           position: 'left',
         },
+        // Right
+        {
+          type: 'docsVersionDropdown',
+          position: 'right',
+          dropdownActiveClassDisabled: true,
+        },
         {
           href: 'https://github.com/epam/edp-install/blob/master/RELEASES.md',
           label: 'Releases',

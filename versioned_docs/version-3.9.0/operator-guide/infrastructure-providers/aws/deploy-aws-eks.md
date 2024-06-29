@@ -478,7 +478,7 @@ Please find the detailed description of the variables in the [argo-cd/variables.
 
       ```bash
 
-      Outputs:§
+      Outputs:
 
       argocd_agent_role_iam_role_arn = "arn:aws:iam::012345678910:role/EDPArgoCDClusterAdmin"
       argocd_irsa_iam_role_arn = ""

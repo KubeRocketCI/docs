@@ -1,5 +1,7 @@
 language: en
 dictionaries:
+  - bash
+  - google
   - lorem-ipsum
 words:
   - Antora
@@ -20,6 +22,7 @@ words:
   - clusterrolebinding
   - codebasebranch
   - codebaseimagestream
+  - Codenarc
   - configmap
   - creds
   - deepcopy
@@ -34,6 +37,7 @@ words:
   - finalizer
   - finalizers
   - fullname
+  - gantt
   - Gerrit
   - gitops
   - GITTAG

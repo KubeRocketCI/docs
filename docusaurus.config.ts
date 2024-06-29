@@ -70,7 +70,11 @@ const config: Config = {
       content: `KubeRocketCI Team Supports Ukraine 🇺🇦. In solidarity, we ask that you consider financially supporting the organizations below: <a href="https://epamuafund.pinkaloo.com/causes/159bdd2f71854adf8ed5251fe26d2fe0" target="_blank">EPAM’s Global Partners for the Ukraine Humanitarian Crisis</a>`,
       isCloseable: true,
     },
-
+    algolia: {
+      appId: 'ZYN6QI47ZW',
+      apiKey: '1e13b563f9083c76a0b29222a60f000b',
+      indexName: 'kuberocketci',
+    },
     navbar: {
       title: 'KubeRocketCI',
       logo: {

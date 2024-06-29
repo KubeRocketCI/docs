@@ -38,7 +38,7 @@ Bugs are tracked as [GitHub issues](https://guides.github.com/features/issues/).
 Explain the problem and include additional details to help maintainers reproduce the problem:
 
 * **Use a clear and descriptive title** for the issue to identify the problem.
-* **Describe the exact steps which reproduce the problem** in as many details as possible. For example, start by explaining how you started EDP, e.g. which command exactly you used in the terminal, or how you started EDP otherwise. When listing steps, **don't just say what you did, but explain how you did it**.
+* **Describe the exact steps which reproduce the problem** in as many details as possible. For example, start by explaining how you started KubeRocketCI, e.g. which command exactly you used in the terminal, or how you started KubeRocketCI otherwise. When listing steps, **don't just say what you did, but explain how you did it**.
 * **Provide specific examples to demonstrate the steps**. Include links to files or GitHub projects, or copy/pasteable snippets, which you use in those examples. If you're providing snippets in the issue, use [Markdown code blocks](https://help.github.com/articles/markdown-basics/#multiple-lines).
 * **Describe the behavior you observed after following the steps** and point out what exactly is the problem with that behavior.
 * **Explain which behavior you expected to see instead and why.**
@@ -51,7 +51,7 @@ Include details about your configuration and environment:
 
 ### Suggesting Enhancements
 
-This section guides you through submitting an enhancement suggestion for EDP, including completely new features and minor improvements to existing functionality. Following these guidelines helps maintainers and the community understand your suggestion and find related suggestions.
+This section guides you through submitting an enhancement suggestion for KubeRocketCI, including completely new features and minor improvements to existing functionality. Following these guidelines helps maintainers and the community understand your suggestion and find related suggestions.
 
 Before creating enhancement suggestions, please perform a [cursory search](https://github.com/search?q=repo:kuberocketci/docs+is:issue&type=issues) to see if the enhancement has already been suggested. If it has, add a comment to the existing issue instead of opening a new one. When you are creating an enhancement suggestion, please [include as many details as possible](#how-do-i-submit-a-good-enhancement-suggestion). Fill in [the template](https://github.com/kuberocketci/docs/.github/blob/main/.github/ISSUE_TEMPLATE/feature_request.md), including the steps that you imagine you would take if the feature you're requesting existed.
 
@@ -63,19 +63,19 @@ Enhancement suggestions are tracked as [GitHub issues](https://guides.github.com
 * **Provide a step-by-step description of the suggested enhancement** in as many details as possible.
 * **Provide specific examples to demonstrate the steps**. Include copy/pasteable snippets which you use in those examples, as [Markdown code blocks](https://help.github.com/articles/markdown-basics/#multiple-lines).
 * **Describe the current behavior** and **explain which behavior you expected to see instead** and why.
-* **Include screenshots and animated GIFs** which help you demonstrate the steps or point out the part of EDP which the suggestion is related to.
+* **Include screenshots and animated GIFs** which help you demonstrate the steps or point out the part of KubeRocketCI which the suggestion is related to.
 * **Explain why this enhancement would be useful**
-* **Which version of EDP are you using?**
+* **Which version of KubeRocketCI are you using?**
 * **What's the name and version of the cluster you're using**?
-* **Which version of EDP is being integrated with?**
+* **Which version of KubeRocketCI is being integrated with?**
 
 ### Pull Requests
 
 The process described here has several goals:
 
-* Maintain EDP quality
+* Maintain KubeRocketCI quality
 * Fix problems that are important to users
-* Engage the community in working toward the best possible EDP
+* Engage the community in working toward the best possible KubeRocketCI
 
 Please follow these steps to have your contribution considered by the maintainers:
 

@@ -101,7 +101,7 @@ const FeatureList: FeatureItem[] = [
         efficiency.
       </>
     ),
-    link: "docs/operator-guide/project-management-and-reporting/install-reportportal/",
+    link: "docs/operator-guide/project-management-and-reporting/install-reportportal",
   },
   {
     title: "Comprehensive Metrics",
@@ -113,7 +113,7 @@ const FeatureList: FeatureItem[] = [
         understanding of its performance.
       </>
     ),
-    link: "docs/operator-guide/monitoring-and-observability/multitenant-logging/",
+    link: "docs/operator-guide/monitoring-and-observability/multitenant-logging",
   },
   {
     title: "Open-Source Software Solutions",

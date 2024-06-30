@@ -48,7 +48,7 @@ export default function Pricing() {
                     </ul>
                   </div>
                   <div className="pricing-card__footer">
-                    <a href="/edp-install/getting-started" className="button">
+                    <a href="/docs/quick-start/quick-start-overview" className="button">
                       start
                     </a>
                   </div>

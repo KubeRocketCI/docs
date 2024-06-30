@@ -28,7 +28,7 @@ const FeatureList: FeatureItem[] = [
         library with your personalized templates.
       </>
     ),
-    link: "docs/user-guide/add-application/",
+    link: "docs/user-guide/add-application",
   },
   {
     title: "CI/CD pipelines",
@@ -39,7 +39,7 @@ const FeatureList: FeatureItem[] = [
         application management with the comprehensive KubeRocketCI Library.
       </>
     ),
-    link: "docs/user-guide/application/",
+    link: "docs/user-guide/application",
   },
   {
     title: "GitOps",
@@ -51,7 +51,7 @@ const FeatureList: FeatureItem[] = [
         effortlessly with our platform.
       </>
     ),
-    link: "docs/user-guide/add-cd-pipeline/",
+    link: "docs/user-guide/add-cd-pipeline",
   },
   {
     title: "Single sign-on",
@@ -64,7 +64,7 @@ const FeatureList: FeatureItem[] = [
         environment that aligns with your enterprise’s unique needs.
       </>
     ),
-    link: "docs/operator-guide/auth/platform-auth-model/",
+    link: "docs/operator-guide/auth/platform-auth-model",
   },
   {
     title: "Optimized for Kubernetes",
@@ -76,7 +76,7 @@ const FeatureList: FeatureItem[] = [
         clusters, offering you flexibility and control.
       </>
     ),
-    link: "docs/operator-guide/install-kuberocketci/",
+    link: "docs/operator-guide/install-kuberocketci",
   },
   {
     title: "Advanced Security Analysis",
@@ -88,7 +88,7 @@ const FeatureList: FeatureItem[] = [
         Experience enhanced protection and peace of mind.
       </>
     ),
-    link: "docs/operator-guide/devsecops/overview/",
+    link: "docs/operator-guide/devsecops/overview",
   },
   {
     title: "Automated Test Analysis",

@@ -30,15 +30,15 @@ To integrate KubeRocketCI with GitHub, follow the steps below:
     2. Click the profile account and navigate to **Settings** -> **Developer Settings**.
     3. Select _Personal access tokens (classic)_ and generate a new token with the following permissions:
 
-      ![Repo permission](../assets/operator-guide/github-scopes-1.png "Repo permission")
+        ![Repo permission](../assets/operator-guide/github-scopes-1.png "Repo permission")
 
-    :::note
-      The following (Admin:repo, Admin:org, and User) access is necessary for the platform to retrieve Pull Request commits, their status, and author information.
-    :::
+        :::note
+          The following (Admin:repo, Admin:org, and User) access is necessary for the platform to retrieve Pull Request commits, their status, and author information.
+        :::
 
-      ![Admin:repo permission](../assets/operator-guide/github-scopes-2.png "Admin:repo permission")
-      ![Admin:org permission](../assets/operator-guide/github-scopes-4.png "Admin:org permission")
-      ![User permission](../assets/operator-guide/github-scopes-3.png "User permission")
+        ![Admin:repo permission](../assets/operator-guide/github-scopes-2.png "Admin:repo permission")
+        ![Admin:org permission](../assets/operator-guide/github-scopes-4.png "Admin:org permission")
+        ![User permission](../assets/operator-guide/github-scopes-3.png "User permission")
 
     4. Save a new personal access token.
 

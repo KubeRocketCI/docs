@@ -70,8 +70,9 @@ Follow the instructions below to fill in the fields of the **Codebase Info** men
       * C# - selecting C# allows using the .Net v.3.1 and .Net v.6.0 frameworks.
       * Helm - selecting Helm allows using the Helm framework.
       * Other - selecting Other allows extending the default code languages when creating a codebase with the clone/import strategy.
+
       :::note
-          The **Create from template** strategy does not allow to customize the default code language set.
+        The **Create from template** strategy does not allow to customize the default code language set.
       :::
 
     * **Language version/framework** - defines the specific framework or language version of the application. The field depends on the selected code language.

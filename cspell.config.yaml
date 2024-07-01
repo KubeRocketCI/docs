@@ -86,3 +86,13 @@ words:
 enableFiletypes:
   - md
   - mdx
+ignorePaths:
+  - .git
+  - .github
+  - .idea
+  - .log
+  - .png
+  - .svg
+  - .vscode
+  - buid
+  - node_modules

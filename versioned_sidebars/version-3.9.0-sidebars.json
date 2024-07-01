@@ -281,14 +281,15 @@
               "type": "category",
               "label": "KubeRocketCI",
               "items": [
+                "operator-guide/upgrade/upgrade-edp-3.9",
                 "operator-guide/upgrade/upgrade-edp-3.8",
                 "operator-guide/upgrade/upgrade-edp-3.7",
                 "operator-guide/upgrade/upgrade-edp-3.6",
-                "operator-guide/upgrade/upgrade-edp-3.5",
                 {
                   "type": "category",
                   "label": "Older Versions",
                   "items": [
+                    "operator-guide/upgrade/upgrade-edp-3.5",
                     "operator-guide/upgrade/upgrade-edp-3.4",
                     "operator-guide/upgrade/upgrade-edp-3.3",
                     "operator-guide/upgrade/upgrade-edp-3.2",

@@ -13,16 +13,9 @@ Resource Types:
 
 - [Stage](#stage)
 
-
-
-
 ## CDPipeline
+
 <sup><sup>[↩ Parent](#v2edpepamcomv1 )</sup></sup>
-
-
-
-
-
 
 CDPipeline is the Schema for the cdpipelines API.
 
@@ -69,11 +62,9 @@ CDPipeline is the Schema for the cdpipelines API.
       </tr></tbody>
 </table>
 
-
 ### CDPipeline.spec
+
 <sup><sup>[↩ Parent](#cdpipeline)</sup></sup>
-
-
 
 CDPipelineSpec defines the desired state of CDPipeline.
 
@@ -124,11 +115,9 @@ CDPipelineSpec defines the desired state of CDPipeline.
       </tr></tbody>
 </table>
 
-
 ### CDPipeline.status
+
 <sup><sup>[↩ Parent](#cdpipeline)</sup></sup>
-
-
 
 CDPipelineStatus defines the observed state of CDPipeline.
 
@@ -208,12 +197,8 @@ which were performed<br/>
 </table>
 
 ## Stage
+
 <sup><sup>[↩ Parent](#v2edpepamcomv1 )</sup></sup>
-
-
-
-
-
 
 Stage is the Schema for the stages API.
 
@@ -261,11 +246,9 @@ NOTE: for deleting the stage use stages order - delete only the latest stage.<br
       </tr></tbody>
 </table>
 
-
 ### Stage.spec
+
 <sup><sup>[↩ Parent](#stage)</sup></sup>
-
-
 
 StageSpec defines the desired state of Stage.
 NOTE: for deleting the stage use stages order - delete only the latest stage.
@@ -362,11 +345,9 @@ The default TriggerTemplate is delivered using edp-tekton helm chart.<br/>
       </tr></tbody>
 </table>
 
-
 ### Stage.spec.qualityGates[index]
+
 <sup><sup>[↩ Parent](#stagespec)</sup></sup>
-
-
 
 QualityGate defines a single quality for a release.
 
@@ -410,11 +391,9 @@ QualityGate defines a single quality for a release.
       </tr></tbody>
 </table>
 
-
 ### Stage.spec.source
+
 <sup><sup>[↩ Parent](#stagespec)</sup></sup>
-
-
 
 Specifies a source of a pipeline library which will run release
 
@@ -446,11 +425,9 @@ Specifies a source of a pipeline library which will run release
       </tr></tbody>
 </table>
 
-
 ### Stage.spec.source.library
+
 <sup><sup>[↩ Parent](#stagespecsource)</sup></sup>
-
-
 
 A reference to a non default source library
 
@@ -480,11 +457,9 @@ A reference to a non default source library
       </tr></tbody>
 </table>
 
-
 ### Stage.status
+
 <sup><sup>[↩ Parent](#stage)</sup></sup>
-
-
 
 StageStatus defines the observed state of Stage.
 
@@ -578,16 +553,9 @@ Resource Types:
 
 - [Stage](#stage)
 
-
-
-
 ## CDPipeline
+
 <sup><sup>[↩ Parent](#v2edpepamcomv1alpha1 )</sup></sup>
-
-
-
-
-
 
 CDPipeline is the Schema for the cdpipelines API.
 
@@ -634,11 +602,9 @@ CDPipeline is the Schema for the cdpipelines API.
       </tr></tbody>
 </table>
 
-
 ### CDPipeline.spec
+
 <sup><sup>[↩ Parent](#cdpipeline-1)</sup></sup>
-
-
 
 CDPipelineSpec defines the desired state of CDPipeline.
 
@@ -689,11 +655,9 @@ CDPipelineSpec defines the desired state of CDPipeline.
       </tr></tbody>
 </table>
 
-
 ### CDPipeline.status
+
 <sup><sup>[↩ Parent](#cdpipeline-1)</sup></sup>
-
-
 
 CDPipelineStatus defines the observed state of CDPipeline.
 
@@ -773,12 +737,8 @@ which were performed<br/>
 </table>
 
 ## Stage
+
 <sup><sup>[↩ Parent](#v2edpepamcomv1alpha1 )</sup></sup>
-
-
-
-
-
 
 Stage is the Schema for the stages API.
 
@@ -825,11 +785,9 @@ Stage is the Schema for the stages API.
       </tr></tbody>
 </table>
 
-
 ### Stage.spec
+
 <sup><sup>[↩ Parent](#stage-1)</sup></sup>
-
-
 
 StageSpec defines the desired state of Stage.
 
@@ -894,11 +852,9 @@ StageSpec defines the desired state of Stage.
       </tr></tbody>
 </table>
 
-
 ### Stage.spec.qualityGates[index]
+
 <sup><sup>[↩ Parent](#stagespec-1)</sup></sup>
-
-
 
 QualityGate defines a single quality for a release.
 
@@ -942,11 +898,9 @@ QualityGate defines a single quality for a release.
       </tr></tbody>
 </table>
 
-
 ### Stage.spec.source
+
 <sup><sup>[↩ Parent](#stagespec-1)</sup></sup>
-
-
 
 Specifies a source of a pipeline library which will run release
 
@@ -976,11 +930,9 @@ Specifies a source of a pipeline library which will run release
       </tr></tbody>
 </table>
 
-
 ### Stage.spec.source.library
+
 <sup><sup>[↩ Parent](#stagespecsource-1)</sup></sup>
-
-
 
 A reference to a non default source library
 
@@ -1010,11 +962,9 @@ A reference to a non default source library
       </tr></tbody>
 </table>
 
-
 ### Stage.status
+
 <sup><sup>[↩ Parent](#stage-1)</sup></sup>
-
-
 
 StageStatus defines the observed state of Stage.
 

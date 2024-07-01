@@ -35,16 +35,9 @@ Resource Types:
 
 - [Keycloak](#keycloak)
 
-
-
-
 ## ClusterKeycloakRealm
+
 <sup><sup>[↩ Parent](#v1edpepamcomv1alpha1 )</sup></sup>
-
-
-
-
-
 
 ClusterKeycloakRealm is the Schema for the clusterkeycloakrealms API.
 
@@ -91,11 +84,9 @@ ClusterKeycloakRealm is the Schema for the clusterkeycloakrealms API.
       </tr></tbody>
 </table>
 
-
 ### ClusterKeycloakRealm.spec
+
 <sup><sup>[↩ Parent](#clusterkeycloakrealm)</sup></sup>
-
-
 
 ClusterKeycloakRealmSpec defines the desired state of ClusterKeycloakRealm.
 
@@ -182,11 +173,9 @@ Use in combination with the default hostname provider to override the base URL f
       </tr></tbody>
 </table>
 
-
 ### ClusterKeycloakRealm.spec.authenticationFlows
+
 <sup><sup>[↩ Parent](#clusterkeycloakrealmspec)</sup></sup>
-
-
 
 AuthenticationFlow is the configuration for authentication flows in the realm.
 
@@ -209,11 +198,9 @@ AuthenticationFlow is the configuration for authentication flows in the realm.
       </tr></tbody>
 </table>
 
-
 ### ClusterKeycloakRealm.spec.localization
+
 <sup><sup>[↩ Parent](#clusterkeycloakrealmspec)</sup></sup>
-
-
 
 Localization is the configuration for localization in the realm.
 
@@ -236,13 +223,9 @@ Localization is the configuration for localization in the realm.
       </tr></tbody>
 </table>
 
-
 ### ClusterKeycloakRealm.spec.passwordPolicy[index]
+
 <sup><sup>[↩ Parent](#clusterkeycloakrealmspec)</sup></sup>
-
-
-
-
 
 <table>
     <thead>
@@ -270,11 +253,9 @@ Localization is the configuration for localization in the realm.
       </tr></tbody>
 </table>
 
-
 ### ClusterKeycloakRealm.spec.realmEventConfig
+
 <sup><sup>[↩ Parent](#clusterkeycloakrealmspec)</sup></sup>
-
-
 
 RealmEventConfig is the configuration for events in the realm.
 
@@ -332,11 +313,9 @@ RealmEventConfig is the configuration for events in the realm.
       </tr></tbody>
 </table>
 
-
 ### ClusterKeycloakRealm.spec.themes
+
 <sup><sup>[↩ Parent](#clusterkeycloakrealmspec)</sup></sup>
-
-
 
 Themes is a map of themes to apply to the realm.
 
@@ -380,11 +359,9 @@ Themes is a map of themes to apply to the realm.
       </tr></tbody>
 </table>
 
-
 ### ClusterKeycloakRealm.spec.tokenSettings
+
 <sup><sup>[↩ Parent](#clusterkeycloakrealmspec)</sup></sup>
-
-
 
 TokenSettings is the configuration for tokens in the realm.
 
@@ -481,11 +458,9 @@ Otherwise, refresh tokens are not revoked when used and can be used multiple tim
       </tr></tbody>
 </table>
 
-
 ### ClusterKeycloakRealm.status
+
 <sup><sup>[↩ Parent](#clusterkeycloakrealm)</sup></sup>
-
-
 
 ClusterKeycloakRealmStatus defines the observed state of ClusterKeycloakRealm.
 
@@ -525,12 +500,8 @@ ClusterKeycloakRealmStatus defines the observed state of ClusterKeycloakRealm.
 </table>
 
 ## ClusterKeycloak
+
 <sup><sup>[↩ Parent](#v1edpepamcomv1alpha1 )</sup></sup>
-
-
-
-
-
 
 ClusterKeycloak is the Schema for the clusterkeycloaks API.
 
@@ -579,11 +550,9 @@ ClusterKeycloak is the Schema for the clusterkeycloaks API.
       </tr></tbody>
 </table>
 
-
 ### ClusterKeycloak.spec
+
 <sup><sup>[↩ Parent](#clusterkeycloak)</sup></sup>
-
-
 
 ClusterKeycloakSpec defines the desired state of ClusterKeycloak.
 
@@ -643,11 +612,9 @@ certificate.<br/>
       </tr></tbody>
 </table>
 
-
 ### ClusterKeycloak.spec.caCert
+
 <sup><sup>[↩ Parent](#clusterkeycloakspec)</sup></sup>
-
-
 
 CACert defines the root certificate authority
 that api clients use when verifying server certificates.
@@ -679,11 +646,9 @@ Resources should be in the namespace defined in operator OPERATOR_NAMESPACE env.
       </tr></tbody>
 </table>
 
-
 ### ClusterKeycloak.spec.caCert.configMapKeyRef
+
 <sup><sup>[↩ Parent](#clusterkeycloakspeccacert)</sup></sup>
-
-
 
 Selects a key of a ConfigMap.
 
@@ -715,11 +680,9 @@ TODO: Add other useful fields. apiVersion, kind, uid?<br/>
       </tr></tbody>
 </table>
 
-
 ### ClusterKeycloak.spec.caCert.secretKeyRef
+
 <sup><sup>[↩ Parent](#clusterkeycloakspeccacert)</sup></sup>
-
-
 
 Selects a key of a secret.
 
@@ -751,11 +714,9 @@ TODO: Add other useful fields. apiVersion, kind, uid?<br/>
       </tr></tbody>
 </table>
 
-
 ### ClusterKeycloak.status
+
 <sup><sup>[↩ Parent](#clusterkeycloak)</sup></sup>
-
-
 
 ClusterKeycloakStatus defines the observed state of ClusterKeycloak.
 
@@ -779,14 +740,8 @@ ClusterKeycloakStatus defines the observed state of ClusterKeycloak.
 </table>
 
 ## KeycloakAuthFlow
+
 <sup><sup>[↩ Parent](#v1edpepamcomv1alpha1 )</sup></sup>
-
-
-
-
-
-
-
 
 <table>
     <thead>
@@ -831,13 +786,9 @@ ClusterKeycloakStatus defines the observed state of ClusterKeycloak.
       </tr></tbody>
 </table>
 
-
 ### KeycloakAuthFlow.spec
+
 <sup><sup>[↩ Parent](#keycloakauthflow-1)</sup></sup>
-
-
-
-
 
 <table>
     <thead>
@@ -914,13 +865,9 @@ ClusterKeycloakStatus defines the observed state of ClusterKeycloak.
       </tr></tbody>
 </table>
 
-
 ### KeycloakAuthFlow.spec.authenticationExecutions[index]
+
 <sup><sup>[↩ Parent](#keycloakauthflowspec-1)</sup></sup>
-
-
-
-
 
 <table>
     <thead>
@@ -976,13 +923,9 @@ ClusterKeycloakStatus defines the observed state of ClusterKeycloak.
       </tr></tbody>
 </table>
 
-
 ### KeycloakAuthFlow.spec.authenticationExecutions[index].authenticatorConfig
+
 <sup><sup>[↩ Parent](#keycloakauthflowspecauthenticationexecutionsindex-1)</sup></sup>
-
-
-
-
 
 <table>
     <thead>
@@ -1010,13 +953,9 @@ ClusterKeycloakStatus defines the observed state of ClusterKeycloak.
       </tr></tbody>
 </table>
 
-
 ### KeycloakAuthFlow.status
+
 <sup><sup>[↩ Parent](#keycloakauthflow-1)</sup></sup>
-
-
-
-
 
 <table>
     <thead>
@@ -1047,12 +986,8 @@ ClusterKeycloakStatus defines the observed state of ClusterKeycloak.
 </table>
 
 ## KeycloakClient
+
 <sup><sup>[↩ Parent](#v1edpepamcomv1alpha1 )</sup></sup>
-
-
-
-
-
 
 KeycloakClient is the Schema for the keycloakclients API.
 
@@ -1099,11 +1034,9 @@ KeycloakClient is the Schema for the keycloakclients API.
       </tr></tbody>
 </table>
 
-
 ### KeycloakClient.spec
+
 <sup><sup>[↩ Parent](#keycloakclient-1)</sup></sup>
-
-
 
 KeycloakClientSpec defines the desired state of KeycloakClient.
 
@@ -1233,13 +1166,9 @@ KeycloakClientSpec defines the desired state of KeycloakClient.
       </tr></tbody>
 </table>
 
-
 ### KeycloakClient.spec.protocolMappers[index]
+
 <sup><sup>[↩ Parent](#keycloakclientspec-1)</sup></sup>
-
-
-
-
 
 <table>
     <thead>
@@ -1281,13 +1210,9 @@ KeycloakClientSpec defines the desired state of KeycloakClient.
       </tr></tbody>
 </table>
 
-
 ### KeycloakClient.spec.realmRoles[index]
+
 <sup><sup>[↩ Parent](#keycloakclientspec-1)</sup></sup>
-
-
-
-
 
 <table>
     <thead>
@@ -1315,13 +1240,9 @@ KeycloakClientSpec defines the desired state of KeycloakClient.
       </tr></tbody>
 </table>
 
-
 ### KeycloakClient.spec.serviceAccount
+
 <sup><sup>[↩ Parent](#keycloakclientspec-1)</sup></sup>
-
-
-
-
 
 <table>
     <thead>
@@ -1363,13 +1284,9 @@ KeycloakClientSpec defines the desired state of KeycloakClient.
       </tr></tbody>
 </table>
 
-
 ### KeycloakClient.spec.serviceAccount.clientRoles[index]
+
 <sup><sup>[↩ Parent](#keycloakclientspecserviceaccount-1)</sup></sup>
-
-
-
-
 
 <table>
     <thead>
@@ -1397,11 +1314,9 @@ KeycloakClientSpec defines the desired state of KeycloakClient.
       </tr></tbody>
 </table>
 
-
 ### KeycloakClient.status
+
 <sup><sup>[↩ Parent](#keycloakclient-1)</sup></sup>
-
-
 
 KeycloakClientStatus defines the observed state of KeycloakClient.
 
@@ -1448,14 +1363,8 @@ KeycloakClientStatus defines the observed state of KeycloakClient.
 </table>
 
 ## KeycloakClientScope
+
 <sup><sup>[↩ Parent](#v1edpepamcomv1alpha1 )</sup></sup>
-
-
-
-
-
-
-
 
 <table>
     <thead>
@@ -1500,13 +1409,9 @@ KeycloakClientStatus defines the observed state of KeycloakClient.
       </tr></tbody>
 </table>
 
-
 ### KeycloakClientScope.spec
+
 <sup><sup>[↩ Parent](#keycloakclientscope-1)</sup></sup>
-
-
-
-
 
 <table>
     <thead>
@@ -1569,13 +1474,9 @@ KeycloakClientStatus defines the observed state of KeycloakClient.
       </tr></tbody>
 </table>
 
-
 ### KeycloakClientScope.spec.protocolMappers[index]
+
 <sup><sup>[↩ Parent](#keycloakclientscopespec-1)</sup></sup>
-
-
-
-
 
 <table>
     <thead>
@@ -1617,13 +1518,9 @@ KeycloakClientStatus defines the observed state of KeycloakClient.
       </tr></tbody>
 </table>
 
-
 ### KeycloakClientScope.status
+
 <sup><sup>[↩ Parent](#keycloakclientscope-1)</sup></sup>
-
-
-
-
 
 <table>
     <thead>
@@ -1661,14 +1558,8 @@ KeycloakClientStatus defines the observed state of KeycloakClient.
 </table>
 
 ## KeycloakRealmComponent
+
 <sup><sup>[↩ Parent](#v1edpepamcomv1alpha1 )</sup></sup>
-
-
-
-
-
-
-
 
 <table>
     <thead>
@@ -1713,13 +1604,9 @@ KeycloakClientStatus defines the observed state of KeycloakClient.
       </tr></tbody>
 </table>
 
-
 ### KeycloakRealmComponent.spec
+
 <sup><sup>[↩ Parent](#keycloakrealmcomponent-1)</sup></sup>
-
-
-
-
 
 <table>
     <thead>
@@ -1768,13 +1655,9 @@ KeycloakClientStatus defines the observed state of KeycloakClient.
       </tr></tbody>
 </table>
 
-
 ### KeycloakRealmComponent.status
+
 <sup><sup>[↩ Parent](#keycloakrealmcomponent-1)</sup></sup>
-
-
-
-
 
 <table>
     <thead>
@@ -1805,14 +1688,8 @@ KeycloakClientStatus defines the observed state of KeycloakClient.
 </table>
 
 ## KeycloakRealmGroup
+
 <sup><sup>[↩ Parent](#v1edpepamcomv1alpha1 )</sup></sup>
-
-
-
-
-
-
-
 
 <table>
     <thead>
@@ -1857,13 +1734,9 @@ KeycloakClientStatus defines the observed state of KeycloakClient.
       </tr></tbody>
 </table>
 
-
 ### KeycloakRealmGroup.spec
+
 <sup><sup>[↩ Parent](#keycloakrealmgroup-1)</sup></sup>
-
-
-
-
 
 <table>
     <thead>
@@ -1933,13 +1806,9 @@ KeycloakClientStatus defines the observed state of KeycloakClient.
       </tr></tbody>
 </table>
 
-
 ### KeycloakRealmGroup.spec.clientRoles[index]
+
 <sup><sup>[↩ Parent](#keycloakrealmgroupspec-1)</sup></sup>
-
-
-
-
 
 <table>
     <thead>
@@ -1967,13 +1836,9 @@ KeycloakClientStatus defines the observed state of KeycloakClient.
       </tr></tbody>
 </table>
 
-
 ### KeycloakRealmGroup.status
+
 <sup><sup>[↩ Parent](#keycloakrealmgroup-1)</sup></sup>
-
-
-
-
 
 <table>
     <thead>
@@ -2011,14 +1876,8 @@ KeycloakClientStatus defines the observed state of KeycloakClient.
 </table>
 
 ## KeycloakRealmIdentityProvider
+
 <sup><sup>[↩ Parent](#v1edpepamcomv1alpha1 )</sup></sup>
-
-
-
-
-
-
-
 
 <table>
     <thead>
@@ -2063,13 +1922,9 @@ KeycloakClientStatus defines the observed state of KeycloakClient.
       </tr></tbody>
 </table>
 
-
 ### KeycloakRealmIdentityProvider.spec
+
 <sup><sup>[↩ Parent](#keycloakrealmidentityprovider-1)</sup></sup>
-
-
-
-
 
 <table>
     <thead>
@@ -2174,13 +2029,9 @@ KeycloakClientStatus defines the observed state of KeycloakClient.
       </tr></tbody>
 </table>
 
-
 ### KeycloakRealmIdentityProvider.spec.mappers[index]
+
 <sup><sup>[↩ Parent](#keycloakrealmidentityproviderspec-1)</sup></sup>
-
-
-
-
 
 <table>
     <thead>
@@ -2222,13 +2073,9 @@ KeycloakClientStatus defines the observed state of KeycloakClient.
       </tr></tbody>
 </table>
 
-
 ### KeycloakRealmIdentityProvider.status
+
 <sup><sup>[↩ Parent](#keycloakrealmidentityprovider-1)</sup></sup>
-
-
-
-
 
 <table>
     <thead>
@@ -2259,14 +2106,8 @@ KeycloakClientStatus defines the observed state of KeycloakClient.
 </table>
 
 ## KeycloakRealmRoleBatch
+
 <sup><sup>[↩ Parent](#v1edpepamcomv1alpha1 )</sup></sup>
-
-
-
-
-
-
-
 
 <table>
     <thead>
@@ -2311,13 +2152,9 @@ KeycloakClientStatus defines the observed state of KeycloakClient.
       </tr></tbody>
 </table>
 
-
 ### KeycloakRealmRoleBatch.spec
+
 <sup><sup>[↩ Parent](#keycloakrealmrolebatch-1)</sup></sup>
-
-
-
-
 
 <table>
     <thead>
@@ -2345,13 +2182,9 @@ KeycloakClientStatus defines the observed state of KeycloakClient.
       </tr></tbody>
 </table>
 
-
 ### KeycloakRealmRoleBatch.spec.roles[index]
+
 <sup><sup>[↩ Parent](#keycloakrealmrolebatchspec-1)</sup></sup>
-
-
-
-
 
 <table>
     <thead>
@@ -2407,13 +2240,9 @@ KeycloakClientStatus defines the observed state of KeycloakClient.
       </tr></tbody>
 </table>
 
-
 ### KeycloakRealmRoleBatch.spec.roles[index].composites[index]
+
 <sup><sup>[↩ Parent](#keycloakrealmrolebatchspecrolesindex-1)</sup></sup>
-
-
-
-
 
 <table>
     <thead>
@@ -2434,13 +2263,9 @@ KeycloakClientStatus defines the observed state of KeycloakClient.
       </tr></tbody>
 </table>
 
-
 ### KeycloakRealmRoleBatch.status
+
 <sup><sup>[↩ Parent](#keycloakrealmrolebatch-1)</sup></sup>
-
-
-
-
 
 <table>
     <thead>
@@ -2471,14 +2296,8 @@ KeycloakClientStatus defines the observed state of KeycloakClient.
 </table>
 
 ## KeycloakRealmRole
+
 <sup><sup>[↩ Parent](#v1edpepamcomv1alpha1 )</sup></sup>
-
-
-
-
-
-
-
 
 <table>
     <thead>
@@ -2523,13 +2342,9 @@ KeycloakClientStatus defines the observed state of KeycloakClient.
       </tr></tbody>
 </table>
 
-
 ### KeycloakRealmRole.spec
+
 <sup><sup>[↩ Parent](#keycloakrealmrole-1)</sup></sup>
-
-
-
-
 
 <table>
     <thead>
@@ -2592,13 +2407,9 @@ KeycloakClientStatus defines the observed state of KeycloakClient.
       </tr></tbody>
 </table>
 
-
 ### KeycloakRealmRole.spec.composites[index]
+
 <sup><sup>[↩ Parent](#keycloakrealmrolespec-1)</sup></sup>
-
-
-
-
 
 <table>
     <thead>
@@ -2619,13 +2430,9 @@ KeycloakClientStatus defines the observed state of KeycloakClient.
       </tr></tbody>
 </table>
 
-
 ### KeycloakRealmRole.status
+
 <sup><sup>[↩ Parent](#keycloakrealmrole-1)</sup></sup>
-
-
-
-
 
 <table>
     <thead>
@@ -2663,12 +2470,8 @@ KeycloakClientStatus defines the observed state of KeycloakClient.
 </table>
 
 ## KeycloakRealm
+
 <sup><sup>[↩ Parent](#v1edpepamcomv1alpha1 )</sup></sup>
-
-
-
-
-
 
 KeycloakRealm is the Schema for the keycloakrealms API.
 
@@ -2715,11 +2518,9 @@ KeycloakRealm is the Schema for the keycloakrealms API.
       </tr></tbody>
 </table>
 
-
 ### KeycloakRealm.spec
+
 <sup><sup>[↩ Parent](#keycloakrealm-1)</sup></sup>
-
-
 
 KeycloakRealmSpec defines the desired state of KeycloakRealm.
 
@@ -2805,13 +2606,9 @@ KeycloakRealmSpec defines the desired state of KeycloakRealm.
       </tr></tbody>
 </table>
 
-
 ### KeycloakRealm.spec.passwordPolicy[index]
+
 <sup><sup>[↩ Parent](#keycloakrealmspec-1)</sup></sup>
-
-
-
-
 
 <table>
     <thead>
@@ -2839,13 +2636,9 @@ KeycloakRealmSpec defines the desired state of KeycloakRealm.
       </tr></tbody>
 </table>
 
-
 ### KeycloakRealm.spec.realmEventConfig
+
 <sup><sup>[↩ Parent](#keycloakrealmspec-1)</sup></sup>
-
-
-
-
 
 <table>
     <thead>
@@ -2901,13 +2694,9 @@ KeycloakRealmSpec defines the desired state of KeycloakRealm.
       </tr></tbody>
 </table>
 
-
 ### KeycloakRealm.spec.themes
+
 <sup><sup>[↩ Parent](#keycloakrealmspec-1)</sup></sup>
-
-
-
-
 
 <table>
     <thead>
@@ -2956,13 +2745,9 @@ KeycloakRealmSpec defines the desired state of KeycloakRealm.
       </tr></tbody>
 </table>
 
-
 ### KeycloakRealm.spec.users[index]
+
 <sup><sup>[↩ Parent](#keycloakrealmspec-1)</sup></sup>
-
-
-
-
 
 <table>
     <thead>
@@ -2990,11 +2775,9 @@ KeycloakRealmSpec defines the desired state of KeycloakRealm.
       </tr></tbody>
 </table>
 
-
 ### KeycloakRealm.status
+
 <sup><sup>[↩ Parent](#keycloakrealm-1)</sup></sup>
-
-
 
 KeycloakRealmStatus defines the observed state of KeycloakRealm.
 
@@ -3034,14 +2817,8 @@ KeycloakRealmStatus defines the observed state of KeycloakRealm.
 </table>
 
 ## KeycloakRealmUser
+
 <sup><sup>[↩ Parent](#v1edpepamcomv1alpha1 )</sup></sup>
-
-
-
-
-
-
-
 
 <table>
     <thead>
@@ -3086,13 +2863,9 @@ KeycloakRealmStatus defines the observed state of KeycloakRealm.
       </tr></tbody>
 </table>
 
-
 ### KeycloakRealmUser.spec
+
 <sup><sup>[↩ Parent](#keycloakrealmuser-1)</sup></sup>
-
-
-
-
 
 <table>
     <thead>
@@ -3204,13 +2977,9 @@ KeycloakRealmStatus defines the observed state of KeycloakRealm.
       </tr></tbody>
 </table>
 
-
 ### KeycloakRealmUser.status
+
 <sup><sup>[↩ Parent](#keycloakrealmuser-1)</sup></sup>
-
-
-
-
 
 <table>
     <thead>
@@ -3241,12 +3010,8 @@ KeycloakRealmStatus defines the observed state of KeycloakRealm.
 </table>
 
 ## Keycloak
+
 <sup><sup>[↩ Parent](#v1edpepamcomv1alpha1 )</sup></sup>
-
-
-
-
-
 
 Keycloak is the Schema for the keycloaks API.
 
@@ -3293,11 +3058,9 @@ Keycloak is the Schema for the keycloaks API.
       </tr></tbody>
 </table>
 
-
 ### Keycloak.spec
+
 <sup><sup>[↩ Parent](#keycloak-1)</sup></sup>
-
-
 
 KeycloakSpec defines the desired state of Keycloak.
 
@@ -3364,13 +3127,9 @@ KeycloakSpec defines the desired state of Keycloak.
       </tr></tbody>
 </table>
 
-
 ### Keycloak.spec.users[index]
+
 <sup><sup>[↩ Parent](#keycloakspec-1)</sup></sup>
-
-
-
-
 
 <table>
     <thead>
@@ -3398,11 +3157,9 @@ KeycloakSpec defines the desired state of Keycloak.
       </tr></tbody>
 </table>
 
-
 ### Keycloak.status
+
 <sup><sup>[↩ Parent](#keycloak-1)</sup></sup>
-
-
 
 KeycloakStatus defines the observed state of Keycloak.
 
@@ -3451,16 +3208,9 @@ Resource Types:
 
 - [Keycloak](#keycloak)
 
-
-
-
 ## KeycloakAuthFlow
+
 <sup><sup>[↩ Parent](#v1edpepamcomv1 )</sup></sup>
-
-
-
-
-
 
 KeycloakAuthFlow is the Schema for the keycloak authentication flow API.
 
@@ -3507,11 +3257,9 @@ KeycloakAuthFlow is the Schema for the keycloak authentication flow API.
       </tr></tbody>
 </table>
 
-
 ### KeycloakAuthFlow.spec
+
 <sup><sup>[↩ Parent](#keycloakauthflow)</sup></sup>
-
-
 
 KeycloakAuthFlowSpec defines the desired state of KeycloakAuthFlow.
 
@@ -3598,11 +3346,9 @@ Realm is name of KeycloakRealm custom resource.<br/>
       </tr></tbody>
 </table>
 
-
 ### KeycloakAuthFlow.spec.authenticationExecutions[index]
+
 <sup><sup>[↩ Parent](#keycloakauthflowspec)</sup></sup>
-
-
 
 AuthenticationExecution defines keycloak authentication execution.
 
@@ -3660,11 +3406,9 @@ AuthenticationExecution defines keycloak authentication execution.
       </tr></tbody>
 </table>
 
-
 ### KeycloakAuthFlow.spec.authenticationExecutions[index].authenticatorConfig
+
 <sup><sup>[↩ Parent](#keycloakauthflowspecauthenticationexecutionsindex)</sup></sup>
-
-
 
 AuthenticatorConfig is configuration for authenticator.
 
@@ -3694,11 +3438,9 @@ AuthenticatorConfig is configuration for authenticator.
       </tr></tbody>
 </table>
 
-
 ### KeycloakAuthFlow.spec.realmRef
+
 <sup><sup>[↩ Parent](#keycloakauthflowspec)</sup></sup>
-
-
 
 RealmRef is reference to Realm custom resource.
 
@@ -3730,11 +3472,9 @@ RealmRef is reference to Realm custom resource.
       </tr></tbody>
 </table>
 
-
 ### KeycloakAuthFlow.status
+
 <sup><sup>[↩ Parent](#keycloakauthflow)</sup></sup>
-
-
 
 KeycloakAuthFlowStatus defines the observed state of KeycloakAuthFlow.
 
@@ -3767,12 +3507,8 @@ KeycloakAuthFlowStatus defines the observed state of KeycloakAuthFlow.
 </table>
 
 ## KeycloakClient
+
 <sup><sup>[↩ Parent](#v1edpepamcomv1 )</sup></sup>
-
-
-
-
-
 
 KeycloakClient is the Schema for the keycloak clients API.
 
@@ -3819,11 +3555,9 @@ KeycloakClient is the Schema for the keycloak clients API.
       </tr></tbody>
 </table>
 
-
 ### KeycloakClient.spec
+
 <sup><sup>[↩ Parent](#keycloakclient)</sup></sup>
-
-
 
 KeycloakClientSpec defines the desired state of KeycloakClient.
 
@@ -4080,11 +3814,9 @@ If not specified, the value from `WebUrl` is used<br/>
       </tr></tbody>
 </table>
 
-
 ### KeycloakClient.spec.authorization
+
 <sup><sup>[↩ Parent](#keycloakclientspec)</sup></sup>
-
-
 
 Authorization is a client authorization configuration.
 
@@ -4121,13 +3853,9 @@ Authorization is a client authorization configuration.
       </tr></tbody>
 </table>
 
-
 ### KeycloakClient.spec.authorization.permissions[index]
+
 <sup><sup>[↩ Parent](#keycloakclientspecauthorization)</sup></sup>
-
-
-
-
 
 <table>
     <thead>
@@ -4208,11 +3936,9 @@ Specifies that this permission must be applied to one or more scopes.<br/>
       </tr></tbody>
 </table>
 
-
 ### KeycloakClient.spec.authorization.policies[index]
+
 <sup><sup>[↩ Parent](#keycloakclientspecauthorization)</sup></sup>
-
-
 
 Policy represents a client authorization policy.
 
@@ -4313,11 +4039,9 @@ Policy represents a client authorization policy.
       </tr></tbody>
 </table>
 
-
 ### KeycloakClient.spec.authorization.policies[index].aggregatedPolicy
+
 <sup><sup>[↩ Parent](#keycloakclientspecauthorizationpoliciesindex)</sup></sup>
-
-
 
 AggregatedPolicy is an aggregated policy settings.
 
@@ -4341,11 +4065,9 @@ Specifies all the policies that must be applied to the scopes defined by this po
       </tr></tbody>
 </table>
 
-
 ### KeycloakClient.spec.authorization.policies[index].clientPolicy
+
 <sup><sup>[↩ Parent](#keycloakclientspecauthorizationpoliciesindex)</sup></sup>
-
-
 
 ClientPolicy is a client policy settings.
 
@@ -4368,11 +4090,9 @@ ClientPolicy is a client policy settings.
       </tr></tbody>
 </table>
 
-
 ### KeycloakClient.spec.authorization.policies[index].groupPolicy
+
 <sup><sup>[↩ Parent](#keycloakclientspecauthorizationpoliciesindex)</sup></sup>
-
-
 
 GroupPolicy is a group policy settings.
 
@@ -4405,11 +4125,9 @@ If not defined, user's groups are obtained from your realm configuration.<br/>
       </tr></tbody>
 </table>
 
-
 ### KeycloakClient.spec.authorization.policies[index].groupPolicy.groups[index]
+
 <sup><sup>[↩ Parent](#keycloakclientspecauthorizationpoliciesindexgrouppolicy)</sup></sup>
-
-
 
 GroupDefinition represents a group in a GroupPolicyData.
 
@@ -4439,11 +4157,9 @@ GroupDefinition represents a group in a GroupPolicyData.
       </tr></tbody>
 </table>
 
-
 ### KeycloakClient.spec.authorization.policies[index].rolePolicy
+
 <sup><sup>[↩ Parent](#keycloakclientspecauthorizationpoliciesindex)</sup></sup>
-
-
 
 RolePolicy is a role policy settings.
 
@@ -4466,11 +4182,9 @@ RolePolicy is a role policy settings.
       </tr></tbody>
 </table>
 
-
 ### KeycloakClient.spec.authorization.policies[index].rolePolicy.roles[index]
+
 <sup><sup>[↩ Parent](#keycloakclientspecauthorizationpoliciesindexrolepolicy)</sup></sup>
-
-
 
 RoleDefinition represents a role in a RolePolicyData.
 
@@ -4500,11 +4214,9 @@ RoleDefinition represents a role in a RolePolicyData.
       </tr></tbody>
 </table>
 
-
 ### KeycloakClient.spec.authorization.policies[index].timePolicy
+
 <sup><sup>[↩ Parent](#keycloakclientspecauthorizationpoliciesindex)</sup></sup>
-
-
 
 ScopePolicy is a scope policy settings.
 
@@ -4600,11 +4312,9 @@ In this case, permission is granted only if current month is between or equal to
       </tr></tbody>
 </table>
 
-
 ### KeycloakClient.spec.authorization.policies[index].userPolicy
+
 <sup><sup>[↩ Parent](#keycloakclientspecauthorizationpoliciesindex)</sup></sup>
-
-
 
 UserPolicy is a user policy settings.
 
@@ -4627,13 +4337,9 @@ UserPolicy is a user policy settings.
       </tr></tbody>
 </table>
 
-
 ### KeycloakClient.spec.protocolMappers[index]
+
 <sup><sup>[↩ Parent](#keycloakclientspec)</sup></sup>
-
-
-
-
 
 <table>
     <thead>
@@ -4675,11 +4381,9 @@ UserPolicy is a user policy settings.
       </tr></tbody>
 </table>
 
-
 ### KeycloakClient.spec.realmRef
+
 <sup><sup>[↩ Parent](#keycloakclientspec)</sup></sup>
-
-
 
 RealmRef is reference to Realm custom resource.
 
@@ -4711,13 +4415,9 @@ RealmRef is reference to Realm custom resource.
       </tr></tbody>
 </table>
 
-
 ### KeycloakClient.spec.realmRoles[index]
+
 <sup><sup>[↩ Parent](#keycloakclientspec)</sup></sup>
-
-
-
-
 
 <table>
     <thead>
@@ -4745,11 +4445,9 @@ RealmRef is reference to Realm custom resource.
       </tr></tbody>
 </table>
 
-
 ### KeycloakClient.spec.serviceAccount
+
 <sup><sup>[↩ Parent](#keycloakclientspec)</sup></sup>
-
-
 
 ServiceAccount is a service account configuration.
 
@@ -4793,13 +4491,9 @@ ServiceAccount is a service account configuration.
       </tr></tbody>
 </table>
 
-
 ### KeycloakClient.spec.serviceAccount.clientRoles[index]
+
 <sup><sup>[↩ Parent](#keycloakclientspecserviceaccount)</sup></sup>
-
-
-
-
 
 <table>
     <thead>
@@ -4827,11 +4521,9 @@ ServiceAccount is a service account configuration.
       </tr></tbody>
 </table>
 
-
 ### KeycloakClient.status
+
 <sup><sup>[↩ Parent](#keycloakclient)</sup></sup>
-
-
 
 KeycloakClientStatus defines the observed state of KeycloakClient.
 
@@ -4871,12 +4563,8 @@ KeycloakClientStatus defines the observed state of KeycloakClient.
 </table>
 
 ## KeycloakClientScope
+
 <sup><sup>[↩ Parent](#v1edpepamcomv1 )</sup></sup>
-
-
-
-
-
 
 KeycloakClientScope is the Schema for the keycloakclientscopes API.
 
@@ -4923,11 +4611,9 @@ KeycloakClientScope is the Schema for the keycloakclientscopes API.
       </tr></tbody>
 </table>
 
-
 ### KeycloakClientScope.spec
+
 <sup><sup>[↩ Parent](#keycloakclientscope)</sup></sup>
-
-
 
 KeycloakClientScopeSpec defines the desired state of KeycloakClientScope.
 
@@ -5000,13 +4686,9 @@ Realm is name of KeycloakRealm custom resource.<br/>
       </tr></tbody>
 </table>
 
-
 ### KeycloakClientScope.spec.protocolMappers[index]
+
 <sup><sup>[↩ Parent](#keycloakclientscopespec)</sup></sup>
-
-
-
-
 
 <table>
     <thead>
@@ -5048,11 +4730,9 @@ Realm is name of KeycloakRealm custom resource.<br/>
       </tr></tbody>
 </table>
 
-
 ### KeycloakClientScope.spec.realmRef
+
 <sup><sup>[↩ Parent](#keycloakclientscopespec)</sup></sup>
-
-
 
 RealmRef is reference to Realm custom resource.
 
@@ -5084,11 +4764,9 @@ RealmRef is reference to Realm custom resource.
       </tr></tbody>
 </table>
 
-
 ### KeycloakClientScope.status
+
 <sup><sup>[↩ Parent](#keycloakclientscope)</sup></sup>
-
-
 
 KeycloakClientScopeStatus defines the observed state of KeycloakClientScope.
 
@@ -5128,12 +4806,8 @@ KeycloakClientScopeStatus defines the observed state of KeycloakClientScope.
 </table>
 
 ## KeycloakRealmComponent
+
 <sup><sup>[↩ Parent](#v1edpepamcomv1 )</sup></sup>
-
-
-
-
-
 
 KeycloakRealmComponent is the Schema for the keycloak component API.
 
@@ -5180,11 +4854,9 @@ KeycloakRealmComponent is the Schema for the keycloak component API.
       </tr></tbody>
 </table>
 
-
 ### KeycloakRealmComponent.spec
+
 <sup><sup>[↩ Parent](#keycloakrealmcomponent)</sup></sup>
-
-
 
 KeycloakComponentSpec defines the desired state of KeycloakRealmComponent.
 
@@ -5253,11 +4925,9 @@ Realm is name of KeycloakRealm custom resource.<br/>
       </tr></tbody>
 </table>
 
-
 ### KeycloakRealmComponent.spec.parentRef
+
 <sup><sup>[↩ Parent](#keycloakrealmcomponentspec)</sup></sup>
-
-
 
 ParentRef specifies a parent resource.
 If not specified, then parent is realm specified in realm field.
@@ -5292,11 +4962,9 @@ For example, if Kind is KeycloakRealm, then Name is name of KeycloakRealm custom
       </tr></tbody>
 </table>
 
-
 ### KeycloakRealmComponent.spec.realmRef
+
 <sup><sup>[↩ Parent](#keycloakrealmcomponentspec)</sup></sup>
-
-
 
 RealmRef is reference to Realm custom resource.
 
@@ -5328,11 +4996,9 @@ RealmRef is reference to Realm custom resource.
       </tr></tbody>
 </table>
 
-
 ### KeycloakRealmComponent.status
+
 <sup><sup>[↩ Parent](#keycloakrealmcomponent)</sup></sup>
-
-
 
 KeycloakComponentStatus defines the observed state of KeycloakRealmComponent.
 
@@ -5365,12 +5031,8 @@ KeycloakComponentStatus defines the observed state of KeycloakRealmComponent.
 </table>
 
 ## KeycloakRealmGroup
+
 <sup><sup>[↩ Parent](#v1edpepamcomv1 )</sup></sup>
-
-
-
-
-
 
 KeycloakRealmGroup is the Schema for the keycloak group API.
 
@@ -5417,11 +5079,9 @@ KeycloakRealmGroup is the Schema for the keycloak group API.
       </tr></tbody>
 </table>
 
-
 ### KeycloakRealmGroup.spec
+
 <sup><sup>[↩ Parent](#keycloakrealmgroup)</sup></sup>
-
-
 
 KeycloakRealmGroupSpec defines the desired state of KeycloakRealmGroup.
 
@@ -5501,13 +5161,9 @@ Realm is name of KeycloakRealm custom resource.<br/>
       </tr></tbody>
 </table>
 
-
 ### KeycloakRealmGroup.spec.clientRoles[index]
+
 <sup><sup>[↩ Parent](#keycloakrealmgroupspec)</sup></sup>
-
-
-
-
 
 <table>
     <thead>
@@ -5535,11 +5191,9 @@ Realm is name of KeycloakRealm custom resource.<br/>
       </tr></tbody>
 </table>
 
-
 ### KeycloakRealmGroup.spec.realmRef
+
 <sup><sup>[↩ Parent](#keycloakrealmgroupspec)</sup></sup>
-
-
 
 RealmRef is reference to Realm custom resource.
 
@@ -5571,11 +5225,9 @@ RealmRef is reference to Realm custom resource.
       </tr></tbody>
 </table>
 
-
 ### KeycloakRealmGroup.status
+
 <sup><sup>[↩ Parent](#keycloakrealmgroup)</sup></sup>
-
-
 
 KeycloakRealmGroupStatus defines the observed state of KeycloakRealmGroup.
 
@@ -5615,12 +5267,8 @@ KeycloakRealmGroupStatus defines the observed state of KeycloakRealmGroup.
 </table>
 
 ## KeycloakRealmIdentityProvider
+
 <sup><sup>[↩ Parent](#v1edpepamcomv1 )</sup></sup>
-
-
-
-
-
 
 KeycloakRealmIdentityProvider is the Schema for the keycloak realm identity provider API.
 
@@ -5667,11 +5315,9 @@ KeycloakRealmIdentityProvider is the Schema for the keycloak realm identity prov
       </tr></tbody>
 </table>
 
-
 ### KeycloakRealmIdentityProvider.spec
+
 <sup><sup>[↩ Parent](#keycloakrealmidentityprovider)</sup></sup>
-
-
 
 KeycloakRealmIdentityProviderSpec defines the desired state of KeycloakRealmIdentityProvider.
 
@@ -5788,13 +5434,9 @@ Realm is name of KeycloakRealm custom resource.<br/>
       </tr></tbody>
 </table>
 
-
 ### KeycloakRealmIdentityProvider.spec.mappers[index]
+
 <sup><sup>[↩ Parent](#keycloakrealmidentityproviderspec)</sup></sup>
-
-
-
-
 
 <table>
     <thead>
@@ -5836,11 +5478,9 @@ Realm is name of KeycloakRealm custom resource.<br/>
       </tr></tbody>
 </table>
 
-
 ### KeycloakRealmIdentityProvider.spec.realmRef
+
 <sup><sup>[↩ Parent](#keycloakrealmidentityproviderspec)</sup></sup>
-
-
 
 RealmRef is reference to Realm custom resource.
 
@@ -5872,11 +5512,9 @@ RealmRef is reference to Realm custom resource.
       </tr></tbody>
 </table>
 
-
 ### KeycloakRealmIdentityProvider.status
+
 <sup><sup>[↩ Parent](#keycloakrealmidentityprovider)</sup></sup>
-
-
 
 KeycloakRealmIdentityProviderStatus defines the observed state of KeycloakRealmIdentityProvider.
 
@@ -5909,12 +5547,8 @@ KeycloakRealmIdentityProviderStatus defines the observed state of KeycloakRealmI
 </table>
 
 ## KeycloakRealmRoleBatch
+
 <sup><sup>[↩ Parent](#v1edpepamcomv1 )</sup></sup>
-
-
-
-
-
 
 KeycloakRealmRoleBatch is the Schema for the keycloak roles API.
 
@@ -5961,11 +5595,9 @@ KeycloakRealmRoleBatch is the Schema for the keycloak roles API.
       </tr></tbody>
 </table>
 
-
 ### KeycloakRealmRoleBatch.spec
+
 <sup><sup>[↩ Parent](#keycloakrealmrolebatch)</sup></sup>
-
-
 
 KeycloakRealmRoleBatchSpec defines the desired state of KeycloakRealmRoleBatch.
 
@@ -6003,13 +5635,9 @@ Realm is name of KeycloakRealm custom resource.<br/>
       </tr></tbody>
 </table>
 
-
 ### KeycloakRealmRoleBatch.spec.roles[index]
+
 <sup><sup>[↩ Parent](#keycloakrealmrolebatchspec)</sup></sup>
-
-
-
-
 
 <table>
     <thead>
@@ -6065,13 +5693,9 @@ Realm is name of KeycloakRealm custom resource.<br/>
       </tr></tbody>
 </table>
 
-
 ### KeycloakRealmRoleBatch.spec.roles[index].composites[index]
+
 <sup><sup>[↩ Parent](#keycloakrealmrolebatchspecrolesindex)</sup></sup>
-
-
-
-
 
 <table>
     <thead>
@@ -6092,11 +5716,9 @@ Realm is name of KeycloakRealm custom resource.<br/>
       </tr></tbody>
 </table>
 
-
 ### KeycloakRealmRoleBatch.spec.realmRef
+
 <sup><sup>[↩ Parent](#keycloakrealmrolebatchspec)</sup></sup>
-
-
 
 RealmRef is reference to Realm custom resource.
 
@@ -6128,11 +5750,9 @@ RealmRef is reference to Realm custom resource.
       </tr></tbody>
 </table>
 
-
 ### KeycloakRealmRoleBatch.status
+
 <sup><sup>[↩ Parent](#keycloakrealmrolebatch)</sup></sup>
-
-
 
 KeycloakRealmRoleBatchStatus defines the observed state of KeycloakRealmRoleBatch.
 
@@ -6165,12 +5785,8 @@ KeycloakRealmRoleBatchStatus defines the observed state of KeycloakRealmRoleBatc
 </table>
 
 ## KeycloakRealmRole
+
 <sup><sup>[↩ Parent](#v1edpepamcomv1 )</sup></sup>
-
-
-
-
-
 
 KeycloakRealmRole is the Schema for the keycloak group API.
 
@@ -6217,11 +5833,9 @@ KeycloakRealmRole is the Schema for the keycloak group API.
       </tr></tbody>
 </table>
 
-
 ### KeycloakRealmRole.spec
+
 <sup><sup>[↩ Parent](#keycloakrealmrole)</sup></sup>
-
-
 
 KeycloakRealmRoleSpec defines the desired state of KeycloakRealmRole.
 
@@ -6301,13 +5915,9 @@ Realm is name of KeycloakRealm custom resource.<br/>
       </tr></tbody>
 </table>
 
-
 ### KeycloakRealmRole.spec.composites[index]
+
 <sup><sup>[↩ Parent](#keycloakrealmrolespec)</sup></sup>
-
-
-
-
 
 <table>
     <thead>
@@ -6327,14 +5937,10 @@ Realm is name of KeycloakRealm custom resource.<br/>
         <td>true</td>
       </tr></tbody>
 </table>
-
 
 ### KeycloakRealmRole.spec.compositesClientRoles[key][index]
+
 <sup><sup>[↩ Parent](#keycloakrealmrolespec)</sup></sup>
-
-
-
-
 
 <table>
     <thead>
@@ -6355,11 +5961,9 @@ Realm is name of KeycloakRealm custom resource.<br/>
       </tr></tbody>
 </table>
 
-
 ### KeycloakRealmRole.spec.realmRef
+
 <sup><sup>[↩ Parent](#keycloakrealmrolespec)</sup></sup>
-
-
 
 RealmRef is reference to Realm custom resource.
 
@@ -6391,11 +5995,9 @@ RealmRef is reference to Realm custom resource.
       </tr></tbody>
 </table>
 
-
 ### KeycloakRealmRole.status
+
 <sup><sup>[↩ Parent](#keycloakrealmrole)</sup></sup>
-
-
 
 KeycloakRealmRoleStatus defines the observed state of KeycloakRealmRole.
 
@@ -6435,12 +6037,8 @@ KeycloakRealmRoleStatus defines the observed state of KeycloakRealmRole.
 </table>
 
 ## KeycloakRealm
+
 <sup><sup>[↩ Parent](#v1edpepamcomv1 )</sup></sup>
-
-
-
-
-
 
 KeycloakRealm is the Schema for the keycloak realms API.
 
@@ -6487,11 +6085,9 @@ KeycloakRealm is the Schema for the keycloak realms API.
       </tr></tbody>
 </table>
 
-
 ### KeycloakRealm.spec
+
 <sup><sup>[↩ Parent](#keycloakrealm)</sup></sup>
-
-
 
 KeycloakRealmSpec defines the desired state of KeycloakRealm.
 
@@ -6592,11 +6188,9 @@ KeycloakOwner specifies the name of the Keycloak instance that owns the realm.<b
       </tr></tbody>
 </table>
 
-
 ### KeycloakRealm.spec.keycloakRef
+
 <sup><sup>[↩ Parent](#keycloakrealmspec)</sup></sup>
-
-
 
 KeycloakRef is reference to Keycloak custom resource.
 
@@ -6628,13 +6222,9 @@ KeycloakRef is reference to Keycloak custom resource.
       </tr></tbody>
 </table>
 
-
 ### KeycloakRealm.spec.passwordPolicy[index]
+
 <sup><sup>[↩ Parent](#keycloakrealmspec)</sup></sup>
-
-
-
-
 
 <table>
     <thead>
@@ -6662,11 +6252,9 @@ KeycloakRef is reference to Keycloak custom resource.
       </tr></tbody>
 </table>
 
-
 ### KeycloakRealm.spec.realmEventConfig
+
 <sup><sup>[↩ Parent](#keycloakrealmspec)</sup></sup>
-
-
 
 RealmEventConfig is the configuration for events in the realm.
 
@@ -6724,11 +6312,9 @@ RealmEventConfig is the configuration for events in the realm.
       </tr></tbody>
 </table>
 
-
 ### KeycloakRealm.spec.themes
+
 <sup><sup>[↩ Parent](#keycloakrealmspec)</sup></sup>
-
-
 
 Themes is a map of themes to apply to the realm.
 
@@ -6779,11 +6365,9 @@ Themes is a map of themes to apply to the realm.
       </tr></tbody>
 </table>
 
-
 ### KeycloakRealm.spec.tokenSettings
+
 <sup><sup>[↩ Parent](#keycloakrealmspec)</sup></sup>
-
-
 
 TokenSettings is the configuration for tokens in the realm.
 
@@ -6880,13 +6464,9 @@ Otherwise, refresh tokens are not revoked when used and can be used multiple tim
       </tr></tbody>
 </table>
 
-
 ### KeycloakRealm.spec.users[index]
+
 <sup><sup>[↩ Parent](#keycloakrealmspec)</sup></sup>
-
-
-
-
 
 <table>
     <thead>
@@ -6914,11 +6494,9 @@ Otherwise, refresh tokens are not revoked when used and can be used multiple tim
       </tr></tbody>
 </table>
 
-
 ### KeycloakRealm.status
+
 <sup><sup>[↩ Parent](#keycloakrealm)</sup></sup>
-
-
 
 KeycloakRealmStatus defines the observed state of KeycloakRealm.
 
@@ -6958,12 +6536,8 @@ KeycloakRealmStatus defines the observed state of KeycloakRealm.
 </table>
 
 ## KeycloakRealmUser
+
 <sup><sup>[↩ Parent](#v1edpepamcomv1 )</sup></sup>
-
-
-
-
-
 
 KeycloakRealmUser is the Schema for the keycloak user API.
 
@@ -7010,11 +6584,9 @@ KeycloakRealmUser is the Schema for the keycloak user API.
       </tr></tbody>
 </table>
 
-
 ### KeycloakRealmUser.spec
+
 <sup><sup>[↩ Parent](#keycloakrealmuser)</sup></sup>
-
-
 
 KeycloakRealmUserSpec defines the desired state of KeycloakRealmUser.
 
@@ -7149,11 +6721,9 @@ If set to full, user will be created if it does not exist, or updated if it exis
       </tr></tbody>
 </table>
 
-
 ### KeycloakRealmUser.spec.passwordSecret
+
 <sup><sup>[↩ Parent](#keycloakrealmuserspec)</sup></sup>
-
-
 
 PasswordSecret defines Kubernetes secret Name and Key, which holds User secret.
 
@@ -7183,11 +6753,9 @@ PasswordSecret defines Kubernetes secret Name and Key, which holds User secret.
       </tr></tbody>
 </table>
 
-
 ### KeycloakRealmUser.spec.realmRef
+
 <sup><sup>[↩ Parent](#keycloakrealmuserspec)</sup></sup>
-
-
 
 RealmRef is reference to Realm custom resource.
 
@@ -7219,11 +6787,9 @@ RealmRef is reference to Realm custom resource.
       </tr></tbody>
 </table>
 
-
 ### KeycloakRealmUser.status
+
 <sup><sup>[↩ Parent](#keycloakrealmuser)</sup></sup>
-
-
 
 KeycloakRealmUserStatus defines the observed state of KeycloakRealmUser.
 
@@ -7256,12 +6822,8 @@ KeycloakRealmUserStatus defines the observed state of KeycloakRealmUser.
 </table>
 
 ## Keycloak
+
 <sup><sup>[↩ Parent](#v1edpepamcomv1 )</sup></sup>
-
-
-
-
-
 
 Keycloak is the Schema for the keycloaks API.
 
@@ -7310,11 +6872,9 @@ Keycloak is the Schema for the keycloaks API.
       </tr></tbody>
 </table>
 
-
 ### Keycloak.spec
+
 <sup><sup>[↩ Parent](#keycloak)</sup></sup>
-
-
 
 KeycloakSpec defines the desired state of Keycloak.
 
@@ -7371,11 +6931,9 @@ certificate.<br/>
       </tr></tbody>
 </table>
 
-
 ### Keycloak.spec.caCert
+
 <sup><sup>[↩ Parent](#keycloakspec)</sup></sup>
-
-
 
 CACert defines the root certificate authority
 that api client use when verifying server certificates.
@@ -7406,11 +6964,9 @@ that api client use when verifying server certificates.
       </tr></tbody>
 </table>
 
-
 ### Keycloak.spec.caCert.configMapKeyRef
+
 <sup><sup>[↩ Parent](#keycloakspeccacert)</sup></sup>
-
-
 
 Selects a key of a ConfigMap.
 
@@ -7442,11 +6998,9 @@ TODO: Add other useful fields. apiVersion, kind, uid?<br/>
       </tr></tbody>
 </table>
 
-
 ### Keycloak.spec.caCert.secretKeyRef
+
 <sup><sup>[↩ Parent](#keycloakspeccacert)</sup></sup>
-
-
 
 Selects a key of a secret.
 
@@ -7478,11 +7032,9 @@ TODO: Add other useful fields. apiVersion, kind, uid?<br/>
       </tr></tbody>
 </table>
 
-
 ### Keycloak.status
+
 <sup><sup>[↩ Parent](#keycloak)</sup></sup>
-
-
 
 KeycloakStatus defines the observed state of Keycloak.
 

@@ -25,16 +25,9 @@ Resource Types:
 
 - [QuickLink](#quicklink)
 
-
-
-
 ## CDStageDeploy
+
 <sup><sup>[↩ Parent](#v2edpepamcomv1 )</sup></sup>
-
-
-
-
-
 
 CDStageDeploy is the Schema for the CDStageDeployments API.
 
@@ -83,11 +76,9 @@ CDStageDeploy is the Schema for the CDStageDeployments API.
       </tr></tbody>
 </table>
 
-
 ### CDStageDeploy.spec
+
 <sup><sup>[↩ Parent](#cdstagedeploy)</sup></sup>
-
-
 
 CDStageDeploySpec defines the desired state of CDStageDeploy.
 
@@ -131,11 +122,9 @@ CDStageDeploySpec defines the desired state of CDStageDeploy.
       </tr></tbody>
 </table>
 
-
 ### CDStageDeploy.spec.tag
+
 <sup><sup>[↩ Parent](#cdstagedeployspec)</sup></sup>
-
-
 
 Specifies a latest available tag
 
@@ -165,13 +154,9 @@ Specifies a latest available tag
       </tr></tbody>
 </table>
 
-
 ### CDStageDeploy.spec.tags[index]
+
 <sup><sup>[↩ Parent](#cdstagedeployspec)</sup></sup>
-
-
-
-
 
 <table>
     <thead>
@@ -199,11 +184,9 @@ Specifies a latest available tag
       </tr></tbody>
 </table>
 
-
 ### CDStageDeploy.status
+
 <sup><sup>[↩ Parent](#cdstagedeploy)</sup></sup>
-
-
 
 CDStageDeployStatus defines the observed state of CDStageDeploy.
 
@@ -237,12 +220,8 @@ CDStageDeployStatus defines the observed state of CDStageDeploy.
 </table>
 
 ## CodebaseBranch
+
 <sup><sup>[↩ Parent](#v2edpepamcomv1 )</sup></sup>
-
-
-
-
-
 
 CodebaseBranch is the Schema for the CodebaseBranches API.
 
@@ -289,11 +268,9 @@ CodebaseBranch is the Schema for the CodebaseBranches API.
       </tr></tbody>
 </table>
 
-
 ### CodebaseBranch.spec
+
 <sup><sup>[↩ Parent](#codebasebranch)</sup></sup>
-
-
 
 CodebaseBranchSpec defines the desired state of CodebaseBranch.
 
@@ -351,11 +328,9 @@ CodebaseBranchSpec defines the desired state of CodebaseBranch.
       </tr></tbody>
 </table>
 
-
 ### CodebaseBranch.status
+
 <sup><sup>[↩ Parent](#codebasebranch)</sup></sup>
-
-
 
 CodebaseBranchStatus defines the observed state of CodebaseBranch.
 
@@ -465,12 +440,8 @@ which were performed<br/>
 </table>
 
 ## CodebaseImageStream
+
 <sup><sup>[↩ Parent](#v2edpepamcomv1 )</sup></sup>
-
-
-
-
-
 
 CodebaseImageStream is the Schema for the CodebaseImageStreams API.
 
@@ -517,11 +488,9 @@ CodebaseImageStream is the Schema for the CodebaseImageStreams API.
       </tr></tbody>
 </table>
 
-
 ### CodebaseImageStream.spec
+
 <sup><sup>[↩ Parent](#codebaseimagestream)</sup></sup>
-
-
 
 CodebaseImageStreamSpec defines the desired state of CodebaseImageStream.
 
@@ -558,13 +527,9 @@ CodebaseImageStreamSpec defines the desired state of CodebaseImageStream.
       </tr></tbody>
 </table>
 
-
 ### CodebaseImageStream.spec.tags[index]
+
 <sup><sup>[↩ Parent](#codebaseimagestreamspec)</sup></sup>
-
-
-
-
 
 <table>
     <thead>
@@ -592,11 +557,9 @@ CodebaseImageStreamSpec defines the desired state of CodebaseImageStream.
       </tr></tbody>
 </table>
 
-
 ### CodebaseImageStream.status
+
 <sup><sup>[↩ Parent](#codebaseimagestream)</sup></sup>
-
-
 
 CodebaseImageStreamStatus defines the observed state of CodebaseImageStream.
 
@@ -630,12 +593,8 @@ which were performed<br/>
 </table>
 
 ## Codebase
+
 <sup><sup>[↩ Parent](#v2edpepamcomv1 )</sup></sup>
-
-
-
-
-
 
 Codebase is the Schema for the Codebases API.
 
@@ -682,11 +641,9 @@ Codebase is the Schema for the Codebases API.
       </tr></tbody>
 </table>
 
-
 ### Codebase.spec
+
 <sup><sup>[↩ Parent](#codebase)</sup></sup>
-
-
 
 CodebaseSpec defines the desired state of Codebase.
 
@@ -857,13 +814,9 @@ Selected branch will become a default branch for a new codebase (e.g. master, ma
       </tr></tbody>
 </table>
 
-
 ### Codebase.spec.versioning
+
 <sup><sup>[↩ Parent](#codebasespec)</sup></sup>
-
-
-
-
 
 <table>
     <thead>
@@ -891,13 +844,9 @@ Selected branch will become a default branch for a new codebase (e.g. master, ma
       </tr></tbody>
 </table>
 
-
 ### Codebase.spec.repository
+
 <sup><sup>[↩ Parent](#codebasespec)</sup></sup>
-
-
-
-
 
 <table>
     <thead>
@@ -918,11 +867,9 @@ Selected branch will become a default branch for a new codebase (e.g. master, ma
       </tr></tbody>
 </table>
 
-
 ### Codebase.status
+
 <sup><sup>[↩ Parent](#codebase)</sup></sup>
-
-
 
 CodebaseStatus defines the observed state of Codebase.
 
@@ -1032,12 +979,8 @@ which were performed<br/>
 </table>
 
 ## GitServer
+
 <sup><sup>[↩ Parent](#v2edpepamcomv1 )</sup></sup>
-
-
-
-
-
 
 GitServer is the Schema for the gitservers API.
 
@@ -1084,11 +1027,9 @@ GitServer is the Schema for the gitservers API.
       </tr></tbody>
 </table>
 
-
 ### GitServer.spec
+
 <sup><sup>[↩ Parent](#gitserver)</sup></sup>
-
-
 
 GitServerSpec defines the desired state of GitServer.
 
@@ -1170,11 +1111,9 @@ If it is not set, a webhook will be created from Ingress with the name "event-li
       </tr></tbody>
 </table>
 
-
 ### GitServer.status
+
 <sup><sup>[↩ Parent](#gitserver)</sup></sup>
-
-
 
 GitServerStatus defines the observed state of GitServer.
 
@@ -1205,12 +1144,8 @@ GitServerStatus defines the observed state of GitServer.
 </table>
 
 ## JiraIssueMetadata
+
 <sup><sup>[↩ Parent](#v2edpepamcomv1 )</sup></sup>
-
-
-
-
-
 
 JiraIssueMetadata is the Schema for the JiraIssueMetadatas API.
 
@@ -1257,11 +1192,9 @@ JiraIssueMetadata is the Schema for the JiraIssueMetadatas API.
       </tr></tbody>
 </table>
 
-
 ### JiraIssueMetadata.spec
+
 <sup><sup>[↩ Parent](#jiraissuemetadata)</sup></sup>
-
-
 
 JiraIssueMetadataSpec defines the desired state of JiraIssueMetadata.
 
@@ -1305,11 +1238,9 @@ JiraIssueMetadataSpec defines the desired state of JiraIssueMetadata.
       </tr></tbody>
 </table>
 
-
 ### JiraIssueMetadata.status
+
 <sup><sup>[↩ Parent](#jiraissuemetadata)</sup></sup>
-
-
 
 JiraIssueMetadataStatus defines the observed state of JiraIssueMetadata.
 
@@ -1359,12 +1290,8 @@ which were performed<br/>
 </table>
 
 ## JiraServer
+
 <sup><sup>[↩ Parent](#v2edpepamcomv1 )</sup></sup>
-
-
-
-
-
 
 JiraServer is the Schema for the JiraServers API.
 
@@ -1411,11 +1338,9 @@ JiraServer is the Schema for the JiraServers API.
       </tr></tbody>
 </table>
 
-
 ### JiraServer.spec
+
 <sup><sup>[↩ Parent](#jiraserver)</sup></sup>
-
-
 
 JiraServerSpec defines the desired state of JiraServer.
 
@@ -1452,11 +1377,9 @@ JiraServerSpec defines the desired state of JiraServer.
       </tr></tbody>
 </table>
 
-
 ### JiraServer.status
+
 <sup><sup>[↩ Parent](#jiraserver)</sup></sup>
-
-
 
 JiraServerStatus defines the observed state of JiraServer.
 
@@ -1504,12 +1427,8 @@ which were performed<br/>
 </table>
 
 ## QuickLink
+
 <sup><sup>[↩ Parent](#v2edpepamcomv1 )</sup></sup>
-
-
-
-
-
 
 QuickLink is the Schema for the quicklinks API.
 
@@ -1556,11 +1475,9 @@ QuickLink is the Schema for the quicklinks API.
       </tr></tbody>
 </table>
 
-
 ### QuickLink.spec
+
 <sup><sup>[↩ Parent](#quicklink)</sup></sup>
-
-
 
 QuickLinkSpec defines the desired state of QuickLink.
 
@@ -1631,16 +1548,9 @@ Resource Types:
 
 - [Template](#template)
 
-
-
-
 ## CDStageDeploy
+
 <sup><sup>[↩ Parent](#v2edpepamcomv1alpha1 )</sup></sup>
-
-
-
-
-
 
 CDStageDeploy is the Schema for the CDStageDeployments API.
 
@@ -1687,11 +1597,9 @@ CDStageDeploy is the Schema for the CDStageDeployments API.
       </tr></tbody>
 </table>
 
-
 ### CDStageDeploy.spec
+
 <sup><sup>[↩ Parent](#cdstagedeploy-1)</sup></sup>
-
-
 
 CDStageDeploySpec defines the desired state of CDStageDeploy.
 
@@ -1735,11 +1643,9 @@ CDStageDeploySpec defines the desired state of CDStageDeploy.
       </tr></tbody>
 </table>
 
-
 ### CDStageDeploy.spec.tag
+
 <sup><sup>[↩ Parent](#cdstagedeployspec-1)</sup></sup>
-
-
 
 Specifies a latest available tag
 
@@ -1769,13 +1675,9 @@ Specifies a latest available tag
       </tr></tbody>
 </table>
 
-
 ### CDStageDeploy.spec.tags[index]
+
 <sup><sup>[↩ Parent](#cdstagedeployspec-1)</sup></sup>
-
-
-
-
 
 <table>
     <thead>
@@ -1803,11 +1705,9 @@ Specifies a latest available tag
       </tr></tbody>
 </table>
 
-
 ### CDStageDeploy.status
+
 <sup><sup>[↩ Parent](#cdstagedeploy-1)</sup></sup>
-
-
 
 CDStageDeployStatus defines the observed state of CDStageDeploy.
 
@@ -1847,12 +1747,8 @@ CDStageDeployStatus defines the observed state of CDStageDeploy.
 </table>
 
 ## CodebaseBranch
+
 <sup><sup>[↩ Parent](#v2edpepamcomv1alpha1 )</sup></sup>
-
-
-
-
-
 
 CodebaseBranch is the Schema for the CodebaseBranches API.
 
@@ -1899,11 +1795,9 @@ CodebaseBranch is the Schema for the CodebaseBranches API.
       </tr></tbody>
 </table>
 
-
 ### CodebaseBranch.spec
+
 <sup><sup>[↩ Parent](#codebasebranch-1)</sup></sup>
-
-
 
 CodebaseBranchSpec defines the desired state of CodebaseBranch.
 
@@ -1961,11 +1855,9 @@ CodebaseBranchSpec defines the desired state of CodebaseBranch.
       </tr></tbody>
 </table>
 
-
 ### CodebaseBranch.status
+
 <sup><sup>[↩ Parent](#codebasebranch-1)</sup></sup>
-
-
 
 CodebaseBranchStatus defines the observed state of CodebaseBranch.
 
@@ -2068,12 +1960,8 @@ which were performed<br/>
 </table>
 
 ## CodebaseImageStream
+
 <sup><sup>[↩ Parent](#v2edpepamcomv1alpha1 )</sup></sup>
-
-
-
-
-
 
 CodebaseImageStream is the Schema for the CodebaseImageStreams API.
 
@@ -2120,11 +2008,9 @@ CodebaseImageStream is the Schema for the CodebaseImageStreams API.
       </tr></tbody>
 </table>
 
-
 ### CodebaseImageStream.spec
+
 <sup><sup>[↩ Parent](#codebaseimagestream-1)</sup></sup>
-
-
 
 CodebaseImageStreamSpec defines the desired state of CodebaseImageStream.
 
@@ -2161,13 +2047,9 @@ CodebaseImageStreamSpec defines the desired state of CodebaseImageStream.
       </tr></tbody>
 </table>
 
-
 ### CodebaseImageStream.spec.tags[index]
+
 <sup><sup>[↩ Parent](#codebaseimagestreamspec-1)</sup></sup>
-
-
-
-
 
 <table>
     <thead>
@@ -2195,11 +2077,9 @@ CodebaseImageStreamSpec defines the desired state of CodebaseImageStream.
       </tr></tbody>
 </table>
 
-
 ### CodebaseImageStream.status
+
 <sup><sup>[↩ Parent](#codebaseimagestream-1)</sup></sup>
-
-
 
 CodebaseImageStreamStatus defines the observed state of CodebaseImageStream.
 
@@ -2233,12 +2113,8 @@ which were performed<br/>
 </table>
 
 ## Codebase
+
 <sup><sup>[↩ Parent](#v2edpepamcomv1alpha1 )</sup></sup>
-
-
-
-
-
 
 Codebase is the Schema for the Codebases API.
 
@@ -2285,11 +2161,9 @@ Codebase is the Schema for the Codebases API.
       </tr></tbody>
 </table>
 
-
 ### Codebase.spec
+
 <sup><sup>[↩ Parent](#codebase-1)</sup></sup>
-
-
 
 CodebaseSpec defines the desired state of Codebase.
 
@@ -2456,13 +2330,9 @@ Selected branch will become a default branch for a new codebase (e.g. master, ma
       </tr></tbody>
 </table>
 
-
 ### Codebase.spec.versioning
+
 <sup><sup>[↩ Parent](#codebasespec-1)</sup></sup>
-
-
-
-
 
 <table>
     <thead>
@@ -2490,13 +2360,9 @@ Selected branch will become a default branch for a new codebase (e.g. master, ma
       </tr></tbody>
 </table>
 
-
 ### Codebase.spec.repository
+
 <sup><sup>[↩ Parent](#codebasespec-1)</sup></sup>
-
-
-
-
 
 <table>
     <thead>
@@ -2517,11 +2383,9 @@ Selected branch will become a default branch for a new codebase (e.g. master, ma
       </tr></tbody>
 </table>
 
-
 ### Codebase.status
+
 <sup><sup>[↩ Parent](#codebase-1)</sup></sup>
-
-
 
 CodebaseStatus defines the observed state of Codebase.
 
@@ -2617,12 +2481,8 @@ which were performed<br/>
 </table>
 
 ## GitServer
+
 <sup><sup>[↩ Parent](#v2edpepamcomv1alpha1 )</sup></sup>
-
-
-
-
-
 
 GitServer is the Schema for the gitservers API.
 
@@ -2669,11 +2529,9 @@ GitServer is the Schema for the gitservers API.
       </tr></tbody>
 </table>
 
-
 ### GitServer.spec
+
 <sup><sup>[↩ Parent](#gitserver-1)</sup></sup>
-
-
 
 GitServerSpec defines the desired state of GitServer.
 
@@ -2735,11 +2593,9 @@ GitServerSpec defines the desired state of GitServer.
       </tr></tbody>
 </table>
 
-
 ### GitServer.status
+
 <sup><sup>[↩ Parent](#gitserver-1)</sup></sup>
-
-
 
 GitServerStatus defines the observed state of GitServer.
 
@@ -2817,12 +2673,8 @@ which were performed<br/>
 </table>
 
 ## JiraIssueMetadata
+
 <sup><sup>[↩ Parent](#v2edpepamcomv1alpha1 )</sup></sup>
-
-
-
-
-
 
 JiraIssueMetadata is the Schema for the JiraIssueMetadatas API.
 
@@ -2869,11 +2721,9 @@ JiraIssueMetadata is the Schema for the JiraIssueMetadatas API.
       </tr></tbody>
 </table>
 
-
 ### JiraIssueMetadata.spec
+
 <sup><sup>[↩ Parent](#jiraissuemetadata-1)</sup></sup>
-
-
 
 JiraIssueMetadataSpec defines the desired state of JiraIssueMetadata.
 
@@ -2917,11 +2767,9 @@ JiraIssueMetadataSpec defines the desired state of JiraIssueMetadata.
       </tr></tbody>
 </table>
 
-
 ### JiraIssueMetadata.status
+
 <sup><sup>[↩ Parent](#jiraissuemetadata-1)</sup></sup>
-
-
 
 JiraIssueMetadataStatus defines the observed state of JiraIssueMetadata.
 
@@ -2971,12 +2819,8 @@ which were performed<br/>
 </table>
 
 ## JiraServer
+
 <sup><sup>[↩ Parent](#v2edpepamcomv1alpha1 )</sup></sup>
-
-
-
-
-
 
 JiraServer is the Schema for the JiraServers API.
 
@@ -3023,11 +2867,9 @@ JiraServer is the Schema for the JiraServers API.
       </tr></tbody>
 </table>
 
-
 ### JiraServer.spec
+
 <sup><sup>[↩ Parent](#jiraserver-1)</sup></sup>
-
-
 
 JiraServerSpec defines the desired state of JiraServer.
 
@@ -3064,11 +2906,9 @@ JiraServerSpec defines the desired state of JiraServer.
       </tr></tbody>
 </table>
 
-
 ### JiraServer.status
+
 <sup><sup>[↩ Parent](#jiraserver-1)</sup></sup>
-
-
 
 JiraServerStatus defines the observed state of JiraServer.
 
@@ -3116,12 +2956,8 @@ which were performed<br/>
 </table>
 
 ## Template
+
 <sup><sup>[↩ Parent](#v2edpepamcomv1alpha1 )</sup></sup>
-
-
-
-
-
 
 Template is the Schema for the templates API.
 
@@ -3168,11 +3004,9 @@ Template is the Schema for the templates API.
       </tr></tbody>
 </table>
 
-
 ### Template.spec
+
 <sup><sup>[↩ Parent](#template)</sup></sup>
-
-
 
 TemplateSpec defines the desired state of Template.
 
@@ -3288,13 +3122,9 @@ TemplateSpec defines the desired state of Template.
       </tr></tbody>
 </table>
 
-
 ### Template.spec.icon[index]
+
 <sup><sup>[↩ Parent](#templatespec)</sup></sup>
-
-
-
-
 
 <table>
     <thead>
@@ -3322,13 +3152,9 @@ TemplateSpec defines the desired state of Template.
       </tr></tbody>
 </table>
 
-
 ### Template.spec.maintainers[index]
+
 <sup><sup>[↩ Parent](#templatespec)</sup></sup>
-
-
-
-
 
 <table>
     <thead>

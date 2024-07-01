@@ -20,16 +20,9 @@ Resource Types:
 
 - [SonarUser](#sonaruser)
 
-
-
-
 ## SonarGroup
+
 <sup><sup>[↩ Parent](#edpepamcomv1alpha1 )</sup></sup>
-
-
-
-
-
 
 SonarGroup is the Schema for the sonar group API.
 
@@ -76,11 +69,9 @@ SonarGroup is the Schema for the sonar group API.
       </tr></tbody>
 </table>
 
-
 ### SonarGroup.spec
+
 <sup><sup>[↩ Parent](#sonargroup)</sup></sup>
-
-
 
 SonarGroupSpec defines the desired state of SonarGroup.
 
@@ -126,11 +117,9 @@ Do not edit this field after creation. Otherwise, the group will be recreated.<b
       </tr></tbody>
 </table>
 
-
 ### SonarGroup.spec.sonarRef
+
 <sup><sup>[↩ Parent](#sonargroupspec)</sup></sup>
-
-
 
 SonarRef is a reference to Sonar custom resource.
 
@@ -162,11 +151,9 @@ SonarRef is a reference to Sonar custom resource.
       </tr></tbody>
 </table>
 
-
 ### SonarGroup.status
+
 <sup><sup>[↩ Parent](#sonargroup)</sup></sup>
-
-
 
 SonarGroupStatus defines the observed state of SonarGroup.
 
@@ -197,12 +184,8 @@ SonarGroupStatus defines the observed state of SonarGroup.
 </table>
 
 ## SonarPermissionTemplate
+
 <sup><sup>[↩ Parent](#edpepamcomv1alpha1 )</sup></sup>
-
-
-
-
-
 
 SonarPermissionTemplate is the Schema for the sonar permission template API.
 
@@ -249,11 +232,9 @@ SonarPermissionTemplate is the Schema for the sonar permission template API.
       </tr></tbody>
 </table>
 
-
 ### SonarPermissionTemplate.spec
+
 <sup><sup>[↩ Parent](#sonarpermissiontemplate)</sup></sup>
-
-
 
 SonarPermissionTemplateSpec defines the desired state of SonarPermissionTemplate.
 
@@ -316,11 +297,9 @@ Default permission template can't be deleted. You need to set another permission
       </tr></tbody>
 </table>
 
-
 ### SonarPermissionTemplate.spec.sonarRef
+
 <sup><sup>[↩ Parent](#sonarpermissiontemplatespec)</sup></sup>
-
-
 
 SonarRef is a reference to Sonar custom resource.
 
@@ -352,11 +331,9 @@ SonarRef is a reference to Sonar custom resource.
       </tr></tbody>
 </table>
 
-
 ### SonarPermissionTemplate.status
+
 <sup><sup>[↩ Parent](#sonarpermissiontemplate)</sup></sup>
-
-
 
 SonarPermissionTemplateStatus defines the observed state of SonarPermissionTemplate.
 
@@ -387,12 +364,8 @@ SonarPermissionTemplateStatus defines the observed state of SonarPermissionTempl
 </table>
 
 ## SonarQualityGate
+
 <sup><sup>[↩ Parent](#edpepamcomv1alpha1 )</sup></sup>
-
-
-
-
-
 
 SonarQualityGate is the Schema for the sonarqualitygates API
 
@@ -439,11 +412,9 @@ SonarQualityGate is the Schema for the sonarqualitygates API
       </tr></tbody>
 </table>
 
-
 ### SonarQualityGate.spec
+
 <sup><sup>[↩ Parent](#sonarqualitygate)</sup></sup>
-
-
 
 SonarQualityGateSpec defines the desired state of SonarQualityGate
 
@@ -493,11 +464,9 @@ Default quality gate can't be deleted. You need to set another quality gate as d
       </tr></tbody>
 </table>
 
-
 ### SonarQualityGate.spec.sonarRef
+
 <sup><sup>[↩ Parent](#sonarqualitygatespec)</sup></sup>
-
-
 
 SonarRef is a reference to Sonar custom resource.
 
@@ -529,11 +498,9 @@ SonarRef is a reference to Sonar custom resource.
       </tr></tbody>
 </table>
 
-
 ### SonarQualityGate.spec.conditions[key]
+
 <sup><sup>[↩ Parent](#sonarqualitygatespec)</sup></sup>
-
-
 
 Condition defines the condition for quality gate.
 
@@ -567,11 +534,9 @@ GT = is greater than<br/>
       </tr></tbody>
 </table>
 
-
 ### SonarQualityGate.status
+
 <sup><sup>[↩ Parent](#sonarqualitygate)</sup></sup>
-
-
 
 SonarQualityGateStatus defines the observed state of SonarQualityGate
 
@@ -602,12 +567,8 @@ SonarQualityGateStatus defines the observed state of SonarQualityGate
 </table>
 
 ## SonarQualityProfile
+
 <sup><sup>[↩ Parent](#edpepamcomv1alpha1 )</sup></sup>
-
-
-
-
-
 
 SonarQualityProfile is the Schema for the sonarqualityprofiles API
 
@@ -654,11 +615,9 @@ SonarQualityProfile is the Schema for the sonarqualityprofiles API
       </tr></tbody>
 </table>
 
-
 ### SonarQualityProfile.spec
+
 <sup><sup>[↩ Parent](#sonarqualityprofile)</sup></sup>
-
-
 
 SonarQualityProfileSpec defines the desired state of SonarQualityProfile
 
@@ -715,11 +674,9 @@ Key is a rule key, value is a rule.<br/>
       </tr></tbody>
 </table>
 
-
 ### SonarQualityProfile.spec.sonarRef
+
 <sup><sup>[↩ Parent](#sonarqualityprofilespec)</sup></sup>
-
-
 
 SonarRef is a reference to Sonar custom resource.
 
@@ -751,11 +708,9 @@ SonarRef is a reference to Sonar custom resource.
       </tr></tbody>
 </table>
 
-
 ### SonarQualityProfile.spec.rules[key]
+
 <sup><sup>[↩ Parent](#sonarqualityprofilespec)</sup></sup>
-
-
 
 Rule defines a rule of quality profile.
 
@@ -787,11 +742,9 @@ Rule defines a rule of quality profile.
       </tr></tbody>
 </table>
 
-
 ### SonarQualityProfile.status
+
 <sup><sup>[↩ Parent](#sonarqualityprofile)</sup></sup>
-
-
 
 SonarQualityProfileStatus defines the observed state of SonarQualityProfile
 
@@ -822,12 +775,8 @@ SonarQualityProfileStatus defines the observed state of SonarQualityProfile
 </table>
 
 ## Sonar
+
 <sup><sup>[↩ Parent](#edpepamcomv1alpha1 )</sup></sup>
-
-
-
-
-
 
 Sonar is the Schema for the sonars API.
 
@@ -874,11 +823,9 @@ Sonar is the Schema for the sonars API.
       </tr></tbody>
 </table>
 
-
 ### Sonar.spec
+
 <sup><sup>[↩ Parent](#sonar)</sup></sup>
-
-
 
 SonarSpec defines the desired state of Sonar.
 
@@ -924,11 +871,9 @@ Pass the token in the user field and leave the password field empty for token au
       </tr></tbody>
 </table>
 
-
 ### Sonar.spec.settings[index]
+
 <sup><sup>[↩ Parent](#sonarspec)</sup></sup>
-
-
 
 SonarSetting defines the setting of sonar.
 
@@ -972,11 +917,9 @@ SonarSetting defines the setting of sonar.
       </tr></tbody>
 </table>
 
-
 ### Sonar.status
+
 <sup><sup>[↩ Parent](#sonar)</sup></sup>
-
-
 
 SonarStatus defines the observed state of Sonar.
 
@@ -1027,12 +970,8 @@ RED: SonarQube is not operational<br/>
 </table>
 
 ## SonarUser
+
 <sup><sup>[↩ Parent](#edpepamcomv1alpha1 )</sup></sup>
-
-
-
-
-
 
 SonarUser is the Schema for the sonarusers API
 
@@ -1079,11 +1018,9 @@ SonarUser is the Schema for the sonarusers API
       </tr></tbody>
 </table>
 
-
 ### SonarUser.spec
+
 <sup><sup>[↩ Parent](#sonaruser)</sup></sup>
-
-
 
 SonarUserSpec defines the desired state of SonarUser
 
@@ -1151,11 +1088,9 @@ User password can't be updated.<br/>
       </tr></tbody>
 </table>
 
-
 ### SonarUser.spec.sonarRef
+
 <sup><sup>[↩ Parent](#sonaruserspec)</sup></sup>
-
-
 
 SonarRef is a reference to Sonar custom resource.
 
@@ -1187,11 +1122,9 @@ SonarRef is a reference to Sonar custom resource.
       </tr></tbody>
 </table>
 
-
 ### SonarUser.status
+
 <sup><sup>[↩ Parent](#sonaruser)</sup></sup>
-
-
 
 SonarUserStatus defines the observed state of SonarUser
 

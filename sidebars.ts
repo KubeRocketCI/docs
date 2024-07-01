@@ -537,6 +537,11 @@ const sidebars: SidebarsConfig = {
       label: 'API Reference',
       collapsible: false,
       items: [
+        'api/overview',
+        {
+          type: "html",
+          value: '<hr style="margin: 0.8rem">',
+        },
         'api/cd-pipeline',
         'api/codebase',
         'api/keycloak',

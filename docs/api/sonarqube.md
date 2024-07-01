@@ -1,4 +1,4 @@
-# SonarQube
+# SonarQube Operator API
 
 Packages:
 

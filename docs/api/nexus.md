@@ -1,4 +1,4 @@
-# Nexus Repository Manager
+# Nexus Repository Manager Operator API
 
 Packages:
 

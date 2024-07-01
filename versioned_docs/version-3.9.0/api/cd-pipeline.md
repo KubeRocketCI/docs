@@ -1,4 +1,4 @@
-# CD Pipeline
+# CD Pipeline Operator API
 
 Packages:
 

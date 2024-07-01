@@ -1,4 +1,4 @@
-# Keycloak
+# Keycloak Operator API
 
 Packages:
 

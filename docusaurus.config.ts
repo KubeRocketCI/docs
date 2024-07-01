@@ -75,6 +75,7 @@ const config: Config = {
       apiKey: '1e13b563f9083c76a0b29222a60f000b',
       indexName: 'kuberocketci',
     },
+
     navbar: {
       title: 'KubeRocketCI',
       logo: {
@@ -118,6 +119,12 @@ const config: Config = {
           position: 'left',
         },
         // Right
+        {
+          type: 'docSidebar',
+          sidebarId: 'apiSidebar',
+          position: 'right',
+          label: 'API Reference',
+        },
         {
           type: 'docsVersionDropdown',
           position: 'right',

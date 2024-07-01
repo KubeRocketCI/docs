@@ -530,6 +530,21 @@ const sidebars: SidebarsConfig = {
       ],
     },
   ],
+
+  apiSidebar: [
+    {
+      type: 'category',
+      label: 'API Reference',
+      collapsible: false,
+      items: [
+        'api/cd-pipeline',
+        'api/codebase',
+        'api/keycloak',
+        'api/nexus',
+        'api/sonarqube',
+      ]
+    }
+  ],
 };
 
 export default sidebars;

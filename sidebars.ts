@@ -505,7 +505,7 @@ const sidebars: SidebarsConfig = {
           items: [
             'developer-guide/edp-workflow',
             'developer-guide/local-development',
-            'developer-guide/mk-docs-development',
+            'developer-guide/documentation-guide',
           ],
         },
         'developer-guide/artifacts-verification',

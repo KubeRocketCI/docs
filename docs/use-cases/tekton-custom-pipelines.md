@@ -2,12 +2,12 @@
 
 This use case outlines the steps for adding custom Tekton libraries that contain pipelines with tasks. It also covers the process of modifying custom pipelines and tasks.
 
-## __Goals__
+## Goals
 
 - Add custom Tekton pipeline library;
 - Modify existing pipelines and tasks in a custom Tekton library.
 
-## __Preconditions__
+## Preconditions
 
 - KubeRocketCI instance with Gerrit and Tekton inside is [configured](../operator-guide/prerequisites.md);
 - Developer has access to the KubeRocketCI instances using the Single-Sign-On approach;

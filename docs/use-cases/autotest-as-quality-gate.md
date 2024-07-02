@@ -4,18 +4,18 @@ This use case outlines the process of integrating an autotest as a quality gate 
 
 In the KubeRocketCI platform, users can seamlessly add autotests as quality gates to their CD pipelines, enabling them to validate the application's stability and functionality before promoting it to the next stage. This ensures that only reliable versions of the application are deployed, improving the overall quality and reliability of the software.
 
-## __Roles__
+## Roles
 
 This documentation is tailored for the Developers and Quality Assurance specialists.
 
-## __Goals__
+## Goals
 
 - Create several applications and autotests quickly.
 - Create a pipeline for Continuous Deployment.
 - Perform testing.
 - Update delivery by deploying the new version.
 
-## __Preconditions__
+## Preconditions
 
 - KubeRocketCI instance is [configured](../operator-guide/prerequisites.md) with Gerrit, Tekton and [Argo CD](../operator-guide/cd/argocd-integration.md).
 - Developer has access to the platform using the Single-Sign-On approach.

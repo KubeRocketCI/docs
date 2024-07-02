@@ -16,15 +16,15 @@ To implement this approach, the following steps are involved:
 
 By following these steps, developers can ensure that sensitive data is protected and accessed securely within the KubeRocketCI platform. This approach enhances the overall security of the application and reduces the risk of unauthorized access to confidential information.
 
-## __Roles__
+## Roles
 
 This documentation is tailored for the Developers and Team Leads.
 
-## __Goals__
+## Goals
 
 - Make confidential information usage secure in the deployment environment.
 
-## __Preconditions__
+## Preconditions
 
 - KubeRocketCI instance is [configured](../operator-guide/prerequisites.md) with Gerrit, Tekton and [Argo CD](../operator-guide/cd/argocd-integration.md);
 - External Secrets is [installed](../operator-guide/secrets-management/install-external-secrets-operator.md);

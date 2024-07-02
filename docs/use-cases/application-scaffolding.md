@@ -8,11 +8,11 @@ This use case outlines the process of creating and deploying a FastAPI applicati
 <iframe width="560" height="315" src="https://www.youtube.com/embed/TcPcIKYvKFo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen"></iframe>
 </div>
 
-### __Roles__
+### Roles
 
 This documentation is tailored for the Developers and Team Leads.
 
-### __Goals__
+### Goals
 
 - Create a new FastAPI application quickly.
 - Deploy the initial code to the DEV environment.
@@ -20,7 +20,7 @@ This documentation is tailored for the Developers and Team Leads.
 - Perform code review.
 - Delivery update by deploying the new version.
 
-### __Preconditions__
+### Preconditions
 
 - KubeRocketCI instance is [configured](../operator-guide/prerequisites.md) with Gerrit, Tekton and [Argo CD](../operator-guide/cd/argocd-integration.md).
 - Developer has access to the KubeRocketCI instances using the Single-Sign-On approach.

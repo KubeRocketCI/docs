@@ -1,24 +1,24 @@
 # About Platform
 
-**KubeRocketCI (previously known as EPAM Delivery Platform)** is an **open-source** cloud-agnostic SaaS/PaaS solution for software development, licensed under **Apache License 2.0**. It provides a pre-defined set of CI/CD patterns and tools, which allow a user to start product development quickly with established **code review**, **release**, **versioning**, **branching**, **build** processes. These processes include static code analysis, security checks, linters, validators, dynamic feature environments provisioning. Platform consolidates the top Open-Source CI/CD tools by running them on Kubernetes/OpenShift, which enables web/app development either in isolated (on-prem) or cloud environments.
+**KubeRocketCI (previously known as EPAM Delivery Platform)** is an **open-source** cloud-agnostic SaaS/PaaS solution for software development, licensed under **Apache License 2.0**. It provides a pre-defined set of CI/CD patterns and tools, which allow a user to start product development quickly with established **code review**, **release**, **versioning**, **branching**, **build** processes. These processes include static code analysis, security checks, linters, validators, dynamic feature environments provisioning. Platform consolidates the top Open-Source CI/CD tools by running them on Kubernetes/OpenShift, enabling web/app development in isolated (on-prem) or cloud environments.
 
-KubeRocketCI, which is also called **"The Rocket"**, is a platform that allows shortening the time that is passed before an active development can be started from several months to several hours.
+KubeRocketCI, which is also called **"The Rocket"**, is a platform that allows shortening the time that is passed before an active development can start from several months to several hours.
 
-Platform consists of the following:
+The platform consists of the following blocks:
 
-- The platform based on managed infrastructure and container orchestration
+- The platform is based on managed infrastructure and container orchestration
 - Security covering authentication, authorization, and SSO for platform services
 - Development and testing toolset
-- Well-established engineering process and EPAM practices (EngX) reflected in CI/CD pipelines, and delivery analytics
-- A set of pre-configured pipelines for different types of applications
+- Well-established engineering process and EPAM practices (EngX) reflected in CI/CD pipelines and delivery analytics
+- A set of pre-configured pipelines for different types of applications (polyglot microservices)
 - Observability stack
 
 ## Features
 
-- Deployed and configured CI/CD toolset ([Tekton](https://tekton.dev/), [ArgoCD](https://argoproj.github.io/cd/), [Nexus](https://help.sonatype.com/repomanager3), [SonarQube](https://www.sonarqube.org/), [DefectDojo](https://www.defectdojo.org/))
-- [GitHub](https://about.gitlab.com/features/)(by default) or [GitLab](https://about.gitlab.com/features/)
-- [Tekton](./operator-guide/install-tekton.md) is a pipeline orchestrator
-- [CI pipelines](./user-guide/index.md)
+- Deployed and configured CI/CD toolset ([Tekton](https://tekton.dev/), [ArgoCD](https://argoproj.github.io/cd/), [Nexus Repository Manager](https://help.sonatype.com/repomanager3), [SonarQube](https://www.sonarqube.org/), [DefectDojo](https://www.defectdojo.org/), [Dependency-Track](https://dependencytrack.org/).
+- [GitHub](https://about.gitlab.com/features/)(by default) or [GitLab](https://about.gitlab.com/features/).
+- [Tekton](./operator-guide/install-tekton.md) is a pipeline orchestrator.
+- [CI pipelines](./user-guide/index.md) for polyglot applications:
 
   |Language|Framework|Build Tool|Application|Library|Autotest|
   |:-|:-:|:-:|:-:|:-:|:-:|
@@ -37,43 +37,46 @@ Platform consists of the following:
 - [Environments](./user-guide/add-cd-pipeline.md) for Microservice Deployment
 - Kubernetes native approach ([CRD, CR](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/)) to declare CI/CD pipelines
 
-## What's Inside
+## What's Inside KubeRocketCI
 
-KubeRocketCI is suitable for all aspects of delivery starting from development including the capability to deploy production environment.
-Platform architecture is represented on a diagram below (see more [on the Reference Architecture](./developer-guide/reference-architecture.md) page)
+KubeRocketCI offers a comprehensive solution for the entire software delivery lifecycle, from development to deploying production environments. It's designed to be suitable for all aspects of delivery, ensuring a seamless and efficient process.
 
-![Architecture](./assets/edp-context.png "Architecture")
+Platform modules are represented on a diagram below (more [on the Reference Architecture](./developer-guide/reference-architecture.md) page)
 
-KubeRocketCI consists of four cross-cutting concerns:
+![KubeRocketCI Modules](./assets/kuberocketci-components.png "KubeRocketCI Modules")
 
-1. Infrastructure as a Service;
-2. GitOps approach;
-3. Container orchestration and centralized services;
-4. Security.
+The architecture of KubeRocketCI is designed to support a broad range of delivery aspects effectively:
 
-On top of these indicated concerns, the platform incorporates several additional blocks, including:
+1. **Infrastructure as a Service (IaaS)**: The platform leverages managed infrastructure services, providing a robust foundation for container orchestration and other platform services. Central to our approach to IaaS is the adoption of the **Infrastructure as Code (IaC)** methodology. This methodology ensures that infrastructure is defined and managed through code, enabling the automation of infrastructure provisioning and management.
 
-- **CI/CD Components**: These components facilitate various features in the CI/CD process, such as artifacts storage and distribution (Nexus or Artifactory), static code analysis (Sonar), and more.
-- **Artifacts**. This element represents an artifact that is being delivered through the pipelines and presented as a code.
+2. **GitOps Approach**: Embracing GitOps principles, KubeRocketCI ensures an efficient and reliable way to manage deployments and configurations using Git as the single source of truth. This approach is applied not only for deploying **business applications** but also for the robust **management of the platform itself**, utilizing an [add-ons methodology](https://github.com/epam/edp-cluster-add-ons). By treating both platform components and business applications as code, KubeRocketCI facilitates automated, transparent, and collaborative processes, significantly enhancing deployment velocity and platform governance.
 
-    >_Artifact samples: frontend, backend, applications, functional and non-functional autotests, workloads for 3rd party components that can be deployed together with applications._
+3. **Container Orchestration and Centralized Services**: At its core, the platform utilizes Kubernetes/OpenShift for orchestrating containerized applications, coupled with centralized services to manage the lifecycle of these applications.
 
-- **Development and Production Environments** that share the same logic. Environments wrap a set of artifacts with a specific version, and allow performing SDLC routines in order to be sure of the artifacts quality;
-- **Pipelines**. Pipelines cover CI/CD process, production rollout and updates. They also connect three elements indicated above via automation allowing SDLC routines to be non-human;
+4. **Security**: Comprehensive security measures are in place, covering authentication, authorization, and Single Sign-On (SSO) for platform services, ensuring the safeguarding of your applications and data.
+
+On top of the primary architectural pillars, KubeRocketCI integrates several key components to enhance the CI/CD process:
+
+**CI/CD Components**: These components support various CI/CD functionalities, like artifacts storage and distribution (via Nexus or Artifactory), static code analysis (Sonar), and more.
+
+**Artifacts Management**: Representing the deliverables within the pipelines, artifacts can range from frontend and backend applications to functional and non-functional autotests, and workloads for 3rd party components.
+
+**Development and Production Environments**: Environments in KubeRocketCI maintain consistency across development and production, encapsulating artifacts with specific versions to ensure quality through the Software Development Life Cycle (SDLC).
+
+**Pipelines**: Covering the end-to-end CI/CD process, pipelines in KubeRocketCI automate the integration and delivery workflows, connecting the above components seamlessly.
 
 ### Technology Stack
 
-Explore the KubeRocket technology stack diagram
+KubeRocketCI's technology stack is adaptable to most popular public clouds such as AWS, Azure, and GCP, with support for private/hybrid clouds based on OpenStack. The containerization layer is powered by Kubernetes or OpenShift, offering flexibility and choice in deployment options.
 
-![Technology stack](./assets/edp_technology_stack.png "Technology stack")
+Explore the KubeRocketCI technology stack diagram
 
-The IaaS layer supports most popular public clouds AWS, Azure and GCP keeping the capability to be deployed on private/hybrid clouds based on OpenStack.
-Containers are based on [Docker technology](https://www.docker.com/), orchestrated by Kubernetes compatible solutions.
+![KubeRocketCI technology stack](./assets/kuberocketci-tech-stack.png "KubeRocketCI technology stack")
 
-There are two main options for Kubernetes provided by the platform:
+The platform provides two main options for Kubernetes:
 
 - Managed Kubernetes in Public Clouds to avoid installation and management of Kubernetes cluster, and get all benefits of scaling, reliability of this solution;
-- OpenShift that is a Platform as a Service on the top of Kubernetes from Red Hat. OpenShift is the default option for on-premise installation and it can be considered whether the _solution built on the top of KubeRocketCI_ should be **cloud-agnostic** or require **enterprise support**;
+- OpenShift is a Platform as a Service on the top of Kubernetes from Red Hat. OpenShift is the default option for on-premise installation and it can be considered whether the _solution built on the top of KubeRocketCI_ should be **cloud-agnostic** or require **enterprise support**;
 
 There is **no limitation** to run KubeRocketCI on vanilla Kubernetes.
 

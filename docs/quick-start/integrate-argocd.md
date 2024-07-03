@@ -117,7 +117,7 @@ The next step is to integrate Argo CD with the platform. Proceed with the instru
           description: CD pipelines for my application
           roles:
             - name: developer
-              description: Users for edp tenant
+              description: Users for kuberocketci tenant
               policies:
                 - p, proj:edp:developer, applications, create, edp/*, allow
                 - p, proj:edp:developer, applications, delete, edp/*, allow
@@ -159,7 +159,7 @@ The next step is to integrate Argo CD with the platform. Proceed with the instru
       ```
 
       :::info
-      Please enter your GitHub account name at `<github_account>`.
+        Please enter your GitHub account name at `<github_account>`.
       :::
     </details>
 

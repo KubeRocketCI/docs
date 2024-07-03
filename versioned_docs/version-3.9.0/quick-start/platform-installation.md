@@ -49,7 +49,7 @@ To deploy the platform, follow the steps below:
 
     ![Portal login menu](../assets/quick-start/edp_portal_login_menu.png "Portal login menu")
 
-5. Create the edp-admin service account and generate an access token to open the UI Portal:
+5. Create the edp-admin service account and generate an access token to open the KubeRocketCI:
 
     ```bash
     kubectl -n edp create serviceaccount edp-admin
@@ -57,21 +57,21 @@ To deploy the platform, follow the steps below:
     kubectl create token edp-admin -n edp
     ```
 
-6. In the login menu, paste the generated token in the **ID token** field and click the **Authenticate** button.
+6. In the login menu, paste the generated token in the **ID token** field and click the **SIGN IN** button.
 
-7. Upon logging in, specify the namespace for UI Portal where platform is deployed by clicking the **cluster settings** link in the bottom left corner of the UI:
+7. Upon logging in, specify the namespace for KubeRocketCI where platform is deployed by clicking the **cluster settings** link in the bottom left corner of the UI:
 
-  ![Specify namespaces](../assets/quick-start/edp_portal_ui.png "Specify namespaces")
+    ![Specify namespaces](../assets/quick-start/edp_portal_ui.png "Specify namespaces")
 
 8. In the **Cluster Settings** page, define the following for fields:
 
-  * Default namespace: `edp`
-  * Allowed namespaces: `edp`
+    * Default namespace: `edp`
+    * Allowed namespaces: `edp`
 
-  ![Cluster Settings menu](../assets/quick-start/cluster_settings.png "Cluster Settings menu")
+    ![Cluster Settings menu](../assets/quick-start/cluster_settings.png "Cluster Settings menu")
 
-:::note
-  Remember to click the **+** icon when adding the allowed namespace.
-:::
+    :::note
+      Remember to click the **+ ADD** icon when adding the allowed namespace.
+    :::
 
 After completing these steps, you will gain access to KubeRocketCI components through the Portal UI. You can now proceed with the integration steps, starting with the [SonarQube](./integrate-sonarcloud.md) integration.

@@ -20,7 +20,7 @@ To integrate KubeRocketCI with DockerHub, follow the steps below:
 
 6. In the UI Portal, navigate to **Configuration** -> **Registry** and click the **Add Registry** button.
 
-7. In the **Registry Provider** field, select `DockerHub`. Define the following values and click **Save**:
+7. In the **Registry Provider** field, select **DockerHub**. Define the following values and click **Save**:
 
     - Registry Endpoint: `https://docker.io`
     - Registry Space: `DockerHub account name`

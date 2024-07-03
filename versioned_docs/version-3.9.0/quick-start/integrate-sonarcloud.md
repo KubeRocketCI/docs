@@ -16,7 +16,7 @@ To integrate SonarCloud with the platform, follow the steps below:
 
 1. Sign up in the [SonarCloud](https://sonarcloud.io) with your GitHub account.
 
-2. Once you are logged in with GitHub, import an organization from GitHub:
+2. Once you are logged in with GitHub, on [organization page](https://sonarcloud.io/create-organization) import a new one from GitHub:
 
     ![Import organization](../assets/quick-start/import_from_github.png "Import organization")
 
@@ -26,13 +26,17 @@ To integrate SonarCloud with the platform, follow the steps below:
 
 3. In the Create an organization menu, choose the free plan and click **Create organization**:
 
+    :::note
+      Organization key must be unique.
+    :::
+
     ![Create organization](../assets/quick-start/free_plan.png "Choose plan")
 
-4. In your account menu, select the **Security** tab and generate token:
+4. In your account menu, select the [**Security**](https://sonarcloud.io/account/security) tab and generate token:
 
     ![Create organization](../assets/quick-start/generate_token.png "Generate token")
 
-5. In the UI Portal, navigate to `Configuration` -> `Code Quality`. Define the following values and click **Save**:
+5. In the UI Portal, navigate to **Configuration** -> **Code Quality**. Define the following values and click **Save**:
 
     * URL: `https://sonarcloud.io`
     * Token: `account token generated in SonarCloud`

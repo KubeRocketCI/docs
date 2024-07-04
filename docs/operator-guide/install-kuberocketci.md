@@ -121,6 +121,9 @@ There are multiple ways to deploy KubeRocketCI:
       <TabItem value="gerrit">
         ``` yaml title="values.yaml"
         ...
+        gerrit-operator:
+          enabled: true
+        ...
         edp-tekton:
           gitServers:
             gerrit:
@@ -177,7 +180,8 @@ There are multiple ways to deploy KubeRocketCI:
     helm install edp epamedp/edp-install --wait --timeout=900s \
     --version 3.9.0 \
     --values values.yaml \
-    --namespace edp
+    --namespace edp \
+    --create-namespace
     ```
 
     See the example on the parameters below:
@@ -196,6 +200,7 @@ There are multiple ways to deploy KubeRocketCI:
         # -- Docker Registry endpoint
         url: "<AWS_ACCOUNT_ID>.dkr.ecr.<AWS_REGION>.amazonaws.com"
         type: "ecr"
+        space: "edp"
 
     sso:
       enabled: false
@@ -211,7 +216,7 @@ There are multiple ways to deploy KubeRocketCI:
       # Tekton Kaniko configuration section
       kaniko:
         # -- AWS IAM role to be used for kaniko pod service account (IRSA). Format: arn:aws:iam::<AWS_ACCOUNT_ID>:role/<AWS_IAM_ROLE_NAME>
-        roleArn:
+        roleArn: arn:aws:iam::<AWS_ACCOUNT_ID>:role/<AWS_IAM_ROLE_NAME>
       gitServers:
         github:
           gitProvider: github
@@ -241,7 +246,7 @@ There are multiple ways to deploy KubeRocketCI:
     :::
 
     :::info
-      The full installation with integration between tools will take at least 10 minutes.
+      The full installation with integration between tools will take at least 5 minutes.
     :::
 
 8. To check if the installation is successful, run the command below:
@@ -253,7 +258,7 @@ There are multiple ways to deploy KubeRocketCI:
     You can also check ingress endpoints to get the Portal endpoint to enter Portal UI:
 
     ```bash
-    kubectl describe ingress -n edp
+    kubectl get ingress portal -n edp
     ```
 
 9. Once KubeRocketCI is successfully installed, you can explore our [Use Cases](../use-cases/index.md) to try out the functionality of the KubeRocketCI platform.

@@ -48,6 +48,7 @@ words:
   - keepalive
   - Keycloak
   - keyid
+  - krci
   - kubeconfig
   - kuberocketci
   - lintconf

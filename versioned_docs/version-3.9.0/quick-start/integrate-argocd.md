@@ -108,7 +108,7 @@ The next step is to integrate Argo CD with the platform. Proceed with the instru
         apiVersion: argoproj.io/v1alpha1
         kind: AppProject
         metadata:
-          name: edp
+          name: krci
           namespace: argocd
           # Finalizer that ensures that project is not deleted until it is not referenced by any application
           finalizers:
@@ -117,18 +117,18 @@ The next step is to integrate Argo CD with the platform. Proceed with the instru
           description: CD pipelines for my application
           roles:
             - name: developer
-              description: Users for edp tenant
+              description: Users for kuberocketci tenant
               policies:
-                - p, proj:edp:developer, applications, create, edp/*, allow
-                - p, proj:edp:developer, applications, delete, edp/*, allow
-                - p, proj:edp:developer, applications, get, edp/*, allow
-                - p, proj:edp:developer, applications, override, edp/*, allow
-                - p, proj:edp:developer, applications, sync, edp/*, allow
-                - p, proj:edp:developer, applications, update, edp/*, allow
-                - p, proj:edp:developer, repositories, create, edp/*, allow
-                - p, proj:edp:developer, repositories, delete, edp/*, allow
-                - p, proj:edp:developer, repositories, update, edp/*, allow
-                - p, proj:edp:developer, repositories, get, edp/*, allow
+                - p, proj:krci:developer, applications, create, krci/*, allow
+                - p, proj:krci:developer, applications, delete, krci/*, allow
+                - p, proj:krci:developer, applications, get, krci/*, allow
+                - p, proj:krci:developer, applications, override, krci/*, allow
+                - p, proj:krci:developer, applications, sync, krci/*, allow
+                - p, proj:krci:developer, applications, update, krci/*, allow
+                - p, proj:krci:developer, repositories, create, krci/*, allow
+                - p, proj:krci:developer, repositories, delete, krci/*, allow
+                - p, proj:krci:developer, repositories, update, krci/*, allow
+                - p, proj:krci:developer, repositories, get, krci/*, allow
           destinations:
             # ensure we can deploy to ns with tenant prefix
             - namespace: 'edp-*'
@@ -159,7 +159,7 @@ The next step is to integrate Argo CD with the platform. Proceed with the instru
       ```
 
       :::info
-      Please enter your GitHub account name at `<github_account>`.
+        Please enter your GitHub account name at `<github_account>`.
       :::
     </details>
 

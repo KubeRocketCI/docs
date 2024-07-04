@@ -40,6 +40,8 @@ const config: Config = {
         },
         docs: {
           sidebarPath: './sidebars.ts',
+          showLastUpdateAuthor: true,
+          showLastUpdateTime: true,
         },
         theme: {
           customCss: './src/css/custom.css',

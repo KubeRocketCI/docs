@@ -42,7 +42,7 @@ This support model not only fosters innovation but also enables us to deliver a 
 
 Get acquainted with the list of the latest releases and component versions on which the platform is tested and verified:
 
-:::note Professional Services
+:::tip Professional Services
   You can leverage our [professional services](/pricing) to upgrade your platform to the latest version or perform migration from Unsupported to Supported versions.
 :::
 

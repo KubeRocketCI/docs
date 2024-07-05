@@ -35,37 +35,37 @@ To enable Add-Ons, it is necessary to have the configured Argo CD, and connect a
 
 2. Provide the parameter values for the values.yaml files of the desired Add-Ons you are going to install.
 
-3. Navigate to **Argo CD** -> **Settings** -> **Repositories**. Connect your forked repository where you have the values.yaml files changed by clicking the **+ Connect repo** button:
+3. Navigate to **Argo CD** -> **Settings** -> **Repositories**. Connect your forked repository where you have the values.yaml files changed by clicking the **+ CONNECT REPO** button:
 
     ![Connect the forked repository](../assets/operator-guide/connect_repo.png "Connect the forked repository")
 
-4. In the appeared window, fill in the following fields and click the **Connect** button:
+4. In the appeared window, fill in the following fields and click the **CONNECT** button:
 
-    * Name - select the namespace where the project is going to be deployed;
-    * Choose your connection method - choose Via SSH;
-    * Type - choose Helm;
-    * Repository URL - enter the URL of your forked repository.
+    * Choose your connection method - `VIA SSH`;
+    * Name - `addons-demo` (optional);
+    * Project - select project;
+    * Repository URL - enter the `ssh URL` of your forked repository (git@github.com:example/edp-cluster-add-ons.git);
 
     ![Repository parameters](../assets/operator-guide/argo_cd_repo_fields.png "Repository parameters")
 
-5. As soon as the repository is connected, the new item in the repository list will appear:
+5. As soon as the repository is connected, the new item will appear in the repository list:
 
     ![Connected repository](../assets/operator-guide/connected_repo.png "Connected repository")
 
-6. Navigate to **Argo CD** -> **Applications**. Click the **+ New app** button:
+6. Navigate to **Argo CD** -> **Applications**. Click the **+ NEW APP** button:
 
     ![Adding Argo CD application](../assets/operator-guide/argo_cd_add_app.png "Adding Argo CD application")
 
-7. Fill in the required fields:
+7. Fill in the required fields and click **CREATE** button:
 
     * Application Name - addons-demo;
     * Project name - select the namespace where the project is going to be deployed;
-    * Sync policy - select **Manual**;
+    * Sync policy - `Manual`;
     * Repository URL - enter the URL of your forked repository;
-    * Revision - **Head**;
-    * Path - select **chart**;
-    * Cluster URL - enter the URL of your cluster;
-    * Namespace - enter the namespace which must be equal to the **Project name** field.
+    * Revision - `HEAD`;
+    * Path - `chart`;
+    * Cluster URL - select `URL` or cluster Name;
+    * Namespace - enter the namespace which must be equal to the **Project name** field;
 
 8. As soon as the repository is synchronized, the list of applications that can be installed by Add-Ons will be shown:
 
@@ -110,25 +110,33 @@ The list of the available Add-Ons:
 |Name|Description|Default|
 |:-|:-|:-:|
 |Argo CD|A GitOps continuous delivery tool that helps automate the deployment, configuration, and lifecycle management of applications in Kubernetes clusters.|false|
-|AWS EFS CSI Driver|A Container Storage Interface (CSI) driver that enables the dynamic provisioning of Amazon Elastic File System (EFS) volumes in Kubernetes clusters.|true|
-|Cert Manager|A native Kubernetes certificate management controller that automates the issuance and renewal of TLS certificates.|true|
-|DefectDojo|A security vulnerability management tool that allows tracking and managing security findings in applications.|true|
-|DependencyTrack|A Software Composition Analysis (SCA) platform that helps identify and manage open-source dependencies and their associated vulnerabilities.|true|
-|KubeRocketCI|An internal platform created by EPAM to enhance software delivery processes using DevOps principles and tools.|false|
-|Extensions OIDC|KubeRocketCI Helm chart to provision OIDC clients for different Add-Ons using EDP Keycloak Operator.|true|
-|External Secrets|A Kubernetes Operator that fetches secrets from external secret management systems and injects them as Kubernetes Secrets.|true|
+|AWS EFS CSI Driver|A Container Storage Interface (CSI) driver that enables the dynamic provisioning of Amazon Elastic File System (EFS) volumes in Kubernetes clusters.|false|
+|Cert Manager|A native Kubernetes certificate management controller that automates the issuance and renewal of TLS certificates.|false|
+|Capsule|A multi-tenancy solution for Kubernetes clusters that provides each tenant with a dedicated namespace where they can freely run their workloads with resource quotas.|false|
+|Capsule tenant|A specific tenant within the Capsule multi-tenancy solution. Each tenant has its own isolated environment within the Kubernetes cluster.|false|
+|DefectDojo|A security vulnerability management tool that allows tracking and managing security findings in applications.|false|
+|DependencyTrack|A Software Composition Analysis (SCA) platform that helps identify and manage open-source dependencies and their associated vulnerabilities.|false|
+|KubeRocketCI(EDP)|An internal platform created by EPAM to enhance software delivery processes using DevOps principles and tools.|false|
+|Extensions OIDC|KubeRocketCI Helm chart to provision OIDC clients for different Add-Ons using EDP Keycloak Operator.|false|
+|External Secrets|A Kubernetes Operator that fetches secrets from external secret management systems and injects them as Kubernetes Secrets.|false|
 |Fluent Bit|A lightweight and efficient log processor and forwarder that collects and routes logs from various sources in Kubernetes clusters.|false|
-|Harbor|A cloud-native container image registry that provides support for vulnerability scanning, policy-based image replication, and more.|true|
-|Nginx ingress|An Ingress controller that provides external access to services running within a Kubernetes cluster using Nginx as the underlying server.|true|
-|Jaeger Operator|An operator for deploying and managing Jaeger, an end-to-end distributed tracing system, in Kubernetes clusters.|true|
-|Keycloak|An open-source Identity and Access Management (IAM) solution that enables authentication, authorization, and user management in Kubernetes clusters.|true|
+|Harbor|A cloud-native container image registry that provides support for vulnerability scanning, policy-based image replication, and more.|false|
+|Ingress nginx|An Ingress controller that provides external access to services running within a Kubernetes cluster using Nginx as the underlying server.|false|
+|Jaeger Operator|An operator for deploying and managing Jaeger, an end-to-end distributed tracing system, in Kubernetes clusters.|false|
+|Keycloak|An open-source Identity and Access Management (IAM) solution that enables authentication, authorization, and user management in Kubernetes clusters.|false|
 |Keycloak PostgreSQL|A PostgreSQL database operator that simplifies the deployment and management of PostgreSQL instances in Kubernetes clusters.|false|
-|MinIO Operator|An operator that simplifies the deployment and management of MinIO, a high-performance object storage server compatible with Amazon S3, in Kubernetes clusters.|true|
-|OpenSearch|A community-driven, open-source search and analytics engine that provides scalable and distributed search capabilities for Kubernetes clusters.|true|
-|OpenTelemetry Operator|An operator for automating the deployment and management of OpenTelemetry, a set of observability tools for capturing, analyzing, and exporting telemetry data.|true|
-|PostgreSQL Operator|An operator for running and managing PostgreSQL databases in Kubernetes clusters with high availability and scalability.|true|
-|Prometheus Operator|An operator that simplifies the deployment and management of Prometheus, a monitoring and alerting toolkit, in Kubernetes clusters.|true|
-|Redis Operator|An operator for managing Redis, an in-memory data structure store, in Kubernetes clusters, providing high availability and horizontal scalability.|true|
-|StorageClass|A Kubernetes resource that provides a way to define different classes of storage with different performance characteristics for persistent volumes.|true|
-|Tekton|A flexible and cloud-native framework for building, testing, and deploying applications using Kubernetes-native workflows.|true|
-|Vault|An open-source secrets management solution that provides secure storage, encryption, and access control for sensitive data in Kubernetes clusters.|true|
+|MinIO Operator|An operator that simplifies the deployment and management of MinIO, a high-performance object storage server compatible with Amazon S3, in Kubernetes clusters.|false|
+|Nexus|Serves as a repository manager, enabling the proxying, aggregation, and management of dependencies, as well as the storage of artifacts.|false|
+|Nexus Operator|A tool designed to streamline the handling of Nexus resources and configurations, facilitating the proxying, collection, and management of dependencies within a repository manager.|false|
+|OpenSearch|A community-driven, open-source search and analytics engine that provides scalable and distributed search capabilities for Kubernetes clusters.|false|
+|OpenTelemetry Operator|An operator for automating the deployment and management of OpenTelemetry, a set of observability tools for capturing, analyzing, and exporting telemetry data.|false|
+|PostgreSQL Operator|An operator for running and managing PostgreSQL databases in Kubernetes clusters with high availability and scalability.|false|
+|Report Portal|An powered test automation dashboard that allows you to analyze test results, identify issues, and track testing progress.|false|
+|Prometheus Operator|An operator that simplifies the deployment and management of Prometheus, a monitoring and alerting toolkit, in Kubernetes clusters.|false|
+|Redis Operator|An operator for managing Redis, an in-memory data structure store, in Kubernetes clusters, providing high availability and horizontal scalability.|false|
+|Sonar|A comprehensive open-source platform dedicated to the continuous evaluation of code quality, automatically scrutinizing code to identify bugs, code smells, and security vulnerabilities.|false|
+|Sonar Operator|An operator that simplifies the management and configuration of SonarQube.|false|
+|StorageClass|A Kubernetes resource that provides a way to define different classes of storage with different performance characteristics for persistent volumes.|false|
+|Tekton|A flexible and cloud-native framework for building, testing, and deploying applications using Kubernetes-native workflows.|false|
+|Tekton-cache||false|
+|Vault|An open-source secrets management solution that provides secure storage, encryption, and access control for sensitive data in Kubernetes clusters.|false|

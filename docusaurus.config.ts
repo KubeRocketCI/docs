@@ -83,6 +83,7 @@ const config: Config = {
       appId: 'ZYN6QI47ZW',
       apiKey: '1e13b563f9083c76a0b29222a60f000b',
       indexName: 'kuberocketci',
+      contextualSearch: true,
     },
 
     navbar: {

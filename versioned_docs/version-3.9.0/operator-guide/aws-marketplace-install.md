@@ -68,7 +68,7 @@ To deploy the platform, follow the steps below:
 4. (Optional) To get access to the Portal, run the port-forwarding command:
 
     ```bash
-    kubectl port-forward service/edp-headlamp 59480:80 -n edp
+    kubectl port-forward service/portal 59480:80 -n edp
     ```
 
 5. (Optional) To open Portal, navigate to the `http://localhost:59480`.
@@ -76,7 +76,7 @@ To deploy the platform, follow the steps below:
 6. (Optional) To get admin token to sign in to the Portal:
 
     ```bash
-    kubectl get secrets -o jsonpath="{.items[?(@.metadata.annotations['kubernetes\.io/service-account\.name']=='edp-admin')].data.token}" -n edp|base64 --decode
+    kubectl get secrets -o jsonpath="{.items[?(@.metadata.annotations['kubernetes\.io/service-account\.name']=='edp-admin')].data.token}" -n edp|base64 --decode; echo
     ```
 
 As a result, you will get access to KubeRocketCI components via KubeRocketCI Portal UI. Navigate to our [Use Cases](../use-cases/index.md) to try out KubeRocketCI functionality. Visit other subsections of the [Operator Guide](../operator-guide/index.md) to figure out how to configure KubeRocketCI and integrate it with various tools.

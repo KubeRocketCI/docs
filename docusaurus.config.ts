@@ -38,11 +38,17 @@ const config: Config = {
         gtag: {
           trackingID: 'G-4V1NZ8PQWG',
         },
+
         docs: {
           sidebarPath: './sidebars.ts',
           showLastUpdateAuthor: true,
           showLastUpdateTime: true,
+
+          editUrl: ({ locale, docPath }) => {
+            return `https://github.com/KubeRocketCI/docs/edit/main/docs/${docPath}`;
+          },
         },
+
         theme: {
           customCss: './src/css/custom.css',
         },
@@ -72,6 +78,7 @@ const config: Config = {
       content: `KubeRocketCI Team Supports Ukraine 🇺🇦. In solidarity, we ask that you consider financially supporting the organizations below: <a href="https://epamuafund.pinkaloo.com/causes/159bdd2f71854adf8ed5251fe26d2fe0" target="_blank">EPAM’s Global Partners for the Ukraine Humanitarian Crisis</a>`,
       isCloseable: true,
     },
+
     algolia: {
       appId: 'ZYN6QI47ZW',
       apiKey: '1e13b563f9083c76a0b29222a60f000b',
@@ -116,6 +123,12 @@ const config: Config = {
           label: 'Use Cases',
         },
         {
+          type: 'docSidebar',
+          sidebarId: 'faqSidebar',
+          position: 'left',
+          label: 'FAQ',
+        },
+        {
           label: 'Pricing',
           to: '/pricing',
           position: 'left',
@@ -144,6 +157,7 @@ const config: Config = {
         },
       ],
     },
+
     footer: {
       style: 'dark',
       links: [
@@ -185,14 +199,30 @@ const config: Config = {
       ],
       copyright: `Copyright © ${new Date().getFullYear()} KubeRocketCI. Built with Docusaurus.`,
     },
+
     prism: {
       theme: prismThemes.github,
       darkTheme: prismThemes.dracula,
+      additionalLanguages: [
+        "bash",
+        "go",
+        "groovy",
+        "hcl",
+        "javascript",
+        "jq",
+        "json",
+        "python",
+        "typescript",
+        "yaml",
+      ],
     },
+
   } satisfies Preset.ThemeConfig,
+
   markdown: {
     mermaid: true,
   },
+
   themes: ['@docusaurus/theme-mermaid'],
 };
 

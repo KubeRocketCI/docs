@@ -76,9 +76,9 @@ Portal is integrated in Kubernetes in three steps:
 
     ![Portal login page](../../assets/operator-guide/headlamp-oidc-headlamp-1.png "Portal login page")
 
-3. Go to **Account** -> **Settings**, and set up a namespace:
+3. Upon logging in, specify the namespace for KubeRocketCI where platform is deployed by clicking the cluster settings link in the bottom left corner of the UI:
 
-    ![Portal namespace settings](../../assets/operator-guide/headlamp-oidc-headlamp-2.png "Portal namespace settings")
+    ![Portal namespace settings](../../assets/operator-guide/edp_portal_ui.png "Portal namespace settings")
 
 As a result, it is possible to control access and rights from the Keycloak endpoint.
 

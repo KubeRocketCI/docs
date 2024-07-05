@@ -183,7 +183,7 @@ After logging into Gerrit, the user is not automatically attached to any groups.
 To add a user to a group, the `GerritGroupMember` custom resource must be created. This custom resource specifies
 the user's email address and the name of the group to which they should be added.
 
-The ConfigMap below is an example of the `GerritGroupMember` resource:
+The Custom Resource below is an example of the `GerritGroupMember` resource:
 
 :::note Gerrit Group Member
 

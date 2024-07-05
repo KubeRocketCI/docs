@@ -225,7 +225,7 @@ To install Keycloak, follow the steps below:
 
     ```bash
     helm install keycloakx codecentric/keycloakx \
-    --version 2.2.1 \
+    --version 2.3.0 \
     --values values.yaml \
     --namespace security
     ```
@@ -240,7 +240,7 @@ To install Keycloak, follow the steps below:
 
       # Deploy the latest version
       image:
-        tag: "20.0.3"
+        tag: "24.0.4"
 
       # The following parameter is unrecommended to expose. Exposed health checks lead to an unnecessary attack vector.
       health:
@@ -249,25 +249,24 @@ To install Keycloak, follow the steps below:
       metrics:
         enabled: false
 
-      extraVolumeMounts: |
-        - name: realm
-          mountPath: /opt/keycloak/data/import
-
       command:
         - "/opt/keycloak/bin/kc.sh"
         - "--verbose"
         - "start"
-        - "--auto-build"
-        - "--http-enabled=true"
-        - "--http-port=8080"
-        - "--hostname-strict=false"
-        - "--hostname-strict-https=false"
-        - "--spi-events-listener-jboss-logging-success-level=info"
-        - "--spi-events-listener-jboss-logging-error-level=warn"
 
       extraEnv: |
-        - name: KC_PROXY
-          value: "passthrough"
+        - name: KC_HOSTNAME
+          value: "keycloak.<ROOT_DOMAIN>"
+        - name: KC_SPI_HOSTNAME_DEFAULT_ADMIN
+          value: "keycloak.<ROOT_DOMAIN>"
+        - name: KC_HTTP_ENABLED
+          value: "true"
+        - name: KC_HOSTNAME_STRICT
+          value: "false"
+        - name: KC_HOSTNAME_STRICT_HTTPS
+          value: "false"
+        - name: KC_SPI_EVENTS_LISTENER_JBOSS_LOGGING_SUCCESS_LEVEL
+          value: "info"
         - name: KEYCLOAK_ADMIN
           valueFrom:
             secretKeyRef:
@@ -286,13 +285,21 @@ To install Keycloak, follow the steps below:
             -Djgroups.dns.query={{ include "keycloak.fullname" . }}-headless
             -Dkeycloak.connectionsHttpClient.default.expect-continue-enabled=true
             -Dkeycloak.connectionsHttpClient.default.reuse-connections=false
+        - name: HTTP_ADDRESS_FORWARDING
+          value: "true"
+        - name: PROXY_ADDRESS_FORWARDING
+          value: "true"
 
       # This block should be uncommented if you install Keycloak on Kubernetes
       ingress:
         enabled: true
         annotations:
-          kubernetes.io/ingress.class: nginx
-        # The following parameter is unrecommended to expose. Admin paths lead to an unnecessary attack vector.
+          nginx.ingress.kubernetes.io/proxy-buffer-size: 256k
+        # Defines the class of the Ingress Controller.
+        # It allows you to choose which Ingress controller in cluster should be used to expose the Keycloak service to the outside world.
+        ingressClassName: "nginx"
+        # Exposes Keycloak paths according to the rules from documentation.
+        # Ref: https://www.keycloak.org/server/reverseproxy#_exposed_path_recommendations
         console:
           enabled: false
         rules:
@@ -300,6 +307,10 @@ To install Keycloak, follow the steps below:
             paths:
               - path: '{{ tpl .Values.http.relativePath $ | trimSuffix "/" }}/'
                 pathType: Prefix
+
+      proxy:
+        enabled: true
+        mode: "edge"
 
       # This block should be uncommented if you set Keycloak to OpenShift and change the host field
       # route:

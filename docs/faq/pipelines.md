@@ -9,7 +9,20 @@ This page contains a list of frequently asked questions related to the CI/CD Pip
 
 ### What Is a Pipeline in KubeRocketCI?
 
-A pipeline in KubeRocketCI is a sequence of tasks that define the steps required to build, test, and deploy an application. Pipelines are defined using the Tekton Pipelines framework, which allows users to create custom pipelines using reusable tasks.
+A pipeline in KubeRocketCI is a sequence of tasks that define the steps required to build, test, and deploy an application. Pipelines are defined using the [Tekton Pipelines framework](https://github.com/epam/edp-tekton/), which allows users to create custom pipelines using reusable tasks.
+
+Within the KubeRocketCI platform, there are **three primary types of pipelines**, each serving distinct purposes within the Continuous Integration/Continuous Deployment lifecycle:
+
+1. **Review Pipeline**:
+   - The Review Pipeline is designed to automate the integration of code changes from multiple contributors into a single software project (codebase). It typically includes steps for compiling the code, running tests (unit tests, integration tests, etc.).
+   - The primary goal is to detect integration errors as quickly as possible, which is achieved by triggering the pipeline on each code commit to a repository.
+
+2. **Build Pipeline**:
+   - The Build Pipeline takes center stage following the completion of the code review process. Its primary function is to automate the compilation, testing, and packaging of the code into a build artifact. This artifact can then be deployed to various environments for further testing and promotion to production.
+
+3. **Deploy Pipeline**:
+   - Focused on the deployment aspect, the Deploy Pipeline automates the process of deploying software to environments. This type of pipeline can be triggered manually or automatically, based on the project's deployment strategy.
+   - It often includes steps for provisioning infrastructure, deploying the application, and post-deployment tests to ensure the application runs correctly in the production environment.
 
 ---
 
@@ -34,7 +47,7 @@ If you need to re-trigger a pipeline due to a failed run or to incorporate new c
 Different pipelines within the KubeRocketCI platform are triggered by specific events,
 ensuring that the appropriate actions are taken in response to changes in the codebase or the project environment.
 
-The events triggering the three main types of pipelines are as follows:
+The [three primary types](#what-is-a-pipeline-in-kuberocketci) of pipelines in KubeRocketCI are triggered by the following events:
 
 - **Review Pipeline**:
   - Triggered by events related to pull requests and issue comments.

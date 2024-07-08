@@ -12,22 +12,22 @@ As a prerequisite, make sure to [sign up](https://dashboard.civo.com/signup) on 
 The first step of the installation procedure is to launch the cluster. Please refer to the [official instructions](https://www.civo.com/docs/kubernetes/create-a-cluster) that describe this process in detail.
 To succeed, follow the steps below:
 
-1. Log in to your personal account.
+1. Log in to your personal Civo account.
 
 2. Create a new Kubernetes cluster with the following parameters. Please refer to the [official guidelines](https://www.civo.com/docs/kubernetes/create-a-cluster) for more details:
 
     * **Name**: `demo`
-    * **How many nodes**: 1
-    * **Select size**: Type: Standard, Size: Medium
-    * **Network**: Default
-    * **Firewall**: Create a new firewall with the 443 and 6443 ports opened
+    * **How many nodes**: `1`
+    * **Select size**: Type: `Standard`, Size: `Medium`
+    * **Network**: `Default`
+    * **Firewall**: `Create a new firewall` with the `6443` and `443` ports opened
     * **Advanced options**: Kubernetes version: latest (currently 1.28.2)
-    * **Marketplace**: Choose the Argo CD and Tekton stacks
+    * **Marketplace**: From the `CI/CD` selection choose `Argo CD` and `Tekton` for pre-installation.
 
 3. Wait till the cluster is created.
 
     :::note
-      The cluster deployment takes around two minutes. After cluster deployment, additional 5 minutes are required for both Argo CD and Tekton stacks to get deployed.
+      The process of deploying the cluster typically takes about two minutes. Following this, an extra five minutes are needed for the deployment of both the Argo CD and Tekton.
     :::
 
 4. As soon as cluster is deployed, ensure all the marketplace applications are installed, too:
@@ -50,19 +50,19 @@ To succeed, follow the steps below:
 
 ## Install KubeRocketCI
 
-As soon as the cluster is deployed, it is time to install the EDP application.
+As soon as the cluster is deployed, it is time to install the KubeRocketCI application.
 
 1. In the Civo portal, navigate to **Marketplace** -> **CI/CD**:
 
     ![Civo Marketplace](../assets/operator-guide/civo-marketplace.png "Civo Marketplace")
 
-2. Select EDP and choose which Version Control Systems you would prefer to integrate it with and click the **Install Apps** button:
+2. Select `KubeRocketCI` and choose which Version Control Systems you would prefer to integrate it with and click the **Install Apps** button:
 
-    ![Add EDP](../assets/operator-guide/civo-add-edp.png "Add EDP")
+    ![Add KubeRocketCI](../assets/operator-guide/civo-add-kuberocketci.png "Add KubeRocketCI")
 
-3. Wait till the EDP app appears in the **Installed applications** list:
+3. Wait till the KubeRocketCI app appears in the **Installed applications** list:
 
-    ![EDP installed](../assets/operator-guide/civo-edp-installed.png "EDP installed")
+    ![KubeRocketCI installed](../assets/operator-guide/civo-kuberocketci-installed.png "KubeRocketCI installed")
 
 4. Wait till all the pods are up and running. Use the `kubectl get pods` command to check the status of the pods:
 
@@ -70,7 +70,7 @@ As soon as the cluster is deployed, it is time to install the EDP application.
     kubectl get pods -n edp
     ```
 
-    ![EDP pods](../assets/operator-guide/civo-check-edp-ns.png "EDP pods")
+    ![KubeRocketCI pods](../assets/operator-guide/civo-check-kuberocketci-ns.png "KubeRocketCI pods")
 
 5. As soon as all the pods are deployed. Navigate to the **Cluster Information** tab and copy the DNS name:
 
@@ -78,27 +78,28 @@ As soon as the cluster is deployed, it is time to install the EDP application.
 
 6. In the new browser tab, access the Portal UI by typing the URL according to the `https://portal-edp.<DNS_name>` format.
 
-7. Accept the security warning and click the **service access token** link to open the [instructions](https://headlamp.dev/docs/latest/installation/#create-a-service-account-token) on how to get a token to log in to the Portal UI.
+7. Accept the security warning and click the **service access token** link to open the [instructions](../quick-start/platform-installation) step 5 on how to get a token to log in to the Portal UI.
 
 8. As soon as the token is created, paste it in the **ID token** field and click the **Authenticate** button.
 
-9. Click the notification in the bottom left corner to open the Cluster Settings menu:
+9. Click the notification in the bottom right corner to open the Account settings menu:
 
     ![Click notification](../assets/operator-guide/civo-cluster-settings.png "Click notification")
 
-10. In the Cluster Settings menu, enter **edp** in both default and allowed namespaces and click the **Back** button:
+10. In the Cluster Settings menu, enter **edp** in both default and allowed namespaces and click the **CLOSE** button:
 
     :::note
-      Don't forget to click the **+** button to add the allowed namespace.
+      Don't forget to click the **+ ADD** button to add the allowed namespace.
     :::
 
-    ![Cluster Settings menu](../assets/operator-guide/civo-edp-portal-cluster-settings-menu.png "Cluster Settings menu")
+    ![Account settings menu](../assets/operator-guide/civo-kuberocketci-portal-cluster-settings-menu.png "Account settings menu")
 
-Congratulations! You have just installed the KubeRocketCI platform on the Civo cluster. Now you are ready to proceed with integrating KubeRocketCI with all the necessary third-party tools.
-Navigate to the [Integrate SonarQube](../quick-start/integrate-sonarcloud.md) page to proceed with onboarding KubeRocketCI.
+Well done! You've successfully installed the KubeRocketCI platform on the Civo cluster. You're now set to integrate KubeRocketCI with the necessary third-party tools.
+Proceed to the [SonarQube Integration](../quick-start/integrate-sonarcloud.md) page.
 
 ## Related Articles
 
 * [Install via AWS Marketplace](aws-marketplace-install.md)
-* [Install KubeRocketCI](install-kuberocketci.md)
-* [Integrate SonarQube](../quick-start/integrate-sonarcloud.md)
+* [KubeRocketCI Installation](install-kuberocketci.md)
+* [SonarQube Integration](../quick-start/integrate-sonarcloud.md)
+* [Argo CD Integration](cd/argocd-integration.md)

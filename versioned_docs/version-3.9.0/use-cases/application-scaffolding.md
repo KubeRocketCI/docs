@@ -2,7 +2,10 @@
 
 ## Overview
 
-This use case outlines the process of creating and deploying a FastAPI application using a scaffolding tool. The purpose is to provide developers with a streamlined approach to generate a functional code structure for a FastAPI web application, including basic read functionality. The process also allows for customization to meet specific requirements and deployment to a development environment. By utilizing a standardized process for code review, testing, and deployment, developers can save time and effort while ensuring high code quality and reliability. The ultimate goal is to empower the development team to release new features and applications more efficiently, while maintaining a high level of code quality and reliability. The KubeRocketCI is used to facilitate this process.
+This use case outlines the process of creating and deploying a FastAPI application using KubeRocketCI.
+The purpose is to provide developers with a streamlined approach to generate a functional code structure for a FastAPI web application, including basic read functionality. The process also allows for customization to meet specific requirements and deployment to a development environment. By utilizing a standardized process for code review, testing, and deployment, developers can save time and effort while ensuring high code quality and reliability.
+The goal is to empower the development team to release new features and applications more efficiently, while maintaining a high level of code quality and reliability.
+The KubeRocketCI is used to facilitate this process.
 
 <div style={{ display: 'flex', justifyContent: 'center' }}>
 <iframe width="560" height="315" src="https://www.youtube.com/embed/TcPcIKYvKFo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen"></iframe>
@@ -95,7 +98,7 @@ To succeed with the steps above, follow the instructions below:
 
     ![Branch Build Pipeline](../assets/use-cases/fastapi-scaffolding/build-in-process.png "Pipeline building")
 
-3. Track Pipeline's status by accessing **Pipelines** section by clicking the **fastapi-demo-main-build-zwpj** application link.
+3. Track Pipeline's status by clicking the **fastapi-demo-main-build-zwpj** pipeline link.
 
     ![CD Pipeline](../assets/use-cases/fastapi-scaffolding/cd-pipeline.png "CD Pipeline")
 
@@ -161,34 +164,34 @@ To ensure the application is deployed successfully, follow the steps below:
 
 This section describes the code delivery process. We need to deploy our `fastapi-demo` application that deploys `Ingress` object to expose API outside the Kubernetes cluster.
 
-In the [GitOps](../user-guide/gitops.md) repository in GitHub, create the `values.yaml` file according to the `<pipeline-name>/<stage-name>/<application-name>-values.yaml` pattern.
+Within the [GitOps](../user-guide/gitops.md) repository, follow the naming convention `<pipeline-name>/<stage-name>/<application-name>-values.yaml` to create the chart values file. For our case, use `mypipe/dev/fastapi-demo-values.yaml` as the file name.
 
-Create a commit to the `main` branch in which add parameters to the newly created `values.yaml` file to enable the creation of an `Ingress` resource. Apply and push the changes to the repository.
+Commit `mypipe/dev/fastapi-demo-values.yaml` file to the default branch of the GitOps repository:
 
-   ```yaml
-   ingress:
-     enabled: true
-   ```
+  ```yaml title="mypipe/dev/fastapi-demo-values.yaml"
+  ingress:
+    enabled: true
+  ```
 
-1. Deliver `fastapi-demo` application to the Environment. Before the new version deployment, check the ingress object in `dev` namespace:
+1. Deploy `fastapi-demo` application to the Environment. Before the new version deployment, check the ingress object in `dev` environment:
 
     ```bash
     $ kubectl get ingress -n ${EDP_ENV}-mypipe-dev
     No resources found in ${EDP_ENV}-mypipe-dev namespace.
     ```
 
-   No ingress object exists as expected.
+    No ingress object exists as expected.
 
 2. Deploy `fastapi-demo` application which has the ingress object in place. Since we use `Manual` deployment approach, we perform version upgrade by hand.
 
-   Additionally, to ensure our application recognizes the changes in the GitOps repository related to enabling the creation of the `Ingress` resource, we need to set the **Override values** checkbox to `true` before deploying.
+    To ensure our application recognizes the changes in the GitOps repository related to enabling the creation of the `Ingress` resource, we need to set the **Override values** checkbox to `true` before deploying.
 
     - Go to the **Environments** section of the UI Portal, select `mypipe` and choose **dev** stage.
     - In the **Select image tag** section select the version `0.0.1-SNAPSHOT.1`
     - Set the **Override values** checkbox to `true` and push the **Start deploy** button.
     - Check that the application is deployed: application status is `Healthy` and `Synced`.
 
-   ![CD Pipeline Deploy New Version](../assets/use-cases/fastapi-scaffolding/deploy-with-override.png)
+    ![CD Pipeline Deploy New Version](../assets/use-cases/fastapi-scaffolding/deploy-with-override.png)
 
 3. Check that the new version with Ingress is deployed:
 

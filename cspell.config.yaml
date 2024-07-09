@@ -85,6 +85,7 @@ words:
   - tfenv
   - toolset
   - xlarge
+  - zwpj
 enableFiletypes:
   - md
   - mdx

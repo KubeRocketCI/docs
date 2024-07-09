@@ -26,6 +26,16 @@ Within the KubeRocketCI platform, there are **three primary types of pipelines**
 
 ---
 
+### Does KubeRocketCI Integrate with GitHub Actions, GitLab CI, or Azure Pipelines for CI/CD?
+
+KubeRocketCI is built upon [Tekton](../operator-guide/ci/tekton-overview.md) and [Argo CD](../operator-guide/cd/argocd-integration.md) for its CI/CD processes, emphasizing a Kubernetes-native strategy.
+
+It does not integrate with GitHub Actions, GitLab CI, Azure Pipelines, or similar CI/CD tools.
+
+This design choice ensures that KubeRocketCI remains `vendor-neutral` and `cloud-agnostic`, allowing it to operate effectively across any Kubernetes environment without reliance on specific CI services or cloud platforms.
+
+---
+
 ### How to Re-trigger a Pipeline in KubeRocketCI?
 
 If you need to re-trigger a pipeline due to a failed run or to incorporate new changes, you have several options available:

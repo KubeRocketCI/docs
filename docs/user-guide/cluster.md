@@ -6,13 +6,13 @@ In a nutshell, cluster in KubeRocketCI Portal is a Kubernetes secret that stores
 
 The added cluster will be listed in the clusters list allowing you to do the following:
 
-![Clusters list](../assets/user-guide/edp-portal-cluster-overview.png "Clusters list")
+![Clusters list](../assets/user-guide/krci-portal-cluster-overview.png "Clusters list")
 
-* **Cluster status** - displays the cluster status. Can be red or green depending on if the KubeRocketCI portal managed to connect to the cluster host with the specified credentials or not.
 * **Open documentation** - opens the cluster related documentation page.
 * **Add a new cluster** - displays the cluster creation form.
 * **Cluster properties** - shows the specified cluster properties.
 * **Delete cluster** - remove cluster by clicking the recycle bin icon.
+* **Undo/Save changes** - these buttons apply or revert changes made to the cluster configuration.
 
 ## View Authentication Data
 

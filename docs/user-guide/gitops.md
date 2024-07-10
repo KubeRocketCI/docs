@@ -10,15 +10,19 @@ The purpose of the `GitOps` section is to provide users with the ability to cust
 
 GitOps repository is added in two steps:
 
-1. Navigate to **KubeRocketCI** -> **Components** -> **GitOps**. Fill in the required fields (in case VCS supports nesting) and click **Save**:
+1. Navigate to **Configuration** -> **Deployment**-> **GitOps** and click the **+ Add GitOps Repository** button:
 
-    ![Required fields](../assets/user-guide/gitops_required_fields.png "Required fields")
+    ![Required fields](../assets/user-guide/gitops_section.png "GitOps section")
 
-2. Check the GitOps repository connected to the platform:
+2. Choose one of the Git servers, fill in the required fields and click **Save**:
+
+    ![Required fields](../assets/user-guide/gitops_menu.png "GitOps menu")
+
+3. Check the GitOps repository connected to the platform:
 
     ![System Codebase](../assets/user-guide/gitops_repo_added.png "System Codebase")
 
-    As the result, the `Codebase` of `system` type will be added to the Codebase list of the Components section:
+    As the result, the `Codebase` of `system` type will be added to the Codebase list of the **Components** section:
 
     ![GitOps Codebase](../assets/user-guide/system_codebase.png "GitOps Codebase")
 
@@ -30,11 +34,11 @@ GitOps repository is added in two steps:
 
 Once the GitOps repository is added to the platform, you can set custom parameters for the deployed Helm Chart. To redefine the parameters, follow the steps below:
 
-1. In the GitOps repository, create the values.yaml file according to the `<pipeline-name>/<stage-name>/<application-name>-values.yaml` pattern.
+1. Within the GitOps repository, follow the naming convention `<pipeline-name>/<stage-name>/<application-name>-values.yaml` to create the chart values file.
 
 2. In the created values.yaml file, enter the parameters with their custom values.
 
-3. Navigate to the Environments section. Open the created environment, open its stage and deploy it with the **Values override** checkbox selected as it is shown below:
+3. Navigate to the **Environments** section. Open the created environment, open its stage and deploy it with the **Values override** checkbox selected as it is shown below:
 
     ![GitOps Codebase](../assets/user-guide/values_override_deploy.png "GitOps Codebase")
 

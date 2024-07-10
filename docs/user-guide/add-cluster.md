@@ -10,7 +10,7 @@ Before moving ahead, ensure you have already performed the guidelines outlined i
 
 To deploy an application to a remote cluster, follow the steps below:
 
-1. Navigate to **Configuration** -> **Clusters** and click the **+ Add cluster** button:
+1. Navigate to **Configuration** -> **Deployment** -> **Clusters** and click the **+ Add cluster** button:
 
     ![Clusters menu](../assets/user-guide/add_new_cluster.png "Clusters menu")
 
@@ -26,9 +26,9 @@ To deploy an application to a remote cluster, follow the steps below:
       The `Cluster Certificate` field is hidden if the `skip TLS verification` option is enabled.
     :::
 
-    ![Add cluster](../assets/user-guide/edp-portal-add-cluster.png "Add cluster")
+    ![Add cluster](../assets/user-guide/krci-portal-add-cluster.png "Add cluster")
 
-3. Click the **Apply** button to add the cluster.
+3. Click the **Save** button to add the cluster.
 
 As a result, the Kubernetes secret will be created for further integration and you will be able to select the integrated cluster when creating a new stage:
 

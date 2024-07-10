@@ -1,6 +1,6 @@
 # Overview
 
-The KubeRocketCI (former EPAM Delivery Platform) portal user guide is intended for developers and provides details on working with the KubeRocketCI portal, different codebase types, and the KubeRocketCI CI/CD flow.
+The KubeRocketCI portal user guide is intended for developers and provides details on working with the KubeRocketCI portal, different codebase types, and the KubeRocketCI CI/CD flow.
 
 ## KubeRocketCI Portal
 
@@ -12,12 +12,14 @@ The KubeRocketCI portal is a central management tool in the KubeRocketCI ecosyst
 
 Below is the Overview page of the KubeRocketCI portal:
 
-![Overview page](../assets/user-guide/edp-portal-overview-page.png "Overview page")
+![Overview page](../assets/user-guide/kuberocketci-portal-overview-page.png "Overview page")
 
 * **Application widgets** – shows the information on codebases created in the default and allowed namespaces, reflecting the overall amount of entities and their statuses.
 * **Top bar panel** – contains documentation link, notifications, KubeRocketCI portal settings, and cluster settings, such as default and allowed namespaces.
 * **Quick links** – displays the corresponding links to the major adjusted tool set.
-* **Pipeline runs** – displays all the pipeline runs initiated in both the default and allowed namespaces.
+* **Resource switcher** - Toggle between KubeRocketCI and K8s resource views.
+* **Create resource as code** – Allows creating resources using Kubernetes manifests.
+* **Chat assistant** - An AI assistant that answers questions related to KubeRocketCI.
 
 KubeRocketCI portal is a complete tool allowing to manage and control the codebases (applications, autotests, libraries and infrastructures) added to the environment as well as to create a CD pipeline.
 

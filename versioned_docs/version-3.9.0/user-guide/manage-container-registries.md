@@ -14,7 +14,6 @@ The following table displays the registry services supported for both OpenShift 
 |AWS ECR|:white_check_mark:|:white_check_mark:|
 |DockerHub|:white_check_mark:|:white_check_mark:|
 |Harbor|:white_check_mark:|:white_check_mark:|
-|OpenShift (OCR)|:white_check_mark:|:x:|
 |Nexus|:white_check_mark:|:white_check_mark:|
 |GitHub (GHCR)|:white_check_mark:|:white_check_mark:|
 
@@ -22,13 +21,13 @@ The following table displays the registry services supported for both OpenShift 
 
 Follow a three-step process to integrate a container registry in KubeRocketCI:
 
-1. In the **KubeRocketCI** -> **Configuration** -> **Registry**:
+1. In the **Configuration** -> **Artifacts storage** -> **Registry** click the **+ Add Registry** button:
 
     ![Registry settings](../assets/operator-guide/container-registry-list.png "Registry settings")
 
-2. Select `Registry Provider` and enter the required details.
+2. Select **Registry Provider** and enter the required details.
 
-3. Confirm settings by clicking the `Save` button.
+3. Confirm settings by clicking the **Save** button.
 
     The required fields vary depending on which container registry is chosen:
 
@@ -38,7 +37,6 @@ Follow a three-step process to integrate a container registry in KubeRocketCI:
         {label: 'AWS ECR', value: 'ecr'},
         {label: 'DockerHub', value: 'docker'},
         {label: 'Harbor', value: 'harbor'},
-        {label: 'OpenShift', value: 'openshift'},
         {label: 'Nexus', value: 'nexus'},
         {label: 'GitHub', value: 'github'}
       ]}>
@@ -77,16 +75,6 @@ Follow a three-step process to integrate a container registry in KubeRocketCI:
           |Checkbox/Use the Push Account's credentials|Check this to use the same account for pulling and pushing operations. Provide the account name with pull permissions.|
         </TabItem>
 
-        <TabItem value="openshift">
-          ![OpenShift settings](../assets/operator-guide/container-registry-openshift.png "OpenShift settings")
-
-          |Fields|Description|
-          |:-|:-|
-          |Registry Endpoint|OpenShift service registry endpoint URL (e.g., image-registry.openshift-image-registry.svc:5000).|
-          |Project|The project name in registry.|
-          |Password/Token|Supply the [password](https://docs.openshift.com/container-platform/4.2/authentication/identity_providers/configuring-htpasswd-identity-provider.html#identity-provider-htpasswd-update-users_configuring-htpasswd-identity-provider) for the user who has pull authorization privileges in your OpenShift container image registry.|
-        </TabItem>
-
         <TabItem value="nexus">
           ![Nexus settings](../assets/operator-guide/container-registry-nexus.png "Nexus settings")
 
@@ -118,9 +106,9 @@ To remove container registry integration from KubeRocketCI, follow the steps bel
     Proceed with caution, removing registry settings might disrupt your CI/CD process. All new components created after changing the registry such as Components and Environments will start working out of the box. To work with existing codebases and pipelines familiarize with the [change container registry guide](change-container-registry.md).
 :::
 
-  1. In the **KubeRocketCI** -> **Configuration** -> **Registry**.
+  1. In the **Configuration** -> **Artifacts storage** -> **Registry**.
 
-  2. Click the `Reset registry` button, type the `confirm` word and then click `Confirm`:
+  2. Click the **Reset registry** button, type the `confirm` word and then click **Confirm**:
 
   ![Registry settings](../assets/operator-guide/container-registry-reset.png "Registry settings")
 

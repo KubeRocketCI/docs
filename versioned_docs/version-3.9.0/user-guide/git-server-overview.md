@@ -10,7 +10,7 @@ The Git Server is set via the **global.gitProviders** parameter of the [values.y
 
 To view the current Git Server, you can open Portal **Configuration** -> **Git Servers** and inspect the following properties:
 
-![Git Server menu](../assets/user-guide/edp-portal-git-server-overview.png "Git Server menu")
+![Git Server menu](../assets/user-guide/krci-portal-git-server-overview.png "Git Server menu")
 
 * **Git Server status and name** - displays the Git Server status, which depends on the Git Server integration status (Success/Failed).
 * **Git Server properties** - displays the Git Server type, its host address, username, SSH/HTTPS port, public and private SSH keys.

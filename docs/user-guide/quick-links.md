@@ -6,7 +6,7 @@ The Links section is designed to store all the component references in one place
 
 To create a Quick Link, follow the steps below:
 
-1. Navigate to **KubeRocketCI** -> **Configuration** -> **Links** and click the **+ Create Link** button:
+1. Navigate to **Configuration** -> **Quick Access**-> **Links** and click the **+ Add Link** button:
 
     ![Links section](../assets/user-guide/links_section.png "Links section")
 
@@ -14,7 +14,7 @@ To create a Quick Link, follow the steps below:
 
     ![Create reference menu](../assets/user-guide/create_link_menu.png "Create reference menu")
 
-3. If the **Show on Overview Page** option is selected, the image will be displayed on the Overview page among the other links:
+3. If the **Show on Overview Page** option is selected, the image will be displayed on the **Overview** page among the other links:
 
     ![Added link](../assets/user-guide/links_on_the_overview.png "Added link")
 
@@ -22,7 +22,7 @@ To create a Quick Link, follow the steps below:
 
 To edit a Quick Link, follow the steps below:
 
-1. Navigate to **KubeRocketCI** -> **Configuration** -> **Links**. Click the three-dot menu and select **Edit**:
+1. Navigate to **Configuration** -> **Quick Access** -> **Links**. Click the three-dot menu and select **Edit**:
 
     ![Edit link button](../assets/user-guide/edit_link_button.png "Edit link button")
 
@@ -34,7 +34,7 @@ To edit a Quick Link, follow the steps below:
 
 Quick Links are deleted the following way:
 
-1. Navigate to **KubeRocketCI** -> **Configuration** -> **Links**. Click the three-dot menu and select **Delete**:
+1. Navigate to **Configuration** -> **Quick Access** -> **Links**. Click the three-dot menu and select **Delete**:
 
     ![Delete link button](../assets/user-guide/delete_link_button.png "Delete link button")
 

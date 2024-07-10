@@ -10,9 +10,9 @@ It may become essential to modify the container registry settings. This section 
 
 To remove container registry integration from the KubeRocketCI, follow the steps below:
 
-  1. In the `UI Portal` main menu, navigate to **Configuration** -> **Registry**.
+  1. In the KubeRocketCI main menu, navigate to **Configuration** -> **Artifacts storage** -> **Registry**.
 
-  2. Click the `Reset registry` button, type the `confirm` word and then click `Confirm`:
+  2. Click the **Reset registry** button, type the `confirm` word and then click **Confirm**:
 
       ![Registry settings](../assets/operator-guide/container-registry-reset.png "Registry settings")
 
@@ -44,12 +44,6 @@ KubeRocketCI uses `CodebaseImageStream` custom resource to define Container Regi
 
       ```bash
       kubectl patch codebaseimagestream <name> -n edp --type='json' -p='[{"op": "replace", "path": "/spec/imageName", "value": "<Registry Endpoint>/<Registry Space>/<codebase name>}]'
-      ```
-
-    * OpenShift
-
-      ```bash
-      kubectl patch codebaseimagestream <name> -n edp --type='json' -p='[{"op": "replace", "path": "/spec/imageName", "value": "<Registry Endpoint>/<Project>/<codebase name>}"}]'
       ```
 
     * Nexus

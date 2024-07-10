@@ -13,7 +13,7 @@ This page describes how to integrate KubeRocketCI with GitLab or GitHub.
 
 To start from, it is required to add both Secret with SSH key, API token, and GitServer resources by taking the steps below.
 
-1. Generate an SSH key pair and add a public key to [GitLab](https://docs.gitlab.com/ee/ssh/) or [GitHub](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent) account.
+1. Generate an SSH key pair and add a public key to [GitLab](https://docs.gitlab.com/ee/user/ssh.html) or [GitHub](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent) account.
 
     ```bash
     ssh-keygen -t ed25519 -C "email@example.com"
@@ -91,9 +91,9 @@ To start from, it is required to add both Secret with SSH key, API token, and Gi
       ]}>
 
       <TabItem value="portal">
-      Navigate to **Configuration** -> **Git Servers**. Fill in the required fields:
+      Navigate to **Configuration** -> **Version Control System**. Fill in the required fields:
 
-      ![VCS Integration in KubeRocketCI portal](../assets/operator-guide/github_integration.png "Project access tokens")
+      ![VCS Integration in KubeRocketCI portal](../assets/operator-guide/github_integration.png "GitHub integration")
       </TabItem>
 
       <TabItem value="kubectl">

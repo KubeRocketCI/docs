@@ -2,7 +2,7 @@
 
 This page describes actions that can be performed to an already created environment. If no environments are created yet, navigate to the [Add Environment](add-cd-pipeline.md) page:
 
-  ![Environments page](../assets/user-guide/edp-portal-cd-pipeline-page.png "Environments page")
+  ![Environments page](../assets/user-guide/environments/edp-portal-cd-pipeline-page.png "Environments page")
 
 * **Environment status** - displays the environment status. Can be red or green depending on if the KubeRocketCI portal managed to connect to the Git Server with the specified credentials or not.
 * **Environment name** (clickable) - displays the Git Server name set during the Git Server creation.
@@ -20,7 +20,7 @@ This page describes actions that can be performed to an already created environm
 
 To view environment details, click the environment name in the environments list. Once clicked, the following data will be displayed:
 
-  ![Environment details](../assets/user-guide/edp-portal-cd-pipeline-overview.png "Environment details")
+  ![Environment details](../assets/user-guide/environments/edp-portal-cd-pipeline-overview.png "Environment details")
 
 * **Filters** - enables filtering by stage name, stage applications and stage health status.
 * **Open environment in Argo CD** - opens the corresponding resource in Argo CD.
@@ -43,11 +43,11 @@ Edit the environment directly from the environment overview page or when viewing
 
 1. Select **Edit** in the options icon menu next to the environment name:
 
-    ![Edit environment when viewing the environment data](../assets/user-guide/edp-portal-edit-cd-pipeline-1.png "Edit environment when viewing the environment data")
+    ![Edit environment when viewing the environment data](../assets/user-guide/environments/edp-portal-edit-cd-pipeline-1.png "Edit environment when viewing the environment data")
 
 2. Apply the necessary changes (edit the list of applications for deploy, application branches, and promotion in the pipeline). Add new extra stages by clicking the plus sign icon and filling in the application branch and promotion in the pipeline.
 
-    ![Edit environment dialog](../assets/user-guide/edp-portal-edit-cd-pipeline-page.png "Edit environment dialog")
+    ![Edit environment dialog](../assets/user-guide/environments/edp-portal-edit-cd-pipeline-page.png "Edit environment dialog")
 
 3. Click the **Apply** button to confirm the changes.
 
@@ -59,7 +59,7 @@ In order to create a new stage for the existing environment, follow the steps be
 
 2. Click the **Create stage** button:
 
-    ![Add environment stage](../assets/user-guide/edp-portal-add-cd-pipeline-stage.png "Add environment stage")
+    ![Add environment stage](../assets/user-guide/environments/edp-portal-cd-pipeline-add-stages.png "Add environment stage")
 
 3. Fill in the required fields in the dialog. Alternatively, click **Edit YAML** in the upper-right corner of the **Create stage** dialog to open the YAML editor and add a stage. Please see the [Stages Menu](../user-guide/add-cd-pipeline.md) section for details.
 
@@ -71,7 +71,7 @@ In order to edit a stage for the existing environment, follow the steps below:
 
 1. Navigate to the **Stages** block by clicking the environment name link in the environments list.
 
-    ![Edit environment stage](../assets/user-guide/edp-portal-edit-cd-pipeline-stage.png "Edit environment stage")
+    ![Edit environment stage](../assets/user-guide/environments/edp-portal-edit-cd-pipeline-stage.png "Edit environment stage")
 
 2. Select the options icon related to the necessary stage and then select **Edit**.
 
@@ -93,11 +93,11 @@ In order to delete a stage for the existing environment, follow the steps below:
 
 2. Click the name of the stage that needs to be deleted:
 
-    ![Delete environment stage](../assets/user-guide/enter_stage.png "Delete environment stage")
+    ![Delete environment stage](../assets/user-guide/environments/enter_stage.png "Delete environment stage")
 
 3. Click the recycle bin button to open the stage deletion menu:
 
-    ![Delete environment stage](../assets/user-guide/edp-portal-delete-cd-pipeline-stage.png "Delete environment stage")
+    ![Delete environment stage](../assets/user-guide/environments/edp-portal-delete-cd-pipeline-stage.png "Delete environment stage")
 
 ### View Stage Data
 
@@ -105,49 +105,43 @@ To view the environment stage data for the existing environment, follow the step
 
 1. Navigate to the **Stages** block by clicking the environment name link in the environments list.
 
-    ![Expand environment stage](../assets/user-guide/edp-portal-expand-stage.png "Expand environment stage")
+    ![Expand environment stage](../assets/user-guide/environments/edp-portal-expand-stage.png "Expand environment stage")
 
 2. Click stage name. The following blocks will be displayed:
 
-    ![Environment stage overview](../assets/user-guide/edp-portal-stage-overview.png "Environment stage overview")
+    ![Environment stage overview](../assets/user-guide/environments/edp-portal-stage-overview.png "Environment stage overview")
 
-    a. **Applications** - displays the status of the applications related to the stage and allows [deploying the applications](#deploy-application). Applications health and sync statuses are returned from the Argo CD tool.
+    a. **Overview** - general information and configuration of current environment.
 
-    b. **Pipelines** - displays all the deploy pipeline runs launched for this stage.
+    b. **Applications** - displays the status of the applications related to the stage and allows [deploying the applications](#deploy-application). Applications health and sync statuses are returned from the Argo CD tool.
 
-    c. **Monitoring** - opens the grafana window that allows for watching various metrics.
+    c. **Pipelines** - displays all the deploy pipeline runs launched for this stage.
+
+    d. **Monitoring** - opens the Grafana window that allows for watching various metrics.
 
 ### Deploy Application
 
 To deploy an application, follow the steps below:
 
-![Deploy the promoted application](../assets/user-guide/edp-portal-deploy-application.png "Deploy the promoted application")
+![Deploy the promoted application](../assets/user-guide/environments/deploy_application.png "Deploy the promoted application")
 
 1. Navigate to the **Applications** block of the stage and select an application.
 
-2. Select the image stream version from the drop-down list.
+    a. Select the image stream version from the drop-down list.
 
-3. (Optional) Enable setting custom values for Helm Charts. For more details, please refer to the [Manage GitOps](gitops.md) page.
+    b. (Optional) Enable setting custom values for Helm Charts. For more details, please refer to the [Manage GitOps](gitops.md) page.
 
-4. Click **Deploy**. The application will be deployed in the Argo CD tool as well.
+    c. Click **Start Deploy**. Starts pipeline with deploy script.
 
-  :::info
-    In case of using OpenShift internal registry, if the deployment fails with the ImagePullBackOff error, delete the pod that was created for this application.
-  :::
+      :::info
+        In case of using OpenShift internal registry, if the deployment fails with the ImagePullBackOff error, delete the pod that was created for this application.
+      :::
 
-To update application, use the **Deploy** button:
+To uninstall the application, click the **Delete** button:
 
-![Update the application](../assets/user-guide/edp-portal-update-application.png "Update the application")
+![Uninstall the application](../assets/user-guide/environments/edp-portal-uninstall-application.png "Uninstall the application")
 
-To uninstall the application, click the **Uninstall** button:
-
-![Uninstall the application](../assets/user-guide/edp-portal-uninstall-application.png "Uninstall the application")
-
-As a result, the application will be updated or uninstalled in the Argo CD tool as well.
-
-:::note
-  In a nutshell, the **Update** button updates your image version in the Helm chart, whereas the **Uninstall** button deletes the Helm chart from the namespace where the Argo CD application is deployed.
-:::
+As a result, the application will be uninstalled in the Argo CD tool as well.
 
 ### Troubleshoot Application
 
@@ -157,19 +151,19 @@ To inspect the deployed application in KubeRocketCI portal, take the following s
 
 1. Open the application logs by clicking the `Show Logs` button:
 
-    ![Show Logs button](../assets/user-guide/show_logs_button.png "Show Logs button")
+    ![Show Logs button](../assets/user-guide/environments/show_logs_button.png "Show Logs button")
 
 2. Inspect the shown logs:
 
-    ![Inspect Logs](../assets/user-guide/application_logs.png "Inspect Logs")
+    ![Inspect Logs](../assets/user-guide/environments/application_logs.png "Inspect Logs")
 
 3. Open the application terminal by clicking the `Show Terminal` button:
 
-    ![Show Terminal button](../assets/user-guide/show_terminal_button.png "Show Terminal button")
+    ![Show Terminal button](../assets/user-guide/environments/show_terminal_button.png "Show Terminal button")
 
 4. Operate the terminal to fix the problem if any:
 
-    ![Inspect application](../assets/user-guide/application_terminal.png "Inspect application")
+    ![Inspect application](../assets/user-guide/environments/application_terminal.png "Inspect application")
 
 ### Related Articles
 

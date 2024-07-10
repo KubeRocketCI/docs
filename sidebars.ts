@@ -409,8 +409,7 @@ const sidebars: SidebarsConfig = {
           collapsed: false,
           items: [
             'user-guide/add-cd-pipeline',
-            'user-guide/manage-environments',
-            'user-guide/add-quality-gate',
+            'user-guide/manage-environments'
           ],
         },
         {

@@ -34,9 +34,9 @@ GitOps repository is added in two steps:
 
 Once the GitOps repository is added to the platform, you can set custom parameters for the deployed Helm Chart. To redefine the parameters, follow the steps below:
 
-1. Within the GitOps repository, follow the naming convention `<pipeline-name>/<stage-name>/<application-name>-values.yaml` to create the chart values file.
+1. Within the GitOps repository, follow the naming convention `<pipeline-name>/<stage-name>/<application-name>-values.yaml` to create the chart values file, e.g. `mypipe/dev/fastapi-demo-values.yaml`.
 
-2. In the created values.yaml file, enter the parameters with their custom values.
+2. Add the necessary custom values to the `mypipe/dev/fastapi-demo-values.yaml` file, and then commit the file to the default branch of the GitOps repository.
 
 3. Navigate to the **Environments** section. Open the created environment, open its stage and deploy it with the **Values override** checkbox selected as it is shown below:
 

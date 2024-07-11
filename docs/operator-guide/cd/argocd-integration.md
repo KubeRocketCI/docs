@@ -3,7 +3,7 @@ import TabItem from '@theme/TabItem';
 
 # Argo CD Integration
 
-KubeRocketCI uses Argo CD as a [part of the Continues Delivery/Continues Deployment](../../user-guide/cd-pipeline-details.md)
+KubeRocketCI uses Argo CD as a [part of the Continuous Delivery/Continuous Deployment](../../user-guide/cd-pipeline-details.md)
 implementation. Argo CD follows the best GitOps practices, uses Kubernetes native approach for the Deployment Management, has rich UI and
 required RBAC capabilities.
 

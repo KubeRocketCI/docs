@@ -234,7 +234,7 @@ const sidebars: SidebarsConfig = {
         // },
         {
           type: 'category',
-          label: 'Continues Integration (CI)',
+          label: 'Continuous Integration (CI)',
           items: [
             {
               type: 'category',
@@ -250,7 +250,7 @@ const sidebars: SidebarsConfig = {
         },
         {
           type: 'category',
-          label: 'Continues Delivery and Deployment (CD)',
+          label: 'Continuous Delivery and Deployment (CD)',
           items: [
             'operator-guide/cd/customize-deploy-pipeline',
             {

@@ -4,10 +4,8 @@ Welcome to the Troubleshooting Guide for the KubeRocketCI. Here, we offer essent
 
 Currently, this section covers the following issues:
 
-* [Container Registry Reset](troubleshoot-container-registries.md)
-* [Application Is Not deployed](troubleshoot-stages.md)
-* [Troubleshoot Codebase Creation](troubleshoot-git-server.md)
-* [Resource Observability Issue](resource-observability.md)
-* [Application Already Exists Error (Gerrit VCS)](troubleshoot-applications.md)
-* [Codebase Build Process is Failed](application-not-built.md)
-* [Invalid Codebase ID Issue (GitHub/GitLab VCS)](invalid-codebase-name.md)
+* [Container Registry Error](container-registry-error.md)
+* [Sync and Health Status Unknown](sync-health-status-unknown.md)
+* [Codebase Creation Issues](codebase-creation-issues.md)
+* [Forbidden Messages on the Overview Page](forbidden-messages.md)
+* [Review Pipeline is Failed](review-pipeline-is-failed.md)

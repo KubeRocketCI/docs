@@ -333,13 +333,11 @@ const sidebars: SidebarsConfig = {
           label: 'Troubleshooting',
           items: [
             'operator-guide/troubleshooting/overview',
-            'operator-guide/troubleshooting/troubleshoot-container-registries',
-            'operator-guide/troubleshooting/troubleshoot-stages',
-            'operator-guide/troubleshooting/troubleshoot-git-server',
-            'operator-guide/troubleshooting/resource-observability',
-            'operator-guide/troubleshooting/troubleshoot-applications',
-            'operator-guide/troubleshooting/application-not-built',
-            'operator-guide/troubleshooting/invalid-codebase-name',
+            'operator-guide/troubleshooting/container-registry-error',
+            'operator-guide/troubleshooting/sync-health-status-unknown',
+            'operator-guide/troubleshooting/codebase-creation-issues',
+            'operator-guide/troubleshooting/forbidden-messages',
+            'operator-guide/troubleshooting/review-pipeline-is-failed'
           ],
         },
       ],

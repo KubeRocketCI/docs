@@ -26,11 +26,11 @@ This documentation is tailored for the Developers and Team Leads.
 
 ## Preconditions
 
-- KubeRocketCI instance is [configured](../operator-guide/prerequisites.md) with Gerrit, Tekton and [Argo CD](../operator-guide/cd/argocd-integration.md);
+- KubeRocketCI instance is [configured](../operator-guide/prerequisites.md) with [GitOps](../user-guide/gitops.md) repo (to be able to create components);
 - External Secrets is [installed](../operator-guide/secrets-management/install-external-secrets-operator.md);
 - Developer has access to the KubeRocketCI instances using the Single-Sign-On approach;
-- Developer has the `Administrator` role (to perform merge in Gerrit);
-- Developer has access to manage secrets in demo-vault namespace.
+- Developer has merge permissions in the one of the [Git Server](../user-guide/git-server-overview.md) repository, e.g. GitHub;
+- Developer has permissions to create resources such as namespace, roles, and role bindings.
 
 ## Scenario
 
@@ -40,86 +40,101 @@ To utilize External Secrets in the KubeRocketCI platform, follow the steps outli
 
 To begin, you will need an application first. Here are the steps to create it:
 
-1. Open the UI Portal. Use the `Sign-In` option:
+1. Open the UI Portal. Use the **Sign In** option:
 
-    ![Logging Page](../assets/use-cases/external-secrets/headlamp_login.png "Logging screen")
+    ![Logging Page](../assets/use-cases/general/login.png "Logging screen")
 
-2. In the top right corner, enter the `Cluster settings` and ensure that both `Default namespace` and `Allowed namespace` are set:
+2. In the top right corner, enter the **Account settings** and ensure that both `Default namespace` and `Allowed namespaces` are set:
 
-    ![Settings](../assets/use-cases/external-secrets/cluster-settings.png "Cluster settings")
+    ![Settings](../assets/use-cases/general/settings.png "Cluster settings")
 
-3. Create the new `Codebase` with the `Application` type using the `Create` strategy. To do this, click the `EDP` tab:
+3. Create the new component with the `Application` type using the `Create from template` strategy. Select the **Components** section and press the **Create component** button:
 
-    ![Cluster Overview](../assets/use-cases/external-secrets/cluster_overview.png "Cluster overview")
+    ![Cluster Overview](../assets/use-cases/general/components.png "Cluster components")
 
-4. Select the `Components` section under the `EDP` tab and push the `+` button:
+4. Choose the **Application** component type. Click the **Next** button:
 
-    ![Components Overview](../assets/use-cases/external-secrets/component-tab.png "Components tab")
+    ![Component Type](../assets/use-cases/general/component-type.png "Component type")
 
-5. Select the `Application` Codebase type because we are going to deliver our application as a container and deploy it inside the Kubernetes cluster. Select the `Create` strategy to use predefined template:
+5. Opt for the **Create from template** strategy to scaffold our application from the template provided by the KubeRocketCI and press the **Create** button:
 
-    ![Codebase Info](../assets/use-cases/external-secrets/codebase-info.png "Step codebase info")
+    ![Component Strategy](../assets/use-cases/general/component-strategy.png "Step component strategy")
 
-6. On the `Application Info` tab, define the following values and press the `Proceed` button:
+6. On the **Add component info** tab, define the following values and press the **Next** button:
 
-    - Application name: `es-usage`
-    - Default branch: `master`
+    - Git server: `github`
+    - Repository name: `{github_account_name}/es-usage`
+    - Component name: `es-usage`
+    - Description: `external-secrets usage`
     - Application code language: `Java`
     - Language version/framework: `Java 17`
     - Build tool: `Maven`
 
     ![Application Info](../assets/use-cases/external-secrets/application-info.png "Step application info")
 
-7. On the `Advanced Settings` tab, define the below values and push the `Apply` button:
+7. On the **Specify advanced settings** tab, define the below values and push the **Create** button:
 
-    - CI tool: `Tekton`
+    - Default branch: `main`
     - Codebase versioning type: `default`
 
-    ![Application Info](../assets/use-cases/external-secrets/advanced-settings.png "Step application info")
+    ![Advanced Settings](../assets/use-cases/external-secrets/advanced-settings.png "Step advanced settings")
 
 8. Check the application status. It should be green:
 
-    ![Components overview page](../assets/use-cases/external-secrets/application-status.png "Application status")
+    ![Application Status](../assets/use-cases/external-secrets/application-status.png "Application status")
 
 ### Create CD Pipeline
 
 This section outlines the process of establishing a CD pipeline within UI Portal. There are two fundamental steps in this procedure:
 
-- Build the application from the last commit of the `master` branch;
+   - Create a `CD pipeline`;
+   - Configure the CD pipeline `stage`.
 
-- Create a `CD Pipeline` to establish continuous delivery to the SIT environment.
+Follow the instructions below to complete the process successfully:
 
-To succeed with the steps above, follow the instructions below:
+1. In the UI Portal, navigate to **Environments** tab and push the **Create environment** button to create pipeline:
 
-1. Create CD Pipeline. To enable application deployment, create a CD Pipeline with a single environment - System Integration Testing (SIT for short). Select the `CD Pipelines` section under the `EDP` tab and push the `+` button:
+    ![CD-Pipeline Overview](../assets/use-cases/general/create-cd-pipeline.png "CD-Pipeline tab")
 
-    ![CD-Pipeline Overview](../assets/use-cases/external-secrets/cd-pipeline_tab.png "CD-Pipeline tab")
+2. In the **Create environment** dialog, define the below values:
 
-2. On the `Pipeline` tab, define the following values and press the `Proceed` button:
+    - **Enter name**:
 
-    - Pipeline name: `deploy`
-    - Deployment type: `Container`
+      - Pipeline name: `deploy`
 
-    ![Pipeline tab](../assets/use-cases/external-secrets/cd-pipeline_pipeline.png "Pipeline tab")
+      ![CD Pipeline name](../assets/use-cases/external-secrets/create-cd-pipeline-window.png "Pipeline tab with parameters")
 
-3. On the `Applications` tab, add `es-usage` application, select `master` branch, leave `Promote in pipeline` unchecked and press the `Proceed` button:
+    - **Add components**. Add `es-usage` application, select `main` branch, and leave `Promote in pipeline` unchecked. Click the **Create** button:
 
-    ![Pipeline tab](../assets/use-cases/external-secrets/cd-pipeline_applications.png "Pipeline tab")
+      ![CD Pipeline Add Application](../assets/use-cases/external-secrets/create-cd-pipeline-window-2.png "Applications tab with parameters")
 
-4. On the `Stage` tab, add the `sit` stage with the values below and push the `Apply` button:
+3. Navigate to the created `deploy` CD pipeline and click the **Create Stage** button.
 
-    - Stage name: `sit`
-    - Description: `System integration testing`
-    - Trigger type: `Manual`. We plan to deploy applications to this environment manually
-    - Quality gate type: `Manual`
-    - Step name: `approve`
+    ![Create Stage Button](../assets/use-cases/external-secrets/create-stage-button.png "Create stage button")
 
-    ![Stage tab](../assets/use-cases/external-secrets/cd-pipeline_stages.png "Stage tab")
+4. In the **Create stage** dialog add the `sit` stage with the values below:
+
+     - **Configure stage**:
+
+       - Cluster: `in cluster`
+       - Stage name: `sit`
+       - Description: `System integration testing`
+       - Trigger type: `Manual`
+       - Pipeline template: `deploy`
+
+       ![Pipeline tab](../assets/use-cases/external-secrets/create-cd-pipeline-stage-window.png "Pipeline tab with parameters")
+
+     - **Add quality gates**:
+
+       - Quality gate type: `Manual`
+       - Step name: `approve`
+
+       ![Pipeline tab](../assets/use-cases/external-secrets/create-cd-pipeline-stage-window-2.png "Pipeline tab with parameters")
 
 ### Configure RBAC for External Secret Store
 
 :::note
-  In this scenario, three namespaces are used: `demo`, which is the namespace where KubeRocketCI is deployed, `demo-vault`, which is the vault where developers store secrets, and `demo-deploy-sit`, which is the namespace used for deploying the application. The target namespace name for deploying the application is formed with the pattern: `edp-<cd_pipeline_name>-<stage_name>`.
+  In this scenario, three namespaces are used: `demo`, which is the namespace where KubeRocketCI is deployed, `demo-vault`, which is the vault where developers store secrets, and `demo-deploy-sit`, which is the namespace used for deploying the application. The target namespace name for deploying the application is formed with the pattern: `demo-<cd_pipeline_name>-<stage_name>`.
 :::
 
 To ensure the proper functioning of the system, it is crucial to create the following resources:
@@ -174,7 +189,7 @@ To ensure the proper functioning of the system, it is crucial to create the foll
     apiVersion: rbac.authorization.k8s.io/v1
     kind: RoleBinding
     metadata:
-      name: eso-from-edp
+      name: eso-from-krci
       namespace: demo-vault
     subjects:
       - kind: ServiceAccount
@@ -190,31 +205,11 @@ To ensure the proper functioning of the system, it is crucial to create the foll
 
 Now that RBAC is configured properly, it is time to add external secrets templates to application Helm chart. Follow the instructions provided below:
 
-1. Navigate to `UI Portal` -> `EDP` -> `Overview`, and push the Gerrit link:
+1. Navigate to one of the `Git Servers` where the `es-usage` application was created during the [Add Application](#add-application) step. In this example, it is `GitHub`:
 
-    ![Overview page](../assets/use-cases/external-secrets/edp_overview.png "Overview page")
+    ![Github Repository](../assets/use-cases/external-secrets/github_repo.png "Github repository")
 
-2. Log in to Gerrit UI, select `Repositories` and select `es-usage` project:
-
-    ![Browse Gerrit repositories](../assets/use-cases/external-secrets/gerrit_repository.png "Browse Gerrit repositories")
-
-3. In the `Commands` section of the project, push the `Create Change` button:
-
-    ![Create Change request](../assets/use-cases/external-secrets/gerrit_create_change.png "Create Change request")
-
-4. In the `Create Change` dialog, provide the branch `master` and fill in the `Description` (commit message) field and push the `Create` button:
-
-    ```txt
-    Add external secrets templates
-    ```
-
-    ![Create Change](../assets/use-cases/external-secrets/gerrit_mr.png "Create Change")
-
-5. Push the `Edit` button of the merge request and then the `ADD/OPEN/UPLOAD` button and add files:
-
-      ![Add files to repository](../assets/use-cases/external-secrets/gerrit_add_files.png "Add files to repository")
-
-    Once the file menu is opened, and click `SAVE` after editing each of the files:
+2. Create a commit in the `es-usage` repository in which you add the following configuration files:
 
     1. deploy-templates/templates/sa.yaml:
 
@@ -255,7 +250,7 @@ Now that RBAC is configured properly, it is time to add external secrets templat
         kind: ExternalSecret
         metadata:
           name: mongo                            # target secret name
-          namespace: demo-deploy-sit    # target namespace
+          namespace: demo-deploy-sit             # target namespace
         spec:
           refreshInterval: 1h
           secretStoreRef:
@@ -288,26 +283,31 @@ Now that RBAC is configured properly, it is time to add external secrets templat
                 key: password
         ```
 
-6. Push the `Publish Edit` button.
-
-7. As soon as review pipeline finished, and you get `Verified +1` from CI, you are ready for review. Click `Mark as Active` -> `Code-Review +2` -> `Submit`:
-
-    ![Apply change](../assets/use-cases/external-secrets/gerrit_approve.png "Apply change")
+3. Push the changes made to the `es-usage` repository.
 
 ### Deploy Application
 
 Deploy the application by following the steps provided below:
 
-1. When build pipeline is finished, navigate to `UI Portal` -> `EDP` -> `CD-Pipeline` and select `deploy` pipeline.
+1. Build Container from the latest branch commit. To build the initial version of the application's `main` branch, go to the **Components** -> **es-usage** -> **Branches** -> **main** and press the **Trigger build pipeline run** button.
 
-2. Deploy the initial version of the application to the SIT environment:
+    ![Build Pipeline](../assets/use-cases/external-secrets/component_build.png "Build pipeline")
 
-    - Select the `sit` stage from the Stages tab;
-    - In the `Image stream version`, select latest version and push the `Deploy` button.
+2. Build pipeline for the `es-usage` application starts.
 
-3. Ensure application status is `Healthy` and `Synced`:
+    ![Build Status](../assets/use-cases/external-secrets/build_status.png "Build status")
 
-    ![CD-Pipeline status](../assets/use-cases/external-secrets/cd-pipeline_status.png "CD-Pipeline status")
+3. Once the build pipeline has successfully completed, navigate to the **Environments** tab and select the `deploy` pipeline. Choose the **SIT** stage and click on the **Configure deploy** button:
+
+    ![Configure Deploy](../assets/use-cases/external-secrets/configure_deploy.png "Configure deploy")
+
+4. In the `Image stream version`, select latest version and push the **Start deploy** button.
+
+    ![Start Deploy](../assets/use-cases/external-secrets/start_deploy.png "Start deploy")
+
+5. Ensure application status is `Healthy` and `Synced`:
+
+    ![App Synced](../assets/use-cases/external-secrets/app_synced.png "App synced")
 
 ### Check Application Status
 
@@ -317,25 +317,25 @@ To ensure the application is deployed successfully, do the following:
 
     ```bash
     kubectl get secretstore -n demo-deploy-sit
-    NAME                           AGE     STATUS   READY
-    demo                           5m57s   Valid    True
+    NAME   AGE     STATUS   CAPABILITIES   READY
+    demo   4m38s   Valid    ReadWrite      True
     ```
 
     ```bash
     kubectl get externalsecret -n demo-deploy-sit
-    NAME    STORE                          REFRESH INTERVAL   STATUS         READY
-    mongo   demo                           1h                 SecretSynced   True
+    NAME    STORE   REFRESH INTERVAL   STATUS         READY
+    mongo   demo    1h                 SecretSynced   True
     ```
 
-2. In the top right corner, enter the `Cluster settings` and add `demo-deploy-sit` to the `Allowed namespace`.
+2. In the top right corner, enter the `Account settings` and add `demo-deploy-sit` to the `Allowed namespaces`.
 
-3. Navigate `UI Portal` -> `Configuration` -> `Secrets` and ensure that secret was created:
+3. Navigate to the **Kubernetes** tab in the bottom left corner, then go to **Configuration** -> **Secrets** and ensure that the `mongo` secret has been successfully created:
 
-    ![Secrets](../assets/use-cases/external-secrets/headlamp_secrets.png "Secrets")
+    ![Secrets](../assets/use-cases/external-secrets/secret_list.png "Secrets")
 
-4. Navigate `UI Portal` -> `Workloads` -> `Pods` and select deployed application:
+4. Navigate to **Workloads** -> **Pods** and access the pod for the `es-usage` application, e.g. `es-usage-7fdb577994-pwjps`. Ensure that the environment variables for `mongo` have been successfully applied:
 
-    ![Pod information](../assets/use-cases/external-secrets/pod_env.png "Pod information")
+    ![Pod information](../assets/use-cases/external-secrets/env_vars.png "Pod information")
 
 ## Related Articles
 

@@ -36,23 +36,23 @@ To scaffold and deploy FastAPI Application, follow the steps below.
 
 1. Open the Portal URL. Use the **Sign-In** option.
 
-    ![Logging Page](../assets/use-cases/fastapi-scaffolding/login.png "Logging screen")
+    ![Logging Page](../assets/use-cases/general/login.png "Logging screen")
 
 2. Ensure `Namespace` value in the User **Account settings** tab points to the namespace with the KubeRocketCI installation.
 
-    ![Settings](../assets/use-cases/fastapi-scaffolding/settings.png "Settings button")
+    ![Settings](../assets/use-cases/general/settings.png "Settings button")
 
 3. Create the new `Codebase` with the `Application` type using the `Create from template` strategy. Select the **Components** section and press the **Create component** button.
 
-    ![Components Overview](../assets/use-cases/fastapi-scaffolding/components.png "Components tab")
+    ![Components Overview](../assets/use-cases/general/components.png "Components tab")
 
 4. Choose the **Application** Codebase type as we intend to deliver our application as a container and deploy it within the Kubernetes cluster. Click the **Next** button.
 
-    ![Codebase Type](../assets/use-cases/fastapi-scaffolding/component-type.png "Step codebase type")
+    ![Codebase Type](../assets/use-cases/general/component-type.png "Step codebase type")
 
 5. Opt for the **Create from template** strategy to scaffold our application from the template provided by the KubeRocketCI and press the **Create** button:
 
-    ![Codebase Strategy](../assets/use-cases/fastapi-scaffolding/component-strategy.png "Step codebase strategy")
+    ![Codebase Strategy](../assets/use-cases/general/component-strategy.png "Step codebase strategy")
 
 6. On the **Add component info** tab, define the following values and press the **Next** button:
 
@@ -108,7 +108,7 @@ To succeed with the steps above, follow the instructions below:
 
 6. In the UI Portal, navigate to **Environments** tab and push the **Create environment** button to create pipeline.
 
-    ![CD_pipeline](../assets/use-cases/fastapi-scaffolding/create-cd-pipeline.png "Create CD Pipeline")
+    ![CD_pipeline](../assets/use-cases/general/create-cd-pipeline.png "Create CD Pipeline")
 
 7. In the **Create environment** dialog, define the below values:
 

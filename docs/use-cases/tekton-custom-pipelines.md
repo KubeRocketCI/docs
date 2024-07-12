@@ -25,7 +25,7 @@ To create and then modify a custom Tekton library, please follow the steps below
 
 1. Open the UI Portal. Use the Sign-In option:
 
-    ![Logging Page](../assets/use-cases/fastapi-scaffolding/login.png "Logging screen")
+    ![Logging Page](../assets/use-cases/general/login.png "Logging screen")
 
 2. In the top right corner, enter the `Cluster settings` and ensure that both `Default namespace` and `Allowed namespace` are set:
 

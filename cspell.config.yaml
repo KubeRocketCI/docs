@@ -61,6 +61,7 @@ words:
   - patchset
   - pipelinerun
   - pipelinetype
+  - pwjps
   - regcred
   - Rego
   - rekor

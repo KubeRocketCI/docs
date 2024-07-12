@@ -1,16 +1,16 @@
 # Secured Secrets Management for Application Deployment
 
-This use case demonstrates how to securely manage sensitive data, such as passwords, API keys, and other credentials, that are consumed by an application during development or runtime in production. The approach involves storing sensitive data in an external secret store located in a "vault" namespace (which can be Vault, AWS Secret Store, or any other provider). The process entails transmitting confidential information from the vault namespace to the deployed namespace to establish a connection to a database.
+This use case demonstrates the secure management of sensitive data, such as passwords, API keys, and other credentials used by an application during development or production runtime.
+The process involves storing sensitive data in an external secret store within a `demo-vault` namespace. The confidential information is then transmitted from the `demo-vault` namespace to the deployed namespace to establish a connection to a database.
+In this scenario, the KubeRocketCI platform leverages capabilities of the `External Secret Operator`. Developers can use another external secret store (Hashicorp Vault, AWS Secret Store, or another provider) to ensure that confidential information is securely stored and accessed only when necessary.
 
-In this scenario, the KubeRocketCI platform is used to facilitate the management of sensitive data. By leveraging an external secret store, developers can ensure that confidential information is securely stored and accessed only when needed. This approach enhances the security of the deployment environment and mitigates the risk of exposing sensitive data.
+To follow this approach, the next steps are involved:
 
-To implement this approach, the following steps are involved:
+1. Configure the KubeRocketCI platform with the external secret store provider, [namespace will be used](../operator-guide/secrets-management/external-secrets-operator-integration.md#kubernetes-provider) for the below scenario.
 
-1. Configure the KubeRocketCI platform with the desired external secret store provider, such as Vault or AWS Secret Store.
+2. Create a separate namespace, with the name `demo-vault`, to store the sensitive data.
 
-2. Create a separate namespace, referred to as the "vault" namespace, to store the sensitive data securely.
-
-3. Store the sensitive data, such as passwords, API keys, and credentials, in the vault namespace using the chosen external secret store provider.
+3. Keep sensitive data, such as passwords, API keys, and credentials, in the `demo-vault` namespace.
 
 4. Establish a connection between the deployed namespace and the vault namespace to securely access the sensitive data when required.
 
@@ -18,16 +18,16 @@ By following these steps, developers can ensure that sensitive data is protected
 
 ## Roles
 
-This documentation is tailored for the Developers and Team Leads.
+This documentation is tailored for the Platform Team, Developers and Team Leads.
 
 ## Goals
 
-- Make confidential information usage secure in the deployment environment.
+- Ensure secure handling of confidential information within the deployment environment.
 
 ## Preconditions
 
 - KubeRocketCI instance is [configured](../operator-guide/prerequisites.md) with [GitOps](../user-guide/gitops.md) repo (to be able to create components);
-- External Secrets is [installed](../operator-guide/secrets-management/install-external-secrets-operator.md);
+- External Secrets Operator is [installed](../operator-guide/secrets-management/install-external-secrets-operator.md);
 - Developer has access to the KubeRocketCI instances using the Single-Sign-On approach;
 - Developer has merge permissions in the one of the [Git Server](../user-guide/git-server-overview.md) repository, e.g. GitHub;
 - Developer has permissions to create resources such as namespace, roles, and role bindings.
@@ -87,8 +87,12 @@ To begin, you will need an application first. Here are the steps to create it:
 
 This section outlines the process of establishing a CD pipeline within UI Portal. There are two fundamental steps in this procedure:
 
-   - Create a `CD pipeline`;
-   - Configure the CD pipeline `stage`.
+- Create a `CD pipeline`;
+- Configure the CD pipeline `stage`.
+
+:::note
+  Ensure [GitOps repository](../user-guide/gitops.md) is connected to the KubeRocketCI instance.
+:::
 
 Follow the instructions below to complete the process successfully:
 
@@ -102,7 +106,7 @@ Follow the instructions below to complete the process successfully:
 
       - Pipeline name: `deploy`
 
-      ![CD Pipeline name](../assets/use-cases/external-secrets/create-cd-pipeline-window.png "Pipeline tab with parameters")
+        ![CD Pipeline name](../assets/use-cases/external-secrets/create-cd-pipeline-window.png "Pipeline tab with parameters")
 
     - **Add components**. Add `es-usage` application, select `main` branch, and leave `Promote in pipeline` unchecked. Click the **Create** button:
 
@@ -114,27 +118,30 @@ Follow the instructions below to complete the process successfully:
 
 4. In the **Create stage** dialog add the `sit` stage with the values below:
 
-     - **Configure stage**:
+    - **Configure stage**:
 
-       - Cluster: `in cluster`
-       - Stage name: `sit`
-       - Description: `System integration testing`
-       - Trigger type: `Manual`
-       - Pipeline template: `deploy`
+      - Cluster: `in cluster`
+      - Stage name: `sit`
+      - Description: `System integration testing`
+      - Trigger type: `Manual`
+      - Pipeline template: `deploy`
 
-       ![Pipeline tab](../assets/use-cases/external-secrets/create-cd-pipeline-stage-window.png "Pipeline tab with parameters")
+      ![Pipeline tab](../assets/use-cases/external-secrets/create-cd-pipeline-stage-window.png "Pipeline tab with parameters")
 
-     - **Add quality gates**:
+    - **Add quality gates**:
 
-       - Quality gate type: `Manual`
-       - Step name: `approve`
+      - Quality gate type: `Manual`
+      - Step name: `approve`
 
-       ![Pipeline tab](../assets/use-cases/external-secrets/create-cd-pipeline-stage-window-2.png "Pipeline tab with parameters")
+      ![Pipeline tab](../assets/use-cases/external-secrets/create-cd-pipeline-stage-window-2.png "Pipeline tab with parameters")
 
 ### Configure RBAC for External Secret Store
 
 :::note
-  In this scenario, three namespaces are used: `demo`, which is the namespace where KubeRocketCI is deployed, `demo-vault`, which is the vault where developers store secrets, and `demo-deploy-sit`, which is the namespace used for deploying the application. The target namespace name for deploying the application is formed with the pattern: `demo-<cd_pipeline_name>-<stage_name>`.
+  In this scenario, three namespaces are used:
+    - `demo`, the namespace where KubeRocketCI is deployed,
+    - `demo-vault`, the vault namespace, where sensitive data is stored, and
+    - `demo-<cd_pipeline_name>-<stage_name>`, the namespace used for deploying the application (`demo-deploy-sit` for this scenario).
 :::
 
 To ensure the proper functioning of the system, it is crucial to create the following resources:
@@ -209,9 +216,9 @@ Now that RBAC is configured properly, it is time to add external secrets templat
 
     ![Github Repository](../assets/use-cases/external-secrets/github_repo.png "Github repository")
 
-2. Create a commit in the `es-usage` repository in which you add the following configuration files:
+2. Create a commit in the `es-usage` repository and add the following configuration files to the helm chart:
 
-    1. deploy-templates/templates/sa.yaml:
+    1. `deploy-templates/templates/sa.yaml`:
 
         ```yaml
         apiVersion: v1
@@ -221,7 +228,7 @@ Now that RBAC is configured properly, it is time to add external secrets templat
           namespace: demo-deploy-sit
         ```
 
-    2. deploy-templates/templates/secret-store.yaml:
+    2. `deploy-templates/templates/secret-store.yaml`:
 
         ```yaml
         apiVersion: external-secrets.io/v1beta1
@@ -243,7 +250,7 @@ Now that RBAC is configured properly, it is time to add external secrets templat
                   key: ca.crt
         ```
 
-    3. deploy-templates/templates/external-secret.yaml:
+    3. `deploy-templates/templates/external-secret.yaml`:
 
         ```yaml
         apiVersion: external-secrets.io/v1beta1
@@ -267,7 +274,7 @@ Now that RBAC is configured properly, it is time to add external secrets templat
               property: password                  # value will be fetched from this field
         ```
 
-    4. deploy-templates/templates/deployment.yaml. Add the environment variable for mongodb to the existing deployment configuration that used the secret:
+    4. `deploy-templates/templates/deployment.yaml`. Add the environment variable for mongodb to the existing deployment configuration that used the secret:
 
         ```yaml
         env:
@@ -287,7 +294,7 @@ Now that RBAC is configured properly, it is time to add external secrets templat
 
 ### Deploy Application
 
-Deploy the application by following the steps provided below:
+Deploy the application by following the steps below:
 
 1. Build Container from the latest branch commit. To build the initial version of the application's `main` branch, go to the **Components** -> **es-usage** -> **Branches** -> **main** and press the **Trigger build pipeline run** button.
 

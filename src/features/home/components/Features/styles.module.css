@@ -46,13 +46,3 @@
   height: 1.5rem;
   width: 1.5rem;
 }
-
-[data-theme='dark'] {
-  .feature {
-    background-color: var(--kuberocket-color-primary-dark);
-  }
-
-  .featureTitle {
-    color: var(--ifm-color-white);
-  }
-}

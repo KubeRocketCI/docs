@@ -66,9 +66,3 @@
   width: 1rem;
   height: 1rem;
 }
-
-[data-theme='dark'] {
-  .pricingCard {
-    background-color: var(--kuberocket-color-primary-dark);
-  }
-}

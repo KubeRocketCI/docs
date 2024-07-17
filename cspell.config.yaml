@@ -3,88 +3,233 @@ dictionaries:
   - bash
   - google
   - lorem-ipsum
+  - python
+  - softwareTerms
 words:
+  - addopts
+  - adoptopenjdk
+  - alnum
   - Antora
+  - apiserver
+  - apiuser
+  - auths
   - autoplay
   - Autotest
   - autotests
+  - awsdns
+  - AWSIRSA
+  - backchannel
   - Beego
   - bitnami
+  - Bnow
+  - boltdb
+  - Bridgecrew
   - buildtool
+  - cacerts
   - cbis
   - cbtype
+  - ccoctl
   - CDPIPELINE
   - cdstage
   - cdxgen
+  - Cfluent
+  - changeit
+  - changemerged
+  - Checkmarx
+  - cicd
   - ciuser
   - Civo
+  - clastix
+  - clusterissuer
   - clusterrole
   - clusterrolebinding
+  - cmctl
   - codebasebranch
   - codebaseimagestream
+  - codecentric
   - Codenarc
+  - codeviewer
+  - commentadded
   - configmap
+  - Coverity
+  - credrequests
   - creds
+  - csanchez
+  - dbchecker
   - deepcopy
   - defectdojo
+  - dependencytrack
+  - deployers
+  - Djava
+  - Djgroups
+  - Dkeycloak
   - dockerbuild
+  - dockerconfigjson
   - dockerhub
+  - dropdb
+  - dumpall
+  - EBSCSI
+  - edpcomponent
+  - edpcomponents
+  - emptydir
+  - endpointshort
   - EPAM
   - epamedp
   - epmd
   - externalsecret
   - fastapi
+  - Filebeat
+  - filesystems
   - finalizer
   - finalizers
+  - fluentbit
   - fullname
+  - Fzcw
   - gantt
   - Gerrit
   - gitops
   - GITTAG
   - GOPATH
   - GOROOT
+  - Grype
   - hadolint
+  - harborkeycloakclient
+  - hostedzone
+  - Hostnames
+  - hyperthreading
+  - importcert
+  - ingresscontroller
+  - initdb
+  - issueadmin
+  - jobservice
+  - junitxml
   - Kaniko
   - keepalive
+  - Keyacloak
   - Keycloak
+  - keycloakrealmuser
+  - keycloakx
+  - Keycloakx
   - keyid
+  - keytool
   - krci
+  - kubeadmin
   - kubeconfig
+  - kubelet
+  - kubelogin
   - kuberocketci
+  - ldflags
   - lintconf
   - listner
+  - Logsight
+  - ltree
+  - Lucene
+  - Metasploit
+  - Metricbeat
   - mkdocs
   - MKNOD
+  - mrparkers
   - multitenancy
+  - multitenant
+  - multivalued
+  - mutatingwebhook
   - mypipe
+  - myuser
+  - newcoming
+  - nindent
+  - Nlcg
+  - noout
+  - noprompt
   - nosniff
+  - nslookup
+  - ojson
+  - Packetbeat
+  - parameterstore
+  - passwordfile
   - patchset
+  - patchsetcreated
+  - petclinic
+  - pgcrypto
+  - pgdb
+  - PGPASSWORD
   - pipelinerun
   - pipelinetype
+  - PKCS
+  - printenv
+  - psql
   - pwjps
+  - Qualys
+  - Quarkus
+  - rabbitmq
+  - rabbitmqctl
   - regcred
   - Rego
   - rekor
+  - reportportal
+  - resourcetemplates
+  - restic
+  - rolebindings
+  - rpuser
   - SAMEORIGIN
   - SDLC
   - seccomp
+  - secretkey
   - secretstore
+  - securityhotspotadmin
   - selfsubjectrulesreviews
   - Semgrep
   - serviceaccount
+  - serviceaccounts
+  - serviceanalyzer
+  - serviceanalyzertrain
+  - serviceapi
+  - serviceindex
+  - serviceui
   - SETGID
   - SETUID
   - SLSA
   - slsaprovenance
+  - Snyk
   - sonarqube
   - sonarsource
+  - Sonatype
   - sshkey
+  - sshport
+  - statefulset
   - storageclass
+  - storepass
   - struct
+  - subresource
+  - superadmin
+  - Sysdig
+  - tablespaces
+  - tanzu
   - Taskrun
   - tekton
   - tfenv
+  - tflint
+  - Tflint
+  - tfsec
+  - Tfsec
+  - tfstate
+  - tfvars
   - toolset
+  - traefik
+  - trgm
+  - trustcacerts
+  - truststore
+  - usedomainname
+  - USEDOMAINNAME
+  - userinfo
+  - usermodel
+  - vacuumdb
+  - velero
+  - Veracode
+  - verion
+  - wafv
+  - waynesun
+  - wildfly
+  - Wildfly
   - xlarge
   - zwpj
 enableFiletypes:
@@ -100,4 +245,4 @@ ignorePaths:
   - .vscode
   - buid
   - node_modules
-  - docs/api
+  - "**/api/**"

@@ -26,8 +26,8 @@ export const PricingCard = ({ title, price, description, features, link }) => {
         </ul>
       </div>
       <div className={styles.pricingCardFooter}>
-        <Link href={link} className="button">
-          start
+        <Link href={link} className="button button--primary button--md">
+          {hasPrice ? 'Contact us' : 'Start'}
         </Link>
       </div>
     </div>

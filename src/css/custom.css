@@ -5,24 +5,66 @@
  */
 /* You can override the default Infima variables here. */
 :root {
-  --ifm-color-primary: #2f43b6;
-  --ifm-color-primary-dark: #2a3ca4;
-  --ifm-color-primary-darker: #28399b;
-  --ifm-color-primary-darkest: #212f7f;
-  --ifm-color-primary-light: #344ac8;
-  --ifm-color-primary-lighter: #3b51cc;
-  --ifm-color-primary-lightest: #5669d3;
+  /* custom variables */
+  --kuberocket-color-primary-dark: #002446;
+  --kuberocket-color-primary-light: #0094ff;
+
+  /* ifm color overrides */
+
+  --ifm-color-primary: #0094ff;
+  --ifm-color-primary-dark: #0085e6;
+  --ifm-color-primary-darker: #007ed9;
+  --ifm-color-primary-darkest: #0068b3;
+  --ifm-color-primary-light: #1a9fff;
+  --ifm-color-primary-lighter: #26a4ff;
+  --ifm-color-primary-lightest: #4db4ff;
   --ifm-code-font-size: 95%;
+
+  /* navbar */
+  --ifm-navbar-background-color: var(--kuberocket-color-primary-dark);
+  --ifm-navbar-link-color: var(--ifm-color-white);
+  --ifm-navbar-link-hover-color: var(--kuberocket-color-primary-light);
+
+  /* footer */
+  --ifm-footer-background-color: var(--kuberocket-color-primary-dark);
+
+  /* other variables override */
+
   --docusaurus-highlighted-code-line-bg: rgba(66, 135, 255, 0.1);
 }
 
 [data-theme='dark'] {
-  --ifm-color-primary: #a3ade6;
-  --ifm-color-primary-dark: #8491de;
-  --ifm-color-primary-darker: #7584d9;
-  --ifm-color-primary-darkest: #465acd;
-  --ifm-color-primary-light: #c2c9ee;
-  --ifm-color-primary-lighter: #d1d6f3;
-  --ifm-color-primary-lightest: #ffffff;
+  /* ifm color overrides */
+
+  --ifm-color-primary: #0094ff;
+  --ifm-color-primary-dark: #0085e6;
+  --ifm-color-primary-darker: #007ed9;
+  --ifm-color-primary-darkest: #0068b3;
+  --ifm-color-primary-light: #1a9fff;
+  --ifm-color-primary-lighter: #26a4ff;
+  --ifm-color-primary-lightest: #4db4ff;
+
+  /* navbar */
+  --ifm-navbar-background-color: var(--kuberocket-color-primary-dark);
+  --ifm-navbar-link-color: var(--ifm-color-white);
+  --ifm-navbar-link-hover-color: var(--kuberocket-color-primary-light);
+
+  /* footer */
+  --ifm-footer-background-color: var(--kuberocket-color-primary-dark);
+
+  /* other variables override */
+
   --docusaurus-highlighted-code-line-bg: rgba(66, 135, 255, 0.3);
+}
+
+.footer--dark {
+  background-color: var(--kuberocket-color-primary-dark);
+}
+
+button[class*='ColorModeToggle'] {
+  color: #fff;
+}
+
+button[class*='ColorModeToggle']:hover {
+  background-color: var(--ifm-color-emphasis-400);
 }

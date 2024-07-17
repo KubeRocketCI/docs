@@ -1,0 +1,74 @@
+.pricingCard {
+  display: flex;
+  flex-direction: column;
+  gap: 3.125rem;
+  border-radius: 0.625rem;
+  padding: 1.25rem;
+  background-color: var(--ifm-color-white);
+  box-shadow: 0 0.75rem 3.125rem -0.75rem rgba(0, 0, 0, 0.25);
+  height: 100%;
+}
+
+.pricingCardContent {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.pricingCardFooter {
+  margin-top: auto;
+  display: flex;
+  justify-content: center;
+}
+
+.pricingCardName {
+  font-size: 2rem;
+  font-weight: 300;
+}
+
+.pricingCardPrice {
+  font-size: 2.5rem;
+  font-weight: bold;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.3125rem;
+}
+
+.pricingCardPrice span {
+  font-size: 1rem;
+}
+
+.pricingCardDescription {
+  font-size: 1.0625rem;
+}
+
+.pricingCardFeatures {
+  padding-left: 1.25rem;
+}
+
+.pricingCardFeature {
+  font-size: 1rem;
+  font-weight: 300;
+  line-height: 2.1875rem;
+}
+
+.pricingCardFeature::marker {
+  content: '';
+}
+
+.pricingCardFeatureMarker {
+  display: inline-block;
+  width: 1.25rem;
+}
+
+.pricingCardFeatureMarker svg {
+  width: 1rem;
+  height: 1rem;
+}
+
+[data-theme='dark'] {
+  .pricingCard {
+    background-color: var(--kuberocket-color-primary-dark);
+  }
+}

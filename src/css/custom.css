@@ -8,6 +8,8 @@
   /* custom variables */
   --kuberocket-color-primary-dark: #002446;
   --kuberocket-color-primary-light: #0094ff;
+  --kuberocket-card-color: var(--ifm-color-white);
+  --kuberocket-card-color-hover: rgba(33, 150, 243, 0.08);
 
   /* ifm color overrides */
 
@@ -19,13 +21,10 @@
   --ifm-color-primary-lighter: #26a4ff;
   --ifm-color-primary-lightest: #4db4ff;
   --ifm-code-font-size: 95%;
-
-  /* navbar */
+  --ifm-menu-color: var(--ifm-color-white);
   --ifm-navbar-background-color: var(--kuberocket-color-primary-dark);
   --ifm-navbar-link-color: var(--ifm-color-white);
   --ifm-navbar-link-hover-color: var(--kuberocket-color-primary-light);
-
-  /* footer */
   --ifm-footer-background-color: var(--kuberocket-color-primary-dark);
 
   /* other variables override */
@@ -34,6 +33,10 @@
 }
 
 [data-theme='dark'] {
+  /* custom variables */
+  --kuberocket-card-color: var(--kuberocket-color-primary-dark);
+  --kuberocket-card-color-hover: var(--kuberocket-color-primary-dark);
+
   /* ifm color overrides */
 
   --ifm-color-primary: #0094ff;
@@ -43,13 +46,10 @@
   --ifm-color-primary-light: #1a9fff;
   --ifm-color-primary-lighter: #26a4ff;
   --ifm-color-primary-lightest: #4db4ff;
-
-  /* navbar */
+  --ifm-menu-color: var(--ifm-color-white);
   --ifm-navbar-background-color: var(--kuberocket-color-primary-dark);
   --ifm-navbar-link-color: var(--ifm-color-white);
   --ifm-navbar-link-hover-color: var(--kuberocket-color-primary-light);
-
-  /* footer */
   --ifm-footer-background-color: var(--kuberocket-color-primary-dark);
 
   /* other variables override */
@@ -61,10 +61,6 @@
   background-color: var(--kuberocket-color-primary-dark);
 }
 
-button[class*='ColorModeToggle'] {
-  color: #fff;
-}
-
-button[class*='ColorModeToggle']:hover {
-  background-color: var(--ifm-color-emphasis-400);
+.navbar {
+  color: var(--ifm-color-white);
 }

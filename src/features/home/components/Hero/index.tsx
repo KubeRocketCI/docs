@@ -38,8 +38,8 @@ export const Hero = () => {
             </div>
             <div className={styles.heroBannerDescription}>{siteConfig.themeConfig.description as string}</div>
           </div>
-          <div className={clsx('row margin-bottom--sm', styles.heroBannerButtons)}>
-            <div className="margin-horiz--sm">
+          <div className={clsx('row', styles.heroBannerButtons)}>
+            <div className="margin--sm">
               <Link
                 className={clsx('button button--outline button--lg', [
                   styles.heroBannerBtn,
@@ -50,7 +50,7 @@ export const Hero = () => {
                 Getting Started
               </Link>
             </div>
-            <div className="margin-horiz--sm">
+            <div className="margin--sm">
               <Link
                 className={clsx('button  button--lg', [styles.heroBannerBtn, styles.heroBannerBtnContained])}
                 to={siteConfig.themeConfig.mailTo as string}
@@ -58,7 +58,7 @@ export const Hero = () => {
                 Request Demo
               </Link>
             </div>
-            <div className="margin-horiz--sm">
+            <div className="margin--sm">
               <Link
                 className={clsx('button button--outline button--lg', [
                   styles.heroBannerBtn,

@@ -15,20 +15,20 @@
   color: var(--ifm-color-emphasis);
   box-shadow: 0px 1px 10px 0px rgba(0, 36, 70, 0.12);
   border: 1px solid transparent;
+  background-color: var(--kuberocket-card-color);
 }
 
 .feature:hover {
   text-decoration: none;
   color: var(--ifm-color-emphasis);
   border: 1px solid var(--kuberocket-color-primary-light, rgba(33, 150, 243, 1));
-  background: rgba(33, 150, 243, 0.08);
+  background-color: var(--kuberocket-card-color-hover);
 }
 
 .featureTitle {
   margin: 0;
   font-size: 1.25rem;
   font-weight: 500;
-  color: var(--kuberocket-color-primary-dark);
 }
 
 .featureHeader {

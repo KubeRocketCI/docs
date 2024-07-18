@@ -21,7 +21,7 @@
   --ifm-color-primary-lighter: #26a4ff;
   --ifm-color-primary-lightest: #4db4ff;
   --ifm-code-font-size: 95%;
-  --ifm-menu-color: var(--ifm-color-white);
+  --ifm-menu-color: var(--ifm-color-emphasis-800);
   --ifm-navbar-background-color: var(--kuberocket-color-primary-dark);
   --ifm-navbar-link-color: var(--ifm-color-white);
   --ifm-navbar-link-hover-color: var(--kuberocket-color-primary-light);
@@ -63,4 +63,10 @@
 
 .navbar {
   color: var(--ifm-color-white);
+}
+
+@media screen and (max-width: 996px) {
+  :root {
+    --ifm-menu-color: var(--ifm-color-white);
+  }
 }

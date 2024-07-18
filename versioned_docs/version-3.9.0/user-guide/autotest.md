@@ -15,15 +15,18 @@ As soon as the autotest is successfully provisioned, the following will be creat
 
 The added autotest will be listed in the Autotests list allowing you to do the following:
 
-![Autotests page](../assets/user-guide/edp-portal-inspect-autotest-menu.png "Autotests page")
+![Autotests page](../assets/user-guide/components/components-manage-components-menu.png "Autotests page")
 
-* **Autotest status** - displays the autotest status. Can be red or green depending on KubeRocketCI portal managed to connect to the Git Server with the specified credentials or not.
-* **Autotest name (clickable)** - displays the autotest name set during the autotest creation.
+* **Component status** - displays the autotest status. Can be red or green depending on KubeRocketCI portal managed to connect to the Git Server with the specified credentials or not.
+* **Component name (clickable)** - displays the autotest name set during the autotest creation.
 * **Open documentation** - opens the autotest related documentation page.
 * **Enable filtering** - enables filtering by autotest name and namespace where this custom resource is located in.
-* **Create new autotest** - displays the **Create new component** menu.
-* **Edit autotest** - edit the autotest by selecting the options icon next to its name in the autotests list, and then selecting **Edit**. For details see the [Edit Existing Autotest](#edit-existing-autotest) section.
-* **Delete autotest** - remove autotest by clicking the vertical ellipsis button and then selecting **Delete**.
+* **Selector** - Allows you to select multiple autotets for bulk actions.
+* **Delete selected** - Deletes all selected autotets. This option is only 
+* **Create new omponent** - displays the **Create new component** menu.
+* **Actions menu** provides additional options for each individual application:
+* **Edit** - edit the autotest by selecting the options icon next to its name in the autotests list, and then selecting **Edit**. For details see the [Edit Existing Autotest](#edit-existing-autotest) section.
+* **Delete** - remove autotest by clicking the vertical ellipsis button and then selecting **Delete**.
 
   :::note
     The autotest that is used in a CD pipeline cannot be removed.
@@ -31,9 +34,9 @@ The added autotest will be listed in the Autotests list allowing you to do the f
 
 There are also options to sort the autotests:
 
-* Sort the existing autotests in a table by clicking the sorting icons in the table header. Sort the autotests alphabetically by their name, language, build tool, framework, and CI tool. You can also sort the autotests by their status: Created, Failed, or In progress.
+* **Enable filtering** - Sort the existing autotests in a table by clicking the sorting icons in the table header. Sort the autotests alphabetically by their name, language, build tool, framework, and CI tool. You can also sort the autotests by their status: Created, Failed, or In progress.
 
-* Select a number of autotests displayed per page (15, 25 or 50 rows)  and navigate between pages if the number of autotests exceeds the capacity of a single page.
+* **Pagination menu** - Select a number of autotests displayed per page (15, 25 or 50 rows)  and navigate between pages if the number of autotests exceeds the capacity of a single page.
 
 ## Edit Existing Autotest
 
@@ -43,13 +46,13 @@ KubeRocketCI portal provides the ability to enable, disable or edit the Jira Int
 
       Select **Edit** in the options icon menu:
 
-      ![Edit autotest on the autotests overview page](../assets/user-guide/edp-portal-edit-autotest-1.png "Edit autotest on the autotests overview page")
+      ![Edit autotest on the autotests overview page](../assets/user-guide/components/autotests/autotests-manage-components-codebase-edit-1.png "Edit autotest on the autotests overview page")
 
-      ![Edit autotest when viewing the autotest data](../assets/user-guide/edp-portal-edit-autotest-2.png "Edit autotest when viewing the autotest data")
+      ![Edit autotest when viewing the autotest data](../assets/user-guide/components/autotests/autotests-manage-components-codebase-edit-2.png "Edit autotest when viewing the autotest data")
 
 2. To enable Jira integration, on the **Edit Autotest** page do the following:
 
-    ![Edit autotest](../assets/user-guide/edp-portal-edit-autotest-jira.png "Edit library")
+    ![Edit autotest](../assets/user-guide/components/autotests/autotests-manage-edit-codebase-autotests.png "Edit library")
 
     a. Mark the **Integrate with Jira server** check box and fill in the necessary fields. Please see steps d-h on the [Add Autotests](add-autotest.md) page.
 

@@ -9,15 +9,15 @@ KubeRocketCI portal allows you to clone an existing repository with the autotest
 
 To add an autotest, navigate to the **Components** section on the navigation bar and click **+ Create component**:
 
-  ![Create new autotest](../assets/user-guide/create_new_codebase.png "Create new autotest")
+  ![Create new autotest](../assets/user-guide/components/components-create-new-codebase.png "Create new autotest")
 
 Once clicked, the **Create new component** dialog will appear, then select **Autotest** and click **Next**:
 
-  ![Create new autotest](../assets/user-guide/create_new_autotest.png "Create new autotest")
+  ![Create new autotest](../assets/user-guide/components/components-select-type-new-codebase.png "Create new autotest")
 
 Choose one of the strategies and click **Create**:
 
-  ![Select strategy](../assets/user-guide/select_strategy_autotest.png  "Select strategy")
+  ![Select strategy](../assets/user-guide/components/autotests/autotests-select-strategy.png  "Select strategy")
 
 * **Clone project** – clones the indicated repository into KubeRocketCI. While cloning the existing repository, it is required to fill in the **Repository URL** field and specify the credentials if needed.
 
@@ -31,7 +31,7 @@ Choose one of the strategies and click **Create**:
 
 Click **Edit YAML** in the upper-right corner of the **Create Autotest** dialog to open the YAML editor and create an autotest:
 
-![Edit YAML](../assets/user-guide/edp-portal-yaml-edit-autotest.png "Edit YAML")
+![Edit YAML](../assets/user-guide/components/autotests/autotests-yaml-edit.png "Edit YAML")
 
 To edit YAML in the minimal editor, turn on the **Use minimal editor** toggle in the upper-right corner of the **Create Autotest** dialog.
 
@@ -48,7 +48,7 @@ The **Create Autotest** dialog contains the two steps:
 
 In our case, we will use the **Clone** strategy:
 
-    ![Clone autotest](../assets/user-guide/edp-portal-clone-autotest.png "Clone autotest")
+    ![Clone autotest](../assets/user-guide/components/autotests/autotests-clone-autotests.png "Clone autotest")
 
 1. Select all the settings that define how the autotest will be added to Git server:
 
@@ -70,7 +70,7 @@ In our case, we will use the **Clone** strategy:
 
 In the **Advanced Settings** menu, specify the branch options and define the Jira settings:
 
-    ![Advanced settings](../assets/user-guide/edp-portal-advanced-settings-autotest.png "Advanced settings")
+    ![Advanced settings](../assets/user-guide/components/autotests/autotests-advanced-settings-autotest.png "Advanced settings")
 
 * **Default branch** - the name of the branch where you want the development to be performed.
 
@@ -82,7 +82,7 @@ In the **Advanced Settings** menu, specify the branch options and define the Jir
   * **default**: Using the default versioning type, in order to specify the version of the current artifacts, images, and tags in the Version Control System, a developer should navigate to the corresponding file and change the version **manually**.
   * **edp**: Using the edp versioning type, a developer indicates the version number from which all the artifacts will be versioned and, as a result, **automatically** registered in the corresponding file (e.g. pom.xml). When selecting the edp versioning type, the extra fields will appear, type the version number from which you want the artifacts to be versioned:
 
-    ![Edp versioning](../assets/user-guide/edp-portal-edp-versioning-autotest.png "Edp versioning")
+    ![Edp versioning](../assets/user-guide/components/components-edp-versioning.png "Edp versioning")
 
     Type the version number from which you want the artifacts to be versioned.
 
@@ -92,7 +92,7 @@ In the **Advanced Settings** menu, specify the branch options and define the Jir
 
 * **Specify the pattern to validate a commit message** - the regular expression used to indicate the pattern that is followed on the project to validate a commit message in the code review pipeline. An example of the pattern: `^[PROJECT_NAME-d{4}]:.*$`.
 
-    ![Jira integration](../assets/user-guide/edp-portal-integrate-jira-server-autotest.png)
+    ![Jira integration](../assets/user-guide/components/components-jira-server.png)
 
 * **Integrate with Jira server** - this check box is used in case it is required to connect Jira tickets with the commits
 and have a respective label in the **Fix Version** field.
@@ -105,7 +105,7 @@ and have a respective label in the **Fix Version** field.
 
 * **Specify the pattern to find a Jira ticket number in a commit message** - based on this pattern, the value from KubeRocketCI will be displayed in Jira.
 
-    ![Mapping field name](../assets/user-guide/edp-portal-autotest-advanced-mapping.png "Mapping field name")
+    ![Mapping field name](../assets/user-guide/components/components-jira-advanced-mapping.png "Mapping field name")
 
 * **Mapping field name** - the section where the additional Jira fields are specified the names of the Jira fields that should be filled in with attributes from KubeRocketCI:
 

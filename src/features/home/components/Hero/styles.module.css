@@ -1,6 +1,6 @@
 .heroBanner {
   position: relative;
-  height: 27.5rem;
+  min-height: 27.5rem;
   width: 100%;
 }
 
@@ -14,13 +14,11 @@
 }
 
 .heroBannerContent {
-  position: absolute;
-  z-index: 2;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  position: relative;
+  z-index: 1;
   text-align: center;
   color: var(--ifm-color-white);
+  padding: 2rem;
 }
 
 .heroBannerOverlay {

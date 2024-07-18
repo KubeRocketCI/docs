@@ -15,20 +15,23 @@ As soon as the library is successfully provisioned, the following will be create
 
 The added library will be listed in the Libraries list allowing to do the following:
 
-![Library menu](../assets/user-guide/edp-portal-library-page.png "Library menu")
+![Library menu](../assets/user-guide/components/components-manage-components-menu.png  "Library menu")
 
-* **Library status** - displays the library status. Can be red or green depending on if the KubeRocketCI portal managed to connect to the Git Server with the specified credentials or not.
-* **Library name (clickable)** - displays the library name set during the library creation.
+* **Component status** - displays the library status. Can be red or green depending on if the KubeRocketCI portal managed to connect to the Git Server with the specified credentials or not.
+* **Component name (clickable)** - displays the library name set during the library creation.
 * **Open documentation** - opens the library related documentation page.
 * **Enable filtering** - enables filtering by library name and namespace where this custom resource is located in.
-* **Create new library** - displays the **Create new component** menu.
-* **Edit library** - edit the library by selecting the options icon next to its name in the libraries list, and then selecting **Edit**. For details see the [Edit Existing Library](#edit-existing-library) section.
-* **Delete Library** - remove library by clicking the vertical ellipsis button and then selecting **Delete**.
+* **Selector** - Allows you to select multiple library for bulk actions.
+* **Delete selected** - Deletes all selected library. This option is only available when one or more library`s are selected using the **Selector**.
+* **Create new component** - displays the **Create new component** menu.
+* ***Actions menu**
+* **Edit** - edit the library by selecting the options icon next to its name in the libraries list, and then selecting **Edit**. For details see the [Edit Existing Library](#edit-existing-library) section.
+* **Delete** - remove library by clicking the vertical ellipsis button and then selecting **Delete**.
 
 There are also options to sort the libraries:
 
-* Sort the existing libraries in a table by clicking the sorting icons in the table header. Sort the libraries alphabetically by their name, language, build tool, framework, and CI tool. You can also sort the libraries by their status: Created, Failed, or In progress.
-* Select a number of libraries displayed per page (15, 25 or 50 rows) and navigate between pages if the number of libraries exceeds the capacity of a single page.
+* **Enable filtering** - Sort the existing libraries in a table by clicking the sorting icons in the table header. Sort the libraries alphabetically by their name, language, build tool, framework, and CI tool. You can also sort the libraries by their status: Created, Failed, or In progress.
+* **Pagination menu** - Select a number of libraries displayed per page (15, 25 or 50 rows) and navigate between pages if the number of libraries exceeds the capacity of a single page.
 
 ## Edit Existing Library
 
@@ -38,15 +41,15 @@ KubeRocketCI portal provides the ability to enable, disable or edit the Jira Int
 
     * Select **Edit** in the options icon menu:
 
-      ![Edit library on the libraries overview page](../assets/user-guide/edp-portal-edit-library-1.png "Edit library on the libraries overview page")
+      ![Edit library on the libraries overview page](../assets/user-guide/components/library/library-manage-components-library-edit-1.png "Edit library on the libraries overview page")
 
     * Select **Edit** in the library details menu:
 
-      ![Edit library when viewing the library data](../assets/user-guide/edp-portal-edit-library-2.png "Edit library when viewing the library data")
+      ![Edit library when viewing the library data](../assets/user-guide/components/library/library-manage-components-library-edit-2.png "Edit library when viewing the library data")
 
 2. To enable Jira integration, in the **Edit Library** dialog do the following:
 
-    ![Edit library](../assets/user-guide/edp-portal-edit-library-jira.png "Edit library")
+    ![Edit library](../assets/user-guide/components/library/library-manage-edit-codebase-library.png "Edit library")
 
     a. Mark the **Integrate with Jira server** check box and fill in the necessary fields. Please see the steps of the [Add Library](add-library.md) page.
 

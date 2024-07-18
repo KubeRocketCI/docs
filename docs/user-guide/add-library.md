@@ -4,15 +4,15 @@ KubeRocketCI portal allows you to create a library, clone an existing repository
 
 To add a library, navigate to the **Components** section on the navigation bar and click **+ Create component**:
 
-  ![Create new library](../assets/user-guide/create_new_codebase.png "Create new library")
+  ![Create new library](../assets/user-guide/components/components-create-new-codebase.png "Create new library")
 
 Once clicked, the **Create new component** dialog will appear. Select **Library** and click **Next**:
 
-  ![Edit YAML](../assets/user-guide/headlamp_new_component_library.png "Create new component menu")
+  ![Edit YAML](../assets/user-guide/components/components-select-type-new-codebase.png "Create new component menu")
 
 Choose one of the strategies and click **Create**:
 
-  ![Select strategy](../assets/user-guide/select_strategy.png  "Select strategy")
+  ![Select strategy](../assets/user-guide/components/components-select-strategy.png  "Select strategy")
 
 In the **Create new component** menu, select the necessary configuration strategy. The choice will define the parameters you will need to specify:
 
@@ -26,13 +26,13 @@ In the **Create new component** menu, select the necessary configuration strateg
 
 * **Clone project** – clones the indicated repository into KubeRocketCI. While cloning the existing repository, it is required to fill in the **Repository URL** field and specify the **Repository credentials** field if needed:
 
-  ![Clone library](../assets/user-guide/edp-portal-clone-library.png "Clone library")
+  ![Clone library](../assets/user-guide/components/library/library-clone-library.png "Clone library")
 
 ## Create Library in YAML
 
 Click **Edit YAML** in the upper-right corner of the **Create Library** dialog to open the YAML editor and create the library:
 
-  ![Edit YAML](../assets/user-guide/edp-portal-yaml-edit-library.png "Edit YAML")
+  ![Edit YAML](../assets/user-guide/components/library/library-yaml-edit.png "Edit YAML")
 
 To edit YAML in the minimal editor, turn on the **Use minimal editor** toggle in the upper-right corner of the **Create Application** dialog.
 
@@ -49,7 +49,7 @@ The **Create Library** dialog contains the two steps:
 
 In our example, we will use the **Create from template** strategy:
 
-  ![Create library](../assets/user-guide/edp-portal-library-codebase-info.png "Create library")
+  ![Create library](../assets/user-guide/components/library/library-create-new-library.png "Create library")
 
 1. Select all the settings that define how the library will be added to Git server:
 
@@ -89,7 +89,7 @@ Click the **Proceed** button to switch to the next menu.
 
 In the Advanced Settings menu, specify the branch options and define the Jira settings:
 
-  ![Advanced settings](../assets/user-guide/edp-portal-library-advanced-settings-menu.png "Advanced settings")
+  ![Advanced settings](../assets/user-guide/components/components-specify-advanced-settings.png "Advanced settings")
 
 * **Default branch** - the name of the branch where you want the development to be performed.
 
@@ -101,7 +101,7 @@ In the Advanced Settings menu, specify the branch options and define the Jira se
   * **default**: Using the default versioning type, in order to specify the version of the current artifacts, images, and tags in the Version Control System, a developer should navigate to the corresponding file and change the version **manually**.
   * **edp**: Using the edp versioning type, a developer indicates the version number from which all the artifacts will be versioned and, as a result, **automatically** registered in the corresponding file (e.g. pom.xml). When selecting the edp versioning type, the extra fields will appear, type the version number from which you want the artifacts to be versioned:
 
-      ![EDP versioning](../assets/user-guide/edp-portal-library-edp-versioning.png "EDP versioning")
+      ![EDP versioning](../assets/user-guide/components/components-edp-versioning.png "EDP versioning")
 
     :::note
       The **Start Version From** field should be filled out in compliance with the semantic versioning rules, e.g. 1.2.3 or 10.10.10. Please refer to the [Semantic Versioning](https://semver.org/) page for details.
@@ -109,7 +109,7 @@ In the Advanced Settings menu, specify the branch options and define the Jira se
 
 * **Specify the pattern to validate a commit message** - the regular expression used to indicate the pattern that is followed on the project to validate a commit message in the code review pipeline. An example of the pattern: `^[PROJECT_NAME-d{4}]:.*$`.
 
-  ![Integrate with Jira server](../assets/user-guide/edp-portal-library-jira-server.png "Integrate with Jira server")
+  ![Integrate with Jira server](../assets/user-guide/components/components-jira-server.png "Integrate with Jira server")
 
 * **Integrate with Jira server** - this check box is used in case it is required to connect Jira tickets with the commits
 and have a respective label in the **Fix Version** field.
@@ -122,7 +122,7 @@ and have a respective label in the **Fix Version** field.
 
 * **Specify the pattern to find a Jira ticket number in a commit message** - based on this pattern, the value from KubeRocketCI will be displayed in Jira.
 
-  ![Mapping fields](../assets/user-guide/edp-portal-library-advanced-mapping.png "Mapping fields")
+  ![Mapping fields](../assets/user-guide/components/components-jira-advanced-mapping.png "Mapping fields")
 
 * **Mapping field name** - the section where the additional Jira fields are specified the names of the Jira fields that should be filled in with attributes from KubeRocketCI:
 

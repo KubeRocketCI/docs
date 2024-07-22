@@ -112,7 +112,7 @@ As a result, a new environment will be created in the environments list.
 
 Click **Edit YAML** in the upper-right corner of the **Create CD Pipeline** dialog to open the YAML editor and create the environment.
 
-![Edit YAML](../assets/user-guide/edp-portal-yaml-editor.png "Edit YAML")
+![Edit YAML](../assets/user-guide/environments/edp-portal-yaml-editor.png "Edit YAML")
 
 To edit YAML in the minimal editor, turn on the **Use minimal editor** toggle in the upper-right corner of the **Create CD Pipeline** dialog.
 

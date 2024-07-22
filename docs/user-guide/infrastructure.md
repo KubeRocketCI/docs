@@ -11,7 +11,7 @@ As soon as the infrastructure is successfully provisioned, the following will be
 
 The added infrastructure will be listed in the infrastructure list allowing you to do the following:
 
-![Components menu](../assets/user-guide/edp-portal-inspect-infrastructure-menu.png "Components menu")
+![Components menu](../assets/user-guide/components/components-manage-components-menu.png "Components menu")
 
 * **Component status** - displays the infrastructure status. Can be red or green depending on if the KubeRocketCI portal managed to connect to the Git Server with the specified credentials or not.
 * **Component name (clickable)** - displays the infrastructure name set during the library creation.

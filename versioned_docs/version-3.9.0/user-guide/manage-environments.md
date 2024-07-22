@@ -75,7 +75,7 @@ In order to edit a stage for the existing environment, follow the steps below:
 
 2. Select the options icon related to the necessary stage and then select **Edit**.
 
-    ![Edit environment stage dialog](../assets/user-guide/edp-portal-edit-cd-pipeline-stage-dialog.png "Edit environment stage dialog")
+    ![Edit environment stage dialog](../assets/user-guide/environments/edp-portal-edit-cd-pipeline-stage-dialog.png "Edit environment stage dialog")
 
 3. In the **Edit Stage** dialog, change the stage trigger type. See more about this field in the [Stages Menu](#edit-stage) section.
 

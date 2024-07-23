@@ -169,11 +169,16 @@ const config: Config = {
           type: 'docsVersionDropdown',
           position: 'right',
           dropdownActiveClassDisabled: true,
-        },
-        {
-          href: 'https://github.com/epam/edp-install/blob/master/RELEASES.md',
-          label: 'Releases',
-          position: 'right',
+          dropdownItemsAfter: [
+            {
+              type: "html",
+              value: '<hr style="margin: 0.1rem">',
+            },
+            {
+              href: 'https://github.com/epam/edp-install/blob/master/RELEASES.md',
+              label: 'Releases',
+            }
+          ],
         },
         {
           href: 'https://github.com/kuberocketci/docs',

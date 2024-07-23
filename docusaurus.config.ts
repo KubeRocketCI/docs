@@ -119,22 +119,27 @@ const config: Config = {
           label: 'Getting Started',
         },
         {
-          type: 'docSidebar',
-          sidebarId: 'operatorGuideSidebar',
+          type: 'dropdown',
+          label: 'Guides',
           position: 'left',
-          label: 'Operator Guide',
-        },
-        {
-          type: 'docSidebar',
-          sidebarId: 'userGuideSidebar',
-          position: 'left',
-          label: 'User Guide',
-        },
-        {
-          type: 'docSidebar',
-          sidebarId: 'developerGuideSidebar',
-          position: 'left',
-          label: 'Developer Guide',
+          items: [
+            {
+              type: 'docSidebar',
+              sidebarId: 'operatorGuideSidebar',
+              label: 'Operator Guide',
+            },
+            {
+              type: 'docSidebar',
+              sidebarId: 'userGuideSidebar',
+              label: 'User Guide',
+            },
+            {
+              type: 'docSidebar',
+              sidebarId: 'developerGuideSidebar',
+              label: 'Developer Guide',
+            },
+            // Add other guides here as needed
+          ],
         },
         {
           type: 'docSidebar',

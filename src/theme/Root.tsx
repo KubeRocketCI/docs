@@ -10,7 +10,7 @@ export default function Root({ children }) {
         disableButtonStyles
         buttonText="Accept"
         setDeclineCookie
-        expires={1}
+        expires={150}
         style={{
           backgroundColor: 'var(--ifm-color-primary)',
           alignItems: 'center',

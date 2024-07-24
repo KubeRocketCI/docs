@@ -1,3 +1,6 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 # Multitenant Logging
 
 Get acquainted with the multitenant logging components.
@@ -27,39 +30,83 @@ To find the project logs, navigate to [Grafana](https://grafana.shared.edp-epam.
     and doesn't have any access to another project.
   :::
 
-1. Choose the organization by clicking the **Current Organization** drop-down list. If a user is assigned to several organizations, switch easily by using the Switch button.
+    <Tabs
+      defaultValue="< v9.5.0"
+      values={[
+        {label: 'Grafana < v9.5.0', value: '< v9.5.0'},
+        {label: 'Grafana >= v9.5.0', value: '> v9.5.0'},
+      ]}>
 
-    ![Current organization](../../assets/operator-guide/grafana-organization-user-info.png "Current organization")
+      <TabItem value="< v9.5.0">
+      1. Choose the organization by clicking the **Current Organization** drop-down list. If a user is assigned to several organizations, switch easily by using the Switch button:
 
-2. Navigate to the left-side menu and click the **Explore** button to see the Log Browser:
+          ![Current organization](../../assets/operator-guide/multitenant-logging/grafana-organization-user-info.png "Current organization")
 
-    ![Grafana explore](../../assets/operator-guide/grafana-explore.png "Grafana explore")
+      2. Navigate to the left-side menu and click the **Explore** button to see the Log Browser:
 
-3. Click the **Log Browser** button to see the labels that can be used to filter logs (e.g., hostname, namespace, application name, pod, etc.):
+          ![Grafana explore](../../assets/operator-guide/multitenant-logging/grafana-explore.png "Grafana explore")
 
-    :::note
-      Enable the correct data source, select the relevant logging data from the top left-side corner, and pay attention that the data source name always follows the `project_name-logging` pattern.
-    :::
+      3. Click the **Log Browser** button to see the labels that can be used to filter logs (e.g., hostname, namespace, application name, pod, etc.):
 
-    ![Log browser](../../assets/operator-guide/grafana-log-browser-original.png "Log browser")
+          :::note
+            Enable the correct data source, select the relevant logging data from the top left-side corner, and pay attention that the data source name always follows the `project_name-logging` pattern.
+          :::
 
-4. Filter out logs by clicking the **Show logs** button or write the query and click the **Run query** button.
+          ![Log browser](../../assets/operator-guide/multitenant-logging/grafana-log-browser-original.png "Log browser")
 
-5. Review the results with the quantity of logs per time, see the example below:
+      4. Filter out logs by clicking the **Show logs** button or write the query and click the **Run query** button.
 
-    ![Logs example](../../assets/operator-guide/grafana-logs-example.png "Logs example")
+      5. Review the results with the quantity of logs per time, see the example below:
 
-    * Expand the logs to get detailed information about the object entry:
+          ![Logs example](../../assets/operator-guide/multitenant-logging/grafana-logs-example.png "Logs example")
 
-      ![Expand logs](../../assets/operator-guide/grafana-expand-logs.png "Expand logs")
+          * Expand the logs to get detailed information about the object entry:
 
-    * Use the following buttons to include or remove the labels from the query:
+              ![Expand logs](../../assets/operator-guide/multitenant-logging/grafana-expand-logs.png "Expand logs")
 
-      ![Addition button](../../assets/operator-guide/grafana-addition-button.png "Addition button")
+          * Use the following buttons to include or remove the labels from the query:
 
-    * See the ad-hoc statistics for a particular label:
+              ![Addition button](../../assets/operator-guide/multitenant-logging/grafana-addition-button.png "Addition button")
 
-      ![Ad-hoc stat example](../../assets/operator-guide/grafana-ad-hoc-stat-example.png "Ad-hoc stat example")
+          * See the ad-hoc statistics for a particular label:
+
+              ![Ad-hoc stat example](../../assets/operator-guide/multitenant-logging/grafana-ad-hoc-stat-example.png "Ad-hoc stat example")
+        </TabItem>
+
+      <TabItem value="> v9.5.0">
+      1. Choose the organization from the drop-down list in the upper left corner:
+
+          ![Current organization](../../assets/operator-guide/multitenant-logging/grafana-organizations.png "Current organization")
+
+      2. Navigate to the left-side menu and click the **Explore** button:
+
+          ![Grafana explore](../../assets/operator-guide/multitenant-logging/grafana-explore-tab.png "Grafana explore")
+
+      3. Click the **Label Browser** button to see the labels that can be used to filter logs:
+
+          :::note
+            Enable the correct data source, select the relevant logging data from the top left-side corner, and pay attention that the data source name always follows the `project_name-logging` pattern.
+          :::
+
+          ![Log browser](../../assets/operator-guide/multitenant-logging/grafana-label-browser.png "Log browser")
+
+      4. In the appeared window, select the labels to filter logs (e.g., hostname, namespace, application name, pod, etc.):
+
+          ![labels example](../../assets/operator-guide/multitenant-logging/grafana-label-browser-tab.png "Logs example")
+
+      5. Close the **Label Browser** window and click the **Run query** button. Review the results with the quantity of logs per time, see the example below:
+
+          ![Run query](../../assets/operator-guide/multitenant-logging/grafana-query-result.png "Run query")
+
+          * Expand the logs to get detailed information about the object entry. Use the following buttons to include or remove the labels from the query:
+
+              ![Expand logs](../../assets/operator-guide/multitenant-logging/grafana-expand-logs-tab.png "Expand logs")
+
+          * See the ad-hoc statistics for a particular label:
+
+              ![Ad-hoc stat example](../../assets/operator-guide/multitenant-logging/grafana-label-statistics.png "Ad-hoc stat example")
+        </TabItem>
+       </Tabs>
 
 ## Related Articles
 

@@ -7,12 +7,15 @@
 :root {
   /* custom variables */
   --kuberocket-color-primary-dark: #002446;
+  --kuberocket-color-primary-dark-secondary: rgba(0, 148, 255, 0.05);
   --kuberocket-color-primary-light: #0094ff;
+  --kuberocket-color-secondary-dark: rgba(89, 109, 128, 1);
   --kuberocket-card-color: var(--ifm-color-white);
   --kuberocket-card-color-hover: rgba(33, 150, 243, 0.08);
 
   /* ifm color overrides */
-
+  --ifm-table-stripe-background: rgba(248, 249, 255, 1);
+  --ifm-font-color-base: var(--kuberocket-color-primary-dark);
   --ifm-color-primary: #0094ff;
   --ifm-color-primary-dark: #0085e6;
   --ifm-color-primary-darker: #007ed9;
@@ -20,7 +23,6 @@
   --ifm-color-primary-light: #1a9fff;
   --ifm-color-primary-lighter: #26a4ff;
   --ifm-color-primary-lightest: #4db4ff;
-  --ifm-code-font-size: 95%;
   --ifm-menu-color: var(--ifm-color-emphasis-800);
   --ifm-navbar-background-color: var(--kuberocket-color-primary-dark);
   --ifm-navbar-link-color: var(--ifm-color-white);
@@ -30,15 +32,19 @@
   /* other variables override */
 
   --docusaurus-highlighted-code-line-bg: rgba(66, 135, 255, 0.1);
+  --ifm-code-font-size: 95%;
 }
 
 [data-theme='dark'] {
   /* custom variables */
-  --kuberocket-card-color: var(--kuberocket-color-primary-dark);
-  --kuberocket-card-color-hover: var(--kuberocket-color-primary-dark);
+  --kuberocket-card-color: var(--kuberocket-color-primary-dark-secondary);
+  --kuberocket-card-color-hover: var(--kuberocket-color-primary-dark-secondary);
 
   /* ifm color overrides */
-
+  --ifm-table-stripe-background: rgba(0, 148, 255, 0.05) !important;
+  --ifm-button-color: var(--ifm-color-white);
+  --ifm-background-color: var(--kuberocket-color-primary-dark) !important;
+  --ifm-font-color-base: var(--ifm-color-white);
   --ifm-color-primary: #0094ff;
   --ifm-color-primary-dark: #0085e6;
   --ifm-color-primary-darker: #007ed9;

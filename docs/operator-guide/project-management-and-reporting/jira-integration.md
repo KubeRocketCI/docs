@@ -28,40 +28,87 @@ In order to adjust the Jira server integration, add the JiraServer CR by perform
     <Tabs
       defaultValue="portal"
       values={[
-        {label: 'UI Portal', value: 'portal'},
+        {label: 'KubeRocketCI', value: 'portal'},
         {label: 'Manifests', value: 'manifests'},
         {label: 'External Secrets Operator', value: 'externalsecret'},
       ]}>
 
       <TabItem value="portal">
-      Go to **EDP Portal** -> **EDP** -> **Configuration** -> **Jira**. Update or fill in the **URL**, **User**, **Password** fields and click the **Save** button:
 
-      ![Jira update manual secret](../../assets/operator-guide/jira-edp-portal-secret.png "Jira update manual secret")
+      Go to **KubeRocketCI** -> **Configuration** -> **Management Tool**.
+
+      ![Jira update manual secret](../../assets/operator-guide/project-management-and-reporting/jira-edp-portal-secret.png "Jira update manual secret")
+
+       Fill in the **URL**, **User**, **Password** fields and click the **Save** button:
+
+       ![Add Jira Server](../../assets/operator-guide/project-management-and-reporting/add_jira_server.png "Add Jira Server")
       </TabItem>
 
       <TabItem value="manifests">
-      ```yaml
-      apiVersion: v1
-      kind: Secret
-      metadata:
-        name: ci-jira
-        namespace: edp
-        labels:
-          app.edp.epam.com/secret-type=jira
-      stringData:
-        username: username
-        password: password
-      ```
+
+      1. Create Kubernetes Secret:
+
+          ```yaml
+          apiVersion: v1
+          kind: Secret
+          metadata:
+            name: ci-jira
+            namespace: edp
+            labels:
+              app.edp.epam.com/secret-type=jira
+          stringData:
+            username: username
+            password: password
+          ```
+
+      2. Create `JiraServer` CR with the **apiUrl**, **credentialName** and **rootUrl** fields:
+
+          ```yaml
+          apiVersion: v2.edp.epam.com/v1
+          kind: JiraServer
+          metadata:
+            name: jira-server
+            namespace: edp
+          spec:
+            apiUrl: 'https://jira-api.example.com'
+            credentialName: ci-jira
+            rootUrl: 'https://jira.example.com'
+          ```
+
+          :::note
+            The value of the **credentialName** property is the name of the Kubernetes Secret, created on the previous step.
+          :::
       </TabItem>
 
       <TabItem value="externalsecret">
-      ```json
-      "ci-jira":
-      {
-        "username": "username",
-        "password": "password"
-      }
-      ```
+
+      1. Configure secret in Parameter Store:
+
+          ```json
+          "ci-jira":
+          {
+            "username": "username",
+            "password": "password"
+          }
+          ```
+
+      2. Create `JiraServer` CR with the **apiUrl**, **credentialName** and **rootUrl** fields:
+
+          ```yaml
+          apiVersion: v2.edp.epam.com/v1
+          kind: JiraServer
+          metadata:
+            name: jira-server
+            namespace: edp
+          spec:
+            apiUrl: 'https://jira-api.example.com'
+            credentialName: ci-jira
+            rootUrl: 'https://jira.example.com'
+          ```
+
+          :::note
+            The value of the **credentialName** property is the name of the Kubernetes Secret, created on the previous step.
+          :::
       </TabItem>
 
     </Tabs>
@@ -73,22 +120,7 @@ In order to adjust the Jira server integration, add the JiraServer CR by perform
       3. **Add Comments:** Required for adding external links and comments to issues.
     :::
 
-2. Create `JiraServer` CR in the OpenShift/Kubernetes namespace with the **apiUrl**, **credentialName** and **rootUrl** fields:
 
-      ```yaml
-      apiVersion: v2.edp.epam.com/v1
-      kind: JiraServer
-      metadata:
-        name: jira-server
-      spec:
-        apiUrl: 'https://jira-api.example.com'
-        credentialName: ci-jira
-        rootUrl: 'https://jira.example.com'
-      ```
-
-    :::note
-      The value of the **credentialName** property is the name of the Kubernetes Secret, created on the previous step.
-    :::
 
 ## Enable Jira During Platform Deployment
 
@@ -110,7 +142,7 @@ To use Jira, you need to set up your codebases properly.
 
 During the codebase creation process, proceed to the **Advanced Settings** tab. Here, ensure to mark the **Integrate with Jira server** checkbox and complete the necessary fields accordingly:
 
-  ![Advanced settings](../../assets/operator-guide/jira_integration_ac.png "Advanced settings")
+  ![Advanced settings](../../assets/operator-guide/project-management-and-reporting/jira_integration_ac.png "Advanced settings")
 
 There are four predefined variables, each with specific values, that can be utilized individually or in combination. These variables display varying data based on the versioning type in use (`edp` or `default`):
 
@@ -138,7 +170,7 @@ If the `default versioning` type is used:
 
 Upon successful configuration of the Jira integration, your tickets will be enriched with additional metadata:
 
-  ![Additional Metadata](../../assets/operator-guide/jira_versioning_type_example.png "Additional Metadata")
+  ![Additional Metadata](../../assets/operator-guide/project-management-and-reporting/jira_versioning_type_example.png "Additional Metadata")
 
 Should you encounter an issue where metadata is not appearing within a Jira ticket, it's advisable to inspect the status field of the `JiraIssueMetadata` custom resources located in the platform namespace (e.g, `edp`). The codebase-operator typically removes this resource after post-processing, it may persist in case of reconciliation issues, remaining within the namespace.
 

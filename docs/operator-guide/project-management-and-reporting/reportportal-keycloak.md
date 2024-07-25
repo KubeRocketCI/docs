@@ -23,8 +23,8 @@ Follow the steps below to integrate the ReportPortal with Keycloak.
     * _SAML Attribute NameFormat_: `Basic`.
     * _Aggregate attribute values_: `Off`.
 
-    ![User mapper sample](../../assets/operator-guide/reportportal-keycloak-1.png "User mapper sample")
-    ![Scope mappers](../../assets/operator-guide/reportportal-keycloak-2.png "Scope mappers")
+    ![User mapper sample](../../assets/operator-guide/project-management-and-reporting/reportportal-keycloak-1.png "User mapper sample")
+    ![Scope mappers](../../assets/operator-guide/project-management-and-reporting/reportportal-keycloak-2.png "Scope mappers")
 
 3. Navigate to **Clients** > **Create client** and fill in the following fields:
 
@@ -39,11 +39,11 @@ Follow the steps below to integrate the ReportPortal with Keycloak.
 
 5. Navigate to **Client** > **your_client** > **Keys** and disable _Client signature required_.
 
-    ![Client keys](../../assets/operator-guide/reportportal-keycloak-3.png "Client keys")
+    ![Client keys](../../assets/operator-guide/project-management-and-reporting/reportportal-keycloak-3.png "Client keys")
 
 6. Navigate to **Client** > **your_client** > **Client scopes** and add the scope created on step 3 with the default _Assigned type_.
 
-    ![Client scopes](../../assets/operator-guide/reportportal-keycloak-4.png "Client scopes")
+    ![Client scopes](../../assets/operator-guide/project-management-and-reporting/reportportal-keycloak-4.png "Client scopes")
 
 ## ReportPortal Configuration
 
@@ -51,11 +51,11 @@ Follow the steps below to integrate the ReportPortal with Keycloak.
 
 2. Navigate to **Client** > **Administrate** > **Plugins** and select the SAML plugin.
 
-    ![Plugins menu](../../assets/operator-guide/reportportal-keycloak-5.png "Plugins menu")
+    ![Plugins menu](../../assets/operator-guide/project-management-and-reporting/reportportal-keycloak-5.png "Plugins menu")
 
 3. To add a new integration, fill in the following fields:
 
-    ![Add SAML configuration](../../assets/operator-guide/reportportal-keycloak-6.png "Add SAML configuration")
+    ![Add SAML configuration](../../assets/operator-guide/project-management-and-reporting/reportportal-keycloak-6.png "Add SAML configuration")
 
     * _Provider name_ is the display name in the ReportPortal login page.
     * _Metadata URL_ `https://<keycloak_url>/auth/realms/<realm>/protocol/saml/descriptor`.
@@ -71,7 +71,7 @@ Follow the steps below to integrate the ReportPortal with Keycloak.
       By default, after the first login, ReportPortal creates the `<your_email>_personal` project and adds an account with the `Project manager` role.
     :::
 
-    ![Report portal login page](../../assets/operator-guide/reportportal-keycloak-7.png "Report portal login page")
+    ![Report portal login page](../../assets/operator-guide/project-management-and-reporting/reportportal-keycloak-7.png "Report portal login page")
 
 ## Related Articles
 

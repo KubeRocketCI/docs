@@ -1,0 +1,76 @@
+.tableWrapper {
+  overflow-x: auto;
+  border-radius: 0.25rem;
+}
+
+.table {
+  display: table;
+  border-collapse: collapse;
+  width: 100%;
+  border-radius: 0.25rem;
+  border: none;
+}
+
+.table th,
+.table td,
+.table tr {
+  border: none;
+}
+
+.table thead th {
+  color: var(--ifm-color-white);
+}
+
+.table thead th {
+  background-color: var(--kuberocket-color-primary-dark);
+}
+
+.table thead th:first-child {
+  background-color: var(--ifm-color-primary);
+}
+
+.table td,
+.table th {
+  padding: 1rem;
+  text-align: left;
+}
+
+.table th {
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.table td {
+  font-size: 0.875rem;
+}
+
+.table th:last-child,
+.table td:last-child {
+  width: 25%;
+  max-width: 25%;
+}
+
+.table th:nth-child(2),
+.table td:nth-child(2) {
+  min-width: 50%;
+  width: 50%;
+}
+
+.table td:last-child {
+  text-align: center;
+}
+
+.table .tableCellLabel {
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.table tr:nth-child(2n) {
+  background-color: initial;
+}
+
+.table .customBg {
+  background-color: var(--ifm-table-stripe-background);
+}

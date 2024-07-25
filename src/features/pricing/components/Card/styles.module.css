@@ -1,68 +1,119 @@
-.pricingCard {
+.root {
   display: flex;
   flex-direction: column;
   gap: 3.125rem;
-  border-radius: 0.625rem;
-  padding: 1.25rem;
+  border-radius: 0.25rem;
+  padding: 1.5rem;
   background-color: var(--kuberocket-card-color);
-  box-shadow: 0 0.75rem 3.125rem -0.75rem rgba(0, 0, 0, 0.25);
+  box-shadow: 0px 1px 10px 0px rgba(0, 36, 70, 0.12);
   height: 100%;
 }
 
-.pricingCardContent {
+.content {
   flex-grow: 1;
   display: flex;
   flex-direction: column;
-  gap: 1.25rem;
+  gap: 1rem;
 }
 
-.pricingCardFooter {
+.footer {
   margin-top: auto;
   display: flex;
   justify-content: center;
 }
 
-.pricingCardName {
-  font-size: 2rem;
-  font-weight: 300;
+.name {
+  font-size: 1.25rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
-.pricingCardPrice {
+.label {
+  font-size: 0.8125rem;
+  padding: 0 0.5rem;
+  color: var(--ifm-color-white);
+  border-radius: 1rem;
+}
+
+.price {
   font-size: 2.5rem;
-  font-weight: bold;
+  font-weight: 600;
   display: flex;
   align-items: flex-start;
   gap: 0.3125rem;
+  line-height: 1;
 }
 
-.pricingCardPrice span {
+.price span {
   font-size: 1rem;
 }
 
-.pricingCardDescription {
-  font-size: 1.0625rem;
+.description {
+  font-size: 0.75rem;
+  display: -webkit-box;
+  line-clamp: 3;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  line-height: 1.125rem;
+  min-height: 3.375rem;
 }
 
-.pricingCardFeatures {
-  padding-left: 1.25rem;
+.features {
+  padding-left: 0;
+  margin: 0;
 }
 
-.pricingCardFeature {
-  font-size: 1rem;
-  font-weight: 300;
-  line-height: 2.1875rem;
+.featuresDivider {
+  color: rgba(89, 109, 128, 1);
+  font-size: 0.625rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
-.pricingCardFeature::marker {
+.featuresDivider::before {
+  border-bottom: 1px dotted black;
+  content: '';
+  flex: 1;
+}
+
+.featuresDivider::after {
+  border-bottom: 1px dotted black;
+  content: '';
+  flex: 1;
+}
+
+.feature {
+  font-size: 0.75rem;
+  line-height: 1.125rem;
+}
+
+.featuresDuration {
+  font-size: 0.75rem;
+  color: rgba(89, 109, 128, 1);
+}
+
+.feature {
+  margin-bottom: 0.5rem;
+}
+
+.feature::marker {
   content: '';
 }
 
-.pricingCardFeatureMarker {
+.featureMarker {
   display: inline-block;
   width: 1.25rem;
 }
 
-.pricingCardFeatureMarker svg {
+.featureMarker svg {
   width: 1rem;
   height: 1rem;
+}
+
+.mainButton {
+  text-transform: uppercase;
 }

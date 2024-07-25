@@ -32,15 +32,15 @@ To create the Nexus `ci.user` and define repository parameters follow the steps 
 
 1. Open the Nexus UI and navigate to **Server administration and configuration** -> **Security** -> **User**. Click the `Create local user` button to create a new user:
 
-    ![Nexus user settings](../../assets/operator-guide/nexus-settings-user.png "Nexus user settings")
+    ![Nexus user settings](../../assets/operator-guide/artifacts-management/nexus-settings-user.png "Nexus user settings")
 
 2. Type the `ci-user` username, define an expiration period, and click the `Generate` button to create the token:
 
-    ![Nexus create user](../../assets/operator-guide/nexus-create-user.png "Nexus create user")
+    ![Nexus create user](../../assets/operator-guide/artifacts-management/nexus-create-user.png "Nexus create user")
 
 3. KubeRocketCI operates using a specific repository naming convention, where all repository names adhere to predefined standards. To align with this, navigate to **Server administration and configuration** -> **Repository** -> **Repositories** within Nexus. Here, repository creation is limited to those that match the required programming language, ensuring consistency and compliance with the KubeRocketCI framework.
 
-    ![Nexus repository list](../../assets/operator-guide/nexus-repository.png "Nexus repository list")
+    ![Nexus repository list](../../assets/operator-guide/artifacts-management/nexus-repository.png "Nexus repository list")
 
     <Tabs
       defaultValue="java"
@@ -106,9 +106,9 @@ To create the Nexus `ci.user` and define repository parameters follow the steps 
       {label: 'External Secrets Operator', value: 'externalsecret'},
     ]}>
     <TabItem value="portal">
-      Go to **EDP Portal** -> **EDP** -> **Configuration** -> **Nexus**. Update or fill in the **URL**, **nexus-user-id**, **nexus-user-password** and click the **Save** button:
+      Go to **Portal** -> **Configuration** -> **ARTIFACTS STORAGE** -> **NEXUS**. Update or click **+ ADD INTEGRATION** fill in the `URL`, `nexus-user-id`, `nexus-user-password` and click the `Save` button:
 
-      ![Nexus update manual secret](../../assets/operator-guide/nexus-secret-password.png "Nexus update manual secret")
+      ![Nexus update manual secret](../../assets/operator-guide/artifacts-management/nexus-secret-password.png "Nexus update manual secret")
     </TabItem>
     <TabItem value="manifests">
       ```yaml
@@ -137,9 +137,9 @@ To create the Nexus `ci.user` and define repository parameters follow the steps 
       },
       ```
 
-      Go to **EDP Portal** -> **EDP** -> **Configuration** -> **Nexus** and see `Managed by External Secret` message.
+      Go to **Portal** -> **Configuration** -> **ARTIFACTS STORAGE** -> **NEXUS** and see `Managed by External Secret` message.
 
-      ![Nexus managed by external secret operator](../../assets/operator-guide/nexus-externalsecret-password.png "Nexus managed by external secret operator")
+      ![Nexus managed by external secret operator](../../assets/operator-guide/artifacts-management/nexus-externalsecret-password.png "Nexus managed by external secret operator")
 
       More detail of External Secrets Operator Integration can found on [the following page](../secrets-management/external-secrets-operator-integration.md)
       </TabItem>

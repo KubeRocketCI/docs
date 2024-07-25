@@ -28,9 +28,9 @@ To install DependencyTrack use [KubeRocketCI addons](../add-ons-overview.md) app
 
 3. Click **+** in **API keys** to create token:
 
-    ![DependencyTrack settings](../../assets/operator-guide/dependency-track-token.png "DependencyTrack settings")
+    ![DependencyTrack settings](../../assets/operator-guide/devsecops/dependency-track-token.png "DependencyTrack settings")
 
-4. Provision secrets using manifest, EDP Portal, or with the externalSecrets operator:
+4. Provision secrets using a manifest, Portal, or with the externalSecrets operator:
 
 <Tabs
   defaultValue="portal"
@@ -41,9 +41,9 @@ To install DependencyTrack use [KubeRocketCI addons](../add-ons-overview.md) app
   ]}>
 
   <TabItem value="portal">
-  Go to the **Portal UI** open **EDP** -> **Configuration** -> **DependencyTrack** apply `Token` and `URL` click the `save` button.
+  Go to the **Portal** open **Configuration** -> **SECURITY** -> **DEPENDENCYTRACK**. Click **+ ADD INTEGRATION** fill fields `Quick Link URL`, `URL` and `Token` click the `save` button.
 
-  ![DependencyTrack update manual secret](../../assets/operator-guide/dependency-track-secret.png "DependencyTrack update manual secret")
+  ![DependencyTrack update manual secret](../../assets/operator-guide/devsecops/dependency-track-secret.png "DependencyTrack update manual secret")
   </TabItem>
 
   <TabItem value="manifests">
@@ -76,9 +76,9 @@ To install DependencyTrack use [KubeRocketCI addons](../add-ons-overview.md) app
   }
   ```
 
-  Go to the **Platform UI** open **EDP** -> **Configuration** -> **DependencyTrack** see the `Managed by External Secret`.
+  Go to the **Portal** open **Configuration** -> **SECURITY** -> **DEPENDENCYTRACK** see the secret managed by the `Managed by External Secret`.
 
-  ![DependencyTrack managed by external secret operator](../../assets/operator-guide/dependency-track-external-secret.png "DependencyTrack managed by external secret operator")
+  ![DependencyTrack managed by external secret operator](../../assets/operator-guide/devsecops/defectdojo-external-secret.png "DependencyTrack managed by external secret operator")
 
   More detail on External Secrets Operator Integration can be found on [the following page](../secrets-management/external-secrets-operator-integration.md)
   </TabItem>

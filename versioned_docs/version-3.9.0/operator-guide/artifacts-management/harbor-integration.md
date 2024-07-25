@@ -26,11 +26,11 @@ The process of creating new projects is the following:
 1. Log in to the Harbor console using your credentials.
 2. Navigate to the **Projects** menu, click the **New Project** button:
 
-    ![Harbor Console](../../assets/operator-guide/harbor-console-projects.png "Projects menu")
+    ![Harbor Console](../../assets/operator-guide/artifacts-management/harbor-console-projects.png "Projects menu")
 
 3. On the **New Project** menu, enter a project name that matches your platform namespace in the **Project Name** field. Keep other fields as default and click **OK** to continue:
 
-    ![New Project](../../assets/operator-guide/harbor-new-project.png "New Project menu")
+    ![New Project](../../assets/operator-guide/artifacts-management/harbor-new-project.png "New Project menu")
 
 ### Set Up Robot Account
 
@@ -38,7 +38,7 @@ To facilitate seamless interaction between KubeRocketCI and a Harbor project, it
 
 1. Navigate to your newly created project, select **Robot Accounts** menu and choose **New Robot Account**:
 
-    ![New Project](../../assets/operator-guide/harbor-robot-accounts-menu.png "Create Robot Account menu")
+    ![New Project](../../assets/operator-guide/artifacts-management/harbor-robot-accounts-menu.png "Create Robot Account menu")
 
 2. In the pop-up window, fill in the fields as follows:
 
@@ -49,11 +49,11 @@ To facilitate seamless interaction between KubeRocketCI and a Harbor project, it
 
     To proceed, click the **ADD** button:
 
-    ![New Project](../../assets/operator-guide/harbor-create-robot-account.png "Robot Accounts menu")
+    ![New Project](../../assets/operator-guide/artifacts-management/harbor-create-robot-account.png "Robot Accounts menu")
 
 3. In the appeared window, copy the robot account credentials or click the **Export to file** button to save the secret and account name locally:
 
-    ![New Project](../../assets/operator-guide/harbor-new-credentials-of-robot-account.png "New credentials for Robot Account")
+    ![New Project](../../assets/operator-guide/artifacts-management/harbor-new-credentials-of-robot-account.png "New credentials for Robot Account")
 
 4. Provision the **kaniko-docker-config** secrets using kubectl, UI Portal or with the externalSecrets operator:
 
@@ -72,9 +72,9 @@ To facilitate seamless interaction between KubeRocketCI and a Harbor project, it
       ]}>
 
       <TabItem value="portal">
-      Navigate to **EDP** -> **Configuration** -> **Registry**. Fill in the required fields and click `Save`.
+      Navigate to **Portal** -> **Configuration** -> **ARTIFACTS STORAGE** -> **Registry**. Update or click **+ ADD INTEGRATION** fill in the required fields and click `Save`.
 
-      ![Registry update manual secret](../../assets/operator-guide/regcred-secret.png "Registry update manual secret")
+      ![Registry update manual secret](../../assets/operator-guide/artifacts-management/regcred-secret.png "Registry update manual secret")
       </TabItem>
 
       <TabItem value="manifests">
@@ -115,9 +115,9 @@ To facilitate seamless interaction between KubeRocketCI and a Harbor project, it
         }
       ```
 
-      Navigate to **EDP** -> **Configuration** -> **Registry**. Here, you will observe the `Managed by ExternalSecret` message:
+      Navigate to **Portal** -> **Configuration** -> **ARTIFACTS STORAGE** -> **Registry**. Here, you will observe the `Managed by ExternalSecret` message:
 
-      ![Registry managed by external secret operator](../../assets/operator-guide/kaniko-secret.png "Registry managed by external secret operator")
+      ![Registry managed by external secret operator](../../assets/operator-guide/artifacts-management/kaniko-secret.png "Registry managed by external secret operator")
 
       :::note
         More details of External Secrets Operator Integration can be found in the [External Secrets Operator Integration](../secrets-management/external-secrets-operator-integration.md) page.
@@ -150,9 +150,9 @@ To facilitate seamless interaction between KubeRocketCI and a Harbor project, it
       ]}>
 
       <TabItem value="portal">
-      Navigate to **EDP** -> **Configuration** -> **Registry**. Fill in the required fields and click `Save`.
+      Navigate to **Portal** -> **Configuration** -> **ARTIFACTS STORAGE** -> **Registry**. Update or click **+ ADD INTEGRATION** fill in the required fields and click `Save`.
 
-      ![Registry update manual secret](../../assets/operator-guide/regcred-externalsecret.png "Registry update manual secret")
+      ![Registry update manual secret](../../assets/operator-guide/artifacts-management/regcred-externalsecret.png "Registry update manual secret")
       </TabItem>
 
       <TabItem value="manifests">
@@ -193,9 +193,9 @@ To facilitate seamless interaction between KubeRocketCI and a Harbor project, it
         }
       ```
 
-      Navigate to **EDP** -> **Configuration** -> **Registry**. Here, you will observe the `Managed by ExternalSecret` message:
+      Navigate to **Portal** -> **Configuration** -> **ARTIFACTS STORAGE** -> **Registry**. Here, you will observe the `Managed by ExternalSecret` message:
 
-      ![Registry managed by external secret operator](../../assets/operator-guide/kaniko-externalsecret.png "Registry managed by external secret operator")
+      ![Registry managed by external secret operator](../../assets/operator-guide/artifacts-management/kaniko-externalsecret.png "Registry managed by external secret operator")
 
       :::note
         More details of External Secrets Operator Integration can be found in the [External Secrets Operator Integration](../secrets-management/external-secrets-operator-integration.md) page.

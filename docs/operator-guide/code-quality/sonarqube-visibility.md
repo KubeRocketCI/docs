@@ -12,7 +12,7 @@ In its default configuration, SonarQube does not restrict access to newly create
 
 2. Navigate to the `Administration` tab:
 
-    ![SonarQube user settings](../../assets/operator-guide/sonar_administration.png "SonarQube user settings")
+    ![SonarQube user settings](../../assets/operator-guide/code-quality/sonar_administration.png "SonarQube user settings")
 
     :::note
       Ensure you have admin rights to see the `Administration` section.
@@ -20,15 +20,15 @@ In its default configuration, SonarQube does not restrict access to newly create
 
 3. Click the `Projects` button and select `Management`:
 
-    ![SonarQube user settings](../../assets/operator-guide/sonar_projects_management.png "SonarQube user settings")
+    ![SonarQube user settings](../../assets/operator-guide/code-quality/sonar_projects_management.png "SonarQube user settings")
 
 4. On the project management page, click pencil icon at the top-right corner::
 
-    ![SonarQube user settings](../../assets/operator-guide/sonar_pencil.png "SonarQube user settings")
+    ![SonarQube user settings](../../assets/operator-guide/code-quality/sonar_pencil.png "SonarQube user settings")
 
 5. Select **Private** and click **Change Default Visibility**:
 
-    ![SonarQube user settings](../../assets/operator-guide/sonar_private_visibility.png "SonarQube user settings")
+    ![SonarQube user settings](../../assets/operator-guide/code-quality/sonar_private_visibility.png "SonarQube user settings")
 
 ## Configure Access for Existing Projects
 
@@ -38,11 +38,11 @@ To make all the current projects private, follow the steps below:
 
 2. In the project page, click the **Project Settings** button and select **Permissions**:
 
-    ![SonarQube user settings](../../assets/operator-guide/sonar_project_permissions.png "SonarQube user settings")
+    ![SonarQube user settings](../../assets/operator-guide/code-quality/sonar_project_permissions.png "SonarQube user settings")
 
 3. In the project permissions page, select **Private**:
 
-    ![SonarQube user settings](../../assets/operator-guide/sonar_project_private_permissions.png "SonarQube user settings")
+    ![SonarQube user settings](../../assets/operator-guide/code-quality/sonar_project_private_permissions.png "SonarQube user settings")
 
 4. Repeat the procedure for all of the projects you want to make private.
 

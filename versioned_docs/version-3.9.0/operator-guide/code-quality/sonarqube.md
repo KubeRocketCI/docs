@@ -29,17 +29,17 @@ To establish robust authentication and precise access control, generating a Sona
 
 1. Open the SonarQube UI and navigate to **Administration** -> **Security** -> **User**. Create a new user or select an existing one. Click the `Options List` icon to create a token:
 
-    ![SonarQube user settings](../../assets/operator-guide/sonar-create-user.png "SonarQube user settings")
+    ![SonarQube user settings](../../assets/operator-guide/code-quality/sonar-create-user.png "SonarQube user settings")
 
 2. Type the `ci-user` username, define an expiration period, and click the `Generate` button to create the token:
 
-    ![SonarQube create token](../../assets/operator-guide/sonar-generate-token.png "SonarQube create token")
+    ![SonarQube create token](../../assets/operator-guide/code-quality/sonar-generate-token.png "SonarQube create token")
 
 3. Click the `Copy` button to copy the generated `<Sonarqube-token>`:
 
-    ![SonarQube token](../../assets/operator-guide/sonar-copy-token.png "SonarQube token")
+    ![SonarQube token](../../assets/operator-guide/code-quality/sonar-copy-token.png "SonarQube token")
 
-4. Provision secrets using Manifest, UI Portal or with the externalSecrets operator:
+4. Provision secrets using Manifest, KubeRocketCI portal or with the externalSecrets operator:
 
 <Tabs
   defaultValue="portal"
@@ -50,9 +50,9 @@ To establish robust authentication and precise access control, generating a Sona
   ]}>
 
   <TabItem value="portal">
-  Go to **EDP Portal** -> **EDP** -> **Configuration** -> **SonarQube**. Update or fill in the **URL** and **Token** fields and click the **Save** button:
+  Go to the **Portal** open **Configuration** -> **CODE QUALITY** -> **SONARQUBE**. Update or click **+ ADD INTEGRATION** fill in the `URL` and `Token` fields and click the `Save` button:
 
-  ![SonarQube update manual secret](../../assets/operator-guide/sonar-secret-password.png "SonarQube update manual secret")
+  ![SonarQube update manual secret](../../assets/operator-guide/code-quality/sonar-secret-password.png "SonarQube update manual secret")
   </TabItem>
 
   <TabItem value="manifests">
@@ -84,11 +84,11 @@ To establish robust authentication and precise access control, generating a Sona
   },
   ```
 
-  Go to **EDP Portal** -> **EDP** -> **Configuration** -> **SonarQube** and see the `Managed by External Secret` message:
+  Go to the **Portal** open **Configuration** -> **CODE QUALITY** -> **SONARQUBE** and see the `Managed by External Secret` message:
 
-  ![SonarQube managed by external secret operator](../../assets/operator-guide/sonar-externalsecret-password.png "SonarQube managed by external secret operator")
+  ![SonarQube managed by external secret operator](../../assets/operator-guide/code-quality/sonar-externalsecret-password.png "SonarQube managed by external secret operator")
 
-  More details about External Secrets Operator integration can be found in the [External Secrets Operator Integration](https://epam.github.io/edp-install/operator-guide/external-secrets-operator-integration/) page.
+  More details about External Secrets Operator integration can be found in the [External Secrets Operator Integration](https://epam.github.io/edp-install/operator-guide/code-quality/external-secrets-operator-integration/) page.
   </TabItem>
 
 </Tabs>

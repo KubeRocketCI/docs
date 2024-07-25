@@ -228,7 +228,7 @@ To prepare DefectDojo for integration with KubeRocketCI, follow the steps below:
 
     * Create new user with write permission:
 
-      ![DefectDojo update manual secret](../../assets/operator-guide/defectdojo-createuser.png "DefectDojo set user permission")
+      ![DefectDojo update manual secret](../../assets/operator-guide/devsecops/defectdojo-createuser.png "DefectDojo set user permission")
 
 2. Get a token of the DefectDojo user:
 
@@ -238,19 +238,19 @@ To prepare DefectDojo for integration with KubeRocketCI, follow the steps below:
 
     * Copy the API key.
 
-3. Provision the secret using `UI Portal`, `Manifest` or with the `externalSecrets` operator:
+3. Provision the secret using `Portal UI`, `Manifest` or with the `externalSecrets` operator:
 
     <Tabs
-      defaultValue="edp-portal"
+      defaultValue="portal"
       values={[
-        {label: 'EDP Portal', value: 'edp-portal'},
+        {label: 'UI Portal', value: 'portal'},
         {label: 'Manifest', value: 'manifest'},
         {label: 'External Secrets Operator', value: 'eso'}
       ]}>
-      <TabItem value="edp-portal">
-      Go to **EDP Portal** -> **EDP** -> **Configuration** -> **DefectDojo**. Update or fill in the **URL** and **Token** and click the **Save** button.
+      <TabItem value="portal">
+      Go to the **Portal** open **Configuration** -> **SECURITY** -> **DEFECTDOJO**. Update or click **+ ADD INTEGRATION** fill fields `Quick Link URL`, `URL` and `Token` click the `save` button.
 
-      ![DefectDojo update manual secret](../../assets/operator-guide/defectdojo-token.png "DefectDojo update manual secret")
+      ![DefectDojo update manual secret](../../assets/operator-guide/devsecops/defectdojo-token.png "DefectDojo update manual secret")
       </TabItem>
 
       <TabItem value="manifest">
@@ -280,7 +280,9 @@ To prepare DefectDojo for integration with KubeRocketCI, follow the steps below:
       }
       ```
 
-      Go to **EDP Portal** -> **EDP** -> **Configuration** -> **DefectDojo** and see the `Managed by External Secret` message.
+      Go to the **Portal** open **Configuration** -> **SECURITY** -> **DefectDojo** and see the `Managed by External Secret` message.
+
+      ![DefectDojo managed by external secret operator](../../assets/operator-guide/devsecops/defectdojo-external-secret.png "DefectDojo managed by external secret operator")
 
       More details about the External Secrets Operator integration procedure can be found in the [External Secrets Operator Integration](../secrets-management/external-secrets-operator-integration.md) page.
       </TabItem>

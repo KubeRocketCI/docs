@@ -1,16 +1,16 @@
 import Heading from '@theme/Heading';
 import styles from './styles.module.css';
-import { featuresList } from '../../constants';
+import { useCasesList } from '../../constants';
 import clsx from 'clsx';
 import Link from '@docusaurus/Link';
 
-export const Features = () => {
+export const UseCases = () => {
   return (
     <main className={styles.sectionWrapper}>
       <div className="container">
         <div className="row">
-          {featuresList.map(({ link, title, description, Svg }, idx) => (
-            <div key={`feature:${idx}`} className={clsx('col col--4', styles.gridItem)}>
+          {useCasesList.map(({ link, title, description, Svg }, idx) => (
+            <div key={`feature:${idx}`} className={clsx('col col--6', styles.gridItem)}>
               <Link href={link} className={styles.root}>
                 <div className={styles.header}>
                   <Svg className={styles.icon} role="img" />

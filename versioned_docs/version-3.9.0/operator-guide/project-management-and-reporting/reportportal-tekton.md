@@ -6,7 +6,7 @@ For integration, take the following steps:
 
 1. Log in to the ReportPortal console and navigate to the **User Profile** menu:
 
-    ![ReportPortal profile](../../assets/operator-guide/report-portal-profile.png "ReportPortal profile")
+    ![ReportPortal profile](../../assets/operator-guide/project-management-and-reporting/report-portal-profile.png "ReportPortal profile")
 
 2. Copy the **Access token** and use it as a value while creating a kubernetes secret for the ReportPortal credentials:
 
@@ -123,11 +123,11 @@ For integration, take the following steps:
 
 7. Launch your Tekton pipeline and check that the custom task has been successfully executed:
 
-    ![Tekton task successfully executed](../../assets/operator-guide/tekton-task-success.png "Tekton task successfully executed")
+    ![Tekton task successfully executed](../../assets/operator-guide/project-management-and-reporting/tekton-task-success.png "Tekton task successfully executed")
 
 8. Test reports will be displayed in the **Launches** section of the ReportPortal:
 
-    ![Test report results](../../assets/operator-guide/report-portal-results.png "Test report results")
+    ![Test report results](../../assets/operator-guide/project-management-and-reporting/report-portal-results.png "Test report results")
 
 ## Related Articles
 

@@ -1,29 +1,36 @@
 # Deploy Application With Custom Build Tool/Framework
 
-This use case outlines the steps for adding custom Tekton libraries that contain pipelines with tasks. It also covers the process of modifying custom pipelines and tasks.
+This use case demonstrates how to implement custom CI/CD pipelines within the KubeRocketCI platform to address project-specific requirements.
+KubeRocketCI extends this capability by supporting the **customization** of Applications (Components) and Tekton pipelines, allowing teams to integrate and develop functionalities or services not readily available on the platform.
 
 ## Goals
 
-- Add custom Tekton pipeline library;
-- Modify existing pipelines and tasks in a custom Tekton library.
+- Incorporate and manage custom Tekton pipeline libraries that addresses project requirements.
+- Modify existing pipelines and tasks within these libraries to align with specific developmental goals and introduce novel functionalities.
+- Facilitate a swift setup and implementation process, enabling teams to focus on development without being hindered by platform limitations.
 
 ## Preconditions
 
-- KubeRocketCI instance with GitHub and Tekton inside is [configured](../operator-guide/prerequisites.md);
+- KubeRocketCI instance with GitHub and Tekton is [configured](../operator-guide/prerequisites.md);
 - Developer has access to the KubeRocketCI instances using the Single-Sign-On approach;
-- Developer has the `Administrator` role to perform merge in GitHub.
+- Developer has `Write` permissions for GitHub repository to merge the code.
 
 ## Scenario
 
-:::note
-  This case is based on our predefined repository and application. Your case may be different.
-:::
+To streamline the process of implementing custom logic within the KubeRocketCI platform, follow this scenario:
 
-To create and then modify a custom Tekton library, please follow the steps below:
+- Add Custom Application: Begin by adding your application to the KubeRocketCI platform.
+- Add Custom Tekton Library: Create and add a custom Tekton library designed to implement the CI/CD logic required by your application.
+- Validate the Implementation: After setting up your Application and Tekton library, conduct testing to ensure that the pipelines execute as intended.
 
 ### Add Custom Application to KubeRocketCI
 
-1. Open the KubeRocketCI. Use the Sign-In option:
+:::tip
+  A `Custom Application` refers to any application that utilizes a programming language, framework, or build tool not natively supported by the platform, or an existing application that necessitates specific customizations to its pipeline.
+  This encompasses scenarios where the default pipeline configurations and toolchains are unable to meet the unique requirements of the application, thereby requiring the development and integration of tailored solutions.
+:::
+
+1. Open the KubeRocketCI portal. Use the **Sign-In** option:
 
     ![Logging Page](../assets/use-cases/general/login.png "Logging Screen")
 
@@ -31,15 +38,15 @@ To create and then modify a custom Tekton library, please follow the steps below
 
     ![Settings](../assets/use-cases/tekton-custom/cluster-settings.png "Cluster Settings")
 
-3. Select the **Components** tab and push the create **+CREATE COMPONENT** button:
+3. Select the **Components** tab and push the create **+ CREATE COMPONENT** button:
 
     ![Components Overview](../assets/use-cases/tekton-custom/components.png "Components Overview")
 
-4. Select the `Application` codebase type because is meant to be delivered as a container and deployed inside the Kubernetes cluster. Click **Next** button.
+4. Choose the `Application` type since it is intended for containerization and deployment within a Kubernetes cluster. Click the **Next** button.
 
     ![Create Application Menu](../assets/use-cases/tekton-custom/tekton-custom01.png "Create Application Menu")
 
-5. Choose the `Clone` strategy:
+5. Choose the `Clone` strategy, since we are cloning the application from the existing repository:
 
     ![Clone Project](../assets/use-cases/tekton-custom/tekton-custom02.png "Clone Project")
 
@@ -55,19 +62,6 @@ To create and then modify a custom Tekton library, please follow the steps below
 
     ![Application Menu](../assets/use-cases/tekton-custom/tekton-custom03.png "Application Menu")
 
-    :::note
-      These application details are required to match the Pipeline name `github-shell-go-app-build-default`.
-
-      The PipelineRun name is formed with the help of TriggerTemplates in `pipelines-library` so the Pipeline name should correspond to the following structure:
-
-      ```yaml
-      pipelineRef:
-        name: github-$(tt.params.buildtool)-$(tt.params.framework)-$(tt.params.cbtype)-build-$(tt.params.versioning-type)
-      ```
-
-      The PipelineRun is created as soon as GitHub (or, if configured GitLab) sends a payload during Merge Request events.
-    :::
-
 7. In the **Advances Settings** tab, define the below values and click the **Create** button:
 
     - Default branch: `main`
@@ -80,9 +74,27 @@ To create and then modify a custom Tekton library, please follow the steps below
 
     Now that the application is successfully created, proceed to adding the Tekton library to the KubeRocketCI platform.
 
+:::warning
+  It's important to align with the Tekton Pipeline name to ensure correct pipeline execution for review and build events.
+
+  The name for PipelineRun is dynamically generated via `TriggerTemplates` located in the [pipelines-library](https://github.com/epam/edp-tekton/tree/master/charts/pipelines-library/templates/triggers) and aligned to the structure provided below:
+
+  ```yaml
+  pipelineRef:
+    name: github-$(tt.params.buildtool)-$(tt.params.framework)-$(tt.params.cbtype)-build-$(tt.params.versioning-type)
+  ```
+
+  This naming convention facilitates the automatic creation of PipelineRun instances in response to payload from GitHub during Merge Request events.
+  Ensure that the Pipeline name matches this structure to enable the correct triggering of pipeline executions.
+
+  In our case, the build pipeline name should be `github-shell-go-app-build-edp`
+:::
+
 ### Add Tekton Library
 
-1. Select the **Components** tab and push the create **+CREATE COMPONENT** button:
+KubeRocketCI allows for the creation of custom Tekton libraries to address specific project requirements. This feature enables the modification of existing pipelines and tasks to align with the unique needs of the application.
+
+1. Select the **Components** tab and push the create **+ CREATE COMPONENT** button:
 
     ![Components Overview](../assets/use-cases/tekton-custom/tekton-custom05.png "Components tab")
 
@@ -121,10 +133,12 @@ To create and then modify a custom Tekton library, please follow the steps below
 
     ![Components overview page](../assets/use-cases/tekton-custom/tekton-custom10.png "Codebase status")
 
+You have successfully added the custom Tekton library to the KubeRocketCI platform and are now ready to modify the Tekton pipeline to align with the specific requirements of your custom application.
+
 ### Modify Tekton Pipeline
 
 :::info
-  Our recommendation is to avoid modifying the default Tekton resources. Instead, we suggest creating and modifying your own custom Tekton library.
+  We strongly advise against altering the platform's default Tekton resources. To ensure seamless upgrades and maintain custom functionality, it is recommended to develop and manage your custom pipelines within a dedicated Custom Tekton Library. This approach safeguards your customizations and facilitates a smoother update process.
 :::
 
 Now that the Tekton Helm library is created, it is time to clone, modify and then apply it to the Kubernetes cluster.
@@ -140,7 +154,6 @@ Now that the Tekton Helm library is created, it is time to clone, modify and the
 3. Clone the repository with `SSH` using **Code** button:
 
     ![Create branch in GitHub](../assets/use-cases/tekton-custom/tekton-custom13.png "Create branch in GitHub")
-
 
 4. Examine the repository structure. It should look this way by default:
 
@@ -177,18 +190,18 @@ Now that the Tekton Helm library is created, it is time to clone, modify and the
     ```
 
     :::note
-      Change the values in the `values.yaml` file.
+      Update the values in the `values.yaml` file.
 
       The `gitProvider` parameter is the git hosting provider, GitHub and GitLab in this example.
 
-      The [dnsWildCard](https://github.com/epam/edp-install/blob/v3.9.0/deploy-templates/values.yaml#L10) parameter is the cluster DNS address.
+      The [dnsWildCard](https://github.com/epam/edp-install/blob/v3.9.0/deploy-templates/values.yaml#L10) parameter is the platform address.
     :::
 
-    :::note
-      Our custom Helm chart includes [edp-tekton-common-library](https://github.com/epam/edp-tekton/blob/master/charts/common-library/Chart.yaml) dependencies in the `Chart.yaml` file. This library allows to use our predefined code snippets.
+    :::tip
+      The Helm chart incorporates dependencies from the [edp-tekton-common-library](https://github.com/epam/edp-tekton/blob/master/charts/common-library/Chart.yaml) within the `Chart.yaml` file. Leveraging this library enables the utilization of predefined code snippets, facilitating a more streamlined and efficient pipeline creation process.
     :::
 
-    Here is an example of the filled in `values.yaml` file:
+    Below is a sample configuration for the `values.yaml` file:
 
     ```yaml
     nameOverride: ""
@@ -202,7 +215,8 @@ Now that the Tekton Helm library is created, it is time to clone, modify and the
 
 5. Modify and add tasks or pipelines.
 
-    As an example, let's assume that we need to add the `helm-lint` pipeline task to the review pipeline. To implement this, insert the code below to the [github-review.yaml](https://github.com/epmd-edp/helm-helm-pipeline/blob/master/templates/pipelines/hello-world/github-review.yaml#L66) file underneath the hello task:
+    Consider the scenario where it's necessary to incorporate the `helm-lint` task into the review pipeline.
+    To achieve this, append the following code snippet to the `github-review.yaml` file, specifically below the `hello` task, located here: [github-review.yaml](https://github.com/epmd-edp/helm-helm-pipeline/blob/master/templates/pipelines/hello-world/github-review.yaml#L66):
 
     ```yaml
     - name: hello
@@ -236,18 +250,18 @@ Now that the Tekton Helm library is created, it is time to clone, modify and the
     ```
 
     :::note
-      The `helm-lint` task references to the default `pipeline-library` Helm chart which is applied to the cluster during EDP installation.
+      The `helm-lint` task references to the default `pipeline-library` Helm chart which is deployed to the cluster as part of the KubeRocketCI setup process.
 
-      The `runAfter` parameter shows that this Pipeline task will be run after the `hello` pipeline task.
+      The `runAfter` parameter indicates the execution sequence, specifying that the `helm-lint` task is scheduled to run subsequent to the completion of the `hello` task.
     :::
 
-6. Build Helm dependencies in the custom chart:
+6. Update Helm dependencies in the custom chart:
 
     ```bash
     helm dependency update .
     ```
 
-7. Ensure that the chart is valid and all the indentations are fine:
+7. Ensure that the chart is valid by running the following command:
 
     ```bash
     helm lint .
@@ -259,7 +273,7 @@ Now that the Tekton Helm library is created, it is time to clone, modify and the
     helm template .
     ```
 
-8.  Install the custom chart with the command below. You can also use the `--dry-run` flag to simulate the chart installation and catch possible errors:
+8. Install the custom chart with the command below. You can also use the `--dry-run` flag to simulate the chart installation and catch possible errors:
 
     ```bash
     helm upgrade --install edp-tekton-custom . -n edp --dry-run
@@ -269,7 +283,7 @@ Now that the Tekton Helm library is created, it is time to clone, modify and the
     helm upgrade --install edp-tekton-custom . -n edp
     ```
 
-9.  Check the created pipelines and tasks in the cluster:
+9. Check the created pipelines and tasks in the cluster:
 
     ```bash
     kubectl get tasks -n edp
@@ -338,11 +352,7 @@ Perform the below steps to merge new code (Merge Request) that passes the Code R
 
     ![Merge Pull Request](../assets/use-cases/tekton-custom/tekton-custom22.png)
 
-    :::note
-      If the build is added and configured, push steps in the pipeline, it will produce a new version of artifact, which will be available for the deployment in EDP Portal.
-    :::
-
-8.  Check the pipelines in the KubeRocketCI dashboard:
+8. Check the pipelines in the KubeRocketCI dashboard:
 
     ![Explore Build Pipeline](../assets/use-cases/tekton-custom/tekton-custom23.png "Explore Build Pipeline")
 
@@ -350,7 +360,7 @@ Under the hood, the following process takes place:
 
 1. GitHub sends a payload to the Tekton EventListener when a Merge Request event occurs.
 2. The EventListener captures the payload with the assistance of an Interceptor.
-3. The TriggerTemplate is responsible for creating a PipelineRun.
+3. The TriggerTemplate creates a PipelineRun.
 
 The detailed scheme is shown below:
 
@@ -364,4 +374,4 @@ This chart will be using the core of `common-library` and `pipelines-library` an
 ## Related Articles
 
 - [Tekton Overview](../operator-guide/ci/tekton-overview.md)
-- [Add Application using EDP Portal](../user-guide/add-application.md)
+- [Add Application using KubeRocketCI Portal](../user-guide/add-application.md)

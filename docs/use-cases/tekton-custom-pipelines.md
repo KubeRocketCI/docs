@@ -9,9 +9,9 @@ This use case outlines the steps for adding custom Tekton libraries that contain
 
 ## Preconditions
 
-- KubeRocketCI instance with Gerrit and Tekton inside is [configured](../operator-guide/prerequisites.md);
+- KubeRocketCI instance with GitHub and Tekton inside is [configured](../operator-guide/prerequisites.md);
 - Developer has access to the KubeRocketCI instances using the Single-Sign-On approach;
-- Developer has the `Administrator` role to perform merge in Gerrit.
+- Developer has the `Administrator` role to perform merge in GitHub.
 
 ## Scenario
 
@@ -23,96 +23,101 @@ To create and then modify a custom Tekton library, please follow the steps below
 
 ### Add Custom Application to KubeRocketCI
 
-1. Open the UI Portal. Use the Sign-In option:
+1. Open the KubeRocketCI. Use the Sign-In option:
 
-    ![Logging Page](../assets/use-cases/general/login.png "Logging screen")
+    ![Logging Page](../assets/use-cases/general/login.png "Logging Screen")
 
-2. In the top right corner, enter the `Cluster settings` and ensure that both `Default namespace` and `Allowed namespace` are set:
+2. In the top right corner, enter the `Account settings` and ensure that both `Default namespace` and `Allowed namespace` are set:
 
-    ![Settings](../assets/use-cases/tekton-custom/cluster-settings.png "Cluster settings")
+    ![Settings](../assets/use-cases/tekton-custom/cluster-settings.png "Cluster Settings")
 
-3. Create the new `Codebase` with the `Application` type using the `Clone` strategy. To do this, click the EDP tab:
+3. Select the **Components** tab and push the create **+CREATE COMPONENT** button:
 
-    ![Cluster Overview](../assets/use-cases/tekton-custom/cluster-overview.png "Cluster overview")
+    ![Components Overview](../assets/use-cases/tekton-custom/components.png "Components Overview")
 
-4. Select the `Components` section under the EDP tab and push the create `+` button:
+4. Select the `Application` codebase type because is meant to be delivered as a container and deployed inside the Kubernetes cluster. Click **Next** button.
 
-    ![Components Overview](../assets/use-cases/tekton-custom/components.png "Components tab")
+    ![Create Application Menu](../assets/use-cases/tekton-custom/tekton-custom01.png "Create Application Menu")
 
-5. Select the `Application` codebase type because is meant to be delivered as a container and deployed inside the Kubernetes cluster. Choose the `Clone` strategy and this example [repository](https://github.com/epmd-edp/go-go-beego.git):
+5. Choose the `Clone` strategy:
 
-    ![Codebase Info](../assets/use-cases/tekton-custom/tekton-custom01.png "Step codebase info")
+    ![Clone Project](../assets/use-cases/tekton-custom/tekton-custom02.png "Clone Project")
 
-6. In the Application Info tab, define the following values and click the `Proceed` button:
+6. In the **Add component info** tab, define the following values and click the **Proceed** button:
 
-    - Application name: `tekton-hello-world`
-    - Default branch: `master`
+    - Repository URL: `https://github.com/epmd-edp/go-go-beego.git`
+    - Repository name: `tekton-hello-world`
+    - Component name: `tekton-hello-world`
+    - Description: `tekton-hello-world`
     - Application code language: `Other`
     - Language version/framework: `go`
     - Build tool: `shell`
 
-    ![Application Info](../assets/use-cases/tekton-custom/tekton-custom02.png "Application info")
+    ![Application Menu](../assets/use-cases/tekton-custom/tekton-custom03.png "Application Menu")
 
     :::note
-      These application details are required to match the Pipeline name `gerrit-shell-go-app-build-default`.
+      These application details are required to match the Pipeline name `github-shell-go-app-build-default`.
 
       The PipelineRun name is formed with the help of TriggerTemplates in `pipelines-library` so the Pipeline name should correspond to the following structure:
 
       ```yaml
       pipelineRef:
-        name: gerrit-$(tt.params.buildtool)-$(tt.params.framework)-$(tt.params.cbtype)-build-$(tt.params.versioning-type)
+        name: github-$(tt.params.buildtool)-$(tt.params.framework)-$(tt.params.cbtype)-build-$(tt.params.versioning-type)
       ```
 
-      The PipelineRun is created as soon as Gerrit (or, if configured, GitHub, GitLab) sends a payload during Merge Request events.
+      The PipelineRun is created as soon as GitHub (or, if configured GitLab) sends a payload during Merge Request events.
     :::
 
-7. In the `Advances Settings` tab, define the below values and click the `Apply` button:
+7. In the **Advances Settings** tab, define the below values and click the **Create** button:
 
-    - CI tool: `Tekton`
-    - Codebase versioning type: `default`
+    - Default branch: `main`
+    - Codebase versioning type: `edp`
     - Leave `Specify the pattern to validate a commit message` empty.
 
-    ![Advanced Settings](../assets/use-cases/tekton-custom/tekton-custom03.png "Advanced settings")
+    ![Application Menu](../assets/use-cases/tekton-custom/tekton-custom04.png "Application Menu")
 
-8. Check the application status. It should be green:
+8. Check the application status. It should be green.
 
-    ![Components overview page](../assets/use-cases/tekton-custom/tekton-custom04.png "Application status")
-
-Now that the application is successfully created, proceed to adding the Tekton library to the KubeRocketCI platform.
+    Now that the application is successfully created, proceed to adding the Tekton library to the KubeRocketCI platform.
 
 ### Add Tekton Library
 
-1. Select the `Components` section under the EDP tab and push the create `+` button:
+1. Select the **Components** tab and push the create **+CREATE COMPONENT** button:
 
-    ![Components Overview](../assets/use-cases/tekton-custom/tekton-custom04.png "Components tab")
+    ![Components Overview](../assets/use-cases/tekton-custom/tekton-custom05.png "Components tab")
 
-2. Create a new Codebase with the `Library` type using the `Create` strategy:
+2. Create a new Codebase with the `Library` type:
 
-    ![Codebase Info](../assets/use-cases/tekton-custom/tekton-custom08.png "Step codebase info")
+    ![Create Library](../assets/use-cases/tekton-custom/tekton-custom06.png "Create Library")
+
+3. Select **Create from template** and click **Create** button:
+
+    ![Create From Template](../assets/use-cases/tekton-custom/tekton-custom07.png "Create From Template")
 
     :::note
       The KubeRocketCI `Create` strategy will automatically pull the code for the Tekton Helm application from [the template](https://github.com/epmd-edp/helm-helm-pipeline.git).
     :::
 
-3. In the Application Info tab, define the following values and click the `Proceed` button:
+4. In the Application Info tab, define the following values and click the `Proceed` button:
 
-    - Application name: `custom-tekton-chart`
-    - Default branch: `master`
+    - Repository name: `custom-tekton-chart`
+    - Component name: `custom-tekton-chart`
+    - Description: `custom-tekton-chart`
     - Application code language: `Helm`
     - Language version/framework: `Pipeline`
     - Build tool: `Helm`
 
-    ![Codebase Info](../assets/use-cases/tekton-custom/tekton-custom09.png "Step codebase info")
+    ![Codebase Info](../assets/use-cases/tekton-custom/tekton-custom08.png "Step codebase info")
 
-4. In the `Advances Settings` tab, define the below values and click the `Apply` button:
+5. In the `Advances Settings` tab, define the below values and click the `Apply` button:
 
-    - CI tool: `Tekton`
-    - Codebase versioning type: `default`
+    - Default branch: `main`
+    - Codebase versioning type: `edp`
     - Leave `Specify the pattern to validate a commit message` empty.
 
-    ![Advanced Settings](../assets/use-cases/tekton-custom/tekton-custom03.png "Advanced settings")
+    ![Advanced Settings](../assets/use-cases/tekton-custom/tekton-custom09.png "Advanced settings")
 
-5. Check the codebase status:
+6. Check the codebases status:
 
     ![Components overview page](../assets/use-cases/tekton-custom/tekton-custom10.png "Codebase status")
 
@@ -124,32 +129,20 @@ Now that the application is successfully created, proceed to adding the Tekton l
 
 Now that the Tekton Helm library is created, it is time to clone, modify and then apply it to the Kubernetes cluster.
 
-1. Generate SSH key to work with Gerrit repositories:
+1. In the Components tab, click one of the `custom-tekton-chart` to enter the application menu:
 
-    ```bash
-    ssh-keygen -t ed25519 -C "your_email@example.com"
-    ```
+    ![Components overview page](../assets/use-cases/tekton-custom/tekton-custom11.png "Codebase status")
 
-2. Log into Gerrit UI.
+2. Navigate to **Branches** and click to the **Git** button:
 
-3. Go to Gerrit `Settings` -> `SSH keys`, paste your generated public SSH key to the `New SSH key` field and click `ADD NEW SSH KEY`:
+    ![Branches tab](../assets/use-cases/tekton-custom/tekton-custom12.png "Branches tab")
 
-    ![Gerrit settings](../assets/use-cases/tekton-custom/tekton-custom11.png "Gerrit settings")
-    ![Gerrit settings](../assets/use-cases/tekton-custom/tekton-custom12.png "Gerrit settings")
+3. Clone the repository with `SSH` using **Code** button:
 
-4. Browse Gerrit Repositories and select `custom-tekton-chart` project:
+    ![Create branch in GitHub](../assets/use-cases/tekton-custom/tekton-custom13.png "Create branch in GitHub")
 
-    ![Browse Gerrit repositories](../assets/use-cases/tekton-custom/tekton-gerrit01.png)
 
-5. Clone the repository with `SSH` using `Clone with commit-msg hook` command:
-
-    ![Gerrit clone](../assets/use-cases/tekton-custom/tekton-custom13.png "Gerrit clone")
-
-    :::note
-      In case of the strict firewall configurations, please use the `HTTP` protocol to pull and configure the `HTTP Credentials` in Gerrit.
-    :::
-
-6. Examine the repository structure. It should look this way by default:
+4. Examine the repository structure. It should look this way by default:
 
     ```bash
     custom-tekton-chart
@@ -186,11 +179,9 @@ Now that the Tekton Helm library is created, it is time to clone, modify and the
     :::note
       Change the values in the `values.yaml` file.
 
-      The `gitProvider` parameter is the git hosting provider, Gerrit in this example. The similar approach be made with [GitHub, or GitLab](https://github.com/epam/edp-tekton/blob/master/charts/pipelines-library/values.yaml#L23).
+      The `gitProvider` parameter is the git hosting provider, GitHub and GitLab in this example.
 
-      The [dnsWildCard](https://github.com/epam/edp-install/blob/master/deploy-templates/values.yaml#L14) parameter is the cluster DNS address.
-
-      The [gerritSSHPort](https://github.com/epam/edp-install/blob/master/deploy-templates/values.yaml#L30) parameter is the SSH port of the Gerrit service on Kubernetes. Check the Gerrit port in your edp installation  global section.
+      The [dnsWildCard](https://github.com/epam/edp-install/blob/v3.9.0/deploy-templates/values.yaml#L10) parameter is the cluster DNS address.
     :::
 
     :::note
@@ -204,14 +195,14 @@ Now that the Tekton Helm library is created, it is time to clone, modify and the
     fullnameOverride: ""
 
     global:
-      gitProvider: gerrit
+      gitProviders:
+        - github
       dnsWildCard: "example.domain.com"
-      gerritSSHPort: "30009"
     ```
 
-7. Modify and add tasks or pipelines.
+5. Modify and add tasks or pipelines.
 
-    As an example, let's assume that we need to add the `helm-lint` pipeline task to the review pipeline. To implement this, insert the code below to the [gerrit-review.yaml](https://github.com/epmd-edp/helm-helm-pipeline/blob/master/templates/pipelines/hello-world/gerrit-review.yaml#L60) file underneath the hello task:
+    As an example, let's assume that we need to add the `helm-lint` pipeline task to the review pipeline. To implement this, insert the code below to the [github-review.yaml](https://github.com/epmd-edp/helm-helm-pipeline/blob/master/templates/pipelines/hello-world/github-review.yaml#L66) file underneath the hello task:
 
     ```yaml
     - name: hello
@@ -241,6 +232,7 @@ Now that the Tekton Helm library is created, it is time to clone, modify and the
       workspaces:
         - name: source
           workspace: shared-workspace
+          subPath: source
     ```
 
     :::note
@@ -249,13 +241,13 @@ Now that the Tekton Helm library is created, it is time to clone, modify and the
       The `runAfter` parameter shows that this Pipeline task will be run after the `hello` pipeline task.
     :::
 
-8. Build Helm dependencies in the custom chart:
+6. Build Helm dependencies in the custom chart:
 
     ```bash
     helm dependency update .
     ```
 
-9. Ensure that the chart is valid and all the indentations are fine:
+7. Ensure that the chart is valid and all the indentations are fine:
 
     ```bash
     helm lint .
@@ -267,7 +259,7 @@ Now that the Tekton Helm library is created, it is time to clone, modify and the
     helm template .
     ```
 
-10. Install the custom chart with the command below. You can also use the `--dry-run` flag to simulate the chart installation and catch possible errors:
+8.  Install the custom chart with the command below. You can also use the `--dry-run` flag to simulate the chart installation and catch possible errors:
 
     ```bash
     helm upgrade --install edp-tekton-custom . -n edp --dry-run
@@ -277,83 +269,86 @@ Now that the Tekton Helm library is created, it is time to clone, modify and the
     helm upgrade --install edp-tekton-custom . -n edp
     ```
 
-11. Check the created pipelines and tasks in the cluster:
+9.  Check the created pipelines and tasks in the cluster:
 
     ```bash
     kubectl get tasks -n edp
     kubectl get pipelines -n edp
     ```
 
-12. Commit and push the modified Tekton Helm chart to Gerrit:
+10. Commit and push the modified Tekton Helm chart to GitHub:
 
     ```bash
+    git checkout -b helm
     git add .
     git commit -m "Add Helm chart testing for go-shell application"
-    git push origin HEAD:refs/for/master
+    git push -u origin helm
     ```
 
-13. Check the Gerrit code review for the custom Helm chart pipelines repository in Tekton:
+11. Navigate Github -> **Pull requests** -> **Compare & pull request** -> **Create pull request**.
 
-    ![Gerrit code review status](../assets/use-cases/tekton-custom/tekton-custom14.png "Gerrit code review status")
+    ![Create pull request](../assets/use-cases/tekton-custom/tekton-custom15.png "Create pull request")
 
-14. Go to `Changes` -> `Open`, click `CODE-REVIEW` and submit the merge request:
+12. Check the GitHub code review for the custom Helm chart pipelines repository in KubeRocketCI. Navigate **Components** -> **Component name** and click to the review pipeline run:
 
-    ![Gerrit merge](../assets/use-cases/tekton-custom/tekton-custom15.png "Gerrit merge")
-    ![Gerrit merge](../assets/use-cases/tekton-custom/tekton-custom16.png "Gerrit merge")
+    ![KubeRocketCI pipelines overview](../assets/use-cases/tekton-custom/tekton-custom14.png "KubeRocketCI pipelines overview")
 
-15. Check the build Pipeline status for the custom Pipelines Helm chart repository in Tekton:
+13. Explore the pipeline status and steps:
 
-    ![Tekton status](../assets/use-cases/tekton-custom/tekton-custom16.png "Tekton status")
+    ![Explore pipeline](../assets/use-cases/tekton-custom/tekton-custom16.png "Explore pipeline")
+
+14. Go to the GitHub **Pull requests** -> **Add Helm chart testing for go-shell application** -> and click **Merge pull request**:
+
+    ![Merge PR](../assets/use-cases/tekton-custom/tekton-custom17.png "Merge PR")
 
 ### Create Application Merge Request
 
 Since we applied the Tekton library to the Kubernetes cluster in the previous step, let's test the review and build pipelines for our `tekton-hello-world` application.
 
-Perform the below steps to merge new code (Merge Request) that passes the Code Review flow. For the steps below, we use Gerrit UI but the same actions can be performed using the command line and Git tool:
+Perform the below steps to merge new code (Merge Request) that passes the Code Review flow. For the steps below, we use GitHub UI but the same actions can be performed using the command line and Git tool:
 
-1. Log into Gerrit UI, select `tekton-hello-world` project, and create a change request.
+1. In the Components tab, click one of the `custom-tekton-chart` to enter the application menu.
 
-2. Browse Gerrit Repositories and select `tekton-hello-world` project:
+2. Navigate to **Branches** and click to the **Git** button:
 
-    ![Browse Gerrit repositories](../assets/use-cases/tekton-custom/tekton-gerrit01.png)
+    ![Component's branch tab](../assets/use-cases/tekton-custom/tekton-custom18.png "Component's branch tab")
 
-3. Clone the  `tekton-hello-world` repository to make the necessary changes or click the `Create Change` button in the `Commands` section of the project to make changes via Gerrit GUI:
+3. Navigate to the **Branches** menu, create new branch from **New branch** menu with name `test`, and the click on the test branch:
 
-    ![Create Change request](../assets/use-cases/tekton-custom/tekton-gerrit02.png)
+    ![Create Branch](../assets/use-cases/tekton-custom/tekton-custom19.png "Create Branch")
 
-4. In the `Create Change` dialog, provide the branch `master`, write some text in the `Description` (commit message) and click the `Create` button:
+4. Change file `deploy-templates/values.yaml` with values below:
 
-    ![Create Change](../assets/use-cases/tekton-custom/tekton-gerrit03.png)
+    ```yaml
+    ...
+    ingress:
+      enabled: true
+    ...
+    ```
 
-5. Click the `Edit` button of the merge request and add `deployment-templates/values.yaml` to modify it and change the `ingress.enabled flag` from `false` to `true`:
+    ![Create Merge Request](../assets/use-cases/tekton-custom/tekton-custom20.png "Create Merge Request")
 
-    ![Update values.yaml file](../assets/use-cases/tekton-custom/tekton-gerrit04.png)
-    ![Update values.yaml file](../assets/use-cases/tekton-custom/tekton-gerrit05.png)
+5. Navigate to the **Pull requests** -> **Compare & pull request** -> and click **Create pull request**:
 
-6. Check the Review Pipeline status. The `helm-lint` pipeline task should be displayed there:
+6. Check the Review Pipeline status. Navigate KubeRocketCI -> **Components** -> `tekton-hello-world` and click on review pipeline. The `helm-lint` task should be displayed there:
 
-    ![Review Change](../assets/use-cases/tekton-custom/tekton-custom07.png "Review Change")
+    ![Explore Lint Step](../assets/use-cases/tekton-custom/tekton-custom21.png "Explore Lint Step")
 
-7. Review the `deployment-templates/values.yaml` file and push the `SAVE & PUBLISH` button. As soon as you get `Verified +1` from CI bot, the change is ready for review. Click the `Mark as Active` and `Code-review` buttons:
+7. After review procedure successfully ended - approve merge request. Navigate Github -> **Pull requests** -> `test` and click on **Merge pull request** button. Then, your code is merged to the main branch, triggering the Build Pipeline:
 
-    ![Review Change](../assets/use-cases/tekton-custom/tekton-gerrit06.png)
-
-8. Click the `Submit` button. Then, your code is merged to the main branch, triggering the Build Pipeline.
-
-    ![Review Change](../assets/use-cases/tekton-custom/tekton-gerrit07.png)
+    ![Merge Pull Request](../assets/use-cases/tekton-custom/tekton-custom22.png)
 
     :::note
       If the build is added and configured, push steps in the pipeline, it will produce a new version of artifact, which will be available for the deployment in EDP Portal.
     :::
 
-9. Check the pipelines in the Tekton dashboard:
+8.  Check the pipelines in the KubeRocketCI dashboard:
 
-    ![Tekton custom pipelines](../assets/use-cases/tekton-custom/tekton-custom05.png "Tekton custom pipelines")
-    ![Tekton custom pipelines](../assets/use-cases/tekton-custom/tekton-custom06.png "Tekton custom pipelines")
+    ![Explore Build Pipeline](../assets/use-cases/tekton-custom/tekton-custom23.png "Explore Build Pipeline")
 
 Under the hood, the following process takes place:
 
-1. Gerrit sends a payload to the Tekton EventListener when a Merge Request event occurs.
+1. GitHub sends a payload to the Tekton EventListener when a Merge Request event occurs.
 2. The EventListener captures the payload with the assistance of an Interceptor.
 3. The TriggerTemplate is responsible for creating a PipelineRun.
 
@@ -361,7 +356,7 @@ The detailed scheme is shown below:
 
 ```mermaid
 graph LR;
-    A[Gerrit events] --> |Payload| B(Tekton EventListener) --> C(Tekton Interceptor CEL filter) --> D(TriggerTemplate)--> E(PipelineRun)
+    A[GitHub events] --> |Payload| B(Tekton EventListener) --> C(Tekton Interceptor CEL filter) --> D(TriggerTemplate)--> E(PipelineRun)
 ```
 
 This chart will be using the core of `common-library` and `pipelines-library` and custom resources on the top of them.

@@ -89,8 +89,8 @@ SonarGroupSpec defines the desired state of SonarGroup.
         <td>string</td>
         <td>
           Name is a group name.
-Name should be unique across all groups.
-Do not edit this field after creation. Otherwise, the group will be recreated.<br/>
+          Name should be unique across all groups.
+          Do not edit this field after creation. Otherwise, the group will be recreated.<br/>
         </td>
         <td>true</td>
       </tr><tr>
@@ -252,8 +252,8 @@ SonarPermissionTemplateSpec defines the desired state of SonarPermissionTemplate
         <td>string</td>
         <td>
           Name is a name of permission template.
-Name should be unique across all permission templates.
-Do not edit this field after creation. Otherwise, the permission template will be recreated.<br/>
+          Name should be unique across all permission templates.
+          Do not edit this field after creation. Otherwise, the permission template will be recreated.<br/>
         </td>
         <td>true</td>
       </tr><tr>
@@ -268,9 +268,9 @@ Do not edit this field after creation. Otherwise, the permission template will b
         <td>boolean</td>
         <td>
           Default is a flag to set permission template as default.
-Only one permission template can be default.
-If several permission templates have default flag, the random one will be chosen.
-Default permission template can't be deleted. You need to set another permission template as default before.<br/>
+          Only one permission template can be default.
+          If several permission templates have default flag, the random one will be chosen.
+          Default permission template can't be deleted. You need to set another permission template as default before.<br/>
         </td>
         <td>false</td>
       </tr><tr>
@@ -432,8 +432,8 @@ SonarQualityGateSpec defines the desired state of SonarQualityGate
         <td>string</td>
         <td>
           Name is a name of quality gate.
-Name should be unique across all quality gates.
-Don't change this field after creation otherwise quality gate will be recreated.<br/>
+          Name should be unique across all quality gates.
+          Don't change this field after creation otherwise quality gate will be recreated.<br/>
         </td>
         <td>true</td>
       </tr><tr>
@@ -448,7 +448,7 @@ Don't change this field after creation otherwise quality gate will be recreated.
         <td>map[string]object</td>
         <td>
           Conditions is a list of conditions for quality gate.
-Key is a metric name, value is a condition.<br/>
+          Key is a metric name, value is a condition.<br/>
         </td>
         <td>false</td>
       </tr><tr>
@@ -456,9 +456,9 @@ Key is a metric name, value is a condition.<br/>
         <td>boolean</td>
         <td>
           Default is a flag to set quality gate as default.
-Only one quality gate can be default.
-If several quality gates have default flag, the random one will be chosen.
-Default quality gate can't be deleted. You need to set another quality gate as default before.<br/>
+          Only one quality gate can be default.
+          If several quality gates have default flag, the random one will be chosen.
+          Default quality gate can't be deleted. You need to set another quality gate as default before.<br/>
         </td>
         <td>false</td>
       </tr></tbody>
@@ -525,8 +525,8 @@ Condition defines the condition for quality gate.
         <td>enum</td>
         <td>
           Op is condition operator.
-LT = is lower than
-GT = is greater than<br/>
+          LT = is lower than
+          GT = is greater than<br/>
           <br/>
             <i>Enum</i>: LT, GT<br/>
         </td>
@@ -642,8 +642,8 @@ SonarQualityProfileSpec defines the desired state of SonarQualityProfile
         <td>string</td>
         <td>
           Name is a name of quality profile.
-Name should be unique across all quality profiles.
-Don't change this field after creation otherwise quality profile will be recreated.<br/>
+          Name should be unique across all quality profiles.
+          Don't change this field after creation otherwise quality profile will be recreated.<br/>
         </td>
         <td>true</td>
       </tr><tr>
@@ -658,9 +658,9 @@ Don't change this field after creation otherwise quality profile will be recreat
         <td>boolean</td>
         <td>
           Default is a flag to set quality profile as default.
-Only one quality profile can be default.
-If several quality profiles have default flag, the random one will be chosen.
-Default quality profile can't be deleted. You need to set another quality profile as default before.<br/>
+          Only one quality profile can be default.
+          If several quality profiles have default flag, the random one will be chosen.
+          Default quality profile can't be deleted. You need to set another quality profile as default before.<br/>
         </td>
         <td>false</td>
       </tr><tr>
@@ -668,7 +668,7 @@ Default quality profile can't be deleted. You need to set another quality profil
         <td>map[string]object</td>
         <td>
           Rules is a list of rules for quality profile.
-Key is a rule key, value is a rule.<br/>
+          Key is a rule key, value is a rule.<br/>
         </td>
         <td>false</td>
       </tr></tbody>
@@ -843,8 +843,8 @@ SonarSpec defines the desired state of Sonar.
         <td>string</td>
         <td>
           Secret is the name of the k8s object Secret related to sonar.
-Secret should contain a user field with a sonar username and a password field with a sonar password.
-Pass the token in the user field and leave the password field empty for token authentication.<br/>
+          Secret should contain a user field with a sonar username and a password field with a sonar password.
+          Pass the token in the user field and leave the password field empty for token authentication.<br/>
         </td>
         <td>true</td>
       </tr><tr>
@@ -951,8 +951,8 @@ SonarStatus defines the observed state of Sonar.
         <td>string</td>
         <td>
           ProcessedSettings shows which settings were processed.
-It is used to compare the current settings with the settings that were processed
-to unset the settings that are not in the current settings.<br/>
+          It is used to compare the current settings with the settings that were processed
+          to unset the settings that are not in the current settings.<br/>
         </td>
         <td>false</td>
       </tr><tr>
@@ -960,10 +960,10 @@ to unset the settings that are not in the current settings.<br/>
         <td>string</td>
         <td>
           Value is status of sonar instance.
-Possible values:
-GREEN: SonarQube is fully operational
-YELLOW: SonarQube is usable, but it needs attention in order to be fully operational
-RED: SonarQube is not operational<br/>
+          Possible values:
+          GREEN: SonarQube is fully operational
+          YELLOW: SonarQube is usable, but it needs attention in order to be fully operational
+          RED: SonarQube is not operational<br/>
         </td>
         <td>false</td>
       </tr></tbody>
@@ -1038,7 +1038,7 @@ SonarUserSpec defines the desired state of SonarUser
         <td>string</td>
         <td>
           Login is a user login.
-Do not edit this field after creation. Otherwise, the user will be recreated.<br/>
+          Do not edit this field after creation. Otherwise, the user will be recreated.<br/>
         </td>
         <td>true</td>
       </tr><tr>
@@ -1053,8 +1053,8 @@ Do not edit this field after creation. Otherwise, the user will be recreated.<br
         <td>string</td>
         <td>
           Secret is the name of the secret with the user password.
-It should contain a password field with a user password.
-User password can't be updated.<br/>
+          It should contain a password field with a user password.
+          User password can't be updated.<br/>
         </td>
         <td>true</td>
       </tr><tr>

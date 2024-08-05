@@ -44,10 +44,10 @@ If you need to re-trigger a pipeline due to a failed run or to incorporate new c
 
 - **Tekton Dashboard**: If Tekton Dashboard is integrated. In the KubeRocketCI Portal navigate **Overview** -> **Links** and click on **Tekton**. In the Tekton Dashboard navigate to the **PipelineRuns** section, identify the failed pipeline, and select the action **Rerun**.
 
-- **Through VCS (GitHub/GitLab)**: Add a comment with word `/recheck` to your Pull Request (PR) or Merge Request (MR), and the pipeline will be triggered automatically.
+- **Through VCS (GitHub/GitLab)**: Add a comment with word `/recheck` or `/ok-to-test` to your Pull Request (PR) or Merge Request (MR), and the pipeline will be triggered automatically.
 
 :::tip
-  Use comment approach with `/recheck` if the Pipeline is not available either on KubeRocketCI or Tekton Dashboard.
+  Use comment approach with `/recheck` or `/ok-to-test` if the Pipeline is not available either on KubeRocketCI or Tekton Dashboard.
 :::
 
 ---
@@ -124,3 +124,16 @@ The [three primary types](#what-is-a-pipeline-in-kuberocketci) of pipelines in K
   - This pipeline is designed to automatically deploy the newly built images to the appropriate environments.
 
 For further details on configuring these triggers review the `TektonTriggers` configuration available in the [Tekton repository](https://github.com/epam/edp-tekton/tree/master/charts/pipelines-library/templates/triggers).
+
+---
+
+### How to Manage Trigger Owner Verification in Tekton?
+
+Tekton provides a feature to control which commits can trigger Tekton pipelines, enhancing security by preventing the execution of potentially harmful scripts from unauthorized contributors. This is achieved through the use of Tekton Interceptors, which verify whether the individual initiating a pull request is an owner of the repository (i.e., has write access) before permitting pipeline execution. For more details consult official [GitHub documentation](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners).
+
+This functionality is enabled by default. To disable it, you need to update the relevant flag in the [values.yaml](https://github.com/epam/edp-tekton/blob/master/charts/pipelines-library/values.yaml#L64) file during the installation of Tekton.
+
+```yaml title="values.yaml"
+githubOwners:
+  enabled: false
+```

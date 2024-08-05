@@ -18,7 +18,7 @@ This error occurs because SonarQube does not have complete source code data and 
 
 2. In the main branch section, click the **Trigger build pipeline run** button to run scanning of full repository.
 
-3. After successful finished build pipeline - re-trigger review pipeline, for example by using `/recheck` feature.
+3. After successful finished build pipeline - re-trigger review pipeline, for example by using `/recheck` (or `/ok-to-test`) feature.
 
     ![Tree diagram window](../../assets/operator-guide/troubleshooting/successful_pass_review.png "Tree diagram window")
 

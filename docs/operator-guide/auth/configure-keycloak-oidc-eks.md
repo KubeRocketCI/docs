@@ -3,6 +3,9 @@
 This article provides the instruction of configuring Keycloak as [OIDC Identity Provider](https://aws.amazon.com/blogs/containers/introducing-oidc-identity-provider-authentication-amazon-eks/) for EKS.
 The example is written on Terraform (HCL).
 
+:::info
+We highly recommend configuring the integration through a GitOps approach, utilizing the [edp-keycloak-operator](https://github.com/epam/edp-keycloak-operator/tree/master/deploy-templates) and the [edp-cluster-add-ons](https://github.com/epam/edp-cluster-add-ons/tree/main/add-ons/eks) repository. For details, please refer to the [AWS EKS OIDC Integration](eks-oidc-integration.md) page.
+:::
 ## Prerequisites
 
 To follow the instruction, check the following prerequisites:

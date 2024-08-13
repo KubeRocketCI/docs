@@ -10,6 +10,10 @@ This page serves as a comprehensive guide on integrating Keycloak with the [edp-
 
 ## Install Keycloak Operator
 
+:::info
+Alternately, the edp-keycloak-operator can be installed using a GitOps approach via the [edp-cluster-add-ons](https://github.com/epam/edp-cluster-add-ons/tree/main/add-ons/extensions-oidc) repository. For detailed installation instructions, please refer to the [Install via Add-ons](../add-ons-overview.md) guide.
+:::
+
 To install the Keycloak operator, follow the steps below:
 
 1. Add the `epamedp` Helm chart to a local client:
@@ -26,6 +30,10 @@ To install the Keycloak operator, follow the steps below:
     ```
 
 ## Connect Keycloak Operator to Keycloak
+
+:::info
+It is also possible to install Keycloak resources using the [edp-cluster-add-ons](https://github.com/epam/edp-cluster-add-ons/tree/main/add-ons/eks) repository. For details, please refer to the [Install via Add-Ons](../add-ons-overview.md) page.
+:::
 
 The next stage after installing Keycloak is to integrate it with the Keycloak operator. It can be implemented with the following steps:
 
@@ -185,7 +193,24 @@ The next stage after installing Keycloak is to integrate it with the Keycloak op
           - eks-oidc-developers
       ```
 
-8. As a result, Keycloak is integrated with the AWS Elastic Kubernetes Service. This integration allows users to easily log in to the EKS cluster using their kubeconfig files and `kubelogin`, while managing permissions through Keycloak. This seamless integration enhances the user experience and streamlines the management of access control within the KubeRocketCI platform.
+8. To connect the created Keycloak resources with permissions, it is necessary to bind the created Keycloak groups to Kubernetes roles, e.g., assigning the Keycloak group `administrators` the Kubernetes Cluster role `cluster-admin`.
+
+    ```yaml
+    apiVersion: rbac.authorization.k8s.io/v1
+    kind: ClusterRoleBinding
+    metadata:
+      name: oidc-cluster-admins
+    subjects:
+      - kind: Group
+        apiGroup: rbac.authorization.k8s.io
+        name: administrators
+    roleRef:
+      apiGroup: rbac.authorization.k8s.io
+      kind: ClusterRole
+      name: cluster-admin
+    ```
+
+9. As a result, Keycloak is integrated with the AWS Elastic Kubernetes Service. This integration allows users to easily log in to the EKS cluster using their kubeconfig files and `kubelogin`, while managing permissions through Keycloak. This seamless integration enhances the user experience and streamlines the management of access control within the KubeRocketCI platform.
 
 ## Related Articles
 

@@ -13,6 +13,11 @@ Follow the steps below to integrate the ReportPortal with Keycloak.
 
 ## Keycloak Configuration
 
+:::info
+The Keycloak configuration can also be applied using Keycloak resources from the [Cluster Add-Ons](https://github.com/epam/edp-cluster-add-ons/tree/main/add-ons/report-portal/templates/saml) repository.
+To apply the Keycloak configuration, the Keycloak Operator is required. For installation details, refer to the [Install Keycloak Operator](https://docs.kuberocketci.io/docs/next/operator-guide/auth/eks-oidc-integration#install-keycloak-operator) page.
+:::
+
 1. Navigate to **Client Scopes** > **Create client scope** and create a new scope with the _SAML_ protocol type.
 
 2. Navigate to **Client Scopes** > **your_scope_name** > **Mappers** > **Configure a new mapper** > select the _User Attribute_ mapper type. Add three mappers for the email, first name, and last name by typing `lastName`, `firstName`, and `email` in the _User Attribute_ field:

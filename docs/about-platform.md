@@ -25,6 +25,8 @@ The platform consists of the following blocks:
   |Java|Java 8, Java 11, Java 17|Gradle, Maven|:white_check_mark:|:white_check_mark:|:white_check_mark:|
   |Python|Python 3.8, FastAPI, Flask|Python|:white_check_mark:|:white_check_mark:||
   |C#|.Net 3.1, .Net 6.0|.Net|:white_check_mark:|:white_check_mark:||
+  |C|None|Make,CMake|:white_check_mark:|||
+  |C++|None|Make,CMake|:white_check_mark:|||
   |Go|Beego, Gin, Operator SDK|Go|:white_check_mark:|||
   |JavaScript|React, Vue, Angular, Express, Next.js, Antora|NPM|:white_check_mark:|:white_check_mark:||
   |HCL|Terraform|Terraform||:white_check_mark:||

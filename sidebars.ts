@@ -448,6 +448,13 @@ const sidebars: SidebarsConfig = {
                 'user-guide/change-container-registry',
               ],
             },
+            {
+              type: 'category',
+              label: 'Gen AI',
+              items: [
+                'user-guide/add-ai-assistant',
+              ],
+            },
           ],
         },
       ],

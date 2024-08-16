@@ -21,9 +21,9 @@ The added autotest will be listed in the Autotests list allowing you to do the f
 * **Component name (clickable)** - displays the autotest name set during the autotest creation.
 * **Open documentation** - opens the autotest related documentation page.
 * **Enable filtering** - enables filtering by autotest name and namespace where this custom resource is located in.
-* **Selector** - Allows you to select multiple autotets for bulk actions.
-* **Delete selected** - Deletes all selected autotets. This option is only 
-* **Create new omponent** - displays the **Create new component** menu.
+* **Selector** - Allows you to select multiple autotests for bulk actions.
+* **Delete selected** - Deletes all selected autotests.
+* **Create new component** - displays the **Create new component** menu.
 * **Actions menu** provides additional options for each individual application:
 * **Edit** - edit the autotest by selecting the options icon next to its name in the autotests list, and then selecting **Edit**. For details see the [Edit Existing Autotest](#edit-existing-autotest) section.
 * **Delete** - remove autotest by clicking the vertical ellipsis button and then selecting **Delete**.

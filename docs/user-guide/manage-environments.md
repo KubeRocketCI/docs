@@ -1,31 +1,32 @@
-# Manage Environments
+# Manage Deployment Flows
 
-This page describes actions that can be performed to an already created environment. If no environments are created yet, navigate to the [Add Environment](add-cd-pipeline.md) page:
+This page describes actions that can be performed to an already created deployment flow. If no deployment flows are created yet, navigate to the [Add Deployment Flow](add-cd-pipeline.md) page:
 
-  ![Environments page](../assets/user-guide/environments/edp-portal-cd-pipeline-page.png "Environments page")
+  ![Deployment flows page](../assets/user-guide/environments/edp-portal-cd-pipeline-page.png "Deployment flows page")
 
-* **Environment status** - displays the environment status. Can be red or green depending on if the KubeRocketCI portal managed to connect to the Git Server with the specified credentials or not.
-* **Environment name** (clickable) - displays the Git Server name set during the Git Server creation.
+* **Deployment flow status** - displays the deployment flow status. Can be red or green depending on if the KubeRocketCI portal managed to connect to the Git Server with the specified credentials or not.
+* **Deployment flow name** (clickable) - displays the Git Server name set during the Git Server creation.
 * **Open documentation** - opens the documentation that leads to this page.
-* **Enable filtering** - enables filtering by Git Server name and namespace where this environment is located in.
-* **Create new environment** - displays the Create new component menu.
-* **Edit environment** - edit the environment by selecting the options icon next to its name in the environment list, and then selecting Edit. For details see the [Edit Existing Environment](#edit-existing-environment) section.
-* **Delete environment** - remove environment by clicking the vertical ellipsis button and then selecting Delete.
+* **Enable filtering** - enables filtering by Git Server name and namespace where this deployment flow is located in.
+* **Create new deployment flow** - displays the Create new component menu.
+* **Edit deployment flow** - edit the deployment flow by selecting the options icon next to its name in the deployment flow list, and then selecting Edit. For details see the [Edit Existing Deployment Flow](#edit-existing-deployment-flow) section.
+* **Delete deployment flow** - remove deployment flow by clicking the vertical ellipsis button and then selecting Delete.
+* **Chat assistant** - opens the chat window with AI assistant.
 
   :::note
-    Please keep in mind that after deleting the environment, all the created resources within the environment will be deleted.
+    Please keep in mind that after deleting the deployment flow, all the created resources within the deployment flow will be deleted.
   :::
 
-## View Environment Details
+### View Deployment Flow Details
 
-To view environment details, click the environment name in the environments list. Once clicked, the following data will be displayed:
+To view deployment flow details, click the deployment flow name in the deployment flows list. Once clicked, the following data will be displayed:
 
-  ![Environment details](../assets/user-guide/environments/edp-portal-cd-pipeline-overview.png "Environment details")
+  ![Deployment flow details](../assets/user-guide/environments/edp-portal-cd-pipeline-overview.png "Deployment flow details")
 
 * **Filters** - enables filtering by stage name, stage applications and stage health status.
-* **Open environment in Argo CD** - opens the corresponding resource in Argo CD.
-* **Edit environment** - allows to edit some parameters of the environment.
-* **Delete environment** - allows to remove the environment.
+* **Open deployment flow in Argo CD** - opens the corresponding resource in Argo CD.
+* **Edit deployment flow** - allows to edit some parameters of the deployment flow.
+* **Delete deployment flow** - allows to remove the deployment flow.
 * **Create new stage** - displays the **Create stage** menu.
 * **Stage name (clickable)** - opens the stage details page.
 * **Stage status** - displays the status of the created stage.
@@ -37,85 +38,89 @@ To view environment details, click the environment name in the environments list
 * **Open application resource in Argo CD** - opens a new tab with Argo CD resources related to the application.
 * **Open stage in Argo CD / Grafana / Kibana** - allows to view the stage in Argo CD, Grafana or Kibana.
 
-### Edit Existing Environment<a name="edit-existing-environment"></a>
+### Edit Existing Deployment Flow<a name="edit-existing-deployment-flow"></a>
 
-Edit the environment directly from the environment overview page or when viewing the environment data:
+Edit the deployment flow directly from the deployment flow overview page or when viewing the deployment flow data:
 
-1. Select **Edit** in the options icon menu next to the environment name:
+1. Select **Edit** in the options icon menu next to the deployment flow name:
 
-    ![Edit environment when viewing the environment data](../assets/user-guide/environments/edp-portal-edit-cd-pipeline-1.png "Edit environment when viewing the environment data")
+    ![Edit deployment flow when viewing the deployment flow data](../assets/user-guide/environments/edp-portal-edit-cd-pipeline-1.png "Edit deployment flow when viewing the deployment flow data")
 
 2. Apply the necessary changes (edit the list of applications for deploy, application branches, and promotion in the pipeline). Add new extra stages by clicking the plus sign icon and filling in the application branch and promotion in the pipeline.
 
-    ![Edit environment dialog](../assets/user-guide/environments/edp-portal-edit-cd-pipeline-page.png "Edit environment dialog")
+    ![Edit deployment flow dialog](../assets/user-guide/environments/edp-portal-edit-cd-pipeline-page.png "Edit deployment flow dialog")
 
 3. Click the **Apply** button to confirm the changes.
 
-### Add a New Stage
+### Add a New Environment
 
-In order to create a new stage for the existing environment, follow the steps below:
+In order to create a new environment for the existing deployment flow, follow the steps below:
 
-1. Navigate to the **Stages** block by clicking the environment name link in the environments list.
+1. Navigate to the **Environments** block by clicking the deployment flow name link in the deployment flows list.
 
-2. Click the **Create stage** button:
+2. Click the **Create environment** button:
 
-    ![Add environment stage](../assets/user-guide/environments/edp-portal-cd-pipeline-add-stages.png "Add environment stage")
+    ![Add environment button](../assets/user-guide/environments/edp-portal-cd-pipeline-add-stages.png "Add environment button")
 
-3. Fill in the required fields in the dialog. Alternatively, click **Edit YAML** in the upper-right corner of the **Create stage** dialog to open the YAML editor and add a stage. Please see the [Stages Menu](../user-guide/add-cd-pipeline.md) section for details.
-
-4. Click the **Apply** button.
-
-### Edit Stage
-
-In order to edit a stage for the existing environment, follow the steps below:
-
-1. Navigate to the **Stages** block by clicking the environment name link in the environments list.
-
-    ![Edit environment stage](../assets/user-guide/environments/edp-portal-edit-cd-pipeline-stage.png "Edit environment stage")
-
-2. Select the options icon related to the necessary stage and then select **Edit**.
-
-    ![Edit environment stage dialog](../assets/user-guide/environments/edp-portal-edit-cd-pipeline-stage-dialog.png "Edit environment stage dialog")
-
-3. In the **Edit Stage** dialog, change the stage trigger type. See more about this field in the [Stages Menu](#edit-stage) section.
+3. Fill in the required fields in the dialog. Alternatively, click **Edit YAML** in the upper-right corner of the **Create environment** dialog to open the YAML editor and add an environment. Please see the [Stages Menu](../user-guide/add-cd-pipeline.md) section for details.
 
 4. Click the **Apply** button.
 
-### Delete Stage
+### Edit Environment
+
+In order to edit an environment for the existing deployment flow, follow the steps below:
+
+1. Click the environment name in the deployment flows list to enter its details page.
+
+2. In the upper-right corner of the page, click the **Edit** button:
+
+    ![Edit environment](../assets/user-guide/environments/edp-portal-edit-cd-pipeline-stage.png "Edit environment")
+
+3. In the **Edit environment** dialog, change the environment trigger type and deploy pipeline template:
+
+    ![Edit environment dialog](../assets/user-guide/environments/edp-portal-edit-cd-pipeline-stage-dialog.png "Edit environment dialog")
+
+4. Click the **Apply** button.
+
+### Delete Environment
 
 :::warning
-  You cannot remove the last stage, as the environment does not exist without at least one.
+  You cannot remove the last environment, as the deployment flow does not exist without at least one.
 ::::
 
-In order to delete a stage for the existing environment, follow the steps below:
+In order to delete an environment for the existing deployment flow, follow the steps below:
 
-1. Navigate to the **Stages** block by clicking the environment name link in the environments list.
+1. Navigate to the **Environments** block by clicking the deployment flow name link in the deployment flows list.
 
-2. Click the name of the stage that needs to be deleted:
+2. Click the name of the environment that needs to be deleted:
 
-    ![Delete environment stage](../assets/user-guide/environments/enter_stage.png "Delete environment stage")
+    ![Delete environment](../assets/user-guide/environments/enter_stage.png "Delete environment")
 
-3. Click the recycle bin button to open the stage deletion menu:
+3. Click the recycle bin button to open the environment deletion menu:
 
-    ![Delete environment stage](../assets/user-guide/environments/edp-portal-delete-cd-pipeline-stage.png "Delete environment stage")
+    ![Delete environment button](../assets/user-guide/environments/edp-portal-delete-cd-pipeline-stage.png "Delete environment button")
 
-### View Stage Data
+4. Enter the environment name and click **Confirm**:
 
-To view the environment stage data for the existing environment, follow the steps below:
+    ![Confirm deletion](../assets/user-guide/environments/confirm-environment-deletion.png "Confirm deletion")
 
-1. Navigate to the **Stages** block by clicking the environment name link in the environments list.
+### View Environment Data
 
-    ![Expand environment stage](../assets/user-guide/environments/edp-portal-expand-stage.png "Expand environment stage")
+To view the environment data for the existing environment, follow the steps below:
 
-2. Click stage name. The following blocks will be displayed:
+1. Navigate to the **Stages** block by clicking the deployment flow name link in the deployment flows list;
 
-    ![Environment stage overview](../assets/user-guide/environments/edp-portal-stage-overview.png "Environment stage overview")
+    ![Expand environment](../assets/user-guide/environments/edp-portal-expand-stage.png "Expand environment")
+
+2. Click the environment name. The following blocks will be displayed:
+
+    ![Environment overview](../assets/user-guide/environments/edp-portal-stage-overview.png "Environment overview")
 
     a. **Overview** - general information and configuration of current environment.
 
-    b. **Applications** - displays the status of the applications related to the stage and allows [deploying the applications](#deploy-application). Applications health and sync statuses are returned from the Argo CD tool.
+    b. **Applications** - displays the status of the applications related to the environment and allows for [deploying applications](#deploy-application). Applications health and sync statuses are returned from the Argo CD tool.
 
-    c. **Pipelines** - displays all the deploy pipeline runs launched for this stage.
+    c. **Pipelines** - displays all the deploy pipeline runs launched for this environment.
 
     d. **Monitoring** - opens the Grafana window that allows for watching various metrics.
 
@@ -123,25 +128,33 @@ To view the environment stage data for the existing environment, follow the step
 
 To deploy an application, follow the steps below:
 
-![Deploy the promoted application](../assets/user-guide/environments/deploy_application.png "Deploy the promoted application")
+1. Navigate to the **Applications** block and click the **Configure deploy** button:
 
-1. Navigate to the **Applications** block of the stage and select an application.
+  ![Configure deploy button](../assets/user-guide/environments/configure-deploy-button.png "Configure deploy button")
 
-    a. Select the image stream version from the drop-down list.
+2. Set deployment properties you need:
 
-    b. (Optional) Enable setting custom values for Helm Charts. For more details, please refer to the [Manage GitOps](gitops.md) page.
+  ![Deploy the promoted application](../assets/user-guide/environments/deploy_application.png "Deploy the promoted application")
 
-    c. Click **Start Deploy**. Starts pipeline with deploy script.
+  a. Select the image stream version from the drop-down list.
 
-      :::info
-        In case of using OpenShift internal registry, if the deployment fails with the ImagePullBackOff error, delete the pod that was created for this application.
-      :::
+  b. (Optional) Enable setting custom values for Helm Charts. For more details, please refer to the [Manage GitOps](gitops.md) page.
+
+  c. Click the **Start Deploy** button to start a pipeline with the deploy script.
+
+  :::info
+    In case of using OpenShift internal registry, if the deployment fails with the ImagePullBackOff error, delete the pod that was created for this application.
+  :::
 
 To uninstall the application, click the **Delete** button:
 
 ![Uninstall the application](../assets/user-guide/environments/edp-portal-uninstall-application.png "Uninstall the application")
 
 As a result, the application will be uninstalled in the Argo CD tool as well.
+
+Alternatively, you can use the **Clean** button. This way will be appropriate when you have some specific requirements to the environment cleanup procedure. Note that you need to make up your own logic in the cleanup pipeline to use the button or choose one of the pre-defined pipelines offered by KubeRocketCI:
+
+![Clean up application](../assets/user-guide/environments/edp-portal-clean-application.png "Clean up application")
 
 ### Troubleshoot Application
 
@@ -167,5 +180,5 @@ To inspect the deployed application in KubeRocketCI portal, take the following s
 
 ### Related Articles
 
-* [Add Environment](add-cd-pipeline.md)
+* [Add Deployment Flow](add-cd-pipeline.md)
 * [Add Quality Gate](../user-guide/add-quality-gate.md)

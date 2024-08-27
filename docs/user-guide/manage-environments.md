@@ -178,7 +178,25 @@ To inspect the deployed application in KubeRocketCI portal, take the following s
 
     ![Inspect application](../assets/user-guide/environments/application_terminal.png "Inspect application")
 
+### Delete Application
+
+There are two buttons on the environment page that can be utilized to delete application in the portal:
+
+  ![Clean button](../assets/operator-guide/edp-portal-clean-application.png "Clean button")
+
+  * **Delete** - Deletes selected applications and associated resources.
+  * **Clean** - Manages custom cleanup actions, such as deleting cloud resources and databases, rolling back transactions, etc.
+
+The **Delete** button is optimized for applications based on a single, simple helm chart that can be deployed independently without any specific dependencies.
+
+The **Clean** button activates a deletion process (triggers a delete pipeline) that includes any custom logic you have defined. This option is most suitable for applications that require complex configurations to function properly. It ensures that any associated resources with the same lifecycle are deleted when the application is no longer needed.
+
+KubeRocketCI provides an intuitive and streamlined pipeline by default. Initially, there is no distinction between the **Delete** and **Clean** buttons, as both perform identical actions. This default behavior encompasses the straightforward deletion of applications, which involves the uninstallation of the associated Helm chart. However, this functionality evolves once a custom delete pipeline is established, enabling manual configuration of the logic behind the **Clean** button. This customization allows for a more tailored approach to managing application lifecycles within KubeRocketCI.
+
+For more details on how to create a custom delete pipeline, navigate to the [Customize Environment Cleanup](../operator-guide/cd/customize-environment-deletion.md)
+
 ### Related Articles
 
+* [Customize Environment Cleanup](../operator-guide/cd/customize-environment-deletion.md)
 * [Add Deployment Flow](add-cd-pipeline.md)
 * [Add Quality Gate](../user-guide/add-quality-gate.md)

@@ -253,6 +253,7 @@ const sidebars: SidebarsConfig = {
           label: 'Continuous Delivery and Deployment (CD)',
           items: [
             'operator-guide/cd/customize-deploy-pipeline',
+            'operator-guide/cd/customize-environment-deletion',
             {
               type: 'category',
               label: 'GitOps',

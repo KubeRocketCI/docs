@@ -1,6 +1,6 @@
 # Add Deployment Flow
 
-In KubeRocketCI, deployments are managed through Deployment Flows, a versatile mechanism that enables GitOps, auto deploy, promotion within pipelines, and multi-environment support.
+In KubeRocketCI, deployments are managed through Deployment Flows, a versatile mechanism that enables GitOps, automated deploy, promotion within pipelines, and multi-environment support.
 
 Navigate to the **Deployment flows** section on the navigation bar and click **+ Create deployment flow**. Once clicked, the **Create deployment flow** dialog will appear.
 
@@ -66,7 +66,7 @@ To create a deployment flow, follow the steps below:
 
 Stages are created the following way:
 
-1. On the **Environments** menu, click the **Create Environment** button and fill in the necessary fields in the corresponding window<a name="adding_stage_window"></a>:
+1. On the **Environments** menu, click the **Create Environment** button and fill in the necessary fields in the corresponding window:
 
     ![CD stages](../assets/user-guide/environments/edp-portal-cd-pipeline-add-stages.png "CD stages")
 

@@ -1,4 +1,4 @@
-# Codebase Operator API
+# API Reference
 
 Packages:
 
@@ -312,10 +312,10 @@ CodebaseBranchSpec defines the desired state of CodebaseBranch.
         </td>
         <td>true</td>
       </tr><tr>
-        <td><b>releaseJobParams</b></td>
+        <td><b>pipelines</b></td>
         <td>map[string]string</td>
         <td>
-          <br/>
+          Pipelines is a map of pipelines related to the branch.<br/>
         </td>
         <td>false</td>
       </tr><tr>
@@ -1545,7 +1545,6 @@ Resource Types:
 ## Template
 
 <sup><sup>[↩ Parent](#v2edpepamcomv1alpha1 )</sup></sup>
-
 
 Template is the Schema for the templates API.
 

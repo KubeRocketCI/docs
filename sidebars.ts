@@ -403,6 +403,14 @@ const sidebars: SidebarsConfig = {
         },
         {
           type: 'category',
+          label: 'Pipelines',
+          collapsed: false,
+          items: [
+            'user-guide/pipelines',
+          ],
+        },
+        {
+          type: 'category',
           label: 'Environments',
           collapsed: false,
           items: [

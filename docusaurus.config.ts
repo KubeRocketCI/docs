@@ -90,7 +90,7 @@ const config: Config = {
     ],
     description:
       'Boost your delivery with the development culture based on the modern CI/CD stack, golden path and self-service capabilities of the KubeRocketCI.',
-    videoTeaser: 'https://www.youtube.com/embed/Xsy1UKMb8vg',
+    videoTeaser: 'https://www.youtube.com/embed/wiAaAHu17mw',
     mailTo: 'mailto:SupportEPMD-EDP@epam.com?subject=KubeRocketCI Demo Request',
     announcementBar: {
       id: 'announcement', // Increment on change

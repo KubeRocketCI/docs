@@ -9,3 +9,4 @@ Currently, this section covers the following issues:
 * [Codebase Creation Issues](codebase-creation-issues.md)
 * [Forbidden Messages on the Overview Page](forbidden-messages.md)
 * [Review Pipeline is Failed](review-pipeline-is-failed.md)
+* [Modify GitOps Repository Path](modify-gitops-repo-path.md)

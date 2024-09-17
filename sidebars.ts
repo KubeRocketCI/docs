@@ -338,7 +338,8 @@ const sidebars: SidebarsConfig = {
             'operator-guide/troubleshooting/sync-health-status-unknown',
             'operator-guide/troubleshooting/codebase-creation-issues',
             'operator-guide/troubleshooting/forbidden-messages',
-            'operator-guide/troubleshooting/review-pipeline-is-failed'
+            'operator-guide/troubleshooting/review-pipeline-is-failed',
+            'operator-guide/troubleshooting/modify-gitops-repo-path'
           ],
         },
       ],

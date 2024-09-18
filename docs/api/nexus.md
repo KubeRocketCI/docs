@@ -1,4 +1,5 @@
 # Nexus Repository Manager Operator API
+
 Packages:
 
 - [edp.epam.com/v1alpha1](#edpepamcomv1alpha1)
@@ -21,16 +22,9 @@ Resource Types:
 
 - [NexusUser](#nexususer)
 
-
-
-
 ## NexusBlobStore
+
 <sup><sup>[↩ Parent](#edpepamcomv1alpha1 )</sup></sup>
-
-
-
-
-
 
 NexusBlobStore is the Schema for the nexusblobstores API.
 
@@ -77,11 +71,9 @@ NexusBlobStore is the Schema for the nexusblobstores API.
       </tr></tbody>
 </table>
 
-
 ### NexusBlobStore.spec
+
 <sup><sup>[↩ Parent](#nexusblobstore)</sup></sup>
-
-
 
 NexusBlobStoreSpec defines the desired state of NexusBlobStore.
 
@@ -128,11 +120,9 @@ Name should be unique across all BlobStores.<br/>
       </tr></tbody>
 </table>
 
-
 ### NexusBlobStore.spec.nexusRef
+
 <sup><sup>[↩ Parent](#nexusblobstorespec)</sup></sup>
-
-
 
 NexusRef is a reference to Nexus custom resource.
 
@@ -164,11 +154,9 @@ NexusRef is a reference to Nexus custom resource.
       </tr></tbody>
 </table>
 
-
 ### NexusBlobStore.spec.file
+
 <sup><sup>[↩ Parent](#nexusblobstorespec)</sup></sup>
-
-
 
 File type blobstore.
 
@@ -192,11 +180,9 @@ This can be an absolute path to anywhere on the system Nexus Repository Manager 
       </tr></tbody>
 </table>
 
-
 ### NexusBlobStore.spec.softQuota
+
 <sup><sup>[↩ Parent](#nexusblobstorespec)</sup></sup>
-
-
 
 Settings to control the soft quota.
 
@@ -231,11 +217,9 @@ Settings to control the soft quota.
       </tr></tbody>
 </table>
 
-
 ### NexusBlobStore.status
+
 <sup><sup>[↩ Parent](#nexusblobstore)</sup></sup>
-
-
 
 NexusBlobStoreStatus defines the observed state of NexusBlobStore.
 
@@ -266,12 +250,8 @@ NexusBlobStoreStatus defines the observed state of NexusBlobStore.
 </table>
 
 ## NexusCleanupPolicy
+
 <sup><sup>[↩ Parent](#edpepamcomv1alpha1 )</sup></sup>
-
-
-
-
-
 
 NexusCleanupPolicy is the Schema for the cleanuppolicies API.
 
@@ -318,11 +298,9 @@ NexusCleanupPolicy is the Schema for the cleanuppolicies API.
       </tr></tbody>
 </table>
 
-
 ### NexusCleanupPolicy.spec
+
 <sup><sup>[↩ Parent](#nexuscleanuppolicy)</sup></sup>
-
-
 
 NexusCleanupPolicySpec defines the desired state of NexusCleanupPolicy.
 
@@ -377,11 +355,9 @@ NexusCleanupPolicySpec defines the desired state of NexusCleanupPolicy.
       </tr></tbody>
 </table>
 
-
 ### NexusCleanupPolicy.spec.criteria
+
 <sup><sup>[↩ Parent](#nexuscleanuppolicyspec)</sup></sup>
-
-
 
 Criteria for the cleanup policy.
 
@@ -433,11 +409,9 @@ Criteria for the cleanup policy.
       </tr></tbody>
 </table>
 
-
 ### NexusCleanupPolicy.spec.nexusRef
+
 <sup><sup>[↩ Parent](#nexuscleanuppolicyspec)</sup></sup>
-
-
 
 NexusRef is a reference to Nexus custom resource.
 
@@ -469,11 +443,9 @@ NexusRef is a reference to Nexus custom resource.
       </tr></tbody>
 </table>
 
-
 ### NexusCleanupPolicy.status
+
 <sup><sup>[↩ Parent](#nexuscleanuppolicy)</sup></sup>
-
-
 
 NexusCleanupPolicyStatus defines the observed state of NexusCleanupPolicy.
 
@@ -504,12 +476,8 @@ NexusCleanupPolicyStatus defines the observed state of NexusCleanupPolicy.
 </table>
 
 ## Nexus
+
 <sup><sup>[↩ Parent](#edpepamcomv1alpha1 )</sup></sup>
-
-
-
-
-
 
 Nexus is the Schema for the nexus API.
 
@@ -556,11 +524,9 @@ Nexus is the Schema for the nexus API.
       </tr></tbody>
 </table>
 
-
 ### Nexus.spec
+
 <sup><sup>[↩ Parent](#nexus)</sup></sup>
-
-
 
 NexusSpec defines the desired state of Nexus.
 
@@ -591,11 +557,9 @@ Secret should contain a user field with a nexus username and a password field wi
       </tr></tbody>
 </table>
 
-
 ### Nexus.status
+
 <sup><sup>[↩ Parent](#nexus)</sup></sup>
-
-
 
 NexusStatus defines the observed state of Nexus.
 
@@ -626,12 +590,8 @@ NexusStatus defines the observed state of Nexus.
 </table>
 
 ## NexusRepository
+
 <sup><sup>[↩ Parent](#edpepamcomv1alpha1 )</sup></sup>
-
-
-
-
-
 
 NexusRepository is the Schema for the nexusrepositories API.
 
@@ -679,11 +639,9 @@ It should contain only one format of repository - go, maven, npm, etc. and only 
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec
+
 <sup><sup>[↩ Parent](#nexusrepository)</sup></sup>
-
-
 
 NexusRepositorySpec defines the desired state of NexusRepository.
 It should contain only one format of repository - go, maven, npm, etc. and only one type - proxy, hosted or group.
@@ -833,11 +791,9 @@ It should contain only one format of repository - go, maven, npm, etc. and only 
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.nexusRef
+
 <sup><sup>[↩ Parent](#nexusrepositoryspec)</sup></sup>
-
-
 
 NexusRef is a reference to Nexus custom resource.
 
@@ -869,13 +825,9 @@ NexusRef is a reference to Nexus custom resource.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.apt
+
 <sup><sup>[↩ Parent](#nexusrepositoryspec)</sup></sup>
-
-
-
-
 
 <table>
     <thead>
@@ -903,13 +855,9 @@ NexusRef is a reference to Nexus custom resource.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.apt.hosted
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecapt)</sup></sup>
-
-
-
-
 
 <table>
     <thead>
@@ -977,11 +925,9 @@ Only letters, digits, underscores(_), hyphens(-), and dots(.) are allowed and ma
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.apt.hosted.apt
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecapthosted)</sup></sup>
-
-
 
 Apt contains data of hosted repositories of format Apt.
 
@@ -1004,11 +950,9 @@ Apt contains data of hosted repositories of format Apt.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.apt.hosted.aptSigning
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecapthosted)</sup></sup>
-
-
 
 AptSigning contains signing data of hosted repositores of format Apt.
 
@@ -1038,13 +982,9 @@ AptSigning contains signing data of hosted repositores of format Apt.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.apt.hosted.cleanup
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecapthosted)</sup></sup>
-
-
-
-
 
 <table>
     <thead>
@@ -1065,13 +1005,9 @@ AptSigning contains signing data of hosted repositores of format Apt.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.apt.hosted.component
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecapthosted)</sup></sup>
-
-
-
-
 
 <table>
     <thead>
@@ -1092,11 +1028,9 @@ AptSigning contains signing data of hosted repositores of format Apt.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.apt.hosted.storage
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecapthosted)</sup></sup>
-
-
 
 Storage configuration.
 
@@ -1140,13 +1074,9 @@ Storage configuration.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.apt.proxy
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecapt)</sup></sup>
-
-
-
-
 
 <table>
     <thead>
@@ -1232,11 +1162,9 @@ Only letters, digits, underscores(_), hyphens(-), and dots(.) are allowed and ma
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.apt.proxy.apt
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecaptproxy)</sup></sup>
-
-
 
 Apt configuration.
 
@@ -1268,11 +1196,9 @@ Apt configuration.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.apt.proxy.proxy
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecaptproxy)</sup></sup>
-
-
 
 Proxy configuration.
 
@@ -1313,13 +1239,9 @@ Proxy configuration.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.apt.proxy.cleanup
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecaptproxy)</sup></sup>
-
-
-
-
 
 <table>
     <thead>
@@ -1340,11 +1262,9 @@ Proxy configuration.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.apt.proxy.httpClient
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecaptproxy)</sup></sup>
-
-
 
 HTTP client configuration.
 
@@ -1390,11 +1310,9 @@ HTTP client configuration.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.apt.proxy.httpClient.authentication
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecaptproxyhttpclient)</sup></sup>
-
-
 
 HTTPClientAuthentication contains HTTP client authentication configuration data.
 
@@ -1448,11 +1366,9 @@ HTTPClientAuthentication contains HTTP client authentication configuration data.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.apt.proxy.httpClient.connection
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecaptproxyhttpclient)</sup></sup>
-
-
 
 HTTPClientConnection contains HTTP client connection configuration data.
 
@@ -1510,11 +1426,9 @@ HTTPClientConnection contains HTTP client connection configuration data.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.apt.proxy.negativeCache
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecaptproxy)</sup></sup>
-
-
 
 Negative cache configuration.
 
@@ -1548,11 +1462,9 @@ Negative cache configuration.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.apt.proxy.storage
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecaptproxy)</sup></sup>
-
-
 
 Storage configuration.
 
@@ -1586,13 +1498,9 @@ Storage configuration.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.bower
+
 <sup><sup>[↩ Parent](#nexusrepositoryspec)</sup></sup>
-
-
-
-
 
 <table>
     <thead>
@@ -1627,13 +1535,9 @@ Storage configuration.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.bower.group
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecbower)</sup></sup>
-
-
-
-
 
 <table>
     <thead>
@@ -1680,11 +1584,9 @@ Only letters, digits, underscores(_), hyphens(-), and dots(.) are allowed and ma
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.bower.group.group
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecbowergroup)</sup></sup>
-
-
 
 Group configuration.
 
@@ -1707,11 +1609,9 @@ Group configuration.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.bower.group.storage
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecbowergroup)</sup></sup>
-
-
 
 Storage configuration.
 
@@ -1745,13 +1645,9 @@ Storage configuration.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.bower.hosted
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecbower)</sup></sup>
-
-
-
-
 
 <table>
     <thead>
@@ -1805,13 +1701,9 @@ Only letters, digits, underscores(_), hyphens(-), and dots(.) are allowed and ma
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.bower.hosted.cleanup
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecbowerhosted)</sup></sup>
-
-
-
-
 
 <table>
     <thead>
@@ -1832,13 +1724,9 @@ Only letters, digits, underscores(_), hyphens(-), and dots(.) are allowed and ma
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.bower.hosted.component
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecbowerhosted)</sup></sup>
-
-
-
-
 
 <table>
     <thead>
@@ -1859,11 +1747,9 @@ Only letters, digits, underscores(_), hyphens(-), and dots(.) are allowed and ma
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.bower.hosted.storage
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecbowerhosted)</sup></sup>
-
-
 
 Storage configuration.
 
@@ -1907,13 +1793,9 @@ Storage configuration.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.bower.proxy
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecbower)</sup></sup>
-
-
-
-
 
 <table>
     <thead>
@@ -1999,13 +1881,9 @@ Only letters, digits, underscores(_), hyphens(-), and dots(.) are allowed and ma
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.bower.proxy.bower
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecbowerproxy)</sup></sup>
-
-
-
-
 
 <table>
     <thead>
@@ -2026,11 +1904,9 @@ Only letters, digits, underscores(_), hyphens(-), and dots(.) are allowed and ma
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.bower.proxy.proxy
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecbowerproxy)</sup></sup>
-
-
 
 Proxy configuration.
 
@@ -2071,13 +1947,9 @@ Proxy configuration.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.bower.proxy.cleanup
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecbowerproxy)</sup></sup>
-
-
-
-
 
 <table>
     <thead>
@@ -2098,11 +1970,9 @@ Proxy configuration.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.bower.proxy.httpClient
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecbowerproxy)</sup></sup>
-
-
 
 HTTP client configuration.
 
@@ -2148,11 +2018,9 @@ HTTP client configuration.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.bower.proxy.httpClient.authentication
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecbowerproxyhttpclient)</sup></sup>
-
-
 
 HTTPClientAuthentication contains HTTP client authentication configuration data.
 
@@ -2206,11 +2074,9 @@ HTTPClientAuthentication contains HTTP client authentication configuration data.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.bower.proxy.httpClient.connection
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecbowerproxyhttpclient)</sup></sup>
-
-
 
 HTTPClientConnection contains HTTP client connection configuration data.
 
@@ -2268,11 +2134,9 @@ HTTPClientConnection contains HTTP client connection configuration data.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.bower.proxy.negativeCache
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecbowerproxy)</sup></sup>
-
-
 
 Negative cache configuration.
 
@@ -2306,11 +2170,9 @@ Negative cache configuration.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.bower.proxy.storage
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecbowerproxy)</sup></sup>
-
-
 
 Storage configuration.
 
@@ -2344,13 +2206,9 @@ Storage configuration.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.cocoapods
+
 <sup><sup>[↩ Parent](#nexusrepositoryspec)</sup></sup>
-
-
-
-
 
 <table>
     <thead>
@@ -2371,13 +2229,9 @@ Storage configuration.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.cocoapods.proxy
+
 <sup><sup>[↩ Parent](#nexusrepositoryspeccocoapods)</sup></sup>
-
-
-
-
 
 <table>
     <thead>
@@ -2456,11 +2310,9 @@ Only letters, digits, underscores(_), hyphens(-), and dots(.) are allowed and ma
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.cocoapods.proxy.proxy
+
 <sup><sup>[↩ Parent](#nexusrepositoryspeccocoapodsproxy)</sup></sup>
-
-
 
 Proxy configuration.
 
@@ -2501,13 +2353,9 @@ Proxy configuration.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.cocoapods.proxy.cleanup
+
 <sup><sup>[↩ Parent](#nexusrepositoryspeccocoapodsproxy)</sup></sup>
-
-
-
-
 
 <table>
     <thead>
@@ -2528,11 +2376,9 @@ Proxy configuration.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.cocoapods.proxy.httpClient
+
 <sup><sup>[↩ Parent](#nexusrepositoryspeccocoapodsproxy)</sup></sup>
-
-
 
 HTTP client configuration.
 
@@ -2578,11 +2424,9 @@ HTTP client configuration.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.cocoapods.proxy.httpClient.authentication
+
 <sup><sup>[↩ Parent](#nexusrepositoryspeccocoapodsproxyhttpclient)</sup></sup>
-
-
 
 HTTPClientAuthentication contains HTTP client authentication configuration data.
 
@@ -2636,11 +2480,9 @@ HTTPClientAuthentication contains HTTP client authentication configuration data.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.cocoapods.proxy.httpClient.connection
+
 <sup><sup>[↩ Parent](#nexusrepositoryspeccocoapodsproxyhttpclient)</sup></sup>
-
-
 
 HTTPClientConnection contains HTTP client connection configuration data.
 
@@ -2698,11 +2540,9 @@ HTTPClientConnection contains HTTP client connection configuration data.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.cocoapods.proxy.negativeCache
+
 <sup><sup>[↩ Parent](#nexusrepositoryspeccocoapodsproxy)</sup></sup>
-
-
 
 Negative cache configuration.
 
@@ -2736,11 +2576,9 @@ Negative cache configuration.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.cocoapods.proxy.storage
+
 <sup><sup>[↩ Parent](#nexusrepositoryspeccocoapodsproxy)</sup></sup>
-
-
 
 Storage configuration.
 
@@ -2774,13 +2612,9 @@ Storage configuration.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.conan
+
 <sup><sup>[↩ Parent](#nexusrepositoryspec)</sup></sup>
-
-
-
-
 
 <table>
     <thead>
@@ -2801,13 +2635,9 @@ Storage configuration.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.conan.proxy
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecconan)</sup></sup>
-
-
-
-
 
 <table>
     <thead>
@@ -2886,11 +2716,9 @@ Only letters, digits, underscores(_), hyphens(-), and dots(.) are allowed and ma
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.conan.proxy.proxy
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecconanproxy)</sup></sup>
-
-
 
 Proxy configuration.
 
@@ -2931,13 +2759,9 @@ Proxy configuration.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.conan.proxy.cleanup
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecconanproxy)</sup></sup>
-
-
-
-
 
 <table>
     <thead>
@@ -2958,11 +2782,9 @@ Proxy configuration.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.conan.proxy.httpClient
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecconanproxy)</sup></sup>
-
-
 
 HTTP client configuration.
 
@@ -3008,11 +2830,9 @@ HTTP client configuration.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.conan.proxy.httpClient.authentication
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecconanproxyhttpclient)</sup></sup>
-
-
 
 HTTPClientAuthentication contains HTTP client authentication configuration data.
 
@@ -3066,11 +2886,9 @@ HTTPClientAuthentication contains HTTP client authentication configuration data.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.conan.proxy.httpClient.connection
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecconanproxyhttpclient)</sup></sup>
-
-
 
 HTTPClientConnection contains HTTP client connection configuration data.
 
@@ -3128,11 +2946,9 @@ HTTPClientConnection contains HTTP client connection configuration data.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.conan.proxy.negativeCache
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecconanproxy)</sup></sup>
-
-
 
 Negative cache configuration.
 
@@ -3166,11 +2982,9 @@ Negative cache configuration.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.conan.proxy.storage
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecconanproxy)</sup></sup>
-
-
 
 Storage configuration.
 
@@ -3204,13 +3018,9 @@ Storage configuration.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.conda
+
 <sup><sup>[↩ Parent](#nexusrepositoryspec)</sup></sup>
-
-
-
-
 
 <table>
     <thead>
@@ -3231,13 +3041,9 @@ Storage configuration.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.conda.proxy
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecconda)</sup></sup>
-
-
-
-
 
 <table>
     <thead>
@@ -3316,11 +3122,9 @@ Only letters, digits, underscores(_), hyphens(-), and dots(.) are allowed and ma
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.conda.proxy.proxy
+
 <sup><sup>[↩ Parent](#nexusrepositoryspeccondaproxy)</sup></sup>
-
-
 
 Proxy configuration.
 
@@ -3361,13 +3165,9 @@ Proxy configuration.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.conda.proxy.cleanup
+
 <sup><sup>[↩ Parent](#nexusrepositoryspeccondaproxy)</sup></sup>
-
-
-
-
 
 <table>
     <thead>
@@ -3388,11 +3188,9 @@ Proxy configuration.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.conda.proxy.httpClient
+
 <sup><sup>[↩ Parent](#nexusrepositoryspeccondaproxy)</sup></sup>
-
-
 
 HTTP client configuration.
 
@@ -3438,11 +3236,9 @@ HTTP client configuration.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.conda.proxy.httpClient.authentication
+
 <sup><sup>[↩ Parent](#nexusrepositoryspeccondaproxyhttpclient)</sup></sup>
-
-
 
 HTTPClientAuthentication contains HTTP client authentication configuration data.
 
@@ -3496,11 +3292,9 @@ HTTPClientAuthentication contains HTTP client authentication configuration data.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.conda.proxy.httpClient.connection
+
 <sup><sup>[↩ Parent](#nexusrepositoryspeccondaproxyhttpclient)</sup></sup>
-
-
 
 HTTPClientConnection contains HTTP client connection configuration data.
 
@@ -3558,11 +3352,9 @@ HTTPClientConnection contains HTTP client connection configuration data.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.conda.proxy.negativeCache
+
 <sup><sup>[↩ Parent](#nexusrepositoryspeccondaproxy)</sup></sup>
-
-
 
 Negative cache configuration.
 
@@ -3596,11 +3388,9 @@ Negative cache configuration.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.conda.proxy.storage
+
 <sup><sup>[↩ Parent](#nexusrepositoryspeccondaproxy)</sup></sup>
-
-
 
 Storage configuration.
 
@@ -3634,13 +3424,9 @@ Storage configuration.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.docker
+
 <sup><sup>[↩ Parent](#nexusrepositoryspec)</sup></sup>
-
-
-
-
 
 <table>
     <thead>
@@ -3675,13 +3461,9 @@ Storage configuration.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.docker.group
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecdocker)</sup></sup>
-
-
-
-
 
 <table>
     <thead>
@@ -3735,11 +3517,9 @@ Only letters, digits, underscores(_), hyphens(-), and dots(.) are allowed and ma
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.docker.group.docker
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecdockergroup)</sup></sup>
-
-
 
 Docker contains data of a Docker Repositoriy.
 
@@ -3783,11 +3563,9 @@ Docker contains data of a Docker Repositoriy.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.docker.group.group
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecdockergroup)</sup></sup>
-
-
 
 Group configuration.
 
@@ -3817,11 +3595,9 @@ Group configuration.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.docker.group.storage
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecdockergroup)</sup></sup>
-
-
 
 Storage configuration.
 
@@ -3855,13 +3631,9 @@ Storage configuration.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.docker.hosted
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecdocker)</sup></sup>
-
-
-
-
 
 <table>
     <thead>
@@ -3922,11 +3694,9 @@ Only letters, digits, underscores(_), hyphens(-), and dots(.) are allowed and ma
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.docker.hosted.docker
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecdockerhosted)</sup></sup>
-
-
 
 Docker contains data of a Docker Repositoriy.
 
@@ -3970,13 +3740,9 @@ Docker contains data of a Docker Repositoriy.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.docker.hosted.cleanup
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecdockerhosted)</sup></sup>
-
-
-
-
 
 <table>
     <thead>
@@ -3997,13 +3763,9 @@ Docker contains data of a Docker Repositoriy.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.docker.hosted.component
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecdockerhosted)</sup></sup>
-
-
-
-
 
 <table>
     <thead>
@@ -4024,11 +3786,9 @@ Docker contains data of a Docker Repositoriy.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.docker.hosted.storage
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecdockerhosted)</sup></sup>
-
-
 
 Storage configuration.
 
@@ -4072,13 +3832,9 @@ Storage configuration.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.docker.proxy
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecdocker)</sup></sup>
-
-
-
-
 
 <table>
     <thead>
@@ -4171,11 +3927,9 @@ Only letters, digits, underscores(_), hyphens(-), and dots(.) are allowed and ma
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.docker.proxy.docker
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecdockerproxy)</sup></sup>
-
-
 
 Docker contains data of a Docker Repositoriy.
 
@@ -4219,11 +3973,9 @@ Docker contains data of a Docker Repositoriy.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.docker.proxy.dockerProxy
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecdockerproxy)</sup></sup>
-
-
 
 DockerProxy contains data of a Docker Proxy Repository.
 
@@ -4257,11 +4009,9 @@ TODO: add cel validation. (Required if indexType is CUSTOM)<br/>
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.docker.proxy.proxy
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecdockerproxy)</sup></sup>
-
-
 
 Proxy configuration.
 
@@ -4302,13 +4052,9 @@ Proxy configuration.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.docker.proxy.cleanup
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecdockerproxy)</sup></sup>
-
-
-
-
 
 <table>
     <thead>
@@ -4329,11 +4075,9 @@ Proxy configuration.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.docker.proxy.httpClient
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecdockerproxy)</sup></sup>
-
-
 
 HTTP client configuration.
 
@@ -4379,11 +4123,9 @@ HTTP client configuration.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.docker.proxy.httpClient.authentication
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecdockerproxyhttpclient)</sup></sup>
-
-
 
 HTTPClientAuthentication contains HTTP client authentication configuration data.
 
@@ -4437,11 +4179,9 @@ HTTPClientAuthentication contains HTTP client authentication configuration data.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.docker.proxy.httpClient.connection
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecdockerproxyhttpclient)</sup></sup>
-
-
 
 HTTPClientConnection contains HTTP client connection configuration data.
 
@@ -4499,11 +4239,9 @@ HTTPClientConnection contains HTTP client connection configuration data.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.docker.proxy.negativeCache
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecdockerproxy)</sup></sup>
-
-
 
 Negative cache configuration.
 
@@ -4537,11 +4275,9 @@ Negative cache configuration.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.docker.proxy.storage
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecdockerproxy)</sup></sup>
-
-
 
 Storage configuration.
 
@@ -4575,13 +4311,9 @@ Storage configuration.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.gitLfs
+
 <sup><sup>[↩ Parent](#nexusrepositoryspec)</sup></sup>
-
-
-
-
 
 <table>
     <thead>
@@ -4602,13 +4334,9 @@ Storage configuration.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.gitLfs.hosted
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecgitlfs)</sup></sup>
-
-
-
-
 
 <table>
     <thead>
@@ -4662,13 +4390,9 @@ Only letters, digits, underscores(_), hyphens(-), and dots(.) are allowed and ma
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.gitLfs.hosted.cleanup
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecgitlfshosted)</sup></sup>
-
-
-
-
 
 <table>
     <thead>
@@ -4689,13 +4413,9 @@ Only letters, digits, underscores(_), hyphens(-), and dots(.) are allowed and ma
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.gitLfs.hosted.component
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecgitlfshosted)</sup></sup>
-
-
-
-
 
 <table>
     <thead>
@@ -4716,11 +4436,9 @@ Only letters, digits, underscores(_), hyphens(-), and dots(.) are allowed and ma
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.gitLfs.hosted.storage
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecgitlfshosted)</sup></sup>
-
-
 
 Storage configuration.
 
@@ -4764,13 +4482,9 @@ Storage configuration.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.go
+
 <sup><sup>[↩ Parent](#nexusrepositoryspec)</sup></sup>
-
-
-
-
 
 <table>
     <thead>
@@ -4798,13 +4512,9 @@ Storage configuration.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.go.group
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecgo)</sup></sup>
-
-
-
-
 
 <table>
     <thead>
@@ -4851,11 +4561,9 @@ Only letters, digits, underscores(_), hyphens(-), and dots(.) are allowed and ma
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.go.group.group
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecgogroup)</sup></sup>
-
-
 
 Group configuration.
 
@@ -4878,11 +4586,9 @@ Group configuration.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.go.group.storage
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecgogroup)</sup></sup>
-
-
 
 Storage configuration.
 
@@ -4916,13 +4622,9 @@ Storage configuration.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.go.proxy
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecgo)</sup></sup>
-
-
-
-
 
 <table>
     <thead>
@@ -5001,11 +4703,9 @@ Only letters, digits, underscores(_), hyphens(-), and dots(.) are allowed and ma
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.go.proxy.proxy
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecgoproxy)</sup></sup>
-
-
 
 Proxy configuration.
 
@@ -5046,13 +4746,9 @@ Proxy configuration.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.go.proxy.cleanup
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecgoproxy)</sup></sup>
-
-
-
-
 
 <table>
     <thead>
@@ -5073,11 +4769,9 @@ Proxy configuration.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.go.proxy.httpClient
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecgoproxy)</sup></sup>
-
-
 
 HTTP client configuration.
 
@@ -5123,11 +4817,9 @@ HTTP client configuration.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.go.proxy.httpClient.authentication
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecgoproxyhttpclient)</sup></sup>
-
-
 
 HTTPClientAuthentication contains HTTP client authentication configuration data.
 
@@ -5181,11 +4873,9 @@ HTTPClientAuthentication contains HTTP client authentication configuration data.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.go.proxy.httpClient.connection
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecgoproxyhttpclient)</sup></sup>
-
-
 
 HTTPClientConnection contains HTTP client connection configuration data.
 
@@ -5243,11 +4933,9 @@ HTTPClientConnection contains HTTP client connection configuration data.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.go.proxy.negativeCache
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecgoproxy)</sup></sup>
-
-
 
 Negative cache configuration.
 
@@ -5281,11 +4969,9 @@ Negative cache configuration.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.go.proxy.storage
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecgoproxy)</sup></sup>
-
-
 
 Storage configuration.
 
@@ -5319,13 +5005,9 @@ Storage configuration.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.helm
+
 <sup><sup>[↩ Parent](#nexusrepositoryspec)</sup></sup>
-
-
-
-
 
 <table>
     <thead>
@@ -5353,13 +5035,9 @@ Storage configuration.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.helm.hosted
+
 <sup><sup>[↩ Parent](#nexusrepositoryspechelm)</sup></sup>
-
-
-
-
 
 <table>
     <thead>
@@ -5413,13 +5091,9 @@ Only letters, digits, underscores(_), hyphens(-), and dots(.) are allowed and ma
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.helm.hosted.cleanup
+
 <sup><sup>[↩ Parent](#nexusrepositoryspechelmhosted)</sup></sup>
-
-
-
-
 
 <table>
     <thead>
@@ -5440,13 +5114,9 @@ Only letters, digits, underscores(_), hyphens(-), and dots(.) are allowed and ma
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.helm.hosted.component
+
 <sup><sup>[↩ Parent](#nexusrepositoryspechelmhosted)</sup></sup>
-
-
-
-
 
 <table>
     <thead>
@@ -5467,11 +5137,9 @@ Only letters, digits, underscores(_), hyphens(-), and dots(.) are allowed and ma
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.helm.hosted.storage
+
 <sup><sup>[↩ Parent](#nexusrepositoryspechelmhosted)</sup></sup>
-
-
 
 Storage configuration.
 
@@ -5515,13 +5183,9 @@ Storage configuration.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.helm.proxy
+
 <sup><sup>[↩ Parent](#nexusrepositoryspechelm)</sup></sup>
-
-
-
-
 
 <table>
     <thead>
@@ -5600,11 +5264,9 @@ Only letters, digits, underscores(_), hyphens(-), and dots(.) are allowed and ma
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.helm.proxy.proxy
+
 <sup><sup>[↩ Parent](#nexusrepositoryspechelmproxy)</sup></sup>
-
-
 
 Proxy configuration.
 
@@ -5645,13 +5307,9 @@ Proxy configuration.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.helm.proxy.cleanup
+
 <sup><sup>[↩ Parent](#nexusrepositoryspechelmproxy)</sup></sup>
-
-
-
-
 
 <table>
     <thead>
@@ -5672,11 +5330,9 @@ Proxy configuration.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.helm.proxy.httpClient
+
 <sup><sup>[↩ Parent](#nexusrepositoryspechelmproxy)</sup></sup>
-
-
 
 HTTP client configuration.
 
@@ -5722,11 +5378,9 @@ HTTP client configuration.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.helm.proxy.httpClient.authentication
+
 <sup><sup>[↩ Parent](#nexusrepositoryspechelmproxyhttpclient)</sup></sup>
-
-
 
 HTTPClientAuthentication contains HTTP client authentication configuration data.
 
@@ -5780,11 +5434,9 @@ HTTPClientAuthentication contains HTTP client authentication configuration data.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.helm.proxy.httpClient.connection
+
 <sup><sup>[↩ Parent](#nexusrepositoryspechelmproxyhttpclient)</sup></sup>
-
-
 
 HTTPClientConnection contains HTTP client connection configuration data.
 
@@ -5842,11 +5494,9 @@ HTTPClientConnection contains HTTP client connection configuration data.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.helm.proxy.negativeCache
+
 <sup><sup>[↩ Parent](#nexusrepositoryspechelmproxy)</sup></sup>
-
-
 
 Negative cache configuration.
 
@@ -5880,11 +5530,9 @@ Negative cache configuration.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.helm.proxy.storage
+
 <sup><sup>[↩ Parent](#nexusrepositoryspechelmproxy)</sup></sup>
-
-
 
 Storage configuration.
 
@@ -5918,13 +5566,9 @@ Storage configuration.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.maven
+
 <sup><sup>[↩ Parent](#nexusrepositoryspec)</sup></sup>
-
-
-
-
 
 <table>
     <thead>
@@ -5959,13 +5603,9 @@ Storage configuration.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.maven.group
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecmaven)</sup></sup>
-
-
-
-
 
 <table>
     <thead>
@@ -6021,11 +5661,9 @@ Only letters, digits, underscores(_), hyphens(-), and dots(.) are allowed and ma
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.maven.group.group
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecmavengroup)</sup></sup>
-
-
 
 Group configuration.
 
@@ -6048,11 +5686,9 @@ Group configuration.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.maven.group.maven
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecmavengroup)</sup></sup>
-
-
 
 Maven contains additional data of maven repository.
 
@@ -6098,11 +5734,9 @@ Maven contains additional data of maven repository.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.maven.group.storage
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecmavengroup)</sup></sup>
-
-
 
 Storage configuration.
 
@@ -6136,13 +5770,9 @@ Storage configuration.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.maven.hosted
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecmaven)</sup></sup>
-
-
-
-
 
 <table>
     <thead>
@@ -6205,13 +5835,9 @@ Only letters, digits, underscores(_), hyphens(-), and dots(.) are allowed and ma
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.maven.hosted.cleanup
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecmavenhosted)</sup></sup>
-
-
-
-
 
 <table>
     <thead>
@@ -6232,13 +5858,9 @@ Only letters, digits, underscores(_), hyphens(-), and dots(.) are allowed and ma
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.maven.hosted.component
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecmavenhosted)</sup></sup>
-
-
-
-
 
 <table>
     <thead>
@@ -6259,11 +5881,9 @@ Only letters, digits, underscores(_), hyphens(-), and dots(.) are allowed and ma
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.maven.hosted.maven
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecmavenhosted)</sup></sup>
-
-
 
 Maven contains additional data of maven repository.
 
@@ -6309,11 +5929,9 @@ Maven contains additional data of maven repository.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.maven.hosted.storage
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecmavenhosted)</sup></sup>
-
-
 
 Storage configuration.
 
@@ -6357,13 +5975,9 @@ Storage configuration.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.maven.proxy
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecmaven)</sup></sup>
-
-
-
-
 
 <table>
     <thead>
@@ -6451,11 +6065,9 @@ Only letters, digits, underscores(_), hyphens(-), and dots(.) are allowed and ma
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.maven.proxy.proxy
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecmavenproxy)</sup></sup>
-
-
 
 Proxy configuration.
 
@@ -6496,13 +6108,9 @@ Proxy configuration.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.maven.proxy.cleanup
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecmavenproxy)</sup></sup>
-
-
-
-
 
 <table>
     <thead>
@@ -6523,11 +6131,9 @@ Proxy configuration.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.maven.proxy.httpClient
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecmavenproxy)</sup></sup>
-
-
 
 HTTP client configuration.
 
@@ -6573,11 +6179,9 @@ HTTP client configuration.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.maven.proxy.httpClient.authentication
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecmavenproxyhttpclient)</sup></sup>
-
-
 
 HTTPClientAuthenticationWithPreemptive contains HTTP client authentication configuration data.
 
@@ -6638,11 +6242,9 @@ HTTPClientAuthenticationWithPreemptive contains HTTP client authentication confi
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.maven.proxy.httpClient.connection
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecmavenproxyhttpclient)</sup></sup>
-
-
 
 HTTPClientConnection contains HTTP client connection configuration data.
 
@@ -6700,11 +6302,9 @@ HTTPClientConnection contains HTTP client connection configuration data.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.maven.proxy.maven
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecmavenproxy)</sup></sup>
-
-
 
 Maven contains additional data of maven repository.
 
@@ -6750,11 +6350,9 @@ Maven contains additional data of maven repository.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.maven.proxy.negativeCache
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecmavenproxy)</sup></sup>
-
-
 
 Negative cache configuration.
 
@@ -6788,11 +6386,9 @@ Negative cache configuration.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.maven.proxy.storage
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecmavenproxy)</sup></sup>
-
-
 
 Storage configuration.
 
@@ -6826,13 +6422,9 @@ Storage configuration.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.npm
+
 <sup><sup>[↩ Parent](#nexusrepositoryspec)</sup></sup>
-
-
-
-
 
 <table>
     <thead>
@@ -6867,13 +6459,9 @@ Storage configuration.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.npm.group
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecnpm)</sup></sup>
-
-
-
-
 
 <table>
     <thead>
@@ -6920,11 +6508,9 @@ Only letters, digits, underscores(_), hyphens(-), and dots(.) are allowed and ma
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.npm.group.group
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecnpmgroup)</sup></sup>
-
-
 
 Group configuration.
 
@@ -6947,11 +6533,9 @@ Group configuration.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.npm.group.storage
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecnpmgroup)</sup></sup>
-
-
 
 Storage configuration.
 
@@ -6985,13 +6569,9 @@ Storage configuration.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.npm.hosted
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecnpm)</sup></sup>
-
-
-
-
 
 <table>
     <thead>
@@ -7045,13 +6625,9 @@ Only letters, digits, underscores(_), hyphens(-), and dots(.) are allowed and ma
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.npm.hosted.cleanup
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecnpmhosted)</sup></sup>
-
-
-
-
 
 <table>
     <thead>
@@ -7072,13 +6648,9 @@ Only letters, digits, underscores(_), hyphens(-), and dots(.) are allowed and ma
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.npm.hosted.component
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecnpmhosted)</sup></sup>
-
-
-
-
 
 <table>
     <thead>
@@ -7099,11 +6671,9 @@ Only letters, digits, underscores(_), hyphens(-), and dots(.) are allowed and ma
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.npm.hosted.storage
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecnpmhosted)</sup></sup>
-
-
 
 Storage configuration.
 
@@ -7147,13 +6717,9 @@ Storage configuration.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.npm.proxy
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecnpm)</sup></sup>
-
-
-
-
 
 <table>
     <thead>
@@ -7239,11 +6805,9 @@ Only letters, digits, underscores(_), hyphens(-), and dots(.) are allowed and ma
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.npm.proxy.proxy
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecnpmproxy)</sup></sup>
-
-
 
 Proxy configuration.
 
@@ -7284,13 +6848,9 @@ Proxy configuration.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.npm.proxy.cleanup
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecnpmproxy)</sup></sup>
-
-
-
-
 
 <table>
     <thead>
@@ -7311,11 +6871,9 @@ Proxy configuration.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.npm.proxy.httpClient
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecnpmproxy)</sup></sup>
-
-
 
 HTTP client configuration.
 
@@ -7361,11 +6919,9 @@ HTTP client configuration.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.npm.proxy.httpClient.authentication
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecnpmproxyhttpclient)</sup></sup>
-
-
 
 HTTPClientAuthentication contains HTTP client authentication configuration data.
 
@@ -7419,11 +6975,9 @@ HTTPClientAuthentication contains HTTP client authentication configuration data.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.npm.proxy.httpClient.connection
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecnpmproxyhttpclient)</sup></sup>
-
-
 
 HTTPClientConnection contains HTTP client connection configuration data.
 
@@ -7481,11 +7035,9 @@ HTTPClientConnection contains HTTP client connection configuration data.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.npm.proxy.negativeCache
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecnpmproxy)</sup></sup>
-
-
 
 Negative cache configuration.
 
@@ -7519,13 +7071,9 @@ Negative cache configuration.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.npm.proxy.npm
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecnpmproxy)</sup></sup>
-
-
-
-
 
 <table>
     <thead>
@@ -7553,11 +7101,9 @@ Negative cache configuration.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.npm.proxy.storage
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecnpmproxy)</sup></sup>
-
-
 
 Storage configuration.
 
@@ -7591,13 +7137,9 @@ Storage configuration.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.nuget
+
 <sup><sup>[↩ Parent](#nexusrepositoryspec)</sup></sup>
-
-
-
-
 
 <table>
     <thead>
@@ -7632,13 +7174,9 @@ Storage configuration.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.nuget.group
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecnuget)</sup></sup>
-
-
-
-
 
 <table>
     <thead>
@@ -7685,11 +7223,9 @@ Only letters, digits, underscores(_), hyphens(-), and dots(.) are allowed and ma
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.nuget.group.group
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecnugetgroup)</sup></sup>
-
-
 
 Group configuration.
 
@@ -7712,11 +7248,9 @@ Group configuration.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.nuget.group.storage
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecnugetgroup)</sup></sup>
-
-
 
 Storage configuration.
 
@@ -7750,13 +7284,9 @@ Storage configuration.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.nuget.hosted
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecnuget)</sup></sup>
-
-
-
-
 
 <table>
     <thead>
@@ -7810,13 +7340,9 @@ Only letters, digits, underscores(_), hyphens(-), and dots(.) are allowed and ma
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.nuget.hosted.cleanup
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecnugethosted)</sup></sup>
-
-
-
-
 
 <table>
     <thead>
@@ -7837,13 +7363,9 @@ Only letters, digits, underscores(_), hyphens(-), and dots(.) are allowed and ma
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.nuget.hosted.component
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecnugethosted)</sup></sup>
-
-
-
-
 
 <table>
     <thead>
@@ -7864,11 +7386,9 @@ Only letters, digits, underscores(_), hyphens(-), and dots(.) are allowed and ma
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.nuget.hosted.storage
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecnugethosted)</sup></sup>
-
-
 
 Storage configuration.
 
@@ -7912,13 +7432,9 @@ Storage configuration.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.nuget.proxy
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecnuget)</sup></sup>
-
-
-
-
 
 <table>
     <thead>
@@ -8006,11 +7522,9 @@ Only letters, digits, underscores(_), hyphens(-), and dots(.) are allowed and ma
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.nuget.proxy.proxy
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecnugetproxy)</sup></sup>
-
-
 
 Proxy configuration.
 
@@ -8051,13 +7565,9 @@ Proxy configuration.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.nuget.proxy.cleanup
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecnugetproxy)</sup></sup>
-
-
-
-
 
 <table>
     <thead>
@@ -8078,11 +7588,9 @@ Proxy configuration.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.nuget.proxy.httpClient
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecnugetproxy)</sup></sup>
-
-
 
 HTTP client configuration.
 
@@ -8128,11 +7636,9 @@ HTTP client configuration.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.nuget.proxy.httpClient.authentication
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecnugetproxyhttpclient)</sup></sup>
-
-
 
 HTTPClientAuthentication contains HTTP client authentication configuration data.
 
@@ -8186,11 +7692,9 @@ HTTPClientAuthentication contains HTTP client authentication configuration data.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.nuget.proxy.httpClient.connection
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecnugetproxyhttpclient)</sup></sup>
-
-
 
 HTTPClientConnection contains HTTP client connection configuration data.
 
@@ -8248,11 +7752,9 @@ HTTPClientConnection contains HTTP client connection configuration data.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.nuget.proxy.negativeCache
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecnugetproxy)</sup></sup>
-
-
 
 Negative cache configuration.
 
@@ -8286,11 +7788,9 @@ Negative cache configuration.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.nuget.proxy.nugetProxy
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecnugetproxy)</sup></sup>
-
-
 
 NugetProxy contains data specific to proxy repositories of format Nuget.
 
@@ -8325,11 +7825,9 @@ NugetProxy contains data specific to proxy repositories of format Nuget.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.nuget.proxy.storage
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecnugetproxy)</sup></sup>
-
-
 
 Storage configuration.
 
@@ -8363,13 +7861,9 @@ Storage configuration.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.p2
+
 <sup><sup>[↩ Parent](#nexusrepositoryspec)</sup></sup>
-
-
-
-
 
 <table>
     <thead>
@@ -8390,13 +7884,9 @@ Storage configuration.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.p2.proxy
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecp2)</sup></sup>
-
-
-
-
 
 <table>
     <thead>
@@ -8475,11 +7965,9 @@ Only letters, digits, underscores(_), hyphens(-), and dots(.) are allowed and ma
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.p2.proxy.proxy
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecp2proxy)</sup></sup>
-
-
 
 Proxy configuration.
 
@@ -8520,13 +8008,9 @@ Proxy configuration.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.p2.proxy.cleanup
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecp2proxy)</sup></sup>
-
-
-
-
 
 <table>
     <thead>
@@ -8547,11 +8031,9 @@ Proxy configuration.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.p2.proxy.httpClient
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecp2proxy)</sup></sup>
-
-
 
 HTTP client configuration.
 
@@ -8597,11 +8079,9 @@ HTTP client configuration.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.p2.proxy.httpClient.authentication
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecp2proxyhttpclient)</sup></sup>
-
-
 
 HTTPClientAuthentication contains HTTP client authentication configuration data.
 
@@ -8655,11 +8135,9 @@ HTTPClientAuthentication contains HTTP client authentication configuration data.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.p2.proxy.httpClient.connection
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecp2proxyhttpclient)</sup></sup>
-
-
 
 HTTPClientConnection contains HTTP client connection configuration data.
 
@@ -8717,11 +8195,9 @@ HTTPClientConnection contains HTTP client connection configuration data.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.p2.proxy.negativeCache
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecp2proxy)</sup></sup>
-
-
 
 Negative cache configuration.
 
@@ -8755,11 +8231,9 @@ Negative cache configuration.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.p2.proxy.storage
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecp2proxy)</sup></sup>
-
-
 
 Storage configuration.
 
@@ -8793,13 +8267,9 @@ Storage configuration.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.pypi
+
 <sup><sup>[↩ Parent](#nexusrepositoryspec)</sup></sup>
-
-
-
-
 
 <table>
     <thead>
@@ -8834,13 +8304,9 @@ Storage configuration.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.pypi.group
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecpypi)</sup></sup>
-
-
-
-
 
 <table>
     <thead>
@@ -8887,11 +8353,9 @@ Only letters, digits, underscores(_), hyphens(-), and dots(.) are allowed and ma
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.pypi.group.group
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecpypigroup)</sup></sup>
-
-
 
 Group configuration.
 
@@ -8914,11 +8378,9 @@ Group configuration.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.pypi.group.storage
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecpypigroup)</sup></sup>
-
-
 
 Storage configuration.
 
@@ -8952,13 +8414,9 @@ Storage configuration.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.pypi.hosted
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecpypi)</sup></sup>
-
-
-
-
 
 <table>
     <thead>
@@ -9012,13 +8470,9 @@ Only letters, digits, underscores(_), hyphens(-), and dots(.) are allowed and ma
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.pypi.hosted.cleanup
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecpypihosted)</sup></sup>
-
-
-
-
 
 <table>
     <thead>
@@ -9039,13 +8493,9 @@ Only letters, digits, underscores(_), hyphens(-), and dots(.) are allowed and ma
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.pypi.hosted.component
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecpypihosted)</sup></sup>
-
-
-
-
 
 <table>
     <thead>
@@ -9066,11 +8516,9 @@ Only letters, digits, underscores(_), hyphens(-), and dots(.) are allowed and ma
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.pypi.hosted.storage
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecpypihosted)</sup></sup>
-
-
 
 Storage configuration.
 
@@ -9114,13 +8562,9 @@ Storage configuration.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.pypi.proxy
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecpypi)</sup></sup>
-
-
-
-
 
 <table>
     <thead>
@@ -9199,11 +8643,9 @@ Only letters, digits, underscores(_), hyphens(-), and dots(.) are allowed and ma
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.pypi.proxy.proxy
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecpypiproxy)</sup></sup>
-
-
 
 Proxy configuration.
 
@@ -9244,13 +8686,9 @@ Proxy configuration.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.pypi.proxy.cleanup
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecpypiproxy)</sup></sup>
-
-
-
-
 
 <table>
     <thead>
@@ -9271,11 +8709,9 @@ Proxy configuration.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.pypi.proxy.httpClient
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecpypiproxy)</sup></sup>
-
-
 
 HTTP client configuration.
 
@@ -9321,11 +8757,9 @@ HTTP client configuration.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.pypi.proxy.httpClient.authentication
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecpypiproxyhttpclient)</sup></sup>
-
-
 
 HTTPClientAuthentication contains HTTP client authentication configuration data.
 
@@ -9379,11 +8813,9 @@ HTTPClientAuthentication contains HTTP client authentication configuration data.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.pypi.proxy.httpClient.connection
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecpypiproxyhttpclient)</sup></sup>
-
-
 
 HTTPClientConnection contains HTTP client connection configuration data.
 
@@ -9441,11 +8873,9 @@ HTTPClientConnection contains HTTP client connection configuration data.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.pypi.proxy.negativeCache
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecpypiproxy)</sup></sup>
-
-
 
 Negative cache configuration.
 
@@ -9479,11 +8909,9 @@ Negative cache configuration.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.pypi.proxy.storage
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecpypiproxy)</sup></sup>
-
-
 
 Storage configuration.
 
@@ -9517,13 +8945,9 @@ Storage configuration.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.r
+
 <sup><sup>[↩ Parent](#nexusrepositoryspec)</sup></sup>
-
-
-
-
 
 <table>
     <thead>
@@ -9558,13 +8982,9 @@ Storage configuration.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.r.group
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecr)</sup></sup>
-
-
-
-
 
 <table>
     <thead>
@@ -9611,11 +9031,9 @@ Only letters, digits, underscores(_), hyphens(-), and dots(.) are allowed and ma
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.r.group.group
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecrgroup)</sup></sup>
-
-
 
 Group configuration.
 
@@ -9638,11 +9056,9 @@ Group configuration.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.r.group.storage
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecrgroup)</sup></sup>
-
-
 
 Storage configuration.
 
@@ -9676,13 +9092,9 @@ Storage configuration.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.r.hosted
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecr)</sup></sup>
-
-
-
-
 
 <table>
     <thead>
@@ -9736,13 +9148,9 @@ Only letters, digits, underscores(_), hyphens(-), and dots(.) are allowed and ma
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.r.hosted.cleanup
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecrhosted)</sup></sup>
-
-
-
-
 
 <table>
     <thead>
@@ -9763,13 +9171,9 @@ Only letters, digits, underscores(_), hyphens(-), and dots(.) are allowed and ma
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.r.hosted.component
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecrhosted)</sup></sup>
-
-
-
-
 
 <table>
     <thead>
@@ -9790,11 +9194,9 @@ Only letters, digits, underscores(_), hyphens(-), and dots(.) are allowed and ma
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.r.hosted.storage
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecrhosted)</sup></sup>
-
-
 
 Storage configuration.
 
@@ -9838,13 +9240,9 @@ Storage configuration.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.r.proxy
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecr)</sup></sup>
-
-
-
-
 
 <table>
     <thead>
@@ -9923,11 +9321,9 @@ Only letters, digits, underscores(_), hyphens(-), and dots(.) are allowed and ma
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.r.proxy.proxy
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecrproxy)</sup></sup>
-
-
 
 Proxy configuration.
 
@@ -9968,13 +9364,9 @@ Proxy configuration.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.r.proxy.cleanup
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecrproxy)</sup></sup>
-
-
-
-
 
 <table>
     <thead>
@@ -9995,11 +9387,9 @@ Proxy configuration.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.r.proxy.httpClient
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecrproxy)</sup></sup>
-
-
 
 HTTP client configuration.
 
@@ -10045,11 +9435,9 @@ HTTP client configuration.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.r.proxy.httpClient.authentication
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecrproxyhttpclient)</sup></sup>
-
-
 
 HTTPClientAuthentication contains HTTP client authentication configuration data.
 
@@ -10103,11 +9491,9 @@ HTTPClientAuthentication contains HTTP client authentication configuration data.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.r.proxy.httpClient.connection
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecrproxyhttpclient)</sup></sup>
-
-
 
 HTTPClientConnection contains HTTP client connection configuration data.
 
@@ -10165,11 +9551,9 @@ HTTPClientConnection contains HTTP client connection configuration data.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.r.proxy.negativeCache
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecrproxy)</sup></sup>
-
-
 
 Negative cache configuration.
 
@@ -10203,11 +9587,9 @@ Negative cache configuration.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.r.proxy.storage
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecrproxy)</sup></sup>
-
-
 
 Storage configuration.
 
@@ -10241,13 +9623,9 @@ Storage configuration.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.raw
+
 <sup><sup>[↩ Parent](#nexusrepositoryspec)</sup></sup>
-
-
-
-
 
 <table>
     <thead>
@@ -10282,13 +9660,9 @@ Storage configuration.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.raw.group
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecraw)</sup></sup>
-
-
-
-
 
 <table>
     <thead>
@@ -10342,11 +9716,9 @@ Only letters, digits, underscores(_), hyphens(-), and dots(.) are allowed and ma
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.raw.group.group
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecrawgroup)</sup></sup>
-
-
 
 Group configuration.
 
@@ -10369,13 +9741,9 @@ Group configuration.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.raw.group.raw
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecrawgroup)</sup></sup>
-
-
-
-
 
 <table>
     <thead>
@@ -10398,11 +9766,9 @@ Group configuration.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.raw.group.storage
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecrawgroup)</sup></sup>
-
-
 
 Storage configuration.
 
@@ -10436,13 +9802,9 @@ Storage configuration.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.raw.hosted
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecraw)</sup></sup>
-
-
-
-
 
 <table>
     <thead>
@@ -10503,13 +9865,9 @@ Only letters, digits, underscores(_), hyphens(-), and dots(.) are allowed and ma
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.raw.hosted.cleanup
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecrawhosted)</sup></sup>
-
-
-
-
 
 <table>
     <thead>
@@ -10530,13 +9888,9 @@ Only letters, digits, underscores(_), hyphens(-), and dots(.) are allowed and ma
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.raw.hosted.component
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecrawhosted)</sup></sup>
-
-
-
-
 
 <table>
     <thead>
@@ -10557,13 +9911,9 @@ Only letters, digits, underscores(_), hyphens(-), and dots(.) are allowed and ma
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.raw.hosted.raw
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecrawhosted)</sup></sup>
-
-
-
-
 
 <table>
     <thead>
@@ -10586,11 +9936,9 @@ Only letters, digits, underscores(_), hyphens(-), and dots(.) are allowed and ma
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.raw.hosted.storage
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecrawhosted)</sup></sup>
-
-
 
 Storage configuration.
 
@@ -10634,13 +9982,9 @@ Storage configuration.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.raw.proxy
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecraw)</sup></sup>
-
-
-
-
 
 <table>
     <thead>
@@ -10726,11 +10070,9 @@ Only letters, digits, underscores(_), hyphens(-), and dots(.) are allowed and ma
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.raw.proxy.proxy
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecrawproxy)</sup></sup>
-
-
 
 Proxy configuration.
 
@@ -10771,13 +10113,9 @@ Proxy configuration.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.raw.proxy.cleanup
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecrawproxy)</sup></sup>
-
-
-
-
 
 <table>
     <thead>
@@ -10798,11 +10136,9 @@ Proxy configuration.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.raw.proxy.httpClient
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecrawproxy)</sup></sup>
-
-
 
 HTTP client configuration.
 
@@ -10848,11 +10184,9 @@ HTTP client configuration.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.raw.proxy.httpClient.authentication
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecrawproxyhttpclient)</sup></sup>
-
-
 
 HTTPClientAuthentication contains HTTP client authentication configuration data.
 
@@ -10906,11 +10240,9 @@ HTTPClientAuthentication contains HTTP client authentication configuration data.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.raw.proxy.httpClient.connection
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecrawproxyhttpclient)</sup></sup>
-
-
 
 HTTPClientConnection contains HTTP client connection configuration data.
 
@@ -10968,11 +10300,9 @@ HTTPClientConnection contains HTTP client connection configuration data.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.raw.proxy.negativeCache
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecrawproxy)</sup></sup>
-
-
 
 Negative cache configuration.
 
@@ -11006,13 +10336,9 @@ Negative cache configuration.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.raw.proxy.raw
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecrawproxy)</sup></sup>
-
-
-
-
 
 <table>
     <thead>
@@ -11035,11 +10361,9 @@ Negative cache configuration.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.raw.proxy.storage
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecrawproxy)</sup></sup>
-
-
 
 Storage configuration.
 
@@ -11073,13 +10397,9 @@ Storage configuration.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.rubyGems
+
 <sup><sup>[↩ Parent](#nexusrepositoryspec)</sup></sup>
-
-
-
-
 
 <table>
     <thead>
@@ -11114,13 +10434,9 @@ Storage configuration.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.rubyGems.group
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecrubygems)</sup></sup>
-
-
-
-
 
 <table>
     <thead>
@@ -11167,11 +10483,9 @@ Only letters, digits, underscores(_), hyphens(-), and dots(.) are allowed and ma
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.rubyGems.group.group
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecrubygemsgroup)</sup></sup>
-
-
 
 Group configuration.
 
@@ -11194,11 +10508,9 @@ Group configuration.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.rubyGems.group.storage
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecrubygemsgroup)</sup></sup>
-
-
 
 Storage configuration.
 
@@ -11232,13 +10544,9 @@ Storage configuration.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.rubyGems.hosted
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecrubygems)</sup></sup>
-
-
-
-
 
 <table>
     <thead>
@@ -11292,13 +10600,9 @@ Only letters, digits, underscores(_), hyphens(-), and dots(.) are allowed and ma
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.rubyGems.hosted.cleanup
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecrubygemshosted)</sup></sup>
-
-
-
-
 
 <table>
     <thead>
@@ -11319,13 +10623,9 @@ Only letters, digits, underscores(_), hyphens(-), and dots(.) are allowed and ma
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.rubyGems.hosted.component
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecrubygemshosted)</sup></sup>
-
-
-
-
 
 <table>
     <thead>
@@ -11346,11 +10646,9 @@ Only letters, digits, underscores(_), hyphens(-), and dots(.) are allowed and ma
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.rubyGems.hosted.storage
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecrubygemshosted)</sup></sup>
-
-
 
 Storage configuration.
 
@@ -11394,13 +10692,9 @@ Storage configuration.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.rubyGems.proxy
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecrubygems)</sup></sup>
-
-
-
-
 
 <table>
     <thead>
@@ -11479,11 +10773,9 @@ Only letters, digits, underscores(_), hyphens(-), and dots(.) are allowed and ma
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.rubyGems.proxy.proxy
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecrubygemsproxy)</sup></sup>
-
-
 
 Proxy configuration.
 
@@ -11524,13 +10816,9 @@ Proxy configuration.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.rubyGems.proxy.cleanup
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecrubygemsproxy)</sup></sup>
-
-
-
-
 
 <table>
     <thead>
@@ -11551,11 +10839,9 @@ Proxy configuration.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.rubyGems.proxy.httpClient
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecrubygemsproxy)</sup></sup>
-
-
 
 HTTP client configuration.
 
@@ -11601,11 +10887,9 @@ HTTP client configuration.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.rubyGems.proxy.httpClient.authentication
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecrubygemsproxyhttpclient)</sup></sup>
-
-
 
 HTTPClientAuthentication contains HTTP client authentication configuration data.
 
@@ -11659,11 +10943,9 @@ HTTPClientAuthentication contains HTTP client authentication configuration data.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.rubyGems.proxy.httpClient.connection
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecrubygemsproxyhttpclient)</sup></sup>
-
-
 
 HTTPClientConnection contains HTTP client connection configuration data.
 
@@ -11721,11 +11003,9 @@ HTTPClientConnection contains HTTP client connection configuration data.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.rubyGems.proxy.negativeCache
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecrubygemsproxy)</sup></sup>
-
-
 
 Negative cache configuration.
 
@@ -11759,11 +11039,9 @@ Negative cache configuration.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.rubyGems.proxy.storage
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecrubygemsproxy)</sup></sup>
-
-
 
 Storage configuration.
 
@@ -11797,13 +11075,9 @@ Storage configuration.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.yum
+
 <sup><sup>[↩ Parent](#nexusrepositoryspec)</sup></sup>
-
-
-
-
 
 <table>
     <thead>
@@ -11838,13 +11112,9 @@ Storage configuration.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.yum.group
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecyum)</sup></sup>
-
-
-
-
 
 <table>
     <thead>
@@ -11898,11 +11168,9 @@ Only letters, digits, underscores(_), hyphens(-), and dots(.) are allowed and ma
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.yum.group.group
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecyumgroup)</sup></sup>
-
-
 
 Group configuration.
 
@@ -11925,11 +11193,9 @@ Group configuration.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.yum.group.storage
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecyumgroup)</sup></sup>
-
-
 
 Storage configuration.
 
@@ -11963,13 +11229,9 @@ Storage configuration.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.yum.group.yumSigning
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecyumgroup)</sup></sup>
-
-
-
-
 
 <table>
     <thead>
@@ -11997,13 +11259,9 @@ Storage configuration.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.yum.hosted
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecyum)</sup></sup>
-
-
-
-
 
 <table>
     <thead>
@@ -12064,11 +11322,9 @@ Only letters, digits, underscores(_), hyphens(-), and dots(.) are allowed and ma
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.yum.hosted.yum
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecyumhosted)</sup></sup>
-
-
 
 Yum contains data of hosted repositories of format Yum.
 
@@ -12100,13 +11356,9 @@ Yum contains data of hosted repositories of format Yum.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.yum.hosted.cleanup
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecyumhosted)</sup></sup>
-
-
-
-
 
 <table>
     <thead>
@@ -12127,13 +11379,9 @@ Yum contains data of hosted repositories of format Yum.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.yum.hosted.component
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecyumhosted)</sup></sup>
-
-
-
-
 
 <table>
     <thead>
@@ -12154,11 +11402,9 @@ Yum contains data of hosted repositories of format Yum.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.yum.hosted.storage
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecyumhosted)</sup></sup>
-
-
 
 Storage configuration.
 
@@ -12202,13 +11448,9 @@ Storage configuration.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.yum.proxy
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecyum)</sup></sup>
-
-
-
-
 
 <table>
     <thead>
@@ -12294,11 +11536,9 @@ Only letters, digits, underscores(_), hyphens(-), and dots(.) are allowed and ma
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.yum.proxy.proxy
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecyumproxy)</sup></sup>
-
-
 
 Proxy configuration.
 
@@ -12339,13 +11579,9 @@ Proxy configuration.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.yum.proxy.cleanup
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecyumproxy)</sup></sup>
-
-
-
-
 
 <table>
     <thead>
@@ -12366,11 +11602,9 @@ Proxy configuration.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.yum.proxy.httpClient
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecyumproxy)</sup></sup>
-
-
 
 HTTP client configuration.
 
@@ -12416,11 +11650,9 @@ HTTP client configuration.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.yum.proxy.httpClient.authentication
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecyumproxyhttpclient)</sup></sup>
-
-
 
 HTTPClientAuthentication contains HTTP client authentication configuration data.
 
@@ -12474,11 +11706,9 @@ HTTPClientAuthentication contains HTTP client authentication configuration data.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.yum.proxy.httpClient.connection
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecyumproxyhttpclient)</sup></sup>
-
-
 
 HTTPClientConnection contains HTTP client connection configuration data.
 
@@ -12536,11 +11766,9 @@ HTTPClientConnection contains HTTP client connection configuration data.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.yum.proxy.negativeCache
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecyumproxy)</sup></sup>
-
-
 
 Negative cache configuration.
 
@@ -12574,11 +11802,9 @@ Negative cache configuration.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.yum.proxy.storage
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecyumproxy)</sup></sup>
-
-
 
 Storage configuration.
 
@@ -12612,13 +11838,9 @@ Storage configuration.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.spec.yum.proxy.yumSigning
+
 <sup><sup>[↩ Parent](#nexusrepositoryspecyumproxy)</sup></sup>
-
-
-
-
 
 <table>
     <thead>
@@ -12646,11 +11868,9 @@ Storage configuration.
       </tr></tbody>
 </table>
 
-
 ### NexusRepository.status
+
 <sup><sup>[↩ Parent](#nexusrepository)</sup></sup>
-
-
 
 NexusRepositoryStatus defines the observed state of NexusRepository.
 
@@ -12681,12 +11901,8 @@ NexusRepositoryStatus defines the observed state of NexusRepository.
 </table>
 
 ## NexusRole
+
 <sup><sup>[↩ Parent](#edpepamcomv1alpha1 )</sup></sup>
-
-
-
-
-
 
 NexusRole is the Schema for the nexusroles API.
 
@@ -12733,11 +11949,9 @@ NexusRole is the Schema for the nexusroles API.
       </tr></tbody>
 </table>
 
-
 ### NexusRole.spec
+
 <sup><sup>[↩ Parent](#nexusrole)</sup></sup>
-
-
 
 NexusRoleSpec defines the desired state of NexusRole.
 
@@ -12791,11 +12005,9 @@ ID should be unique across all roles.<br/>
       </tr></tbody>
 </table>
 
-
 ### NexusRole.spec.nexusRef
+
 <sup><sup>[↩ Parent](#nexusrolespec)</sup></sup>
-
-
 
 NexusRef is a reference to Nexus custom resource.
 
@@ -12827,11 +12039,9 @@ NexusRef is a reference to Nexus custom resource.
       </tr></tbody>
 </table>
 
-
 ### NexusRole.status
+
 <sup><sup>[↩ Parent](#nexusrole)</sup></sup>
-
-
 
 NexusRoleStatus defines the observed state of NexusRole.
 
@@ -12862,12 +12072,8 @@ NexusRoleStatus defines the observed state of NexusRole.
 </table>
 
 ## NexusScript
+
 <sup><sup>[↩ Parent](#edpepamcomv1alpha1 )</sup></sup>
-
-
-
-
-
 
 NexusScript is the Schema for the nexusscripts API.
 
@@ -12914,11 +12120,9 @@ NexusScript is the Schema for the nexusscripts API.
       </tr></tbody>
 </table>
 
-
 ### NexusScript.spec
+
 <sup><sup>[↩ Parent](#nexusscript)</sup></sup>
-
-
 
 NexusScriptSpec defines the desired state of NexusScript.
 
@@ -12974,11 +12178,9 @@ Name should be unique across all scripts.<br/>
       </tr></tbody>
 </table>
 
-
 ### NexusScript.spec.nexusRef
+
 <sup><sup>[↩ Parent](#nexusscriptspec)</sup></sup>
-
-
 
 NexusRef is a reference to Nexus custom resource.
 
@@ -13010,11 +12212,9 @@ NexusRef is a reference to Nexus custom resource.
       </tr></tbody>
 </table>
 
-
 ### NexusScript.status
+
 <sup><sup>[↩ Parent](#nexusscript)</sup></sup>
-
-
 
 NexusScriptStatus defines the observed state of NexusScript.
 
@@ -13052,12 +12252,8 @@ NexusScriptStatus defines the observed state of NexusScript.
 </table>
 
 ## NexusUser
+
 <sup><sup>[↩ Parent](#edpepamcomv1alpha1 )</sup></sup>
-
-
-
-
-
 
 NexusUser is the Schema for the nexususers API.
 
@@ -13104,11 +12300,9 @@ NexusUser is the Schema for the nexususers API.
       </tr></tbody>
 </table>
 
-
 ### NexusUser.spec
+
 <sup><sup>[↩ Parent](#nexususer)</sup></sup>
-
-
 
 NexusUserSpec defines the desired state of NexusUser.
 
@@ -13188,11 +12382,9 @@ Updating user password is not supported.<br/>
       </tr></tbody>
 </table>
 
-
 ### NexusUser.spec.nexusRef
+
 <sup><sup>[↩ Parent](#nexususerspec)</sup></sup>
-
-
 
 NexusRef is a reference to Nexus custom resource.
 
@@ -13224,11 +12416,9 @@ NexusRef is a reference to Nexus custom resource.
       </tr></tbody>
 </table>
 
-
 ### NexusUser.status
+
 <sup><sup>[↩ Parent](#nexususer)</sup></sup>
-
-
 
 NexusUserStatus defines the observed state of NexusUser.
 

@@ -13,11 +13,9 @@ Resource Types:
 
 - [ClusterKeycloak](#clusterkeycloak)
 
-
 ## ClusterKeycloakRealm
 
 <sup><sup>[↩ Parent](#v1edpepamcomv1alpha1 )</sup></sup>
-
 
 ClusterKeycloakRealm is the Schema for the clusterkeycloakrealms API.
 

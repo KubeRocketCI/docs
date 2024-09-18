@@ -8,5 +8,6 @@ These CRDs represent a variety of resources essential for the continuous deploym
 - **Nexus**: Facilitates artifact storage and management, providing a reliable way to store, share, and manage binary software components. [Learn more](nexus.md).
 - **Keycloak**: Handles authentication and authorization, offering a comprehensive solution for user management and access control. [Learn more](keycloak.md).
 - **SonarQube**: Ensures code quality by analyzing source code for bugs, vulnerabilities, and code smells. [Learn more](sonarqube.md).
+- **Tekton**: Defines Tekton Approval Custom Task, enabling the automation of complex workflows. [Learn more](tekton-custom-task.md).
 
 By leveraging these CRDs, our platform simplifies the management of complex applications, enhancing automation, security, and efficiency throughout the software development lifecycle.

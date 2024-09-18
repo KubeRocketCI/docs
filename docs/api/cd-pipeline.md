@@ -467,8 +467,6 @@ A reference to a non default source library
 
 <sup><sup>[↩ Parent](#stage)</sup></sup>
 
-
-
 StageStatus defines the observed state of Stage.
 
 <table>

@@ -564,6 +564,7 @@ const sidebars: SidebarsConfig = {
         'api/keycloak',
         'api/nexus',
         'api/sonarqube',
+        'api/tekton-custom-task',
       ]
     }
   ],

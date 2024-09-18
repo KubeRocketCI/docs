@@ -119,6 +119,7 @@ words:
   - kubelogin
   - kuberocketci
   - ldflags
+  - lifecycles
   - lintconf
   - listner
   - Logsight

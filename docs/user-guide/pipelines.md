@@ -15,7 +15,7 @@ To see the Pipelines section, open the KubeRocketCI portal and select the **Pipe
   * **Run** - Displays the pipeline run name. Click the name to view its details.
   * **Pipeline** - Indicates which pipeline this pipeline run belongs to. Click the pipeline name to view its details.
   * **Pull Request** - Click the icon to see which pull request started this pipeline run.
-  * **Started at** - Desiplays the time the pipeline was started.
+  * **Started at** - Displays the time the pipeline was started.
   * **Time** - Displays the total amount of time it took the pipeline to complete.
   * **Diagram** - Click the icon to see the real-time pipeline diagram.
   * **Actions** - This button allows for restarting and deleting pipeline runs.

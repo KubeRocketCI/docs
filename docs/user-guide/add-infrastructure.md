@@ -93,8 +93,7 @@ Follow the instructions below to fill in the fields of the **Advanced Setting** 
 
   ![JIRA integration](../assets/user-guide/components/components-jira-server.png "JIRA integration")
 
-* **Integrate with Jira server** - this check box is used in case it is required to connect Jira tickets with the commits
-and have a respective label in the **Fix Version** field.
+* **Integrate with Jira server** - this check box is used in case it is required to connect Jira tickets with the commits and have a respective label in the **Fix Version** field.
 
   :::note
     To adjust the Jira integration functionality, first apply the necessary changes described on the [Adjust Jira Integration](../operator-guide/project-management-and-reporting/jira-integration.md) page.

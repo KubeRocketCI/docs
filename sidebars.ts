@@ -355,6 +355,14 @@ const sidebars: SidebarsConfig = {
         'user-guide/index',
         {
           type: 'category',
+          label: 'Pipelines',
+          collapsed: false,
+          items: [
+            'user-guide/pipelines',
+          ],
+        },
+        {
+          type: 'category',
           label: 'Marketplace',
           collapsed: false,
           items: [
@@ -405,15 +413,7 @@ const sidebars: SidebarsConfig = {
         },
         {
           type: 'category',
-          label: 'Pipelines',
-          collapsed: false,
-          items: [
-            'user-guide/pipelines',
-          ],
-        },
-        {
-          type: 'category',
-          label: 'Environments',
+          label: 'Deployment Flows',
           collapsed: false,
           items: [
             'user-guide/add-cd-pipeline',

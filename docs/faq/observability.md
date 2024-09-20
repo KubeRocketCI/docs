@@ -17,9 +17,9 @@ To access logs for applications running in a specific environment, KubeRocketCI 
 
 Using KubeRocketCI UI:
 
-- **Via Environments Section:**
-  - Navigate to **Environments**, select `<CD Pipeline name>`, and click the **Kibana** icon located at the top-left corner of the Environment `Swimlane`.
-- **Via Environment Details Page:**
-  - Access each [Environment details page](../user-guide/manage-environments.md#view-environment-details) to find **Kibana** links at the top.
+- **Via Deployment Flows Section:**
+  - Navigate to **Deployment Flows**, select `<Deployment Flow name>`, and click the **Kibana** icon located at the top-left corner of the Environment `Swimlane`.
+- **Via Deployment Flow Details Page:**
+  - Access each [Deployment Flow details page](../user-guide/manage-environments.md#view-environment-details) to find **Kibana** links at the top.
 - **Through Argo CD Integration:**
-  - Go to the **Environments** page, choose the desired `<CD Pipeline name>`, and click on the **Argo CD** icon. Within the Argo CD UI, select the application of interest (useful if you run more than one), click on **Pod(s)**, and then select the **Logs** tab.
+  - Go to the **Deployment Flows** page, choose the desired `<Deployment Flow name>`, and click on the **Argo CD** icon. Within the Argo CD UI, select the application of interest (useful if you run more than one), click on **Pod(s)**, and then select the **Logs** tab.

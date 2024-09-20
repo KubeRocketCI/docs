@@ -36,7 +36,7 @@ The platform consists of the following blocks:
   |Container|Docker|Kaniko||:white_check_mark:||
 
 - [Portal UI](./user-guide/index.md) as a single entry point
-- [Environments](./user-guide/add-cd-pipeline.md) for Microservice Deployment
+- [Deployment Flows](./user-guide/add-cd-pipeline.md) for Microservice Deployment
 - Kubernetes native approach ([CRD, CR](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/)) to declare CI/CD pipelines
 
 ## What's Inside KubeRocketCI
@@ -63,7 +63,7 @@ On top of the primary architectural pillars, KubeRocketCI integrates several key
 
 **Artifacts Management**: Representing the deliverables within the pipelines, artifacts can range from frontend and backend applications to functional and non-functional autotests, and workloads for 3rd party components.
 
-**Development and Production Environments**: Environments in KubeRocketCI maintain consistency across development and production, encapsulating artifacts with specific versions to ensure quality through the Software Development Life Cycle (SDLC).
+**Development and Production Deployment Flows**: Deployment Flows in KubeRocketCI maintain consistency across development and production, encapsulating artifacts with specific versions to ensure quality through the Software Development Life Cycle (SDLC).
 
 **Pipelines**: Covering the end-to-end CI/CD process, pipelines in KubeRocketCI automate the integration and delivery workflows, connecting the above components seamlessly.
 

@@ -16,7 +16,11 @@ To create a component from template, follow the instructions below:
 
     ![Creating from template window](../assets/user-guide/marketplace/kuberocketci-portal-marketplace-creating-from-template.png "Creating from template window")
 
-4. As a result, new component will appear in the **Components** section:
+4. Click the **Go to application** button to open the application details:
+
+    ![Go to application button](../assets/user-guide/marketplace/kuberocketci-portal-marketplace-go-to-application.png "Go to application button")
+
+5. As a result, new component will appear in the **Components** section:
 
     ![Creating from template window](../assets/user-guide/marketplace/kuberocketci-portal-marketplace-created-application.png "Creating from template window")
 

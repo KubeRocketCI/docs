@@ -21,8 +21,8 @@ graph TD;
         direction TB
         Report-Portal["<b>Report-portal</b><br>---<br>Keycloak Client<br> Keycloak Client Scope"]
         Sonar["<b>Sonar</b><br>---<br>Keycloak Client<br>Keycloak Realm Role Batch"]
-        Vault-kms["<b>Valut-kms</b><br> --- <br> Keycloak Client"]
-        Vault-okd["<b>Valut-okd</b><br> --- <br> Keycloak Client"]
+        Vault-kms["<b>Vault-kms</b><br> --- <br> Keycloak Client"]
+        Vault-okd["<b>Vault-okd</b><br> --- <br> Keycloak Client"]
         ArgoCD["<b>Argo CD</b><br> --- <br> Keycloak Client <br> Keycloak Realm Group"]
 
         EKS["<b>EKS</b><br> --- <br> Keycloak Client <br> Keycloak Client Scope <br> Keycloak Realm Groups"]
@@ -32,13 +32,13 @@ graph TD;
         AWX-operator["<b>AWX Operator</b><br> --- <br> Keycloak Client"]
 
         Nexus["<b>Nexus</b><br> --- <br> Keycloak Client"]
-        Opensearch["<b>Opensearch</b><br> --- <br> Keycloak Client <br> Keycloak Client Scope"]
+        OpenSearch["<b>OpenSearch</b><br> --- <br> Keycloak Client <br> Keycloak Client Scope"]
         Prometheus-operator["<b>Prometheus-operator</b><br> --- <br> Keycloak Client (Grafana)"]
         DependencyTrack["<b>Dependency Track</b><br> --- <br> Keycloak Client"]
         DefectDojo["<b>DefectDojo</b><br> --- <br> Keycloak Client"]
 
         Report-Portal ~~~ EKS ~~~ Nexus
-        Sonar ~~~ Harbor ~~~ Opensearch
+        Sonar ~~~ Harbor ~~~ OpenSearch
         Vault-kms ~~~ Harbor-ha ~~~ Prometheus-operator
         Vault-okd ~~~ Harbor-ha-okd ~~~ DependencyTrack
         ArgoCD ~~~ AWX-operator ~~~ DefectDojo
@@ -46,7 +46,7 @@ graph TD;
 
     integrated_services --> shared_realm["<b>shared (realm)</b><br> --- <br> IdP Broker"]
 
-    Portal["<b>Protal UI</b><br> --- <br> KeycloakClient (in eks directory) <br> Keycloak Client Secret(in edp-install repository)"] --> broker_realm["broker (realm)"]
+    Portal["<b>Portal UI</b><br> --- <br> KeycloakClient (in eks directory) <br> Keycloak Client Secret(in edp-install repository)"] --> broker_realm["broker (realm)"]
     shared_realm --> broker_realm["<b>broker (realm)</b><br> --- <br> Keycloak Client (shared)"]
     broker_realm --> IdP["<b>IdP</b><br> (Google, Facebook, AD)"]
 ```
@@ -340,7 +340,7 @@ graph TD;
         Harbor["<b>Harbor</b><br> --- <br> administrator"]
         TektonDashboard["<b>Tekton Dashboard</b><br> --- <br> administrator <br> developer"]
 
-        Opensearch["<b>Opensearch</b><br> --- <br> administrator <br> developer"]
+        OpenSearch["<b>OpenSearch</b><br> --- <br> administrator <br> developer"]
         Grafana["<b>Grafana</b><br> --- <br> administrator <br> developer"]
 
         Sonar["<b>Sonar</b><br> --- <br> sonar-administrators <br> sonar-developers"]
@@ -353,7 +353,7 @@ graph TD;
 
         Vault["<b>Vault</b><br> --- <br> Role 'reader' by default"]
 
-        DependencyTrack ~~~ Opensearch ~~~ Sonar ~~~ DefectDojo
+        DependencyTrack ~~~ OpenSearch ~~~ Sonar ~~~ DefectDojo
         Harbor ~~~ Grafana ~~~ ReportPortal ~~~ Vault
         TektonDashboard ~~~ Nexus ~~~ AWX-operator ~~~ mock_object[" "]
     end

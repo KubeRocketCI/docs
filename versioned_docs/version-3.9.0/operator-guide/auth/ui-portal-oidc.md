@@ -6,13 +6,11 @@ This page provides instructions for configuring the [OIDC authorization](https:/
 
 Ensure the following values are set first before starting the Portal OIDC configuration:
 
-1. `realm_id`  = **openshift**
+1. `realm_id`  = **shared**
 
-2. `client_id` = **kubernetes**
+2. `client_id` = **eks**
 
-3. `keycloak_client_key`= **keycloak_client_secret_key** (received from: `Openshift realm` -> `clients` -> `kubernetes` -> `Credentials` -> `Client secret`)
-
-4. `group` = **`edp-oidc-admins`, `edp-oidc-builders`, `edp-oidc-deployers`, `edp-oidc-developers`, `edp-oidc-viewers`** (Should be created manually in the realm from point 1)
+3. `keycloak_client_key`= **keycloak_client_secret_key** (received from: `Shared realm` -> `clients` -> `eks` -> `Credentials` -> `Client secret`)
 
 :::note
   The values indicated above are the result of the Keycloak configuration as an OIDC identity provider.
@@ -23,15 +21,14 @@ Ensure the following values are set first before starting the Portal OIDC config
 
 To proceed with the Keycloak configuration, perform the following:
 
-1. Add the URL of the Headlamp to the `valid_redirect_uris` variable in [Keycloak](configure-keycloak-oidc-eks.md):
+1. Add the URL of the Headlamp to the `valid_redirect_uris` variable in [Keycloak](https://github.com/epam/edp-cluster-add-ons/blob/main/add-ons/extensions-oidc/templates/kubernetes/keycloak-client.yaml#L17):
 
     :::note keycloak_openid_client
 
       ```yaml
-        valid_redirect_uris = [
-          "https://edp-portal.<dns_wildcard>/*"
-          "http://localhost:8000/*"
-        ]
+        redirectUris:
+          - "https://portal.<dns_wildcard>/*"
+          - "http://localhost:8000/*"
       ```
 
     :::

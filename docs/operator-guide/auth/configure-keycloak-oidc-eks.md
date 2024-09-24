@@ -1,22 +1,21 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 # EKS OIDC With Keycloak
 
 This article provides the instruction of configuring Keycloak as [OIDC Identity Provider](https://aws.amazon.com/blogs/containers/introducing-oidc-identity-provider-authentication-amazon-eks/) for EKS.
-The example is written on Terraform (HCL).
+The example is implemented following the KubeRocketCI add-ons approach.
 
-:::info
-We highly recommend configuring the integration through a GitOps approach, utilizing the [edp-keycloak-operator](https://github.com/epam/edp-keycloak-operator/tree/master/deploy-templates) and the [edp-cluster-add-ons](https://github.com/epam/edp-cluster-add-ons/tree/main/add-ons/eks) repository. For details, please refer to the [AWS EKS OIDC Integration](eks-oidc-integration.md) page.
-:::
 ## Prerequisites
 
 To follow the instruction, check the following prerequisites:
 
-1. terraform 0.14.10
-2. hashicorp/aws = 4.8.0
-3. mrparkers/keycloak >= 3.0.0
-4. hashicorp/kubernetes ~> 2.9.0
-5. kubectl = 1.22
-6. kubelogin  >= v1.25.1
-7. Ensure that Keycloak has network availability for AWS (not in a private network).
+1. terraform 1.5.7
+2. hashicorp/aws >= 5.54.1
+3. kubelogin  >= v1.25.1
+4. [Helm version 3.10+](https://github.com/helm/helm/releases)
+5. [Keycloak operator](https://github.com/epam/edp-cluster-add-ons/tree/main/add-ons/keycloak-operator) installed by [add-ons](https://github.com/epam/edp-cluster-add-ons/blob/main/chart/values.yaml#L105) approach.
+6. Ensure that Keycloak has network availability for AWS (not in a private network).
 
 :::note
   To connect OIDC with a cluster, install and configure the [kubelogin](https://github.com/int128/kubelogin) plugin. For Windows, it is recommended to download the kubelogin as a binary and add it to your PATH.
@@ -32,196 +31,117 @@ Of particular importance within the Kubernetes ecosystem are the `RoleBindings` 
 
 ## Keycloak Configuration
 
-To configure Keycloak, follow the steps described below.
+The initial step involves setting up the Keycloak operator (configure connections to the Keycloak instance) and along creation its associated resources, including realms, clients, roles, and groups.
 
-* Create a client:
+1. Create user with [necessary](keycloak.md#configuration) priveleges to Keycloak:
 
-  ```terraform
-  resource "keycloak_openid_client" "openid_client" {
-    realm_id                                  = "openshift"
-    client_id                                 = "kubernetes"
-    access_type                               = "CONFIDENTIAL"
-    standard_flow_enabled                     = true
-    implicit_flow_enabled                     = false
-    direct_access_grants_enabled              = true
-    service_accounts_enabled                  = true
-    oauth2_device_authorization_grant_enabled = true
-    backchannel_logout_session_required       = true
+    <Tabs
+      defaultValue="eso"
+      values={[
+        {label: 'External Secret Operator', value: 'eso'},
+        {label: 'Manual', value: 'manual'}
+      ]}>
 
-    root_url    = "http://localhost:8000/"
-    base_url    = "http://localhost:8000/"
-    admin_url   = "http://localhost:8000/"
-    web_origins = ["*"]
+      <TabItem value="eso">
+        Store user credentials in AWS Parameter Store:
 
-    valid_redirect_uris = [
-      "http://localhost:8000/*"
-    ]
-  }
-  ```
+        ```json title="AWS Parameter Store"
+        {
+          "keycloak": {
+            "username": "<KEYCLOAK_USERNAME>",
+            "password": "<KEYCLOAK_PASSWORD>"
+          }
+        }
+        ```
+      </TabItem>
 
-* Create the client scope:
+      <TabItem value="manual">
+        Deactivate the External Secret Operator within the primary [extensions-oidc](https://github.com/epam/edp-cluster-add-ons/blob/main/add-ons/extensions-oidc/values.yaml#L27) chart:
 
-  ```terraform
-  resource "keycloak_openid_client_scope" "openid_client_scope" {
-    realm_id               = <realm_id>
-    name                   = "groups"
-    description            = "When requested, this scope will map a user's group memberships to a claim"
-    include_in_token_scope = true
-    consent_screen_text    = false
-  }
-  ```
+        ```yaml title="values.yaml"
+        # Configure components of the External Secrets Operator (ESO).
+        eso:
+          # -- Install components of the ESO.
+          enabled: false
+        ```
 
-* Add scope to the client by selecting all default client scope:
+        Create secret with user credentials:
+        ```bash
+        kubectl create secret generic keycloak \
+          --from-literal=username=<KEYCLOAK_USERNAME> \
+          --from-literal=password=<KEYCLOAK_PASSWORD>
+        ```
+      </TabItem>
+    </Tabs>
 
-  ```terraform
-  resource "keycloak_openid_client_default_scopes" "client_default_scopes" {
-    realm_id  = <realm_id>
-    client_id = keycloak_openid_client.openid_client.id
+2. Begin by installing the [**extensions-oidc**](https://github.com/epam/edp-cluster-add-ons/tree/main/add-ons/extensions-oidc) add-on. This can be accomplished through the use of the add-ons method, as detailed in the [addons approach](../add-ons-overview.md). Utilize the following values in the `values.yaml` file:
 
-    default_scopes = [
-      "profile",
-      "email",
-      "roles",
-      "web-origins",
-      keycloak_openid_client_scope.openid_client_scope.name,
-    ]
-  }
-  ```
+    ```yaml title="values.yaml"
+    keycloakUrl: "https://example.com"
+    # -- This block enable the creation of Keycloak operator resources for the 
+    # EKS OIDC configuration, such as client, client scope, and realm groups.
+    kubernetes:
+      enabled: true
+    ```
 
-* Add the following mapper to the client scope:
+3. Activate the [**extensions-oidc**](https://github.com/epam/edp-cluster-add-ons/blob/main/chart/values.yaml#L58) add-on within the application settings:
 
-  ```terraform
+    ```yaml title="values.yaml"
+    extensions-oidc:
+      createNamespace: false
+      enable: true
+    ```
 
-  resource "keycloak_openid_group_membership_protocol_mapper" "group_membership_mapper" {
-    realm_id            = <realm_id>
-    client_scope_id     = keycloak_openid_client_scope.openid_client_scope.id
-    name                = "group-membership-mapper"
-    add_to_id_token     = true
-    add_to_access_token = true
-    add_to_userinfo     = true
-    full_path           = false
 
-    claim_name = "groups"
-  }
-  ```
+This add-ons facilitates sets up a broker realm to manage traffic redirection between external Identity Providers (IdP) and internal clients. Additionally, it creates a shared realm that encompasses all clients, including to EKS, Sonar, Nexus, and Portal.
 
-* In the authorization token, get groups membership field with the list of group membership in the realm:
+## AWS Configuration
 
-  ```json
-  ...
-    "email_verified": false,
-    "name": "An User",
-    "groups": [
-      "<env_prefix_name>-oidc-viewers",
-      "<env_prefix_name>-oidc-cluster-admins"
-    ],
-    "preferred_username": "an_user@example.com",
-    "given_name": "An",
-    "family_name": "User",
-    "email": "an_user@example.com"
-    ...
-  ```
+Configure Identity provider in kubernetes cluster
 
-* Create group/groups, e.g. admin group:
+    <Tabs
+      defaultValue="terraform"
+      values={[
+        {label: 'Terraform', value: 'terraform'},
+        {label: 'AWS Console UI', value: 'aws'}
+      ]}>
 
-  ```terraform
-  resource "keycloak_group" "oidc_tenant_admin" {
-    realm_id = <realm_id>
-    name     = "kubernetes-oidc-admins"
-  }
-  ```
+      <TabItem value="terraform">
+        For integrating OpenID Connect (OIDC) with Amazon EKS through terraform, it's essential to update the EKS module within your terraform repository. The relevant repository can be found at KubeRocketCI's [terraform-aws-platform](https://github.com/KubeRocketCI/terraform-aws-platform/tree/master/eks). Adjust the module by incorporating the following configuration in the `eks/template.tfvars` file:
 
-## EKS Configuration
+        ```json title="eks/template.tfvars"
+        # OIDC Identity provider configuration
+        cluster_identity_providers = {
+          keycloak = {
+            client_id = "eks"
+            issuer_url = "https://example.com/auth/realms/shared"
+            groups_claim = "groups"
+          }
+        }
+        ```
 
-To configure EKS, follow the steps described below. In AWS Console, open **EKS home page** -> **Choose a cluster** -> **Configuration** tab -> **Authentication** tab.
+        This configuration snippet specifies the Keycloak as the OIDC Identity Provider for your EKS cluster. It includes the client ID (`eks`), the issuer URL (pointing to the Keycloak realm), and the claim used for groups (`groups`). This setup ensures that authentication and authorization mechanisms for accessing the EKS cluster are correctly configured to use Keycloak as the identity provider.
 
-The Terraform code for association with Keycloak:
+      </TabItem>
 
-* terraform.tfvars
+      <TabItem value="aws">
+        The objective is to configure an Identity Provider within your Kubernetes cluster. The process involves several steps within the AWS Management Console:
 
-  ```terraform
-  ...
-  cluster_identity_providers = {
-    keycloak = {
-      client_id                     = <keycloak_client_id>
-      identity_provider_config_name = "Keycloak"
-      issuer_url                    = "https://<keycloak_url>/auth/realms/<realm_name>"
-      groups_claim                  = "groups"
-    }
-  ...
-  ```
+        1. Begin by opening the AWS Management Console.
+        2. Navigate to the Elastic Kubernetes Service (EKS) section.
+        3. Select your specific **Cluster name**.
+        4. Go to the **Access** tab, then find and select the **OIDC identity providers** section.
+        5. Click on **Associate identity provider**.
 
-* the resource code
+        When associating the identity provider, ensure you input the following details:
 
-  ```terraform
-  resource "aws_eks_identity_provider_config" "keycloak" {
-    for_each = { for k, v in var.cluster_identity_providers : k => v if true }
-
-    cluster_name = var.platform_name
-
-    oidc {
-      client_id                     = each.value.client_id
-      groups_claim                  = lookup(each.value, "groups_claim", null)
-      groups_prefix                 = lookup(each.value, "groups_prefix", null)
-      identity_provider_config_name = try(each.value.identity_provider_config_name, each.key)
-      issuer_url                    = each.value.issuer_url
-      required_claims               = lookup(each.value, "required_claims", null)
-      username_claim                = lookup(each.value, "username_claim", null)
-      username_prefix               = lookup(each.value, "username_prefix", null)
-    }
-
-    tags = var.tags
-  }
-  ```
-
-:::note
-  The resource creation takes around 20-30 minutes. The resource doesn't support updating, so each change will lead to deletion of the old instance and creation of a new instance instead.
-:::
-
-## Kubernetes Configuration
-
-To connect the created Keycloak resources with permissions, it is necessary to create Kubernetes Roles and RoleBindings:
-
-* ClusterRole
-
-  ```terraform
-  resource "kubernetes_cluster_role_v1" "oidc_tenant_admin" {
-    metadata {
-      name = "oidc-admin"
-    }
-    rule {
-      api_groups = ["*"]
-      resources  = ["*"]
-      verbs      = ["*"]
-    }
-  }
-  ```
-
-* ClusterRoleBinding
-
-  ```terraform
-  resource "kubernetes_cluster_role_binding_v1" "oidc_cluster_rb" {
-    metadata {
-      name = "oidc-cluster-admin"
-    }
-    role_ref {
-      api_group = "rbac.authorization.k8s.io"
-      kind      = "ClusterRole"
-      name      = kubernetes_cluster_role_v1.oidc_tenant_admin.metadata[0].name
-    }
-    subject {
-      kind      = "Group"
-      name      = keycloak_group.oidc_tenant_admin.name
-      api_group = "rbac.authorization.k8s.io"
-      # work-around due https://github.com/hashicorp/terraform-provider-kubernetes/issues/710
-      namespace = ""
-    }
-  }
-  ```
-
-:::note
-  When creating the Keycloak group, ClusterRole, and ClusterRoleBinding, a user receives cluster admin permissions. There is also an option to provide admin permissions just to a particular namespace or another resources set in another namespace. For details, please refer to the [Mixing Kubernetes Roles](https://octopus.com/blog/k8s-rbac-roles-and-bindings) page.
-:::
+        ```text
+        Issuer URL: https://example.com/auth/realms/shared
+        Client ID: eks
+        Groups Claim: groups
+        ```
+      </TabItem>
+    </Tabs>
 
 ## Kubeconfig
 
@@ -236,15 +156,15 @@ clusters:
 - cluster:
     server: https://<eks_url>.eks.amazonaws.com
     certificate-authority-data: <certificate_authority_data>
-  name: <cluster_name>
+  name: eks
 
 contexts:
 - context:
-    cluster: <cluster_name>
+    cluster: eks
     user: <keycloak_user_email>
-  name: <cluster_name>
+  name: eks
 
-current-context: <cluster_name>
+current-context: eks
 
 users:
 - name: <keycloak_user_email>
@@ -256,8 +176,8 @@ users:
       - oidc-login
       - get-token
       - -v1
-      - --oidc-issuer-url=https://<keycloak_url>/auth/realms/<realm>
-      - --oidc-client-id=<keycloak_client_id>
+      - --oidc-issuer-url=https://<keycloak_url>/auth/realms/shared
+      - --oidc-client-id=eks
       - --oidc-client-secret=<keycloak_client_secret>
 ```
 
@@ -266,24 +186,24 @@ Flag `-v1` can be used for debug, in a common case it's not needed and can be de
 To find the client secret:
 
 1. Open Keycloak
-2. Choose **realm**
-3. Find **keycloak_client_id** that was previously created
+2. Choose **Shared realm**
+3. Find **eks** keycloak client
 4. Open Credentials tab
 5. Copy Secret
 
-## Testing
+## Access Validation
 
 Before testing, ensure that a user is a member of the correct Keycloak group.
 To add a user to a Keycloak group:
 
 1. Open Keycloak
-2. Choose **realm**
+2. Choose **Shared realm**
 3. Open user screen with search field
 4. Find a user and open the configuration
 5. Open Groups tab
 6. In Available Groups, choose an appropriate group
 7. Click the **Join** button
-8. The group should appear in the Group Membership list
+8. The group should appear in the User's Group Membership list
 
 Follow the steps below to test the configuration:
 
@@ -329,6 +249,10 @@ To access the Kubernetes cluster via [Lens](https://k8slens.dev/), follow the st
 :::note
   Lens does not add namespaces of the project automatically, so it is necessary to add them manually, simply go to **Settings** -> **Namespaces** and add the namespaces of a project.
 :::
+
+## Changing the Lifespan of an Access Token
+
+By default, the Keycloak token has a lifespan of 5 minutes. To modify this duration, please refer to the guidelines outlined in this [document](ui-portal-oidc#changing-the-lifespan-of-an-access-token).
 
 ## Related Articles
 

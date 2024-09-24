@@ -5,24 +5,14 @@ import TabItem from '@theme/TabItem';
 
 [OAuth2-Proxy](https://oauth2-proxy.github.io/oauth2-proxy/) is a versatile tool that serves as a reverse proxy, utilizing the OAuth 2.0 protocol with various providers like Google, GitHub, and Keycloak to provide both authentication and authorization. This guide instructs readers on how to protect their applications' endpoints using OAuth2-Proxy. By following these steps, users can enhance the security of their endpoints without modifying their current application code. In the context of KubeRocketCI, it has integration with the Keycloak OIDC provider, enabling it to connect with any component that lacks built-in authentication.
 
-  :::note
-    OAuth2-Proxy is disabled by default when installing KubeRocketCI.
-  :::
-
 ## Prerequisites
 
 * [Keycloak](keycloak.md) with OIDC authentication is installed.
 * [Keycloak operator](../add-ons-overview.md) is installed.
 
-## Enable OAuth2-Proxy
+## Integration OAuth2-Proxy
 
-Enabling OAuth2-Proxy implies the following general steps:
-
-1. Update your KubeRocketCI deployment using command `--set 'sso.enabled=true'` **or** the `--values` file by enabling the sso parameter.
-2. Check that OAuth2-Proxy is deployed successfully.
-3. Enable authentication for your Ingress by adding `auth-signin` and `auth-url` of OAuth2-Proxy to its annotation.
-
-This will deploy and connect OAuth2-Proxy to your application endpoint.
+To streamline the installation of OAuth2-Proxy in your environment, it is advised to utilize the resources available in the [Cluster Add-Ons](https://github.com/epam/edp-cluster-add-ons/tree/main/add-ons/oauth2-proxy) and their [applications](https://github.com/epam/edp-cluster-add-ons/blob/main/chart/values.yaml#L120).
 
 ## Enable OAuth2-Proxy on Tekton Dashboard
 
@@ -36,20 +26,12 @@ The example below illustrates how to use OAuth2-Proxy in practice when using the
       ]}>
 
       <TabItem value="kubernetes">
-          1. Run `helm upgrade` to update edp-install release:
-
-          ```bash
-          helm upgrade --version <version> --set 'sso.enabled=true' edp-install --namespace edp
-          ```
-
-          2. Check that OAuth2-Proxy is deployed successfully.
-
-          3. Edit the Tekton dashboard Ingress annotation by adding `auth-signin` and `auth-url` of oauth2-proxy by `kubectl` command:
+          Edit the Tekton dashboard Ingress annotation by adding `auth-signin` and `auth-url` of oauth2-proxy by `kubectl` command:
 
           ```bash
           kubectl annotate ingress <application-ingress-name> \
           nginx.ingress.kubernetes.io/auth-signin='https://<oauth-ingress-host>/oauth2/start?rd=https://$host$request_uri' \
-          nginx.ingress.kubernetes.io/auth-url='http://oauth2-proxy.edp.svc.cluster.local:8080/oauth2/auth'
+          nginx.ingress.kubernetes.io/auth-url='http://oauth2-proxy.oauth2-proxy.svc.cluster.local:80/oauth2/auth'
           ```
       </TabItem>
 

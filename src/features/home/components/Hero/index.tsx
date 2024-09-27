@@ -33,7 +33,7 @@ export const Hero = () => {
           </div>
           <div className="margin-bottom--lg">
             <div className="margin-bottom--md">
-              <div className={styles.heroBannerTitle}>{siteConfig.title}</div>
+              <h1 className={styles.heroBannerTitle}>{siteConfig.title}</h1>
               <div className={styles.heroBannerSubtitle}>{siteConfig.tagline}</div>
             </div>
             <div className={styles.heroBannerDescription}>{siteConfig.themeConfig.description as string}</div>

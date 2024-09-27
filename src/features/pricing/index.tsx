@@ -11,7 +11,7 @@ export const Pricing = () => {
     <Layout title="Professional Service Pricing" description="Professional Service Pricing">
       <section className={styles.sectionWrapper}>
         <div className="container">
-          <div className={styles.sectionTitle}>Professional Service Pricing</div>
+          <h1 className={styles.sectionTitle}>Professional Service Pricing</h1>
           <div className={styles.sectionDescription}>
             Experience the flexibility of deploying the EPAM Delivery Platform on your on-premises infrastructure or in
             the Cloud. Your valuable data stays securely within your perimeter, ensuring uncompromising security at

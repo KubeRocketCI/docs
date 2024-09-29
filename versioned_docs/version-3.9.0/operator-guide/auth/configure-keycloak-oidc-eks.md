@@ -33,7 +33,7 @@ Of particular importance within the Kubernetes ecosystem are the `RoleBindings` 
 
 The initial step involves setting up the Keycloak operator (configure connections to the Keycloak instance) and along creation its associated resources, including realms, clients, roles, and groups.
 
-1. Create user with [necessary](keycloak.md#configuration) priveleges to Keycloak:
+1. Create user with [necessary](keycloak.md#configuration) privileges to Keycloak:
 
     <Tabs
       defaultValue="eso"
@@ -78,7 +78,7 @@ The initial step involves setting up the Keycloak operator (configure connection
 
     ```yaml title="values.yaml"
     keycloakUrl: "https://example.com"
-    # -- This block enable the creation of Keycloak operator resources for the 
+    # -- This block enable the creation of Keycloak operator resources for the
     # EKS OIDC configuration, such as client, client scope, and realm groups.
     kubernetes:
       enabled: true

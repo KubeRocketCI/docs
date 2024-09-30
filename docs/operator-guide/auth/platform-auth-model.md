@@ -1,23 +1,23 @@
 # Overview
 
-In KubeRocketCI, access control is implemented through various authorization methods. To control access to the resources uses single point - Keycloak using groups and roles, which integrates with Kubernetes RBAC.  Permissions for third-party tools are configured by Keycloak operator [custom resources](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/). This document provides an overview of the access management entities in KubeRocketCI and various tools, including Kubernetes roles, Keycloak realm roles and Kubernetes custom resources. It also details their respective permissions and the tools they are applied to.
+KubeRocketCI uses [Keycloak](https://keycloak.org) as central access management solution, handling user permissions across various platform tools, including Kubernetes. Kubernetes clusters leverage Keycloak for RBAC implementation via [OIDC](https://kubernetes.io/docs/reference/access-authn-authz/authentication/). This consistent approach allows administrators to manage access uniformly.
+Within Kubernetes, [Custom Resources (CRs)](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/) are used to refine and enforce access controls by [configuring Keycloak](https://operatorhub.io/operator/edp-keycloak-operator), translating Kubernetes configurations into Keycloak access policies.
 
-## Keycloak
+## Keycloak Components Overview
 
-This section explains what Keycloak resources are and how they interact to each other.
+Keycloak is a critical component in KubeRocketCI for managing authentication and authorization. It uses realms, roles and groups to control access across the platform.
 
-The diagram illustrates the Keycloak resources within a system based on the [Add-Ons](../add-ons-overview.md) approach, where all tools and their Keycloak configurations are managed within the [edp-cluster-add-ons](https://github.com/epam/edp-cluster-add-ons) repository.
-Various tools such as Argo CD, Nexus, Sonar, Report-portal, Harbor, and others are configured as OIDC (OpenID Connect) clients within a `shared` realm.
-Each component can have its own unique configurations, including Keycloak realm roles, realm groups, or client scopes. The `shared` realm, in turn, acts as an OIDC client to the `broker` realm, which serves as a proxy to external Identity Providers (IdPs) like Google, Facebook, and Active Directory (AD), supporting both OIDC and SAML protocols.
+The diagram below illustrates the Keycloak resources within the KubeRocketCI system. It shows how tools and their Keycloak configurations are managed within the `shared` and `broker` realms. The `broker` realm serves as a central "authentication proxy" (broker), connecting to external Identity Providers (IdPs) such as Google, Facebook, and Active Directory (AD) through OIDC and/or SAML protocols. The `shared` realm consolidates platform tools such as Argo CD, Nexus Repository, SonarQube, Report-portal, Harbor, and others as OIDC (OpenID Connect) clients.
+
+Each component can have its own unique configurations, including Keycloak roles, groups, or client scopes.
 
 ```mermaid
 graph TD;
     style integrated_services fill:#FFF2CC,stroke:#333,stroke-width:1px
-    style shared_realm fill:#e1f5fe,stroke:#333,stroke-width:2px
-    style broker_realm fill:#e1f5fe,stroke:#333,stroke-width:2px
+    style broker_realm fill:#FFF2CC,stroke:#333,stroke-width:1px
     style IdP fill:#E1D5E7,stroke:#333,stroke-width:2px,dashed
 
-    subgraph integrated_services [" "]
+    subgraph integrated_services ["<b>shared realm</b>"]
         direction TB
         Report-Portal["<b>Report-portal</b><br>---<br>Keycloak Client<br> Keycloak Client Scope"]
         Sonar["<b>Sonar</b><br>---<br>Keycloak Client<br>Keycloak Realm Role Batch"]
@@ -45,287 +45,18 @@ graph TD;
         Vault-kms ~~~ Harbor-ha ~~~ Prometheus-operator ~~~ AWX-operator
         Vault-okd ~~~ Harbor-ha-okd ~~~ DependencyTrack ~~~ DefectDojo
     end
+    subgraph broker_realm ["<b>broker realm</b>"]
+     shared["<b>shared</b><br> --- <br> Keycloak Client"]
+    end
 
-    integrated_services --> shared_realm["<b>shared (realm)</b><br> --- <br> IdP Broker"]
-
-    shared_realm --> broker_realm["<b>broker (realm)</b><br> --- <br> Keycloak Client (shared)"]
+    integrated_services --> shared["<b>shared</b><br> --- <br> Keycloak Client"]
     broker_realm --> IdP["<b>IdP</b><br> (Google, Facebook, AD)"]
 ```
 
-### Realm Roles
+## Keycloak Roles and Groups
 
-The Keycloak realm of `shared` has two realm roles with a composite types named `administrator` and `developer`:
-
-* The `administrator` realm role is designed for users who need administrative access to the tools used in the project.
-This realm role contains the `sonar-administrators` role.
-Users who are assigned the `administrator` realm role will be granted these two roles automatically.
-
-* The `developer` realm role, on the other hand, is designed for users who need access to the development tools used in the project.
-This realm role also contains the `sonar-developers` role.
-Users who are assigned the `developer` realm role will be granted these two roles automatically.
-
-These realm roles have been defined to make it easier to assign groups of rights to users.
-
-The table below shows the realm roles and the composite types they relate to.
-
-| Realm Role Name | Regular Role | Composite role |
-| - | :-: | :-: |
-| administrator | | :white_check_mark: |
-| developer | | :white_check_mark: |
-| sonar-administrators | :white_check_mark: | |
-| sonar-developers | :white_check_mark: | |
-
-### Realm Groups
-
-KubeRocketCI uses `shared` realm for group management:
-
-* The `shared` realm contains two groups that are specifically used for controlling access to Argo CD. These groups are named `ArgoCDAdmins` and `ArgoCD-edp-users`.
-
-* Also contains six groups that are used for access control in both the KubeRocketCI portal and EKS cluster. These groups are named `edp-oidc-admins`, `edp-oidc-builders`, `edp-oidc-deployers`,`edp-oidc-developers`, `edp-oidc-viewers` and `oidc-cluster-admins`.
-
-| Realm Group Name | Realm Name |
-| - | - |
-| `ArgoCDAdmins` | shared |
-| `ArgoCD-edp-users` | shared |
-| `oidc-cluster-admins` | shared |
-| `edp-oidc-admins` | shared |
-| `edp-oidc-builders` | shared |
-| `edp-oidc-deployers` | shared |
-| `edp-oidc-developers` | shared |
-| `edp-oidc-viewers` | shared |
-
-## SonarQube
-
-In the context of SonarQube, access management is achieved through configurations in both Keycloak and KubeRocketCI. This section offers a detailed walkthrough for configuring access control.
-
-### Keycloak Configuration
-
-SonarQube access is managed using Keycloak roles in the `shared` realm.
-The `sonar-developers` and `sonar-administrators` realm roles are the two available roles that determine user access levels.
-To grant access, the corresponding role must be added to the user in Keycloak.
-
-For example, a user who needs developer access to SonarQube should be assigned the `sonar-developers` or `developer` composite role in Keycloak.
-
-### Sonar Configuration
-
-[KubeRocketCI Sonar Operator](https://github.com/epam/edp-sonar-operator) provides its own SonarQube Permission Template, which is used to manage user access and permissions for SonarQube projects.
-
-The template is stored in the SonarQube [custom resource](https://github.com/epam/edp-sonar-operator/blob/master/deploy-templates/_crd_examples/permission_template.yaml) of the operator, an example of a custom resource can be found below.
-
-:::note Sonar Permission Template
-
-  ```yaml
-  apiVersion: v2.edp.epam.com/v1
-  kind: SonarPermissionTemplate
-  metadata:
-    name: edp-default
-  spec:
-    name: edp-default
-    description: "KubeRocketCI permission templates (DO NOT REMOVE)"
-    projectKeyPattern: ".+"
-    default: true
-    groupsPermissions:
-      non-interactive-users:
-      - user
-      sonar-developers:
-      - user
-      - securityhotspotadmin
-      - issueadmin
-      - codeviewer
-      sonar-administrators:
-      - admin
-      - user
-    sonarRef:
-      name: sonar
-  ```
-
-:::
-
-The SonarQube Permission Template contains three groups: `non-interactive-users`, `sonar-administrators` and `sonar-developers`:
-
-* `non-interactive-users` are users who do not require direct access to the SonarQube project but need to be informed about the project's status and progress. This group has read-only access to the project, which means that they can view the project's data and metrics but cannot modify or interact with it in any way.
-
-* `sonar-administrators` are users who have full control over the SonarQube project. They have the ability to create, modify, and delete projects, as well as manage user access and permissions. This group also has the ability to configure SonarQube settings and perform other administrative tasks.
-
-* `sonar-developers` are users who are actively working on the SonarQube project. They have read and write access to the project, which means that they can modify the project's data and metrics. This group also has the ability to configure project-specific settings and perform other development tasks.
-
-These groups are designed to provide different levels of access to the SonarQube project, depending on the user's role and responsibilities.
-
-:::info
-  If a user has no group, it will have the `sonar-users` group by default. This group does not have any permissions
-  in the `edp-default` Permission Template.
-:::
-
-The permissions that are attached to each of the groups are described below in the table:
-
-| Group Name | Permissions |
-| - | - |
-| `non-interactive-users` | user |
-| `sonar-administrators` | admin, user |
-| `sonar-developers` | codeviewer, issueadmin, securityhotspotadmin, user |
-| `sonar-users` | - |
-
-## Nexus Repository Manager
-
-Users authenticate to Nexus using their Keycloak credentials.
-
-During the authentication process, the OAuth2-Proxy receives the user's role from Keycloak.
-
-:::info
-  Only users with either the `administrator` or `developer` role in Keycloak can access Nexus.
-:::
-
-Nexus has four distinct roles available, including `edp-admin`, `edp-viewer`, `nx-admin` and `nx-anonymous`.
-To grant the user access to one or more of these roles, an entry must be added to the custom Nexus resource.
-
-For instance, in the context of the custom Nexus resource, the user `user_1@example.com` has been assigned the `nx-admin` role.
-An example can be found below:
-
-:::note Nexus
-
-  ```yaml
-  apiVersion: v2.edp.epam.com/v1
-  kind: Nexus
-  metadata:
-    name: nexus
-  spec:
-    basePath: /
-    edpSpec:
-      dnsWildcard: example.com
-    keycloakSpec:
-      enabled: false
-      roles:
-        - developer
-        - administrator
-    users:
-      - roles:
-          - nx-admin
-        username: user_1@example.com
-  ```
-
-:::
-
-## Gerrit
-
-The user should use their credentials from Keycloak when authenticating to Gerrit.
-
-After logging into Gerrit, the user is not automatically attached to any groups.
-To add a user to a group, the `GerritGroupMember` custom resource must be created. This custom resource specifies
-the user's email address and the name of the group to which they should be added.
-
-The Custom Resource below is an example of the `GerritGroupMember` resource:
-
-:::note Gerrit Group Member
-
-  ```yaml
-  apiVersion: v2.edp.epam.com/v1
-  kind: GerritGroupMember
-  metadata:
-    name: user-admins
-  spec:
-    accountId: user@user.com
-    groupId: Administrators
-  ```
-
-:::
-
-After the `GerritGroupMember` resource is created, the user will have the permissions and access levels associated with that group.
-
-## KubeRocketCI Portal and EKS Cluster
-
-Both Portal and EKS Cluster use Keycloak groups for controlling access.
-Users need to be added to the required group in Keycloak to get access.
-The groups that are used for access control are in the `broker` realm.
-
-:::warning
-  For the Kubernetes cluster to correctly manage access control, Keycloak must be configured as an OpenID Connect (OIDC) provider. Ensure that your Keycloak setup is properly configured for OIDC before proceeding.
-:::
-
-:::note
-  The `broker` realm keeps Kubernetes OIDC client.
-:::
-
-### Keycloak Groups
-
-There are two types of groups provided for users:
-
-* Independent group: provides the minimum required permission set.
-* Extension group: extends the rights of an independent group.
-
-For example, the `edp-oidc-viewers` group can be extended with rights from the `edp-oidc-builders` group.
-
-| Group Name | Independent Group | Extension Group |
-| - | :-: | :-: |
-|`edp-oidc-admins`    | :white_check_mark: | |
-|`edp-oidc-developers`| :white_check_mark: | |
-|`edp-oidc-viewers`   | :white_check_mark: | |
-|`edp-oidc-builders`  | | :white_check_mark: |
-|`edp-oidc-deployers` | | :white_check_mark: |
-
-| Name | Action List |
-| - | - |
-| View | Getting of all namespaced resources |
-| Build | Starting a PipelineRun from KubeRocketCI portal |
-| Deploy | Deploying a new version of application via Argo CD Application |
-
-| Group Name | View | Build | Deploy | Full Namespace Access |
-| - | :-: | :-: | :-: | :-: |
-|`edp-oidc-admins`    | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |
-|`edp-oidc-developers`| | :white_check_mark: | :white_check_mark: | |
-|`edp-oidc-viewers`   | :white_check_mark: | | | |
-|`edp-oidc-builders`  | | :white_check_mark: | | |
-|`edp-oidc-deployers` | | | :white_check_mark: | |
-
-:::note
-  Originally, the `edp-oidc-developer` group members come solely with the permissions to initiate pipelines. Assigning them to the `edp-oidc-viewers` group grants necessary permissions to view pipelines in the KubeRocketCI portal.
-:::
-
-### Cluster RBAC Resources
-
-The `edp` namespace has five role bindings that provide the necessary permissions for the Keycloak groups
-described above.
-
-| Role Binding Name| Role Name | Groups |
-| - | - | - |
-| tenant-admin | cluster-admin | `edp-oidc-admins` |
-| tenant-builder | tenant-builder | `edp-oidc-builders` |
-| tenant-deployer | tenant-deployer | `edp-oidc-deployers` |
-| tenant-developer | tenant-developer | `edp-oidc-developers` |
-| tenant-viewer | view | `edp-oidc-viewers` , `edp-oidc-developers` |
-
-Additionally, the extensions-oidc addon includes RBAC settings for comprehensive cluster administration privileges.
-
-| Cluster Role Binding Name| Cluster Role Name | Group |
-| - | - | - |
-| cluster-admin | cluster-admin | `oidc-cluster-admins` |
-
-:::note
-  KubeRocketCI provides an aggregate ClusterRole with permissions to view custom KubeRocketCI resources. ClusterRole is named `edp-aggregate-view-edp`
-:::
-
-:::info
-  The `tenant-admin` RoleBinding will be created in a created namespace by `cd-pipeline-operator`.<br />
-  `tenant-admin` RoleBinding assign the `admin` role to `edp-oidc-admins` and `edp-oidc-developers` groups.
-:::
-
-### Grant User Access to the Created Namespaces
-
-To provide users with admin or developer privileges for project namespaces, they need to be added to the `edp-oidc-admins` and `edp-oidc-developers` groups in Keycloak.
-
-## Argo CD
-
-In Argo CD, groups are specified when creating an AppProject to restrict access to deployed applications.
-To gain access to deployed applications within a project, the user must be added to their corresponding Argo CD group
-in Keycloak. This ensures that only authorized users can access and modify applications within the project.
-
-:::info
-  By default, only the `ArgoCDAdmins` group is automatically created in Keycloak.
-:::
-
-## Component Access Control Overview
-
-The diagram presented below provides an overview of the access control mechanisms for various applications integrated with Keycloak.
-It illustrates two primary methods of managing user access: [Keycloak roles](#realm-roles) and [Keycloak groups](#realm-groups). Certain components, highlighted in red, require additional configuration directly within the application's UI.
+The diagram below provides an overview of the access control mechanisms for various tools integrated with Keycloak.
+It illustrates two primary methods of managing user access: [Keycloak roles](#roles) and [Keycloak groups](#groups).
 
 ```mermaid
 graph TD;
@@ -368,7 +99,7 @@ graph TD;
     subgraph keycloak_groups_components [" "]
         direction TB
         ArgoCD["<b>Argo CD</b><br> --- <br> ArgoCDAdmins <br> ArgoCDDevelopers"]
-        PortalUI["<b>Portal UI</b><br> --- <br> edp-oidc-admins <br> edp-oidc-builders <br> edp-oidc-deployers <br> edp-oidc-developers <br> edp-oidc-viewers"]
+        PortalUI["<b>Portal UI</b><br> --- <br> ${platform}-oidc-admins <br> ${platform}-oidc-builders <br> ${platform}-oidc-deployers <br> ${platform}-oidc-developers <br> ${platform}-oidc-viewers"]
 
         Gerrit["<b>Gerrit</b><br> --- <br> Specific roles are assigned through <br> the CR GerritGroupMember"]
         ArgoCD ~~~ Gerrit
@@ -382,6 +113,12 @@ graph TD;
     component_access_control["Component Access <br> Control"] --> keycloak_groups["Keycloak Groups"]
 ```
 
+Components, highlighted in red, require additional configuration directly within the tool's UI.
+
+:::info
+  `${platform}` is a placeholder for the platform name (namespace), where the KubeRocketCI is deployed.
+:::
+
 For detailed instructions on setting up OIDC integration for various components, please refer to the following articles:
 
 1. **AWX** - [Community Documentation](https://ansible.readthedocs.io/projects/awx/en/latest/)
@@ -391,6 +128,292 @@ For detailed instructions on setting up OIDC integration for various components,
 5. **Vault** - [OIDC provider configuration](https://developer.hashicorp.com/vault/docs/auth/jwt/oidc-providers/keycloak)
 6. **Tekton** - [Tekton Dashboard Authentication](oauth2-proxy.md)
 7. **Gerrit** - [Gerrit Authentication](#gerrit)
+
+### Roles
+
+The `shared` Keycloak realm defines two composite roles:
+
+* **Administrator Role**:
+  * Designed for users who need administrative access to the tools used on the platform.
+  * This composite role includes the `administrator` and `sonar-administrators` roles.
+  * Users assigned the `administrator` composite role will inherit both roles.
+
+* **Developer Role**:
+  * Designed for users who need access to the development tools used on the platform.
+  * This composite role includes the `developer` and `sonar-developers` roles.
+  * Users assigned the `developer` composite role will inherit both roles.
+
+These composite roles simplify the assignment of administrative and development permissions within the KubeRocketCI.
+
+The table below provides an overview of the `shared` realm roles and their types:
+
+| Realm Role Name | Regular Role | Composite role |
+| - | :-: | :-: |
+| administrator | | :white_check_mark: |
+| developer | | :white_check_mark: |
+| sonar-administrators | :white_check_mark: | |
+| sonar-developers | :white_check_mark: | |
+
+### Groups
+
+KubeRocketCI uses the `shared` realm for group management. The groups are designed to control access to various components such as Argo CD, the KubeRocketCI portal, and the EKS cluster.
+
+| Group Name          | Purpose                                                     |
+|---------------------|-------------------------------------------------------------|
+| `ArgoCDAdmins`        | Controls administrative access to Argo CD                   |
+| `ArgoCD-edp-users`    | Controls user access to Argo CD                             |
+| `oidc-cluster-admins` | Manages administrative access to the EKS cluster            |
+| `${platform}-oidc-admins`     | Grants administrative RBAC to the KubeRocketCI|
+| `${platform}-oidc-builders`   | Grants build RBAC within the KubeRocketCI|
+| `${platform}-oidc-deployers`  | Grants deployment RBAC within the KubeRocketCI|
+| `${platform}-oidc-developers` | Provides development RBAC to the KubeRocketCI|
+| `${platform}-oidc-viewers`    | Provides read-only RBAC to the KubeRocketCI|
+
+These groups simplify the management of permissions and ensure that users have the appropriate level of access based on their roles and responsibilities.
+
+## SonarQube OIDC
+
+Access to SonarQube is managed through configurations in Keycloak (Keycloak Operator) and SonarQube (Sonar Operator). This section provides a detailed walkthrough for configuring access control.
+
+### Keycloak Configuration
+
+SonarQube access is managed using Keycloak roles within the `shared` realm:
+
+* **sonar-developers**: Grants developer access to SonarQube.
+* **sonar-administrators**: Grants administrative access to SonarQube.
+
+To grant access, the appropriate role must be assigned to the user in Keycloak.
+
+:::note Example
+  A user who needs developer access to SonarQube should be assigned the `sonar-developers` role or the `developer` composite role in Keycloak.
+:::
+
+### SonarQube Configuration
+
+[KubeRocketCI Sonar Operator](https://github.com/epam/edp-sonar-operator) provides a [SonarQube Permission Template](https://docs.sonarsource.com/sonarqube/latest/instance-administration/security/) to manage user access and permissions for SonarQube projects.
+
+The template is stored in the SonarQube [custom resource](https://github.com/epam/edp-sonar-operator/blob/master/deploy-templates/_crd_examples/permission_template.yaml) of the operator. An example of a custom resource is shown below.
+
+:::note Sonar Permission Template
+
+ ```yaml
+ apiVersion: v2.edp.epam.com/v1
+ kind: SonarPermissionTemplate
+ metadata:
+   name: edp-default
+ spec:
+   name: edp-default
+   description: "KubeRocketCI permission templates (DO NOT REMOVE)"
+   projectKeyPattern: ".+"
+   default: true
+   groupsPermissions:
+     non-interactive-users:
+       - user
+     sonar-developers:
+       - user
+       - securityhotspotadmin
+       - issueadmin
+       - codeviewer
+     sonar-administrators:
+       - admin
+       - user
+   sonarRef:
+     name: sonar
+ ```
+
+:::
+
+The SonarQube Permission Template defines three groups: `non-interactive-users`, `sonar-administrators`, and `sonar-developers`:
+
+* **non-interactive-users**: Users who have read-only access to the project. They can view project's data and metrics but cannot modify or interact with it.
+* **sonar-administrators**: Users with full control over the SonarQube project. They can create, modify, delete projects, manage user access, and configure SonarQube settings.
+* **sonar-developers**: Users actively working on the SonarQube project. They have read and write access, can modify project data and metrics, and configure project-specific settings.
+
+These groups provide different levels of access based on the user's role and responsibilities.
+
+:::info
+ If a user is not assigned to any group, they will be placed in the `sonar-users` group by default. This group does not have any permissions in the `edp-default` Permission Template.
+:::
+
+### Group Permissions
+
+The following table describes the permissions assigned to each group:
+
+| Group Name               | Sonar Permissions                             |
+|--------------------------|-----------------------------------------------|
+| non-interactive-users    | user                                          |
+| sonar-administrators     | admin, user                                   |
+| sonar-developers         | codeviewer, issueadmin, securityhotspotadmin, user |
+| sonar-users              | -                                             |
+
+## Nexus Repository Manager
+
+KubeRocketCI leverages oauth2-proxy to authenticate users in Nexus Repository Manager OSS.
+
+The user's access level is determined by the roles assigned in Keycloak.
+
+:::info
+  Only users with either the `administrator` or `developer` role in Keycloak can access Nexus.
+:::
+
+The platform manages two distinct roles: `edp-admin`, `edp-viewer`.
+
+:::note Example of edp-admin NexusRole and NexusUser
+
+  ```yaml
+  apiVersion: edp.epam.com/v1alpha1
+  kind: NexusRole
+  metadata:
+    name: edp-admin
+  spec:
+    id: edp-admin
+    nexusRef:
+      name: nexus
+      kind: Nexus
+    name: edp-admin
+    description: Read and write access to all repos and scripts
+    privileges:
+      - nx-apikey-all
+      - nx-repository-view-*-*-add
+      - nx-repository-view-*-*-browse
+      - nx-repository-view-*-*-edit
+      - nx-repository-view-*-*-read
+      - nx-script-*-add
+      - nx-script-*-delete
+      - nx-script-*-run
+      - nx-search-read
+  ```
+
+  ```yaml
+  apiVersion: edp.epam.com/v1alpha1
+  kind: NexusUser
+  metadata:
+    name: ci-user
+    namespace: nexus
+  spec:
+    email: ci.user@edp.com
+    firstName: ci.user
+    id: ci.user
+    lastName: CI
+    nexusRef:
+      kind: Nexus
+      name: nexus
+    roles:
+      - edp-admin
+    secret: $ci-nexus:password
+    status: active
+  ```
+
+:::
+
+## KubeRocketCI Portal and Kubernetes Cluster
+
+Both the KubeRocketCI Portal and the Kubernetes cluster use Keycloak groups for access control. Users must be added to the appropriate group in Keycloak to gain access. These groups are configured in the `broker` realm.
+
+:::warning
+  For the Kubernetes cluster to manage access control correctly, Keycloak must be configured as an OpenID Connect (OIDC) provider. Ensure that your Keycloak setup is properly [configured for OIDC](./configure-keycloak-oidc-eks.md) before proceeding.
+:::
+
+:::info
+  The `broker` realm keeps Kubernetes OIDC client.
+:::
+
+### Keycloak Groups
+
+There are two types of groups provided for users:
+
+* Base group: provides the minimum required permission set.
+* Extension group: extends the rights of the base group.
+
+For example, the permissions of a user in the `${platform}-oidc-viewers` group can be extended by adding the user to the `${platform}-oidc-builders` group.
+
+| Group Name | Base Group | Extension Group |
+| - | :-: | :-: |
+|`${platform}-oidc-admins`    | :white_check_mark: | |
+|`${platform}-oidc-developers`| :white_check_mark: | |
+|`${platform}-oidc-viewers`   | :white_check_mark: | |
+|`${platform}-oidc-builders`  | | :white_check_mark: |
+|`${platform}-oidc-deployers` | | :white_check_mark: |
+
+| Name | Action List |
+| - | - |
+| View | Getting of all namespaced resources |
+| Build | Starting a PipelineRun from KubeRocketCI portal |
+| Deploy | Deploying a new version of application via Argo CD Application |
+
+| Group Name | View | Build | Deploy | Full Namespace Access |
+| - | :-: | :-: | :-: | :-: |
+|`${platform}-oidc-admins`    | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |
+|`${platform}-oidc-developers`| | :white_check_mark: | :white_check_mark: | |
+|`${platform}-oidc-viewers`   | :white_check_mark: | | | |
+|`${platform}-oidc-builders`  | | :white_check_mark: | | |
+|`${platform}-oidc-deployers` | | | :white_check_mark: | |
+
+:::note
+  Members of the `${platform}-oidc-developers` group only have permissions to start pipelines. Assigning them to the `${platform}-oidc-viewers` group grants the necessary permissions to view pipelines in the KubeRocketCI portal.
+:::
+
+### Cluster RBAC Resources
+
+The platform defines five RoleBindings that grant the necessary permissions to the corresponding Keycloak groups mentioned above.
+
+| RoleBinding Name| Role Name | Groups |
+| - | - | - |
+| tenant-admin | cluster-admin | `${platform}-oidc-admins` |
+| tenant-builder | tenant-builder | `${platform}-oidc-builders` |
+| tenant-deployer | tenant-deployer | `${platform}-oidc-deployers` |
+| tenant-developer | tenant-developer | `${platform}-oidc-developers` |
+| tenant-viewer | view | `${platform}-oidc-viewers` , `${platform}-oidc-developers` |
+
+Platform includes RBAC settings for the full cluster administration privileges.
+
+| Cluster Role Binding Name| Cluster Role Name | Group |
+| - | - | - |
+| cluster-admin | cluster-admin | `oidc-cluster-admins` |
+
+:::note
+  KubeRocketCI provides an [aggregated](https://kubernetes.io/docs/reference/access-authn-authz/rbac/#aggregated-clusterroles) ClusterRole `edp-aggregate-view-${platform}` with the permissions to view the KubeRocketCI [custom resources](../../api/overview.md).
+:::
+
+:::info
+  The `tenant-admin` RoleBinding is created in a namespace by the `cd-pipeline-operator`. The `tenant-admin` RoleBinding assigns the `admin` role to the `${platform}-oidc-admins` and `${platform}-oidc-developers` groups.
+:::
+
+### Grant User Access to the Created Namespaces
+
+To provide users with admin or developer privileges for project namespaces, they need to be added to the `${platform}-oidc-admins` and `${platform}-oidc-developers` groups in Keycloak.
+
+## Argo CD
+
+In Argo CD, groups are specified when creating an AppProject to restrict access to deployed applications. To gain access to deployed applications within a project, users must be added to the corresponding Argo CD group in Keycloak. This ensures that only authorized users can access and modify applications within the project.
+
+:::info
+  By default, only the `ArgoCDAdmins` group is automatically created in Keycloak.
+:::
+
+## Gerrit
+
+Users should authenticate to Gerrit using their Keycloak credentials.
+
+After logging into Gerrit, users are not automatically assigned to any groups. To add a user to a group, a `GerritGroupMember` custom resource must be created. This custom resource specifies the user's email address and the name of the group to which they should be added.
+
+Below is an example of a `GerritGroupMember` custom resource:
+
+:::note Gerrit Group Member
+
+ ```yaml
+ apiVersion: v2.edp.epam.com/v1
+ kind: GerritGroupMember
+ metadata:
+   name: user-admins
+ spec:
+   accountId: user@user.com
+   groupId: Administrators
+ ```
+
+:::
+
+Once the `GerritGroupMember` resource is created, the user will inherit the permissions and access levels associated with the specified group.
 
 ## Related Articles
 

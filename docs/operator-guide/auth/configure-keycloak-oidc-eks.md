@@ -56,7 +56,7 @@ The initial step involves setting up the Keycloak operator (configure connection
       </TabItem>
 
       <TabItem value="manual">
-        Deactivate the External Secret Operator within the primary [extensions-oidc](https://github.com/epam/edp-cluster-add-ons/blob/main/add-ons/extensions-oidc/values.yaml#L27) chart:
+        Deactivate the External Secret Operator within the primary [kuberocketci-rbac](https://github.com/epam/edp-cluster-add-ons/blob/main/add-ons/kuberocketci-rbac/values.yaml#L27) chart:
 
         ```yaml title="values.yaml"
         # Configure components of the External Secrets Operator (ESO).
@@ -74,7 +74,7 @@ The initial step involves setting up the Keycloak operator (configure connection
       </TabItem>
     </Tabs>
 
-2. Begin by installing the [**extensions-oidc**](https://github.com/epam/edp-cluster-add-ons/tree/main/add-ons/extensions-oidc) add-on. This can be accomplished through the use of the add-ons method, as detailed in the [addons approach](../add-ons-overview.md). Utilize the following values in the `values.yaml` file:
+2. Begin by installing the [**kuberocketci-rbac**](https://github.com/epam/edp-cluster-add-ons/tree/main/add-ons/kuberocketci-rbac) add-on. This can be accomplished through the use of the add-ons method, as detailed in the [addons approach](../add-ons-overview.md). Utilize the following values in the `values.yaml` file:
 
     ```yaml title="values.yaml"
     keycloakUrl: "https://example.com"
@@ -84,11 +84,11 @@ The initial step involves setting up the Keycloak operator (configure connection
       enabled: true
     ```
 
-3. Activate the [**extensions-oidc**](https://github.com/epam/edp-cluster-add-ons/blob/main/chart/values.yaml#L58) add-on within the application settings:
+3. Activate the [**kuberocketci-rbac**](https://github.com/epam/edp-cluster-add-ons/blob/main/chart/values.yaml#L58) add-on within the application settings:
 
     ```yaml title="values.yaml"
-    extensions-oidc:
-      createNamespace: false
+    kuberocketci-rbac:
+      createNamespace: true
       enable: true
     ```
 

@@ -99,7 +99,7 @@ graph TD;
     subgraph keycloak_groups_components [" "]
         direction TB
         ArgoCD["<b>Argo CD</b><br> --- <br> ArgoCDAdmins <br> ArgoCDDevelopers"]
-        PortalUI["<b>Portal UI</b><br> --- <br> ${platform}-oidc-admins <br> ${platform}-oidc-builders <br> ${platform}-oidc-deployers <br> ${platform}-oidc-developers <br> ${platform}-oidc-viewers"]
+        PortalUI["<b>Portal UI</b><br> --- <br> ${platform}-oidc-admins <br> ${platform}-oidc-developers <br> ${platform}-oidc-viewers"]
 
         Gerrit["<b>Gerrit</b><br> --- <br> Specific roles are assigned through <br> the CR GerritGroupMember"]
         ArgoCD ~~~ Gerrit
@@ -164,8 +164,6 @@ KubeRocketCI uses the `shared` realm for group management. The groups are design
 | `ArgoCD-edp-users`    | Controls user access to Argo CD                             |
 | `oidc-cluster-admins` | Manages administrative access to the EKS cluster            |
 | `${platform}-oidc-admins`     | Grants administrative RBAC to the KubeRocketCI|
-| `${platform}-oidc-builders`   | Grants build RBAC within the KubeRocketCI|
-| `${platform}-oidc-deployers`  | Grants deployment RBAC within the KubeRocketCI|
 | `${platform}-oidc-developers` | Provides development RBAC to the KubeRocketCI|
 | `${platform}-oidc-viewers`    | Provides read-only RBAC to the KubeRocketCI|
 
@@ -332,8 +330,6 @@ For example, the permissions of a user in the `${platform}-oidc-viewers` group c
 |`${platform}-oidc-admins`    | :white_check_mark: | |
 |`${platform}-oidc-developers`| :white_check_mark: | |
 |`${platform}-oidc-viewers`   | :white_check_mark: | |
-|`${platform}-oidc-builders`  | | :white_check_mark: |
-|`${platform}-oidc-deployers` | | :white_check_mark: |
 
 | Name | Action List |
 | - | - |
@@ -346,8 +342,6 @@ For example, the permissions of a user in the `${platform}-oidc-viewers` group c
 |`${platform}-oidc-admins`    | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |
 |`${platform}-oidc-developers`| | :white_check_mark: | :white_check_mark: | |
 |`${platform}-oidc-viewers`   | :white_check_mark: | | | |
-|`${platform}-oidc-builders`  | | :white_check_mark: | | |
-|`${platform}-oidc-deployers` | | | :white_check_mark: | |
 
 :::note
   Members of the `${platform}-oidc-developers` group only have permissions to start pipelines. Assigning them to the `${platform}-oidc-viewers` group grants the necessary permissions to view pipelines in the KubeRocketCI portal.
@@ -360,8 +354,6 @@ The platform defines five RoleBindings that grant the necessary permissions to t
 | RoleBinding Name| Role Name | Groups |
 | - | - | - |
 | tenant-admin | cluster-admin | `${platform}-oidc-admins` |
-| tenant-builder | tenant-builder | `${platform}-oidc-builders` |
-| tenant-deployer | tenant-deployer | `${platform}-oidc-deployers` |
 | tenant-developer | tenant-developer | `${platform}-oidc-developers` |
 | tenant-viewer | view | `${platform}-oidc-viewers` , `${platform}-oidc-developers` |
 

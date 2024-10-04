@@ -156,16 +156,16 @@ The table below provides an overview of the `shared` realm roles and their types
 
 ### Groups
 
-KubeRocketCI uses the `shared` realm for group management. The groups are designed to control access to various components such as Argo CD, the KubeRocketCI portal, and the EKS cluster.
+KubeRocketCI uses the `shared` realm for group management. The [groups](https://github.com/epam/edp-install/tree/master/deploy-templates/templates/rbac) are designed to control access to various components such as Argo CD, the KubeRocketCI portal, and the EKS cluster.
 
-| Group Name          | Purpose                                                     |
-|---------------------|-------------------------------------------------------------|
-| `ArgoCDAdmins`        | Controls administrative access to Argo CD                   |
-| `ArgoCD-edp-users`    | Controls user access to Argo CD                             |
-| `oidc-cluster-admins` | Manages administrative access to the EKS cluster            |
-| `${platform}-oidc-admins`     | Grants administrative RBAC to the KubeRocketCI|
-| `${platform}-oidc-developers` | Provides development RBAC to the KubeRocketCI|
-| `${platform}-oidc-viewers`    | Provides read-only RBAC to the KubeRocketCI|
+| Group Name          | Purpose                                                                    |
+|---------------------|----------------------------------------------------------------------------|
+| `ArgoCDAdmins`        | Administrator access to Argo CD instance                                |
+| `ArgoCD-${platform}-users`    | Access to the Argo CD project mapped to the `${platform}` tenant                                |
+| `oidc-cluster-admins` | Full administrator (cluster-admin) access to the kubernetes cluster     |
+| `${platform}-oidc-admins`     | Administrator access to KubeRocketCI                               |
+| `${platform}-oidc-developers` | Developer access to KubeRocketCI |
+| `${platform}-oidc-viewers`    | Read-only access to view resources in KubeRocketCI                |
 
 These groups simplify the management of permissions and ensure that users have the appropriate level of access based on their roles and responsibilities.
 

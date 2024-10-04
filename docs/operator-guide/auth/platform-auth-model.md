@@ -318,34 +318,11 @@ Both the KubeRocketCI Portal and the Kubernetes cluster use Keycloak groups for 
 
 ### Keycloak Groups
 
-There are two types of groups provided for users:
-
-* Base group: provides the minimum required permission set.
-* Extension group: extends the rights of the base group.
-
-For example, the permissions of a user in the `${platform}-oidc-viewers` group can be extended by adding the user to the `${platform}-oidc-builders` group.
-
-| Group Name | Base Group | Extension Group |
-| - | :-: | :-: |
-|`${platform}-oidc-admins`    | :white_check_mark: | |
-|`${platform}-oidc-developers`| :white_check_mark: | |
-|`${platform}-oidc-viewers`   | :white_check_mark: | |
-
-| Name | Action List |
-| - | - |
-| View | Getting of all namespaced resources |
-| Build | Starting a PipelineRun from KubeRocketCI portal |
-| Deploy | Deploying a new version of application via Argo CD Application |
-
 | Group Name | View | Build | Deploy | Full Namespace Access |
 | - | :-: | :-: | :-: | :-: |
 |`${platform}-oidc-admins`    | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |
 |`${platform}-oidc-developers`| | :white_check_mark: | :white_check_mark: | |
 |`${platform}-oidc-viewers`   | :white_check_mark: | | | |
-
-:::note
-  Members of the `${platform}-oidc-developers` group only have permissions to start pipelines. Assigning them to the `${platform}-oidc-viewers` group grants the necessary permissions to view pipelines in the KubeRocketCI portal.
-:::
 
 ### Cluster RBAC Resources
 

@@ -10,12 +10,13 @@ The example is implemented following the KubeRocketCI add-ons approach.
 
 To follow the instruction, check the following prerequisites:
 
-1. terraform 1.5.7
-2. hashicorp/aws >= 5.54.1
-3. kubelogin  >= v1.25.1
-4. [Helm version 3.10+](https://github.com/helm/helm/releases)
-5. [Keycloak operator](https://github.com/epam/edp-cluster-add-ons/tree/main/add-ons/keycloak-operator) installed by [add-ons](https://github.com/epam/edp-cluster-add-ons/blob/main/chart/values.yaml#L105) approach.
-6. Ensure that Keycloak has network availability for AWS (not in a private network).
+1. (Optional) Terraform version 1.5.7
+2. Kubelogin version >= v1.25.1
+3. (Optional) [EDP Cluster Add-ons](../add-ons-overview.md) Solution is applied
+4. (Optional) [External Secrets Operator](https://github.com/epam/edp-cluster-add-ons/tree/main/add-ons/external-secrets)
+5. A running [Keycloak instance](https://github.com/epam/edp-cluster-add-ons/tree/main/add-ons/keycloak)
+6. The [Keycloak operator](https://github.com/epam/edp-cluster-add-ons/tree/main/add-ons/keycloak-operator) is deployed
+7. The Keycloak Realm's OIDC discovery URL and jwks_uri endpoints are publicly accessible
 
 :::note
   To connect OIDC with a cluster, install and configure the [kubelogin](https://github.com/int128/kubelogin) plugin. For Windows, it is recommended to download the kubelogin as a binary and add it to your PATH.
@@ -94,6 +95,8 @@ The initial step involves setting up the Keycloak operator (configure connection
 
 
 This add-ons facilitates sets up a broker realm to manage traffic redirection between external Identity Providers (IdP) and internal clients. Additionally, it creates a shared realm that encompasses all clients, including to EKS, Sonar, Nexus, and Portal.
+
+The [KubeRocketCI RBAC add-on](https://github.com/epam/edp-cluster-add-ons/tree/main/add-ons/kuberocketci-rbac) creates Keycloak groups that are used in the KubeRocketCI platform to manage access to resources. For more details refer to the [KubeRocketCI Groups](platform-auth-model.md#groups) documentation.
 
 ## AWS Configuration
 
@@ -193,17 +196,28 @@ To find the client secret:
 
 ## Access Validation
 
-Before testing, ensure that a user is a member of the correct Keycloak group.
-To add a user to a Keycloak group:
+To validate access to the Kubernetes cluster by using the default **cluster-admin** role. Assign the user the **oidc-cluster-admins** Keycloak group.
+
+To add a user to a Keycloak group, follow these steps:
 
 1. Open Keycloak
-2. Choose **Shared realm**
+2. Choose **Shared** realm
 3. Open user screen with search field
 4. Find a user and open the configuration
 5. Open Groups tab
-6. In Available Groups, choose an appropriate group
+6. In Available Groups, choose an **oidc-cluster-admins** group
 7. Click the **Join** button
 8. The group should appear in the User's Group Membership list
+
+As a result, the required access mapping is implemented using the following resources:
+
+| Keycloak Group Name  | Kubernetes ClusterRole | Kubernetes ClusterRoleBinding |
+|----------------------|-------------------------|-------------------------------|
+|  [oidc-cluster-admins](https://github.com/epam/edp-cluster-add-ons/blob/main/add-ons/kuberocketci-rbac/templates/kubernetes/keycloak-realmgroups-cluster-admins.yaml) | cluster-admin (built-in)           | [cluster-admin](https://github.com/epam/edp-cluster-add-ons/blob/main/add-ons/kuberocketci-rbac/templates/kubernetes/clusterrolebinding-admin.yaml)                 |
+
+In this configuration, the Keycloak **oidc-cluster-admins** group is mapped to the Kubernetes **cluster-admin** role. This setup grants members of the **oidc-cluster-admins** group the necessary permissions to perform administrator management in the Kubernetes cluster. You can further customize access by associating different Keycloak groups with specific Kubernetes roles.
+
+KubeRocketCI follows the same approach for managing access to its resources. For more information, refer to the [KubeRocketCI Groups](platform-auth-model.md#groups) documentation.
 
 Follow the steps below to test the configuration:
 
@@ -225,7 +239,7 @@ in case a user is configured correctly and is a member of the correct group and 
 
   ```bash
   Error from server (Forbidden): ingresses.networking.k8s.io is forbidden:
-  User "https://<keycloak_url>/auth/realms/<realm>#<keycloak_user_id>"
+  User "https://<keycloak_url>/auth/realms/shared#<keycloak_user_id>"
   cannot list resource "ingresses" in API group "networking.k8s.io" in the namespace "<namespace_name>"
   ```
 
@@ -252,7 +266,7 @@ To access the Kubernetes cluster via [Lens](https://k8slens.dev/), follow the st
 
 ## Changing the Lifespan of an Access Token
 
-By default, the Keycloak token has a lifespan of 5 minutes. To modify this duration, please refer to the guidelines outlined in this [document](ui-portal-oidc#changing-the-lifespan-of-an-access-token).
+By default, the Keycloak token has a lifespan of 5 minutes. To modify this duration refer to the guidelines outlined in this [document](ui-portal-oidc#changing-the-lifespan-of-an-access-token).
 
 ## Related Articles
 

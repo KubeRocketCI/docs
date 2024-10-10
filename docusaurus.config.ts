@@ -2,6 +2,36 @@ import { themes as prismThemes } from 'prism-react-renderer';
 import type { Config } from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
 
+const siteStructuredData = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@id': 'https://docs.kuberocketci.io',
+      '@type': 'WebSite',
+      'url': 'https://docs.kuberocketci.io',
+      'name': 'KubeRocketCI Documentation',
+      'description': 'Explore KubeRocketCI Documentation for detailed guides, tutorials, and insights into KubeRocketCI CI/CD flow, platform components, and add-ons. Learn how to enhance your DevOps practices with KubeRocketCI.',
+
+      copyrightHolder: {
+        '@id': 'https://docs.kuberocketci.io/docs/about-platform',
+      },
+      publisher: {
+        '@id': 'https://docs.kuberocketci.io/docs/about-platform',
+      },
+
+      potentialAction: {
+        '@type': 'SearchAction',
+        target: {
+          '@type': 'EntryPoint',
+          urlTemplate: 'https://docs.kuberocketci.com/search?q={search_term_string}',
+        },
+        'query-input': 'required name=search_term_string',
+      },
+      inLanguage: 'en-UK',
+    }
+  ],
+};
+
 const config: Config = {
   title: 'KubeRocketCI',
   tagline: 'Build Your Delivery Rocket',
@@ -31,6 +61,16 @@ const config: Config = {
     locales: ['en'],
   },
 
+  headTags: [
+    {
+      tagName: 'script',
+      attributes: {
+        type: 'application/ld+json',
+      },
+      innerHTML: JSON.stringify(siteStructuredData),
+    },
+  ],
+
   presets: [
     [
       'classic',
@@ -51,6 +91,21 @@ const config: Config = {
             current: {
               label: '3.10-dev',
               path: 'next',
+            },
+          },
+        },
+
+        blog: {
+          feedOptions: {
+            type: 'all',
+            copyright: `Copyright © ${new Date().getFullYear()} KubeRocketCI.`,
+            createFeedItems: async (params) => {
+              const {blogPosts, defaultCreateFeedItems, ...rest} = params;
+              return defaultCreateFeedItems({
+                // keep only the 10 most recent blog posts in the feed
+                blogPosts: blogPosts.filter((item, index) => index < 10),
+                ...rest,
+              });
             },
           },
         },
@@ -218,6 +273,22 @@ const config: Config = {
               label: 'Quick Start',
               to: '/docs/about-platform',
             },
+            {
+              label: 'Operator Guide',
+              to: '/docs/operator-guide',
+            },
+            {
+              label: 'User Guide',
+              to: '/docs/user-guide',
+            },
+            {
+              label: 'Developer Guide',
+              to: '/docs/developer-guide',
+            },
+            {
+              label: 'API Reference',
+              to: '/docs/api/overview',
+            }
           ],
         },
         {

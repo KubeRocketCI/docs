@@ -1,0 +1,26 @@
+{
+    "version": "https://jsonfeed.org/version/1",
+    "title": "KubeRocketCI Blog",
+    "home_page_url": "https://docs.kuberocketci.io/blog",
+    "description": "KubeRocketCI Blog",
+    "items": [
+        {
+            "id": "https://docs.kuberocketci.io/blog/advanced-aws-eks-management-oidc-keycloak",
+            "content_html": "<p>In today's cloud-centric world, ensuring secure and hassle-free access to Amazon Elastic Kubernetes Service (AWS EKS) stands out as a top priority for IT teams. Our guide dives into the nuts and bolts of boosting AWS EKS security by implementing Single Sign-On (SSO) using OpenID Connect (OIDC) and Keycloak. This approach streamlines authentication processes and bolsters security. With this guide, we aim to arm you with practical strategies to deploy an effective SSO solution, creating a more secure and organization-friendly AWS EKS environment.</p>\n<h2 class=\"anchor anchorWithStickyNavbar_LWe7\" id=\"keycloak-components-overview\">Keycloak Components Overview<a href=\"https://docs.kuberocketci.io/blog/advanced-aws-eks-management-oidc-keycloak#keycloak-components-overview\" class=\"hash-link\" aria-label=\"Direct link to Keycloak Components Overview\" title=\"Direct link to Keycloak Components Overview\">​</a></h2>\n<p>Keycloak is a critical component in KubeRocketCI for managing authentication and authorization. It uses realms, roles and groups to control access across the platform.</p>",
+            "url": "https://docs.kuberocketci.io/blog/advanced-aws-eks-management-oidc-keycloak",
+            "title": "Advanced AWS EKS Management: Implementing SSO via OIDC and Keycloak",
+            "summary": "Learn how to implement Single Sign-On (SSO) using OpenID Connect (OIDC) and Keycloak to boost security and streamline authentication processes in Amazon Elastic Kubernetes Service (AWS EKS).",
+            "date_modified": "2024-10-04T00:00:00.000Z",
+            "author": {
+                "name": "Sergiy Kulanov",
+                "url": "https://github.com/sergk"
+            },
+            "tags": [
+                "KubeRocketCI",
+                "Keycloak",
+                "AWS EKS",
+                "SSO"
+            ]
+        }
+    ]
+}

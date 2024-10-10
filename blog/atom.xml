@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>https://docs.kuberocketci.io/blog</id>
+    <title>KubeRocketCI Blog</title>
+    <updated>2024-10-04T00:00:00.000Z</updated>
+    <generator>https://github.com/jpmonette/feed</generator>
+    <link rel="alternate" href="https://docs.kuberocketci.io/blog"/>
+    <subtitle>KubeRocketCI Blog</subtitle>
+    <icon>https://docs.kuberocketci.io/img/favicon.ico</icon>
+    <entry>
+        <title type="html"><![CDATA[Advanced AWS EKS Management: Implementing SSO via OIDC and Keycloak]]></title>
+        <id>https://docs.kuberocketci.io/blog/advanced-aws-eks-management-oidc-keycloak</id>
+        <link href="https://docs.kuberocketci.io/blog/advanced-aws-eks-management-oidc-keycloak"/>
+        <updated>2024-10-04T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[Learn how to implement Single Sign-On (SSO) using OpenID Connect (OIDC) and Keycloak to boost security and streamline authentication processes in Amazon Elastic Kubernetes Service (AWS EKS).]]></summary>
+        <content type="html"><![CDATA[<p>In today's cloud-centric world, ensuring secure and hassle-free access to Amazon Elastic Kubernetes Service (AWS EKS) stands out as a top priority for IT teams. Our guide dives into the nuts and bolts of boosting AWS EKS security by implementing Single Sign-On (SSO) using OpenID Connect (OIDC) and Keycloak. This approach streamlines authentication processes and bolsters security. With this guide, we aim to arm you with practical strategies to deploy an effective SSO solution, creating a more secure and organization-friendly AWS EKS environment.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="keycloak-components-overview">Keycloak Components Overview<a href="https://docs.kuberocketci.io/blog/advanced-aws-eks-management-oidc-keycloak#keycloak-components-overview" class="hash-link" aria-label="Direct link to Keycloak Components Overview" title="Direct link to Keycloak Components Overview">​</a></h2>
+<p>Keycloak is a critical component in KubeRocketCI for managing authentication and authorization. It uses realms, roles and groups to control access across the platform.</p>]]></content>
+        <author>
+            <name>Sergiy Kulanov</name>
+            <uri>https://github.com/sergk</uri>
+        </author>
+        <author>
+            <name>Mykola Marusenko</name>
+            <uri>https://github.com/nikolaymarusenko</uri>
+        </author>
+        <category label="KubeRocketCI" term="KubeRocketCI"/>
+        <category label="Keycloak" term="Keycloak"/>
+        <category label="AWS EKS" term="AWS EKS"/>
+        <category label="SSO" term="SSO"/>
+    </entry>
+</feed>

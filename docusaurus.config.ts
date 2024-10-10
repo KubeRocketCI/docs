@@ -11,6 +11,11 @@ const siteStructuredData = {
       'url': 'https://docs.kuberocketci.io',
       'name': 'KubeRocketCI Documentation',
       'description': 'Explore KubeRocketCI Documentation for detailed guides, tutorials, and insights into KubeRocketCI CI/CD flow, platform components, and add-ons. Learn how to enhance your DevOps practices with KubeRocketCI.',
+      'sameAs': [
+        'https://medium.com/epam-delivery-platform',
+        'https://hub.docker.com/u/epamedp',
+        'https://epam.github.io/edp-install/',
+      ],
 
       copyrightHolder: {
         '@id': 'https://docs.kuberocketci.io/docs/about-platform',

@@ -4,7 +4,7 @@ This page serves as a comprehensive guide on integrating Keycloak with the [edp-
 
 ## Prerequisites
 
-* [EKS Configuration](configure-keycloak-oidc-eks/#eks-configuration) is performed;
+* [EKS Configuration](./configure-keycloak-oidc-eks.md) is performed;
 * [Helm v3.10.0](https://github.com/helm/helm/releases/tag/v3.10.0) is installed;
 * [Keycloak](../../operator-guide/auth/keycloak.md) is installed.
 

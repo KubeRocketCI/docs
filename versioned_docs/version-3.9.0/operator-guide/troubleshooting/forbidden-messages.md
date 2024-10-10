@@ -28,7 +28,7 @@ This solution suits those who use a service account token to log into the KubeRo
 
 To fix the problem, follow the steps below:
 
-1. Make sure the service account is set up in accordance with the [KubeRocketCI Access Model](../../operator-guide/auth/platform-auth-model#kuberocketci-portal-and-eks-cluster) and possesses the appropriate access rights.
+1. Make sure the service account is set up in accordance with the [KubeRocketCI Access Model](../../operator-guide/auth/platform-auth-model.md) and possesses the appropriate access rights.
 
 2. Check the roles associated with the ServiceAccount:
 

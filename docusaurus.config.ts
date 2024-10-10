@@ -23,7 +23,7 @@ const siteStructuredData = {
         '@type': 'SearchAction',
         target: {
           '@type': 'EntryPoint',
-          urlTemplate: 'https://docs.kuberocketci.com/search?q={search_term_string}',
+          urlTemplate: 'https://docs.kuberocketci.io/search?q={search_term_string}',
         },
         'query-input': 'required name=search_term_string',
       },

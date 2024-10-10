@@ -1,0 +1,17 @@
+sergk:
+  name: Sergiy Kulanov
+  title: Systems Architect and DevOps Advocate, Open Source Enthusiast and Contributor
+  url: https://github.com/sergk
+  image_url: https://github.com/sergk.png
+  socials:
+    x: sergiy_kulanov
+    github: sergk
+    linkedin: skulanov
+nikolaymarusenko:
+  name: Mykola Marusenko
+  title: Co-creator of KubeRocketCI
+  url: https://github.com/nikolaymarusenko
+  image_url: https://github.com/nikolaymarusenko.png
+  socials:
+    linkedin: mykola-marusenko
+    github: nikolaymarusenko

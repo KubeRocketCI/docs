@@ -63,7 +63,7 @@ const config: Config = {
           lastmod: 'date',
           changefreq: 'weekly',
           priority: 0.5,
-          ignorePatterns: ['**/next/**'],
+          ignorePatterns: ['**/next/**','**/tags/**'],
           filename: 'sitemap.xml',
           createSitemapItems: async (params) => {
             const { defaultCreateSitemapItems, ...rest } = params;
@@ -177,6 +177,7 @@ const config: Config = {
           to: '/pricing',
           position: 'left',
         },
+        // { to: 'blog', label: 'Blog', position: 'left' },
         // Right
         {
           type: 'docSidebar',

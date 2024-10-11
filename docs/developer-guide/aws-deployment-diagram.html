@@ -16,7 +16,7 @@
 <link rel="search" type="application/opensearchdescription+xml" title="KubeRocketCI" href="/opensearch.xml">
 
 <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@id":"https://docs.kuberocketci.io","@type":"WebSite","url":"https://docs.kuberocketci.io","name":"KubeRocketCI Documentation","description":"Explore KubeRocketCI Documentation for detailed guides, tutorials, and insights into KubeRocketCI CI/CD flow, platform components, and add-ons. Learn how to enhance your DevOps practices with KubeRocketCI.","sameAs":["https://medium.com/epam-delivery-platform","https://hub.docker.com/u/epamedp","https://epam.github.io/edp-install/"],"copyrightHolder":{"@id":"https://docs.kuberocketci.io/docs/about-platform"},"publisher":{"@id":"https://docs.kuberocketci.io/docs/about-platform"},"potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://docs.kuberocketci.io/search?q={search_term_string}"},"query-input":"required name=search_term_string"},"inLanguage":"en-UK"}]}</script><link rel="stylesheet" href="/assets/css/styles.74981a91.css">
-<script src="/assets/js/runtime~main.0049129f.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.7dd4666e.js" defer="defer"></script>
 <script src="/assets/js/main.5ea0a791.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
@@ -24,7 +24,7 @@
 <p>This document describes the KubeRocketCI deployment architecture on AWS. It utilizes various AWS services such as Amazon Elastic Kubernetes Service (EKS), Amazon EC2, Amazon Route 53, and others to build and deploy software in a repeatable, automated way.</p>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="overview">Overview<a href="#overview" class="hash-link" aria-label="Direct link to Overview" title="Direct link to Overview">​</a></h2>
 <p>The KubeRocketCI deployment architecture consists of two AWS accounts: Shared and Explorer. The <em>Shared</em> account hosts shared services, while the <em>Explorer</em> account runs the development team workload and KubeRocketCI services. Both accounts have an AWS EKS cluster deployed in multiple Availability Zones (AZs). The EKS cluster runs the KubeRocketCI Services, development team workload, and shared services in the case of the Shared account.</p>
-<p><img decoding="async" loading="lazy" alt="KubeRocketCI Deployment Diagram on AWS" src="/assets/images/aws-deploymen-diagram-cae7fe33a1fa766c4819689248134dbd.png" width="5655" height="3342" class="img_ev3q"></p>
+<p><img decoding="async" loading="lazy" alt="KubeRocketCI Deployment Diagram on AWS" src="/assets/images/aws-deploymen-diagram-1ad466c8bf3ac36f0ce9bb41f64afb7e.png" width="5655" height="3342" class="img_ev3q"></p>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="key-components">Key Components<a href="#key-components" class="hash-link" aria-label="Direct link to Key Components" title="Direct link to Key Components">​</a></h2>
 <ol>
 <li><strong>AWS Elastic Kubernetes Service (EKS)</strong>: A managed Kubernetes service used to run the KubeRocketCI Services, development team workload, and shared services. EKS provides easy deployment and management of Kubernetes clusters.</li>

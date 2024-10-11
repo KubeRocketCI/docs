@@ -16,7 +16,7 @@
 <link rel="search" type="application/opensearchdescription+xml" title="KubeRocketCI" href="/opensearch.xml">
 
 <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@id":"https://docs.kuberocketci.io","@type":"WebSite","url":"https://docs.kuberocketci.io","name":"KubeRocketCI Documentation","description":"Explore KubeRocketCI Documentation for detailed guides, tutorials, and insights into KubeRocketCI CI/CD flow, platform components, and add-ons. Learn how to enhance your DevOps practices with KubeRocketCI.","sameAs":["https://medium.com/epam-delivery-platform","https://hub.docker.com/u/epamedp","https://epam.github.io/edp-install/"],"copyrightHolder":{"@id":"https://docs.kuberocketci.io/docs/about-platform"},"publisher":{"@id":"https://docs.kuberocketci.io/docs/about-platform"},"potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://docs.kuberocketci.io/search?q={search_term_string}"},"query-input":"required name=search_term_string"},"inLanguage":"en-UK"}]}</script><link rel="stylesheet" href="/assets/css/styles.74981a91.css">
-<script src="/assets/js/runtime~main.0049129f.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.7dd4666e.js" defer="defer"></script>
 <script src="/assets/js/main.5ea0a791.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
@@ -44,8 +44,8 @@ To apply the Keycloak configuration, the Keycloak Operator is required. For inst
 <li><em>SAML Attribute NameFormat</em>: <code>Basic</code>.</li>
 <li><em>Aggregate attribute values</em>: <code>Off</code>.</li>
 </ul>
-<p><img decoding="async" loading="lazy" alt="User mapper sample" src="/assets/images/reportportal-keycloak-1-3da11250a87808e6f934e7053cfadced.png" title="User mapper sample" width="1107" height="665" class="img_ev3q">
-<img decoding="async" loading="lazy" alt="Scope mappers" src="/assets/images/reportportal-keycloak-2-34201f1e6cf3367c373730a8bfb08a56.png" title="Scope mappers" width="1630" height="460" class="img_ev3q"></p>
+<p><img decoding="async" loading="lazy" alt="User mapper sample" src="/assets/images/reportportal-keycloak-1-95c7057415307093880ec7f72164610a.png" title="User mapper sample" width="1107" height="665" class="img_ev3q">
+<img decoding="async" loading="lazy" alt="Scope mappers" src="/assets/images/reportportal-keycloak-2-a162ced308614d3fa5776425f9705262.png" title="Scope mappers" width="1630" height="460" class="img_ev3q"></p>
 </li>
 <li>
 <p>Navigate to <strong>Clients</strong> &gt; <strong>Create client</strong> and fill in the following fields:</p>
@@ -60,11 +60,11 @@ To apply the Keycloak configuration, the Keycloak Operator is required. For inst
 </li>
 <li>
 <p>Navigate to <strong>Client</strong> &gt; <strong>your_client</strong> &gt; <strong>Keys</strong> and disable <em>Client signature required</em>.</p>
-<p><img decoding="async" loading="lazy" alt="Client keys" src="/assets/images/reportportal-keycloak-3-06e681849364995ec7ac3629151f5cd5.png" title="Client keys" width="1031" height="742" class="img_ev3q"></p>
+<p><img decoding="async" loading="lazy" alt="Client keys" src="/assets/images/reportportal-keycloak-3-c5ec242c56055cc26673b1920de8b5da.png" title="Client keys" width="1031" height="742" class="img_ev3q"></p>
 </li>
 <li>
 <p>Navigate to <strong>Client</strong> &gt; <strong>your_client</strong> &gt; <strong>Client scopes</strong> and add the scope created on step 3 with the default <em>Assigned type</em>.</p>
-<p><img decoding="async" loading="lazy" alt="Client scopes" src="/assets/images/reportportal-keycloak-4-ef48474260b5a13ed5ee5f3875e841dc.png" title="Client scopes" width="1627" height="556" class="img_ev3q"></p>
+<p><img decoding="async" loading="lazy" alt="Client scopes" src="/assets/images/reportportal-keycloak-4-576f044360fa64742f13dc1efaa68963.png" title="Client scopes" width="1627" height="556" class="img_ev3q"></p>
 </li>
 </ol>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="reportportal-configuration">ReportPortal Configuration<a href="#reportportal-configuration" class="hash-link" aria-label="Direct link to ReportPortal Configuration" title="Direct link to ReportPortal Configuration">​</a></h2>
@@ -74,11 +74,11 @@ To apply the Keycloak configuration, the Keycloak Operator is required. For inst
 </li>
 <li>
 <p>Navigate to <strong>Client</strong> &gt; <strong>Administrate</strong> &gt; <strong>Plugins</strong> and select the SAML plugin.</p>
-<p><img decoding="async" loading="lazy" alt="Plugins menu" src="/assets/images/reportportal-keycloak-5-02a5bcb69f803dd870e7b13effd9d627.png" title="Plugins menu" width="1920" height="977" class="img_ev3q"></p>
+<p><img decoding="async" loading="lazy" alt="Plugins menu" src="/assets/images/reportportal-keycloak-5-53df8f5fceb1e934e2fc3f2f937a32db.png" title="Plugins menu" width="1920" height="977" class="img_ev3q"></p>
 </li>
 <li>
 <p>To add a new integration, fill in the following fields:</p>
-<p><img decoding="async" loading="lazy" alt="Add SAML configuration" src="/assets/images/reportportal-keycloak-6-936bb25cc59f429b2bd6810f01beca6a.png" title="Add SAML configuration" width="1920" height="1097" class="img_ev3q"></p>
+<p><img decoding="async" loading="lazy" alt="Add SAML configuration" src="/assets/images/reportportal-keycloak-6-589136ba4bc6683506c71d9ed0f40bfb.png" title="Add SAML configuration" width="1920" height="1097" class="img_ev3q"></p>
 <ul>
 <li><em>Provider name</em> is the display name in the ReportPortal login page.</li>
 <li><em>Metadata URL</em> <code>https://&lt;keycloak_url&gt;/auth/realms/&lt;realm&gt;/protocol/saml/descriptor</code>.</li>
@@ -92,7 +92,7 @@ To apply the Keycloak configuration, the Keycloak Operator is required. For inst
 <li>
 <p>Log in to the ReportPortal.</p>
 <div class="theme-admonition theme-admonition-note admonition_xJq3 alert alert--secondary"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M6.3 5.69a.942.942 0 0 1-.28-.7c0-.28.09-.52.28-.7.19-.18.42-.28.7-.28.28 0 .52.09.7.28.18.19.28.42.28.7 0 .28-.09.52-.28.7a1 1 0 0 1-.7.3c-.28 0-.52-.11-.7-.3zM8 7.99c-.02-.25-.11-.48-.31-.69-.2-.19-.42-.3-.69-.31H6c-.27.02-.48.13-.69.31-.2.2-.3.44-.31.69h1v3c.02.27.11.5.31.69.2.2.42.31.69.31h1c.27 0 .48-.11.69-.31.2-.19.3-.42.31-.69H8V7.98v.01zM7 2.3c-3.14 0-5.7 2.54-5.7 5.68 0 3.14 2.56 5.7 5.7 5.7s5.7-2.55 5.7-5.7c0-3.15-2.56-5.69-5.7-5.69v.01zM7 .98c3.86 0 7 3.14 7 7s-3.14 7-7 7-7-3.12-7-7 3.14-7 7-7z"></path></svg></span>note</div><div class="admonitionContent_BuS1"><p>By default, after the first login, ReportPortal creates the <code>&lt;your_email&gt;_personal</code> project and adds an account with the <code>Project manager</code> role.</p></div></div>
-<p><img decoding="async" loading="lazy" alt="Report portal login page" src="/assets/images/reportportal-keycloak-7-c2976824fbc560eb8d4a8f2f53245a6b.png" title="Report portal login page" width="1920" height="977" class="img_ev3q"></p>
+<p><img decoding="async" loading="lazy" alt="Report portal login page" src="/assets/images/reportportal-keycloak-7-7133f5af1916045daa56b604dc14cc2d.png" title="Report portal login page" width="1920" height="977" class="img_ev3q"></p>
 </li>
 </ol>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="related-articles">Related Articles<a href="#related-articles" class="hash-link" aria-label="Direct link to Related Articles" title="Direct link to Related Articles">​</a></h2>

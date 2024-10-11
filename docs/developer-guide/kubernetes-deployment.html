@@ -16,7 +16,7 @@
 <link rel="search" type="application/opensearchdescription+xml" title="KubeRocketCI" href="/opensearch.xml">
 
 <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@id":"https://docs.kuberocketci.io","@type":"WebSite","url":"https://docs.kuberocketci.io","name":"KubeRocketCI Documentation","description":"Explore KubeRocketCI Documentation for detailed guides, tutorials, and insights into KubeRocketCI CI/CD flow, platform components, and add-ons. Learn how to enhance your DevOps practices with KubeRocketCI.","sameAs":["https://medium.com/epam-delivery-platform","https://hub.docker.com/u/epamedp","https://epam.github.io/edp-install/"],"copyrightHolder":{"@id":"https://docs.kuberocketci.io/docs/about-platform"},"publisher":{"@id":"https://docs.kuberocketci.io/docs/about-platform"},"potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://docs.kuberocketci.io/search?q={search_term_string}"},"query-input":"required name=search_term_string"},"inLanguage":"en-UK"}]}</script><link rel="stylesheet" href="/assets/css/styles.74981a91.css">
-<script src="/assets/js/runtime~main.0049129f.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.7dd4666e.js" defer="defer"></script>
 <script src="/assets/js/main.5ea0a791.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
@@ -28,7 +28,7 @@
 </li>
 <li>
 <p><strong>Loosely Coupling:</strong> KubeRocketCI comprises several loosely coupled operators responsible for different platform parts. These operators can be deployed independently, enabling the most straightforward platform customization and delivery approach.</p>
-<p><img decoding="async" loading="lazy" alt="Kubernetes Operator" src="/assets/images/operator-pattern-approach-27398bf526c0336ba507d35cfc82897f.png" width="3234" height="2832" class="img_ev3q"></p>
+<p><img decoding="async" loading="lazy" alt="Kubernetes Operator" src="/assets/images/operator-pattern-approach-d3c4101a7343e0b7574f95fe25d50692.png" width="3234" height="2832" class="img_ev3q"></p>
 </li>
 </ul>
 <p>The following deployment diagram illustrates the platform&#x27;s core components, which provide the minimum functional capabilities required for the platform operation: build, push, deploy, and run applications. The platform relies on several mandatory dependencies:</p>
@@ -37,7 +37,7 @@
 <li><strong>Tekton Stack:</strong> Includes Tekton pipelines, triggers, dashboard, chains, etc.</li>
 <li><strong>ArgoCD:</strong> Responsible for GitOps deployment.</li>
 </ul>
-<p><img decoding="async" loading="lazy" alt="KubeRocketCI Deployment Diagram" src="/assets/images/deployment-diagram-e4c1be7ba9adfc881c36b5f0c1e3e0b5.png" width="2586" height="2013" class="img_ev3q"></p>
+<p><img decoding="async" loading="lazy" alt="KubeRocketCI Deployment Diagram" src="/assets/images/deployment-diagram-851033ed9be72097384bbbb2d38e3456.png" width="2586" height="2013" class="img_ev3q"></p>
 <ul>
 <li><strong>Codebase Operator:</strong> Responsible for managing git repositories, versioning, and branching. It also implements Jira integration controller.</li>
 <li><strong>CD Pipeline Operator:</strong> Manages Continuous Delivery (CD) pipelines and CD stages (which is an abstraction of Kubernetes Namespace). Operator acts as the bridge between the artifact and deployment tools, like Argo CD. It defines the CD pipeline structure, artifacts promotion logic and triggers the pipeline execution.</li>

@@ -16,7 +16,7 @@
 <link rel="search" type="application/opensearchdescription+xml" title="KubeRocketCI" href="/opensearch.xml">
 
 <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@id":"https://docs.kuberocketci.io","@type":"WebSite","url":"https://docs.kuberocketci.io","name":"KubeRocketCI Documentation","description":"Explore KubeRocketCI Documentation for detailed guides, tutorials, and insights into KubeRocketCI CI/CD flow, platform components, and add-ons. Learn how to enhance your DevOps practices with KubeRocketCI.","sameAs":["https://medium.com/epam-delivery-platform","https://hub.docker.com/u/epamedp","https://epam.github.io/edp-install/"],"copyrightHolder":{"@id":"https://docs.kuberocketci.io/docs/about-platform"},"publisher":{"@id":"https://docs.kuberocketci.io/docs/about-platform"},"potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://docs.kuberocketci.io/search?q={search_term_string}"},"query-input":"required name=search_term_string"},"inLanguage":"en-UK"}]}</script><link rel="stylesheet" href="/assets/css/styles.74981a91.css">
-<script src="/assets/js/runtime~main.83559686.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.0049129f.js" defer="defer"></script>
 <script src="/assets/js/main.5ea0a791.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
@@ -49,9 +49,9 @@
 <p>Download the <a href="https://grafana.com/grafana/dashboards/18321" target="_blank" rel="noopener noreferrer">KubeRocketCi</a> dashboard:</p>
 <p>a. Click on the dashboard menu;</p>
 <p>b. In the upper right corner, click on the <code>New</code> button. In the dropdown menu, click the <code>Import</code>;</p>
-<p><img decoding="async" loading="lazy" alt="Import dashboard grafana" src="/assets/images/grafana-tekton-dasboard-import-ae39035b9c9d12099c8285ab2c470e48.png" title="Import Grafana dashboard" width="3364" height="1662" class="img_ev3q"></p>
+<p><img decoding="async" loading="lazy" alt="Import dashboard grafana" src="/assets/images/grafana-tekton-dasboard-import-4af500d3ab1b3d0be3ab7cb86d6f2ca0.png" title="Import Grafana dashboard" width="3364" height="1662" class="img_ev3q"></p>
 <p>c. Select the downloaded <code>18321_rev*.json</code> file;</p>
-<p><img decoding="async" loading="lazy" alt="Import dashboard grafana options" src="/assets/images/grafana-tekton-dasboard-import-options-a9ba781e1d4be7cd3fe5fc8b53f70eee.png" title="Import Grafana dashboard: Options" width="3364" height="1662" class="img_ev3q"></p>
+<p><img decoding="async" loading="lazy" alt="Import dashboard grafana options" src="/assets/images/grafana-tekton-dasboard-import-options-80eed39e5e1efe273ec52ac5c710988d.png" title="Import Grafana dashboard: Options" width="3364" height="1662" class="img_ev3q"></p>
 <p>d. Type the name of the dashboard;</p>
 <p>e. Select the folder for the dashboard;</p>
 <p>f. Change the UID if necessary;</p>
@@ -59,13 +59,13 @@
 </li>
 </ol>
 <p>As soon as the dashboard procedure is completed, you can track the newcoming metrics in the dashboard menu:</p>
-<p><img decoding="async" loading="lazy" alt="Tekton dashboard" src="/assets/images/tekton-dashboard-d78c13282ba490e7b7c9019fb579a561.png" title="Tekton dashboard" width="3582" height="1852" class="img_ev3q"></p>
+<p><img decoding="async" loading="lazy" alt="Tekton dashboard" src="/assets/images/tekton-dashboard-e75b492e24527d517a5c7d6dda230ade.png" title="Tekton dashboard" width="3582" height="1852" class="img_ev3q"></p>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="integration-via-edp-install-helm-chart">Integration via edp-install Helm Chart<a href="#integration-via-edp-install-helm-chart" class="hash-link" aria-label="Direct link to Integration via edp-install Helm Chart" title="Direct link to Integration via edp-install Helm Chart">​</a></h2>
 <p>The <a href="https://github.com/epam/edp-install/" target="_blank" rel="noopener noreferrer">edp-install</a> helm chart allows to integrate tekton-pipelines metrics with the Prometheus and Grafana stack through the <code>edp-tekton.grafana.enabled</code> field in <a href="https://github.com/epam/edp-install/blob/d149baeb9756bdf113996620630f9b04f896e08d/deploy-templates/values.yaml#L309" target="_blank" rel="noopener noreferrer">values.yaml</a> file.
 To enable integration, set the <code>edp-tekton.grafana.enabled</code> field to <code>true</code> and apply the changes to the cluster.</p>
 <div class="language-yaml codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-yaml codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token key atrule" style="color:#00a4db">edp-tekton</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token key atrule" style="color:#00a4db">grafana</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token key atrule" style="color:#00a4db">enabled</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"> </span><span class="token boolean important" style="color:#36acaa">true</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
 <p>After the changes are applied, the tekton-pipelines metrics will be available in the <code>KRCI Tekton overview</code> Grafana dashboard:</p>
-<p><img decoding="async" loading="lazy" alt="Tekton dashboard" src="/assets/images/grafana-dashboard-is-created-29da7e293f0d96688048fda92a859bc7.png" title="Tekton dashboard is created" width="3364" height="1662" class="img_ev3q"></p>
+<p><img decoding="async" loading="lazy" alt="Tekton dashboard" src="/assets/images/grafana-dashboard-is-created-c56537b68fabbca6f5976436b0194d22.png" title="Tekton dashboard is created" width="3364" height="1662" class="img_ev3q"></p>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="related-articles">Related Articles<a href="#related-articles" class="hash-link" aria-label="Direct link to Related Articles" title="Direct link to Related Articles">​</a></h2>
 <ul>
 <li><a href="/docs/next/operator-guide/install-tekton">Install Tekton</a></li>

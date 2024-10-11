@@ -16,7 +16,7 @@
 <link rel="search" type="application/opensearchdescription+xml" title="KubeRocketCI" href="/opensearch.xml">
 
 <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@id":"https://docs.kuberocketci.io","@type":"WebSite","url":"https://docs.kuberocketci.io","name":"KubeRocketCI Documentation","description":"Explore KubeRocketCI Documentation for detailed guides, tutorials, and insights into KubeRocketCI CI/CD flow, platform components, and add-ons. Learn how to enhance your DevOps practices with KubeRocketCI.","sameAs":["https://medium.com/epam-delivery-platform","https://hub.docker.com/u/epamedp","https://epam.github.io/edp-install/"],"copyrightHolder":{"@id":"https://docs.kuberocketci.io/docs/about-platform"},"publisher":{"@id":"https://docs.kuberocketci.io/docs/about-platform"},"potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://docs.kuberocketci.io/search?q={search_term_string}"},"query-input":"required name=search_term_string"},"inLanguage":"en-UK"}]}</script><link rel="stylesheet" href="/assets/css/styles.74981a91.css">
-<script src="/assets/js/runtime~main.83559686.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.0049129f.js" defer="defer"></script>
 <script src="/assets/js/main.5ea0a791.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
@@ -24,7 +24,7 @@
 <p>This page explains how to change the path of a <a href="/docs/next/user-guide/gitops">GitOps</a> repository after it has been created.</p>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="problem">Problem<a href="#problem" class="hash-link" aria-label="Direct link to Problem" title="Direct link to Problem">​</a></h2>
 <p>The GitOps repository is located at an incorrect path:</p>
-<p><img decoding="async" loading="lazy" alt="GitOps Repository Path" src="/assets/images/gitops-configuration-d6eedc4574612fb265212f275d741dcb.png" title="GitOps repository path" width="3364" height="1660" class="img_ev3q"></p>
+<p><img decoding="async" loading="lazy" alt="GitOps Repository Path" src="/assets/images/gitops-configuration-8eb43fb490ed166b3c6d80055bef0f20.png" title="GitOps repository path" width="3364" height="1660" class="img_ev3q"></p>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="cause">Cause<a href="#cause" class="hash-link" aria-label="Direct link to Cause" title="Direct link to Cause">​</a></h2>
 <p>The GitOps repository path was either misconfigured at creation or needs to be modified as part of a migration or project restructuring.</p>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="solution-1-modify-the-codebase-custom-resource">Solution 1 (Modify the Codebase Custom Resource)<a href="#solution-1-modify-the-codebase-custom-resource" class="hash-link" aria-label="Direct link to Solution 1 (Modify the Codebase Custom Resource)" title="Direct link to Solution 1 (Modify the Codebase Custom Resource)">​</a></h2>
@@ -33,27 +33,27 @@
 <ol>
 <li>
 <p>Navigate to the <strong>Kubernetes</strong> tab in the bottom left corner in Portal UI.</p>
-<p><img decoding="async" loading="lazy" alt="Kubernetes Tab" src="/assets/images/kubernetes-tab-dcbfce442b444a387d9b672e23091af4.png" title="Kubernetes tab" width="3364" height="1660" class="img_ev3q"></p>
+<p><img decoding="async" loading="lazy" alt="Kubernetes Tab" src="/assets/images/kubernetes-tab-c1c248586ec517783d4303d136620972.png" title="Kubernetes tab" width="3364" height="1660" class="img_ev3q"></p>
 </li>
 <li>
 <p>Navigate to <strong>Cluster</strong> -&gt; <strong>Custom Resources</strong>.</p>
-<p><img decoding="async" loading="lazy" alt="Custom Resources Tab" src="/assets/images/custom-resources-tab-2a2879cb1b428aca221e318eccbacd29.png" title="Custom resources tab" width="3364" height="1660" class="img_ev3q"></p>
+<p><img decoding="async" loading="lazy" alt="Custom Resources Tab" src="/assets/images/custom-resources-tab-3a80acdb6e2b9aacb4e9a86ba7f8e2df.png" title="Custom resources tab" width="3364" height="1660" class="img_ev3q"></p>
 </li>
 <li>
 <p>Find and navigate to the <code>Codebase</code> custom resource using the search field in the top right corner.</p>
-<p><img decoding="async" loading="lazy" alt="Search Tab" src="/assets/images/codebase-crd-3e4f365d7f38e647079b7cbff3daca77.png" title="Search tab" width="3364" height="1660" class="img_ev3q"></p>
+<p><img decoding="async" loading="lazy" alt="Search Tab" src="/assets/images/codebase-crd-b1228d1ca5badc04b14d4f4927cf07d4.png" title="Search tab" width="3364" height="1660" class="img_ev3q"></p>
 </li>
 <li>
 <p>Find the <code>Codebase</code> custom resource that corresponds to the GitOps repository.</p>
-<p><img decoding="async" loading="lazy" alt="GitOps Custom Resource" src="/assets/images/edp-gitops-cr-8c8af5ff82e9713e2bfeb431bf03ebf8.png" title="GitOps custom resource" width="3364" height="1660" class="img_ev3q"></p>
+<p><img decoding="async" loading="lazy" alt="GitOps Custom Resource" src="/assets/images/edp-gitops-cr-745eeaea690b75d55e79cff5de46a7a5.png" title="GitOps custom resource" width="3364" height="1660" class="img_ev3q"></p>
 </li>
 <li>
 <p>Navigate to the resource and then press the <strong>Edit</strong> button in the top right corner.</p>
-<p><img decoding="async" loading="lazy" alt="Edit Button" src="/assets/images/edit-button-3e07ab7bdd3d23da2a9ae503a740c5c5.png" title="Edit button" width="3364" height="1660" class="img_ev3q"></p>
+<p><img decoding="async" loading="lazy" alt="Edit Button" src="/assets/images/edit-button-8ea8ad84d1788635a0a187e2eabca682.png" title="Edit button" width="3364" height="1660" class="img_ev3q"></p>
 </li>
 <li>
 <p>In the <strong>Edit</strong> window modify the <code>gitUrlPath</code> field within the <code>spec</code> section to change the GitOps repository path and then press the <strong>Save and Apply</strong> button.</p>
-<p><img decoding="async" loading="lazy" alt="Edit GitOps Repository Path" src="/assets/images/edit-codebase-resource-43011ec114caea39c58187ee0857ccac.png" title="Edit GitOps repository path" width="3364" height="1660" class="img_ev3q"></p>
+<p><img decoding="async" loading="lazy" alt="Edit GitOps Repository Path" src="/assets/images/edit-codebase-resource-11aa7aa52104b121b322a73cf9d74323.png" title="Edit GitOps repository path" width="3364" height="1660" class="img_ev3q"></p>
 </li>
 <li>
 <p>With the path updated, the GitOps repository will be recreated at the new path on the designated Git Server.</p>
@@ -65,31 +65,31 @@
 <ol>
 <li>
 <p>Navigate to the <strong>Kubernetes</strong> tab in the bottom left corner in Portal UI.</p>
-<p><img decoding="async" loading="lazy" alt="Kubernetes Tab" src="/assets/images/kubernetes-tab-dcbfce442b444a387d9b672e23091af4.png" title="Kubernetes tab" width="3364" height="1660" class="img_ev3q"></p>
+<p><img decoding="async" loading="lazy" alt="Kubernetes Tab" src="/assets/images/kubernetes-tab-c1c248586ec517783d4303d136620972.png" title="Kubernetes tab" width="3364" height="1660" class="img_ev3q"></p>
 </li>
 <li>
 <p>Navigate to <strong>Cluster</strong> -&gt; <strong>Custom Resources</strong>.</p>
-<p><img decoding="async" loading="lazy" alt="Custom Resources Tab" src="/assets/images/custom-resources-tab-2a2879cb1b428aca221e318eccbacd29.png" title="Custom resources tab" width="3364" height="1660" class="img_ev3q"></p>
+<p><img decoding="async" loading="lazy" alt="Custom Resources Tab" src="/assets/images/custom-resources-tab-3a80acdb6e2b9aacb4e9a86ba7f8e2df.png" title="Custom resources tab" width="3364" height="1660" class="img_ev3q"></p>
 </li>
 <li>
 <p>Find and navigate to the <code>Codebase</code> custom resource using the search field in the top right corner.</p>
-<p><img decoding="async" loading="lazy" alt="Search Tab" src="/assets/images/codebase-crd-3e4f365d7f38e647079b7cbff3daca77.png" title="Search tab" width="3364" height="1660" class="img_ev3q"></p>
+<p><img decoding="async" loading="lazy" alt="Search Tab" src="/assets/images/codebase-crd-b1228d1ca5badc04b14d4f4927cf07d4.png" title="Search tab" width="3364" height="1660" class="img_ev3q"></p>
 </li>
 <li>
 <p>Find the <code>Codebase</code> custom resource that corresponds to the GitOps repository.</p>
-<p><img decoding="async" loading="lazy" alt="GitOps Custom Resource" src="/assets/images/edp-gitops-cr-8c8af5ff82e9713e2bfeb431bf03ebf8.png" title="GitOps custom resource" width="3364" height="1660" class="img_ev3q"></p>
+<p><img decoding="async" loading="lazy" alt="GitOps Custom Resource" src="/assets/images/edp-gitops-cr-745eeaea690b75d55e79cff5de46a7a5.png" title="GitOps custom resource" width="3364" height="1660" class="img_ev3q"></p>
 </li>
 <li>
 <p>Navigate to the resource and then press the <strong>Delete</strong> button in the top right corner.</p>
-<p><img decoding="async" loading="lazy" alt="Delete Button" src="/assets/images/delete-button-b5f5d94e1ae6c0eab194e598559d9322.png" title="Delete button" width="3364" height="1660" class="img_ev3q"></p>
+<p><img decoding="async" loading="lazy" alt="Delete Button" src="/assets/images/delete-button-346ba1ba9e904d9f78b470e859dcb5c1.png" title="Delete button" width="3364" height="1660" class="img_ev3q"></p>
 </li>
 <li>
 <p>Confirm the deletion by pressing the <strong>Yes</strong> button in the confirmation window.</p>
-<p><img decoding="async" loading="lazy" alt="Delete Confirmation" src="/assets/images/confirm-deletion-224fea39c709ff4b59ff7c5d4fdccbbe.png" title="Delete confirmation" width="3364" height="1660" class="img_ev3q"></p>
+<p><img decoding="async" loading="lazy" alt="Delete Confirmation" src="/assets/images/confirm-deletion-3edc99207d571256c721c56ca291a706.png" title="Delete confirmation" width="3364" height="1660" class="img_ev3q"></p>
 </li>
 <li>
 <p>Click the <strong>Portal</strong> tab in the bottom left corner. Navigate to <strong>Configuration</strong> -&gt; <strong>Deployment</strong> -&gt; <strong>GitOps</strong> and recreate the GitOps repository with the new desired path.</p>
-<p><img decoding="async" loading="lazy" alt="Create GitOps Repository" src="/assets/images/recreate-gitops-repo-94d1a2a9217fb733aca82067a6eb8279.png" title="Create GitOps repository" width="3364" height="1660" class="img_ev3q"></p>
+<p><img decoding="async" loading="lazy" alt="Create GitOps Repository" src="/assets/images/recreate-gitops-repo-879c790dd71aa6e1541e22ebf88a1422.png" title="Create GitOps repository" width="3364" height="1660" class="img_ev3q"></p>
 </li>
 </ol>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="related-articles">Related Articles<a href="#related-articles" class="hash-link" aria-label="Direct link to Related Articles" title="Direct link to Related Articles">​</a></h2>

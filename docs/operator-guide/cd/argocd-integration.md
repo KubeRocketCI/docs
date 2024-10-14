@@ -85,18 +85,18 @@ Now that Argo CD is integrated, it is time to configure it properly. To configur
     </Tabs>
 
 2. Add a [credential template](https://argo-cd.readthedocs.io/en/stable/user-guide/private-repositories/#private-repositories)
-for GitHub, GitLab, Gerrit integrations. The credential template must be created for each Git server.
+for GitHub, GitLab, Bitbucket, or Gerrit integrations. The credential template must be created for each Git Server.
 
     <Tabs
       defaultValue="github"
       values={[
-        {label: 'GitHub/GitLab', value: 'github'},
+        {label: 'GitHub/GitLab/Bitbucket', value: 'github'},
         {label: 'Gerrit', value: 'gerrit'}
       ]}>
 
       <TabItem value="github">
 
-      Generate an SSH key pair and add a public key to GitLab or GitHub account.
+      Generate an SSH key pair and add a public key to GitLab, GitHub, or Bitbucket account.
 
       :::warning
         Use an additional GitHub/GitLab User to access a repository. For example:<br />
@@ -108,11 +108,11 @@ for GitHub, GitLab, Gerrit integrations. The credential template must be created
       ssh-keygen -t ed25519 -C "email@example.com" -f argocd
       ```
 
-      Copy SSH private key to Argo CD namespace
+      Copy SSH private key to Argo CD namespace.
 
       ```bash
       EDP_NAMESPACE="edp"
-      VCS_HOST="<github.com_or_gitlab.com>"
+      VCS_HOST="<github.com_or_gitlab.com_or_bitbucket.org>"
       ACCOUNT_NAME="<ACCOUNT_NAME>"
       URL="ssh://git@${VCS_HOST}:22/${ACCOUNT_NAME}"
 
@@ -122,11 +122,10 @@ for GitHub, GitLab, Gerrit integrations. The credential template must be created
       kubectl label --overwrite secret ${EDP_NAMESPACE} -n argocd "argocd.argoproj.io/secret-type=repo-creds"
       ```
 
-      Add public SSH key to GitHub/GitLab account.
       </TabItem>
 
       <TabItem value="gerrit">
-        Copy existing SSH private key for Gerrit to Argo CD namespace
+        Copy existing SSH private key for Gerrit to Argo CD namespace.
 
         ```bash
         EDP_NAMESPACE="edp"
@@ -140,17 +139,17 @@ for GitHub, GitLab, Gerrit integrations. The credential template must be created
     </Tabs>
 
 3. Add [SSH Known hosts](https://argo-cd.readthedocs.io/en/stable/user-guide/private-repositories/#unknown-ssh-hosts)
-   for Gerrit, GitHub, GitLab integration.
+   for GitHub, GitLab, Bitbucket, or Gerrit integration.
 
     <Tabs
       defaultValue="github"
       values={[
-        {label: 'GitHub/GitLab', value: 'github'},
+        {label: 'GitHub/GitLab/Bitbucket', value: 'github'},
         {label: 'Gerrit', value: 'gerrit'}
       ]}>
 
       <TabItem value="github">
-        Add GitHub/GitLab host to Argo CD config map with known hosts
+        Add GitHub, GitLab, or Bitbucket host to Argo CD config map with known hosts.
 
         ```bash
         EDP_NAMESPACE="edp"
@@ -223,7 +222,7 @@ for GitHub, GitLab, Gerrit integrations. The credential template must be created
         - edp
     ```
 
-5. Check that your new Repository, Known Hosts, and AppProject are added to the Argo CD UI.
+5. Check that your new **Repository**, **Known Hosts**, and **AppProject** are added to the Argo CD UI.
 
 6. Generate Argo CD project token for deploy integration:
 

@@ -7,6 +7,10 @@ This tutorial focuses on the create strategy, wherein an application is directly
   Prior to moving forward, ensure you possess an active GitHub account and have successfully deployed the platform.
 :::
 
+:::note
+If integration with a different Version Control System (VCS) is required, refer to the [Add Git Server](../user-guide/add-git-server.md) section for details on configuring alternative VCS providers.
+:::
+
 ## Integration Procedure
 
 To integrate KubeRocketCI with GitHub, follow the steps below:

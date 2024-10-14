@@ -9,7 +9,7 @@ The codebase-operator collects the following data:
 - The version of the platform
 - The number of codebases created and their parameters: language (for example, Java, NodeJS, etc.), framework (for example, FastAPI, Flask, etc.), build tool (for example, Maven, Gradle, etc.), strategy (for example, Clone, Create, Import), and Type (for example, library, application, etc.)
 - The number of CD pipelines created and their parameters: deployment type (for example, Auto, Manual), and the number of stages
-- The number of Git providers connected to the platform and their types (for example, GitHub, GitLab, Gerrit)
+- The number of Git providers connected to the platform and their types (for example GitHub, GitLab, Bitbucket, or Gerrit)
 - Where Jira is enabled or not
 - The type of the Docker registry connected to the platform (for example, Docker Hub, Harbor, ECR)
 

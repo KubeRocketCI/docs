@@ -7,7 +7,7 @@ This section provides details on the Code Review pipeline of the KubeRocketCI CI
 The purpose of the Code Review pipeline contains the following points:
 
 * Check out and test a particular developer's change (Patch Set) in order to inspect whether the code fits all the quality gates and can be built and tested;
-* Be triggered if any new Patch Set appears in GitHub/GitLab/Gerrit;
+* Be triggered if any new Patch Set appears in GitHub, GitLab, Bitbucket, or Gerrit;
 * Send feedback about the build process in Tekton to review the card in Gerrit;
 * Send feedback about Sonar violations that have been found during the Sonar stage.
 

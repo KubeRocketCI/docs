@@ -17,6 +17,7 @@ KubeRocketCI leverages a variety of secrets to facilitate the integration of dif
 |regcred|.dockerconfigjson|Serialized JSON that follows docker config patterns|cd-pipeline-operator|
 |ci-github|id_rsa<br />token<br />secretString|Private key from github repo <br />API token<br />Random string|edp-tekton|
 |ci-gitlab|id_rsa<br />token<br />secretString|Private key from gitlab repo <br />API token<br />Random string|edp-tekton|
+|ci-bitbucket|id_rsa<br />token<br />secretString|Private key from bitbucket repo <br />App Password<br />Random string|edp-tekton|
 |ci-jira|username<br />password|Jira username <br />Jira password|edp-codebase-operator|
 |ci-sonarqube|token<br />url|SonarQube token<br />SonarQube URL|edp-tekton|
 |ci-nexus|username<br />password<br />url|Nexus username<br />Nexus password<br />Nexus URL|edp-tekton|

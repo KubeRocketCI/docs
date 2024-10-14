@@ -17,7 +17,7 @@ Here is the list of all the sections provided in the Configuration tab. Familiar
 |[DefectDojo](../operator-guide/devsecops/defectdojo.md)|Connect platform with DefectDojo to manage and track security defects in applications.|
 |[DependencyTrack](../operator-guide/devsecops/dependency-track.md)|Connect the platform with the DependencyTrack tool for monitoring and managing vulnerabilities within third-party components.|
 |[SonarQube](../operator-guide/code-quality/sonarqube.md)|Integrate SonarQube to enable static code analysis.|
-|[Git Server](add-git-server.md)|Connect the platform to Version Control Systems, such as GitHub, GitLab, or Gerrit for source code management.|
+|[Git Server](add-git-server.md)|Connect the platform to Version Control Systems, such as GitHub, GitLab, Bitbucket, or Gerrit for source code management.|
 |[Jira](../operator-guide/project-management-and-reporting/jira-integration.md)|Integrate Jira to track and deliver the status of your projects on a dedicated dashboard.|
 |[SSO](../operator-guide/auth/keycloak.md)|Integrate platform with identity provider to enable the Single Sign-On approach.|
 

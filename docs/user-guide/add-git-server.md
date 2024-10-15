@@ -172,10 +172,6 @@ To change the default branch from `master` to desired branch in Bitbucket, follo
 
 Custom Webhook URL configuration is effectively utilized in Kubernetes clusters facing specific restrictions on traffic routing or requiring customized webhook event handling. Beyond the conventional Ingress, alternative traffic routing solutions such as Service Mesh (e.g., Istio), NodePort services, or external Load Balancers can be employed to manage traffic into the cluster, offering flexibility in addressing diverse networking policies and security requirements.
 
-:::warning
-  When deploying a custom webhook URL, it's important to note that the KubeRocketCI platform does not automatically handle the Ingress and the Tekton EventListener.
-:::
-
 User is responsible for the following action:
 
 * **Ingress Traffic Routing:** The configuration and management of Ingress for custom webhook URL. This entails ensuring that the custom URL is configured to accept incoming traffic and webhook events from your VCS (e.g., GitHub, GitLab). It's essential that your networking setup, including firewalls and DNS, allows your git hosting service to reach the specified URL endpoint.

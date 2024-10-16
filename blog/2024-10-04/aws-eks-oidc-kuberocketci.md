@@ -29,6 +29,40 @@ Together, these technologies streamline the login process, reinforce security, a
 
 Single sign-on (SSO) is a user authentication method that lets you use one set of login credentials (such as a username and password) to access multiple applications. The primary benefits of SSO include an improved user experience by eliminating the need for multiple passwords and logins, and enhanced security through centralized management of user access. Organizations widely adopt SSO to streamline their authentication processes and reduce the likelihood of password fatigue among users, thereby decreasing the risk of security breaches. For more information, see [Single sign-on on Wikipedia](https://en.wikipedia.org/wiki/Single_sign-on).
 
+```mermaid
+sequenceDiagram
+    participant U as User
+    participant SSO as SSO Gateway
+    participant A1 as Application 1
+    participant A2 as Application 2
+    participant A3 as Application 3
+
+    U->>SSO: Log in once
+    SSO->>U: Authentication & Session creation
+    Note over U, A3: User accesses applications without re-logging in
+    U->>A1: Access request
+    A1->>SSO: Verify user session
+    SSO->>A1: Session valid
+    A1->>U: Access granted
+    U->>A2: Access request
+    A2->>SSO: Verify user session
+    SSO->>A2: Session valid
+    A2->>U: Access granted
+    U->>A3: Access request
+    A3->>SSO: Verify user session
+    SSO->>A3: Session valid
+    A3->>U: Access granted
+```
+
+This diagram shows the following steps:
+
+1. User logs in once at the single sign-on (SSO) gateway by providing their credentials.
+2. The SSO gateway authenticates the user, creates a session, and then allows the user to access multiple applications.
+3. When the user attempts to access Application 1, the application verifies the user's session with the SSO gateway.
+4. The SSO gateway confirms that the session is valid, and Application 1 grants the user access.
+
+The same process is repeated for Application 2 and Application 3. Since the user's session is already established with the SSO gateway, they do not need to log in again to access these applications.
+
 ### Understanding OIDC
 
 OpenID Connect (OIDC) is an authentication layer on top of the OAuth 2.0 protocol. It lets clients verify the identity of the end user based on authentication by an authorization server and get basic profile information about the end user in an interoperable and REST-like manner. OIDC uses JSON Web Tokens (JWTs) to securely transmit information about an end user from the identity provider to the client. This protocol is essential for modern web applications, providing a more secure and streamlined method for user authentication and authorization. Reference: [OIDC Specification](https://openid.net/specs/openid-connect-core-1_0.html)

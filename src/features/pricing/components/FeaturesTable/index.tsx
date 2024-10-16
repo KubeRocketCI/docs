@@ -24,7 +24,7 @@ export const FeaturesTable = () => {
               Deploy Platform with Minimum Components in the existing Kubernetes Cluster: CI/CD, integration with
               existing SonarQube, Repository Manager, Container Registry
             </td>
-            <td className={styles.customBg}>60</td>
+            <td className={styles.customBg}>8</td>
           </tr>
           <tr>
             <td>
@@ -32,7 +32,7 @@ export const FeaturesTable = () => {
               SonarQube, DependencyTrack, Nexus Repository, DefectDojo, Logging, Monitoring, Docker registry,
               Observability
             </td>
-            <td>8</td>
+            <td>60</td>
           </tr>
           <tr>
             <td className={styles.customBg}>

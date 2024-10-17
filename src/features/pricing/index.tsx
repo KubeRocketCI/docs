@@ -13,7 +13,7 @@ export const Pricing = () => {
         <div className="container">
           <h1 className={styles.sectionTitle}>Professional Service Pricing</h1>
           <div className={styles.sectionDescription}>
-            Experience the flexibility of deploying the EPAM Delivery Platform on your on-premises infrastructure or in
+            Experience the flexibility of deploying KubeRocketCI on your on-premises infrastructure or in
             the Cloud. Your valuable data stays securely within your perimeter, ensuring uncompromising security at
             every step.
           </div>
@@ -27,11 +27,13 @@ export const Pricing = () => {
           </div>
 
           <Note>
-            Experience the flexibility of deploying the EPAM Delivery Platform on your on-premises infrastructure or in
-            the Cloud. Your valuable data stays securely within your perimeter, ensuring uncompromising security at
-            every step.
-            <br />
-            <br />
+            Professional service hours are versatile, blended hours bundled within your subscription plan.
+            They encompass expertise from diverse specialists, including business analysts, architects, lead automation engineers, DevOps (System Engineers), and performance engineers.
+            These multi-functional hours cater to KubeRocketCI installation, configuration, integration, customization, feature implementation, updates, and use case implementation.
+            They empower you to leverage a range of expertise for various aspects of optimizing and enhancing your KubeRocketCI experience.
+          </Note>
+
+          <Note>
             Minimum commitment of time for use of a certain subscription package.
           </Note>
 

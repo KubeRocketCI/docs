@@ -18,8 +18,7 @@ export const pricingList: PricingItem[] = [
     price: 3000,
     features: ['Community Support', 'Run on any Kubernetes Cluster', 'Pipelines for Polyglot Microservice'],
     moreFeatures: {
-      features: ['25 professional service hours'],
-      duration: '* 6 month minimum',
+      features: ['25 professional service hours *', '6 months minimum **'],
     },
     link: {
       href: 'mailto:SupportEPMD-EDP@epam.com',
@@ -37,8 +36,7 @@ export const pricingList: PricingItem[] = [
     price: 6000,
     features: ['Community Support', 'Run on any Kubernetes Cluster', 'Pipelines for Polyglot Microservice'],
     moreFeatures: {
-      features: ['60 professional service hours'],
-      duration: '* 6 month minimum',
+      features: ['60 professional service hours *', '6 months minimum **'],
     },
     link: {
       href: 'mailto:SupportEPMD-EDP@epam.com',
@@ -53,8 +51,7 @@ export const pricingList: PricingItem[] = [
     price: 13000,
     features: ['Community Support', 'Run on any Kubernetes Cluster', 'Pipelines for Polyglot Microservice'],
     moreFeatures: {
-      features: ['160 professional service hours'],
-      duration: '* 3 month minimum',
+      features: ['160 professional service hours *', '3 months minimum **'],
     },
     link: {
       href: 'mailto:SupportEPMD-EDP@epam.com',

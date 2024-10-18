@@ -53,7 +53,6 @@ export const PricingCard = ({
                 </li>
               ))}
             </ul>
-            <div className={styles.featuresDuration}>{moreFeatures.duration}</div>
           </>
         ) : null}
       </div>

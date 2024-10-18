@@ -1,3 +1,5 @@
+import { ReactElement } from 'react';
+
 export interface PricingItem {
   title: string;
   description: string;
@@ -8,8 +10,7 @@ export interface PricingItem {
     label: string;
   };
   moreFeatures?: {
-    features: string[];
-    duration: string;
+    features: string[] | ReactElement[];
   };
   color?: string;
   label?: {

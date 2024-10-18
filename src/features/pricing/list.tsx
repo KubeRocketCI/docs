@@ -1,3 +1,4 @@
+import { NoteAsterisk } from '../../components/NoteAsterisk';
 import { PricingItem } from './types';
 
 export const pricingList: PricingItem[] = [
@@ -18,7 +19,15 @@ export const pricingList: PricingItem[] = [
     price: 3000,
     features: ['Community Support', 'Run on any Kubernetes Cluster', 'Pipelines for Polyglot Microservice'],
     moreFeatures: {
-      features: ['25 professional service hours *', '6 months minimum **'],
+      features: [
+        <>
+          25 professional service hours <NoteAsterisk />
+        </>,
+        <>
+          6 months minimum <NoteAsterisk />
+          <NoteAsterisk />
+        </>,
+      ],
     },
     link: {
       href: 'mailto:SupportEPMD-EDP@epam.com',
@@ -36,7 +45,15 @@ export const pricingList: PricingItem[] = [
     price: 6000,
     features: ['Community Support', 'Run on any Kubernetes Cluster', 'Pipelines for Polyglot Microservice'],
     moreFeatures: {
-      features: ['60 professional service hours *', '6 months minimum **'],
+      features: [
+        <>
+          60 professional service hours <NoteAsterisk />
+        </>,
+        <>
+          6 months minimum <NoteAsterisk />
+          <NoteAsterisk />
+        </>,
+      ],
     },
     link: {
       href: 'mailto:SupportEPMD-EDP@epam.com',
@@ -51,7 +68,15 @@ export const pricingList: PricingItem[] = [
     price: 13000,
     features: ['Community Support', 'Run on any Kubernetes Cluster', 'Pipelines for Polyglot Microservice'],
     moreFeatures: {
-      features: ['160 professional service hours *', '3 months minimum **'],
+      features: [
+        <>
+          160 professional service hours <NoteAsterisk />
+        </>,
+        <>
+          3 months minimum <NoteAsterisk />
+          <NoteAsterisk />
+        </>,
+      ],
     },
     link: {
       href: 'mailto:SupportEPMD-EDP@epam.com',

@@ -13,14 +13,6 @@
     "tabWidth": 2,
     "trailingComma": "es5",
     "useTabs": false,
-    "vueIndentScriptAndStyle": false,
     "printWidth": 120,
-    "overrides": [
-      {
-        "files": "*.graphql",
-        "options": {
-          "parser": "graphql"
-        }
-      }
-    ]
+    "endOfLine": "lf" 
   }

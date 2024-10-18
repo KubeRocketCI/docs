@@ -5,8 +5,7 @@ import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 export default function BlogPostPageWrapper(props) {
   const { siteConfig } = useDocusaurusContext();
 
-  /** @type {import('@docusaurus/plugin-content-blog').BlogPostMetadata} */ const blogMetaData =
-    props.content.metadata;
+  /** @type {import('@docusaurus/plugin-content-blog').BlogPostMetadata} */ const blogMetaData = props.content.metadata;
 
   // https://developers.google.com/search/docs/appearance/structured-data/breadcrumb#json-ld
   const archiveBreadcrumbStructuredData = {
@@ -34,7 +33,7 @@ export default function BlogPostPageWrapper(props) {
     ],
   };
 
-  const tagsBreadcrumbStructuredData = blogMetaData.tags.map((tag) => ({
+  const tagsBreadcrumbStructuredData = blogMetaData.tags.map(tag => ({
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
     name: `Tags ${tag.label} breadcrumb`,
@@ -65,10 +64,7 @@ export default function BlogPostPageWrapper(props) {
     ],
   }));
 
-  const breadcrumbStructuredData = [
-    archiveBreadcrumbStructuredData,
-    ...tagsBreadcrumbStructuredData,
-  ];
+  const breadcrumbStructuredData = [archiveBreadcrumbStructuredData, ...tagsBreadcrumbStructuredData];
 
   return (
     <>

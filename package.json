@@ -12,9 +12,9 @@
     "serve": "docusaurus serve",
     "write-translations": "docusaurus write-translations",
     "write-heading-ids": "docusaurus write-heading-ids",
-    "lint": "eslint . --ext .js,.ts,.jsx,.tsx",
+    "lint": "eslint src --ext .js,.ts,.jsx,.tsx",
     "lint:fix": "npm run lint -- --fix",
-    "format": "prettier -w src docs",
+    "format": "prettier -w src",
     "format:docs": "prettier -w docs",
     "typecheck": "tsc",
     "spell-check": "npx cspell --config cspell.config.yaml '{docs,blog}/**/*.{md,mdx}'"

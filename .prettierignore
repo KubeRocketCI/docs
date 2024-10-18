@@ -1,2 +1,7 @@
 /build
+/blog
+/docs
+/static
+/versioned_docs
+/versioned_sidebars
 /node_modules

@@ -33,7 +33,7 @@ There are multiple ways to deploy KubeRocketCI:
     ```bash
     helm search repo epamedp/edp-install
     NAME                    CHART VERSION   APP VERSION     DESCRIPTION
-    epamedp/edp-install     3.9.0           3.9.0           A Helm chart for EDP Install
+    epamedp/edp-install     3.10.0          3.10.0           A Helm chart for EDP Install
     ```
 
     :::note
@@ -57,6 +57,7 @@ There are multiple ways to deploy KubeRocketCI:
         - gerrit
         - github
         - gitlab
+        - bitbucket
     ...
     ```
 
@@ -67,6 +68,7 @@ There are multiple ways to deploy KubeRocketCI:
       values={[
         {label: 'GitHub', value: 'github'},
         {label: 'GitLab', value: 'gitlab'},
+        {label: 'Bitbucket', value: 'bitbucket'},
         {label: 'Gerrit', value: 'gerrit'}
       ]}>
 
@@ -102,6 +104,30 @@ There are multiple ways to deploy KubeRocketCI:
             gitlab:
               gitProvider: gitlab
               host: gitlab.com
+              webhook:
+                skipWebhookSSLVerification: false
+              eventListener:
+                enabled: true
+                resources:
+                  requests:
+                    memory: "64Mi"
+                    cpu: "50m"
+                  limits:
+                    memory: "128Mi"
+                    cpu: "500m"
+                ingress:
+                  enabled: true
+        ...
+        ```
+      </TabItem>
+      <TabItem value="bitbucket">
+        ``` yaml title="values.yaml"
+        ...
+        edp-tekton:
+          gitServers:
+            bitbucket:
+              gitProvider: bitbucket
+              host: bitbucket.org
               webhook:
                 skipWebhookSSLVerification: false
               eventListener:
@@ -174,11 +200,11 @@ There are multiple ways to deploy KubeRocketCI:
 
 7. Install platform in the **edp** namespace with the Helm tool:
 
-    Check the parameters in the installation chart [values.yaml](https://github.com/epam/edp-install/blob/v3.9.0/deploy-templates/values.yaml) file.
+    Check the parameters in the installation chart [values.yaml](https://github.com/epam/edp-install/blob/v3.10.0/deploy-templates/values.yaml) file.
 
     ```bash
     helm install edp epamedp/edp-install --wait --timeout=900s \
-    --version 3.9.0 \
+    --version 3.10.0 \
     --values values.yaml \
     --namespace edp \
     --create-namespace

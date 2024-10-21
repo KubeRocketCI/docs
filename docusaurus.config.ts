@@ -94,7 +94,7 @@ const config: Config = {
           },
           versions: {
             current: {
-              label: '3.10-dev',
+              label: '3.11-dev',
               path: 'next',
             },
           },

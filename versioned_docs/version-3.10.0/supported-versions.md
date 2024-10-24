@@ -9,16 +9,19 @@ gantt
     title Release Schedule and Lifecycle
 
     section (Under Development)
-    KubeRocketCI 3.10 SNAPSHOT: crit, r310, 2024-06-14, 2024-09-01
+    KubeRocketCI 3.11 SNAPSHOT: crit, r40, 2024-10-18, 2025-02-28
 
     section (Supported)
-    KubeRocketCI 3.9 Release: active, r39, 2024-06-13, 160d
+    KubeRocketCI 3.10 Release: active, r40, 2024-10-18, 2025-02-28
 
     section (Supported)
-    KubeRocketCI 3.8 Release: active, r38, 2024-03-12, 230d
+    KubeRocketCI 3.9 Release: active, r39, 2024-06-13, 2025-02-28
 
     section (Supported)
-    EDP 3.7 Release: active, r37, 2023-12-15, 2024-09-01
+    KubeRocketCI 3.8 Release: active, r38, 2024-03-12, 2025-02-28
+
+    section (Unsupported)
+    EDP 3.7 Release: active, r37, 2023-12-15, 2024-10-18
 
     section (Unsupported)
     EDP 3.6 Release: r36, 2023-11-03, 2024-06-13
@@ -28,12 +31,6 @@ gantt
 
     section (Unsupported)
     EDP 3.4 Release: r34, 2023-07-18, 2023-12-15
-
-    section (Unsupported)
-    EDP 3.3 Release: r33, 2023-05-13, 2023-11-03
-
-    section (Unsupported)
-    EDP 3.2 Release: r32, 2023-03-08, 2023-09-21
 ```
 
 By concentrating our support on the last three versions, we prioritize staying current with evolving technology landscapes. This enables us to swiftly adapt to advancements in Kubernetes and OpenShift environments, incorporating the latest enhancements, fixes, and optimizations into our platform.
@@ -48,9 +45,10 @@ Get acquainted with the list of the latest releases and component versions on wh
 
 |[Release Version](https://github.com/epam/edp-install/blob/master/RELEASES.md)|Release Date|[EKS Version](https://aws.amazon.com/eks/)|[OpenShift Version](https://github.com/okd-project/okd/releases)|
 |:-:|:-:|:-:|:-:|
+|3.10 |Oct 18, 2024|1.29+|4.12|
 |3.9 |Jun 13, 2024|1.26+|4.12|
 |3.8 |Mar 12, 2024|1.26+|4.12|
-|3.7 |Dec 15, 2023|1.26+|4.12|
+|<span style={{ color: "gray" }}>3.7 </span> |<span style={{ color: "gray" }}>Dec 15, 2023</span>|<span style={{ color: "gray" }}>1.26+</span>|<span style={{ color: "gray" }}>4.12</span>|
 |<span style={{ color: "gray" }}>3.6 </span> |<span style={{ color: "gray" }}>Nov 03, 2023</span>|<span style={{ color: "gray" }}>1.26+</span>|<span style={{ color: "gray" }}>4.12</span>|
 |<span style={{ color: "gray" }}>3.5 </span> |<span style={{ color: "gray" }}>Sep 21, 2023</span>|<span style={{ color: "gray" }}>1.26+</span>|<span style={{ color: "gray" }}>4.12</span>|
 |<span style={{ color: "gray" }}>3.4 </span> |<span style={{ color: "gray" }}>Aug 18, 2023</span>|<span style={{ color: "gray" }}>1.26</span>|<span style={{ color: "gray" }}>4.12</span>|

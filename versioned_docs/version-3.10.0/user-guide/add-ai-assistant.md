@@ -49,6 +49,6 @@ When you close the chat and reopen it, a new chat begins. You can see the chat h
 
 You can also create another chat by clicking the **+ New chat** button:
 
-  ![Create new chat](../assets/user-guide/history_button.png "Create new chat")
+  ![Create new chat](../assets/user-guide/ai-chat-history.png "Create new chat")
 
 Depending on the assistant's settings, it will be able to provide platform-related guidance, such as how to onboard a library or deploy an application, and address any questions you may have.

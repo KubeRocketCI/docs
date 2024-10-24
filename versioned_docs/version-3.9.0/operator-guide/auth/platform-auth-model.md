@@ -321,7 +321,7 @@ Both the KubeRocketCI Portal and the Kubernetes cluster use Keycloak groups for 
 | Group Name | View | Build | Deploy | Full Namespace Access |
 | - | :-: | :-: | :-: | :-: |
 |`${platform}-oidc-admins`    | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |
-|`${platform}-oidc-developers`| | :white_check_mark: | :white_check_mark: | |
+|`${platform}-oidc-developers`| :white_check_mark: | :white_check_mark: | :white_check_mark: | |
 |`${platform}-oidc-viewers`   | :white_check_mark: | | | |
 
 ### Cluster RBAC Resources

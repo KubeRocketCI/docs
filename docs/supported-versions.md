@@ -12,7 +12,7 @@ gantt
     KubeRocketCI 3.11 SNAPSHOT: crit, r40, 2024-10-18, 2025-02-28
 
     section (Supported)
-    KubeRocketCI 3.10 SNAPSHOT: active, r40, 2024-10-18, 2025-02-28
+    KubeRocketCI 3.10 Release: active, r40, 2024-10-18, 2025-02-28
 
     section (Supported)
     KubeRocketCI 3.9 Release: active, r39, 2024-06-13, 2025-02-28

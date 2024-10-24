@@ -9,16 +9,16 @@ gantt
     title Release Schedule and Lifecycle
 
     section (Under Development)
-    KubeRocketCI 3.10 SNAPSHOT: crit, r310, 2024-06-14, 2024-09-01
+    KubeRocketCI 3.10 SNAPSHOT: crit, r310, 2024-06-14, 2024-10-18
 
     section (Supported)
-    KubeRocketCI 3.9 Release: active, r39, 2024-06-13, 160d
+    KubeRocketCI 3.9 Release: active, r39, 2024-06-13, 2024-10-18
 
     section (Supported)
-    KubeRocketCI 3.8 Release: active, r38, 2024-03-12, 230d
+    KubeRocketCI 3.8 Release: active, r38, 2024-03-12, 2024-10-18
 
     section (Supported)
-    EDP 3.7 Release: active, r37, 2023-12-15, 2024-09-01
+    EDP 3.7 Release: active, r37, 2023-12-15, 2024-10-18
 
     section (Unsupported)
     EDP 3.6 Release: r36, 2023-11-03, 2024-06-13

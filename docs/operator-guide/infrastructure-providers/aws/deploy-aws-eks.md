@@ -45,13 +45,12 @@ This step covers the following topics:
 
 To create the required resources, follow the steps below:
 
-1. Fork and clone git repo with project [edp-terraform-aws-platform](https://github.com/KubeRocketCI/terraform-aws-platform),
+1. Fork and clone git repo with project [terraform-aws-platform](https://github.com/KubeRocketCI/terraform-aws-platform),
 rename it in the correspondence with project name:
 
     ```bash
     git clone https://github.com/KubeRocketCI/terraform-aws-platform
-    mv edp-terraform-aws-platform edp-terraform-aws-platform-edp
-    cd edp-terraform-aws-platform-edp/s3-backend
+    cd terraform-aws-platform/s3-backend
     ```
 
 2. Fill in the input variables for Terraform run in the `s3-backend/template.tfvars` file, refer to the [s3-backend/example.tfvars](https://github.com/KubeRocketCI/terraform-aws-platform/blob/master/s3-backend/example.tfvars) as an example:
@@ -88,7 +87,7 @@ rename it in the correspondence with project name:
 
 ## AWS IAM Roles
 
-This step covers the `EKSDeployerRole` AWS IAM role creation. To create the role, take the following steps:
+This step covers the `KRCIDeployerRole` AWS IAM role creation. To create the role, take the following steps:
 
 1. Navigate to the IAM module directory:
 
@@ -96,40 +95,25 @@ This step covers the `EKSDeployerRole` AWS IAM role creation. To create the role
     cd ../iam
     ```
 
-2. Set up the backend for store Terraform states remotely and support state locking and consistency checking via DynamoDB.
-Insert the missing fields in the `iam/providers.tf` file:
-
-    ```tf title="iam/providers.tf"
-    ...
-      backend "s3" {
-        bucket         = "terraform-states-012345678910"
-        key            = "eu-central-1/test/iam/terraform.tfstate"
-        region         = "eu-central-1"
-        acl            = "bucket-owner-full-control"
-        dynamodb_table = "terraform_locks"
-        encrypt        = true
-      }
-    ...
-    ```
-
-3. Fill in the input variables for Terraform run in the `iam/template.tfvars` file. Refer to the [iam/example.tfvars](https://github.com/KubeRocketCI/terraform-aws-platform/blob/master/iam/example.tfvars) as an example.
-Please find the detailed description of the variables in the [iam/variables.tf](https://github.com/KubeRocketCI/terraform-aws-platform/blob/master/iam/variables.tf) file:
+2. Fill in the input variables for Terraform run in the `iam/template.tfvars` file.
+Find the detailed description of the variables in the [iam/variables.tf](https://github.com/KubeRocketCI/terraform-aws-platform/blob/master/iam/variables.tf) file:
 
     ```tf title="iam/template.tfvars"
-    create_iam_deployer = true
-
+    # -- e.g eu-central-1
     region = "eu-central-1"
 
-    deployer_iam_permissions_boundary_policy_arn = "arn:aws:iam::012345678910:policy/eo_role_boundary"
+    # If you need to set role boundary
+    iam_permissions_boundary_policy_arn = "arn:aws:iam::012345678910:policy/role_boundary"
 
     tags = {
-      "SysName"      = "Terraform-Backend"
-      "SysOwner"     = "owner@example.com"
-      "Environment"  = "EKS-TEST-CLUSTER"
+      "SysName"     = "KubeRocketCI"
+      "Environment" = "core"
+      "Project"     = "my-proj"
+      "ManagedBy"   = "terraform"
     }
     ```
 
-4. Initialize the backend and apply the changes:
+3. Initialize and apply the changes:
 
     ```bash
     terraform init
@@ -141,14 +125,8 @@ Please find the detailed description of the variables in the [iam/variables.tf](
       ```bash
       Outputs:
 
-      kaniko_iam_role_arn = []
-      kaniko_iam_role_name = []
-      deployer_iam_role_arn = [
-        "arn:aws:iam::012345678910:role/EKSDeployerRole",
-      ]
-      deployer_iam_role_name = [
-        "EKSDeployerRole",
-      ]
+      deployer_iam_role_arn = "arn:aws:iam::012345678910:role/KRCIDeployerRole"
+      deployer_iam_role_name = "KRCIDeployerRole"
       ```
 
     :::
@@ -191,7 +169,7 @@ Please find the detailed description of the variables in the [vpc/variables.tf](
     ```tf title="vpc/template.tfvars"
     region   = "eu-central-1"
 
-    role_arn = "arn:aws:iam::012345678910:role/EKSDeployerRole"
+    role_arn = "arn:aws:iam::012345678910:role/KRCIDeployerRole"
 
     platform_name = "test"
 
@@ -278,7 +256,7 @@ Please find the detailed description of the variables in the [eks/variables.tf](
     platform_name        = "test"
     platform_domain_name = "example.com"
 
-    role_arn                      = "arn:aws:iam::012345678910:role/EKSDeployerRole"
+    role_arn                      = "arn:aws:iam::012345678910:role/KRCIDeployerRole"
     role_permissions_boundary_arn = "arn:aws:iam::012345678910:policy/eo_role_boundary"
 
     vpc_id             = "vpc-012345678910"
@@ -380,7 +358,7 @@ Please find the detailed description of the variables in the [argo-cd/variables.
 
     platform_name                 = "test"
     region                        = "eu-central-1"
-    role_arn                      = "arn:aws:iam::012345678910:role/EKSDeployerRole"
+    role_arn                      = "arn:aws:iam::012345678910:role/KRCIDeployerRole"
     role_permissions_boundary_arn = "arn:aws:iam::012345678910:policy/eo_role_boundary"
     tags = {
       "SysName"      = "Terraform-Backend"
@@ -458,7 +436,7 @@ Please find the detailed description of the variables in the [argo-cd/variables.
 
     platform_name                 = "test"
     region                        = "eu-central-1"
-    role_arn                      = "arn:aws:iam::012345678910:role/EKSDeployerRole"
+    role_arn                      = "arn:aws:iam::012345678910:role/KRCIDeployerRole"
     role_permissions_boundary_arn = "arn:aws:iam::012345678910:policy/eo_role_boundary"
     tags = {
       "SysName"      = "Terraform-Backend"

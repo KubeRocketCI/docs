@@ -32,7 +32,7 @@ To deploy the platform, follow the steps below:
 2. Deploy the platform using the `helm install` command:
 
     ```bash
-    helm install edp epamedp/edp-install --version 3.10.0 --create-namespace --atomic -n edp --set global.dnsWildCard=example.com
+    helm install edp epamedp/edp-install --version 3.10.1 --create-namespace --atomic -n edp --set global.dnsWildCard=example.com
     ```
 
 3. Upon successful deployment of the KubeRocketCI Helm Chart, run the `kubectl port-forward` command:

@@ -61,6 +61,7 @@ words:
   - defectdojo
   - dependencytrack
   - deployers
+  - DEPTRACK
   - Djava
   - Djgroups
   - Dkeycloak
@@ -113,6 +114,7 @@ words:
   - Keycloakx
   - keyid
   - keytool
+  - krakend
   - krci
   - kubeadmin
   - kubeconfig

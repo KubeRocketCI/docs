@@ -117,6 +117,13 @@ const sidebars: SidebarsConfig = {
                 'operator-guide/advanced-installation/custom-certificates',
               ],
             },
+            {
+              'type': 'category',
+              'label': 'Extensions',
+              'items': [
+                'operator-guide/extensions/krakend'
+              ]
+            },
             'operator-guide/uninstall-kuberocketci',
           ],
         },

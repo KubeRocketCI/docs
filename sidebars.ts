@@ -260,6 +260,7 @@ const sidebars: SidebarsConfig = {
           items: [
             'operator-guide/cd/customize-deploy-pipeline',
             'operator-guide/cd/customize-environment-deletion',
+            'operator-guide/cd/manual-approval',
             {
               type: 'category',
               label: 'GitOps',

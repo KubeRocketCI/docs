@@ -423,7 +423,8 @@ const sidebars: SidebarsConfig = {
           collapsed: false,
           items: [
             'user-guide/add-cd-pipeline',
-            'user-guide/manage-environments'
+            'user-guide/manage-environments',
+            "user-guide/cd-pipeline-variables-injection"
           ],
         },
         {

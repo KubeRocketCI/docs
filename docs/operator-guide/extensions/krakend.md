@@ -3,7 +3,7 @@ import TabItem from '@theme/TabItem';
 
 # KrakenD Integration
 
-This documentation provides comprehensive guidance on integrating KrakenD into KubeRocketCI. It is a high-performance open-source API gateway that securely hides sensitive data and manages routing.
+This documentation provides comprehensive guidance on integrating KrakenD into KubeRocketCI. KrakenD is a high-performance, open-source API gateway that securely hides sensitive data and manages routing.
 
 ## Prerequisites
 
@@ -11,7 +11,7 @@ Ensure that an ingress controller is preinstalled on the cluster. You can instal
 
 # Installation
 
-To streamline the installation of KrakenD in your environment, it is advised to utilize the resources available in the [Cluster Add-Ons](https://github.com/epam/edp-cluster-add-ons) repository. This method involves deploying KrakenD alongside the appropriate components, ensuring efficient management and integration into your infrastructure.
+To streamline the installation of KrakenD in your environment, use the resources available in the [Cluster Add-Ons](https://github.com/epam/edp-cluster-add-ons) repository. This method involves deploying KrakenD alongside the appropriate components, ensuring efficient management and integration into your infrastructure.
 
 # Configuration
 
@@ -24,14 +24,13 @@ To configure KrakenD as the API gateway, set the following parameter in the Kube
       apiGatewayUrl: "https://api.example.com"
   ```
 
-    :::note
-      This URL should point to the ingress URL of the KrakenD API Gateway. By default, this [value](https://github.com/epam/edp-install/blob/v3.10.0/deploy-templates/values.yaml#L16) is left empty, which disables widgets..
-    :::
-
+  :::note
+    This URL should point to the ingress URL of the KrakenD API Gateway. By default, this [value](https://github.com/epam/edp-install/blob/v3.10.0/deploy-templates/values.yaml#L16) is left empty, which disables widgets.
+  :::
 
 2. Secret configuration preparation:
 
-    * SONARQUBE_URL: Determine the URL of your SonarQube instance. For example: http://sonar.sonar:9000
+    * SONARQUBE_URL: Determine the URL of your SonarQube instance. For example: `http://sonar.sonar:9000`
 
     * SONARQUBE_TOKEN: Use [SonarQube Integration](../code-quality/sonarqube.md#configuration) guide for token generation(string in base64).
 
@@ -39,7 +38,7 @@ To configure KrakenD as the API gateway, set the following parameter in the Kube
 
     * DEPTRACK_TOKEN: Use the [Dependency-Track Integration](../devsecops/dependency-track.md#configuration) guide to generate the token.
 
-    * JWK_URL: Determine the URL for obtaining the JWK. The format is: https://keycloak.example.com/auth/realms/broker/protocol/openid-connect/certs
+    * JWK_URL: Determine the URL for obtaining the JWK. The format is: `https://keycloak.example.com/auth/realms/<REALM_NAME>/protocol/openid-connect/certs`
 
 <Tabs
   defaultValue="externalsecret"
@@ -83,7 +82,6 @@ To configure KrakenD as the API gateway, set the following parameter in the Kube
   </TabItem>
 
 </Tabs>
-
 
 * [Install KubeRocketCI With Values File](../install-kuberocketci.md)
 * [Cluster Add-Ons Overview](../add-ons-overview.md)

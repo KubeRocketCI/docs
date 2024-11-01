@@ -48,7 +48,9 @@ words:
   - codebasebranch
   - codebaseimagestream
   - codecentric
+  - Codemie
   - Codenarc
+  - codemie
   - codeviewer
   - commentadded
   - configmap
@@ -109,6 +111,13 @@ words:
   - keepalive
   - Keyacloak
   - Keycloak
+  - keycloakauthflow
+  - keycloakclient
+  - keycloakclientscope
+  - keycloakrealm
+  - keycloakrealmidentityprovider
+  - keycloakrealmrole
+  - keycloakrealmrolebatch
   - keycloakrealmuser
   - keycloakx
   - Keycloakx
@@ -219,6 +228,7 @@ words:
   - Tfsec
   - tfstate
   - tfvars
+  - tolerations
   - toolset
   - traefik
   - trgm

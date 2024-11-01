@@ -313,6 +313,7 @@ const sidebars: SidebarsConfig = {
               type: 'category',
               label: 'KubeRocketCI',
               items: [
+                'operator-guide/upgrade/upgrade-edp-3.10',
                 'operator-guide/upgrade/upgrade-edp-3.9',
                 'operator-guide/upgrade/upgrade-edp-3.8',
                 'operator-guide/upgrade/upgrade-edp-3.7',

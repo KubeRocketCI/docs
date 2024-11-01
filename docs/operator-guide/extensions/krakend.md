@@ -17,16 +17,16 @@ To streamline the installation of KrakenD in your environment, use the resources
 
 1. KubeRocketCI API Gateway URL Configuration:
 
-To configure KrakenD as the API gateway, set the following parameter in the KubeRocketCI [values.yaml](https://github.com/epam/edp-install/blob/v3.10.1/deploy-templates/values.yaml#L16) file during installation or an upgrade:
+  To configure KrakenD as the API gateway, set the following parameter in the KubeRocketCI [values.yaml](https://github.com/epam/edp-install/blob/v3.10.1/deploy-templates/values.yaml#L16) file during installation or an upgrade:
 
-  ```yaml
-    global:
-      apiGatewayUrl: "https://api.example.com"
-  ```
+    ```yaml
+      global:
+        apiGatewayUrl: "https://api.example.com"
+    ```
 
-  :::note
-    This URL should point to the ingress URL of the KrakenD API Gateway. By default, this [value](https://github.com/epam/edp-install/blob/v3.10.0/deploy-templates/values.yaml#L16) is left empty, which disables widgets.
-  :::
+    :::note
+      This URL should point to the ingress URL of the KrakenD API Gateway. By default, this [value](https://github.com/epam/edp-install/blob/v3.10.0/deploy-templates/values.yaml#L16) is left empty, which disables widgets.
+    :::
 
 2. Secret configuration preparation:
 
@@ -40,48 +40,48 @@ To configure KrakenD as the API gateway, set the following parameter in the Kube
 
     * JWK_URL: Determine the URL for obtaining the JWK. The format is: `https://keycloak.example.com/auth/realms/<REALM_NAME>/protocol/openid-connect/certs`
 
-<Tabs
-  defaultValue="externalsecret"
-  values={[
-    {label: 'Manifests', value: 'manifests'},
-    {label: 'External Secrets Operator', value: 'externalsecret'},
-  ]}>
+  <Tabs
+    defaultValue="externalsecret"
+    values={[
+      {label: 'Manifests', value: 'manifests'},
+      {label: 'External Secrets Operator', value: 'externalsecret'},
+    ]}>
 
-  <TabItem value="manifests">
+    <TabItem value="manifests">
 
-  ```yaml
-  apiVersion: v1
-  kind: Secret
-  metadata:
-    name: krakend
-    namespace: krakend
-  type: Opaque
-  stringData:
-    SONARQUBE_URL: http://sonar.sonar:9000
-    SONARQUBE_TOKEN: <sonarqube-token>
-    DEPTRACK_URL: http://dependency-track-api-server.dependency-track:8080
-    DEPTRACK_TOKEN: <dependency-track-token>
-    JWK_URL: https://keycloak.example.com/auth/realms/<broker>/protocol/openid-connect/certs
-  ```
+    ```yaml
+    apiVersion: v1
+    kind: Secret
+    metadata:
+      name: krakend
+      namespace: krakend
+    type: Opaque
+    stringData:
+      SONARQUBE_URL: http://sonar.sonar:9000
+      SONARQUBE_TOKEN: <sonarqube-token>
+      DEPTRACK_URL: http://dependency-track-api-server.dependency-track:8080
+      DEPTRACK_TOKEN: <dependency-track-token>
+      JWK_URL: https://keycloak.example.com/auth/realms/<broker>/protocol/openid-connect/certs
+    ```
 
-  </TabItem>
+    </TabItem>
 
-  <TabItem value="externalsecret">
+    <TabItem value="externalsecret">
 
-  ```json
-  {
-    "SONARQUBE_URL": "http://sonar.sonar:9000",
-    "SONARQUBE_TOKEN": "<sonarqube-token>",
-    "DEPTRACK_URL": "http://dependency-track-api-server.dependency-track:8080",
-    "DEPTRACK_TOKEN": "<dependency-track-token>",
-    "JWK_URL": "https://keycloak.example.com/auth/realms/<broker>/protocol/openid-connect/certs"
-  }
-  ```
+    ```json
+    {
+      "SONARQUBE_URL": "http://sonar.sonar:9000",
+      "SONARQUBE_TOKEN": "<sonarqube-token>",
+      "DEPTRACK_URL": "http://dependency-track-api-server.dependency-track:8080",
+      "DEPTRACK_TOKEN": "<dependency-track-token>",
+      "JWK_URL": "https://keycloak.example.com/auth/realms/<broker>/protocol/openid-connect/certs"
+    }
+    ```
 
-  More details about External Secrets Operator integration can be found in the [External Secrets Operator](../secrets-management/install-external-secrets-operator) page. [Cluster Add-Ons](https://github.com/epam/edp-cluster-add-ons)
-  </TabItem>
+    More details about External Secrets Operator integration can be found in the [External Secrets Operator](../secrets-management/install-external-secrets-operator) page. [Cluster Add-Ons](https://github.com/epam/edp-cluster-add-ons)
+    </TabItem>
 
-</Tabs>
+  </Tabs>
 
 * [Install KubeRocketCI With Values File](../install-kuberocketci.md)
 * [Cluster Add-Ons Overview](../add-ons-overview.md)

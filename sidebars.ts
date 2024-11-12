@@ -550,6 +550,7 @@ const sidebars: SidebarsConfig = {
         'use-cases/application-scaffolding',
         'use-cases/external-secrets',
         'use-cases/autotest-as-quality-gate',
+        'use-cases/custom-pipelines-flow',
         'use-cases/tekton-custom-pipelines',
       ],
     },

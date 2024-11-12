@@ -13,7 +13,8 @@ KubeRocketCI extends this capability by supporting the **customization** of Appl
 
 - KubeRocketCI instance with GitHub and Tekton is [configured](../operator-guide/prerequisites.md);
 - Developer has access to the KubeRocketCI instances using the Single-Sign-On approach;
-- Developer has `Write` permissions for GitHub repository to merge the code.
+- Developer has `Write` permissions for GitHub repository to merge the code;
+- Configured Argo CD instance with the [Add-ons repository](https://docs.kuberocketci.io/docs/next/operator-guide/add-ons-overview) added.
 
 ## Scenario
 
@@ -55,7 +56,7 @@ To streamline the process of implementing custom logic within the KubeRocketCI p
     - Repository URL: `https://github.com/epmd-edp/go-go-beego.git`
     - Repository name: `tekton-hello-world`
     - Component name: `tekton-hello-world`
-    - Description: `tekton-hello-world`
+    - Description: `Custom tekton-hello-world application`
     - Application code language: `Other`
     - Language version/framework: `go`
     - Build tool: `shell`
@@ -114,7 +115,7 @@ KubeRocketCI allows for the creation of custom Tekton libraries to address speci
 
     - Repository name: `custom-tekton-chart`
     - Component name: `custom-tekton-chart`
-    - Description: `custom-tekton-chart`
+    - Description: `Repository for storing and managing custom Tekton resources`
     - Application code language: `Helm`
     - Language version/framework: `Pipeline`
     - Build tool: `Helm`
@@ -157,88 +158,92 @@ Now that the Tekton Helm library is created, it is time to clone, modify and the
 
 4. Examine the repository structure. It should look this way by default:
 
-    ```bash
-    custom-tekton-chart
-      ├── Chart.yaml
-      ├── chart_schema.yaml
-      ├── ct.yaml
-      ├── lintconf.yaml
-      ├── templates
-      │   ├── pipelines
-      │   │   └── hello-world
-      │   │       ├── gerrit-build-default.yaml
-      │   │       ├── gerrit-build-edp.yaml
-      │   │       ├── gerrit-build-lib-default.yaml
-      │   │       ├── gerrit-build-lib-edp.yaml
-      │   │       ├── gerrit-review-lib.yaml
-      │   │       ├── gerrit-review.yaml
-      │   │       ├── github-build-default.yaml
-      │   │       ├── github-build-edp.yaml
-      │   │       ├── github-build-lib-default.yaml
-      │   │       ├── github-build-lib-edp.yaml
-      │   │       ├── github-review-lib.yaml
-      │   │       ├── github-review.yaml
-      │   │       ├── gitlab-build-default.yaml
-      │   │       ├── gitlab-build-edp.yaml
-      │   │       ├── gitlab-build-lib-default.yaml
-      │   │       ├── gitlab-build-lib-edp.yaml
-      │   │       ├── gitlab-review-lib.yaml
-      │   │       └── gitlab-review.yaml
-      │   └── tasks
-      │       └── task-hello-world.yaml
-      └── values.yaml
+    ```plaintext
+    tekton-custom-pipelines
+    ├── Chart.yaml
+    ├── templates
+    │   ├── pipelines
+    │   │   ├── deploy
+    │   │   │   ├── custom-clean.yaml
+    │   │   │   └── custom-deploy.yaml
+    │   │   ├── bitbucket-build-default.yaml
+    │   │   ├── bitbucket-build-edp.yaml
+    │   │   ├── bitbucket-build-lib-default.yaml
+    │   │   ├── bitbucket-build-lib-edp.yaml
+    │   │   ├── bitbucket-review.yaml
+    │   │   ├── gerrit-build-default.yaml
+    │   │   ├── gerrit-build-edp.yaml
+    │   │   ├── gerrit-build-lib-default.yaml
+    │   │   ├── gerrit-build-lib-edp.yaml
+    │   │   ├── gerrit-review.yaml
+    │   │   ├── github-build-default.yaml
+    │   │   ├── github-build-edp.yaml
+    │   │   ├── github-build-lib-default.yaml
+    │   │   ├── github-build-lib-edp.yaml
+    │   │   ├── github-review.yaml
+    │   │   ├── gitlab-build-default.yaml
+    │   │   ├── gitlab-build-edp.yaml
+    │   │   ├── gitlab-build-lib-default.yaml
+    │   │   ├── gitlab-build-lib-edp.yaml
+    │   │   └── gitlab-review.yaml
+    │   ├── resources
+    │   │   └── npm-settings.yaml
+    │   ├── tasks
+    │   │   ├── deploy
+    │   │   │   └── hello-world-deploy.yaml
+    │   │   └── hello-world.yaml
+    │   └── triggers
+    │       ├── custom-clean.yaml
+    │       └── custom-deploy.yaml
+    └── values.yaml
     ```
+
+    For more detailed information and explanations regarding the repository structure, please refer to [Creating and Using Custom Tekton Pipelines](./custom-pipelines-flow.md) use case.
 
     :::note
       Update the values in the `values.yaml` file.
 
-      The `gitProvider` parameter is the git hosting provider, GitHub and GitLab in this example.
-
       The [dnsWildCard](https://github.com/epam/edp-install/blob/v3.9.0/deploy-templates/values.yaml#L10) parameter is the platform address.
-    :::
-
-    :::tip
-      The Helm chart incorporates dependencies from the [edp-tekton-common-library](https://github.com/epam/edp-tekton/blob/master/charts/common-library/Chart.yaml) within the `Chart.yaml` file. Leveraging this library enables the utilization of predefined code snippets, facilitating a more streamlined and efficient pipeline creation process.
     :::
 
     Below is a sample configuration for the `values.yaml` file:
 
     ```yaml
-    nameOverride: ""
-    fullnameOverride: ""
-
-    global:
-      gitProviders:
-        - github
-      dnsWildCard: "example.domain.com"
+    dnsWildCard: "example.domain.com"
     ```
 
 5. Modify and add tasks or pipelines.
 
     Consider the scenario where it's necessary to incorporate the `helm-lint` task into the review pipeline.
-    To achieve this, append the following code snippet to the `github-review.yaml` file, specifically below the `hello` task, located here: [github-review.yaml](https://github.com/epmd-edp/helm-helm-pipeline/blob/master/templates/pipelines/hello-world/github-review.yaml#L66):
+    To achieve this, append the following code snippet to the `templates/pipelines/github-review.yaml` file, specifically below the `hello-world` task, located here: [github-review.yaml](https://github.com/epmd-edp/helm-helm-pipeline/blob/master/templates/pipelines/github-review.yaml#L114):
 
     ```yaml
-    - name: hello
+    apiVersion: tekton.dev/v1beta1
+    kind: Pipeline
+    metadata:
+      name: github-shell-go-app-review
+    ...
+    - name: hello-world
       taskRef:
-        name: hello
+        name: hello-world
       runAfter:
       - init-values
       params:
       - name: BASE_IMAGE
-        value: "$(params.shell-image-version)"
+        value: "$(params.image-version)"
       - name: username
         value: "$(params.username)"
       workspaces:
         - name: source
           workspace: shared-workspace
+          subPath: source
 
     - name: helm-lint
       taskRef:
         kind: Task
         name: helm-lint
       runAfter:
-        - hello
+        - hello-world
       params:
         - name: EXTRA_COMMANDS
           value: |
@@ -252,45 +257,20 @@ Now that the Tekton Helm library is created, it is time to clone, modify and the
     :::note
       The `helm-lint` task references to the default `pipeline-library` Helm chart which is deployed to the cluster as part of the KubeRocketCI setup process.
 
-      The `runAfter` parameter indicates the execution sequence, specifying that the `helm-lint` task is scheduled to run subsequent to the completion of the `hello` task.
+      The `runAfter` parameter indicates the execution sequence, specifying that the `helm-lint` task is scheduled to run subsequent to the completion of the `hello-world` task.
     :::
 
-6. Update Helm dependencies in the custom chart:
+    Also, in the `templates/pipelines/github-build-edp.yaml` file, specify the name `github-shell-go-app-build-edp` for the custom build pipeline:
 
-    ```bash
-    helm dependency update .
+    ```yaml
+    apiVersion: tekton.dev/v1beta1
+    kind: Pipeline
+    metadata:
+      name: github-shell-go-app-build-edp
+    ...
     ```
 
-7. Ensure that the chart is valid by running the following command:
-
-    ```bash
-    helm lint .
-    ```
-
-    To validate if the values are substituted in the templates correctly, render the templated YAML files with the values using the following command. It generates and displays all the manifest files with the substituted values:
-
-    ```bash
-    helm template .
-    ```
-
-8. Install the custom chart with the command below. You can also use the `--dry-run` flag to simulate the chart installation and catch possible errors:
-
-    ```bash
-    helm upgrade --install edp-tekton-custom . -n edp --dry-run
-    ```
-
-    ```bash
-    helm upgrade --install edp-tekton-custom . -n edp
-    ```
-
-9. Check the created pipelines and tasks in the cluster:
-
-    ```bash
-    kubectl get tasks -n edp
-    kubectl get pipelines -n edp
-    ```
-
-10. Commit and push the modified Tekton Helm chart to GitHub:
+6. Commit and push the modified Tekton Helm chart to GitHub:
 
     ```bash
     git checkout -b helm
@@ -299,21 +279,50 @@ Now that the Tekton Helm library is created, it is time to clone, modify and the
     git push -u origin helm
     ```
 
-11. Navigate Github -> **Pull requests** -> **Compare & pull request** -> **Create pull request**.
+7. Navigate Github -> **Pull requests** -> **Compare & pull request** -> **Create pull request**.
 
     ![Create pull request](../assets/use-cases/tekton-custom/tekton-custom15.png "Create pull request")
 
-12. Check the GitHub code review for the custom Helm chart pipelines repository in KubeRocketCI. Navigate **Components** -> **Component name** and click to the review pipeline run:
+8. Check the GitHub code review for the custom Helm chart pipelines repository in KubeRocketCI. Navigate **Components** -> **Component name** and click to the review pipeline run:
 
     ![KubeRocketCI pipelines overview](../assets/use-cases/tekton-custom/tekton-custom14.png "KubeRocketCI pipelines overview")
 
-13. Explore the pipeline status and steps:
+9. Explore the pipeline status and steps:
 
     ![Explore pipeline](../assets/use-cases/tekton-custom/tekton-custom16.png "Explore pipeline")
 
-14. Go to the GitHub **Pull requests** -> **Add Helm chart testing for go-shell application** -> and click **Merge pull request**:
+10. Go to the GitHub **Pull requests** -> **Add Helm chart testing for go-shell application** -> and click **Merge pull request**:
 
     ![Merge PR](../assets/use-cases/tekton-custom/tekton-custom17.png "Merge PR")
+
+### Deliver Custom Tekton Pipelines to the cluster
+
+To deploy custom pipelines to the cluster, you can use Argo CD, which includes a repository with [add-ons](https://github.com/epam/edp-cluster-add-ons/tree/main).
+
+To deliver custom Tekton pipelines to the cluster, follow these steps:
+
+1. Clone the forked repository with add-ons and make the following changes. In the `clusters/core/apps/values.yaml` file, set the `repoUrl` and `namespace` fields to specify the Git URL of the `tekton-custom-pipelines` repository and the namespace where the KubeRocketCI platform is deployed. Also, set the `kuberocketci-pipelines.enabled` field to `true` to enable the deployment of the `tekton-custom-pipelines` Argo CD Application:
+
+    ```yaml
+    kuberocketci-pipelines:
+      enable: true
+      namespace: <krci-namespace>
+      repoUrl: ssh://git@github.com:22/<account-name>/tekton-custom-pipelines.git
+    ```
+
+2. Commit and push the changes to the repository.
+
+    After making the necessary changes, commit and push the changes to the repository. Use the following commands to commit and push the changes:
+
+    ```bash
+    git add .
+    git commit -m "Enable custom Tekton pipelines deployment"
+    git push origin main
+    ```
+
+3. After pushing the changes, access **Argo CD**, navigate to the Application that corresponds to the repository with the **add-ons**, and initiate the `Sync` process. This will apply the `tekton-custom-pipelines` Helm Chart to the cluster within the specified namespace.
+
+    ![Argo CD Sync](../assets/use-cases/custom-tekton-pipelines/argocd-sync.png "Argo CD Sync")
 
 ### Create Application Merge Request
 

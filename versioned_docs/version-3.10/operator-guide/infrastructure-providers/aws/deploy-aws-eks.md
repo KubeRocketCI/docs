@@ -148,9 +148,9 @@ To accomplish the tasks outlined above, follow these steps:
     ```
 
 2. Set up the backend for store Terraform states remotely and support state locking and consistency checking via DynamoDB.
-Insert the missing fields in the file `vpc/providers.tf`:
+Insert the missing fields in the file `vpc/versions.tf`:
 
-    ```tf title="vpc/providers.tf"
+    ```tf title="vpc/versions.tf"
     ...
       backend "s3" {
         bucket         = "terraform-states-012345678910"
@@ -233,9 +233,9 @@ To accomplish the tasks outlined above, follow these steps:
     ```
 
 2. Set up the backend for store Terraform states remotely and support state locking and consistency checking via DynamoDB.
-Insert the missing fields in the `eks/providers.tf` file:
+Insert the missing fields in the `eks/versions.tf` file:
 
-    ```tf title="eks/providers.tf"
+    ```tf title="eks/versions.tf"
     ...
       backend "s3" {
         bucket         = "terraform-states-012345678910"
@@ -251,7 +251,7 @@ Insert the missing fields in the `eks/providers.tf` file:
 3. Fill in the input variables for Terraform run in the `eks/template.tfvars` file. Use the [eks/example.tfvars](https://github.com/KubeRocketCI/terraform-aws-platform/blob/master/eks/example.tfvars) as an example.
 Please find the detailed description of the variables in the [eks/variables.tf](https://github.com/KubeRocketCI/terraform-aws-platform/blob/master/eks/variables.tf) file:
 
-    ```tf title="eks/providers.tf"
+    ```tf title="eks/versions.tf"
     region               = "eu-central-1"
     platform_name        = "test"
     platform_domain_name = "example.com"
@@ -331,9 +331,9 @@ This step covers the `AWSIRSA_Test_ArgoCDMaster` AWS IAM role creation procedure
     ```
 
 2. Set up the backend for store Terraform states remotely and support state locking and consistency checking via DynamoDB.
-Insert the missing fields in the `argo-cd/providers.tf` file:
+Insert the missing fields in the `argo-cd/versions.tf` file:
 
-    ```tf title="argo-cd/providers.tf"
+    ```tf title="argo-cd/versions.tf"
     ...
       backend "s3" {
         bucket         = "terraform-states-012345678910"
@@ -411,9 +411,9 @@ This step covers the `EDPArgoCDClusterAdmin` AWS IAM role creation procedure. To
     ```
 
 2. Set up the backend for store Terraform states remotely and support state locking and consistency checking via DynamoDB.
-Insert the missing fields in the `argo-cd/providers.tf` file:
+Insert the missing fields in the `argo-cd/versions.tf` file:
 
-    ```tf title="argo-cd/providers.tf"
+    ```tf title="argo-cd/versions.tf"
     ...
       backend "s3" {
         bucket         = "terraform-states-012345678910"

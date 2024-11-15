@@ -100,10 +100,14 @@ For [Bitbucket](https://support.atlassian.com/bitbucket-cloud/docs/app-passwords
       </TabItem>
     </Tabs>
 
-3. Create a secret in the namespace where KubeRocketCI is installed (default is `edp`) to store the Git account credentials, including the **id_rsa**, **username**, and **token** fields.
+3. Create a secret in the namespace where KubeRocketCI is installed (default: `edp`) to securely store the Git account credentials, including the **id_rsa**, **username**, and **token** fields:
 
-   :::note
-   For integration with **Bitbucket**, the **token** field should be populated with the App Password.
+   :::warning
+   For integration with **Bitbucket**, the **token** field should be in the format `username:AppPassword`, encoded in base64. You can generate the encoded token using the following command:
+
+   ```bash
+   echo -n "username:AppPassword" | base64
+   ```
    :::
 
     <Tabs
@@ -183,3 +187,4 @@ For more information on setting up a Ingress and Tekton EventListener for custom
 ## Related Articles
 
 * [Add Application](add-application.md)
+* [Manage Git Servers](git-server-overview.md)

@@ -105,7 +105,7 @@ const config: Config = {
             type: 'all',
             copyright: `Copyright © ${new Date().getFullYear()} KubeRocketCI.`,
             createFeedItems: async (params) => {
-              const {blogPosts, defaultCreateFeedItems, ...rest} = params;
+              const { blogPosts, defaultCreateFeedItems, ...rest } = params;
               return defaultCreateFeedItems({
                 // keep only the 10 most recent blog posts in the feed
                 blogPosts: blogPosts.filter((item, index) => index < 10),
@@ -123,7 +123,7 @@ const config: Config = {
           lastmod: 'date',
           changefreq: 'weekly',
           priority: 0.5,
-          ignorePatterns: ['**/next/**', '**/3.9.0/**', '**/tags/**'],
+          ignorePatterns: ['/next/**', '/3.9.0/**', '/3.10.0/**', '/tags/**'],
           filename: 'sitemap.xml',
           createSitemapItems: async (params) => {
             const { defaultCreateSitemapItems, ...rest } = params;

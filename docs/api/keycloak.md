@@ -106,6 +106,20 @@ ClusterKeycloakRealmSpec defines the desired state of ClusterKeycloakRealm.
         </td>
         <td>false</td>
       </tr><tr>
+        <td><b>displayHtmlName</b></td>
+        <td>string</td>
+        <td>
+          DisplayHTMLName name to render in the UI.<br/>
+        </td>
+        <td>false</td>
+      </tr><tr>
+        <td><b>displayName</b></td>
+        <td>string</td>
+        <td>
+          DisplayName is the display name of the realm.<br/>
+        </td>
+        <td>false</td>
+      </tr><tr>
         <td><b>frontendUrl</b></td>
         <td>string</td>
         <td>
@@ -146,6 +160,13 @@ Use in combination with the default hostname provider to override the base URL f
         <td>object</td>
         <td>
           TokenSettings is the configuration for tokens in the realm.<br/>
+        </td>
+        <td>false</td>
+      </tr><tr>
+        <td><b><a href="#clusterkeycloakrealmspecuserprofileconfig">userProfileConfig</a></b></td>
+        <td>object</td>
+        <td>
+          UserProfileConfig is the configuration for user profiles in the realm.<br/>
         </td>
         <td>false</td>
       </tr></tbody>
@@ -431,6 +452,308 @@ TokenSettings is the configuration for tokens in the realm.
           Otherwise, refresh tokens are not revoked when used and can be used multiple times.<br/>
           <br/>
             <i>Default</i>: false<br/>
+        </td>
+        <td>false</td>
+      </tr></tbody>
+</table>
+
+### ClusterKeycloakRealm.spec.userProfileConfig
+
+<sup><sup>[↩ Parent](#clusterkeycloakrealmspec)</sup></sup>
+
+UserProfileConfig is the configuration for user profiles in the realm.
+
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Description</th>
+            <th>Required</th>
+        </tr>
+    </thead>
+    <tbody><tr>
+        <td><b><a href="#clusterkeycloakrealmspecuserprofileconfigattributesindex">attributes</a></b></td>
+        <td>[]object</td>
+        <td>
+          Attributes specifies the list of user profile attributes.<br/>
+        </td>
+        <td>false</td>
+      </tr><tr>
+        <td><b><a href="#clusterkeycloakrealmspecuserprofileconfiggroupsindex">groups</a></b></td>
+        <td>[]object</td>
+        <td>
+          Groups specifies the list of user profile groups.<br/>
+        </td>
+        <td>false</td>
+      </tr><tr>
+        <td><b>unmanagedAttributePolicy</b></td>
+        <td>string</td>
+        <td>
+          UnmanagedAttributePolicy are user attributes not explicitly defined in the user profile configuration.
+          Empty value means that unmanaged attributes are disabled.
+          Possible values:
+          ENABLED - unmanaged attributes are allowed.
+          ADMIN_VIEW - unmanaged attributes are read-only and only available through the administration console and API.
+          ADMIN_EDIT - unmanaged attributes can be managed only through the administration console and API.<br/>
+        </td>
+        <td>false</td>
+      </tr></tbody>
+</table>
+
+### ClusterKeycloakRealm.spec.userProfileConfig.attributes[index]
+
+<sup><sup>[↩ Parent](#clusterkeycloakrealmspecuserprofileconfig)</sup></sup>
+
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Description</th>
+            <th>Required</th>
+        </tr>
+    </thead>
+    <tbody><tr>
+        <td><b>name</b></td>
+        <td>string</td>
+        <td>
+          Name of the user attribute, used to uniquely identify an attribute.<br/>
+        </td>
+        <td>true</td>
+      </tr><tr>
+        <td><b>annotations</b></td>
+        <td>map[string]string</td>
+        <td>
+          Annotations specifies the annotations for the attribute.<br/>
+        </td>
+        <td>false</td>
+      </tr><tr>
+        <td><b>displayName</b></td>
+        <td>string</td>
+        <td>
+          Display name for the attribute.<br/>
+        </td>
+        <td>false</td>
+      </tr><tr>
+        <td><b>group</b></td>
+        <td>string</td>
+        <td>
+          Group to which the attribute belongs.<br/>
+        </td>
+        <td>false</td>
+      </tr><tr>
+        <td><b>multivalued</b></td>
+        <td>boolean</td>
+        <td>
+          Multivalued specifies if this attribute supports multiple values.
+          This setting is an indicator and does not enable any validation<br/>
+        </td>
+        <td>false</td>
+      </tr><tr>
+        <td><b><a href="#clusterkeycloakrealmspecuserprofileconfigattributesindexpermissions">permissions</a></b></td>
+        <td>object</td>
+        <td>
+          Permissions specifies the permissions for the attribute.<br/>
+        </td>
+        <td>false</td>
+      </tr><tr>
+        <td><b><a href="#clusterkeycloakrealmspecuserprofileconfigattributesindexrequired">required</a></b></td>
+        <td>object</td>
+        <td>
+          Required indicates that the attribute must be set by users and administrators.<br/>
+        </td>
+        <td>false</td>
+      </tr><tr>
+        <td><b><a href="#clusterkeycloakrealmspecuserprofileconfigattributesindexselector">selector</a></b></td>
+        <td>object</td>
+        <td>
+          Selector specifies the scopes for which the attribute is available.<br/>
+        </td>
+        <td>false</td>
+      </tr><tr>
+        <td><b><a href="#clusterkeycloakrealmspecuserprofileconfigattributesindexvalidationskeykey">validations</a></b></td>
+        <td>map[string]map[string]object</td>
+        <td>
+          Validations specifies the validations for the attribute.<br/>
+        </td>
+        <td>false</td>
+      </tr></tbody>
+</table>
+
+### ClusterKeycloakRealm.spec.userProfileConfig.attributes[index].permissions
+
+<sup><sup>[↩ Parent](#clusterkeycloakrealmspecuserprofileconfigattributesindex)</sup></sup>
+
+Permissions specifies the permissions for the attribute.
+
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Description</th>
+            <th>Required</th>
+        </tr>
+    </thead>
+    <tbody><tr>
+        <td><b>edit</b></td>
+        <td>[]string</td>
+        <td>
+          Edit specifies who can edit the attribute.<br/>
+        </td>
+        <td>false</td>
+      </tr><tr>
+        <td><b>view</b></td>
+        <td>[]string</td>
+        <td>
+          View specifies who can view the attribute.<br/>
+        </td>
+        <td>false</td>
+      </tr></tbody>
+</table>
+
+### ClusterKeycloakRealm.spec.userProfileConfig.attributes[index].required
+
+<sup><sup>[↩ Parent](#clusterkeycloakrealmspecuserprofileconfigattributesindex)</sup></sup>
+
+Required indicates that the attribute must be set by users and administrators.
+
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Description</th>
+            <th>Required</th>
+        </tr>
+    </thead>
+    <tbody><tr>
+        <td><b>roles</b></td>
+        <td>[]string</td>
+        <td>
+          Roles specifies the roles for whom the attribute is required.<br/>
+        </td>
+        <td>false</td>
+      </tr><tr>
+        <td><b>scopes</b></td>
+        <td>[]string</td>
+        <td>
+          Scopes specifies the scopes when the attribute is required.<br/>
+        </td>
+        <td>false</td>
+      </tr></tbody>
+</table>
+
+### ClusterKeycloakRealm.spec.userProfileConfig.attributes[index].selector
+
+<sup><sup>[↩ Parent](#clusterkeycloakrealmspecuserprofileconfigattributesindex)</sup></sup>
+
+Selector specifies the scopes for which the attribute is available.
+
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Description</th>
+            <th>Required</th>
+        </tr>
+    </thead>
+    <tbody><tr>
+        <td><b>scopes</b></td>
+        <td>[]string</td>
+        <td>
+          Scopes specifies the scopes for which the attribute is available.<br/>
+        </td>
+        <td>false</td>
+      </tr></tbody>
+</table>
+
+### ClusterKeycloakRealm.spec.userProfileConfig.attributes[index].validations[key][key]
+
+<sup><sup>[↩ Parent](#clusterkeycloakrealmspecuserprofileconfigattributesindex)</sup></sup>
+
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Description</th>
+            <th>Required</th>
+        </tr>
+    </thead>
+    <tbody><tr>
+        <td><b>intVal</b></td>
+        <td>integer</td>
+        <td>
+          <br/>
+        </td>
+        <td>false</td>
+      </tr><tr>
+        <td><b>mapVal</b></td>
+        <td>map[string]string</td>
+        <td>
+          <br/>
+        </td>
+        <td>false</td>
+      </tr><tr>
+        <td><b>sliceVal</b></td>
+        <td>[]string</td>
+        <td>
+          <br/>
+        </td>
+        <td>false</td>
+      </tr><tr>
+        <td><b>stringVal</b></td>
+        <td>string</td>
+        <td>
+          <br/>
+        </td>
+        <td>false</td>
+      </tr></tbody>
+</table>
+
+### ClusterKeycloakRealm.spec.userProfileConfig.groups[index]
+
+<sup><sup>[↩ Parent](#clusterkeycloakrealmspecuserprofileconfig)</sup></sup>
+
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Description</th>
+            <th>Required</th>
+        </tr>
+    </thead>
+    <tbody><tr>
+        <td><b>name</b></td>
+        <td>string</td>
+        <td>
+          Name is unique name of the group.<br/>
+        </td>
+        <td>true</td>
+      </tr><tr>
+        <td><b>annotations</b></td>
+        <td>map[string]string</td>
+        <td>
+          Annotations specifies the annotations for the group.
+          nullable<br/>
+        </td>
+        <td>false</td>
+      </tr><tr>
+        <td><b>displayDescription</b></td>
+        <td>string</td>
+        <td>
+          DisplayDescription specifies a user-friendly name for the group that should be used when rendering a group of attributes in user-facing forms.<br/>
+        </td>
+        <td>false</td>
+      </tr><tr>
+        <td><b>displayHeader</b></td>
+        <td>string</td>
+        <td>
+          DisplayHeader specifies a text that should be used as a header when rendering user-facing forms.<br/>
         </td>
         <td>false</td>
       </tr></tbody>
@@ -843,6 +1166,13 @@ KeycloakAuthFlowSpec defines the desired state of KeycloakAuthFlow.
         </td>
         <td>false</td>
       </tr><tr>
+        <td><b>childRequirement</b></td>
+        <td>string</td>
+        <td>
+          ChildRequirement is requirement for child execution. Available options: REQUIRED, ALTERNATIVE, DISABLED, CONDITIONAL.<br/>
+        </td>
+        <td>false</td>
+      </tr><tr>
         <td><b>childType</b></td>
         <td>string</td>
         <td>
@@ -1113,6 +1443,13 @@ KeycloakClientSpec defines the desired state of KeycloakClient.
         </td>
         <td>true</td>
       </tr><tr>
+        <td><b>adminUrl</b></td>
+        <td>string</td>
+        <td>
+          AdminUrl<br/>
+        </td>
+        <td>false</td>
+      </tr><tr>
         <td><b>advancedProtocolMappers</b></td>
         <td>boolean</td>
         <td>
@@ -1219,6 +1556,13 @@ KeycloakClientSpec defines the desired state of KeycloakClient.
         </td>
         <td>false</td>
       </tr><tr>
+        <td><b>homeUrl</b></td>
+        <td>string</td>
+        <td>
+          <br/>
+        </td>
+        <td>false</td>
+      </tr><tr>
         <td><b>implicitFlowEnabled</b></td>
         <td>boolean</td>
         <td>
@@ -1230,6 +1574,13 @@ KeycloakClientSpec defines the desired state of KeycloakClient.
         <td>string</td>
         <td>
           Name is a client name.<br/>
+        </td>
+        <td>false</td>
+      </tr><tr>
+        <td><b>optionalClientScopes</b></td>
+        <td>[]string</td>
+        <td>
+          OptionalClientScopes is a list of optional client scopes assigned to client.<br/>
         </td>
         <td>false</td>
       </tr><tr>
@@ -1292,7 +1643,7 @@ KeycloakClientSpec defines the desired state of KeycloakClient.
         <td>
           Secret is kubernetes secret name where the client's secret will be stored.
           Secret should have the following format: $secretName:secretKey.
-          If not specified, a client secret will be generated and stored in a secret with the name keycloak-client-{metadata.name}-secret.
+          If not specified, a client secret will be generated and stored in a secret with the name `keycloak-client-{metadata.name}-secret`.
           If keycloak client is public, secret property will be ignored.<br/>
         </td>
         <td>false</td>
@@ -1373,6 +1724,13 @@ Authorization is a client authorization configuration.
         <td>false</td>
       </tr><tr>
         <td><b><a href="#keycloakclientspecauthorizationpoliciesindex">policies</a></b></td>
+        <td>[]object</td>
+        <td>
+          <br/>
+        </td>
+        <td>false</td>
+      </tr><tr>
+        <td><b><a href="#keycloakclientspecauthorizationresourcesindex">resources</a></b></td>
         <td>[]object</td>
         <td>
           <br/>
@@ -1869,6 +2227,79 @@ UserPolicy is a user policy settings.
           Users is a list of usernames. Specifies which user(s) are allowed by this policy.<br/>
         </td>
         <td>true</td>
+      </tr></tbody>
+</table>
+
+### KeycloakClient.spec.authorization.resources[index]
+
+<sup><sup>[↩ Parent](#keycloakclientspecauthorization)</sup></sup>
+
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Description</th>
+            <th>Required</th>
+        </tr>
+    </thead>
+    <tbody><tr>
+        <td><b>displayName</b></td>
+        <td>string</td>
+        <td>
+          DisplayName for Identity Providers.<br/>
+        </td>
+        <td>true</td>
+      </tr><tr>
+        <td><b>name</b></td>
+        <td>string</td>
+        <td>
+          Name is unique resource name.<br/>
+        </td>
+        <td>true</td>
+      </tr><tr>
+        <td><b>attributes</b></td>
+        <td>map[string][]string</td>
+        <td>
+          Attributes is a map of resource attributes.<br/>
+        </td>
+        <td>false</td>
+      </tr><tr>
+        <td><b>iconUri</b></td>
+        <td>string</td>
+        <td>
+          IconURI pointing to an icon.<br/>
+        </td>
+        <td>false</td>
+      </tr><tr>
+        <td><b>ownerManagedAccess</b></td>
+        <td>boolean</td>
+        <td>
+          OwnerManagedAccess if enabled, the access to this resource can be managed by the resource owner.<br/>
+        </td>
+        <td>false</td>
+      </tr><tr>
+        <td><b>scopes</b></td>
+        <td>[]string</td>
+        <td>
+          Scopes requested or assigned in advance to the client to determine whether the policy is applied to this client.
+          Condition is evaluated during OpenID Connect authorization request and/or token request.<br/>
+        </td>
+        <td>false</td>
+      </tr><tr>
+        <td><b>type</b></td>
+        <td>string</td>
+        <td>
+          Type of this resource. It can be used to group different resource instances with the same type.<br/>
+        </td>
+        <td>false</td>
+      </tr><tr>
+        <td><b>uris</b></td>
+        <td>[]string</td>
+        <td>
+          URIs which are protected by resource.<br/>
+        </td>
+        <td>false</td>
       </tr></tbody>
 </table>
 
@@ -3664,6 +4095,13 @@ KeycloakRealmSpec defines the desired state of KeycloakRealm.
         </td>
         <td>false</td>
       </tr><tr>
+        <td><b>displayName</b></td>
+        <td>string</td>
+        <td>
+          DisplayName is the display name of the realm.<br/>
+        </td>
+        <td>false</td>
+      </tr><tr>
         <td><b>frontendUrl</b></td>
         <td>string</td>
         <td>
@@ -3718,6 +4156,15 @@ KeycloakRealmSpec defines the desired state of KeycloakRealm.
         <td>object</td>
         <td>
           TokenSettings is the configuration for tokens in the realm.<br/>
+        </td>
+        <td>false</td>
+      </tr><tr>
+        <td><b><a href="#keycloakrealmspecuserprofileconfig">userProfileConfig</a></b></td>
+        <td>object</td>
+        <td>
+          UserProfileConfig is the configuration for user profiles in the realm.
+          Attributes and groups will be added to the current realm configuration.
+          Deletion of attributes and groups is not supported.<br/>
         </td>
         <td>false</td>
       </tr><tr>
@@ -4001,6 +4448,310 @@ TokenSettings is the configuration for tokens in the realm.
           Otherwise, refresh tokens are not revoked when used and can be used multiple times.<br/>
           <br/>
             <i>Default</i>: false<br/>
+        </td>
+        <td>false</td>
+      </tr></tbody>
+</table>
+
+### KeycloakRealm.spec.userProfileConfig
+
+<sup><sup>[↩ Parent](#keycloakrealmspec)</sup></sup>
+
+UserProfileConfig is the configuration for user profiles in the realm.
+Attributes and groups will be added to the current realm configuration.
+Deletion of attributes and groups is not supported.
+
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Description</th>
+            <th>Required</th>
+        </tr>
+    </thead>
+    <tbody><tr>
+        <td><b><a href="#keycloakrealmspecuserprofileconfigattributesindex">attributes</a></b></td>
+        <td>[]object</td>
+        <td>
+          Attributes specifies the list of user profile attributes.<br/>
+        </td>
+        <td>false</td>
+      </tr><tr>
+        <td><b><a href="#keycloakrealmspecuserprofileconfiggroupsindex">groups</a></b></td>
+        <td>[]object</td>
+        <td>
+          Groups specifies the list of user profile groups.<br/>
+        </td>
+        <td>false</td>
+      </tr><tr>
+        <td><b>unmanagedAttributePolicy</b></td>
+        <td>string</td>
+        <td>
+          UnmanagedAttributePolicy are user attributes not explicitly defined in the user profile configuration.
+          Empty value means that unmanaged attributes are disabled.
+          Possible values:
+          ENABLED - unmanaged attributes are allowed.
+          ADMIN_VIEW - unmanaged attributes are read-only and only available through the administration console and API.
+          ADMIN_EDIT - unmanaged attributes can be managed only through the administration console and API.<br/>
+        </td>
+        <td>false</td>
+      </tr></tbody>
+</table>
+
+### KeycloakRealm.spec.userProfileConfig.attributes[index]
+
+<sup><sup>[↩ Parent](#keycloakrealmspecuserprofileconfig)</sup></sup>
+
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Description</th>
+            <th>Required</th>
+        </tr>
+    </thead>
+    <tbody><tr>
+        <td><b>name</b></td>
+        <td>string</td>
+        <td>
+          Name of the user attribute, used to uniquely identify an attribute.<br/>
+        </td>
+        <td>true</td>
+      </tr><tr>
+        <td><b>annotations</b></td>
+        <td>map[string]string</td>
+        <td>
+          Annotations specifies the annotations for the attribute.<br/>
+        </td>
+        <td>false</td>
+      </tr><tr>
+        <td><b>displayName</b></td>
+        <td>string</td>
+        <td>
+          Display name for the attribute.<br/>
+        </td>
+        <td>false</td>
+      </tr><tr>
+        <td><b>group</b></td>
+        <td>string</td>
+        <td>
+          Group to which the attribute belongs.<br/>
+        </td>
+        <td>false</td>
+      </tr><tr>
+        <td><b>multivalued</b></td>
+        <td>boolean</td>
+        <td>
+          Multivalued specifies if this attribute supports multiple values.
+          This setting is an indicator and does not enable any validation<br/>
+        </td>
+        <td>false</td>
+      </tr><tr>
+        <td><b><a href="#keycloakrealmspecuserprofileconfigattributesindexpermissions">permissions</a></b></td>
+        <td>object</td>
+        <td>
+          Permissions specifies the permissions for the attribute.<br/>
+        </td>
+        <td>false</td>
+      </tr><tr>
+        <td><b><a href="#keycloakrealmspecuserprofileconfigattributesindexrequired">required</a></b></td>
+        <td>object</td>
+        <td>
+          Required indicates that the attribute must be set by users and administrators.<br/>
+        </td>
+        <td>false</td>
+      </tr><tr>
+        <td><b><a href="#keycloakrealmspecuserprofileconfigattributesindexselector">selector</a></b></td>
+        <td>object</td>
+        <td>
+          Selector specifies the scopes for which the attribute is available.<br/>
+        </td>
+        <td>false</td>
+      </tr><tr>
+        <td><b><a href="#keycloakrealmspecuserprofileconfigattributesindexvalidationskeykey">validations</a></b></td>
+        <td>map[string]map[string]object</td>
+        <td>
+          Validations specifies the validations for the attribute.<br/>
+        </td>
+        <td>false</td>
+      </tr></tbody>
+</table>
+
+### KeycloakRealm.spec.userProfileConfig.attributes[index].permissions
+
+<sup><sup>[↩ Parent](#keycloakrealmspecuserprofileconfigattributesindex)</sup></sup>
+
+Permissions specifies the permissions for the attribute.
+
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Description</th>
+            <th>Required</th>
+        </tr>
+    </thead>
+    <tbody><tr>
+        <td><b>edit</b></td>
+        <td>[]string</td>
+        <td>
+          Edit specifies who can edit the attribute.<br/>
+        </td>
+        <td>false</td>
+      </tr><tr>
+        <td><b>view</b></td>
+        <td>[]string</td>
+        <td>
+          View specifies who can view the attribute.<br/>
+        </td>
+        <td>false</td>
+      </tr></tbody>
+</table>
+
+### KeycloakRealm.spec.userProfileConfig.attributes[index].required
+
+<sup><sup>[↩ Parent](#keycloakrealmspecuserprofileconfigattributesindex)</sup></sup>
+
+Required indicates that the attribute must be set by users and administrators.
+
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Description</th>
+            <th>Required</th>
+        </tr>
+    </thead>
+    <tbody><tr>
+        <td><b>roles</b></td>
+        <td>[]string</td>
+        <td>
+          Roles specifies the roles for whom the attribute is required.<br/>
+        </td>
+        <td>false</td>
+      </tr><tr>
+        <td><b>scopes</b></td>
+        <td>[]string</td>
+        <td>
+          Scopes specifies the scopes when the attribute is required.<br/>
+        </td>
+        <td>false</td>
+      </tr></tbody>
+</table>
+
+### KeycloakRealm.spec.userProfileConfig.attributes[index].selector
+
+<sup><sup>[↩ Parent](#keycloakrealmspecuserprofileconfigattributesindex)</sup></sup>
+
+Selector specifies the scopes for which the attribute is available.
+
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Description</th>
+            <th>Required</th>
+        </tr>
+    </thead>
+    <tbody><tr>
+        <td><b>scopes</b></td>
+        <td>[]string</td>
+        <td>
+          Scopes specifies the scopes for which the attribute is available.<br/>
+        </td>
+        <td>false</td>
+      </tr></tbody>
+</table>
+
+### KeycloakRealm.spec.userProfileConfig
+
+<sup><sup>[↩ Parent](#keycloakrealmspecuserprofileconfigattributesindex)</sup></sup>
+
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Description</th>
+            <th>Required</th>
+        </tr>
+    </thead>
+    <tbody><tr>
+        <td><b>intVal</b></td>
+        <td>integer</td>
+        <td>
+          <br/>
+        </td>
+        <td>false</td>
+      </tr><tr>
+        <td><b>mapVal</b></td>
+        <td>map[string]string</td>
+        <td>
+          <br/>
+        </td>
+        <td>false</td>
+      </tr><tr>
+        <td><b>sliceVal</b></td>
+        <td>[]string</td>
+        <td>
+          <br/>
+        </td>
+        <td>false</td>
+      </tr><tr>
+        <td><b>stringVal</b></td>
+        <td>string</td>
+        <td>
+          <br/>
+        </td>
+        <td>false</td>
+      </tr></tbody>
+</table>
+
+### KeycloakRealm.spec.userProfileConfig.groups[index]
+
+<sup><sup>[↩ Parent](#keycloakrealmspecuserprofileconfig)</sup></sup>
+
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Description</th>
+            <th>Required</th>
+        </tr>
+    </thead>
+    <tbody><tr>
+        <td><b>name</b></td>
+        <td>string</td>
+        <td>
+          Name is unique name of the group.<br/>
+        </td>
+        <td>true</td>
+      </tr><tr>
+        <td><b>annotations</b></td>
+        <td>map[string]string</td>
+        <td>
+          Annotations specifies the annotations for the group.
+          nullable<br/>
+        </td>
+        <td>false</td>
+      </tr><tr>
+        <td><b>displayDescription</b></td>
+        <td>string</td>
+        <td>
+          DisplayDescription specifies a user-friendly name for the group that should be used when rendering a group of attributes in user-facing forms.<br/>
+        </td>
+        <td>false</td>
+      </tr><tr>
+        <td><b>displayHeader</b></td>
+        <td>string</td>
+        <td>
+          DisplayHeader specifies a text that should be used as a header when rendering user-facing forms.<br/>
         </td>
         <td>false</td>
       </tr></tbody>

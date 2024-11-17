@@ -13,28 +13,6 @@ Resource Types:
 
 - [ClusterKeycloak](#clusterkeycloak)
 
-- [KeycloakAuthFlow](#keycloakauthflow)
-
-- [KeycloakClient](#keycloakclient)
-
-- [KeycloakClientScope](#keycloakclientscope)
-
-- [KeycloakRealmComponent](#keycloakrealmcomponent)
-
-- [KeycloakRealmGroup](#keycloakrealmgroup)
-
-- [KeycloakRealmIdentityProvider](#keycloakrealmidentityprovider)
-
-- [KeycloakRealmRoleBatch](#keycloakrealmrolebatch)
-
-- [KeycloakRealmRole](#keycloakrealmrole)
-
-- [KeycloakRealm](#keycloakrealm)
-
-- [KeycloakRealmUser](#keycloakrealmuser)
-
-- [Keycloak](#keycloak)
-
 ## ClusterKeycloakRealm
 
 <sup><sup>[↩ Parent](#v1edpepamcomv1alpha1 )</sup></sup>
@@ -128,6 +106,20 @@ ClusterKeycloakRealmSpec defines the desired state of ClusterKeycloakRealm.
         </td>
         <td>false</td>
       </tr><tr>
+        <td><b>displayHtmlName</b></td>
+        <td>string</td>
+        <td>
+          DisplayHTMLName name to render in the UI.<br/>
+        </td>
+        <td>false</td>
+      </tr><tr>
+        <td><b>displayName</b></td>
+        <td>string</td>
+        <td>
+          DisplayName is the display name of the realm.<br/>
+        </td>
+        <td>false</td>
+      </tr><tr>
         <td><b>frontendUrl</b></td>
         <td>string</td>
         <td>
@@ -168,6 +160,13 @@ Use in combination with the default hostname provider to override the base URL f
         <td>object</td>
         <td>
           TokenSettings is the configuration for tokens in the realm.<br/>
+        </td>
+        <td>false</td>
+      </tr><tr>
+        <td><b><a href="#clusterkeycloakrealmspecuserprofileconfig">userProfileConfig</a></b></td>
+        <td>object</td>
+        <td>
+          UserProfileConfig is the configuration for user profiles in the realm.<br/>
         </td>
         <td>false</td>
       </tr></tbody>
@@ -379,7 +378,7 @@ TokenSettings is the configuration for tokens in the realm.
         <td>integer</td>
         <td>
           AccessCodeLifespan specifies max time(in seconds)a client has to finish the access token protocol.
-This should normally be 1 minute.<br/>
+          This should normally be 1 minute.<br/>
           <br/>
             <i>Default</i>: 60<br/>
         </td>
@@ -398,7 +397,7 @@ This should normally be 1 minute.<br/>
         <td>integer</td>
         <td>
           AccessTokenLifespan specifies max time(in seconds) before an access token is expired.
-This value is recommended to be short relative to the SSO timeout.<br/>
+          This value is recommended to be short relative to the SSO timeout.<br/>
           <br/>
             <i>Default</i>: 300<br/>
         </td>
@@ -408,8 +407,8 @@ This value is recommended to be short relative to the SSO timeout.<br/>
         <td>integer</td>
         <td>
           ActionTokenGeneratedByAdminLifespan specifies max time(in seconds) before an action permit sent to a user by administrator is expired.
-This value is recommended to be long to allow administrators to send e-mails for users that are currently offline.
-The default timeout can be overridden immediately before issuing the token.<br/>
+          This value is recommended to be long to allow administrators to send e-mails for users that are currently offline.
+          The default timeout can be overridden immediately before issuing the token.<br/>
           <br/>
             <i>Default</i>: 43200<br/>
         </td>
@@ -419,7 +418,7 @@ The default timeout can be overridden immediately before issuing the token.<br/>
         <td>integer</td>
         <td>
           AccessCodeLifespanUserAction specifies max time(in seconds) before an action permit sent by a user (such as a forgot password e-mail) is expired.
-This value is recommended to be short because it's expected that the user would react to self-created action quickly.<br/>
+          This value is recommended to be short because it's expected that the user would react to self-created action quickly.<br/>
           <br/>
             <i>Default</i>: 300<br/>
         </td>
@@ -439,7 +438,7 @@ This value is recommended to be short because it's expected that the user would 
         <td>integer</td>
         <td>
           RefreshTokenMaxReuse specifies maximum number of times a refresh token can be reused.
-When a different token is used, revocation is immediate.<br/>
+          When a different token is used, revocation is immediate.<br/>
           <br/>
             <i>Default</i>: 0<br/>
         </td>
@@ -449,10 +448,312 @@ When a different token is used, revocation is immediate.<br/>
         <td>boolean</td>
         <td>
           RevokeRefreshToken if enabled a refresh token can only be used up to 'refreshTokenMaxReuse' and
-is revoked when a different token is used.
-Otherwise, refresh tokens are not revoked when used and can be used multiple times.<br/>
+          is revoked when a different token is used.
+          Otherwise, refresh tokens are not revoked when used and can be used multiple times.<br/>
           <br/>
             <i>Default</i>: false<br/>
+        </td>
+        <td>false</td>
+      </tr></tbody>
+</table>
+
+### ClusterKeycloakRealm.spec.userProfileConfig
+
+<sup><sup>[↩ Parent](#clusterkeycloakrealmspec)</sup></sup>
+
+UserProfileConfig is the configuration for user profiles in the realm.
+
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Description</th>
+            <th>Required</th>
+        </tr>
+    </thead>
+    <tbody><tr>
+        <td><b><a href="#clusterkeycloakrealmspecuserprofileconfigattributesindex">attributes</a></b></td>
+        <td>[]object</td>
+        <td>
+          Attributes specifies the list of user profile attributes.<br/>
+        </td>
+        <td>false</td>
+      </tr><tr>
+        <td><b><a href="#clusterkeycloakrealmspecuserprofileconfiggroupsindex">groups</a></b></td>
+        <td>[]object</td>
+        <td>
+          Groups specifies the list of user profile groups.<br/>
+        </td>
+        <td>false</td>
+      </tr><tr>
+        <td><b>unmanagedAttributePolicy</b></td>
+        <td>string</td>
+        <td>
+          UnmanagedAttributePolicy are user attributes not explicitly defined in the user profile configuration.
+          Empty value means that unmanaged attributes are disabled.
+          Possible values:
+          ENABLED - unmanaged attributes are allowed.
+          ADMIN_VIEW - unmanaged attributes are read-only and only available through the administration console and API.
+          ADMIN_EDIT - unmanaged attributes can be managed only through the administration console and API.<br/>
+        </td>
+        <td>false</td>
+      </tr></tbody>
+</table>
+
+### ClusterKeycloakRealm.spec.userProfileConfig.attributes[index]
+
+<sup><sup>[↩ Parent](#clusterkeycloakrealmspecuserprofileconfig)</sup></sup>
+
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Description</th>
+            <th>Required</th>
+        </tr>
+    </thead>
+    <tbody><tr>
+        <td><b>name</b></td>
+        <td>string</td>
+        <td>
+          Name of the user attribute, used to uniquely identify an attribute.<br/>
+        </td>
+        <td>true</td>
+      </tr><tr>
+        <td><b>annotations</b></td>
+        <td>map[string]string</td>
+        <td>
+          Annotations specifies the annotations for the attribute.<br/>
+        </td>
+        <td>false</td>
+      </tr><tr>
+        <td><b>displayName</b></td>
+        <td>string</td>
+        <td>
+          Display name for the attribute.<br/>
+        </td>
+        <td>false</td>
+      </tr><tr>
+        <td><b>group</b></td>
+        <td>string</td>
+        <td>
+          Group to which the attribute belongs.<br/>
+        </td>
+        <td>false</td>
+      </tr><tr>
+        <td><b>multivalued</b></td>
+        <td>boolean</td>
+        <td>
+          Multivalued specifies if this attribute supports multiple values.
+          This setting is an indicator and does not enable any validation<br/>
+        </td>
+        <td>false</td>
+      </tr><tr>
+        <td><b><a href="#clusterkeycloakrealmspecuserprofileconfigattributesindexpermissions">permissions</a></b></td>
+        <td>object</td>
+        <td>
+          Permissions specifies the permissions for the attribute.<br/>
+        </td>
+        <td>false</td>
+      </tr><tr>
+        <td><b><a href="#clusterkeycloakrealmspecuserprofileconfigattributesindexrequired">required</a></b></td>
+        <td>object</td>
+        <td>
+          Required indicates that the attribute must be set by users and administrators.<br/>
+        </td>
+        <td>false</td>
+      </tr><tr>
+        <td><b><a href="#clusterkeycloakrealmspecuserprofileconfigattributesindexselector">selector</a></b></td>
+        <td>object</td>
+        <td>
+          Selector specifies the scopes for which the attribute is available.<br/>
+        </td>
+        <td>false</td>
+      </tr><tr>
+        <td><b><a href="#clusterkeycloakrealmspecuserprofileconfigattributesindexvalidationskeykey">validations</a></b></td>
+        <td>map[string]map[string]object</td>
+        <td>
+          Validations specifies the validations for the attribute.<br/>
+        </td>
+        <td>false</td>
+      </tr></tbody>
+</table>
+
+### ClusterKeycloakRealm.spec.userProfileConfig.attributes[index].permissions
+
+<sup><sup>[↩ Parent](#clusterkeycloakrealmspecuserprofileconfigattributesindex)</sup></sup>
+
+Permissions specifies the permissions for the attribute.
+
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Description</th>
+            <th>Required</th>
+        </tr>
+    </thead>
+    <tbody><tr>
+        <td><b>edit</b></td>
+        <td>[]string</td>
+        <td>
+          Edit specifies who can edit the attribute.<br/>
+        </td>
+        <td>false</td>
+      </tr><tr>
+        <td><b>view</b></td>
+        <td>[]string</td>
+        <td>
+          View specifies who can view the attribute.<br/>
+        </td>
+        <td>false</td>
+      </tr></tbody>
+</table>
+
+### ClusterKeycloakRealm.spec.userProfileConfig.attributes[index].required
+
+<sup><sup>[↩ Parent](#clusterkeycloakrealmspecuserprofileconfigattributesindex)</sup></sup>
+
+Required indicates that the attribute must be set by users and administrators.
+
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Description</th>
+            <th>Required</th>
+        </tr>
+    </thead>
+    <tbody><tr>
+        <td><b>roles</b></td>
+        <td>[]string</td>
+        <td>
+          Roles specifies the roles for whom the attribute is required.<br/>
+        </td>
+        <td>false</td>
+      </tr><tr>
+        <td><b>scopes</b></td>
+        <td>[]string</td>
+        <td>
+          Scopes specifies the scopes when the attribute is required.<br/>
+        </td>
+        <td>false</td>
+      </tr></tbody>
+</table>
+
+### ClusterKeycloakRealm.spec.userProfileConfig.attributes[index].selector
+
+<sup><sup>[↩ Parent](#clusterkeycloakrealmspecuserprofileconfigattributesindex)</sup></sup>
+
+Selector specifies the scopes for which the attribute is available.
+
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Description</th>
+            <th>Required</th>
+        </tr>
+    </thead>
+    <tbody><tr>
+        <td><b>scopes</b></td>
+        <td>[]string</td>
+        <td>
+          Scopes specifies the scopes for which the attribute is available.<br/>
+        </td>
+        <td>false</td>
+      </tr></tbody>
+</table>
+
+### ClusterKeycloakRealm.spec.userProfileConfig.attributes[index].validations[key][key]
+
+<sup><sup>[↩ Parent](#clusterkeycloakrealmspecuserprofileconfigattributesindex)</sup></sup>
+
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Description</th>
+            <th>Required</th>
+        </tr>
+    </thead>
+    <tbody><tr>
+        <td><b>intVal</b></td>
+        <td>integer</td>
+        <td>
+          <br/>
+        </td>
+        <td>false</td>
+      </tr><tr>
+        <td><b>mapVal</b></td>
+        <td>map[string]string</td>
+        <td>
+          <br/>
+        </td>
+        <td>false</td>
+      </tr><tr>
+        <td><b>sliceVal</b></td>
+        <td>[]string</td>
+        <td>
+          <br/>
+        </td>
+        <td>false</td>
+      </tr><tr>
+        <td><b>stringVal</b></td>
+        <td>string</td>
+        <td>
+          <br/>
+        </td>
+        <td>false</td>
+      </tr></tbody>
+</table>
+
+### ClusterKeycloakRealm.spec.userProfileConfig.groups[index]
+
+<sup><sup>[↩ Parent](#clusterkeycloakrealmspecuserprofileconfig)</sup></sup>
+
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Description</th>
+            <th>Required</th>
+        </tr>
+    </thead>
+    <tbody><tr>
+        <td><b>name</b></td>
+        <td>string</td>
+        <td>
+          Name is unique name of the group.<br/>
+        </td>
+        <td>true</td>
+      </tr><tr>
+        <td><b>annotations</b></td>
+        <td>map[string]string</td>
+        <td>
+          Annotations specifies the annotations for the group.
+          nullable<br/>
+        </td>
+        <td>false</td>
+      </tr><tr>
+        <td><b>displayDescription</b></td>
+        <td>string</td>
+        <td>
+          DisplayDescription specifies a user-friendly name for the group that should be used when rendering a group of attributes in user-facing forms.<br/>
+        </td>
+        <td>false</td>
+      </tr><tr>
+        <td><b>displayHeader</b></td>
+        <td>string</td>
+        <td>
+          DisplayHeader specifies a text that should be used as a header when rendering user-facing forms.<br/>
         </td>
         <td>false</td>
       </tr></tbody>
@@ -584,7 +885,7 @@ ClusterKeycloakSpec defines the desired state of ClusterKeycloak.
         <td>enum</td>
         <td>
           AdminType can be user or serviceAccount, if serviceAccount was specified,
-then client_credentials grant type should be used for getting admin realm token.<br/>
+          then client_credentials grant type should be used for getting admin realm token.<br/>
           <br/>
             <i>Enum</i>: serviceAccount, user<br/>
             <i>Default</i>: user<br/>
@@ -595,8 +896,8 @@ then client_credentials grant type should be used for getting admin realm token.
         <td>object</td>
         <td>
           CACert defines the root certificate authority
-that api clients use when verifying server certificates.
-Resources should be in the namespace defined in operator OPERATOR_NAMESPACE env.<br/>
+          that api clients use when verifying server certificates.
+          Resources should be in the namespace defined in operator OPERATOR_NAMESPACE env.<br/>
         </td>
         <td>false</td>
       </tr><tr>
@@ -604,9 +905,9 @@ Resources should be in the namespace defined in operator OPERATOR_NAMESPACE env.
         <td>boolean</td>
         <td>
           InsecureSkipVerify controls whether api client verifies the server's
-certificate chain and host name. If InsecureSkipVerify is true, api client
-accepts any certificate presented by the server and any host name in that
-certificate.<br/>
+          certificate chain and host name. If InsecureSkipVerify is true, api client
+          accepts any certificate presented by the server and any host name in that
+          certificate.<br/>
         </td>
         <td>false</td>
       </tr></tbody>
@@ -673,8 +974,8 @@ Selects a key of a ConfigMap.
         <td>string</td>
         <td>
           Name of the referent.
-More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
-TODO: Add other useful fields. apiVersion, kind, uid?<br/>
+          More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+          TODO: Add other useful fields. apiVersion, kind, uid?<br/>
         </td>
         <td>false</td>
       </tr></tbody>
@@ -707,8 +1008,8 @@ Selects a key of a secret.
         <td>string</td>
         <td>
           Name of the referent.
-More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
-TODO: Add other useful fields. apiVersion, kind, uid?<br/>
+          More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+          TODO: Add other useful fields. apiVersion, kind, uid?<br/>
         </td>
         <td>false</td>
       </tr></tbody>
@@ -734,2449 +1035,6 @@ ClusterKeycloakStatus defines the observed state of ClusterKeycloak.
         <td>boolean</td>
         <td>
           Connected shows if keycloak service is up and running.<br/>
-        </td>
-        <td>true</td>
-      </tr></tbody>
-</table>
-
-## KeycloakAuthFlow
-
-<sup><sup>[↩ Parent](#v1edpepamcomv1alpha1 )</sup></sup>
-
-<table>
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Type</th>
-            <th>Description</th>
-            <th>Required</th>
-        </tr>
-    </thead>
-    <tbody><tr>
-      <td><b>apiVersion</b></td>
-      <td>string</td>
-      <td>v1.edp.epam.com/v1alpha1</td>
-      <td>true</td>
-      </tr>
-      <tr>
-      <td><b>kind</b></td>
-      <td>string</td>
-      <td>KeycloakAuthFlow</td>
-      <td>true</td>
-      </tr>
-      <tr>
-      <td><b><a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.20/#objectmeta-v1-meta">metadata</a></b></td>
-      <td>object</td>
-      <td>Refer to the Kubernetes API documentation for the fields of the `metadata` field.</td>
-      <td>true</td>
-      </tr><tr>
-        <td><b><a href="#keycloakauthflowspec-1">spec</a></b></td>
-        <td>object</td>
-        <td>
-          <br/>
-        </td>
-        <td>false</td>
-      </tr><tr>
-        <td><b><a href="#keycloakauthflowstatus-1">status</a></b></td>
-        <td>object</td>
-        <td>
-          <br/>
-        </td>
-        <td>false</td>
-      </tr></tbody>
-</table>
-
-### KeycloakAuthFlow.spec
-
-<sup><sup>[↩ Parent](#keycloakauthflow-1)</sup></sup>
-
-<table>
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Type</th>
-            <th>Description</th>
-            <th>Required</th>
-        </tr>
-    </thead>
-    <tbody><tr>
-        <td><b>alias</b></td>
-        <td>string</td>
-        <td>
-          Alias is display name for authentication flow<br/>
-        </td>
-        <td>true</td>
-      </tr><tr>
-        <td><b>builtIn</b></td>
-        <td>boolean</td>
-        <td>
-          <br/>
-        </td>
-        <td>true</td>
-      </tr><tr>
-        <td><b>providerId</b></td>
-        <td>string</td>
-        <td>
-          ProviderID for root auth flow and provider for child auth flows<br/>
-        </td>
-        <td>true</td>
-      </tr><tr>
-        <td><b>realm</b></td>
-        <td>string</td>
-        <td>
-          Realm is name of keycloak realm<br/>
-        </td>
-        <td>true</td>
-      </tr><tr>
-        <td><b>topLevel</b></td>
-        <td>boolean</td>
-        <td>
-          <br/>
-        </td>
-        <td>true</td>
-      </tr><tr>
-        <td><b><a href="#keycloakauthflowspecauthenticationexecutionsindex-1">authenticationExecutions</a></b></td>
-        <td>[]object</td>
-        <td>
-          <br/>
-        </td>
-        <td>false</td>
-      </tr><tr>
-        <td><b>childType</b></td>
-        <td>string</td>
-        <td>
-          ChildType is type for auth flow if it has a parent, available options: basic-flow, form-flow<br/>
-        </td>
-        <td>false</td>
-      </tr><tr>
-        <td><b>description</b></td>
-        <td>string</td>
-        <td>
-          <br/>
-        </td>
-        <td>false</td>
-      </tr><tr>
-        <td><b>parentName</b></td>
-        <td>string</td>
-        <td>
-          <br/>
-        </td>
-        <td>false</td>
-      </tr></tbody>
-</table>
-
-### KeycloakAuthFlow.spec.authenticationExecutions[index]
-
-<sup><sup>[↩ Parent](#keycloakauthflowspec-1)</sup></sup>
-
-<table>
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Type</th>
-            <th>Description</th>
-            <th>Required</th>
-        </tr>
-    </thead>
-    <tbody><tr>
-        <td><b>alias</b></td>
-        <td>string</td>
-        <td>
-          <br/>
-        </td>
-        <td>false</td>
-      </tr><tr>
-        <td><b>authenticator</b></td>
-        <td>string</td>
-        <td>
-          <br/>
-        </td>
-        <td>false</td>
-      </tr><tr>
-        <td><b><a href="#keycloakauthflowspecauthenticationexecutionsindexauthenticatorconfig-1">authenticatorConfig</a></b></td>
-        <td>object</td>
-        <td>
-          <br/>
-        </td>
-        <td>false</td>
-      </tr><tr>
-        <td><b>authenticatorFlow</b></td>
-        <td>boolean</td>
-        <td>
-          <br/>
-        </td>
-        <td>false</td>
-      </tr><tr>
-        <td><b>priority</b></td>
-        <td>integer</td>
-        <td>
-          <br/>
-        </td>
-        <td>false</td>
-      </tr><tr>
-        <td><b>requirement</b></td>
-        <td>string</td>
-        <td>
-          <br/>
-        </td>
-        <td>false</td>
-      </tr></tbody>
-</table>
-
-### KeycloakAuthFlow.spec.authenticationExecutions[index].authenticatorConfig
-
-<sup><sup>[↩ Parent](#keycloakauthflowspecauthenticationexecutionsindex-1)</sup></sup>
-
-<table>
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Type</th>
-            <th>Description</th>
-            <th>Required</th>
-        </tr>
-    </thead>
-    <tbody><tr>
-        <td><b>alias</b></td>
-        <td>string</td>
-        <td>
-          <br/>
-        </td>
-        <td>false</td>
-      </tr><tr>
-        <td><b>config</b></td>
-        <td>map[string]string</td>
-        <td>
-          <br/>
-        </td>
-        <td>false</td>
-      </tr></tbody>
-</table>
-
-### KeycloakAuthFlow.status
-
-<sup><sup>[↩ Parent](#keycloakauthflow-1)</sup></sup>
-
-<table>
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Type</th>
-            <th>Description</th>
-            <th>Required</th>
-        </tr>
-    </thead>
-    <tbody><tr>
-        <td><b>failureCount</b></td>
-        <td>integer</td>
-        <td>
-          <br/>
-          <br/>
-            <i>Format</i>: int64<br/>
-        </td>
-        <td>false</td>
-      </tr><tr>
-        <td><b>value</b></td>
-        <td>string</td>
-        <td>
-          <br/>
-        </td>
-        <td>false</td>
-      </tr></tbody>
-</table>
-
-## KeycloakClient
-
-<sup><sup>[↩ Parent](#v1edpepamcomv1alpha1 )</sup></sup>
-
-KeycloakClient is the Schema for the keycloakclients API.
-
-<table>
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Type</th>
-            <th>Description</th>
-            <th>Required</th>
-        </tr>
-    </thead>
-    <tbody><tr>
-      <td><b>apiVersion</b></td>
-      <td>string</td>
-      <td>v1.edp.epam.com/v1alpha1</td>
-      <td>true</td>
-      </tr>
-      <tr>
-      <td><b>kind</b></td>
-      <td>string</td>
-      <td>KeycloakClient</td>
-      <td>true</td>
-      </tr>
-      <tr>
-      <td><b><a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.20/#objectmeta-v1-meta">metadata</a></b></td>
-      <td>object</td>
-      <td>Refer to the Kubernetes API documentation for the fields of the `metadata` field.</td>
-      <td>true</td>
-      </tr><tr>
-        <td><b><a href="#keycloakclientspec-1">spec</a></b></td>
-        <td>object</td>
-        <td>
-          KeycloakClientSpec defines the desired state of KeycloakClient.<br/>
-        </td>
-        <td>false</td>
-      </tr><tr>
-        <td><b><a href="#keycloakclientstatus-1">status</a></b></td>
-        <td>object</td>
-        <td>
-          KeycloakClientStatus defines the observed state of KeycloakClient.<br/>
-        </td>
-        <td>false</td>
-      </tr></tbody>
-</table>
-
-### KeycloakClient.spec
-
-<sup><sup>[↩ Parent](#keycloakclient-1)</sup></sup>
-
-KeycloakClientSpec defines the desired state of KeycloakClient.
-
-<table>
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Type</th>
-            <th>Description</th>
-            <th>Required</th>
-        </tr>
-    </thead>
-    <tbody><tr>
-        <td><b>clientId</b></td>
-        <td>string</td>
-        <td>
-          ClientId is a unique keycloak client ID referenced in URI and tokens.<br/>
-        </td>
-        <td>true</td>
-      </tr><tr>
-        <td><b>advancedProtocolMappers</b></td>
-        <td>boolean</td>
-        <td>
-          <br/>
-        </td>
-        <td>false</td>
-      </tr><tr>
-        <td><b>attributes</b></td>
-        <td>map[string]string</td>
-        <td>
-          <br/>
-        </td>
-        <td>false</td>
-      </tr><tr>
-        <td><b>clientRoles</b></td>
-        <td>[]string</td>
-        <td>
-          <br/>
-        </td>
-        <td>false</td>
-      </tr><tr>
-        <td><b>defaultClientScopes</b></td>
-        <td>[]string</td>
-        <td>
-          A list of default client scopes for a keycloak client.<br/>
-        </td>
-        <td>false</td>
-      </tr><tr>
-        <td><b>directAccess</b></td>
-        <td>boolean</td>
-        <td>
-          <br/>
-        </td>
-        <td>false</td>
-      </tr><tr>
-        <td><b>frontChannelLogout</b></td>
-        <td>boolean</td>
-        <td>
-          <br/>
-        </td>
-        <td>false</td>
-      </tr><tr>
-        <td><b>protocol</b></td>
-        <td>string</td>
-        <td>
-          <br/>
-        </td>
-        <td>false</td>
-      </tr><tr>
-        <td><b><a href="#keycloakclientspecprotocolmappersindex-1">protocolMappers</a></b></td>
-        <td>[]object</td>
-        <td>
-          <br/>
-        </td>
-        <td>false</td>
-      </tr><tr>
-        <td><b>public</b></td>
-        <td>boolean</td>
-        <td>
-          <br/>
-        </td>
-        <td>false</td>
-      </tr><tr>
-        <td><b><a href="#keycloakclientspecrealmrolesindex-1">realmRoles</a></b></td>
-        <td>[]object</td>
-        <td>
-          <br/>
-        </td>
-        <td>false</td>
-      </tr><tr>
-        <td><b>reconciliationStrategy</b></td>
-        <td>enum</td>
-        <td>
-          <br/>
-          <br/>
-            <i>Enum</i>: full, addOnly<br/>
-        </td>
-        <td>false</td>
-      </tr><tr>
-        <td><b>secret</b></td>
-        <td>string</td>
-        <td>
-          <br/>
-        </td>
-        <td>false</td>
-      </tr><tr>
-        <td><b><a href="#keycloakclientspecserviceaccount-1">serviceAccount</a></b></td>
-        <td>object</td>
-        <td>
-          <br/>
-        </td>
-        <td>false</td>
-      </tr><tr>
-        <td><b>targetRealm</b></td>
-        <td>string</td>
-        <td>
-          <br/>
-        </td>
-        <td>false</td>
-      </tr><tr>
-        <td><b>webUrl</b></td>
-        <td>string</td>
-        <td>
-          <br/>
-        </td>
-        <td>false</td>
-      </tr></tbody>
-</table>
-
-### KeycloakClient.spec.protocolMappers[index]
-
-<sup><sup>[↩ Parent](#keycloakclientspec-1)</sup></sup>
-
-<table>
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Type</th>
-            <th>Description</th>
-            <th>Required</th>
-        </tr>
-    </thead>
-    <tbody><tr>
-        <td><b>config</b></td>
-        <td>map[string]string</td>
-        <td>
-          <br/>
-        </td>
-        <td>false</td>
-      </tr><tr>
-        <td><b>name</b></td>
-        <td>string</td>
-        <td>
-          <br/>
-        </td>
-        <td>false</td>
-      </tr><tr>
-        <td><b>protocol</b></td>
-        <td>string</td>
-        <td>
-          <br/>
-        </td>
-        <td>false</td>
-      </tr><tr>
-        <td><b>protocolMapper</b></td>
-        <td>string</td>
-        <td>
-          <br/>
-        </td>
-        <td>false</td>
-      </tr></tbody>
-</table>
-
-### KeycloakClient.spec.realmRoles[index]
-
-<sup><sup>[↩ Parent](#keycloakclientspec-1)</sup></sup>
-
-<table>
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Type</th>
-            <th>Description</th>
-            <th>Required</th>
-        </tr>
-    </thead>
-    <tbody><tr>
-        <td><b>composite</b></td>
-        <td>string</td>
-        <td>
-          <br/>
-        </td>
-        <td>true</td>
-      </tr><tr>
-        <td><b>name</b></td>
-        <td>string</td>
-        <td>
-          <br/>
-        </td>
-        <td>false</td>
-      </tr></tbody>
-</table>
-
-### KeycloakClient.spec.serviceAccount
-
-<sup><sup>[↩ Parent](#keycloakclientspec-1)</sup></sup>
-
-<table>
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Type</th>
-            <th>Description</th>
-            <th>Required</th>
-        </tr>
-    </thead>
-    <tbody><tr>
-        <td><b>attributes</b></td>
-        <td>map[string]string</td>
-        <td>
-          <br/>
-        </td>
-        <td>false</td>
-      </tr><tr>
-        <td><b><a href="#keycloakclientspecserviceaccountclientrolesindex-1">clientRoles</a></b></td>
-        <td>[]object</td>
-        <td>
-          <br/>
-        </td>
-        <td>false</td>
-      </tr><tr>
-        <td><b>enabled</b></td>
-        <td>boolean</td>
-        <td>
-          <br/>
-        </td>
-        <td>false</td>
-      </tr><tr>
-        <td><b>realmRoles</b></td>
-        <td>[]string</td>
-        <td>
-          <br/>
-        </td>
-        <td>false</td>
-      </tr></tbody>
-</table>
-
-### KeycloakClient.spec.serviceAccount.clientRoles[index]
-
-<sup><sup>[↩ Parent](#keycloakclientspecserviceaccount-1)</sup></sup>
-
-<table>
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Type</th>
-            <th>Description</th>
-            <th>Required</th>
-        </tr>
-    </thead>
-    <tbody><tr>
-        <td><b>clientId</b></td>
-        <td>string</td>
-        <td>
-          <br/>
-        </td>
-        <td>true</td>
-      </tr><tr>
-        <td><b>roles</b></td>
-        <td>[]string</td>
-        <td>
-          <br/>
-        </td>
-        <td>false</td>
-      </tr></tbody>
-</table>
-
-### KeycloakClient.status
-
-<sup><sup>[↩ Parent](#keycloakclient-1)</sup></sup>
-
-KeycloakClientStatus defines the observed state of KeycloakClient.
-
-<table>
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Type</th>
-            <th>Description</th>
-            <th>Required</th>
-        </tr>
-    </thead>
-    <tbody><tr>
-        <td><b>clientId</b></td>
-        <td>string</td>
-        <td>
-          <br/>
-        </td>
-        <td>false</td>
-      </tr><tr>
-        <td><b>clientSecretName</b></td>
-        <td>string</td>
-        <td>
-          <br/>
-        </td>
-        <td>false</td>
-      </tr><tr>
-        <td><b>failureCount</b></td>
-        <td>integer</td>
-        <td>
-          <br/>
-          <br/>
-            <i>Format</i>: int64<br/>
-        </td>
-        <td>false</td>
-      </tr><tr>
-        <td><b>value</b></td>
-        <td>string</td>
-        <td>
-          <br/>
-        </td>
-        <td>false</td>
-      </tr></tbody>
-</table>
-
-## KeycloakClientScope
-
-<sup><sup>[↩ Parent](#v1edpepamcomv1alpha1 )</sup></sup>
-
-<table>
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Type</th>
-            <th>Description</th>
-            <th>Required</th>
-        </tr>
-    </thead>
-    <tbody><tr>
-      <td><b>apiVersion</b></td>
-      <td>string</td>
-      <td>v1.edp.epam.com/v1alpha1</td>
-      <td>true</td>
-      </tr>
-      <tr>
-      <td><b>kind</b></td>
-      <td>string</td>
-      <td>KeycloakClientScope</td>
-      <td>true</td>
-      </tr>
-      <tr>
-      <td><b><a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.20/#objectmeta-v1-meta">metadata</a></b></td>
-      <td>object</td>
-      <td>Refer to the Kubernetes API documentation for the fields of the `metadata` field.</td>
-      <td>true</td>
-      </tr><tr>
-        <td><b><a href="#keycloakclientscopespec-1">spec</a></b></td>
-        <td>object</td>
-        <td>
-          <br/>
-        </td>
-        <td>false</td>
-      </tr><tr>
-        <td><b><a href="#keycloakclientscopestatus-1">status</a></b></td>
-        <td>object</td>
-        <td>
-          <br/>
-        </td>
-        <td>false</td>
-      </tr></tbody>
-</table>
-
-### KeycloakClientScope.spec
-
-<sup><sup>[↩ Parent](#keycloakclientscope-1)</sup></sup>
-
-<table>
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Type</th>
-            <th>Description</th>
-            <th>Required</th>
-        </tr>
-    </thead>
-    <tbody><tr>
-        <td><b>name</b></td>
-        <td>string</td>
-        <td>
-          Name of keycloak client scope<br/>
-        </td>
-        <td>true</td>
-      </tr><tr>
-        <td><b>protocol</b></td>
-        <td>string</td>
-        <td>
-          Protocol is SSO protocol configuration which is being supplied by this client scope<br/>
-        </td>
-        <td>true</td>
-      </tr><tr>
-        <td><b>realm</b></td>
-        <td>string</td>
-        <td>
-          Realm is name of keycloak realm<br/>
-        </td>
-        <td>true</td>
-      </tr><tr>
-        <td><b>attributes</b></td>
-        <td>map[string]string</td>
-        <td>
-          <br/>
-        </td>
-        <td>false</td>
-      </tr><tr>
-        <td><b>default</b></td>
-        <td>boolean</td>
-        <td>
-          <br/>
-        </td>
-        <td>false</td>
-      </tr><tr>
-        <td><b>description</b></td>
-        <td>string</td>
-        <td>
-          <br/>
-        </td>
-        <td>false</td>
-      </tr><tr>
-        <td><b><a href="#keycloakclientscopespecprotocolmappersindex-1">protocolMappers</a></b></td>
-        <td>[]object</td>
-        <td>
-          <br/>
-        </td>
-        <td>false</td>
-      </tr></tbody>
-</table>
-
-### KeycloakClientScope.spec.protocolMappers[index]
-
-<sup><sup>[↩ Parent](#keycloakclientscopespec-1)</sup></sup>
-
-<table>
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Type</th>
-            <th>Description</th>
-            <th>Required</th>
-        </tr>
-    </thead>
-    <tbody><tr>
-        <td><b>config</b></td>
-        <td>map[string]string</td>
-        <td>
-          <br/>
-        </td>
-        <td>false</td>
-      </tr><tr>
-        <td><b>name</b></td>
-        <td>string</td>
-        <td>
-          <br/>
-        </td>
-        <td>false</td>
-      </tr><tr>
-        <td><b>protocol</b></td>
-        <td>string</td>
-        <td>
-          <br/>
-        </td>
-        <td>false</td>
-      </tr><tr>
-        <td><b>protocolMapper</b></td>
-        <td>string</td>
-        <td>
-          <br/>
-        </td>
-        <td>false</td>
-      </tr></tbody>
-</table>
-
-### KeycloakClientScope.status
-
-<sup><sup>[↩ Parent](#keycloakclientscope-1)</sup></sup>
-
-<table>
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Type</th>
-            <th>Description</th>
-            <th>Required</th>
-        </tr>
-    </thead>
-    <tbody><tr>
-        <td><b>failureCount</b></td>
-        <td>integer</td>
-        <td>
-          <br/>
-          <br/>
-            <i>Format</i>: int64<br/>
-        </td>
-        <td>false</td>
-      </tr><tr>
-        <td><b>id</b></td>
-        <td>string</td>
-        <td>
-          <br/>
-        </td>
-        <td>false</td>
-      </tr><tr>
-        <td><b>value</b></td>
-        <td>string</td>
-        <td>
-          <br/>
-        </td>
-        <td>false</td>
-      </tr></tbody>
-</table>
-
-## KeycloakRealmComponent
-
-<sup><sup>[↩ Parent](#v1edpepamcomv1alpha1 )</sup></sup>
-
-<table>
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Type</th>
-            <th>Description</th>
-            <th>Required</th>
-        </tr>
-    </thead>
-    <tbody><tr>
-      <td><b>apiVersion</b></td>
-      <td>string</td>
-      <td>v1.edp.epam.com/v1alpha1</td>
-      <td>true</td>
-      </tr>
-      <tr>
-      <td><b>kind</b></td>
-      <td>string</td>
-      <td>KeycloakRealmComponent</td>
-      <td>true</td>
-      </tr>
-      <tr>
-      <td><b><a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.20/#objectmeta-v1-meta">metadata</a></b></td>
-      <td>object</td>
-      <td>Refer to the Kubernetes API documentation for the fields of the `metadata` field.</td>
-      <td>true</td>
-      </tr><tr>
-        <td><b><a href="#keycloakrealmcomponentspec-1">spec</a></b></td>
-        <td>object</td>
-        <td>
-          <br/>
-        </td>
-        <td>false</td>
-      </tr><tr>
-        <td><b><a href="#keycloakrealmcomponentstatus-1">status</a></b></td>
-        <td>object</td>
-        <td>
-          <br/>
-        </td>
-        <td>false</td>
-      </tr></tbody>
-</table>
-
-### KeycloakRealmComponent.spec
-
-<sup><sup>[↩ Parent](#keycloakrealmcomponent-1)</sup></sup>
-
-<table>
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Type</th>
-            <th>Description</th>
-            <th>Required</th>
-        </tr>
-    </thead>
-    <tbody><tr>
-        <td><b>name</b></td>
-        <td>string</td>
-        <td>
-          <br/>
-        </td>
-        <td>true</td>
-      </tr><tr>
-        <td><b>providerId</b></td>
-        <td>string</td>
-        <td>
-          <br/>
-        </td>
-        <td>true</td>
-      </tr><tr>
-        <td><b>providerType</b></td>
-        <td>string</td>
-        <td>
-          <br/>
-        </td>
-        <td>true</td>
-      </tr><tr>
-        <td><b>realm</b></td>
-        <td>string</td>
-        <td>
-          <br/>
-        </td>
-        <td>true</td>
-      </tr><tr>
-        <td><b>config</b></td>
-        <td>map[string][]string</td>
-        <td>
-          <br/>
-        </td>
-        <td>false</td>
-      </tr></tbody>
-</table>
-
-### KeycloakRealmComponent.status
-
-<sup><sup>[↩ Parent](#keycloakrealmcomponent-1)</sup></sup>
-
-<table>
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Type</th>
-            <th>Description</th>
-            <th>Required</th>
-        </tr>
-    </thead>
-    <tbody><tr>
-        <td><b>failureCount</b></td>
-        <td>integer</td>
-        <td>
-          <br/>
-          <br/>
-            <i>Format</i>: int64<br/>
-        </td>
-        <td>false</td>
-      </tr><tr>
-        <td><b>value</b></td>
-        <td>string</td>
-        <td>
-          <br/>
-        </td>
-        <td>false</td>
-      </tr></tbody>
-</table>
-
-## KeycloakRealmGroup
-
-<sup><sup>[↩ Parent](#v1edpepamcomv1alpha1 )</sup></sup>
-
-<table>
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Type</th>
-            <th>Description</th>
-            <th>Required</th>
-        </tr>
-    </thead>
-    <tbody><tr>
-      <td><b>apiVersion</b></td>
-      <td>string</td>
-      <td>v1.edp.epam.com/v1alpha1</td>
-      <td>true</td>
-      </tr>
-      <tr>
-      <td><b>kind</b></td>
-      <td>string</td>
-      <td>KeycloakRealmGroup</td>
-      <td>true</td>
-      </tr>
-      <tr>
-      <td><b><a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.20/#objectmeta-v1-meta">metadata</a></b></td>
-      <td>object</td>
-      <td>Refer to the Kubernetes API documentation for the fields of the `metadata` field.</td>
-      <td>true</td>
-      </tr><tr>
-        <td><b><a href="#keycloakrealmgroupspec-1">spec</a></b></td>
-        <td>object</td>
-        <td>
-          <br/>
-        </td>
-        <td>false</td>
-      </tr><tr>
-        <td><b><a href="#keycloakrealmgroupstatus-1">status</a></b></td>
-        <td>object</td>
-        <td>
-          <br/>
-        </td>
-        <td>false</td>
-      </tr></tbody>
-</table>
-
-### KeycloakRealmGroup.spec
-
-<sup><sup>[↩ Parent](#keycloakrealmgroup-1)</sup></sup>
-
-<table>
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Type</th>
-            <th>Description</th>
-            <th>Required</th>
-        </tr>
-    </thead>
-    <tbody><tr>
-        <td><b>name</b></td>
-        <td>string</td>
-        <td>
-          <br/>
-        </td>
-        <td>true</td>
-      </tr><tr>
-        <td><b>realm</b></td>
-        <td>string</td>
-        <td>
-          <br/>
-        </td>
-        <td>true</td>
-      </tr><tr>
-        <td><b>access</b></td>
-        <td>map[string]boolean</td>
-        <td>
-          <br/>
-        </td>
-        <td>false</td>
-      </tr><tr>
-        <td><b>attributes</b></td>
-        <td>map[string][]string</td>
-        <td>
-          <br/>
-        </td>
-        <td>false</td>
-      </tr><tr>
-        <td><b><a href="#keycloakrealmgroupspecclientrolesindex-1">clientRoles</a></b></td>
-        <td>[]object</td>
-        <td>
-          <br/>
-        </td>
-        <td>false</td>
-      </tr><tr>
-        <td><b>path</b></td>
-        <td>string</td>
-        <td>
-          <br/>
-        </td>
-        <td>false</td>
-      </tr><tr>
-        <td><b>realmRoles</b></td>
-        <td>[]string</td>
-        <td>
-          <br/>
-        </td>
-        <td>false</td>
-      </tr><tr>
-        <td><b>subGroups</b></td>
-        <td>[]string</td>
-        <td>
-          <br/>
-        </td>
-        <td>false</td>
-      </tr></tbody>
-</table>
-
-### KeycloakRealmGroup.spec.clientRoles[index]
-
-<sup><sup>[↩ Parent](#keycloakrealmgroupspec-1)</sup></sup>
-
-<table>
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Type</th>
-            <th>Description</th>
-            <th>Required</th>
-        </tr>
-    </thead>
-    <tbody><tr>
-        <td><b>clientId</b></td>
-        <td>string</td>
-        <td>
-          <br/>
-        </td>
-        <td>true</td>
-      </tr><tr>
-        <td><b>roles</b></td>
-        <td>[]string</td>
-        <td>
-          <br/>
-        </td>
-        <td>false</td>
-      </tr></tbody>
-</table>
-
-### KeycloakRealmGroup.status
-
-<sup><sup>[↩ Parent](#keycloakrealmgroup-1)</sup></sup>
-
-<table>
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Type</th>
-            <th>Description</th>
-            <th>Required</th>
-        </tr>
-    </thead>
-    <tbody><tr>
-        <td><b>failureCount</b></td>
-        <td>integer</td>
-        <td>
-          <br/>
-          <br/>
-            <i>Format</i>: int64<br/>
-        </td>
-        <td>false</td>
-      </tr><tr>
-        <td><b>id</b></td>
-        <td>string</td>
-        <td>
-          <br/>
-        </td>
-        <td>false</td>
-      </tr><tr>
-        <td><b>value</b></td>
-        <td>string</td>
-        <td>
-          <br/>
-        </td>
-        <td>false</td>
-      </tr></tbody>
-</table>
-
-## KeycloakRealmIdentityProvider
-
-<sup><sup>[↩ Parent](#v1edpepamcomv1alpha1 )</sup></sup>
-
-<table>
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Type</th>
-            <th>Description</th>
-            <th>Required</th>
-        </tr>
-    </thead>
-    <tbody><tr>
-      <td><b>apiVersion</b></td>
-      <td>string</td>
-      <td>v1.edp.epam.com/v1alpha1</td>
-      <td>true</td>
-      </tr>
-      <tr>
-      <td><b>kind</b></td>
-      <td>string</td>
-      <td>KeycloakRealmIdentityProvider</td>
-      <td>true</td>
-      </tr>
-      <tr>
-      <td><b><a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.20/#objectmeta-v1-meta">metadata</a></b></td>
-      <td>object</td>
-      <td>Refer to the Kubernetes API documentation for the fields of the `metadata` field.</td>
-      <td>true</td>
-      </tr><tr>
-        <td><b><a href="#keycloakrealmidentityproviderspec-1">spec</a></b></td>
-        <td>object</td>
-        <td>
-          <br/>
-        </td>
-        <td>false</td>
-      </tr><tr>
-        <td><b><a href="#keycloakrealmidentityproviderstatus-1">status</a></b></td>
-        <td>object</td>
-        <td>
-          <br/>
-        </td>
-        <td>false</td>
-      </tr></tbody>
-</table>
-
-### KeycloakRealmIdentityProvider.spec
-
-<sup><sup>[↩ Parent](#keycloakrealmidentityprovider-1)</sup></sup>
-
-<table>
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Type</th>
-            <th>Description</th>
-            <th>Required</th>
-        </tr>
-    </thead>
-    <tbody><tr>
-        <td><b>alias</b></td>
-        <td>string</td>
-        <td>
-          <br/>
-        </td>
-        <td>true</td>
-      </tr><tr>
-        <td><b>config</b></td>
-        <td>map[string]string</td>
-        <td>
-          <br/>
-        </td>
-        <td>true</td>
-      </tr><tr>
-        <td><b>enabled</b></td>
-        <td>boolean</td>
-        <td>
-          <br/>
-        </td>
-        <td>true</td>
-      </tr><tr>
-        <td><b>providerId</b></td>
-        <td>string</td>
-        <td>
-          <br/>
-        </td>
-        <td>true</td>
-      </tr><tr>
-        <td><b>realm</b></td>
-        <td>string</td>
-        <td>
-          <br/>
-        </td>
-        <td>true</td>
-      </tr><tr>
-        <td><b>addReadTokenRoleOnCreate</b></td>
-        <td>boolean</td>
-        <td>
-          <br/>
-        </td>
-        <td>false</td>
-      </tr><tr>
-        <td><b>authenticateByDefault</b></td>
-        <td>boolean</td>
-        <td>
-          <br/>
-        </td>
-        <td>false</td>
-      </tr><tr>
-        <td><b>displayName</b></td>
-        <td>string</td>
-        <td>
-          <br/>
-        </td>
-        <td>false</td>
-      </tr><tr>
-        <td><b>firstBrokerLoginFlowAlias</b></td>
-        <td>string</td>
-        <td>
-          <br/>
-        </td>
-        <td>false</td>
-      </tr><tr>
-        <td><b>linkOnly</b></td>
-        <td>boolean</td>
-        <td>
-          <br/>
-        </td>
-        <td>false</td>
-      </tr><tr>
-        <td><b><a href="#keycloakrealmidentityproviderspecmappersindex-1">mappers</a></b></td>
-        <td>[]object</td>
-        <td>
-          <br/>
-        </td>
-        <td>false</td>
-      </tr><tr>
-        <td><b>storeToken</b></td>
-        <td>boolean</td>
-        <td>
-          <br/>
-        </td>
-        <td>false</td>
-      </tr><tr>
-        <td><b>trustEmail</b></td>
-        <td>boolean</td>
-        <td>
-          <br/>
-        </td>
-        <td>false</td>
-      </tr></tbody>
-</table>
-
-### KeycloakRealmIdentityProvider.spec.mappers[index]
-
-<sup><sup>[↩ Parent](#keycloakrealmidentityproviderspec-1)</sup></sup>
-
-<table>
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Type</th>
-            <th>Description</th>
-            <th>Required</th>
-        </tr>
-    </thead>
-    <tbody><tr>
-        <td><b>config</b></td>
-        <td>map[string]string</td>
-        <td>
-          <br/>
-        </td>
-        <td>false</td>
-      </tr><tr>
-        <td><b>identityProviderAlias</b></td>
-        <td>string</td>
-        <td>
-          <br/>
-        </td>
-        <td>false</td>
-      </tr><tr>
-        <td><b>identityProviderMapper</b></td>
-        <td>string</td>
-        <td>
-          <br/>
-        </td>
-        <td>false</td>
-      </tr><tr>
-        <td><b>name</b></td>
-        <td>string</td>
-        <td>
-          <br/>
-        </td>
-        <td>false</td>
-      </tr></tbody>
-</table>
-
-### KeycloakRealmIdentityProvider.status
-
-<sup><sup>[↩ Parent](#keycloakrealmidentityprovider-1)</sup></sup>
-
-<table>
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Type</th>
-            <th>Description</th>
-            <th>Required</th>
-        </tr>
-    </thead>
-    <tbody><tr>
-        <td><b>failureCount</b></td>
-        <td>integer</td>
-        <td>
-          <br/>
-          <br/>
-            <i>Format</i>: int64<br/>
-        </td>
-        <td>false</td>
-      </tr><tr>
-        <td><b>value</b></td>
-        <td>string</td>
-        <td>
-          <br/>
-        </td>
-        <td>false</td>
-      </tr></tbody>
-</table>
-
-## KeycloakRealmRoleBatch
-
-<sup><sup>[↩ Parent](#v1edpepamcomv1alpha1 )</sup></sup>
-
-<table>
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Type</th>
-            <th>Description</th>
-            <th>Required</th>
-        </tr>
-    </thead>
-    <tbody><tr>
-      <td><b>apiVersion</b></td>
-      <td>string</td>
-      <td>v1.edp.epam.com/v1alpha1</td>
-      <td>true</td>
-      </tr>
-      <tr>
-      <td><b>kind</b></td>
-      <td>string</td>
-      <td>KeycloakRealmRoleBatch</td>
-      <td>true</td>
-      </tr>
-      <tr>
-      <td><b><a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.20/#objectmeta-v1-meta">metadata</a></b></td>
-      <td>object</td>
-      <td>Refer to the Kubernetes API documentation for the fields of the `metadata` field.</td>
-      <td>true</td>
-      </tr><tr>
-        <td><b><a href="#keycloakrealmrolebatchspec-1">spec</a></b></td>
-        <td>object</td>
-        <td>
-          <br/>
-        </td>
-        <td>false</td>
-      </tr><tr>
-        <td><b><a href="#keycloakrealmrolebatchstatus-1">status</a></b></td>
-        <td>object</td>
-        <td>
-          <br/>
-        </td>
-        <td>false</td>
-      </tr></tbody>
-</table>
-
-### KeycloakRealmRoleBatch.spec
-
-<sup><sup>[↩ Parent](#keycloakrealmrolebatch-1)</sup></sup>
-
-<table>
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Type</th>
-            <th>Description</th>
-            <th>Required</th>
-        </tr>
-    </thead>
-    <tbody><tr>
-        <td><b>realm</b></td>
-        <td>string</td>
-        <td>
-          <br/>
-        </td>
-        <td>true</td>
-      </tr><tr>
-        <td><b><a href="#keycloakrealmrolebatchspecrolesindex-1">roles</a></b></td>
-        <td>[]object</td>
-        <td>
-          <br/>
-        </td>
-        <td>true</td>
-      </tr></tbody>
-</table>
-
-### KeycloakRealmRoleBatch.spec.roles[index]
-
-<sup><sup>[↩ Parent](#keycloakrealmrolebatchspec-1)</sup></sup>
-
-<table>
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Type</th>
-            <th>Description</th>
-            <th>Required</th>
-        </tr>
-    </thead>
-    <tbody><tr>
-        <td><b>name</b></td>
-        <td>string</td>
-        <td>
-          <br/>
-        </td>
-        <td>true</td>
-      </tr><tr>
-        <td><b>attributes</b></td>
-        <td>map[string][]string</td>
-        <td>
-          <br/>
-        </td>
-        <td>false</td>
-      </tr><tr>
-        <td><b>composite</b></td>
-        <td>boolean</td>
-        <td>
-          <br/>
-        </td>
-        <td>false</td>
-      </tr><tr>
-        <td><b><a href="#keycloakrealmrolebatchspecrolesindexcompositesindex-1">composites</a></b></td>
-        <td>[]object</td>
-        <td>
-          <br/>
-        </td>
-        <td>false</td>
-      </tr><tr>
-        <td><b>description</b></td>
-        <td>string</td>
-        <td>
-          <br/>
-        </td>
-        <td>false</td>
-      </tr><tr>
-        <td><b>isDefault</b></td>
-        <td>boolean</td>
-        <td>
-          <br/>
-        </td>
-        <td>false</td>
-      </tr></tbody>
-</table>
-
-### KeycloakRealmRoleBatch.spec.roles[index].composites[index]
-
-<sup><sup>[↩ Parent](#keycloakrealmrolebatchspecrolesindex-1)</sup></sup>
-
-<table>
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Type</th>
-            <th>Description</th>
-            <th>Required</th>
-        </tr>
-    </thead>
-    <tbody><tr>
-        <td><b>name</b></td>
-        <td>string</td>
-        <td>
-          <br/>
-        </td>
-        <td>true</td>
-      </tr></tbody>
-</table>
-
-### KeycloakRealmRoleBatch.status
-
-<sup><sup>[↩ Parent](#keycloakrealmrolebatch-1)</sup></sup>
-
-<table>
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Type</th>
-            <th>Description</th>
-            <th>Required</th>
-        </tr>
-    </thead>
-    <tbody><tr>
-        <td><b>failureCount</b></td>
-        <td>integer</td>
-        <td>
-          <br/>
-          <br/>
-            <i>Format</i>: int64<br/>
-        </td>
-        <td>false</td>
-      </tr><tr>
-        <td><b>value</b></td>
-        <td>string</td>
-        <td>
-          <br/>
-        </td>
-        <td>false</td>
-      </tr></tbody>
-</table>
-
-## KeycloakRealmRole
-
-<sup><sup>[↩ Parent](#v1edpepamcomv1alpha1 )</sup></sup>
-
-<table>
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Type</th>
-            <th>Description</th>
-            <th>Required</th>
-        </tr>
-    </thead>
-    <tbody><tr>
-      <td><b>apiVersion</b></td>
-      <td>string</td>
-      <td>v1.edp.epam.com/v1alpha1</td>
-      <td>true</td>
-      </tr>
-      <tr>
-      <td><b>kind</b></td>
-      <td>string</td>
-      <td>KeycloakRealmRole</td>
-      <td>true</td>
-      </tr>
-      <tr>
-      <td><b><a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.20/#objectmeta-v1-meta">metadata</a></b></td>
-      <td>object</td>
-      <td>Refer to the Kubernetes API documentation for the fields of the `metadata` field.</td>
-      <td>true</td>
-      </tr><tr>
-        <td><b><a href="#keycloakrealmrolespec-1">spec</a></b></td>
-        <td>object</td>
-        <td>
-          <br/>
-        </td>
-        <td>false</td>
-      </tr><tr>
-        <td><b><a href="#keycloakrealmrolestatus-1">status</a></b></td>
-        <td>object</td>
-        <td>
-          <br/>
-        </td>
-        <td>false</td>
-      </tr></tbody>
-</table>
-
-### KeycloakRealmRole.spec
-
-<sup><sup>[↩ Parent](#keycloakrealmrole-1)</sup></sup>
-
-<table>
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Type</th>
-            <th>Description</th>
-            <th>Required</th>
-        </tr>
-    </thead>
-    <tbody><tr>
-        <td><b>name</b></td>
-        <td>string</td>
-        <td>
-          <br/>
-        </td>
-        <td>true</td>
-      </tr><tr>
-        <td><b>realm</b></td>
-        <td>string</td>
-        <td>
-          <br/>
-        </td>
-        <td>true</td>
-      </tr><tr>
-        <td><b>attributes</b></td>
-        <td>map[string][]string</td>
-        <td>
-          <br/>
-        </td>
-        <td>false</td>
-      </tr><tr>
-        <td><b>composite</b></td>
-        <td>boolean</td>
-        <td>
-          <br/>
-        </td>
-        <td>false</td>
-      </tr><tr>
-        <td><b><a href="#keycloakrealmrolespeccompositesindex-1">composites</a></b></td>
-        <td>[]object</td>
-        <td>
-          <br/>
-        </td>
-        <td>false</td>
-      </tr><tr>
-        <td><b>description</b></td>
-        <td>string</td>
-        <td>
-          <br/>
-        </td>
-        <td>false</td>
-      </tr><tr>
-        <td><b>isDefault</b></td>
-        <td>boolean</td>
-        <td>
-          <br/>
-        </td>
-        <td>false</td>
-      </tr></tbody>
-</table>
-
-### KeycloakRealmRole.spec.composites[index]
-
-<sup><sup>[↩ Parent](#keycloakrealmrolespec-1)</sup></sup>
-
-<table>
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Type</th>
-            <th>Description</th>
-            <th>Required</th>
-        </tr>
-    </thead>
-    <tbody><tr>
-        <td><b>name</b></td>
-        <td>string</td>
-        <td>
-          <br/>
-        </td>
-        <td>true</td>
-      </tr></tbody>
-</table>
-
-### KeycloakRealmRole.status
-
-<sup><sup>[↩ Parent](#keycloakrealmrole-1)</sup></sup>
-
-<table>
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Type</th>
-            <th>Description</th>
-            <th>Required</th>
-        </tr>
-    </thead>
-    <tbody><tr>
-        <td><b>failureCount</b></td>
-        <td>integer</td>
-        <td>
-          <br/>
-          <br/>
-            <i>Format</i>: int64<br/>
-        </td>
-        <td>false</td>
-      </tr><tr>
-        <td><b>id</b></td>
-        <td>string</td>
-        <td>
-          <br/>
-        </td>
-        <td>false</td>
-      </tr><tr>
-        <td><b>value</b></td>
-        <td>string</td>
-        <td>
-          <br/>
-        </td>
-        <td>false</td>
-      </tr></tbody>
-</table>
-
-## KeycloakRealm
-
-<sup><sup>[↩ Parent](#v1edpepamcomv1alpha1 )</sup></sup>
-
-KeycloakRealm is the Schema for the keycloakrealms API.
-
-<table>
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Type</th>
-            <th>Description</th>
-            <th>Required</th>
-        </tr>
-    </thead>
-    <tbody><tr>
-      <td><b>apiVersion</b></td>
-      <td>string</td>
-      <td>v1.edp.epam.com/v1alpha1</td>
-      <td>true</td>
-      </tr>
-      <tr>
-      <td><b>kind</b></td>
-      <td>string</td>
-      <td>KeycloakRealm</td>
-      <td>true</td>
-      </tr>
-      <tr>
-      <td><b><a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.20/#objectmeta-v1-meta">metadata</a></b></td>
-      <td>object</td>
-      <td>Refer to the Kubernetes API documentation for the fields of the `metadata` field.</td>
-      <td>true</td>
-      </tr><tr>
-        <td><b><a href="#keycloakrealmspec-1">spec</a></b></td>
-        <td>object</td>
-        <td>
-          KeycloakRealmSpec defines the desired state of KeycloakRealm.<br/>
-        </td>
-        <td>false</td>
-      </tr><tr>
-        <td><b><a href="#keycloakrealmstatus-1">status</a></b></td>
-        <td>object</td>
-        <td>
-          KeycloakRealmStatus defines the observed state of KeycloakRealm.<br/>
-        </td>
-        <td>false</td>
-      </tr></tbody>
-</table>
-
-### KeycloakRealm.spec
-
-<sup><sup>[↩ Parent](#keycloakrealm-1)</sup></sup>
-
-KeycloakRealmSpec defines the desired state of KeycloakRealm.
-
-<table>
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Type</th>
-            <th>Description</th>
-            <th>Required</th>
-        </tr>
-    </thead>
-    <tbody><tr>
-        <td><b>realmName</b></td>
-        <td>string</td>
-        <td>
-          <br/>
-        </td>
-        <td>true</td>
-      </tr><tr>
-        <td><b>browserFlow</b></td>
-        <td>string</td>
-        <td>
-          <br/>
-        </td>
-        <td>false</td>
-      </tr><tr>
-        <td><b>browserSecurityHeaders</b></td>
-        <td>map[string]string</td>
-        <td>
-          <br/>
-        </td>
-        <td>false</td>
-      </tr><tr>
-        <td><b>frontendUrl</b></td>
-        <td>string</td>
-        <td>
-          FrontendURL Set the frontend URL for the realm. Use in combination with the default hostname provider to override the base URL for frontend requests for a specific realm.<br/>
-        </td>
-        <td>false</td>
-      </tr><tr>
-        <td><b>id</b></td>
-        <td>string</td>
-        <td>
-          <br/>
-        </td>
-        <td>false</td>
-      </tr><tr>
-        <td><b>keycloakOwner</b></td>
-        <td>string</td>
-        <td>
-          <br/>
-        </td>
-        <td>false</td>
-      </tr><tr>
-        <td><b><a href="#keycloakrealmspecpasswordpolicyindex-1">passwordPolicy</a></b></td>
-        <td>[]object</td>
-        <td>
-          <br/>
-        </td>
-        <td>false</td>
-      </tr><tr>
-        <td><b><a href="#keycloakrealmspecrealmeventconfig-1">realmEventConfig</a></b></td>
-        <td>object</td>
-        <td>
-          <br/>
-        </td>
-        <td>false</td>
-      </tr><tr>
-        <td><b><a href="#keycloakrealmspecthemes-1">themes</a></b></td>
-        <td>object</td>
-        <td>
-          <br/>
-        </td>
-        <td>false</td>
-      </tr><tr>
-        <td><b><a href="#keycloakrealmspecusersindex-1">users</a></b></td>
-        <td>[]object</td>
-        <td>
-          <br/>
-        </td>
-        <td>false</td>
-      </tr></tbody>
-</table>
-
-### KeycloakRealm.spec.passwordPolicy[index]
-
-<sup><sup>[↩ Parent](#keycloakrealmspec-1)</sup></sup>
-
-<table>
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Type</th>
-            <th>Description</th>
-            <th>Required</th>
-        </tr>
-    </thead>
-    <tbody><tr>
-        <td><b>type</b></td>
-        <td>string</td>
-        <td>
-          Type of password policy.<br/>
-        </td>
-        <td>true</td>
-      </tr><tr>
-        <td><b>value</b></td>
-        <td>string</td>
-        <td>
-          Value of password policy.<br/>
-        </td>
-        <td>true</td>
-      </tr></tbody>
-</table>
-
-### KeycloakRealm.spec.realmEventConfig
-
-<sup><sup>[↩ Parent](#keycloakrealmspec-1)</sup></sup>
-
-<table>
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Type</th>
-            <th>Description</th>
-            <th>Required</th>
-        </tr>
-    </thead>
-    <tbody><tr>
-        <td><b>adminEventsDetailsEnabled</b></td>
-        <td>boolean</td>
-        <td>
-          AdminEventsDetailsEnabled indicates whether to enable detailed admin events.<br/>
-        </td>
-        <td>false</td>
-      </tr><tr>
-        <td><b>adminEventsEnabled</b></td>
-        <td>boolean</td>
-        <td>
-          AdminEventsEnabled indicates whether to enable admin events.<br/>
-        </td>
-        <td>false</td>
-      </tr><tr>
-        <td><b>enabledEventTypes</b></td>
-        <td>[]string</td>
-        <td>
-          EnabledEventTypes is a list of event types to enable.<br/>
-        </td>
-        <td>false</td>
-      </tr><tr>
-        <td><b>eventsEnabled</b></td>
-        <td>boolean</td>
-        <td>
-          EventsEnabled indicates whether to enable events.<br/>
-        </td>
-        <td>false</td>
-      </tr><tr>
-        <td><b>eventsExpiration</b></td>
-        <td>integer</td>
-        <td>
-          EventsExpiration is the number of seconds after which events expire.<br/>
-        </td>
-        <td>false</td>
-      </tr><tr>
-        <td><b>eventsListeners</b></td>
-        <td>[]string</td>
-        <td>
-          EventsListeners is a list of event listeners to enable.<br/>
-        </td>
-        <td>false</td>
-      </tr></tbody>
-</table>
-
-### KeycloakRealm.spec.themes
-
-<sup><sup>[↩ Parent](#keycloakrealmspec-1)</sup></sup>
-
-<table>
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Type</th>
-            <th>Description</th>
-            <th>Required</th>
-        </tr>
-    </thead>
-    <tbody><tr>
-        <td><b>accountTheme</b></td>
-        <td>string</td>
-        <td>
-          <br/>
-        </td>
-        <td>false</td>
-      </tr><tr>
-        <td><b>adminConsoleTheme</b></td>
-        <td>string</td>
-        <td>
-          <br/>
-        </td>
-        <td>false</td>
-      </tr><tr>
-        <td><b>emailTheme</b></td>
-        <td>string</td>
-        <td>
-          <br/>
-        </td>
-        <td>false</td>
-      </tr><tr>
-        <td><b>internationalizationEnabled</b></td>
-        <td>boolean</td>
-        <td>
-          <br/>
-        </td>
-        <td>false</td>
-      </tr><tr>
-        <td><b>loginTheme</b></td>
-        <td>string</td>
-        <td>
-          <br/>
-        </td>
-        <td>false</td>
-      </tr></tbody>
-</table>
-
-### KeycloakRealm.spec.users[index]
-
-<sup><sup>[↩ Parent](#keycloakrealmspec-1)</sup></sup>
-
-<table>
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Type</th>
-            <th>Description</th>
-            <th>Required</th>
-        </tr>
-    </thead>
-    <tbody><tr>
-        <td><b>username</b></td>
-        <td>string</td>
-        <td>
-          Username of keycloak user<br/>
-        </td>
-        <td>true</td>
-      </tr><tr>
-        <td><b>realmRoles</b></td>
-        <td>[]string</td>
-        <td>
-          RealmRoles is a list of roles attached to keycloak user<br/>
-        </td>
-        <td>false</td>
-      </tr></tbody>
-</table>
-
-### KeycloakRealm.status
-
-<sup><sup>[↩ Parent](#keycloakrealm-1)</sup></sup>
-
-KeycloakRealmStatus defines the observed state of KeycloakRealm.
-
-<table>
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Type</th>
-            <th>Description</th>
-            <th>Required</th>
-        </tr>
-    </thead>
-    <tbody><tr>
-        <td><b>available</b></td>
-        <td>boolean</td>
-        <td>
-          <br/>
-        </td>
-        <td>false</td>
-      </tr><tr>
-        <td><b>failureCount</b></td>
-        <td>integer</td>
-        <td>
-          <br/>
-          <br/>
-            <i>Format</i>: int64<br/>
-        </td>
-        <td>false</td>
-      </tr><tr>
-        <td><b>value</b></td>
-        <td>string</td>
-        <td>
-          <br/>
-        </td>
-        <td>false</td>
-      </tr></tbody>
-</table>
-
-## KeycloakRealmUser
-
-<sup><sup>[↩ Parent](#v1edpepamcomv1alpha1 )</sup></sup>
-
-<table>
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Type</th>
-            <th>Description</th>
-            <th>Required</th>
-        </tr>
-    </thead>
-    <tbody><tr>
-      <td><b>apiVersion</b></td>
-      <td>string</td>
-      <td>v1.edp.epam.com/v1alpha1</td>
-      <td>true</td>
-      </tr>
-      <tr>
-      <td><b>kind</b></td>
-      <td>string</td>
-      <td>KeycloakRealmUser</td>
-      <td>true</td>
-      </tr>
-      <tr>
-      <td><b><a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.20/#objectmeta-v1-meta">metadata</a></b></td>
-      <td>object</td>
-      <td>Refer to the Kubernetes API documentation for the fields of the `metadata` field.</td>
-      <td>true</td>
-      </tr><tr>
-        <td><b><a href="#keycloakrealmuserspec-1">spec</a></b></td>
-        <td>object</td>
-        <td>
-          <br/>
-        </td>
-        <td>false</td>
-      </tr><tr>
-        <td><b><a href="#keycloakrealmuserstatus-1">status</a></b></td>
-        <td>object</td>
-        <td>
-          <br/>
-        </td>
-        <td>false</td>
-      </tr></tbody>
-</table>
-
-### KeycloakRealmUser.spec
-
-<sup><sup>[↩ Parent](#keycloakrealmuser-1)</sup></sup>
-
-<table>
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Type</th>
-            <th>Description</th>
-            <th>Required</th>
-        </tr>
-    </thead>
-    <tbody><tr>
-        <td><b>realm</b></td>
-        <td>string</td>
-        <td>
-          <br/>
-        </td>
-        <td>true</td>
-      </tr><tr>
-        <td><b>username</b></td>
-        <td>string</td>
-        <td>
-          <br/>
-        </td>
-        <td>true</td>
-      </tr><tr>
-        <td><b>attributes</b></td>
-        <td>map[string]string</td>
-        <td>
-          <br/>
-        </td>
-        <td>false</td>
-      </tr><tr>
-        <td><b>email</b></td>
-        <td>string</td>
-        <td>
-          <br/>
-        </td>
-        <td>false</td>
-      </tr><tr>
-        <td><b>emailVerified</b></td>
-        <td>boolean</td>
-        <td>
-          <br/>
-        </td>
-        <td>false</td>
-      </tr><tr>
-        <td><b>enabled</b></td>
-        <td>boolean</td>
-        <td>
-          <br/>
-        </td>
-        <td>false</td>
-      </tr><tr>
-        <td><b>firstName</b></td>
-        <td>string</td>
-        <td>
-          <br/>
-        </td>
-        <td>false</td>
-      </tr><tr>
-        <td><b>groups</b></td>
-        <td>[]string</td>
-        <td>
-          <br/>
-        </td>
-        <td>false</td>
-      </tr><tr>
-        <td><b>keepResource</b></td>
-        <td>boolean</td>
-        <td>
-          <br/>
-        </td>
-        <td>false</td>
-      </tr><tr>
-        <td><b>lastName</b></td>
-        <td>string</td>
-        <td>
-          <br/>
-        </td>
-        <td>false</td>
-      </tr><tr>
-        <td><b>password</b></td>
-        <td>string</td>
-        <td>
-          <br/>
-        </td>
-        <td>false</td>
-      </tr><tr>
-        <td><b>reconciliationStrategy</b></td>
-        <td>string</td>
-        <td>
-          <br/>
-        </td>
-        <td>false</td>
-      </tr><tr>
-        <td><b>requiredUserActions</b></td>
-        <td>[]string</td>
-        <td>
-          RequiredUserActions is required action when user log in, example: CONFIGURE_TOTP, UPDATE_PASSWORD, UPDATE_PROFILE, VERIFY_EMAIL<br/>
-        </td>
-        <td>false</td>
-      </tr><tr>
-        <td><b>roles</b></td>
-        <td>[]string</td>
-        <td>
-          <br/>
-        </td>
-        <td>false</td>
-      </tr></tbody>
-</table>
-
-### KeycloakRealmUser.status
-
-<sup><sup>[↩ Parent](#keycloakrealmuser-1)</sup></sup>
-
-<table>
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Type</th>
-            <th>Description</th>
-            <th>Required</th>
-        </tr>
-    </thead>
-    <tbody><tr>
-        <td><b>failureCount</b></td>
-        <td>integer</td>
-        <td>
-          <br/>
-          <br/>
-            <i>Format</i>: int64<br/>
-        </td>
-        <td>false</td>
-      </tr><tr>
-        <td><b>value</b></td>
-        <td>string</td>
-        <td>
-          <br/>
-        </td>
-        <td>false</td>
-      </tr></tbody>
-</table>
-
-## Keycloak
-
-<sup><sup>[↩ Parent](#v1edpepamcomv1alpha1 )</sup></sup>
-
-Keycloak is the Schema for the keycloaks API.
-
-<table>
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Type</th>
-            <th>Description</th>
-            <th>Required</th>
-        </tr>
-    </thead>
-    <tbody><tr>
-      <td><b>apiVersion</b></td>
-      <td>string</td>
-      <td>v1.edp.epam.com/v1alpha1</td>
-      <td>true</td>
-      </tr>
-      <tr>
-      <td><b>kind</b></td>
-      <td>string</td>
-      <td>Keycloak</td>
-      <td>true</td>
-      </tr>
-      <tr>
-      <td><b><a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.20/#objectmeta-v1-meta">metadata</a></b></td>
-      <td>object</td>
-      <td>Refer to the Kubernetes API documentation for the fields of the `metadata` field.</td>
-      <td>true</td>
-      </tr><tr>
-        <td><b><a href="#keycloakspec-1">spec</a></b></td>
-        <td>object</td>
-        <td>
-          KeycloakSpec defines the desired state of Keycloak.<br/>
-        </td>
-        <td>false</td>
-      </tr><tr>
-        <td><b><a href="#keycloakstatus-1">status</a></b></td>
-        <td>object</td>
-        <td>
-          KeycloakStatus defines the observed state of Keycloak.<br/>
-        </td>
-        <td>false</td>
-      </tr></tbody>
-</table>
-
-### Keycloak.spec
-
-<sup><sup>[↩ Parent](#keycloak-1)</sup></sup>
-
-KeycloakSpec defines the desired state of Keycloak.
-
-<table>
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Type</th>
-            <th>Description</th>
-            <th>Required</th>
-        </tr>
-    </thead>
-    <tbody><tr>
-        <td><b>secret</b></td>
-        <td>string</td>
-        <td>
-          Secret is the name of the k8s object Secret related to keycloak<br/>
-        </td>
-        <td>true</td>
-      </tr><tr>
-        <td><b>url</b></td>
-        <td>string</td>
-        <td>
-          URL of keycloak service<br/>
-        </td>
-        <td>true</td>
-      </tr><tr>
-        <td><b>adminType</b></td>
-        <td>enum</td>
-        <td>
-          AdminType can be user or serviceAccount, if serviceAccount was specified, then client_credentials grant type should be used for getting admin realm token<br/>
-          <br/>
-            <i>Enum</i>: serviceAccount, user<br/>
-        </td>
-        <td>false</td>
-      </tr><tr>
-        <td><b>installMainRealm</b></td>
-        <td>boolean</td>
-        <td>
-          <br/>
-        </td>
-        <td>false</td>
-      </tr><tr>
-        <td><b>realmName</b></td>
-        <td>string</td>
-        <td>
-          <br/>
-        </td>
-        <td>false</td>
-      </tr><tr>
-        <td><b>ssoRealmName</b></td>
-        <td>string</td>
-        <td>
-          <br/>
-        </td>
-        <td>false</td>
-      </tr><tr>
-        <td><b><a href="#keycloakspecusersindex">users</a></b></td>
-        <td>[]object</td>
-        <td>
-          Users is a list of keycloak users<br/>
-        </td>
-        <td>false</td>
-      </tr></tbody>
-</table>
-
-### Keycloak.spec.users[index]
-
-<sup><sup>[↩ Parent](#keycloakspec-1)</sup></sup>
-
-<table>
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Type</th>
-            <th>Description</th>
-            <th>Required</th>
-        </tr>
-    </thead>
-    <tbody><tr>
-        <td><b>username</b></td>
-        <td>string</td>
-        <td>
-          Username of keycloak user<br/>
-        </td>
-        <td>true</td>
-      </tr><tr>
-        <td><b>realmRoles</b></td>
-        <td>[]string</td>
-        <td>
-          RealmRoles is a list of roles attached to keycloak user<br/>
-        </td>
-        <td>false</td>
-      </tr></tbody>
-</table>
-
-### Keycloak.status
-
-<sup><sup>[↩ Parent](#keycloak-1)</sup></sup>
-
-KeycloakStatus defines the observed state of Keycloak.
-
-<table>
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Type</th>
-            <th>Description</th>
-            <th>Required</th>
-        </tr>
-    </thead>
-    <tbody><tr>
-        <td><b>connected</b></td>
-        <td>boolean</td>
-        <td>
-          <br/>
         </td>
         <td>true</td>
       </tr></tbody>
@@ -3308,6 +1166,13 @@ KeycloakAuthFlowSpec defines the desired state of KeycloakAuthFlow.
         </td>
         <td>false</td>
       </tr><tr>
+        <td><b>childRequirement</b></td>
+        <td>string</td>
+        <td>
+          ChildRequirement is requirement for child execution. Available options: REQUIRED, ALTERNATIVE, DISABLED, CONDITIONAL.<br/>
+        </td>
+        <td>false</td>
+      </tr><tr>
         <td><b>childType</b></td>
         <td>string</td>
         <td>
@@ -3333,7 +1198,7 @@ KeycloakAuthFlowSpec defines the desired state of KeycloakAuthFlow.
         <td>string</td>
         <td>
           Deprecated: use RealmRef instead.
-Realm is name of KeycloakRealm custom resource.<br/>
+          Realm is name of KeycloakRealm custom resource.<br/>
         </td>
         <td>false</td>
       </tr><tr>
@@ -3578,6 +1443,13 @@ KeycloakClientSpec defines the desired state of KeycloakClient.
         </td>
         <td>true</td>
       </tr><tr>
+        <td><b>adminUrl</b></td>
+        <td>string</td>
+        <td>
+          AdminUrl<br/>
+        </td>
+        <td>false</td>
+      </tr><tr>
         <td><b>advancedProtocolMappers</b></td>
         <td>boolean</td>
         <td>
@@ -3684,6 +1556,13 @@ KeycloakClientSpec defines the desired state of KeycloakClient.
         </td>
         <td>false</td>
       </tr><tr>
+        <td><b>homeUrl</b></td>
+        <td>string</td>
+        <td>
+          <br/>
+        </td>
+        <td>false</td>
+      </tr><tr>
         <td><b>implicitFlowEnabled</b></td>
         <td>boolean</td>
         <td>
@@ -3695,6 +1574,13 @@ KeycloakClientSpec defines the desired state of KeycloakClient.
         <td>string</td>
         <td>
           Name is a client name.<br/>
+        </td>
+        <td>false</td>
+      </tr><tr>
+        <td><b>optionalClientScopes</b></td>
+        <td>[]string</td>
+        <td>
+          OptionalClientScopes is a list of optional client scopes assigned to client.<br/>
         </td>
         <td>false</td>
       </tr><tr>
@@ -3746,9 +1632,9 @@ KeycloakClientSpec defines the desired state of KeycloakClient.
         <td>[]string</td>
         <td>
           RedirectUris is a list of valid URI pattern a browser can redirect to after a successful login.
-Simple wildcards are allowed such as 'https://example.com/*'.
-Relative path can be specified too, such as /my/relative/path/*. Relative paths are relative to the client root URL.
-If not specified, spec.webUrl + "/*" will be used.<br/>
+          Simple wildcards are allowed such as 'https://example.com/*'.
+          Relative path can be specified too, such as /my/relative/path/*. Relative paths are relative to the client root URL.
+          If not specified, spec.webUrl + "/*" will be used.<br/>
         </td>
         <td>false</td>
       </tr><tr>
@@ -3756,9 +1642,9 @@ If not specified, spec.webUrl + "/*" will be used.<br/>
         <td>string</td>
         <td>
           Secret is kubernetes secret name where the client's secret will be stored.
-Secret should have the following format: $secretName:secretKey.
-If not specified, a client secret will be generated and stored in a secret with the name keycloak-client-{metadata.name}-secret.
-If keycloak client is public, secret property will be ignored.<br/>
+          Secret should have the following format: $secretName:secretKey.
+          If not specified, a client secret will be generated and stored in a secret with the name `keycloak-client-{metadata.name}-secret`.
+          If keycloak client is public, secret property will be ignored.<br/>
         </td>
         <td>false</td>
       </tr><tr>
@@ -3789,9 +1675,9 @@ If keycloak client is public, secret property will be ignored.<br/>
         <td>string</td>
         <td>
           Deprecated: use RealmRef instead.
-TargetRealm is a realm name where client will be created.
-It has higher priority than RealmRef for backward compatibility.
-If both TargetRealm and RealmRef are specified, TargetRealm will be used for client creation.<br/>
+          TargetRealm is a realm name where client will be created.
+          It has higher priority than RealmRef for backward compatibility.
+          If both TargetRealm and RealmRef are specified, TargetRealm will be used for client creation.<br/>
         </td>
         <td>false</td>
       </tr><tr>
@@ -3799,9 +1685,9 @@ If both TargetRealm and RealmRef are specified, TargetRealm will be used for cli
         <td>[]string</td>
         <td>
           WebOrigins is a list of allowed CORS origins.
-To permit all origins of Valid Redirect URIs, add '+'. This does not include the '*' wildcard though.
-To permit all origins, explicitly add '*'.
-If not specified, the value from `WebUrl` is used<br/>
+          To permit all origins of Valid Redirect URIs, add '+'. This does not include the '*' wildcard though.
+          To permit all origins, explicitly add '*'.
+          If not specified, the value from `WebUrl` is used<br/>
         </td>
         <td>false</td>
       </tr><tr>
@@ -3838,6 +1724,13 @@ Authorization is a client authorization configuration.
         <td>false</td>
       </tr><tr>
         <td><b><a href="#keycloakclientspecauthorizationpoliciesindex">policies</a></b></td>
+        <td>[]object</td>
+        <td>
+          <br/>
+        </td>
+        <td>false</td>
+      </tr><tr>
+        <td><b><a href="#keycloakclientspecauthorizationresourcesindex">resources</a></b></td>
         <td>[]object</td>
         <td>
           <br/>
@@ -3914,7 +1807,7 @@ Authorization is a client authorization configuration.
         <td>[]string</td>
         <td>
           Policies is a list of policies names.
-Specifies all the policies that must be applied to the scopes defined by this policy or permission.<br/>
+          Specifies all the policies that must be applied to the scopes defined by this policy or permission.<br/>
         </td>
         <td>false</td>
       </tr><tr>
@@ -3922,7 +1815,7 @@ Specifies all the policies that must be applied to the scopes defined by this po
         <td>[]string</td>
         <td>
           Resources is a list of resources names.
-Specifies that this permission must be applied to all resource instances of a given type.<br/>
+          Specifies that this permission must be applied to all resource instances of a given type.<br/>
         </td>
         <td>false</td>
       </tr><tr>
@@ -3930,7 +1823,7 @@ Specifies that this permission must be applied to all resource instances of a gi
         <td>[]string</td>
         <td>
           Scopes is a list of authorization scopes names.
-Specifies that this permission must be applied to one or more scopes.<br/>
+          Specifies that this permission must be applied to one or more scopes.<br/>
         </td>
         <td>false</td>
       </tr></tbody>
@@ -4117,9 +2010,9 @@ GroupPolicy is a group policy settings.
         <td>string</td>
         <td>
           GroupsClaim is a group claim.
-If defined, the policy will fetch user's groups from the given claim
-within an access token or ID token representing the identity asking permissions.
-If not defined, user's groups are obtained from your realm configuration.<br/>
+          If defined, the policy will fetch user's groups from the given claim
+          within an access token or ID token representing the identity asking permissions.
+          If not defined, user's groups are obtained from your realm configuration.<br/>
         </td>
         <td>false</td>
       </tr></tbody>
@@ -4234,7 +2127,7 @@ ScopePolicy is a scope policy settings.
         <td>string</td>
         <td>
           NotBefore defines the time before which the policy MUST NOT be granted.
-Only granted if current date/time is after or equal to this value.<br/>
+          Only granted if current date/time is after or equal to this value.<br/>
         </td>
         <td>true</td>
       </tr><tr>
@@ -4242,7 +2135,7 @@ Only granted if current date/time is after or equal to this value.<br/>
         <td>string</td>
         <td>
           NotOnOrAfter defines the time after which the policy MUST NOT be granted.
-Only granted if current date/time is before or equal to this value.<br/>
+          Only granted if current date/time is before or equal to this value.<br/>
         </td>
         <td>true</td>
       </tr><tr>
@@ -4250,8 +2143,8 @@ Only granted if current date/time is before or equal to this value.<br/>
         <td>string</td>
         <td>
           Day defines the month which the policy MUST be granted.
-You can also provide a range by filling the dayMonthEnd field.
-In this case, permission is granted only if current month is between or equal to the two values you provided.<br/>
+          You can also provide a range by filling the dayMonthEnd field.
+          In this case, permission is granted only if current month is between or equal to the two values you provided.<br/>
         </td>
         <td>false</td>
       </tr><tr>
@@ -4266,8 +2159,8 @@ In this case, permission is granted only if current month is between or equal to
         <td>string</td>
         <td>
           Hour defines the hour when the policy MUST be granted.
-You can also provide a range by filling the hourEnd.
-In this case, permission is granted only if current hour is between or equal to the two values you provided.<br/>
+          You can also provide a range by filling the hourEnd.
+          In this case, permission is granted only if current hour is between or equal to the two values you provided.<br/>
         </td>
         <td>false</td>
       </tr><tr>
@@ -4282,8 +2175,8 @@ In this case, permission is granted only if current hour is between or equal to 
         <td>string</td>
         <td>
           Minute defines the minute when the policy MUST be granted.
-You can also provide a range by filling the minuteEnd field.
-In this case, permission is granted only if current minute is between or equal to the two values you provided.<br/>
+          You can also provide a range by filling the minuteEnd field.
+          In this case, permission is granted only if current minute is between or equal to the two values you provided.<br/>
         </td>
         <td>false</td>
       </tr><tr>
@@ -4298,8 +2191,8 @@ In this case, permission is granted only if current minute is between or equal t
         <td>string</td>
         <td>
           Month defines the month which the policy MUST be granted.
-You can also provide a range by filling the monthEnd.
-In this case, permission is granted only if current month is between or equal to the two values you provided.<br/>
+          You can also provide a range by filling the monthEnd.
+          In this case, permission is granted only if current month is between or equal to the two values you provided.<br/>
         </td>
         <td>false</td>
       </tr><tr>
@@ -4334,6 +2227,79 @@ UserPolicy is a user policy settings.
           Users is a list of usernames. Specifies which user(s) are allowed by this policy.<br/>
         </td>
         <td>true</td>
+      </tr></tbody>
+</table>
+
+### KeycloakClient.spec.authorization.resources[index]
+
+<sup><sup>[↩ Parent](#keycloakclientspecauthorization)</sup></sup>
+
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Description</th>
+            <th>Required</th>
+        </tr>
+    </thead>
+    <tbody><tr>
+        <td><b>displayName</b></td>
+        <td>string</td>
+        <td>
+          DisplayName for Identity Providers.<br/>
+        </td>
+        <td>true</td>
+      </tr><tr>
+        <td><b>name</b></td>
+        <td>string</td>
+        <td>
+          Name is unique resource name.<br/>
+        </td>
+        <td>true</td>
+      </tr><tr>
+        <td><b>attributes</b></td>
+        <td>map[string][]string</td>
+        <td>
+          Attributes is a map of resource attributes.<br/>
+        </td>
+        <td>false</td>
+      </tr><tr>
+        <td><b>iconUri</b></td>
+        <td>string</td>
+        <td>
+          IconURI pointing to an icon.<br/>
+        </td>
+        <td>false</td>
+      </tr><tr>
+        <td><b>ownerManagedAccess</b></td>
+        <td>boolean</td>
+        <td>
+          OwnerManagedAccess if enabled, the access to this resource can be managed by the resource owner.<br/>
+        </td>
+        <td>false</td>
+      </tr><tr>
+        <td><b>scopes</b></td>
+        <td>[]string</td>
+        <td>
+          Scopes requested or assigned in advance to the client to determine whether the policy is applied to this client.
+          Condition is evaluated during OpenID Connect authorization request and/or token request.<br/>
+        </td>
+        <td>false</td>
+      </tr><tr>
+        <td><b>type</b></td>
+        <td>string</td>
+        <td>
+          Type of this resource. It can be used to group different resource instances with the same type.<br/>
+        </td>
+        <td>false</td>
+      </tr><tr>
+        <td><b>uris</b></td>
+        <td>[]string</td>
+        <td>
+          URIs which are protected by resource.<br/>
+        </td>
+        <td>false</td>
       </tr></tbody>
 </table>
 
@@ -4673,7 +2639,7 @@ KeycloakClientScopeSpec defines the desired state of KeycloakClientScope.
         <td>string</td>
         <td>
           Deprecated: use RealmRef instead.
-Realm is name of KeycloakRealm custom resource.<br/>
+          Realm is name of KeycloakRealm custom resource.<br/>
         </td>
         <td>false</td>
       </tr><tr>
@@ -4895,8 +2861,8 @@ KeycloakComponentSpec defines the desired state of KeycloakRealmComponent.
         <td>map[string][]string</td>
         <td>
           Config is a map of component configuration.
-Map key is a name of configuration property, map value is an array value of configuration properties.
-Any configuration property can be a reference to k8s secret, in this case the property should be in format $secretName:secretKey.<br/>
+          Map key is a name of configuration property, map value is an array value of configuration properties.
+          Any configuration property can be a reference to k8s secret, in this case the property should be in format $secretName:secretKey.<br/>
         </td>
         <td>false</td>
       </tr><tr>
@@ -4904,7 +2870,7 @@ Any configuration property can be a reference to k8s secret, in this case the pr
         <td>object</td>
         <td>
           ParentRef specifies a parent resource.
-If not specified, then parent is realm specified in realm field.<br/>
+          If not specified, then parent is realm specified in realm field.<br/>
         </td>
         <td>false</td>
       </tr><tr>
@@ -4912,7 +2878,7 @@ If not specified, then parent is realm specified in realm field.<br/>
         <td>string</td>
         <td>
           Deprecated: use RealmRef instead.
-Realm is name of KeycloakRealm custom resource.<br/>
+          Realm is name of KeycloakRealm custom resource.<br/>
         </td>
         <td>false</td>
       </tr><tr>
@@ -4946,7 +2912,7 @@ If not specified, then parent is realm specified in realm field.
         <td>string</td>
         <td>
           Name is a name of parent component custom resource.
-For example, if Kind is KeycloakRealm, then Name is name of KeycloakRealm custom resource.<br/>
+          For example, if Kind is KeycloakRealm, then Name is name of KeycloakRealm custom resource.<br/>
         </td>
         <td>true</td>
       </tr><tr>
@@ -5134,7 +3100,7 @@ KeycloakRealmGroupSpec defines the desired state of KeycloakRealmGroup.
         <td>string</td>
         <td>
           Deprecated: use RealmRef instead.
-Realm is name of KeycloakRealm custom resource.<br/>
+          Realm is name of KeycloakRealm custom resource.<br/>
         </td>
         <td>false</td>
       </tr><tr>
@@ -5342,8 +3308,8 @@ KeycloakRealmIdentityProviderSpec defines the desired state of KeycloakRealmIden
         <td>map[string]string</td>
         <td>
           Config is a map of identity provider configuration.
-Map key is a name of configuration property, map value is a value of configuration property.
-Any value can be a reference to k8s secret, in this case value should be in format $secretName:secretKey.<br/>
+          Map key is a name of configuration property, map value is a value of configuration property.
+          Any value can be a reference to k8s secret, in this case value should be in format $secretName:secretKey.<br/>
         </td>
         <td>true</td>
       </tr><tr>
@@ -5407,7 +3373,7 @@ Any value can be a reference to k8s secret, in this case value should be in form
         <td>string</td>
         <td>
           Deprecated: use RealmRef instead.
-Realm is name of KeycloakRealm custom resource.<br/>
+          Realm is name of KeycloakRealm custom resource.<br/>
         </td>
         <td>false</td>
       </tr><tr>
@@ -5622,7 +3588,7 @@ KeycloakRealmRoleBatchSpec defines the desired state of KeycloakRealmRoleBatch.
         <td>string</td>
         <td>
           Deprecated: use RealmRef instead.
-Realm is name of KeycloakRealm custom resource.<br/>
+          Realm is name of KeycloakRealm custom resource.<br/>
         </td>
         <td>false</td>
       </tr><tr>
@@ -5902,7 +3868,7 @@ KeycloakRealmRoleSpec defines the desired state of KeycloakRealmRole.
         <td>string</td>
         <td>
           Deprecated: use RealmRef instead.
-Realm is name of KeycloakRealm custom resource.<br/>
+          Realm is name of KeycloakRealm custom resource.<br/>
         </td>
         <td>false</td>
       </tr><tr>
@@ -6122,6 +4088,20 @@ KeycloakRealmSpec defines the desired state of KeycloakRealm.
         </td>
         <td>false</td>
       </tr><tr>
+        <td><b>displayHtmlName</b></td>
+        <td>string</td>
+        <td>
+          DisplayHTMLName name to render in the UI<br/>
+        </td>
+        <td>false</td>
+      </tr><tr>
+        <td><b>displayName</b></td>
+        <td>string</td>
+        <td>
+          DisplayName is the display name of the realm.<br/>
+        </td>
+        <td>false</td>
+      </tr><tr>
         <td><b>frontendUrl</b></td>
         <td>string</td>
         <td>
@@ -6140,7 +4120,7 @@ KeycloakRealmSpec defines the desired state of KeycloakRealm.
         <td>string</td>
         <td>
           Deprecated: use KeycloakRef instead.
-KeycloakOwner specifies the name of the Keycloak instance that owns the realm.<br/>
+          KeycloakOwner specifies the name of the Keycloak instance that owns the realm.<br/>
         </td>
         <td>false</td>
       </tr><tr>
@@ -6176,6 +4156,15 @@ KeycloakOwner specifies the name of the Keycloak instance that owns the realm.<b
         <td>object</td>
         <td>
           TokenSettings is the configuration for tokens in the realm.<br/>
+        </td>
+        <td>false</td>
+      </tr><tr>
+        <td><b><a href="#keycloakrealmspecuserprofileconfig">userProfileConfig</a></b></td>
+        <td>object</td>
+        <td>
+          UserProfileConfig is the configuration for user profiles in the realm.
+          Attributes and groups will be added to the current realm configuration.
+          Deletion of attributes and groups is not supported.<br/>
         </td>
         <td>false</td>
       </tr><tr>
@@ -6385,7 +4374,7 @@ TokenSettings is the configuration for tokens in the realm.
         <td>integer</td>
         <td>
           AccessCodeLifespan specifies max time(in seconds)a client has to finish the access token protocol.
-This should normally be 1 minute.<br/>
+          This should normally be 1 minute.<br/>
           <br/>
             <i>Default</i>: 60<br/>
         </td>
@@ -6404,7 +4393,7 @@ This should normally be 1 minute.<br/>
         <td>integer</td>
         <td>
           AccessTokenLifespan specifies max time(in seconds) before an access token is expired.
-This value is recommended to be short relative to the SSO timeout.<br/>
+          This value is recommended to be short relative to the SSO timeout.<br/>
           <br/>
             <i>Default</i>: 300<br/>
         </td>
@@ -6414,8 +4403,8 @@ This value is recommended to be short relative to the SSO timeout.<br/>
         <td>integer</td>
         <td>
           ActionTokenGeneratedByAdminLifespan specifies max time(in seconds) before an action permit sent to a user by administrator is expired.
-This value is recommended to be long to allow administrators to send e-mails for users that are currently offline.
-The default timeout can be overridden immediately before issuing the token.<br/>
+          This value is recommended to be long to allow administrators to send e-mails for users that are currently offline.
+          The default timeout can be overridden immediately before issuing the token.<br/>
           <br/>
             <i>Default</i>: 43200<br/>
         </td>
@@ -6425,7 +4414,7 @@ The default timeout can be overridden immediately before issuing the token.<br/>
         <td>integer</td>
         <td>
           AccessCodeLifespanUserAction specifies max time(in seconds) before an action permit sent by a user (such as a forgot password e-mail) is expired.
-This value is recommended to be short because it's expected that the user would react to self-created action quickly.<br/>
+          This value is recommended to be short because it's expected that the user would react to self-created action quickly.<br/>
           <br/>
             <i>Default</i>: 300<br/>
         </td>
@@ -6445,7 +4434,7 @@ This value is recommended to be short because it's expected that the user would 
         <td>integer</td>
         <td>
           RefreshTokenMaxReuse specifies maximum number of times a refresh token can be reused.
-When a different token is used, revocation is immediate.<br/>
+          When a different token is used, revocation is immediate.<br/>
           <br/>
             <i>Default</i>: 0<br/>
         </td>
@@ -6455,10 +4444,314 @@ When a different token is used, revocation is immediate.<br/>
         <td>boolean</td>
         <td>
           RevokeRefreshToken if enabled a refresh token can only be used up to 'refreshTokenMaxReuse' and
-is revoked when a different token is used.
-Otherwise, refresh tokens are not revoked when used and can be used multiple times.<br/>
+          is revoked when a different token is used.
+          Otherwise, refresh tokens are not revoked when used and can be used multiple times.<br/>
           <br/>
             <i>Default</i>: false<br/>
+        </td>
+        <td>false</td>
+      </tr></tbody>
+</table>
+
+### KeycloakRealm.spec.userProfileConfig
+
+<sup><sup>[↩ Parent](#keycloakrealmspec)</sup></sup>
+
+UserProfileConfig is the configuration for user profiles in the realm.
+Attributes and groups will be added to the current realm configuration.
+Deletion of attributes and groups is not supported.
+
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Description</th>
+            <th>Required</th>
+        </tr>
+    </thead>
+    <tbody><tr>
+        <td><b><a href="#keycloakrealmspecuserprofileconfigattributesindex">attributes</a></b></td>
+        <td>[]object</td>
+        <td>
+          Attributes specifies the list of user profile attributes.<br/>
+        </td>
+        <td>false</td>
+      </tr><tr>
+        <td><b><a href="#keycloakrealmspecuserprofileconfiggroupsindex">groups</a></b></td>
+        <td>[]object</td>
+        <td>
+          Groups specifies the list of user profile groups.<br/>
+        </td>
+        <td>false</td>
+      </tr><tr>
+        <td><b>unmanagedAttributePolicy</b></td>
+        <td>string</td>
+        <td>
+          UnmanagedAttributePolicy are user attributes not explicitly defined in the user profile configuration.
+          Empty value means that unmanaged attributes are disabled.
+          Possible values:
+          ENABLED - unmanaged attributes are allowed.
+          ADMIN_VIEW - unmanaged attributes are read-only and only available through the administration console and API.
+          ADMIN_EDIT - unmanaged attributes can be managed only through the administration console and API.<br/>
+        </td>
+        <td>false</td>
+      </tr></tbody>
+</table>
+
+### KeycloakRealm.spec.userProfileConfig.attributes[index]
+
+<sup><sup>[↩ Parent](#keycloakrealmspecuserprofileconfig)</sup></sup>
+
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Description</th>
+            <th>Required</th>
+        </tr>
+    </thead>
+    <tbody><tr>
+        <td><b>name</b></td>
+        <td>string</td>
+        <td>
+          Name of the user attribute, used to uniquely identify an attribute.<br/>
+        </td>
+        <td>true</td>
+      </tr><tr>
+        <td><b>annotations</b></td>
+        <td>map[string]string</td>
+        <td>
+          Annotations specifies the annotations for the attribute.<br/>
+        </td>
+        <td>false</td>
+      </tr><tr>
+        <td><b>displayName</b></td>
+        <td>string</td>
+        <td>
+          Display name for the attribute.<br/>
+        </td>
+        <td>false</td>
+      </tr><tr>
+        <td><b>group</b></td>
+        <td>string</td>
+        <td>
+          Group to which the attribute belongs.<br/>
+        </td>
+        <td>false</td>
+      </tr><tr>
+        <td><b>multivalued</b></td>
+        <td>boolean</td>
+        <td>
+          Multivalued specifies if this attribute supports multiple values.
+          This setting is an indicator and does not enable any validation<br/>
+        </td>
+        <td>false</td>
+      </tr><tr>
+        <td><b><a href="#keycloakrealmspecuserprofileconfigattributesindexpermissions">permissions</a></b></td>
+        <td>object</td>
+        <td>
+          Permissions specifies the permissions for the attribute.<br/>
+        </td>
+        <td>false</td>
+      </tr><tr>
+        <td><b><a href="#keycloakrealmspecuserprofileconfigattributesindexrequired">required</a></b></td>
+        <td>object</td>
+        <td>
+          Required indicates that the attribute must be set by users and administrators.<br/>
+        </td>
+        <td>false</td>
+      </tr><tr>
+        <td><b><a href="#keycloakrealmspecuserprofileconfigattributesindexselector">selector</a></b></td>
+        <td>object</td>
+        <td>
+          Selector specifies the scopes for which the attribute is available.<br/>
+        </td>
+        <td>false</td>
+      </tr><tr>
+        <td><b><a href="#keycloakrealmspecuserprofileconfigattributesindexvalidationskeykey">validations</a></b></td>
+        <td>map[string]map[string]object</td>
+        <td>
+          Validations specifies the validations for the attribute.<br/>
+        </td>
+        <td>false</td>
+      </tr></tbody>
+</table>
+
+### KeycloakRealm.spec.userProfileConfig.attributes[index].permissions
+
+<sup><sup>[↩ Parent](#keycloakrealmspecuserprofileconfigattributesindex)</sup></sup>
+
+Permissions specifies the permissions for the attribute.
+
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Description</th>
+            <th>Required</th>
+        </tr>
+    </thead>
+    <tbody><tr>
+        <td><b>edit</b></td>
+        <td>[]string</td>
+        <td>
+          Edit specifies who can edit the attribute.<br/>
+        </td>
+        <td>false</td>
+      </tr><tr>
+        <td><b>view</b></td>
+        <td>[]string</td>
+        <td>
+          View specifies who can view the attribute.<br/>
+        </td>
+        <td>false</td>
+      </tr></tbody>
+</table>
+
+### KeycloakRealm.spec.userProfileConfig.attributes[index].required
+
+<sup><sup>[↩ Parent](#keycloakrealmspecuserprofileconfigattributesindex)</sup></sup>
+
+Required indicates that the attribute must be set by users and administrators.
+
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Description</th>
+            <th>Required</th>
+        </tr>
+    </thead>
+    <tbody><tr>
+        <td><b>roles</b></td>
+        <td>[]string</td>
+        <td>
+          Roles specifies the roles for whom the attribute is required.<br/>
+        </td>
+        <td>false</td>
+      </tr><tr>
+        <td><b>scopes</b></td>
+        <td>[]string</td>
+        <td>
+          Scopes specifies the scopes when the attribute is required.<br/>
+        </td>
+        <td>false</td>
+      </tr></tbody>
+</table>
+
+### KeycloakRealm.spec.userProfileConfig.attributes[index].selector
+
+<sup><sup>[↩ Parent](#keycloakrealmspecuserprofileconfigattributesindex)</sup></sup>
+
+Selector specifies the scopes for which the attribute is available.
+
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Description</th>
+            <th>Required</th>
+        </tr>
+    </thead>
+    <tbody><tr>
+        <td><b>scopes</b></td>
+        <td>[]string</td>
+        <td>
+          Scopes specifies the scopes for which the attribute is available.<br/>
+        </td>
+        <td>false</td>
+      </tr></tbody>
+</table>
+
+### KeycloakRealm.spec.userProfileConfig
+
+<sup><sup>[↩ Parent](#keycloakrealmspecuserprofileconfigattributesindex)</sup></sup>
+
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Description</th>
+            <th>Required</th>
+        </tr>
+    </thead>
+    <tbody><tr>
+        <td><b>intVal</b></td>
+        <td>integer</td>
+        <td>
+          <br/>
+        </td>
+        <td>false</td>
+      </tr><tr>
+        <td><b>mapVal</b></td>
+        <td>map[string]string</td>
+        <td>
+          <br/>
+        </td>
+        <td>false</td>
+      </tr><tr>
+        <td><b>sliceVal</b></td>
+        <td>[]string</td>
+        <td>
+          <br/>
+        </td>
+        <td>false</td>
+      </tr><tr>
+        <td><b>stringVal</b></td>
+        <td>string</td>
+        <td>
+          <br/>
+        </td>
+        <td>false</td>
+      </tr></tbody>
+</table>
+
+### KeycloakRealm.spec.userProfileConfig.groups[index]
+
+<sup><sup>[↩ Parent](#keycloakrealmspecuserprofileconfig)</sup></sup>
+
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Description</th>
+            <th>Required</th>
+        </tr>
+    </thead>
+    <tbody><tr>
+        <td><b>name</b></td>
+        <td>string</td>
+        <td>
+          Name is unique name of the group.<br/>
+        </td>
+        <td>true</td>
+      </tr><tr>
+        <td><b>annotations</b></td>
+        <td>map[string]string</td>
+        <td>
+          Annotations specifies the annotations for the group.
+          nullable<br/>
+        </td>
+        <td>false</td>
+      </tr><tr>
+        <td><b>displayDescription</b></td>
+        <td>string</td>
+        <td>
+          DisplayDescription specifies a user-friendly name for the group that should be used when rendering a group of attributes in user-facing forms.<br/>
+        </td>
+        <td>false</td>
+      </tr><tr>
+        <td><b>displayHeader</b></td>
+        <td>string</td>
+        <td>
+          DisplayHeader specifies a text that should be used as a header when rendering user-facing forms.<br/>
         </td>
         <td>false</td>
       </tr></tbody>
@@ -6653,8 +4946,8 @@ KeycloakRealmUserSpec defines the desired state of KeycloakRealmUser.
         <td>boolean</td>
         <td>
           KeepResource, when set to false, results in the deletion of the KeycloakRealmUser Custom Resource (CR)
-from the cluster after the corresponding user is created in Keycloak. The user will continue to exist in Keycloak.
-When set to true, the CR will not be deleted after processing.<br/>
+          from the cluster after the corresponding user is created in Keycloak. The user will continue to exist in Keycloak.
+          When set to true, the CR will not be deleted after processing.<br/>
           <br/>
             <i>Default</i>: true<br/>
         </td>
@@ -6685,7 +4978,7 @@ When set to true, the CR will not be deleted after processing.<br/>
         <td>string</td>
         <td>
           Deprecated: use RealmRef instead.
-Realm is name of KeycloakRealm custom resource.<br/>
+          Realm is name of KeycloakRealm custom resource.<br/>
         </td>
         <td>false</td>
       </tr><tr>
@@ -6700,8 +4993,8 @@ Realm is name of KeycloakRealm custom resource.<br/>
         <td>string</td>
         <td>
           ReconciliationStrategy is a strategy for reconciliation. Possible values: full, create-only.
-Default value: full. If set to create-only, user will be created only if it does not exist. If user exists, it will not be updated.
-If set to full, user will be created if it does not exist, or updated if it exists.<br/>
+          Default value: full. If set to create-only, user will be created only if it does not exist. If user exists, it will not be updated.
+          If set to full, user will be created if it does not exist, or updated if it exists.<br/>
         </td>
         <td>false</td>
       </tr><tr>
@@ -6915,7 +5208,7 @@ KeycloakSpec defines the desired state of Keycloak.
         <td>object</td>
         <td>
           CACert defines the root certificate authority
-that api client use when verifying server certificates.<br/>
+          that api client use when verifying server certificates.<br/>
         </td>
         <td>false</td>
       </tr><tr>
@@ -6923,9 +5216,9 @@ that api client use when verifying server certificates.<br/>
         <td>boolean</td>
         <td>
           InsecureSkipVerify controls whether api client verifies the server's
-certificate chain and host name. If InsecureSkipVerify is true, api client
-accepts any certificate presented by the server and any host name in that
-certificate.<br/>
+          certificate chain and host name. If InsecureSkipVerify is true, api client
+          accepts any certificate presented by the server and any host name in that
+          certificate.<br/>
         </td>
         <td>false</td>
       </tr></tbody>
@@ -6991,8 +5284,8 @@ Selects a key of a ConfigMap.
         <td>string</td>
         <td>
           Name of the referent.
-More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
-TODO: Add other useful fields. apiVersion, kind, uid?<br/>
+          More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+          TODO: Add other useful fields. apiVersion, kind, uid?<br/>
         </td>
         <td>false</td>
       </tr></tbody>
@@ -7025,8 +5318,8 @@ Selects a key of a secret.
         <td>string</td>
         <td>
           Name of the referent.
-More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
-TODO: Add other useful fields. apiVersion, kind, uid?<br/>
+          More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+          TODO: Add other useful fields. apiVersion, kind, uid?<br/>
         </td>
         <td>false</td>
       </tr></tbody>

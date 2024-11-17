@@ -123,7 +123,7 @@ const config: Config = {
           lastmod: 'date',
           changefreq: 'weekly',
           priority: 0.5,
-          ignorePatterns: ['/next/**', '/3.9/**', '/3.10/**', '/tags/**'],
+          ignorePatterns: ['/docs/next/**', '/docs/3.9/**', '/docs/3.10/**', '/blog/tags/**'],
           filename: 'sitemap.xml',
           createSitemapItems: async (params) => {
             const { defaultCreateSitemapItems, ...rest } = params;

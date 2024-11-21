@@ -147,25 +147,25 @@ These composite roles simplify the assignment of administrative and development 
 
 The table below provides an overview of the `shared` realm roles and their types:
 
-| Realm Role Name | Regular Role | Composite role |
-| - | :-: | :-: |
-| administrator | | :white_check_mark: |
-| developer | | :white_check_mark: |
-| sonar-administrators | :white_check_mark: | |
-| sonar-developers | :white_check_mark: | |
+| Realm Role Name      |    Regular Role    |   Composite role   |
+| -------------------- | :----------------: | :----------------: |
+| administrator        |                    | :white_check_mark: |
+| developer            |                    | :white_check_mark: |
+| sonar-administrators | :white_check_mark: |                    |
+| sonar-developers     | :white_check_mark: |                    |
 
 ### Groups
 
 KubeRocketCI uses the `shared` realm for group management. The [groups](https://github.com/epam/edp-install/tree/master/deploy-templates/templates/rbac) are designed to control access to various components such as Argo CD, the KubeRocketCI portal, and the EKS cluster.
 
-| Group Name          | Purpose                                                                    |
-|---------------------|----------------------------------------------------------------------------|
-| `ArgoCDAdmins`        | Administrator access to Argo CD instance                                |
-| `ArgoCD-${platform}-users`    | Access to the Argo CD project mapped to the `${platform}` tenant                                |
-| `oidc-cluster-admins` | Full administrator (cluster-admin) access to the kubernetes cluster     |
-| `${platform}-oidc-admins`     | Administrator access to KubeRocketCI                               |
-| `${platform}-oidc-developers` | Developer access to KubeRocketCI |
-| `${platform}-oidc-viewers`    | Read-only access to view resources in KubeRocketCI                |
+| Group Name                    | Purpose                                                             |
+| ----------------------------- | ------------------------------------------------------------------- |
+| `ArgoCDAdmins`                | Administrator access to Argo CD instance                            |
+| `ArgoCD-${platform}-users`    | Access to the Argo CD project mapped to the `${platform}` tenant    |
+| `oidc-cluster-admins`         | Full administrator (cluster-admin) access to the kubernetes cluster |
+| `${platform}-oidc-admins`     | Administrator access to KubeRocketCI                                |
+| `${platform}-oidc-developers` | Developer access to KubeRocketCI                                    |
+| `${platform}-oidc-viewers`    | Read-only access to view resources in KubeRocketCI                  |
 
 These groups simplify the management of permissions and ensure that users have the appropriate level of access based on their roles and responsibilities.
 
@@ -205,7 +205,7 @@ The template is stored in the SonarQube [custom resource](https://github.com/epa
    projectKeyPattern: ".+"
    default: true
    groupsPermissions:
-     non-interactive-users:
+     view-group:
        - user
      sonar-developers:
        - user
@@ -221,9 +221,9 @@ The template is stored in the SonarQube [custom resource](https://github.com/epa
 
 :::
 
-The SonarQube Permission Template defines three groups: `non-interactive-users`, `sonar-administrators`, and `sonar-developers`:
+The SonarQube Permission Template defines three groups: `view-group`, `sonar-administrators`, and `sonar-developers`:
 
-* **non-interactive-users**: Users who have read-only access to the project. They can view project's data and metrics but cannot modify or interact with it.
+* **view-group**: Users who have read-only access to the project. They can view project's data and metrics but cannot modify or interact with it.
 * **sonar-administrators**: Users with full control over the SonarQube project. They can create, modify, delete projects, manage user access, and configure SonarQube settings.
 * **sonar-developers**: Users actively working on the SonarQube project. They have read and write access, can modify project data and metrics, and configure project-specific settings.
 
@@ -237,12 +237,12 @@ These groups provide different levels of access based on the user's role and res
 
 The following table describes the permissions assigned to each group:
 
-| Group Name               | Sonar Permissions                             |
-|--------------------------|-----------------------------------------------|
-| non-interactive-users    | user                                          |
-| sonar-administrators     | admin, user                                   |
-| sonar-developers         | codeviewer, issueadmin, securityhotspotadmin, user |
-| sonar-users              | -                                             |
+| Group Name           | Sonar Permissions                                  |
+| -------------------- | -------------------------------------------------- |
+| view-group           | user                                               |
+| sonar-administrators | admin, user                                        |
+| sonar-developers     | codeviewer, issueadmin, securityhotspotadmin, user |
+| sonar-users          | -                                                  |
 
 ## Nexus Repository Manager
 
@@ -318,27 +318,27 @@ Both the KubeRocketCI Portal and the Kubernetes cluster use Keycloak groups for 
 
 ### Keycloak Groups
 
-| Group Name | View | Build | Deploy | Full Namespace Access |
-| - | :-: | :-: | :-: | :-: |
-|`${platform}-oidc-admins`    | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |
-|`${platform}-oidc-developers`| :white_check_mark: | :white_check_mark: | :white_check_mark: | |
-|`${platform}-oidc-viewers`   | :white_check_mark: | | | |
+| Group Name                    |        View        |       Build        |       Deploy       | Full Namespace Access |
+| ----------------------------- | :----------------: | :----------------: | :----------------: | :-------------------: |
+| `${platform}-oidc-admins`     | :white_check_mark: | :white_check_mark: | :white_check_mark: |  :white_check_mark:   |
+| `${platform}-oidc-developers` | :white_check_mark: | :white_check_mark: | :white_check_mark: |                       |
+| `${platform}-oidc-viewers`    | :white_check_mark: |                    |                    |                       |
 
 ### Cluster RBAC Resources
 
 The platform defines five RoleBindings that grant the necessary permissions to the corresponding Keycloak groups mentioned above.
 
-| RoleBinding Name| Role Name | Groups |
-| - | - | - |
-| tenant-admin | cluster-admin | `${platform}-oidc-admins` |
-| tenant-developer | tenant-developer | `${platform}-oidc-developers` |
-| tenant-viewer | view | `${platform}-oidc-viewers` , `${platform}-oidc-developers` |
+| RoleBinding Name | Role Name        | Groups                                                     |
+| ---------------- | ---------------- | ---------------------------------------------------------- |
+| tenant-admin     | cluster-admin    | `${platform}-oidc-admins`                                  |
+| tenant-developer | tenant-developer | `${platform}-oidc-developers`                              |
+| tenant-viewer    | view             | `${platform}-oidc-viewers` , `${platform}-oidc-developers` |
 
 Platform includes RBAC settings for the full cluster administration privileges.
 
-| Cluster Role Binding Name| Cluster Role Name | Group |
-| - | - | - |
-| cluster-admin | cluster-admin | `oidc-cluster-admins` |
+| Cluster Role Binding Name | Cluster Role Name | Group                 |
+| ------------------------- | ----------------- | --------------------- |
+| cluster-admin             | cluster-admin     | `oidc-cluster-admins` |
 
 :::note
   KubeRocketCI provides an [aggregated](https://kubernetes.io/docs/reference/access-authn-authz/rbac/#aggregated-clusterroles) ClusterRole `edp-aggregate-view-${platform}` with the permissions to view the KubeRocketCI [custom resources](../../api/overview.md).

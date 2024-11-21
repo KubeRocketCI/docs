@@ -205,7 +205,7 @@ The template is stored in the SonarQube [custom resource](https://github.com/epa
    projectKeyPattern: ".+"
    default: true
    groupsPermissions:
-     non-interactive-users:
+     view-group:
        - user
      sonar-developers:
        - user
@@ -221,9 +221,9 @@ The template is stored in the SonarQube [custom resource](https://github.com/epa
 
 :::
 
-The SonarQube Permission Template defines three groups: `non-interactive-users`, `sonar-administrators`, and `sonar-developers`:
+The SonarQube Permission Template defines three groups: `view-group`, `sonar-administrators`, and `sonar-developers`:
 
-* **non-interactive-users**: Users who have read-only access to the project. They can view project's data and metrics but cannot modify or interact with it.
+* **view-group**: Users who have read-only access to the project. They can view project's data and metrics but cannot modify or interact with it.
 * **sonar-administrators**: Users with full control over the SonarQube project. They can create, modify, delete projects, manage user access, and configure SonarQube settings.
 * **sonar-developers**: Users actively working on the SonarQube project. They have read and write access, can modify project data and metrics, and configure project-specific settings.
 
@@ -239,7 +239,7 @@ The following table describes the permissions assigned to each group:
 
 | Group Name               | Sonar Permissions                             |
 |--------------------------|-----------------------------------------------|
-| non-interactive-users    | user                                          |
+| view-group    | user                                          |
 | sonar-administrators     | admin, user                                   |
 | sonar-developers         | codeviewer, issueadmin, securityhotspotadmin, user |
 | sonar-users              | -                                             |

@@ -157,6 +157,7 @@ words:
   - nosniff
   - nslookup
   - ojson
+  - opensearch
   - Packetbeat
   - parameterstore
   - passwordfile

@@ -40,14 +40,23 @@ Once KrakenD is installed, update the KrakenD deployment configuration by adding
 
     * SONARQUBE_TOKEN: Use [SonarQube Integration](../code-quality/sonarqube.md#configuration) guide for token generation(string in base64) ending with ':'.
 
-    ```bash
+      ```bash
       sonarqube_user_token="squ_19f5xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx46b6"
-      echo -n "${TOKEN}:" | base64
-    ```
+      echo -n "${sonarqube_user_token}:" | base64
+      ```
 
     * DEPTRACK_URL: Specify the api server URL of your Dependency-Track instance. For example: `http://dependency-track-api-server.dependency-track:8080`
 
     * DEPTRACK_TOKEN: Use the [Dependency-Track Integration](../devsecops/dependency-track.md#configuration) guide to generate the token.
+
+    * OPENSEARCH_URL: Determine the URL of your OpenSearch instance. For example: `https://opensearch-cluster-master.logging:9200`
+
+    * OPENSEARCH_CREDS: This field should contain the OpenSearch credentials in the format `admin:<opensearch_admin_password>`, encoded in base64. The OpenSearch password can be found in the `opensearch-admin-creds` secret within the `logging` namespace.
+      To encode `admin:<opensearch_admin_password>` into Base64, execute the following command:
+
+      ```bash
+      echo -n "admin:MySecurePass123" | base64
+      ```
 
     * JWK_URL: Determine the URL for obtaining the JWK. The format is: `https://keycloak.example.com/auth/realms/<REALM_NAME>/protocol/openid-connect/certs`
 
@@ -72,6 +81,8 @@ Once KrakenD is installed, update the KrakenD deployment configuration by adding
       SONARQUBE_TOKEN: <sonarqube-token>
       DEPTRACK_URL: http://dependency-track-api-server.dependency-track:8080
       DEPTRACK_TOKEN: <dependency-track-token>
+      OPENSEARCH_URL: https://opensearch-cluster-master.logging:9200
+      OPENSEARCH_CREDS: <base64-encoded-credentials>
       JWK_URL: https://keycloak.example.com/auth/realms/<sharedService>/protocol/openid-connect/certs
     ```
 
@@ -85,6 +96,8 @@ Once KrakenD is installed, update the KrakenD deployment configuration by adding
       "SONARQUBE_TOKEN": "<sonarqube-token>",
       "DEPTRACK_URL": "http://dependency-track-api-server.dependency-track:8080",
       "DEPTRACK_TOKEN": "<dependency-track-token>",
+      "OPENSEARCH_URL": "https://opensearch-cluster-master.logging:9200",
+      "OPENSEARCH_CREDS": "<base64-encoded-credentials>",
       "JWK_URL": "https://keycloak.example.com/auth/realms/<sharedService>/protocol/openid-connect/certs"
     }
     ```

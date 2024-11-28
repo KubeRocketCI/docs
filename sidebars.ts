@@ -287,6 +287,7 @@ const sidebars: SidebarsConfig = {
             'operator-guide/cd/customize-environment-deletion',
             'operator-guide/cd/manual-approval',
             'operator-guide/cd/deploy-rpm',
+            'operator-guide/cd/auto-stable-trigger-type',
             {
               type: 'category',
               label: 'GitOps',

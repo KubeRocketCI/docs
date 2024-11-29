@@ -6,15 +6,19 @@ Now, let's proceed to deploy our first application. This page offers detailed in
 
 As a prerequisite, create a GitOps repository in your GitHub account. KubeRocketCI Portal adheres to the GitOps approach when working with environments. In a GitOps repository, values are saved to redefine the default behavior (parameters) of deployment for each environment. The creation of a GitOps repository involves the following two steps:
 
-1. In the UI Portal, navigate to **Configuration** -> **Deployment** -> **GitOps** -> **+ Add GitOps repository**, define the following values and click **Save**:
+1. In the UI Portal, navigate to **Configuration** -> **Deployment** -> **GitOps** and click **+ Add GitOps repository**:
+
+    ![GitOps tab](../assets/quick-start/gitops_section.png "GitOps tab")
+
+2. Define the following values and click **Save**:
 
     - Git server: `github`
     - Git repo relative path: `github_account_name`
     - Repository Name: `edp-gitops`
 
-    ![GitOps tab](../assets/quick-start/gitops_section.png "GitOps tab")
+    ![GitOps tab](../assets/quick-start/add_gitops_repository.png "GitOps tab")
 
-## Create Deployment FLow
+## Create Deployment Flow
 
 To create a deployment flow, follow the steps below:
 
@@ -22,11 +26,11 @@ To create a deployment flow, follow the steps below:
 
     ![Deployment flows section](../assets/quick-start/create_environment.png "Deployment Flows section")
 
-2. In the **Create CD Pipeline** window, enter the pipeline name and click the **Proceed** button:
+2. In the **Create deployment flow** window, enter the pipeline name and click the **Next** button:
 
-    ![Pipelines tab](../assets/quick-start/pipelines_tab.png "Pipelines tab")
+    ![Enter name tab](../assets/quick-start/pipelines_tab.png "Enter name tab")
 
-3. In the **Applications** tab, select the my-go-gin-app application, main branch, and click **Create**:
+3. In the **Add applications** tab, select the my-go-gin-app application, main branch, and click **Create**:
 
     ![Applications tab](../assets/quick-start/applications_tab.png "Applications tab")
 
@@ -34,11 +38,11 @@ To create a deployment flow, follow the steps below:
 
     ![Congratulations window](../assets/quick-start/deployment-flow-congratulations-window.png "Congratulations window")
 
-5. In the **Deployment flows** section, click the **Add Environment** button:
+5. In the **Deployment flows** section, click the **Create environment** button:
 
     ![Create environment](../assets/quick-start/create-environment.png "Create environment")
 
-6. Define the following values and click **Next**:
+6. On the **Configure stages** tab, define the following values and click **Next**:
 
     - Cluster: `in-cluster`
     - Environment name: `dev`
@@ -50,7 +54,7 @@ To create a deployment flow, follow the steps below:
 
     ![Create environment window](../assets/quick-start/stages_tab.png "Create environment window")
 
-7. Define the quality gates and click **Create**:
+7. On the **Add quality gates** tab, define the quality gates and click **Create**:
 
     - Quality gate type: `Manual`
     - Step name: `dev`
@@ -65,20 +69,22 @@ To create a deployment flow, follow the steps below:
 
 ## Application Deployment
 
-To Deploy application, follow the steps below:
+To deploy application, follow the steps below:
 
 1. In the deployment flows section, click the deployment flow name:
 
     ![Deployment flows list](../assets/quick-start/environment_list.png "Deployment flows list")
 
-2. In the Deployment Flow details page, click the environment name to enter the environment details page:
+2. In the deployment flow details page, click the environment name to enter the environment details page:
 
     ![Deployment flow details](../assets/quick-start/environment_details.png "Deployment flow details")
 
-3. Once you enter the environment details, proceed to deploy the application:
+3. Once you enter the environment details page, proceed to deploy the application:
 
     a. Click the **Configure deploy** button;
+
     b. Select the Image stream version;
+
     c. Click the **Start deploy** button.
 
     ![Deploying application](../assets/quick-start/deploy_application.png "Deploying application")

@@ -6,65 +6,86 @@ Now, let's proceed to deploy our first application. This page offers detailed in
 
 As a prerequisite, create a GitOps repository in your GitHub account. KubeRocketCI Portal adheres to the GitOps approach when working with environments. In a GitOps repository, values are saved to redefine the default behavior (parameters) of deployment for each environment. The creation of a GitOps repository involves the following two steps:
 
-1. In the UI Portal, navigate to **Configuration** -> **Deployment** -> **GitOps** -> **ADD GITOPS REPOSITORY**, define the following values and click **Save**:
+1. In the UI Portal, navigate to **Configuration** -> **Deployment** -> **GitOps** and click **+ Add GitOps repository**:
 
+    ![GitOps tab](../assets/quick-start/gitops_section.png "GitOps tab")
+
+2. Define the following values and click **Save**:
 
     - Git server: `github`
     - Git repo relative path: `github_account_name`
     - Repository Name: `edp-gitops`
 
-    ![GitOps tab](../assets/quick-start/gitops_section.png "GitOps tab")
+    ![GitOps tab](../assets/quick-start/add_gitops_repository.png "GitOps tab")
 
-## Create Environment
+## Create Deployment Flow
 
-To create an environment, follow the steps below:
+To create a deployment flow, follow the steps below:
 
-1. In the UI Portal, navigate to **Environments** and click the **+ CREATE ENVIRONMENT** button:
+1. In the UI Portal, navigate to **Deployment Flows** and click the **+ Create deployment flow** button:
 
-    ![Environments section](../assets/quick-start/create_environment.png "Environments section")
+    ![Deployment flows section](../assets/quick-start/create_environment.png "Deployment Flows section")
 
-2. In the **Create CD Pipeline** window, enter the pipeline name and click the **Proceed** button:
+2. In the **Create deployment flow** window, enter the pipeline name and click the **Next** button:
 
-    ![Pipelines tab](../assets/quick-start/pipelines_tab.png "Pipelines tab")
+    ![Enter name tab](../assets/quick-start/pipelines_tab.png "Enter name tab")
 
-3. In the **Applications** tab, select the go-application and main branch:
+3. In the **Add applications** tab, select the my-go-gin-app application, main branch, and click **Create**:
 
     ![Applications tab](../assets/quick-start/applications_tab.png "Applications tab")
 
-4. In the **Stages** tab, click the **Add Stage** button.
+4. Once the deployment flow is created, click the **Go to deployment flow** button on the congratulations window:
 
-5. Define the following values and click **Apply**:
+    ![Congratulations window](../assets/quick-start/deployment-flow-congratulations-window.png "Congratulations window")
+
+5. In the **Deployment flows** section, click the **Create environment** button:
+
+    ![Create environment](../assets/quick-start/create-environment.png "Create environment")
+
+6. On the **Configure stages** tab, define the following values and click **Next**:
 
     - Cluster: `in-cluster`
-    - Stage name: `dev`
+    - Environment name: `dev`
     - Namespace: `edp-my-go-gin-app-dev`
     - Description: `Development stage`
     - Trigger type: `Manual`
-    - Pipeline template: `deploy`
+    - Deploy Pipeline template: `deploy`
+    - Clean Pipeline template: `clean`
+
+    ![Create environment window](../assets/quick-start/stages_tab.png "Create environment window")
+
+7. On the **Add quality gates** tab, define the quality gates and click **Create**:
+
     - Quality gate type: `Manual`
     - Step name: `dev`
 
-    ![Create Stage window](../assets/quick-start/stages_tab.png "Create Stage window")
+    ![Define quality gates window](../assets/quick-start/define-quality-gates.png "Define quality gates window")
 
-6. In the **Stages** tab, click the **Apply** button.
+8. On the congratulations window, click **Go to environment**:
+
+    ![Go to environment](../assets/quick-start/go-to-environment.png "Go to environment")
+
+   The created deployment flow will be added to the deployment flows list.
 
 ## Application Deployment
 
-To Deploy application, follow the steps below:
+To deploy application, follow the steps below:
 
-1. In the Environments list, click the Environment name:
+1. In the deployment flows section, click the deployment flow name:
 
-    ![Environments list](../assets/quick-start/environment_list.png "Environments list")
+    ![Deployment flows list](../assets/quick-start/environment_list.png "Deployment flows list")
 
-2. In the Environment details page, click the stage name to enter the stage details:
+2. In the deployment flow details page, click the environment name to enter the environment details page:
 
-    ![Environment details](../assets/quick-start/environment_details.png "Environment details")
+    ![Deployment flow details](../assets/quick-start/environment_details.png "Deployment flow details")
 
-3. Once you enter the stage details, proceed to deploy the application:
+3. Once you enter the environment details page, proceed to deploy the application:
 
-    1. Click the **CONFIGURE DEPLOY** button;
-    2. Select the Image stream version;
-    3. Click the **START DEPLOY** button.
+    a. Click the **Configure deploy** button;
+
+    b. Select the Image stream version;
+
+    c. Click the **Start deploy** button.
 
     ![Deploying application](../assets/quick-start/deploy_application.png "Deploying application")
 

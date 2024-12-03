@@ -58,6 +58,7 @@ words:
   - credrequests
   - creds
   - csanchez
+  - daniilnedostup
   - dbchecker
   - deepcopy
   - defectdojo
@@ -73,10 +74,12 @@ words:
   - dropdb
   - dumpall
   - EBSCSI
+  - Entra
   - edpcomponent
   - edpcomponents
   - emptydir
   - endpointshort
+  - entra
   - EPAM
   - epamedp
   - epmd
@@ -139,6 +142,7 @@ words:
   - Lucene
   - Metasploit
   - Metricbeat
+  - Micosoft
   - mkdocs
   - MKNOD
   - mrparkers
@@ -146,10 +150,10 @@ words:
   - multitenant
   - multivalued
   - mutatingwebhook
+  - mykolamarusenko
   - mypipe
   - myuser
   - newcoming
-  - nikolaymarusenko
   - nindent
   - Nlcg
   - noout

@@ -5,7 +5,7 @@ slug: advanced-aws-eks-management-oidc-keycloak
 tags: [KubeRocketCI, Keycloak, AWS EKS, SSO]
 keywords: [Keycloak, AWS EKS, Kubernetes, AWS, EKS, IAM, OpenID Connect, Single Sign-On, Security, Authentication, Authorization]
 image: https://i.imgur.com/mErPwqL.png
-authors: [sergk, nikolaymarusenko]
+authors: [sergk, mykolamarusenko]
 hide_table_of_contents: false
 ---
 

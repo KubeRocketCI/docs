@@ -38,29 +38,6 @@
 </li>
 </ul>
 <p>Together, these technologies streamline the login process, reinforce security, and enhance the user experience by allowing secure, seamless navigation across our digital ecosystem.</p>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="what-is-sso">What is SSO?<a href="https://docs.kuberocketci.io/blog/integrating-oidc-authentication-microsoft-entra-aws-eks#what-is-sso" class="hash-link" aria-label="Direct link to What is SSO?" title="Direct link to What is SSO?">​</a></h3>
-<p>Single sign-on (SSO) is a user authentication method that lets you use one set of login credentials (such as a username and password) to access multiple applications. The primary benefits of SSO include an improved user experience by eliminating the need for multiple passwords and logins, and enhanced security through centralized management of user access. Organizations widely adopt SSO to streamline their authentication processes and reduce the likelihood of password fatigue among users, thereby decreasing the risk of security breaches. For more information, see <a href="https://en.wikipedia.org/wiki/Single_sign-on" target="_blank" rel="noopener noreferrer">Single sign-on on Wikipedia</a>.</p>
-<!-- -->
-<p>This diagram shows the following steps:</p>
-<ol>
-<li>User logs in once at the single sign-on (SSO) gateway by providing their credentials.</li>
-<li>The SSO gateway authenticates the user, creates a session, and then allows the user to access multiple applications.</li>
-<li>When the user attempts to access Application 1, the application verifies the user's session with the SSO gateway.</li>
-<li>The SSO gateway confirms that the session is valid, and Application 1 grants the user access.</li>
-</ol>
-<p>The same process is repeated for Application 2 and Application 3. Since the user's session is already established with the SSO gateway, they do not need to log in again to access these applications.</p>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="understanding-oidc">Understanding OIDC<a href="https://docs.kuberocketci.io/blog/integrating-oidc-authentication-microsoft-entra-aws-eks#understanding-oidc" class="hash-link" aria-label="Direct link to Understanding OIDC" title="Direct link to Understanding OIDC">​</a></h3>
-<p>OpenID Connect (OIDC) is an authentication layer on top of the OAuth 2.0 protocol. It lets clients verify the identity of the end user based on authentication by an authorization server and get basic profile information about the end user in an interoperable and REST-like manner. OIDC uses JSON Web Tokens (JWTs) to securely transmit information about an end user from the identity provider to the client. This protocol is essential for modern web applications, providing a more secure and streamlined method for user authentication and authorization. Reference: <a href="https://openid.net/specs/openid-connect-core-1_0.html" target="_blank" rel="noopener noreferrer">OIDC Specification</a></p>
-<p>OIDC enables single sign-on (SSO) functionality, simplifying the user experience by allowing individuals to use a single set of credentials across multiple applications. The protocol also supports robust security features, including token revocation and introspection, enhancing overall application security.</p>
-<p>This diagram simplifies the OIDC flow into its core components:</p>
-<!-- -->
-<ol>
-<li><strong>User (U)</strong>: The end user who wants to access the client application.</li>
-<li><strong>Client Application (C)</strong>: The application requiring authentication from the user.</li>
-<li><strong>Authorization Server (AS)</strong>: The server that authenticates the user and issues tokens to the client application.</li>
-<li><strong>Resource Server (RS)</strong>: The server hosting protected resources that the client application wants to access on behalf of the user.</li>
-</ol>
-<p>The sequence starts with the user requesting access to the client application, moving through authentication with the authorization server, and ending with the client application accessing protected resources.</p>
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="microsoft-entra-overview">Microsoft Entra Overview<a href="https://docs.kuberocketci.io/blog/integrating-oidc-authentication-microsoft-entra-aws-eks#microsoft-entra-overview" class="hash-link" aria-label="Direct link to Microsoft Entra Overview" title="Direct link to Microsoft Entra Overview">​</a></h3>
 <p>Microsoft Entra, formerly known as Azure Active Directory (Azure AD), is a modern identity and access management solution designed for secure access to applications and services. It provides features like Single Sign-On (SSO), identity federation, and seamless integration with on-premises directories such as LDAP and Active Directory. Microsoft Entra supports industry-standard protocols, including OpenID Connect (OIDC), OAuth 2.0, and Security Assertion Markup Language (SAML) 2.0, making it a versatile solution for managing user identities. By leveraging Microsoft Entra, organizations can enhance security, simplify user access, and avoid the complexities of building identity management features from scratch. For more details, see the <a href="https://learn.microsoft.com/en-gb/entra/identity" target="_blank" rel="noopener noreferrer">Microsoft Entra official documentation</a>.</p>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="create-a-new-microsoft-entra-tenant">Create a new Microsoft Entra Tenant<a href="https://docs.kuberocketci.io/blog/integrating-oidc-authentication-microsoft-entra-aws-eks#create-a-new-microsoft-entra-tenant" class="hash-link" aria-label="Direct link to Create a new Microsoft Entra Tenant" title="Direct link to Create a new Microsoft Entra Tenant">​</a></h2>

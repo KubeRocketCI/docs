@@ -61,6 +61,10 @@ To get started with Microsoft Entra, you need to create a new tenant in the Micr
 
 5. Fill in the fields for **Tenant Name**, **Domain Name**, and **Location**.
 
+    :::note
+    The **Tenant Name** and **Domain Name** `kuberocketci` are used as a demonstration examples. In your case, it is recommended to choose names that align with your organization's specific needs and naming conventions.
+    :::
+
     ![Tenant Details](../assets/aws-eks-microsoft-entra-oidc-integration/tenant-details.png)
 
 6. The new tenant will be created, and you can start configuring it for OIDC integration. Ensure you have switched to the new tenant.
@@ -78,6 +82,10 @@ After creating the tenant, you need to set up an OIDC Application in Microsoft E
     ![New Registration](../assets/aws-eks-microsoft-entra-oidc-integration/new-registration.png)
 
 3. Fill in the details for the application, such as **Name**, **Supported account types**, and **Redirect URI** (`http://localhost:8000/`).
+
+    :::note
+    The **Name** `kuberocketci` is used as a demonstration example. In your case, it is recommended to choose a name that aligns with your application's specific needs and naming conventions (e.g. your AWS EKS cluster name).
+    :::
 
     ![Application Details](../assets/aws-eks-microsoft-entra-oidc-integration/application-details.png)
 
@@ -160,8 +168,8 @@ The Application data, such as **Directory (tenant) ID**, **Application (client) 
 
 3. Fill in the following details:
 
-    - **Name**: `Azure`
-    - **Issuer URL**: `https://login.microsoftonline.com/<Tenant-ID>/v2.0/`, where `<Tenant-ID>` is the **Directory** (tenant) **ID**. Ensure that the URL ends with `/v2.0/`.
+    - **Name**: `Entra`
+    - **Issuer URL**: `https://login.microsoftonline.com/<Tenant-ID>/`, where `<Tenant-ID>` is the **Directory** (tenant) **ID**. Ensure that the URL ends with `/`.
     - **Client ID**: `<Application (client) ID>`, which corresponds to the **Application** (client) **ID** of the OIDC Application.
     - **Username Claim**: `upn`.
     - **Groups Claim**: `groups`.
@@ -188,7 +196,7 @@ To configure Microsoft Entra as an Identity Provider in AWS EKS using Terraform,
 
     ```hcl
     cluster_identity_providers = {
-      azure = {
+      entra = {
         client_id    = "<Application (client) ID>"
         issuer_url   = "https://sts.windows.net/<Tenant ID>/"
         groups_claim = "groups"
@@ -220,7 +228,7 @@ The **Object ID** of the Microsoft Entra group can be found in the **Overview** 
 ![Group Object ID](../assets/aws-eks-microsoft-entra-oidc-integration/group-object-id.png)
 :::
 
-1. Log in to the AWS EKS cluster and create the following **ClusterRoleBinding** resource, which associates the Azure Entra group `oidc-cluster-admins` with the `cluster-admin` Kubernetes Cluster Role. Replace `<your-azure-admin-group-object-id>` with the Object ID of the `oidc-cluster-admins` group, which can be found on the `Group` overview page in the Microsoft Entra admin center.
+1. Log in to the AWS EKS cluster and create the following **ClusterRoleBinding** resource, which associates the Microsoft Entra group `oidc-cluster-admins` with the `cluster-admin` Kubernetes Cluster Role. Replace `<your-microsoft-entra-admin-group-object-id>` with the Object ID of the `oidc-cluster-admins` group, which can be found on the `Group` overview page in the Microsoft Entra admin center.
 
     ```yaml
     apiVersion: rbac.authorization.k8s.io/v1
@@ -233,7 +241,7 @@ The **Object ID** of the Microsoft Entra group can be found in the **Overview** 
       name: cluster-admin
     subjects:
       - kind: Group
-        name: <your-azure-admin-group-object-id>
+        name: <your-microsoft-entra-admin-group-object-id>
         apiGroup: rbac.authorization.k8s.io
     ```
 
@@ -258,7 +266,7 @@ To authenticate to the AWS EKS cluster using Microsoft Entra, you can use the `k
 2. Execute the following command to create a new kubeconfig context using the `kubelogin` plugin. Replace `<cluster-name>` with the name of your EKS cluster.
 
     ```bash
-    kubectl config set-credentials "azure" \
+    kubectl config set-credentials "eks" \
       --exec-api-version=client.authentication.k8s.io/v1beta1 \
       --exec-command=kubelogin \
       --exec-arg=get-token \
@@ -276,21 +284,21 @@ To authenticate to the AWS EKS cluster using Microsoft Entra, you can use the `k
     You can test the authentication to the EKS cluster immediately by running the following command:
 
     ```bash
-    kubectl --user=azure get nodes
+    kubectl --user=eks get nodes
     ```
 
     :::
 
-3. Set the context for the kubeconfig file to use the `azure` user and the OIDC configuration. Replace `<cluster-name>` with the name of your EKS cluster.
+3. Set the context for the kubeconfig file to use the `eks` user and the OIDC configuration. Replace `<cluster-name>` with the name of your EKS cluster.
 
     ```bash
-    kubectl config set-context azure --user=azure --cluster=<cluster-name>
+    kubectl config set-context eks --user=eks --cluster=<cluster-name>
     ```
 
-    To switch to the `azure` context, execute the following command:
+    To switch to the `eks` context, execute the following command:
 
     ```bash
-    kubectl config use-context azure
+    kubectl config use-context eks
     ```
 
     Test the authentication by running the following command:

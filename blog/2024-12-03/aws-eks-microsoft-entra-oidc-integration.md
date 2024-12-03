@@ -14,6 +14,7 @@ In modern cloud environments, secure and efficient access management is essentia
 <!--truncate-->
 
 ## Prerequisites
+
 Before you begin, ensure you have the following:
 
 - Access to the [Microsoft Entra Admin Center](https://entra.microsoft.com/?feature.msaljs=true#home) with administrative privileges.
@@ -307,6 +308,7 @@ The **Object ID** of the Microsoft Entra group can be found in the **Overview** 
         name: <your-azure-admin-group-object-id>
         apiGroup: rbac.authorization.k8s.io
     ```
+
     Save the above YAML to a file, for example, `clusterrolebinding.yaml`, and apply it to the EKS cluster using the following command:
 
     ```bash
@@ -344,9 +346,11 @@ To authenticate to the AWS EKS cluster using Microsoft Entra, you can use the `k
 
     :::note
     You can test the authentication to the EKS cluster immediately by running the following command:
+
     ```bash
     kubectl --user=azure get nodes
     ```
+
     :::
 
 3. Set the context for the kubeconfig file to use the `azure` user and the OIDC configuration. Replace `<cluster-name>` with the name of your EKS cluster.
@@ -398,5 +402,3 @@ To authenticate to the AWS EKS cluster using Microsoft Entra, you can use the `k
 ## Conclusion
 
 Integrating OpenID Connect (OIDC) authentication with Microsoft Entra in AWS EKS is a powerful way to enhance security and streamline user access management. By leveraging the capabilities of SSO, OIDC, and Microsoft Entra, organizations can simplify authentication processes, enforce access controls, and ensure secure navigation across cloud-native environments. Whether you're managing user identities, enhancing compliance, or improving user experience, this integration provides a robust solution to meet your identity and access management needs. By following the steps outlined in this guide, you can configure Microsoft Entra as an Identity Provider in AWS EKS, authenticate users using OIDC, and secure access to your EKS clusters and KubeRocketCI Portal effectively.
-
-

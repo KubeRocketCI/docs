@@ -21,7 +21,7 @@ Ensure the following values are set first before starting the Portal OIDC config
 
 To proceed with the Keycloak configuration, perform the following:
 
-1. Add the URL of the Headlamp to the `valid_redirect_uris` variable in [Keycloak](https://github.com/epam/edp-cluster-add-ons/blob/main/add-ons/kuberocketci-rbac/templates/kubernetes/keycloak-client.yaml#L17):
+1. Add the URL of the Headlamp to the `valid_redirect_uris` variable in [Keycloak](https://github.com/epam/edp-cluster-add-ons/blob/main/clusters/core/addons/kuberocketci-rbac/templates/kubernetes/keycloak-client.yaml#L17):
 
     :::note keycloak_openid_client
 

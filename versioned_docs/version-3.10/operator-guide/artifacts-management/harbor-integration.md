@@ -257,7 +257,7 @@ To facilitate seamless interaction between KubeRocketCI and a Harbor project, it
 
 As a result, application images built in UI Portal will be stored in Harbor project and will be deployed from the harbor registry.
 
-Harbor projects can be added and retained with a retention policy generated through the script in [edp-cluster-add-ons](https://github.com/epam/edp-cluster-add-ons/tree/main/add-ons/harbor-ha/hack/harbor).
+Harbor projects can be added and retained with a retention policy generated through the script in [edp-cluster-add-ons](https://github.com/epam/edp-cluster-add-ons/tree/main/clusters/core/addons/harbor-ha/hack/harbor).
 
 ## Related Articles
 

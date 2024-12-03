@@ -12,7 +12,7 @@ import TabItem from '@theme/TabItem';
 
 ## Integration OAuth2-Proxy
 
-To streamline the installation of OAuth2-Proxy in your environment, it is advised to utilize the resources available in the [Cluster Add-Ons](https://github.com/epam/edp-cluster-add-ons/tree/main/add-ons/oauth2-proxy) and their [applications](https://github.com/epam/edp-cluster-add-ons/blob/main/chart/values.yaml#L120).
+To streamline the installation of OAuth2-Proxy in your environment, it is advised to utilize the resources available in the [Cluster Add-Ons](https://github.com/epam/edp-cluster-add-ons/tree/main/clusters/core/addons/oauth2-proxy) and their [applications](https://github.com/epam/edp-cluster-add-ons/blob/main/chart/values.yaml#L120).
 
 ## Enable OAuth2-Proxy on Tekton Dashboard
 

@@ -23,7 +23,7 @@ This section provides detailed instructions for upgrading the KubeRocketCI to ve
       ]}>
 
       <TabItem value="capsule">
-      1. Take look how to install Capsule using [addons](https://github.com/epam/edp-cluster-add-ons/tree/main/add-ons/capsule).
+      1. Take look how to install Capsule using [addons](https://github.com/epam/edp-cluster-add-ons/tree/main/clusters/core/addons/capsule).
       2. [Integrate Capsule](https://epam.github.io/edp-install/operator-guide/capsule) with KubeRocketCI.
       3. Update edp-install values file:
 

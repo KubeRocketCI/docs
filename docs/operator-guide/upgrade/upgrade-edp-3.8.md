@@ -63,7 +63,7 @@ This section provides detailed instructions for upgrading the KubeRocketCI to th
     :::
 
     :::info
-      Beginning from version 3.8.x, KubeRocketCI uses Argo CD application set instead applications to manage deploy environments, please ensure to upgrade your Argo CD instance to v2.10.3 and higher to work with this kind of resource. An example of how to install it is provided in the [edp-cluster-addons](https://github.com/epam/edp-cluster-add-ons/blob/main/add-ons/argo-cd/values.yaml#L30) repository.
+      Beginning from version 3.8.x, KubeRocketCI uses Argo CD application set instead applications to manage deploy environments, please ensure to upgrade your Argo CD instance to v2.10.3 and higher to work with this kind of resource. An example of how to install it is provided in the [edp-cluster-addons](https://github.com/epam/edp-cluster-add-ons/blob/main/clusters/core/addons/argo-cd/values.yaml#L30) repository.
     :::
 
 5. Familiarize yourself with the updated file structure of the [values.yaml](https://raw.githubusercontent.com/epam/edp-install/v3.8.1/deploy-templates/values.yaml) file and adjust your values.yaml file accordingly:

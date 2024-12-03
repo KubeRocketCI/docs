@@ -13,9 +13,9 @@ To follow the instruction, check the following prerequisites:
 1. (Optional) Terraform version 1.5.7
 2. Kubelogin version >= v1.25.1
 3. (Optional) [EDP Cluster Add-ons](../add-ons-overview.md) Solution is applied
-4. (Optional) [External Secrets Operator](https://github.com/epam/edp-cluster-add-ons/tree/main/add-ons/external-secrets)
-5. A running [Keycloak instance](https://github.com/epam/edp-cluster-add-ons/tree/main/add-ons/keycloak)
-6. The [Keycloak operator](https://github.com/epam/edp-cluster-add-ons/tree/main/add-ons/keycloak-operator) is deployed
+4. (Optional) [External Secrets Operator](https://github.com/epam/edp-cluster-add-ons/tree/main/clusters/core/addons/external-secrets)
+5. A running [Keycloak instance](https://github.com/epam/edp-cluster-add-ons/tree/main/clusters/core/addons/keycloak)
+6. The [Keycloak operator](https://github.com/epam/edp-cluster-add-ons/tree/main/clusters/core/addons/keycloak-operator) is deployed
 7. The Keycloak Realm's OIDC discovery URL and jwks_uri endpoints are publicly accessible
 
 :::note
@@ -57,7 +57,7 @@ The initial step involves setting up the Keycloak operator (configure connection
       </TabItem>
 
       <TabItem value="manual">
-        Deactivate the External Secret Operator within the primary [kuberocketci-rbac](https://github.com/epam/edp-cluster-add-ons/blob/main/add-ons/kuberocketci-rbac/values.yaml#L27) chart:
+        Deactivate the External Secret Operator within the primary [kuberocketci-rbac](https://github.com/epam/edp-cluster-add-ons/blob/main/clusters/core/addons/kuberocketci-rbac/values.yaml#L27) chart:
 
         ```yaml title="values.yaml"
         # Configure components of the External Secrets Operator (ESO).
@@ -75,7 +75,7 @@ The initial step involves setting up the Keycloak operator (configure connection
       </TabItem>
     </Tabs>
 
-2. Begin by installing the [**kuberocketci-rbac**](https://github.com/epam/edp-cluster-add-ons/tree/main/add-ons/kuberocketci-rbac) add-on. This can be accomplished through the use of the add-ons method, as detailed in the [addons approach](../add-ons-overview.md). Utilize the following values in the `values.yaml` file:
+2. Begin by installing the [**kuberocketci-rbac**](https://github.com/epam/edp-cluster-add-ons/tree/main/clusters/core/addons/kuberocketci-rbac) add-on. This can be accomplished through the use of the add-ons method, as detailed in the [addons approach](../add-ons-overview.md). Utilize the following values in the `values.yaml` file:
 
     ```yaml title="values.yaml"
     keycloakUrl: "https://example.com"
@@ -96,7 +96,7 @@ The initial step involves setting up the Keycloak operator (configure connection
 
 This add-ons facilitates sets up a broker realm to manage traffic redirection between external Identity Providers (IdP) and internal clients. Additionally, it creates a shared realm that encompasses all clients, including to EKS, Sonar, Nexus, and Portal.
 
-The [KubeRocketCI RBAC add-on](https://github.com/epam/edp-cluster-add-ons/tree/main/add-ons/kuberocketci-rbac) creates Keycloak groups that are used in the KubeRocketCI platform to manage access to resources. For more details refer to the [KubeRocketCI Groups](platform-auth-model.md#groups) documentation.
+The [KubeRocketCI RBAC add-on](https://github.com/epam/edp-cluster-add-ons/tree/main/clusters/core/addons/kuberocketci-rbac) creates Keycloak groups that are used in the KubeRocketCI platform to manage access to resources. For more details refer to the [KubeRocketCI Groups](platform-auth-model.md#groups) documentation.
 
 ## AWS Configuration
 
@@ -213,7 +213,7 @@ As a result, the required access mapping is implemented using the following reso
 
 | Keycloak Group Name  | Kubernetes ClusterRole | Kubernetes ClusterRoleBinding |
 |----------------------|-------------------------|-------------------------------|
-|  [oidc-cluster-admins](https://github.com/epam/edp-cluster-add-ons/blob/main/add-ons/kuberocketci-rbac/templates/kubernetes/keycloak-realmgroups-cluster-admins.yaml) | cluster-admin (built-in)           | [cluster-admin](https://github.com/epam/edp-cluster-add-ons/blob/main/add-ons/kuberocketci-rbac/templates/kubernetes/clusterrolebinding-admin.yaml)                 |
+|  [oidc-cluster-admins](https://github.com/epam/edp-cluster-add-ons/blob/main/clusters/core/addons/kuberocketci-rbac/templates/kubernetes/keycloak-realmgroups-cluster-admins.yaml) | cluster-admin (built-in)           | [cluster-admin](https://github.com/epam/edp-cluster-add-ons/blob/main/clusters/core/addons/kuberocketci-rbac/templates/kubernetes/clusterrolebinding-admin.yaml)                 |
 
 In this configuration, the Keycloak **oidc-cluster-admins** group is mapped to the Kubernetes **cluster-admin** role. This setup grants members of the **oidc-cluster-admins** group the necessary permissions to perform administrator management in the Kubernetes cluster. You can further customize access by associating different Keycloak groups with specific Kubernetes roles.
 

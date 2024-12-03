@@ -11,7 +11,7 @@ This page serves as a comprehensive guide on integrating Keycloak with the [edp-
 ## Install Keycloak Operator
 
 :::info
-Alternately, the edp-keycloak-operator can be installed using a GitOps approach via the [edp-cluster-add-ons](https://github.com/epam/edp-cluster-add-ons/tree/main/add-ons/kuberocketci-rbac) repository. For detailed installation instructions, please refer to the [Install via Add-ons](../add-ons-overview.md) guide.
+Alternately, the edp-keycloak-operator can be installed using a GitOps approach via the [edp-cluster-add-ons](https://github.com/epam/edp-cluster-add-ons/tree/main/clusters/core/addons/kuberocketci-rbac) repository. For detailed installation instructions, please refer to the [Install via Add-ons](../add-ons-overview.md) guide.
 :::
 
 To install the Keycloak operator, follow the steps below:
@@ -32,7 +32,7 @@ To install the Keycloak operator, follow the steps below:
 ## Connect Keycloak Operator to Keycloak
 
 :::info
-It is also possible to install Keycloak resources using the [edp-cluster-add-ons](https://github.com/epam/edp-cluster-add-ons/tree/main/add-ons/eks) repository. For details, please refer to the [Install via Add-Ons](../add-ons-overview.md) page.
+It is also possible to install Keycloak resources using the [edp-cluster-add-ons](https://github.com/epam/edp-cluster-add-ons/tree/main/clusters/core/addons/eks) repository. For details, please refer to the [Install via Add-Ons](../add-ons-overview.md) page.
 :::
 
 The next stage after installing Keycloak is to integrate it with the Keycloak operator. It can be implemented with the following steps:

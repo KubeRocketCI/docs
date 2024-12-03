@@ -377,7 +377,7 @@ To create a Keycloak user in the Master realm who can manage other realms, follo
     ![Role mappings](../../assets/operator-guide/keycloak-roles.png "Role mappings")
 
     :::note
-      `openshift-realm` is the realm name used as the `broker` realm, which is utilized for integrating third-party Identity Providers. You can find more information about this integration in the [kuberocketci-rbac](https://github.com/epam/edp-cluster-add-ons/tree/main/add-ons/kuberocketci-rbac) repository of the KubeRocketCI platform.
+      `openshift-realm` is the realm name used as the `broker` realm, which is utilized for integrating third-party Identity Providers. You can find more information about this integration in the [kuberocketci-rbac](https://github.com/epam/edp-cluster-add-ons/tree/main/clusters/core/addons/kuberocketci-rbac) repository of the KubeRocketCI platform.
     :::
 
 ## Related Articles

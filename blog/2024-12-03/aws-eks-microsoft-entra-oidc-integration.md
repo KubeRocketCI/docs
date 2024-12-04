@@ -105,11 +105,35 @@ After creating the tenant, you need to set up an OIDC Application in Microsoft E
 
     ![Token Configuration](../assets/aws-eks-microsoft-entra-oidc-integration/token-configuration.png)
 
-8. Navigate to the **API permissions** section. Ensure that the **User.Read** permission is added under the **Microsoft Graph** API. If not, click on the **Add a permission** button, select **Microsoft Graph**, and add the **User.Read** permission. After adding the permission, click on the **Grant admin consent for 'Tenant name'** button to grant the required permissions.
+8. (Optional) Additionally, add an optional **upn** claim in the **Token configuration** section.
 
-    ![API Permissions](../assets/aws-eks-microsoft-entra-oidc-integration/api-permissions.png)
+    :::note
+    This step is optional and should only be performed if external users (i.e., users with **User type: Guest**) will be added to the Microsoft Entra Tenant and require access to the Application.
+    :::
 
-9. The OIDC Application in Microsoft Entra is now configured and ready for integration with AWS EKS.
+    ![upn Claim](../assets/aws-eks-microsoft-entra-oidc-integration/upn-claim.png)
+
+9. (Optional) After adding the **upn** claim, click on the three dots next to it, select **Edit**, and turn on the **Externally authenticated** toggle to **Yes** value.
+
+    :::note
+    This step is optional and should only be performed if external users (i.e., users with **User type: Guest**) will be added to the Microsoft Entra Tenant and require access to the Application.
+    :::
+
+    ![Externally Authenticated](../assets/aws-eks-microsoft-entra-oidc-integration/externally-authenticated.png)
+
+10. Navigate to the **API permissions** section. Ensure that the **User.Read** permission is added under the **Microsoft Graph** API. If not, click on the **Add a permission** button, select **Microsoft Graph**, and add the **User.Read** permission. After adding the permission, click on the **Grant admin consent for 'Tenant name'** button to grant the required permissions.
+
+     ![API Permissions](../assets/aws-eks-microsoft-entra-oidc-integration/api-permissions.png)
+
+11. (Optional) Additionally, for **Microsoft Graph** API, add the **OpenId** permissions, such as **openid**, **email**, and **profile**.
+
+    :::note
+    This step is optional and should only be performed if external users (i.e., users with **User type: Guest**) will be added to the Microsoft Entra Tenant and require access to the Application.
+    :::
+
+    ![OpenID Permissions](../assets/aws-eks-microsoft-entra-oidc-integration/openid-permissions.png)
+
+12. The OIDC Application in Microsoft Entra is now configured and ready for integration with AWS EKS.
 
 ## Creating Users and Groups in Microsoft Entra
 

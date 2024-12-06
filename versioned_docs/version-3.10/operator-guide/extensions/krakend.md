@@ -13,12 +13,6 @@ Ensure that an **ingress controller** and **kuberocketci-rbac** are preinstalled
 
 To streamline the installation of KrakenD in your environment, use the resources available in the [Cluster Add-Ons](https://github.com/epam/edp-cluster-add-ons) repository. This method involves deploying KrakenD alongside the appropriate components, ensuring efficient management and integration into your infrastructure.
 
-Once KrakenD is installed, update the KrakenD deployment configuration by adding the **envFrom** parameter with the secret name:
-
-  ```bash
-    kubectl patch deployment krakend -n krakend --type=json -p='[{"op": "add", "path": "/spec/template/spec/containers/0/envFrom", "value": [{"secretRef": {"name": "krakend"}}]}]'
-  ```
-
 # Configuration
 
 1. KubeRocketCI API Gateway URL Configuration

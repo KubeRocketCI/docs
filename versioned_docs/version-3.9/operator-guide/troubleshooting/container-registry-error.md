@@ -32,4 +32,4 @@ The user credentials are incorrect.
 
 ## Related Articles
 
-* [Change Container Registry](https://epam.github.io/edp-install/operator-guide/container-registries/)
+* [Change Container Registry](../../user-guide/change-container-registry.md)

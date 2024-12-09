@@ -158,6 +158,13 @@ const sidebars: SidebarsConfig = {
                     'operator-guide/artifacts-management/harbor-integration',
                   ],
                 },
+                {
+                  type: 'category',
+                  label: 'Nexus',
+                  items: [
+                    'operator-guide/artifacts-management/nexus-image-registry',
+                  ],
+                },
               ],
             },
           ],

@@ -73,7 +73,7 @@ To enable Add-Ons, it is necessary to have the configured Argo CD, and connect a
 
 2. Align **repoUrl** in [/clusters/core/apps/values.yaml](https://github.com/epam/edp-cluster-add-ons/blob/main/clusters/core/apps/values.yaml#L14), [/clusters/core/bootstrap-addons.yaml](https://github.com/epam/edp-cluster-add-ons/blob/main/clusters/core/bootstrap-addons.yaml#L16) and **repoSource** in the [/argo-cd/templates/appProjectCore.yaml](https://github.com/epam/edp-cluster-add-ons/blob/main/argo-cd/templates/appProjectCore.yaml#L36), [/argo-cd/templates/appProjectCore.yaml](https://github.com/epam/edp-cluster-add-ons/blob/main/argo-cd/templates/appProjectKRCI.yaml#L55) files of the repository, specify the SSH URL of your fork. For GitHub, replace `kuberocketci` with your `<github_account_name>`.
 
-3. Clone a forked add-ons repository to your local machine and install preconfigured **Argo CD** Helm chart from `/argo-cd` folder using the command below:
+3. Clone a forked add-ons repository to your local machine and install pre-configured **Argo CD** Helm chart from `/argo-cd` folder using the command below:
 
 ```bash
 helm install argocd argo-cd -n argocd --create-namespace

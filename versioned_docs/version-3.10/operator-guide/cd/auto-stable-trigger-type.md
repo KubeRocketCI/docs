@@ -7,12 +7,12 @@ Deploying applications to production environments involves risks of downtime and
 In KubeRocketCI, application deployment can be triggered once the new application version is released. Application deployment strategies are managed by the trigger type resource. There are three trigger types:
 
 * **Manual**: Requires a user to manually initiate the deployment process after a new application version is ready.
-* **Autodeploy**: Automatically triggers the deployment pipeline as soon as a new application version is built, all the applications will deployed with latest version available.
-* **Auto-stable**: This one is similar to **Autodeploy** but features more complicated logic. In this trigger type, the newly released application version is deployed, whereas the rest of applications in the Environment will use the **Stable** image tag, even if they have an application image version marked as **Latest**. If there are no application images with the **Stable** tag available, the **Latest** application version will be used.
+* **Auto-deploy**: Automatically triggers the deployment pipeline as soon as a new application version is built, all the applications will deployed with latest version available.
+* **Auto-stable**: This one is similar to **Auto-deploy** but features more complicated logic. In this trigger type, the newly released application version is deployed, whereas the rest of applications in the Environment will use the **Stable** image tag, even if they have an application image version marked as **Latest**. If there are no application images with the **Stable** tag available, the **Latest** application version will be used.
 
-The diagram below illustrates how the **Autodeploy** trigger type works:
+The diagram below illustrates how the **Auto-deploy** trigger type works:
 
-  ![Autodeploy trigger type](../../assets/operator-guide/autodeploy-trigger-type-scheme.png "Autodeploy trigger type")
+  ![Auto-deploy trigger type](../../assets/operator-guide/autodeploy-trigger-type-scheme.png "Auto-deploy trigger type")
 
 As soon as a new application artifact is built, it is immediately deployed to the environment along with the rest of the applications using their latest versions.
 
@@ -22,7 +22,7 @@ The diagram below illustrates how the **Auto-stable** trigger type works:
 
   ![Auto-stable trigger type](../../assets/operator-guide/auto-stable-trigger-type-scheme.png "Auto-stable trigger type")
 
-In contrast to the **Autodeploy** trigger type, where deploy pipelines always deploy the latest application version, **Auto-stable** can safeguard application stability by preventing deployment of latest application version if this version wasn't unstable. If there are several build pipelines running at a time, they are placed in a queue and deployed consequently.
+In contrast to the **Auto-deploy** trigger type, where deploy pipelines always deploy the latest application version, **Auto-stable** can safeguard application stability by preventing deployment of latest application version if this version wasn't unstable. If there are several build pipelines running at a time, they are placed in a queue and deployed consequently.
 
 Understanding the difference between **Latest** and **Stable** tags is essential:
 

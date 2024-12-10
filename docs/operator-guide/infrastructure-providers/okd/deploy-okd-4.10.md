@@ -316,6 +316,6 @@ providerSpec:
 
 ## Related Articles
 
-* [Deploy AWS EKS Cluster](../aws/deploy-aws-eks.md)
+* [Deploy AWS EKS Cluster](../../deploy-aws-eks.md)
 * [Associate IAM Roles With Service Accounts](../aws/enable-irsa.md)
 * [Deploy OKD 4.9 Cluster](deploy-okd-4.9.md)

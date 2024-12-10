@@ -1,24 +1,24 @@
 # Install Argo CD
 
-Review the necessary prerequisites and follow the detailed steps to successfully enable Argo CD within KubeRocketCI.
+Review the necessary prerequisites and follow the steps to enable Argo CD within KubeRocketCI.
 
 ## Prerequisites
 
 The following tools must be installed:
 
 * [KubeRocketCI](./install-kuberocketci.md)
-* [Kubectl version 1.23+](https://kubernetes.io/docs/tasks/tools/)
+* [Kubectl version 1.24+](https://kubernetes.io/docs/tasks/tools/)
 * [Helm version 3.10+](https://github.com/helm/helm/releases)
 * [Keycloak](./auth/keycloak.md) (optional)
 
 ## Installation
 
-Argo CD enablement for the platform consists of two major steps:
+Enabling Argo CD on the platform involves two main steps:
 
 * Argo CD installation
-* Argo CD integration with KubeRocketCI (SSO enablement, git repository onboarding, etc.)
+* Argo CD integration with Add-Ons
 
-Argo CD can be installed in several ways, please follow the [official documentation](https://argo-cd.readthedocs.io/en/stable/operator-manual/installation/) for more details. It is also possible to install Argo CD using the [edp-cluster-add-ons](https://github.com/epam/edp-cluster-add-ons).
+Argo CD can be installed in several ways, please follow the [official documentation](https://argo-cd.readthedocs.io/en/stable/operator-manual/installation/) for more details. It is also possible to install Argo CD using the [edp-cluster-add-ons](https://github.com/epam/edp-cluster-add-ons/tree/main/argo-cd).
 
 ### Install With Helm
 
@@ -87,106 +87,107 @@ Follow the steps below to install Argo CD using Helm:
   </details>
 :::
 
-1. Check out the _values.yaml_ file sample of the Argo CD customization, which is based on the `HA mode without autoscaling`:
-
-    <details>
-    <summary><b>View: kubernetes-values.yaml</b></summary>
-
-      ```yaml
-      redis-ha:
-        enabled: true
-
-      controller:
-        enableStatefulSet: true
-
-      server:
-        replicas: 2
-        extraArgs:
-          - "--insecure"
-        env:
-          - name: ARGOCD_API_SERVER_REPLICAS
-            value: '2'
-        ingress:
-          enabled: true
-          hosts:
-            - "argocd.<Values.global.dnsWildCard>"
-
-        rbacConfig:
-          # users may be still be able to login,
-          # but will see no apps, projects, etc...
-          policy.default: ''
-          scopes: '[groups]'
-          policy.csv: |
-            # default global admins
-            g, ArgoCDAdmins, role:admin
-
-      repoServer:
-        replicas: 2
-
-      # Deploy without sso
-      dex:
-        enabled: false
-
-      # Disabled for multitenancy env with single instance deployment
-      applicationSet:
-        enabled: false
-      ```
-
-    </details>
-
-    <details>
-    <summary><b>View: openshift-values.yaml</b></summary>
-
-      ```yaml
-      redis-ha:
-        enabled: true
-
-      controller:
-        enableStatefulSet: true
-
-      server:
-        replicas: 2
-        extraArgs:
-          - "--insecure"
-        env:
-          - name: ARGOCD_API_SERVER_REPLICAS
-            value: '2'
-        route:
-          enabled: true
-          hostname: "argocd.<.Values.global.dnsWildCard>"
-          termination_type: edge
-          termination_policy: Redirect
-
-        rbacConfig:
-          # users may be still be able to login,
-          # but will see no apps, projects, etc...
-          policy.default: ''
-          scopes: '[groups]'
-          policy.csv: |
-            # default global admins
-            g, ArgoCDAdmins, role:admin
-
-      repoServer:
-        replicas: 2
-
-      # Deploy without sso
-      dex:
-        enabled: false
-
-      # Disabled for multitenancy env with single instance deployment
-      applicationSet:
-        enabled: false
-      ```
-
-    </details>
+1. Fork the [Add-Ons](https://github.com/epam/edp-cluster-add-ons/tree/main/argo-cd) repository to your personal account:
 
 2. Run the installation:
 
     ```bash
-    kubectl create ns argocd
-    helm repo add argo https://argoproj.github.io/argo-helm
-    helm install argo --version 5.33.1 argo/argo-cd -f values.yaml -n argocd
+    helm dependency update argo-cd
+    helm install argocd argo-cd -n argocd --create-namespace
     ```
+
+3. Port-forward Argo CD service using kubectl:
+
+    ```bash
+    kubectl port-forward svc/argo-argocd-server 8080:80 -n argocd
+    ```
+
+4. Login to the Argo CD server in browser using login and password:
+
+    :::info
+      By default, to access the console with administrative privileges, use the following credentials:
+	    - URL: localhost:8080
+      -	Login: admin
+    :::
+
+    ```bash title="password"
+    kubectl get secret -n argocd argocd-initial-admin-secret --template={{.data.password}} | base64 -d
+    ```
+5. Integrate Argo CD with add-ons and install core add-ons:
+
+    To ensure the system functions correctly, the following core components must be installed:
+
+     - Nginx Ingress Controller
+     - External Secrets Operator
+     - Keycloak
+     - Keycloak Operator
+
+     These components can be installed using the prepared [add-ons repository](https://github.com/epam/edp-cluster-add-ons). Refer to the [add-ons installation guide](add-ons-overview) for detailed instructions.
+
+    ![Add Ons Overview](../assets/operator-guide/argocd-addons.png "Add Ons Overview")
+
+     Once these components are installed, proceed with the Argo CD configuration.
+
+6. Update Argo CD helm chart:
+
+    To enable features such as ingress, login via oidc provider, provisioning secret using ESO need to update ArgoCD with [values](https://github.com/epam/edp-cluster-add-ons/blob/main/argo-cd/values.yaml) below:
+
+    ```yaml title=" kubernetes values.yaml"
+    argo-cd:
+      global:
+        # -- Default domain used by all components
+        ## Used for ingresses, certificates, SSO, notifications, etc.
+        domain: argocd.example.com
+      configs:
+        cm:
+          # required when SSO is enabled
+          url: "https://argocd.example.com"
+        oidc.config: |
+          issuer: https://keycloak.example/auth/realms/shared
+      server:
+        ingress:
+          enabled: true
+          hosts:
+            - "argocd.example.com"
+        oidc:
+          enabled: true
+        eso:
+          enabled: true
+    ```
+
+    <details>
+    <summary><b>View: openshift values.yaml</b></summary>
+
+      ```yaml
+    argo-cd:
+      global:
+        # -- Default domain used by all components
+        ## Used for ingresses, certificates, SSO, notifications, etc.
+        domain: argocd.example.com
+      configs:
+        cm:
+          # required when SSO is enabled
+          url: "https://argocd.example.com"
+        oidc.config: |
+          issuer: https://keycloak.example/auth/realms/shared
+      server:
+        route:
+          enabled: true
+          hostname: "argocd.example.com"
+          termination_type: edge
+          termination_policy: Redirect
+        oidc:
+          enabled: true
+        eso:
+          enabled: true
+      ```
+
+    </details>
+
+## Next Step
+
+  - Instal third party tools via [Add-Ons](add-ons-overview)
+  - Install [KubeRocketCI](install-kuberocketci)
 
 ## Related Articles
 

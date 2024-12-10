@@ -368,7 +368,8 @@
           "label": "Pipelines",
           "collapsed": false,
           "items": [
-            "user-guide/pipelines"
+            "user-guide/pipelines",
+            "user-guide/tekton-pipelines"
           ]
         },
         {

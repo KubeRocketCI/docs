@@ -367,6 +367,7 @@ const sidebars: SidebarsConfig = {
           collapsed: false,
           items: [
             'user-guide/pipelines',
+            'user-guide/tekton-pipelines',
           ],
         },
         {

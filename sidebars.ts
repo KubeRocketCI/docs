@@ -80,6 +80,8 @@ const sidebars: SidebarsConfig = {
           label: 'Installation',
           items: [
             'operator-guide/installation-overview',
+            'operator-guide/deploy-aws-eks',
+            'operator-guide/install-argocd',
             'operator-guide/add-ons-overview',
             {
               type: 'category',
@@ -99,7 +101,6 @@ const sidebars: SidebarsConfig = {
                         'operator-guide/install-ingress-nginx',
                       ],
                     },
-                    'operator-guide/install-argocd',
                     'operator-guide/install-tekton',
                   ],
                 },
@@ -287,7 +288,6 @@ const sidebars: SidebarsConfig = {
               type: 'category',
               label: 'AWS Integration',
               items: [
-                'operator-guide/infrastructure-providers/aws/deploy-aws-eks',
                 'operator-guide/infrastructure-providers/aws/waf-tf-configuration',
                 'operator-guide/infrastructure-providers/aws/ebs-csi-driver',
                 'operator-guide/infrastructure-providers/aws/enable-irsa',

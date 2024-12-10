@@ -311,14 +311,14 @@ Please find the detailed description of the variables in the [eks/variables.tf](
     aws eks update-kubeconfig --region <REGION> --name <CLUSTER_NAME>
     ```
 
-6. Once AWS EKS Cluster is successfully deployed, you can navigate to our [KubeRocketCI addons](../../add-ons-overview.md) to install and manage cluster applications using the GitOps approach.
+6. Once AWS EKS Cluster is successfully deployed, you can navigate to our [KubeRocketCI addons](add-ons-overview.md) to install and manage cluster applications using the GitOps approach.
 
 ## Argo CD Configuration (Optional)
 
 This section covers configuring Argo CD for further integrating with an external EKS cluster. This integration necessitates creating two AWS IAM roles:
 
 * `AWSIRSA_Test_ArgoCDMaster` AWS IAM role - for setting up IRSA annotations for the Argo CD application;
-* `EDPArgoCDClusterAdmin` AWS IAM role - for working with external EKS clusters and further adding them (please refer to the [Add Cluster](../../../user-guide/add-cluster.md) page for details).
+* `EDPArgoCDClusterAdmin` AWS IAM role - for working with external EKS clusters and further adding them (please refer to the [Add Cluster](../user-guide/add-cluster.md) page for details).
 
 ### Argo CD IAM Role for Shared EKS Cluster
 
@@ -385,7 +385,7 @@ Please find the detailed description of the variables in the [argo-cd/variables.
 
     :::
 
-5. Once `AWSIRSA_Test_ArgoCDMaster` AWS IAM Role is successfully created, you can navigate to our [Cluster addons](../../add-ons-overview.md) to set up IRSA annotations for the Argo CD application:
+5. Once `AWSIRSA_Test_ArgoCDMaster` AWS IAM Role is successfully created, navigate to the [Cluster addons](add-ons-overview.md) to set up IRSA annotations for the Argo CD application:
 
     ```yaml title="add-ons/argo-cd/values.yaml"
     argo-cd:
@@ -464,7 +464,11 @@ Please find the detailed description of the variables in the [argo-cd/variables.
 
     :::
 
+## Next Step
+
+  - Install [Argo CD](install-argocd) and integrate it with [edp-cluster-add-ons](https://github.com/epam/edp-cluster-add-ons) components
+
 ## Related Articles
 
-* [Cluster Add-Ons Overview](../../add-ons-overview.md)
-* [Install KubeRocketCI](../../install-kuberocketci.md)
+* [Cluster Add-Ons Overview](add-ons-overview.md)
+* [Install KubeRocketCI](install-kuberocketci.md)

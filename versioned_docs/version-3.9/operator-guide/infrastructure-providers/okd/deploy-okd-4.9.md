@@ -164,5 +164,5 @@ To log into the cluster, export the `kubeconfig`:
 
 ## Related Articles
 
-* [Deploy AWS EKS Cluster](../aws/deploy-aws-eks.md)
+* [Deploy AWS EKS Cluster](../../deploy-aws-eks.md)
 * [Deploy OKD 4.10 Cluster](deploy-okd-4.10.md)

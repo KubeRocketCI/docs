@@ -11,34 +11,144 @@ This documentation guide provides comprehensive instructions for integrating Son
 
 ## Prerequisites
 
-Before proceeding, ensure that you have the following prerequisites:
+Before proceeding, ensure the following prerequisites are met:
 
 * Kubectl version 1.26.0+ is installed. Please refer to the [Kubernetes official website](https://kubernetes.io/releases/download/) for details.
 * [Helm](https://helm.sh) version 3.14.0+ is installed. Please refer to the [Helm page](https://github.com/helm/helm/releases) on GitHub for details.
 
 ## Installation
 
-To install Nexus in your environment, it's recommended to use the resources provided in the [Cluster Add-Ons](https://github.com/epam/edp-cluster-add-ons) repository. This approach involves installing both the Nexus repository manager and the [nexus-operator](https://github.com/epam/edp-nexus-operator). Leveraging the Cluster Add-Ons simplifies the deployment and management process, providing a streamlined method to integrate Nexus into your infrastructure.
+To install Nexus in environment, it's recommended to use the resources provided in the [Cluster Add-Ons](https://github.com/epam/edp-cluster-add-ons) repository. This approach involves installing both the Nexus repository manager and the [nexus-operator](https://github.com/epam/edp-nexus-operator). Leveraging the Cluster Add-Ons simplifies the deployment and management process, providing a streamlined method to integrate Nexus into infrastructure.
 
-1. **Nexus Repository Manager**: First, navigate to the [Nexus section within the KubeRocketCI Cluster Add-Ons](https://github.com/epam/edp-cluster-add-ons/tree/main/clusters/core/addons/nexus) repository. Follow the instructions to deploy Nexus, ensuring it's correctly configured to serve as your artifact repository.
+1. **Nexus Repository Manager**: First, navigate to the forked cluster Add-Ons repository and align the [nexus values.yaml](https://github.com/epam/edp-cluster-add-ons/tree/main/clusters/core/addons/nexus/values.yaml) and [nexus-operator values.yaml](https://github.com/epam/edp-cluster-add-ons/tree/main/clusters/core/addons/nexus-operator/values.yaml) files. Follow the instructions to deploy Nexus, ensuring it's correctly configured to serve as artifact repository.
 
-2. **Nexus-Operator**: Then, proceed with the [nexus-operator](https://github.com/epam/edp-nexus-operator) installation. The operator facilitates easier management and automation of Nexus, allowing for seamless updates, configuration changes, and monitoring.
+2. Update the configuration to enable **nexus** and **nexus-operator** in [Add-Ons](https://github.com/epam/edp-cluster-add-ons/blob/main/clusters/core/apps/values.yaml) repository:
+
+    ```yaml title="clusters/core/apps/values.yaml"
+    nexus:
+      createNamespace: true
+      enable: true
+
+    nexus-operator:
+      createNamespace: true
+      enable: true
+    ```
+
+3. Sync resources and wait till the all **nexus** and **nexus-operator** resources is created:
+
+    ![Nexus ArgoCD applications](../../assets/operator-guide/artifacts-management/nexus-artifact-addons-deploy.png "Nexus ArgoCD applications")
+
+4. **Sign In** into **Nexus Repository Manager** using the default credentials **Username**: `admin` and **Password**: `admin123` and update the default password for better security:
+
+    ![Nexus change password](../../assets/operator-guide/artifacts-management/nexus-artifact-change-password.png "Nexus change password")
 
 ## Configuration
 
-To guarantee robust authentication and precise access control within the platform ecosystem, it's essential to establish a Service Account named `ci.user`. This account acts as a distinct identifier, enabling seamless integration and secure communication across the KubeRocketCI environment.
+With [Add-ons approach](https://github.com/epam/edp-cluster-add-ons/blob/main/clusters/core) `nexus-operator` create the necessary roles,**Service Account** `ci.user`, blob stores, repository, scripts, cleanup policies automatically. Below is a comprehensive guide on how to create all resources manually.
 
-To create the Nexus `ci.user` and define repository parameters follow the steps below:
+## Configuration Nexus Repository Manager with nexus-operator
 
-1. Open the Nexus UI and navigate to **Server administration and configuration** -> **Security** -> **User**. Click the `Create local user` button to create a new user:
+1. Create a Kubernetes Secret that the **nexus-operator** will use to connect to the **Nexus Repository Manager** and create all resources:
 
-    ![Nexus user settings](../../assets/operator-guide/artifacts-management/nexus-settings-user.png "Nexus user settings")
+  <Tabs
+    defaultValue="manifests"
+    values={[
+      {label: 'Manifests', value: 'manifests'},
+      {label: 'External Secrets Operator', value: 'externalsecret'},
+    ]}>
+    <TabItem value="manifests">
+      ```yaml
+      apiVersion: v1
+      kind: Secret
+      metadata:
+        name: nexus-admin-password
+        namespace: nexus
+      type: Opaque
+      data:
+        user: YWRtaW4=     # base64-encoded value of "admin"
+        password: cGFzcw== # base64-encoded value of "pass"
+      ```
+    </TabItem>
+    <TabItem value="externalsecret">
+      ```json
+      "nexus-admin-password":
+      {
+        "user": "XXXXXXX",
+        "password": "XXXXXXX"
+      }
+      ```
+      </TabItem>
+  </Tabs>
 
-2. Type the `ci-user` username, define an expiration period, and click the `Generate` button to create the token:
+2. Create a secret using `manifests` or with `External Secrets Operator` to enable the **edp-nexus-operator** to connect to the **Nexus Repository Manager** for provisioning:
 
-    ![Nexus create user](../../assets/operator-guide/artifacts-management/nexus-create-user.png "Nexus create user")
+  <Tabs
+    defaultValue="manifests"
+    values={[
+      {label: 'Manifests', value: 'manifests'},
+      {label: 'External Secrets Operator', value: 'externalsecret'},
+    ]}>
+    <TabItem value="manifests">
+      ```yaml
+      apiVersion: v1
+      kind: Secret
+      metadata:
+        name: ci-nexus
+        namespace: nexus
+      type: Opaque
+      stringData:
+        password: <nexus-user-password>
+      ```
+    </TabItem>
+    <TabItem value="externalsecret">
+      ```json
+      "ci-nexus":
+      {
+        "password": "XXXXXXX"
+      }
+      ```
+      </TabItem>
+  </Tabs>
 
-3. KubeRocketCI operates using a specific repository naming convention, where all repository names adhere to predefined standards. To align with this, navigate to **Server administration and configuration** -> **Repository** -> **Repositories** within Nexus. Here, repository creation is limited to those that match the required programming language, ensuring consistency and compliance with the KubeRocketCI framework.
+## Configuration Nexus Repository Manager without nexus-operator
+
+Without using the **nexus-operator**, manual updates are required for the Helm chart values of the **Nexus Repository Manager**, as well as the creation of blob stores, repositories, roles, and the **Service Account** `ci.user`:
+
+1. Create blob store. Open the Nexus UI and navigate to **Server administration and configuration** -> **Repository** -> **Blob Stores** and click **Create Blob Store**, fill the following fields and click **Save** button:
+
+    <Tabs
+      defaultValue="java"
+      values={[
+        {label: 'Java', value: 'java'},
+        {label: 'JavaScript', value: 'javascript'},
+        {label: 'DotNet', value: 'dotnet'},
+        {label: 'Python', value: 'python'},
+        {label: 'RPM', value: 'rpm'}
+      ]}>
+
+      <TabItem value="java">
+        * **Type**: `File`
+        * **Name**: `edp-maven`
+      </TabItem>
+      <TabItem value="javascript">
+        * **Type**: `File`
+        * **Name**: `edp-npm`
+      </TabItem>
+      <TabItem value="dotnet">
+        * **Type**: `File`
+        * **Name**: `edp-dotnet`
+      </TabItem>
+      <TabItem value="python">
+        * **Type**: `File`
+        * **Name**: `edp-python`
+      </TabItem>
+      <TabItem value="rpm">
+        * **Type**: `File`
+        * **Name**: `edp-yum`
+      </TabItem>
+    </Tabs>
+
+2. KubeRocketCI operates using a specific repository naming convention, where all repository names adhere to predefined standards. To align with this, navigate to **Server administration and configuration** -> **Repository** -> **Repositories** within Nexus. Here, repository creation is limited to those that match the required programming language, ensuring consistency and compliance with the KubeRocketCI framework.
 
     ![Nexus repository list](../../assets/operator-guide/artifacts-management/nexus-repository.png "Nexus repository list")
 
@@ -48,65 +158,182 @@ To create the Nexus `ci.user` and define repository parameters follow the steps 
         {label: 'Java', value: 'java'},
         {label: 'JavaScript', value: 'javascript'},
         {label: 'DotNet', value: 'dotnet'},
-        {label: 'Python', value: 'python'}
+        {label: 'Python', value: 'python'},
+        {label: 'RPM', value: 'rpm'}
       ]}>
 
       <TabItem value="java">
-        a) Click Create a repository by selecting "maven2(proxy)" and set the name as "edp-maven-proxy". Enter the remote storage URL as "https://repo1.maven.org/maven2/". Save the configuration.
-
-        b) Click Create a repository by selecting "maven2(hosted)" and set the name as "edp-maven-snapshot". Change the Version policy to "snapshot". Save the configuration.
-
-        c) Click Create a repository by selecting "maven2(hosted)" and set the name as "edp-maven-releases". Change the Version policy to "release". Save the configuration.
-
-        d) Click Create a repository by selecting "maven2(group)" and set the name as "edp-maven-group". Change the Version policy to "release". Add repository to group. Save the configuration.
+        a) Click Create a repository by selecting `maven2(proxy)` fill the following fields and click **Create repository**:
+        * **Name** `edp-maven-proxy`
+        * **Remote storage URL** `https://repo1.maven.org/maven2/`
+        * **Blob store** `edp-maven`
+        * **HTTP request settings** `check`
+        * **Use-agent customization** `user-agent-suffix`
+        * **Connection retries** `10`
+        * **Connection timeout** `1440`
+        <br/>
+        b) Click Create a repository by selecting `maven2(hosted)` fill the following fields  and click **Create repository**:
+        * **Name** `edp-maven-snapshots`
+        * **Version policy** `snapshots`
+        * **Blob store** `edp-maven`
+        <br/>
+        c) Click Create a repository by selecting `maven2(hosted)` fill the following fields and click **Create repository**:
+        * **Name** `edp-maven-releases`
+        * **Version policy** `release`
+        * **Blob store** `edp-maven`
+        <br/>
+        d) Click Create a repository by selecting `maven2(group)` fill the following fields and click **Create repository**:
+        * **Name** `edp-maven-group`
+        * **Version policy** `release`
+        * **Member repositories** `edp-maven-proxy`, `edp-maven-snapshots`, `edp-maven-releases`
       </TabItem>
+
       <TabItem value="javascript">
-        a) Click Create a repository by selecting "npm(proxy)" and set the name as "edp-npm-proxy". Enter the remote storage URL as "https://registry.npmjs.org". Save the configuration.
-
-        b) Click Create a repository by selecting "npm(hosted)" and set the name as "edp-npm-snapshot". Save the configuration.
-
-        c) Click Create a repository by selecting "npm(hosted)" and set the name as "edp-npm-releases". Save the configuration.
-
-        d) Click Create a repository by selecting "npm(hosted)" and set the name as "edp-npm-hosted". Save the configuration.
-
-        e) Click Create a repository by selecting "npm(group)" and set the name as "edp-npm-group". Add repository to group. Save the configuration.
+        a) Click Create a repository by selecting `npm(proxy)` fill the following fields **Create repository**:
+        * **Name** `edp-npm-proxy`
+        * **Remote storage URL** `https://registry.npmjs.org`
+        * **Blob store** `edp-npm`
+        * **HTTP request settings** `check`
+        * **Use-agent customization** `user-agent-suffix`
+        * **Connection retries** `10`
+        * **Connection timeout** `1440`
+        <br/>
+        b) Click Create a repository by selecting `npm(hosted)` fill the following fields and click **Create repository**:
+        * **Name** `edp-npm-snapshots`
+        * **Blob store** `edp-npm`
+        <br/>
+        c) Click Create a repository by selecting `npm(hosted)` fill the following fields and click **Create repository**:
+        * **Name** `edp-npm-releases`
+        * **Blob store** `edp-npm`
+        <br/>
+        d) Click Create a repository by selecting `npm(hosted)` fill the following fields and click **Create repository**:
+        * **Name** `edp-npm-hosted`
+        * **Blob store** `edp-npm`
+        <br/>
+        e) Click Create a repository by selecting `npm(group)` fill the following fields and click **Create repository**:
+        * **Name** `edp-npm-group`
+        * **Member repositories** `edp-npm-proxy`, `edp-npm-snapshots`, `edp-npm-releases`, `edp-npm-hosted`
       </TabItem>
 
       <TabItem value="dotnet">
-        a) Click Create a repository by selecting "nuget(proxy)" and set the name as "edp-dotnet-proxy". Select Protocol version NuGet V3. Enter the remote storage URL as "https://api.nuget.org/v3/index.json". Save the configuration.
-
-        b) Click Create a repository by selecting "nuget(hosted)" and set the name as "edp-dotnet-snapshot". Save the configuration.
-
-        c) Click Create a repository by selecting "nuget(hosted)" and set the name as "edp-dotnet-releases". Save the configuration.
-
-        d) Click Create a repository by selecting "nuget(hosted)" and set the name as "edp-dotnet-hosted". Save the configuration.
-
-        e) Click Create a repository by selecting "nuget(group)" and set the name as "edp-dotnet-group". Add repository to group. Save the configuration.
+        a) Click Create a repository by selecting `nuget(proxy)` fill the following fields and click **Create repository**:
+        * **Name** `edp-dotnet-proxy`
+        * **Protocol version NuGet V3** `check`
+        * **Remote storage URL** `https://api.nuget.org/v3/index.json`
+        * **Blob store** `edp-dotnet`
+        * **HTTP request settings** `check`
+        * **Use-agent customization** `user-agent-suffix`
+        * **Connection retries** `10`
+        * **Connection timeout** `1440`
+        <br/>
+        b) Click Create a repository by selecting `nuget(hosted)` fill the following fields and click **Create repository**:
+        * **Name** `edp-dotnet-snapshots`
+        * **Blob store** `edp-dotnet`
+        <br/>
+        c) Click Create a repository by selecting `nuget(hosted)` fill the following fields and click **Create repository**:
+        * **Name** `edp-dotnet-releases`
+        * **Blob store** `edp-dotnet`
+        <br/>
+        d) Click Create a repository by selecting `nuget(hosted)` fill the following fields and click **Create repository**:
+        * **Name** `edp-dotnet-hosted`
+        * **Blob store** `edp-dotnet`
+        <br/>
+        e) Click Create a repository by selecting `nuget(group)` fill the following fields and click **Create repository**:
+        * **Name** `edp-dotnet-group`
+        * **Member repositories** `edp-dotnet-proxy`, `edp-dotnet-snapshots`, `edp-dotnet-releases`, `edp-dotnet-hosted`
       </TabItem>
 
       <TabItem value="python">
-        a) Click Create a repository by selecting "pypi(proxy)" and set the name as "edp-python-proxy". Enter the remote storage URL as "https://pypi.org". Save the configuration.
+        a) Click Create a repository by selecting `pypi(proxy)` fill the following fields and click **Create repository**:
+        * **Name** `edp-python-proxy`
+        * **Remote storage URL** `https://pypi.org`
+        * **Blob store** `edp-python`
+        * **HTTP request settings** `check`
+        * **Use-agent customization** `user-agent-suffix`
+        * **Connection retries** `10`
+        * **Connection timeout** `1440`
+        <br/>
+        b) Click Create a repository by selecting `pypi(hosted)` fill the following fields and click **Create repository**:
+        * **Name** `edp-python-snapshots`
+        * **Blob store** `edp-python`
+        <br/>
+        c) Click Create a repository by selecting `pypi(hosted)` fill the following fields and click **Create repository**:
+        * **Name** `edp-python-releases`
+        * **Blob store** `edp-python`
+        <br/>
+        d) Click Create a repository by selecting `pypi(group)` fill the following fields and click **Create repository**:
+        * **Name** `edp-python-group`
+        * **Member repositories** `edp-python-proxy`, `edp-python-snapshots`, `edp-python-releases`
+        <br/>
+      </TabItem>
 
-        b) Click Create a repository by selecting "pypi(hosted)" and set the name as "edp-python-snapshot". Save the configuration.
-
-        c) Click Create a repository by selecting "pypi(hosted)" and set the name as "edp-python-releases". Save the configuration.
-
-        d) Click Create a repository by selecting "pypi(group)" and set the name as "edp-python-group". Add repository to group. Save the configuration.
+      <TabItem value="rpm">
+        a) Click Create a repository by selecting `yum(proxy)` fill the following fields and click **Create repository**:
+        * **Name** `edp-yum-proxy`
+        * **Remote storage URL** `http://fedora.ip-connect.info/linux/development/rawhide/Everything/x86_64/os/`
+        * **Blob store** `edp-yum`
+        * **HTTP request settings** `check`
+        * **Use-agent customization** `user-agent-suffix`
+        * **Connection retries** `10`
+        * **Connection timeout** `1440`
+        <br/>
+        b) Click Create a repository by selecting `yum(hosted)` fill the following fields and click **Create repository**:
+        * **Name** `edp-yum-snapshots`
+        * **Repo data Depth** `3`
+        * **Blob store** `edp-yum`
+        <br/>
+        c) Click Create a repository by selecting `yum(hosted)` fill the following fields and click **Create repository**:
+        * **Name** `edp-yum-releases`
+        * **Repo data Depth** `3`
+        * **Blob store** `edp-yum`
+        <br/>
       </TabItem>
 
     </Tabs>
 
-4. Provision secrets using manifest, EDP Portal or with the externalSecrets operator
+3. Open the Nexus UI and navigate to **Server administration and configuration** -> **Security** -> **Roles**. Click the **Create Role** button, fill the following fields and click **Save** button:
+
+    * **Type**: `Nexus role`
+    * **Role ID**: `krci-admin`
+    * **Role Name**: `krci-admin`
+    * **Role Descriptions**: `Read and write access to all repos and scripts`
+    * **Applied Privileges**: `nx-apikey-all`, `nx-repository-view-*-*-add`, `nx-repository-view-*-*-browse`,`nx-repository-view-*-*-edit`, `nx-repository-view-*-*-read`, `nx-script-*-add`, `nx-script-*-delete`, `nx-script-*-read`, `nx-script-*-run`
+
+    ![Roles settings](../../assets/operator-guide/artifacts-management/nexus-artifact-create-roles.png "Roles settings")
+
+4. Create repository Service Account `ci.user`. Open the Nexus UI and navigate to **Server administration and configuration** -> **Security** -> **User**. Click the `Create local user` button to create a new user:
+
+    ![Nexus user settings](../../assets/operator-guide/artifacts-management/nexus-settings-user.png "Nexus user settings")
+
+5. Type the `ci.user` username, fill the following fields and click the **Create local user** button to create the ***Service Account**, fill the following fields and click **Save** button::
+
+    * **ID**: `ci.user`
+    * **First name**: `ci.user`
+    * **Last name**: `CI`
+    * **Email**: `ci.user@krci.com`
+    * **Password**: `<nexus-user-password>`
+    * **Status**: `Active`
+    * **Roles**: `krci-admin`
+
+    ![Nexus create user](../../assets/operator-guide/artifacts-management/nexus-artifact-create-user.png "Nexus create user")
+
+## Integration Nexus Repository Manager with KubeRocketCI
+
+For provision secret using manifest, KubeRocketCI portal or with the externalSecrets operator:
 
   <Tabs
-    defaultValue="portal"
+    defaultValue="kuberocketci"
     values={[
-      {label: 'UI Portal', value: 'portal'},
+      {label: 'KubeRocketCI portal', value: 'kuberocketci'},
       {label: 'Manifests', value: 'manifests'},
       {label: 'External Secrets Operator', value: 'externalsecret'},
     ]}>
-    <TabItem value="portal">
-      Go to **Portal** -> **Configuration** -> **ARTIFACTS STORAGE** -> **NEXUS**. Update or click **+ ADD INTEGRATION** fill in the `URL`, `nexus-user-id`, `nexus-user-password` and click the `Save` button:
+    <TabItem value="kuberocketci">
+      Go to **Portal** -> **Configuration** -> **ARTIFACTS STORAGE** -> **NEXUS**. Update or click **+ ADD INTEGRATION** fill the following fields and click the `SAVE` button:
+      * **Quick link URL** `https://nexus.example.com`
+      * **URL** `http://nexus.nexus:8081`
+      * **User** `nexus-user-id`
+      * **Password** `nexus-user-password`
 
       ![Nexus update manual secret](../../assets/operator-guide/artifacts-management/nexus-secret-password.png "Nexus update manual secret")
     </TabItem>
@@ -137,7 +364,7 @@ To create the Nexus `ci.user` and define repository parameters follow the steps 
       },
       ```
 
-      Go to **Portal** -> **Configuration** -> **ARTIFACTS STORAGE** -> **NEXUS** and see `Managed by External Secret` message.
+      Go to **Portal** -> **Configuration** -> **ARTIFACTS STORAGE** -> **NEXUS** and see `Managed by External Secret` message:
 
       ![Nexus managed by external secret operator](../../assets/operator-guide/artifacts-management/nexus-externalsecret-password.png "Nexus managed by external secret operator")
 

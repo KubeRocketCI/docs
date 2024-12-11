@@ -51,4 +51,27 @@ export const useCasesList: UseCaseItem[] = [
     ),
     link: '/docs/use-cases/autotest-as-quality-gate',
   },
+  {
+    title: 'Creating and Using Custom Tekton Pipelines',
+    Svg: BuildIcon,
+    description: (
+      <>
+        How to create and use custom Tekton pipelines. While KubeRocketCI offers pre-configured Tekton pipelines for common
+        use cases, custom pipelines allow you to adapt workflows to meet unique project requirements.
+      </>
+    ),
+    link: '/docs/use-cases/custom-pipelines-flow',
+  },
+  {
+    title: 'Set Test Suite Parameters Using Environment Variables in CD Pipelines',
+    Svg: BuildIcon,
+    description: (
+      <>
+        Dynamically adjust parameters adding, modifying, or removing them without changing the test suite code.
+        This provides precise control over quality gates, streamlines workflows, and allows pipelines to adapt
+        to different environments or requirements while maintaining efficiency and quality standards.
+      </>
+    ),
+    link: '/docs/use-cases/cd-autotests-run-with-env-variables',
+  },
 ];

@@ -222,7 +222,7 @@ This step will cover the following topics:
 * Create the EKS Cluster
 * Create the AWS ASGs for the EKS Cluster
 * Create the AWS ALB
-* (Optional) Create the AWS IAM role Kaniko to use AWS ECR
+* (Optional) Create the Kaniko AWS IAM Role
 
 To accomplish the tasks outlined above, follow these steps:
 
@@ -270,48 +270,36 @@ Please find the detailed description of the variables in the [eks/variables.tf](
     }
     ```
 
-4. (Optional) To create the Kaniko AWS IAM Role, navigate to the IAM module directory:
+4. (Optional) Create the Kaniko AWS IAM Role:
 
-    ```bash
-    cd ../iam
+    If AWS Elastic Container Registry (ECR) will be used as the [Container Registry](../user-guide/manage-container-registries.md) in the KubeRocketCI platform, it is necessary to create a specific IAM role for Kaniko.
+
+    To configure the Kaniko AWS IAM Role, set the `create_kaniko_iam_role` variable to `true` in the `eks/template.tfvars` configuration file:
+
+    ```tf title="eks/template.tfvars"
+    create_kaniko_iam_role = true
     ```
 
-    Fill in the input variables for Terraform run in the `iam/template.tfvars` file. Refer to the [iam/example.tfvars](https://github.com/KubeRocketCI/terraform-aws-platform/blob/master/iam/example.tfvars) file as an example.
+    The Kaniko AWS IAM Role will be created as part of the EKS cluster provisioning process.
 
-    Please find the detailed description of the variables in the [iam/variables.tf](https://github.com/KubeRocketCI/terraform-aws-platform/blob/master/iam/variables.tf) file.
+    Once the EKS cluster and the Kaniko AWS IAM Role are successfully created, you can use the resulting Amazon Resource Name (ARN) in the `edp-tekton.kaniko.roleArn` field within the `values.yaml` file during the [KubeRocketCI installation](install-kuberocketci.md).
 
-    ```tf title="iam/template.tfvars"
-    create_iam_kaniko = true
-
-    region = "eu-central-1"
-
-    kaniko_iam_permissions_boundary_policy_arn = "arn:aws:iam::012345678910:policy/eo_role_boundary"
-
-    tags = {
-      "SysName"      = "Terraform-Backend"
-      "SysOwner"     = "owner@example.com"
-      "Environment"  = "EKS-TEST-CLUSTER"
-    }
-
-    cluster_oidc_issuer_url = "https://oidc.eks.eu-central-1.amazonaws.com/id/012345678910"
-    oidc_provider_arn       = "arn:aws:iam::012345678910:oidc-provider/oidc.eks.eu-central-1.amazonaws.com/id/012345678910"
-    namespace               = "edp"
-    ```
-
-    Initialize the backend and apply the changes.
+5. Initialize the backend and apply the changes:
 
     ```bash
     terraform init
     terraform apply -var-file=./template.tfvars
     ```
 
-5. Update local Kubernetes configuration:
+6. Update local Kubernetes configuration.
+
+    After the EKS cluster is successfully deployed, update the local Kubernetes configuration to interact with the cluster:
 
     ```bash
     aws eks update-kubeconfig --region <REGION> --name <CLUSTER_NAME>
     ```
 
-6. Once AWS EKS Cluster is successfully deployed, you can navigate to our [KubeRocketCI addons](add-ons-overview.md) to install and manage cluster applications using the GitOps approach.
+7. Once AWS EKS Cluster is successfully deployed, you can navigate to our [KubeRocketCI addons](add-ons-overview.md) to install and manage cluster applications using the GitOps approach.
 
 ## Argo CD Configuration (Optional)
 

@@ -80,7 +80,6 @@ const sidebars: SidebarsConfig = {
           label: 'Installation',
           items: [
             'operator-guide/installation-overview',
-            'operator-guide/deploy-aws-eks',
             'operator-guide/install-argocd',
             'operator-guide/add-ons-overview',
             {
@@ -288,6 +287,7 @@ const sidebars: SidebarsConfig = {
               type: 'category',
               label: 'AWS Integration',
               items: [
+                'operator-guide/deploy-aws-eks',
                 'operator-guide/infrastructure-providers/aws/waf-tf-configuration',
                 'operator-guide/infrastructure-providers/aws/ebs-csi-driver',
                 'operator-guide/infrastructure-providers/aws/enable-irsa',

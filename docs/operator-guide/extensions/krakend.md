@@ -17,7 +17,7 @@ To streamline the installation of KrakenD in your environment, use the resources
 
 1. KubeRocketCI API Gateway URL Configuration
 
-  To configure KrakenD as the API gateway, set the following parameter in the KubeRocketCI [values.yaml](https://github.com/epam/edp-install/blob/v3.10.2/deploy-templates/values.yaml#L16) file during installation or an upgrade:
+  To configure KrakenD as the API gateway, set the following parameter in the KubeRocketCI [values.yaml](https://github.com/epam/edp-install/blob/v3.10.3/deploy-templates/values.yaml#L16) file during installation or an upgrade:
 
     ```yaml
       global:
@@ -25,7 +25,7 @@ To streamline the installation of KrakenD in your environment, use the resources
     ```
 
     :::note
-      This URL should point to the ingress URL of the KrakenD API Gateway. By default, this [value](https://github.com/epam/edp-install/blob/v3.10.2/deploy-templates/values.yaml#L16) is left empty, which disables widgets.
+      This URL should point to the ingress URL of the KrakenD API Gateway. By default, this [value](https://github.com/epam/edp-install/blob/v3.10.3/deploy-templates/values.yaml#L16) is left empty, which disables widgets.
     :::
 
 2. Create krakenD secret that contains the following data

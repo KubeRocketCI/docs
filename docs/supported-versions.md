@@ -45,7 +45,7 @@ Get acquainted with the list of the latest releases and component versions on wh
 
 |[Release Version](https://github.com/epam/edp-install/blob/master/RELEASES.md)|Release Date|[EKS Version](https://aws.amazon.com/eks/)|[OpenShift Version](https://github.com/okd-project/okd/releases)|
 |:-:|:-:|:-:|:-:|
-|3.10 |Oct 18, 2024|1.29+|4.12|
+|3.10 |Oct 18, 2024|1.26+|4.12|
 |3.9 |Jun 13, 2024|1.26+|4.12|
 |3.8 |Mar 12, 2024|1.26+|4.12|
 |<span style={{ color: "gray" }}>3.7 </span> |<span style={{ color: "gray" }}>Dec 15, 2023</span>|<span style={{ color: "gray" }}>1.26+</span>|<span style={{ color: "gray" }}>4.12</span>|

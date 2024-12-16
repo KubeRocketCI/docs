@@ -33,7 +33,7 @@ There are multiple ways to deploy KubeRocketCI:
     ```bash
     helm search repo epamedp/edp-install
     NAME                    CHART VERSION   APP VERSION     DESCRIPTION
-    epamedp/edp-install     3.10.2          3.10.2           A Helm chart for EDP Install
+    epamedp/edp-install     3.10.3          3.10.3           A Helm chart for EDP Install
     ```
 
     :::note
@@ -200,11 +200,11 @@ There are multiple ways to deploy KubeRocketCI:
 
 7. Install platform in the **edp** namespace with the Helm tool:
 
-    Check the parameters in the installation chart [values.yaml](https://github.com/epam/edp-install/blob/v3.10.2/deploy-templates/values.yaml) file.
+    Check the parameters in the installation chart [values.yaml](https://github.com/epam/edp-install/blob/v3.10.3/deploy-templates/values.yaml) file.
 
     ```bash
     helm install edp epamedp/edp-install --wait --timeout=900s \
-    --version 3.10.2 \
+    --version 3.10.3 \
     --values values.yaml \
     --namespace edp \
     --create-namespace

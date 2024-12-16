@@ -368,10 +368,10 @@ This section provides detailed instructions for upgrading KubeRocketCI to versio
 10. To upgrade KubeRocketCI to the v3.10, run the following command:
 
      ```bash
-     helm upgrade krci epamedp/edp-install -n krci --values values.yaml --version=3.10.2
+     helm upgrade krci epamedp/edp-install -n krci --values values.yaml --version=3.10.3
      ```
 
      :::note
        To verify the installation, you can test the deployment before applying it to the cluster with the `--dry-run` key:
-       `helm upgrade krci epamedp/edp-install -n krci --values values.yaml --version=3.10.2 --dry-run`
+       `helm upgrade krci epamedp/edp-install -n krci --values values.yaml --version=3.10.3 --dry-run`
      :::

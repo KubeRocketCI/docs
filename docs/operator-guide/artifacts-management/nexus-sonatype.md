@@ -128,23 +128,23 @@ Without using the **nexus-operator**, manual updates are required for the Helm c
 
       <TabItem value="java">
         * **Type**: `File`
-        * **Name**: `edp-maven`
+        * **Name**: `krci-maven`
       </TabItem>
       <TabItem value="javascript">
         * **Type**: `File`
-        * **Name**: `edp-npm`
+        * **Name**: `krci-npm`
       </TabItem>
       <TabItem value="dotnet">
         * **Type**: `File`
-        * **Name**: `edp-dotnet`
+        * **Name**: `krci-dotnet`
       </TabItem>
       <TabItem value="python">
         * **Type**: `File`
-        * **Name**: `edp-python`
+        * **Name**: `krci-python`
       </TabItem>
       <TabItem value="rpm">
         * **Type**: `File`
-        * **Name**: `edp-yum`
+        * **Name**: `krci-yum`
       </TabItem>
     </Tabs>
 
@@ -164,128 +164,128 @@ Without using the **nexus-operator**, manual updates are required for the Helm c
 
       <TabItem value="java">
         a) Click Create a repository by selecting `maven2(proxy)` fill the following fields and click **Create repository**:
-        * **Name** `edp-maven-proxy`
+        * **Name** `krci-maven-proxy`
         * **Remote storage URL** `https://repo1.maven.org/maven2/`
-        * **Blob store** `edp-maven`
+        * **Blob store** `krci-maven`
         * **HTTP request settings** `check`
         * **Use-agent customization** `user-agent-suffix`
         * **Connection retries** `10`
         * **Connection timeout** `1440`
         <br/>
         b) Click Create a repository by selecting `maven2(hosted)` fill the following fields  and click **Create repository**:
-        * **Name** `edp-maven-snapshots`
+        * **Name** `krci-maven-snapshots`
         * **Version policy** `snapshots`
-        * **Blob store** `edp-maven`
+        * **Blob store** `krci-maven`
         <br/>
         c) Click Create a repository by selecting `maven2(hosted)` fill the following fields and click **Create repository**:
-        * **Name** `edp-maven-releases`
+        * **Name** `krci-maven-releases`
         * **Version policy** `release`
-        * **Blob store** `edp-maven`
+        * **Blob store** `krci-maven`
         <br/>
         d) Click Create a repository by selecting `maven2(group)` fill the following fields and click **Create repository**:
-        * **Name** `edp-maven-group`
+        * **Name** `krci-maven-group`
         * **Version policy** `release`
-        * **Member repositories** `edp-maven-proxy`, `edp-maven-snapshots`, `edp-maven-releases`
+        * **Member repositories** `krci-maven-proxy`, `krci-maven-snapshots`, `krci-maven-releases`
       </TabItem>
 
       <TabItem value="javascript">
         a) Click Create a repository by selecting `npm(proxy)` fill the following fields **Create repository**:
-        * **Name** `edp-npm-proxy`
+        * **Name** `krci-npm-proxy`
         * **Remote storage URL** `https://registry.npmjs.org`
-        * **Blob store** `edp-npm`
+        * **Blob store** `krci-npm`
         * **HTTP request settings** `check`
         * **Use-agent customization** `user-agent-suffix`
         * **Connection retries** `10`
         * **Connection timeout** `1440`
         <br/>
         b) Click Create a repository by selecting `npm(hosted)` fill the following fields and click **Create repository**:
-        * **Name** `edp-npm-snapshots`
-        * **Blob store** `edp-npm`
+        * **Name** `krci-npm-snapshots`
+        * **Blob store** `krci-npm`
         <br/>
         c) Click Create a repository by selecting `npm(hosted)` fill the following fields and click **Create repository**:
-        * **Name** `edp-npm-releases`
-        * **Blob store** `edp-npm`
+        * **Name** `krci-npm-releases`
+        * **Blob store** `krci-npm`
         <br/>
         d) Click Create a repository by selecting `npm(hosted)` fill the following fields and click **Create repository**:
-        * **Name** `edp-npm-hosted`
-        * **Blob store** `edp-npm`
+        * **Name** `krci-npm-hosted`
+        * **Blob store** `krci-npm`
         <br/>
         e) Click Create a repository by selecting `npm(group)` fill the following fields and click **Create repository**:
-        * **Name** `edp-npm-group`
-        * **Member repositories** `edp-npm-proxy`, `edp-npm-snapshots`, `edp-npm-releases`, `edp-npm-hosted`
+        * **Name** `krci-npm-group`
+        * **Member repositories** `krci-npm-proxy`, `krci-npm-snapshots`, `krci-npm-releases`, `krci-npm-hosted`
       </TabItem>
 
       <TabItem value="dotnet">
         a) Click Create a repository by selecting `nuget(proxy)` fill the following fields and click **Create repository**:
-        * **Name** `edp-dotnet-proxy`
+        * **Name** `krci-dotnet-proxy`
         * **Protocol version NuGet V3** `check`
         * **Remote storage URL** `https://api.nuget.org/v3/index.json`
-        * **Blob store** `edp-dotnet`
+        * **Blob store** `krci-dotnet`
         * **HTTP request settings** `check`
         * **Use-agent customization** `user-agent-suffix`
         * **Connection retries** `10`
         * **Connection timeout** `1440`
         <br/>
         b) Click Create a repository by selecting `nuget(hosted)` fill the following fields and click **Create repository**:
-        * **Name** `edp-dotnet-snapshots`
-        * **Blob store** `edp-dotnet`
+        * **Name** `krci-dotnet-snapshots`
+        * **Blob store** `krci-dotnet`
         <br/>
         c) Click Create a repository by selecting `nuget(hosted)` fill the following fields and click **Create repository**:
-        * **Name** `edp-dotnet-releases`
-        * **Blob store** `edp-dotnet`
+        * **Name** `krci-dotnet-releases`
+        * **Blob store** `krci-dotnet`
         <br/>
         d) Click Create a repository by selecting `nuget(hosted)` fill the following fields and click **Create repository**:
-        * **Name** `edp-dotnet-hosted`
-        * **Blob store** `edp-dotnet`
+        * **Name** `krci-dotnet-hosted`
+        * **Blob store** `krci-dotnet`
         <br/>
         e) Click Create a repository by selecting `nuget(group)` fill the following fields and click **Create repository**:
-        * **Name** `edp-dotnet-group`
-        * **Member repositories** `edp-dotnet-proxy`, `edp-dotnet-snapshots`, `edp-dotnet-releases`, `edp-dotnet-hosted`
+        * **Name** `krci-dotnet-group`
+        * **Member repositories** `krci-dotnet-proxy`, `krci-dotnet-snapshots`, `krci-dotnet-releases`, `krci-dotnet-hosted`
       </TabItem>
 
       <TabItem value="python">
         a) Click Create a repository by selecting `pypi(proxy)` fill the following fields and click **Create repository**:
-        * **Name** `edp-python-proxy`
+        * **Name** `krci-python-proxy`
         * **Remote storage URL** `https://pypi.org`
-        * **Blob store** `edp-python`
+        * **Blob store** `krci-python`
         * **HTTP request settings** `check`
         * **Use-agent customization** `user-agent-suffix`
         * **Connection retries** `10`
         * **Connection timeout** `1440`
         <br/>
         b) Click Create a repository by selecting `pypi(hosted)` fill the following fields and click **Create repository**:
-        * **Name** `edp-python-snapshots`
-        * **Blob store** `edp-python`
+        * **Name** `krci-python-snapshots`
+        * **Blob store** `krci-python`
         <br/>
         c) Click Create a repository by selecting `pypi(hosted)` fill the following fields and click **Create repository**:
-        * **Name** `edp-python-releases`
-        * **Blob store** `edp-python`
+        * **Name** `krci-python-releases`
+        * **Blob store** `krci-python`
         <br/>
         d) Click Create a repository by selecting `pypi(group)` fill the following fields and click **Create repository**:
-        * **Name** `edp-python-group`
-        * **Member repositories** `edp-python-proxy`, `edp-python-snapshots`, `edp-python-releases`
+        * **Name** `krci-python-group`
+        * **Member repositories** `krci-python-proxy`, `krci-python-snapshots`, `krci-python-releases`
         <br/>
       </TabItem>
 
       <TabItem value="rpm">
         a) Click Create a repository by selecting `yum(proxy)` fill the following fields and click **Create repository**:
-        * **Name** `edp-yum-proxy`
+        * **Name** `krci-yum-proxy`
         * **Remote storage URL** `http://fedora.ip-connect.info/linux/development/rawhide/Everything/x86_64/os/`
-        * **Blob store** `edp-yum`
+        * **Blob store** `krci-yum`
         * **HTTP request settings** `check`
         * **Use-agent customization** `user-agent-suffix`
         * **Connection retries** `10`
         * **Connection timeout** `1440`
         <br/>
         b) Click Create a repository by selecting `yum(hosted)` fill the following fields and click **Create repository**:
-        * **Name** `edp-yum-snapshots`
+        * **Name** `krci-yum-snapshots`
         * **Repo data Depth** `3`
-        * **Blob store** `edp-yum`
+        * **Blob store** `krci-yum`
         <br/>
         c) Click Create a repository by selecting `yum(hosted)` fill the following fields and click **Create repository**:
-        * **Name** `edp-yum-releases`
+        * **Name** `krci-yum-releases`
         * **Repo data Depth** `3`
-        * **Blob store** `edp-yum`
+        * **Blob store** `krci-yum`
         <br/>
       </TabItem>
 

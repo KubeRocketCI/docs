@@ -100,7 +100,7 @@ For example, the following configuration map contains the `settings.xml` file wi
                   <!--This sends everything else to /public -->
                   <id>nexus</id>
                   <mirrorOf>*</mirrorOf>
-                  <url>http://nexus.nexus:8081/repository/edp-maven-group</url>
+                  <url>http://nexus.nexus:8081/repository/krci-maven-group</url>
               </mirror>
           </mirrors>
 
@@ -163,7 +163,7 @@ with the following settings:
     name: custom-npm-settings
   data:
     .npmrc-ci: |
-      registry=${NEXUS_HOST_URL}/repository/edp-npm-group
+      registry=${NEXUS_HOST_URL}/repository/krci-npm-group
       _auth=${upBase64}
       cache=${NPM_CACHE_DIR}
 

@@ -163,10 +163,10 @@ Follow the steps below to install Argo CD using Helm:
           enabled: true
           hosts:
             - "argocd.example.com"
-        oidc:
-          enabled: true
-        eso:
-          enabled: true
+    oidc:
+      enabled: true
+    eso:
+      enabled: true
     ```
 
     <details>
@@ -190,17 +190,17 @@ Follow the steps below to install Argo CD using Helm:
           hostname: "argocd.example.com"
           termination_type: edge
           termination_policy: Redirect
-        oidc:
-          enabled: true
-        eso:
-          enabled: true
+    oidc:
+      enabled: true
+    eso:
+      enabled: true
       ```
 
     </details>
 
 ## Next Step
 
-  - Instal third party tools via [Add-Ons](add-ons-overview)
+  - Install third-party tools via [Add-Ons](add-ons-overview)
   - Install [KubeRocketCI](install-kuberocketci)
 
 After completing the steps outlined in this documentation, the following results should be achieved:

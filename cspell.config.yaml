@@ -19,6 +19,8 @@ words:
   - autotests
   - awsdns
   - AWSIRSA
+  - azuread
+  - AZUREAD
   - backchannel
   - Beego
   - bitnami
@@ -60,6 +62,7 @@ words:
   - csanchez
   - daniilnedostup
   - dbchecker
+  - dbcleaner
   - deepcopy
   - defectdojo
   - dependencytrack
@@ -84,6 +87,7 @@ words:
   - epamedp
   - epmd
   - externalsecret
+  - extrasecrets
   - fastapi
   - Filebeat
   - filesystems

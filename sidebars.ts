@@ -137,6 +137,18 @@ const sidebars: SidebarsConfig = {
             'operator-guide/auth/configure-keycloak-oidc-eks',
             'operator-guide/auth/oauth2-proxy',
             'operator-guide/auth/namespace-management',
+            {
+              type: 'category',
+              label: 'OIDC Authentication with Microsoft Entra',
+              items: [
+                'operator-guide/microsoft-entra/oidc-authentication-overview',
+                'operator-guide/microsoft-entra/sonar-oidc-authentication',
+                'operator-guide/microsoft-entra/defectdojo-oidc-authentication',
+                'operator-guide/microsoft-entra/awx-operator-authentication',
+                'operator-guide/microsoft-entra/argo-cd-authentication',
+                'operator-guide/microsoft-entra/nexus-authentication',
+              ],
+            },
           ],
         },
         {

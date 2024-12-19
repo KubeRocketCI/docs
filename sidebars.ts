@@ -255,6 +255,7 @@ const sidebars: SidebarsConfig = {
               items: [
                 'operator-guide/ci/tekton-overview',
                 'operator-guide/ci/tekton-monitoring',
+                'operator-guide/ci/tekton-long-term-storage',
                 'operator-guide/ci/notification-msteams',
               ],
             },

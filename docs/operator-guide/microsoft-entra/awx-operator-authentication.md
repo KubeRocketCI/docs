@@ -1,6 +1,11 @@
-# Ansible AWX
+---
+id: awx-operator-authentication
+sidebar_label: Ansible AWX
+---
 
-This section provides instructions on how to configure OIDC authentication for the Ansible AWX using Microsoft Entra as the Identity Provider.
+# Guide: Microsoft Entra SSO integration with Ansible AWX
+
+This guide provides instructions on how to configure Ansible AWX with OpenID Connect (OIDC) authentication using Microsoft Entra as the Identity Provider (IdP).
 
 ## Prerequisites
 

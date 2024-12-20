@@ -1,6 +1,11 @@
-# OpenSearch
+---
+id: opensearch-authentication
+sidebar_label: OpenSearch
+---
 
-This page provides instructions on how to configure OpenSearch with OpenID Connect (OIDC) authentication using Microsoft Entra as the Identity Provider (IdP).
+# Guide: Microsoft Entra SSO integration with OpenSearch
+
+This guide provides instructions on how to configure OpenSearch with OpenID Connect (OIDC) authentication using Microsoft Entra as the Identity Provider (IdP).
 
 ## Prerequisites
 

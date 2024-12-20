@@ -1,6 +1,11 @@
-# DefectDojo
+---
+id: defectdojo-oidc-authentication
+sidebar_label: DefectDojo
+---
 
-This page provides instructions on how to configure DefectDojo with OpenID Connect (OIDC) authentication using Microsoft Entra as the Identity Provider (IdP).
+# Guide: Microsoft Entra SSO integration with DefectDojo
+
+This guide provides instructions on how to configure DefectDojo with OpenID Connect (OIDC) authentication using Microsoft Entra as the Identity Provider (IdP).
 
 ## Prerequisites
 

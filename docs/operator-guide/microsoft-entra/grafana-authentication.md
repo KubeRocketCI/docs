@@ -1,6 +1,11 @@
-# Grafana
+---
+id: grafana-authentication
+sidebar_label: Grafana
+---
 
-This document provides instructions on configuring OpenID Connect (OIDC) authentication with Microsoft Entra for Grafana.
+# Guide: Microsoft Entra SSO integration with Grafana
+
+This guide provides instructions on configuring OpenID Connect (OIDC) authentication with Microsoft Entra for Grafana.
 
 ## Prerequisites
 

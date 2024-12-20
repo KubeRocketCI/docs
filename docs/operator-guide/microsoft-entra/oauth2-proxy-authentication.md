@@ -1,4 +1,9 @@
-# OAuth2-proxy (Tekton Dashboard)
+---
+id: oauth2-proxy-authentication
+sidebar_label: OAuth2-proxy (Tekton Dashboard)
+---
+
+# Guide: Microsoft Entra SSO integration with OAuth2-proxy (Tekton Dashboard)
 
 This guide provides instructions on how to configure OAuth2-proxy for the Tekton Dashboard with OIDC authentication using Microsoft Entra as the Identity Provider.
 

@@ -1,6 +1,11 @@
-# Dependency-Track
+---
+id: dependency-track-authentication
+sidebar_label: Dependency-Track
+---
 
-This page provides instructions on how to configure Dependency-Track with OpenID Connect (OIDC) authentication using Microsoft Entra as the Identity Provider (IdP).
+# Guide: Microsoft Entra SSO integration with Dependency-Track
+
+This guide provides instructions on how to configure Dependency-Track with OpenID Connect (OIDC) authentication using Microsoft Entra as the Identity Provider (IdP).
 
 ## Prerequisites
 

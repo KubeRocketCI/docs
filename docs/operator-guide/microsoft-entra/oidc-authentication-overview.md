@@ -10,8 +10,9 @@ Configuring OIDC authentication with Microsoft Entra brings significant benefits
 
 Below is the list of components with OIDC integration instructions:
 
-- [Argo CD](argo-cd-authentication.md)
 - [Ansible AWX](awx-operator-authentication.md)
+- [Argo CD](argo-cd-authentication.md)
+- [AWS EKS and KubeRocketCI Portal](/blog/integrating-oidc-authentication-microsoft-entra-aws-eks)
 - [Dependency-Track](./dependency-track-authentication.md)
 - [DefectDojo](defectdojo-oidc-authentication.md)
 - [Grafana](grafana-authentication.md)

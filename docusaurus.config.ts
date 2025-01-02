@@ -83,6 +83,9 @@ const config: Config = {
         gtag: {
           trackingID: 'G-4V1NZ8PQWG',
         },
+        googleTagManager: {
+          containerId: 'GTM-527T2HLF',
+        },
 
         docs: {
           sidebarPath: './sidebars.ts',

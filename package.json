@@ -1,5 +1,5 @@
 {
-  "name": "my-website",
+  "name": "kuberocketci-docs",
   "version": "0.0.0",
   "private": true,
   "scripts": {
@@ -21,6 +21,7 @@
   },
   "dependencies": {
     "@docusaurus/core": "^3.6.3",
+    "@docusaurus/plugin-google-tag-manager": "^3.6.3",
     "@docusaurus/preset-classic": "^3.6.3",
     "@docusaurus/theme-mermaid": "^3.6.3",
     "@emotion/react": "^11.11.4",

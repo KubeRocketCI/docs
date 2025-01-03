@@ -79,6 +79,100 @@ Portal is integrated in Kubernetes in three steps:
 
 As a result, it is possible to control access and rights from the Keycloak endpoint.
 
+## Configure User Profile Picture
+
+To enhance account personalization, a profile picture can be configured in the Portal using Keycloak. This requires setting up the Keycloak client scope with the necessary user attributes.
+
+Follow the steps below to configure the user profile picture in Keycloak:
+
+1. Open the Keycloak admin console and navigate to the **Broker** realm. In the left sidebar menu, select **Client scopes** and choose the **profile** scope.
+
+    ![Keycloak profile scope](../../assets/operator-guide/keycloak-user-attributes/keycloak-profile-scope.png "Keycloak profile scope")
+
+2. Navigate to the **Mappers** tab and ensure that the **picture** attribute is created. If the attribute is not present, click **Add mapper** button. In the dropdown menu, select **By configuration**.
+
+    :::note
+    If the **picture** user attribute is already present, skip to step 5.
+    :::
+
+    ![Keycloak create mapper](../../assets/operator-guide/keycloak-user-attributes/keycloak-create-mapper.png "Keycloak create mapper")
+
+3. In the **Configure a new mapper** dialog, choose the **User Attribute** type.
+
+    ![Keycloak user attribute](../../assets/operator-guide/keycloak-user-attributes/keycloak-user-attribute.png "Keycloak user attribute")
+
+4. Fill in the following fields to configure the user attribute:
+
+    - **Name**: `picture`
+    - **User Attribute**: `picture`
+    - **Token Claim Name**: `picture`
+    - **Claim JSON Type**: `String`
+
+    ![Keycloak user attribute configuration](../../assets/operator-guide/keycloak-user-attributes/keycloak-user-attribute-configuration.png "Keycloak user attribute configuration")
+
+    Click **Save** to apply the changes.
+
+5. After configuring the user attribute, navigate to the **Users** tab in the left sidebar menu and select the user you want to set a profile picture for.
+
+    ![Keycloak user profile](../../assets/operator-guide/keycloak-user-attributes/keycloak-user-profile.png "Keycloak user profile")
+
+6. In the user profile, click **Attributes** and add the **picture** attribute with the URL of the desired profile picture.
+
+    :::note
+    The profile picture URL should refer to an image accessible via a public URL.
+    :::
+
+    ![Keycloak user picture](../../assets/operator-guide/keycloak-user-attributes/keycloak-user-picture.png "Keycloak user picture")
+
+    Click **Save** to apply the changes.
+
+7. After configuring the user profile picture in Keycloak, the profile picture will be displayed in the Portal UI.
+
+    ![Portal user profile picture](../../assets/operator-guide/keycloak-user-attributes/portal-user-profile-picture.png "Portal user profile picture")
+
+## Configure Default Namespace
+
+After logging into the Portal, it is necessary to manually configure account settings like **Default namespace** and **Allowed namespaces**. To simplify this process, the `default_namespace` user attribute can be added to the user profile in Keycloak. This will ensure that the account settings are automatically configured during login.
+
+Follow the steps below to configure the `default_namespace` user attribute in Keycloak:
+
+1. Open the Keycloak admin console and navigate to the **Broker** realm. In the left sidebar menu, select **Client scopes** and choose the **profile** scope.
+
+    ![Keycloak profile scope](../../assets/operator-guide/keycloak-user-attributes/keycloak-profile-scope.png "Keycloak profile scope")
+
+2. Navigate to the **Mappers** tab and click the **Add mapper** button. In the dropdown menu, select **By configuration**.
+
+    ![Keycloak create mapper](../../assets/operator-guide/keycloak-user-attributes/keycloak-create-mapper.png "Keycloak create mapper")
+
+3. In the **Configure a new mapper** dialog, choose the **User Attribute** type.
+
+    ![Keycloak user attribute](../../assets/operator-guide/keycloak-user-attributes/keycloak-user-attribute.png "Keycloak user attribute")
+
+4. Fill in the following fields to configure the user attribute:
+
+    - **Name**: `default_namespace`
+    - **User Attribute**: `default_namespace`
+    - **Token Claim Name**: `default_namespace`
+    - **Claim JSON Type**: `String`
+
+    ![Keycloak user attribute configuration](../../assets/operator-guide/keycloak-user-attributes/keycloak-default-namespace-attribute.png "Keycloak user attribute configuration")
+
+    Click **Save** to apply the changes.
+
+5. After configuring the user attribute, navigate to the **Users** tab in the left sidebar menu and select the user you want to set a default namespace for.
+
+    ![Keycloak user profile](../../assets/operator-guide/keycloak-user-attributes/keycloak-user-profile.png "Keycloak user profile")
+
+6. In the user profile, click **Attributes** and add the **default_namespace** attribute with the name of the desired default namespace.
+
+    ![Keycloak user default namespace](../../assets/operator-guide/keycloak-user-attributes/keycloak-user-default-namespace.png "Keycloak user default namespace")
+
+    Click **Save** to apply the changes.
+
+7. After configuring the user attribute with the default namespace in Keycloak, the account settings, such as the **Default namespace** and **Allowed namespaces**, will be automatically configured during login.
+
+    ![Portal user default namespace](../../assets/operator-guide/keycloak-user-attributes/portal-user-default-namespace.png "Portal user default namespace")
+
 ## Changing the Lifespan of an Access Token
 
 Change the Access Token Lifespan: go to your Keycloak and select *Openshift realm* > *Realm settings* > *Tokens* >

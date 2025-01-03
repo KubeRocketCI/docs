@@ -14,62 +14,107 @@ In a nutshell, Add-Ons are separate Helm Charts that can be installed with just 
 
 All the Add-Ons for KubeRocketCI are stored in our [GitHub repository](https://github.com/epam/edp-cluster-add-ons) following the GitOps approach. In addition to default Helm and Git files, the repository contains custom resources called Applications for Argo CD and application source code. The repository adheres to the GitOps approach, allowing for easy rollback of changes when necessary. The structure of the repository is as follows:
 
+    <details>
+    <summary><b>View: edp-cluster-add-ons repo structure</b></summary>
     ```bash
-    ├── CHANGELOG.md
-    ├── LICENSE
-    ├── Makefile
-    ├── README.md
-    ├── add-ons
-    └── chart
+    edp-cluster-add-ons
+    ├── argo-cd
+    │   ├── Chart.yaml
+    │   ├── README.md
+    │   ├── templates
+    │   │   ├── appProjectCore.yaml
+    │   │   ├── appProjectKRCI.yaml
+    │   │   ├── ...
+    │   └── values.yaml
+    ├── ...
+    ├── clusters
+    │   ├── core
+    │   │   ├── addons
+    │   │   │   ├── atlantis
+    │   │   │   │   ├── Chart.yaml
+    │   │   │   │   ├── README.md
+    │   │   │   │   ├── templates
+    │   │   │   │   └── values.yaml
+    │   │   │   ├── aws-efs-csi-driver
+    │   │   │   │   ├── Chart.yaml
+    │   │   │   │   ├── README.md
+    │   │   │   │   ├── templates
+    │   │   │   │   └── values.yaml
+    │   │   │   ├── ...
+    │   │   ├── apps
+    │   │   │   ├── templates
+    │   │   │   │   ├── atlantis.yaml
+    │   │   │   │   ├── aws-efs-csi-driver.yaml
+    │   │   │   │   ├── ...
+    │   │   │   ├── Chart.yaml
+    │   │   │   ├── README.md
+    │   │   │   └── values.yaml
+    │   │   └── bootstrap-addons.yaml
+    │   └── prod
+    ├── ...
     ```
+    </details>
 
-* **add-ons** - the directory that contains Helm charts of the applications that can be integrated with KubeRocketCI using Add-Ons.
+* **argo-cd** - The directory containing the Helm chart for deploying the main Argo CD instance and prepared project templates.
 
-* **chart** - the directory that contains Helm charts with application templates that will be used to create custom resources called Applications for Argo CD.
+* **clusters** - A directory for organizing configurations and Helm charts specific to individual clusters. Each subdirectory corresponds to a particular cluster environment (e.g., core, prod, or dev).
+
+* **addons** - The directory containing subdirectories with Helm charts for applications to install, such as Nexus, SonarQube, Keycloak, etc. See the full add-ons list [below](#available-add-ons-list).
+
+* **apps** - Contains application `templates` directory used to create Argo CD application. The deployment of these applications is managed by modifying the `apps/values.yaml` file, where you can enable or disable specific applications.
+
+* **bootstrap-addons.yaml** - The manifest file defining the app of apps application responsible for deploying all enabled application to the cluster. This manifest is applied manually.
 
 ## Enable KubeRocketCI Add-Ons
 
 To enable Add-Ons, it is necessary to have the configured Argo CD, and connect and synchronize the forked repository. To do this, follow the guidelines below:
 
-1. Fork the Add-Ons repository to your personal account.
+1. Create a fork of the [Add-Ons repository](https://github.com/epam/edp-cluster-add-ons) in your personal Git account.
 
-2. Provide the parameter values for the values.yaml files of the desired Add-Ons you are going to install.
+2. Align **repoUrl** in [/clusters/core/apps/values.yaml](https://github.com/epam/edp-cluster-add-ons/blob/main/clusters/core/apps/values.yaml#L14), [/clusters/core/bootstrap-addons.yaml](https://github.com/epam/edp-cluster-add-ons/blob/main/clusters/core/bootstrap-addons.yaml#L16) and **repoSource** in the [/argo-cd/templates/appProjectCore.yaml](https://github.com/epam/edp-cluster-add-ons/blob/main/argo-cd/templates/appProjectCore.yaml#L36), [/argo-cd/templates/appProjectCore.yaml](https://github.com/epam/edp-cluster-add-ons/blob/main/argo-cd/templates/appProjectKRCI.yaml#L55) files of the repository, specify the SSH URL of your fork. For GitHub, replace `kuberocketci` with your `<github_account_name>`.
 
-3. Navigate to **Argo CD** -> **Settings** -> **Repositories**. Connect your forked repository where you have the values.yaml files changed by clicking the **+ CONNECT REPO** button:
+3. Clone a forked add-ons repository to your local machine and install preconfigured **Argo CD** Helm chart from `/argo-cd` folder using the command below:
 
-    ![Connect the forked repository](../assets/operator-guide/connect_repo.png "Connect the forked repository")
+```bash
+helm install argocd argo-cd -n argocd --create-namespace
+```
 
-4. In the appeared window, fill in the following fields and click the **CONNECT** button:
+4. (Optional) If you don't have an ingress controller created in your Kubernetes cluster, enable port-forwarding for the Argo CD service using the command below:
+
+```bash
+kubectl port-forward -n argocd service/argo-cd-argocd-server 65080:80
+```
+
+This will forward the Argo CD service to `http://localhost:65080` on your local machine. Open this URL in your browser to access the Argo CD interface.
+
+5. As soon as Helm chart is deployed, open your Argo CD endpoint and navigate to **Settings** -> **Repositories**. Connect your repository where you have the values.yaml files changed by clicking the **+ CONNECT REPO** button:
+
+    ![Connect the forked repository](../assets/operator-guide/addons-overview/argo_cd_connect_repo.png "Connect the forked repository")
+
+6. In the appeared window, fill in the following fields and click the **CONNECT** button:
 
     * Choose your connection method - `VIA SSH`;
     * Name - `addons-demo` (optional);
     * Project - select project;
-    * Repository URL - enter the `ssh URL` of your forked repository (git@github.com:example/edp-cluster-add-ons.git);
+    * Repository URL - enter the `SSH URL` of your forked repository (ssh://git@github.com:22/`<github_account_name>`/edp-cluster-add-ons.git);
 
-    ![Repository parameters](../assets/operator-guide/argo_cd_repo_fields.png "Repository parameters")
+    ![Repository parameters](../assets/operator-guide/addons-overview/argo_cd_repo_fields.png "Repository parameters")
 
-5. As soon as the repository is connected, the new item will appear in the repository list:
+7. As soon as the repository is connected, the new item will appear in the repository list:
 
-    ![Connected repository](../assets/operator-guide/connected_repo.png "Connected repository")
+    ![Connected repository](../assets/operator-guide/addons-overview/argo_cd_connected_repo.png "Connected repository")
 
-6. Navigate to **Argo CD** -> **Applications**. Click the **+ NEW APP** button:
+8. Apply the add-ons management application manifest and open **Application** tab:
 
-    ![Adding Argo CD application](../assets/operator-guide/argo_cd_add_app.png "Adding Argo CD application")
+    ```bash
+    kubectl apply -f edp-cluster-add-ons/clusters/core/bootstrap-addons.yaml -n argocd
+    ```
 
-7. Fill in the required fields and click **CREATE** button:
+    ![Applications list](../assets/operator-guide/addons-overview/argo_cd_application_list.png "Applications list")
 
-    * Application Name - addons-demo;
-    * Project name - select the namespace where the project is going to be deployed;
-    * Sync policy - `Manual`;
-    * Repository URL - enter the URL of your forked repository;
-    * Revision - `HEAD`;
-    * Path - `chart`;
-    * Cluster URL - select `URL` or cluster Name;
-    * Namespace - enter the namespace which must be equal to the **Project name** field;
+9. Click the **addon-core** application to open its details:
 
-8. As soon as the repository is synchronized, the list of applications that can be installed by Add-Ons will be shown:
-
-    ![Add-Ons list](../assets/operator-guide/add_ons_to_install.png "Add-Ons list")
+    ![Add-ons management menu](../assets/operator-guide/addons-overview/argo_cd_app_of_apps.png "Add-ons management menu")
 
 ## Install Add-Ons
 
@@ -77,25 +122,41 @@ Now that Add-Ons are enabled in Argo CD, they can be installed by following the 
 
 1. Choose the Add-On to install.
 
-2. On the chosen Add-On, click the **⋮** button and then **Details**:
+2. Enable the Add-Ons chosen in the [/clusters/core/apps/values.yaml](https://github.com/epam/edp-cluster-add-ons/blob/main/clusters/core/apps/values.yaml) file. You can also re-define Add-On parameters. Refer to the example below:
 
-    ![Open the Add-On](../assets/operator-guide/sync.png "Open Add-Ons")
+```bash
+sonar:
+  createNamespace: true
+  enable: true
 
-3. To install the Add-On, click the **⋮** button -> **Sync**:
+sonar-operator:
+  createNamespace: true
+  enable: true
+```
 
-    ![Install Add-Ons](../assets/operator-guide/synchronize.png "Install Add-Ons")
+3. Navigate to the Argo CD Add-Ons application. On the chosen Add-On, click the **⋮** button and then **Details**:
 
-4. Once the Add-On is installed, the *Sync OK* message will appear in the Add-On status bar:
+    ![Open the Add-On](../assets/operator-guide/addons-overview/argo_cd_sync_schonen_app.png "Open Add-Ons")
 
-    ![Sync OK message](../assets/operator-guide/sync_ok.png "Sync OK message")
+4. To install the Add-On, click the **⋮** button -> **Sync**:
 
-5. Open the application details by clicking on the little square with an arrow underneath the Add-On name:
+    ![Install Add-Ons](../assets/operator-guide/addons-overview/argocd_synchronize.png "Install Add-Ons")
 
-    ![Open details](../assets/operator-guide/open_details.png "Open details")
+5. Once the Add-On is installed, the *Sync OK* message will appear in the Add-On status bar:
 
-6. Track application resources and status in the **App details** menu:
+    ![Sync OK message](../assets/operator-guide/addons-overview/argo_cd_sync_ok.png "Sync OK message")
 
-    ![Application details](../assets/operator-guide/application_resources.png "Application details")
+6. Open the application details by clicking on the little square with an arrow underneath the Add-On name:
+
+    ![Open details](../assets/operator-guide/addons-overview/argo_cd_open_details_sonar.png "Open details")
+
+7. By default in all addons application `auto sync is not enabled` to install application click **Sync** button.
+
+    ![Open details](../assets/operator-guide/addons-overview/acgo_cd_sync_sonar_app.png "Open details")
+
+8. Track application resources and status in the **App details** menu:
+
+    ![Application details](../assets/operator-guide/addons-overview/argo_cd_application_status.png "Application details")
 
 Argo CD provides excellent observability and monitoring capabilities for its resources, which is particularly beneficial when utilizing KubeRocketCI Add-Ons.
 

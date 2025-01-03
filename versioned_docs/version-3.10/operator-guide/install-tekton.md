@@ -18,7 +18,7 @@ To install Tekton resources, follow the steps below:
   [Install and set up Tekton Triggers](https://tekton.dev/docs/installation/triggers/) sections for details.
 :::
 
-1. Install Tekton pipelines v0.53.4 using the release file:
+1. Install Tekton pipelines v0.65.0 using the release file:
 
     :::note
       Tekton Pipeline resources are used for managing and running KubeRocketCI Tekton Pipelines and Tasks.
@@ -27,10 +27,10 @@ To install Tekton resources, follow the steps below:
     :::
 
     ```bash
-    kubectl apply -f https://storage.googleapis.com/tekton-releases/pipeline/previous/v0.53.4/release.yaml
+    kubectl apply -f https://storage.googleapis.com/tekton-releases/pipeline/previous/v0.65.0/release.yaml
     ```
 
-2. Install Tekton Triggers v0.25.3 using the release file:
+2. Install Tekton Triggers v0.30.0 using the release file:
 
     :::note
       Tekton Trigger resources are used for managing and running KubeRocketCI Tekton EventListeners, Triggers, TriggerBindings and TriggerTemplates.
@@ -38,23 +38,23 @@ To install Tekton resources, follow the steps below:
     :::
 
     ```bash
-    kubectl apply -f https://storage.googleapis.com/tekton-releases/triggers/previous/v0.25.3/release.yaml
+    kubectl apply -f https://storage.googleapis.com/tekton-releases/triggers/previous/v0.30.0/release.yaml
     ```
 
-3. Install Tekton Interceptors v0.25.3 using the release file:
+3. Install Tekton Interceptors v0.30.0 using the release file:
 
     :::note
       The Platform uses GitLab, GitHub and Cel ClusterInterceptors for processing requests from webhooks.
     :::
 
     ```bash
-    kubectl apply -f https://storage.googleapis.com/tekton-releases/triggers/previous/v0.25.3/interceptors.yaml
+    kubectl apply -f https://storage.googleapis.com/tekton-releases/triggers/previous/v0.30.0/interceptors.yaml
     ```
 
-4. Install Tekton Chains v0.19.0 using the release file:
+4. Install Tekton Chains v0.23.0 using the release file:
 
     ```bash
-    kubectl apply -f https://storage.googleapis.com/tekton-releases/chains/previous/v0.19.0/release.yaml
+    kubectl apply -f https://storage.googleapis.com/tekton-releases/chains/previous/v0.23.0/release.yaml
     ```
 
 ## Installation on OKD cluster

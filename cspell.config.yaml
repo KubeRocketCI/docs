@@ -187,6 +187,7 @@ words:
   - psql
   - pwjps
   - Qualys
+  - qualitygate
   - Quarkus
   - rabbitmq
   - rabbitmqctl

@@ -418,6 +418,7 @@ const sidebars: SidebarsConfig = {
               items: [
                 'user-guide/add-application',
                 'user-guide/application',
+                'user-guide/application-sonarqube-project-properties',
               ],
             },
             {

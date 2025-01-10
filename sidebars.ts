@@ -144,6 +144,7 @@ const sidebars: SidebarsConfig = {
                 'operator-guide/microsoft-entra/oidc-authentication-overview',
                 'operator-guide/microsoft-entra/argo-cd-authentication',
                 'operator-guide/microsoft-entra/awx-operator-authentication',
+                'operator-guide/microsoft-entra/aws-eks-portal-authentication',
                 'operator-guide/microsoft-entra/dependency-track-authentication',
                 'operator-guide/microsoft-entra/defectdojo-oidc-authentication',
                 'operator-guide/microsoft-entra/grafana-authentication',

@@ -313,7 +313,7 @@ const config: Config = {
           ],
         },
         {
-          title: 'More',
+          title: 'Learn More',
           items: [
             {
               label: 'KubeRocketCI on the GitHub',
@@ -330,6 +330,18 @@ const config: Config = {
             {
               label: 'Docker Hub',
               href: 'https://hub.docker.com/u/epamedp',
+            },
+            {
+              label: 'Blog categories',
+              href: '/blog/tags',
+            },
+            {
+              label: 'RSS feed',
+              href: 'https://docs.kuberocketci.io/blog/rss.xml',
+            },
+            {
+              label: 'Atom feed',
+              href: 'https://docs.kuberocketci.io/blog/atom.xml',
             },
           ],
         },

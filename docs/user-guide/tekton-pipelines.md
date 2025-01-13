@@ -1,23 +1,22 @@
-# Tekton Pipelines Overview
+# KubeRocketCI: Tekton Pipelines Overview
 
-The KubeRocketCI platform uses the Tekton stack to run continuous integration and continuous delivery (CI/CD) pipelines, providing access to all Tekton features out of the box. KubeRocketCI comes pre-configured with various [Tekton resources](https://github.com/epam/edp-tekton/tree/master/charts/pipelines-library) such as pipelines, tasks, triggers, and other components. This documentation explains how to interact with Tekton resources within the KubeRocketCI platform, covering common use cases, pipeline configuration, and execution processes.
+KubeRocketCI is a platform that utilizes the Tekton stack to implement continuous integration and continuous delivery (CI/CD) pipelines, offering access to all Tekton features. It comes pre-configured with various Tekton resources, including pipelines, tasks, triggers, and other components. This documentation outlines how to interact with these Tekton resources within the KubeRocketCI platform, addressing common use cases, pipeline configuration, and execution processes.
 
 ## Prerequisites
 
-Before running pipelines, ensure that the project is onboarded to the KubeRocketCI platform, and the relevant branches are also configured.
+Before executing pipelines, ensure that the project is onboarded to the KubeRocketCI platform and that the relevant branches are properly configured..
 
 ## Pipeline Types in the Platform
 
-KubeRocketCI supports four primary pipeline types:
+KubeRocketCI supports four main types of pipelines:
 
-* **Review Pipeline**: Triggered by pull request creation; used to check code quality and run tests before merging.
-* **Build Pipeline**: Triggered by pull request merges; responsible for building the application and creating deployable artifacts.
-* **Deploy Pipeline**: Deploys the application to a cluster with specific configurations.
-* **Clean Pipeline**: Cleans up resources created during deployment, ensuring a fresh environment for subsequent deployments.
+* **Review Pipeline**: This pipeline is initiated when a pull request is created. It aims to check code quality and run tests before the code can be merged.
 
-:::note
-If the Helm chart in the deploy-templates folder is modified, run the [helm-docs](https://github.com/norwoodj/helm-docs) utility to update the content of the README.md file accordingly.
-:::
+* **Build Pipeline**: This pipeline is triggered when a pull request is merged. It is responsible for building the application and generating deployable artifacts.
+
+* **Deploy Pipeline**: This pipeline handles the deployment of the application to a target environment, applying specific configurations.
+
+* **Clean Pipeline**: This pipeline is responsible for cleaning up any resources created during the deployment, ensuring a fresh environment for future deployments.
 
 Each pipeline type is identified using specific labels in Kubernetes objects:
 
@@ -68,13 +67,13 @@ The TriggerTemplate defines parameters (e.g., service account name, timeout) and
 
 ## Trigger Pipelines
 
-Each pipeline type is triggered by a specific event.
+A specific event triggers each pipeline type.
 
 ### Review Pipeline
 
 Trigger a review pipeline using one of the four methods:
 
-1. Create a pull request in the repository targeting a configured branch. Review pipeline will be triggered automatically once the pull request is created:
+1. Create a pull request in the repository targeting a configured branch. The review pipeline will be triggered automatically once the pull request is created:
 
   ![Delete branch](../assets/user-guide/tekton-pipelines/bitbucket-pull-request.png "Delete branch")
 
@@ -120,7 +119,7 @@ Deploy pipelines can be triggered manually or automatically. Automatic triggers 
 
   ![Delete branch](../assets/user-guide/tekton-pipelines/deploy-pipeline-configure-deploy.png "Delete branch")
 
-2. Configure the pipeline with the `Auto` TriggerType to deploy automatically after the build pipeline finishes and new version of artifact created.
+2. Configure the pipeline with the `Auto` TriggerType to deploy automatically after the build pipeline finishes and a new artifact version is created.
 
 3. Use the `Auto-stable` TriggerType for deploying stable component versions while updating only the rebuilt component.
 

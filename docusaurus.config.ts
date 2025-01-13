@@ -275,32 +275,32 @@ const config: Config = {
       style: 'dark',
       links: [
         {
-          title: 'Docs',
+          title: 'Readings',
           items: [
             {
-              label: 'Quick Start',
+              label: 'What is KubeRocketCI',
               to: '/docs/about-platform',
             },
             {
-              label: 'Operator Guide',
-              to: '/docs/operator-guide',
+              label: 'Blogs: Interesting Facts From The DevSecOps Life',
+              to: '/blog',
             },
             {
-              label: 'User Guide',
+              label: 'User Guide: How To Use KubeRocketCI',
               to: '/docs/user-guide',
             },
             {
-              label: 'Developer Guide',
+              label: 'Developer Guide: How We Build KubeRocketCI',
               to: '/docs/developer-guide',
             },
             {
-              label: 'API Reference',
+              label: 'API Reference: Use KubeRocketCI To Build Your Solutions',
               to: '/docs/api/overview',
             }
           ],
         },
         {
-          title: 'Community',
+          title: 'Our Community',
           items: [
             {
               label: 'YouTube',
@@ -310,18 +310,38 @@ const config: Config = {
               label: 'Medium',
               href: 'https://medium.com/epam-delivery-platform',
             },
+          ],
+        },
+        {
+          title: 'Learn More',
+          items: [
+            {
+              label: 'KubeRocketCI on the GitHub',
+              href: 'https://github.com/kuberocketci/docs',
+            },
+            {
+              label: 'KubeRocketCI on the ArtifactHub',
+              href: 'https://artifacthub.io/packages/search?repo=epmdedp',
+            },
+            {
+              label: 'KubeRocketCI on the OperatorHub',
+              href: 'https://operatorhub.io/?keyword=edp',
+            },
             {
               label: 'Docker Hub',
               href: 'https://hub.docker.com/u/epamedp',
             },
-          ],
-        },
-        {
-          title: 'More',
-          items: [
             {
-              label: 'GitHub',
-              href: 'https://github.com/kuberocketci/docs',
+              label: 'Blog categories',
+              href: '/blog/tags',
+            },
+            {
+              label: 'RSS feed',
+              href: 'https://docs.kuberocketci.io/blog/rss.xml',
+            },
+            {
+              label: 'Atom feed',
+              href: 'https://docs.kuberocketci.io/blog/atom.xml',
             },
           ],
         },

@@ -18,6 +18,7 @@ words:
   - autoplay
   - Autotest
   - autotests
+  - Autodeploy
   - awsdns
   - AWSIRSA
   - azuread
@@ -181,10 +182,12 @@ words:
   - pipelinerun
   - pipelinetype
   - PKCS
+  - preconfigured
   - printenv
   - psql
   - pwjps
   - Qualys
+  - qualitygate
   - Quarkus
   - rabbitmq
   - rabbitmqctl

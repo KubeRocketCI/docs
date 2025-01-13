@@ -8,7 +8,7 @@ KubeRocketCI is a platform that utilizes the Tekton stack to implement continuou
 
 ## Prerequisites
 
-Before executing pipelines, ensure that the project is onboarded to the KubeRocketCI platform and that the relevant branches are properly configured..
+Before executing pipelines, ensure that the project is onboarded to the KubeRocketCI platform and that the relevant branches are properly configured.
 
 ## Pipeline Types in the Platform
 

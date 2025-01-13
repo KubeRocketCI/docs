@@ -505,7 +505,7 @@ const sidebars: SidebarsConfig = {
             },
           ],
         },
-        'user-guide/platform-cleanup',
+        'user-guide/platform-cleanup-guide',
       ],
     },
   ],

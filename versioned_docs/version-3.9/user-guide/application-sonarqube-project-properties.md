@@ -1,10 +1,10 @@
-# Sonarqube Project Properties for Application
+# SonarQube Project Properties for Application
 
 The KubeRocketCI platform simplifies this process by supporting SonarQube integration with predefined configurations. However, specific use cases may require customization. Below is a guide on setting the SonarQube project properties to meet all application requirements.
 
 ## Application repo structure
 
-When an application is added to the KubeRocketCI, a default `sonar-project.properties` file is automatically generated during the codebase onboarding process. However, depending on the specific needs of the application, a separate configuration file can be created, placed in the root directory of the application repository, and used for sonarqube code quality during the pipeline:
+When an application is added to the KubeRocketCI, a default `sonar-project.properties` file is automatically generated during the codebase onboarding process. However, depending on the specific needs of the application, a separate configuration file can be created, placed in the root directory of the application repository, and used for SonarQube code quality during the pipeline:
 
   <details>
   <summary><b>example repository structure</b></summary>

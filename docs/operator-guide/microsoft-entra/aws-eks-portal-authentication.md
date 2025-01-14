@@ -93,7 +93,7 @@ Follow the steps below to configure the default namespace extension attribute in
 
 7. Navigate to the Microsoft Entra Admin Center. In the left sidebar menu, select **Applications** and navigate to the Enterprise application created for OIDC integration with AWS EKS and the KubeRocketCI Portal (e.g., `eks`).
 
-      ![Enterprise Application](../../assets/operator-guide/microsoft-entra-auth/enterprise-application.png)
+    ![Enterprise Application](../../assets/operator-guide/microsoft-entra-auth/enterprise-application.png)
 
 8. In the application tab, navigate to the **Single sign-on** section. In the **Attributes & Claims** tab, click on the **Edit** button.
 
@@ -126,6 +126,11 @@ Follow the steps below to configure the default namespace extension attribute in
     ![Accept Mapped Claims](../../assets/operator-guide/microsoft-entra-auth/accept-mapped-claims.png)
 
 10. (Optional) Get the application access token and verify the `default_namespace` extension attribute by running the following command:
+
+    :::note
+    Before running the command, ensure that the `Redirect URI` in the Microsoft Entra application is set to `http://localhost:8000`.
+    ![Redirect URI](../../assets/operator-guide/microsoft-entra-auth/redirect-uri.png)
+    :::
 
     ```bash
     kubelogin get-token --oidc-issuer-url=https://sts.windows.net/<tenant_id>/ --oidc-client-id=<application_client_id> --oidc-client-secret=<application_client_secret> --force-refresh
@@ -250,6 +255,11 @@ Follow the steps below to configure the user profile picture extension attribute
 
 10. (Optional) Get the application access token and verify the `picture` extension attribute by running the following command:
 
+    :::note
+    Before running the command, ensure that the `Redirect URI` in the Microsoft Entra application is set to `http://localhost:8000`.
+    ![Redirect URI](../../assets/operator-guide/microsoft-entra-auth/redirect-uri.png)
+    :::
+
     ```bash
     kubelogin get-token --oidc-issuer-url=https://sts.windows.net/<tenant_id>/ --oidc-client-id=<application_client_id> --oidc-client-secret=<application_client_secret> --force-refresh
     ```
@@ -263,6 +273,108 @@ Follow the steps below to configure the user profile picture extension attribute
 11. After configuring the `picture` extension attribute, the user profile picture will be displayed in the KubeRocketCI Portal.
 
     ![Portal user profile picture](../../assets/operator-guide/keycloak-user-attributes/portal-user-profile-picture.png "Portal user profile picture")
+
+## Configure Token Lifetime for Application
+
+The default token lifetime in Microsoft Entra ID is set to 1 hour. This can cause issues for applications needing long-running processes or extended user sessions, leading to frequent re-authentication. To avoid this, a custom Token Lifetime Policy can be created and assigned to the application to extend the lifespan of ID Tokens or Access Tokens, improving the user experience and application efficiency.
+
+Follow the steps below to configure and assign a custom Token Lifetime Policy to the application:
+
+1. Log in to the [Microsoft Entra Admin Center](https://entra.microsoft.com/).
+
+    ![Microsoft Entra Admin Center](../../assets/operator-guide/microsoft-entra-auth/microsoft-entra-admin-center.png)
+
+2. In the left sidebar menu, select **Applications** and navigate to the application for which the Token Lifetime Policy needs to be configured (e.g., `eks`).
+
+    ![Microsoft Entra Application](../../assets/operator-guide/microsoft-entra-auth/microsoft-entra-application.png)
+
+3. In the application tab, navigate to the **API permissions** section. Click on the **Add a permission** button. Select **Microsoft Graph** and then **Application permissions**. Add the following permissions:
+
+    - **Policy.ReadWrite.ApplicationConfiguration**
+    - **Application.ReadWrite.All**
+
+    ![Lifetime Policy Permissions](../../assets/operator-guide/microsoft-entra-auth/lifetime-policy-permissions.png)
+
+    After adding the permissions, click on the **Grant admin consent for 'Tenant name'** button to grant the required permissions.
+
+4. Navigate to the local terminal and run the following command to get the access token:
+
+    :::note
+    You can use the [jq](https://stedolan.github.io/jq/) tool to parse the JSON response. If you do not have it installed, you can drop the `| jq -r '.access_token'` part from the command.
+    :::
+
+    ```bash
+    curl -X POST "https://login.microsoftonline.com/<tenant_id>/oauth2/v2.0/token" \
+    -d "client_id=<application_client_id>" \
+    -d "client_secret=<application_client_secret>" \
+    -d "scope=https://graph.microsoft.com/.default" \
+    -d "grant_type=client_credentials" | jq -r '.access_token'
+    ```
+
+    Replace `<tenant_id>`, `<application_client_id>`, and `<application_client_secret>` with the corresponding values from the Microsoft Entra application.
+
+    Save the access token for further use.
+
+5. Create the custom Token Lifetime Policy by running the following command:
+
+    :::note
+    The `AccessTokenLifetime` value should be set in the format `HH:MM:SS` (e.g., `04:00:00` for 4 hours).
+    :::
+
+    ```bash
+    curl -X POST https://graph.microsoft.com/v1.0/policies/tokenLifetimePolicies \
+    -H "Authorization: Bearer <access_token>" \
+    -H "Content-Type: application/json" \
+    -d '{
+        "definition": [
+            "{ \"TokenLifetimePolicy\": { \"Version\": 1, \"AccessTokenLifetime\": \"04:00:00\" }}"
+        ],
+        "displayName": "Custom Access Token Lifetime",
+        "isOrganizationDefault": false
+    }'
+    ```
+
+    Replace `<access_token>` with the saved access token and set the `AccessTokenLifetime` value as needed.
+
+    After running the command, save the `id` value from the response for further use.
+
+    ![Token Lifetime Policy](../../assets/operator-guide/microsoft-entra-auth/token-lifetime-policy.png)
+
+6. Assign the custom Token Lifetime Policy to the application by running the following command:
+
+    :::note
+    For UNIX-based systems, it is necessary to escape the `$` character in the `\$ref` value.
+    :::
+
+    ```bash
+    curl -X POST "https://graph.microsoft.com/v1.0/applications/<application_object_id>/tokenLifetimePolicies/\$ref" \
+    -H "Authorization: Bearer <access_token>" \
+    -H "Content-Type: application/json" \
+    -d '{
+        "@odata.id": "https://graph.microsoft.com/v1.0/policies/tokenLifetimePolicies/<policy_id>"
+    }'
+    ```
+
+    Replace `<application_object_id>`, `<access_token>`, and `<policy_id>` with the Object ID of the Microsoft Entra application, the saved access token, and the `id` value of the custom Token Lifetime Policy, respectively.
+
+7. (Optional) Get the application access or ID token and verify the token lifetime by running the following command:
+
+    :::note
+    Before running the command, ensure that the `Redirect URI` in the Microsoft Entra application is set to `http://localhost:8000`.
+    ![Redirect URI](../../assets/operator-guide/microsoft-entra-auth/redirect-uri.png)
+    :::
+
+    ```bash
+    kubelogin get-token --oidc-issuer-url=https://sts.windows.net/<tenant_id>/ --oidc-client-id=<application_client_id> --oidc-client-secret=<application_client_secret> --force-refresh
+    ```
+
+    Replace `<tenant_id>`, `<application_client_id>`, and `<application_client_secret>` with the corresponding values from the Microsoft Entra application.
+
+    After that, decode the token using the [jwt.io](https://jwt.io/) tool and verify the `exp` claim to check the token expiration time. The lifetime of the token should match the `AccessTokenLifetime` value set in the custom Token Lifetime Policy (e.g., the token should expire after 4 hours after issuance).
+
+    ![Decoded Token](../../assets/operator-guide/microsoft-entra-auth/lifetime-decoded-token.png)
+
+8. After configuring the custom Token Lifetime Policy, the application will issue tokens with the extended lifespan as defined in the policy.
 
 ## Related Articles
 

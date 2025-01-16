@@ -331,7 +331,7 @@ To authenticate to the AWS EKS cluster using Microsoft Entra, you can use the `k
     kubectl get nodes
     ```
 
-## Configuring KubeRocketCi Portal with Microsoft Entra OIDC Authentication
+## Configuring KubeRocketCI Portal with Microsoft Entra OIDC Authentication
 
 1. Starting from version 3.11, KubeRocketCI platform supports Microsoft Entra as an Identity Provider for OIDC authentication in the Portal UI. To configure Microsoft Entra OIDC authentication, navigate to the [edp-install](https://github.com/epam/edp-install) Helm chart repository and set the following values in the `values.yaml` file:
 

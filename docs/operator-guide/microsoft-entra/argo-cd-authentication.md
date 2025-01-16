@@ -161,6 +161,8 @@ The **Object ID** can be found in the **Overview** section of the group in the M
       metadata:
         name: keycloak-client-argocd-secret
         namespace: <namespace>
+        label:
+          app.kubernetes.io/part-of: argocd
       data:
         clientSecret: <Application Client secret>
       ```

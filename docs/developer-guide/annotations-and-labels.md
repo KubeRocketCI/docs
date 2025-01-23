@@ -1,5 +1,9 @@
 # Annotations and Labels
 
+<head>
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/developer-guide/annotations-and-labels/" />
+</head>
+
 KubeRocketCI uses labels to interact with various resources in a Kubernetes cluster. This guide details the resources, annotations, and labels used by the platform to streamline operations, enhance monitoring, and enforce governance.
 
 ## Labels

@@ -1,5 +1,9 @@
 # Deploy RPM Packages
 
+<head>
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/cd/deploy-rpm/" />
+</head>
+
 KubeRocketCI can use two types of deployment packages: Helm chart and RPM packages. While the Helm chart is the default deployment package in KubeRocketCI, using RPM packages is beneficial for specific Linux distributions, such as Oracle, Fedora, openSUSE, and others where these packages are supported and widespread. To learn more about RPM packages, refer to the official [documentation](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/7/html/rpm_packaging_guide/getting-started-with-rpm-packaging#introduction-to-rpm-packaging_getting-started-with-rpm-packaging).
 
 In KubeRocketCI, RPM support allows to collect applications, store them as Nexus artifacts, and deploy them using the [Ansible](https://docs.ansible.com/ansible/latest/index.html) tool. KubeRocketCI is support two approach to work with RPM packages:

@@ -1,5 +1,9 @@
 # Package Registry
 
+<head>
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/artifacts-management/package-registry/" />
+</head>
+
 This page describes the supported package registry providers and provides detailed instruction on how to adjust configurations to work properly with these package registry providers.
 
 ## Supported Package Registry Providers

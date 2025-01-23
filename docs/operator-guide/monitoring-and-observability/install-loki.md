@@ -1,5 +1,9 @@
 # Install Grafana Loki
 
+<head>
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/monitoring-and-observability/install-loki/" />
+</head>
+
 KubeRocketCI configures the logging with the help of [Grafana Loki](https://grafana.com/oss/loki/) aggregation system.
 
 ## Installation

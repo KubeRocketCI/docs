@@ -1,5 +1,9 @@
 # Upgrade Keycloak v17.0 to 19.0
 
+<head>
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/upgrade/upgrade-keycloak-19.0/" />
+</head>
+
 Starting from Keycloak v.18.x.x, the Keycloak server has been moved from the Wildfly (JBoss) Application Server to [Quarkus](https://quarkus.io/) framework and is called Keycloak.X.
 
 There are two ways to upgrade Keycloak v.17.0.x-legacy to v.19.0.x on Kubernetes, please perform the steps described in the [Prerequisites](#prerequisites) section of this tutorial, and then select a suitable upgrade strategy for your environment:

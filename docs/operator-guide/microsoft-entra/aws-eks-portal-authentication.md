@@ -5,6 +5,10 @@ sidebar_label: AWS EKS & KubeRocketCI Portal
 
 # Guide: Microsoft Entra SSO integration with AWS EKS & KubeRocketCI Portal
 
+<head>
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/microsoft-entra/aws-eks-portal-authentication/" />
+</head>
+
 This guide provides instructions on how to configure OpenID Connect (OIDC) authentication for the AWS EKS cluster and the KubeRocketCI Portal using Microsoft Entra as the Identity Provider (IdP), as well as how to configure the default namespace and user picture in the KubeRocketCI Portal using Microsoft Entra extension attributes.
 
 ## Prerequisites

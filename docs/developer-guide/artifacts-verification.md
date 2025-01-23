@@ -1,5 +1,9 @@
 # Verification of KubeRocketCI Artifacts
 
+<head>
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/developer-guide/artifacts-verification/" />
+</head>
+
 This documentation outlines platform SLSA integration and guides verifying image authenticity and provenance.
 
 Supply Chain Levels of [Software Assurance (SLSA)](https://slsa.dev/) is a framework for assessing and enhancing software supply chain security.

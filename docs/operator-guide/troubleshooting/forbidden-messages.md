@@ -1,5 +1,9 @@
 # Forbidden Messages on the Overview Page
 
+<head>
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/troubleshooting/forbidden-messages/" />
+</head>
+
 ## Problem
 
 Users can't see resources within the KubeRocketCI dedicated namespace via KubeRocketCI portal:

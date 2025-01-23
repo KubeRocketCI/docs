@@ -1,5 +1,9 @@
 # Install via AWS Marketplace
 
+<head>
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/aws-marketplace-install/" />
+</head>
+
 This documentation provides detailed instructions on how to install the KubeRocketCI via the AWS Marketplace.
 
 To initiate the installation process, navigate to our dedicated [AWS Marketplace](https://aws.amazon.com/marketplace/pp/prodview-u7xcz6pvwwwoa#pdp-overview) page and commence the deployment of KubeRocketCI.

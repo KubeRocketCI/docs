@@ -1,5 +1,9 @@
 # Modify GitOps Repository Path
 
+<head>
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/troubleshooting/modify-gitops-repo-path/" />
+</head>
+
 This page explains how to change the path of a [GitOps](../../user-guide/gitops.md) repository after it has been created.
 
 ## Problem

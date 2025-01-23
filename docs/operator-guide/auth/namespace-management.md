@@ -1,5 +1,9 @@
 # Kubernetes Namespace Management
 
+<head>
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/auth/namespace-management/" />
+</head>
+
 KubeRocketCI [deploys](../../user-guide/add-cd-pipeline.md) applications to namespaces. By default, the platform automatically creates these namespaces. This page provides information on an alternative approach to namespace management.
 
 ## Overview

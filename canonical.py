@@ -32,14 +32,18 @@ def scan_and_update(directory, sub_directory):
                 # Check if the canonical link already exists
                 if not any('<link rel="canonical"' in line for line in content):
                     canonical_link = generate_canonical_link(file_path, directory, sub_directory)
-                    # Insert the canonical link on the third line
-                    content.insert(2, canonical_link + "\n\n")
+                    # Find the first line that starts with '#'
+                    for i, line in enumerate(content):
+                        if line.startswith('#'):
+                            # Insert the canonical link after this line
+                            content.insert(i + 2, canonical_link + "\n\n")
+                            break
                     with open(file_path, 'w') as f:
                         f.writelines(content)
                     print(f"Updated {file_path}")
 
 # Root directory of all docs
-root_directory = "/Users/Sergiy_Kulanov/my_projects/edp/docs/versioned_docs/version-3.9"
+root_directory = "/Users/Sergiy_Kulanov/my_projects/edp/docs/versioned_docs/version-3.10"
 
 # Process each specified directory
 for sub_directory in directories_to_process:

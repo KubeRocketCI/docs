@@ -18,12 +18,12 @@ The autotest coverage status is presented on the scheme below:
 
 In our testing flow, each release is verified by the following tests:
 
-| Test Group | Description | What's Covered |
-|-|:-|:-|
-| API Tests | Tekton Gerrit, GitHub, and GitLab API long regression | Codebase provisioning, reviewing and building pipelines, adding new branches, deploying applications (in a custom namespace), Jira integration, and rechecking for review pipeline. |
-| UI Tests | Tekton Gerrit, GitHub, and GitLab UI long regression | Codebase provisioning, reviewing and building pipelines, adding new branches, deploying applications (in a custom namespace), Jira integration, and rechecking for review pipeline. |
-| Short Tests | Tekton Gerrit , GitHub, and GitLab API short regression | Codebase provisioning, reviewing and building pipelines, deploying applications (in a custom namespace), rechecking for review pipeline |
-| Smoke | Tekton Gerrit Smoke | Codebase provisioning, reviewing and building pipelines, deploying applications. |
+| Test Group | Description                                                        | What's Covered |
+|-|:-------------------------------------------------------------------|:-|
+| API Tests | Tekton Bitbucket, Gerrit, GitHub, and GitLab API long regression   | Codebase provisioning, reviewing and building pipelines, adding new branches, deploying applications (in a custom namespace), Jira integration, and rechecking for review pipeline. |
+| UI Tests | Tekton Bitbucket, Gerrit, GitHub, and GitLab UI long regression    | Codebase provisioning, reviewing and building pipelines, adding new branches, deploying applications (in a custom namespace), Jira integration, and rechecking for review pipeline. |
+| Short Tests | Tekton Bitbucket, Gerrit , GitHub, and GitLab API short regression | Codebase provisioning, reviewing and building pipelines, deploying applications (in a custom namespace), rechecking for review pipeline |
+| Smoke | Tekton Gerrit Smoke                                                | Codebase provisioning, reviewing and building pipelines, deploying applications. |
 
 ## Related Articles
 

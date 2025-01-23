@@ -27,7 +27,7 @@ The user credentials are incorrect.
 2. Modify user credentials, including endpoint, user, or token, to ensure appropriate access rights.
 
     :::note
-      For detailed instructions, visit the [managing container registries.](../../user-guide/manage-container-registries)
+      For detailed instructions, visit the [managing container registries.](../../user-guide/manage-container-registries.md)
     :::
 
 ## Related Articles

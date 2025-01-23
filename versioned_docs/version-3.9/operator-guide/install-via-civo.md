@@ -78,7 +78,7 @@ As soon as the cluster is deployed, it is time to install the KubeRocketCI appli
 
 6. In the new browser tab, access the Portal UI by typing the URL according to the `https://portal-edp.<DNS_name>` format.
 
-7. Accept the security warning and click the **service access token** link to open the [instructions](../quick-start/platform-installation) step 5 on how to get a token to log in to the Portal UI.
+7. Accept the security warning and click the **service access token** link to open the [instructions](../quick-start/platform-installation.md) step 5 on how to get a token to log in to the Portal UI.
 
 8. As soon as the token is created, paste it in the **ID token** field and click the **Authenticate** button.
 

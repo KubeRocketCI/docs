@@ -96,7 +96,7 @@ To streamline the installation of KrakenD in your environment, use the resources
     }
     ```
 
-    More details about External Secrets Operator integration can be found in the [External Secrets Operator](../secrets-management/install-external-secrets-operator) page. [Cluster Add-Ons](https://github.com/epam/edp-cluster-add-ons)
+    More details about External Secrets Operator integration can be found in the [External Secrets Operator](../secrets-management/install-external-secrets-operator.md) page. [Cluster Add-Ons](https://github.com/epam/edp-cluster-add-ons)
     </TabItem>
 
   </Tabs>

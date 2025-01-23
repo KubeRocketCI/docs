@@ -1,5 +1,9 @@
 # Manage Deployment Flows
 
+<head>
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/user-guide/manage-environments/" />
+</head>
+
 This page describes actions that can be performed to an already created deployment flow. If no deployment flows are created yet, navigate to the [Add Deployment Flow](add-cd-pipeline.md) page:
 
   ![Deployment flows page](../assets/user-guide/environments/edp-portal-cd-pipeline-page.png "Deployment flows page")
@@ -17,7 +21,7 @@ This page describes actions that can be performed to an already created deployme
     Please keep in mind that after deleting the deployment flow, all the created resources within the deployment flow will be deleted.
   :::
 
-### View Deployment Flow Details
+## View Deployment Flow Details
 
 To view deployment flow details, click the deployment flow name in the deployment flows list. Once clicked, the following data will be displayed:
 

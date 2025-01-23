@@ -1,5 +1,9 @@
 # Add Gen AI Assistant
 
+<head>
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/user-guide/add-ai-assistant/" />
+</head>
+
 The KubeRocketCI portal allows you to connect the platform with a third-party AI assistant, enabling its use within the platform. This integration assists by providing platform-related information and answering any questions in the chat. The assistant's configuration is performed via the Configuration tab in the Gen AI section.
 
 ## Prerequisites

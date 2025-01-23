@@ -4,6 +4,10 @@ sidebar_label: Tekton Overview
 
 # KubeRocketCI: Tekton Overview
 
+<head>
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/user-guide/tekton-pipelines/" />
+</head>
+
 KubeRocketCI is a platform that utilizes the Tekton stack to implement continuous integration and continuous delivery (CI/CD) pipelines, offering access to all Tekton features. It comes pre-configured with various Tekton resources, including pipelines, tasks, triggers, and other components. This documentation outlines how to interact with these Tekton resources within the KubeRocketCI platform, addressing common use cases, pipeline configuration, and execution processes.
 
 ## Prerequisites

@@ -1,5 +1,9 @@
 # Manage Libraries
 
+<head>
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/user-guide/library/" />
+</head>
+
 This section describes the subsequent possible actions that can be performed with the newly added or existing libraries.
 
 ## Check and Remove Library

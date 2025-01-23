@@ -1,5 +1,9 @@
 # Manage Applications
 
+<head>
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/user-guide/application/" />
+</head>
+
 This section describes the subsequent possible actions that can be performed with the newly added or existing applications.
 
 ## Check and Remove Application

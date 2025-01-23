@@ -3,6 +3,10 @@ import TabItem from '@theme/TabItem';
 
 # Integrate DefectDojo
 
+<head>
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/devsecops/defectdojo/" />
+</head>
+
 Inspect the main steps to perform for installing DefectDojo via Helm Chart.
 
 :::info

@@ -1,5 +1,9 @@
 # IAM Roles for Velero Kubernetes Service Accounts
 
+<head>
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/disaster-recovery/velero-irsa/" />
+</head>
+
 :::note
   Make sure that IRSA is enabled and [amazon-eks-pod-identity-webhook](https://github.com/aws/amazon-eks-pod-identity-webhook/tree/master) is deployed according to the [Associate IAM Roles With Service Accounts](../infrastructure-providers/aws/enable-irsa.md) documentation.
 :::

@@ -1,5 +1,9 @@
 # Harbor OIDC Configuration
 
+<head>
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/artifacts-management/harbor-oidc/" />
+</head>
+
 This guide outlines the steps for integrating [OIDC (OpenID Connect) authorization](https://openid.net/connect/) with Harbor, facilitating Single Sign-On (SSO) capabilities. By adopting OIDC, Harbor gains a unified authentication mechanism, simplifying user access management and enhancing security. This approach centralizes user permissions and access control, streamlining administration through a singular configuration interface.
 
 ## Prerequisites

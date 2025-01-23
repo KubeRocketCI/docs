@@ -3,6 +3,10 @@ import TabItem from '@theme/TabItem';
 
 # Tekton Dashboard Authentication
 
+<head>
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/auth/oauth2-proxy/" />
+</head>
+
 [OAuth2-Proxy](https://oauth2-proxy.github.io/oauth2-proxy/) is a versatile tool that serves as a reverse proxy, utilizing the OAuth 2.0 protocol with various providers like Google, GitHub, and Keycloak to provide both authentication and authorization. This guide instructs readers on how to protect their applications' endpoints using OAuth2-Proxy. By following these steps, users can enhance the security of their endpoints without modifying their current application code. In the context of KubeRocketCI, it has integration with the Keycloak OIDC provider, enabling it to connect with any component that lacks built-in authentication.
 
 ## Prerequisites

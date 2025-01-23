@@ -3,6 +3,10 @@ import TabItem from '@theme/TabItem';
 
 # Upgrade KubeRocketCI v3.7 to 3.8
 
+<head>
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/upgrade/upgrade-edp-3.8/" />
+</head>
+
 :::warning
   We suggest backing up the KubeRocketCI environment before starting the upgrade procedure.
 :::

@@ -5,6 +5,10 @@ sidebar_label: SonarQube
 
 # Guide: Microsoft Entra SSO integration with SonarQube
 
+<head>
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/microsoft-entra/sonar-oidc-authentication/" />
+</head>
+
 This guide provides instructions on how to configure SonarQube with OpenID Connect (OIDC) authentication using Microsoft Entra as the Identity Provider (IdP).
 
 ## Prerequisites

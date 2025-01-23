@@ -1,5 +1,9 @@
 # Manage Project Visibility
 
+<head>
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/code-quality/sonarqube-visibility/" />
+</head>
+
 This manual offers detailed guidance on configuring permissions for SonarQube projects, ensuring that only authorized personnel can access and interact with the data on the SonarQube platform. It caters to both new and existing SonarQube projects, providing a clear pathway to refine visibility settings for enhanced security.
 
 By leveraging the OpenID Connect mechanism for login, users are automatically assigned to the `sonar-users` group, granting them access to all projects by default. This document outlines methods to alter these default permissions, enhancing the platform's security and data confidentiality. It is structured into two main sections: one focusing on [restricting access to new projects](#restrict-access-for-new-projects), and the other on [reconfiguring access settings for existing projects](#configure-access-for-existing-projects).

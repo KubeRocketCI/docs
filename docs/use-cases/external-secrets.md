@@ -1,5 +1,9 @@
 # Secured Secrets Management for Application Deployment
 
+<head>
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/use-cases/external-secrets/" />
+</head>
+
 This use case demonstrates the secure management of sensitive data, such as passwords, API keys, and other credentials used by an application during development or production runtime.
 The process involves storing sensitive data in an external secret store within a `demo-vault` namespace. The confidential information is then transmitted from the `demo-vault` namespace to the namespace where the application is deployed. This ensures that the application can utilize these credentials to establish a secure connection to the database.
 In this scenario, the KubeRocketCI platform leverages capabilities of the `External Secret Operator`. Developers can use another external secret store (Hashicorp Vault, AWS Secret Store, or another provider) to ensure that confidential information is securely stored and accessed only when necessary.

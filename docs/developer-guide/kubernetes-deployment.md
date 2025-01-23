@@ -1,5 +1,9 @@
 # Kubernetes Deployment
 
+<head>
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/developer-guide/kubernetes-deployment/" />
+</head>
+
 This section provides a comprehensive overview of the KubeRocketCI deployment approach on a Kubernetes cluster. KubeRocketCI is designed and functions based on a set of key guiding principles:
 
 * **Operator Pattern Approach:** [Approach](https://kubernetes.io/docs/concepts/extend-kubernetes/operator/) is used for deployment and configuration, ensuring that the platform aligns with Kubernetes native methodologies (see schema below).

@@ -3,6 +3,10 @@ import TabItem from '@theme/TabItem';
 
 # Set Up OpenShift
 
+<head>
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/openshift-cluster-settings/" />
+</head>
+
 Make sure the cluster meets the following conditions:
 
 1. OpenShift cluster is installed with minimum 2 worker nodes with total capacity 8 Cores and 32Gb RAM.

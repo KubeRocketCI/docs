@@ -1,5 +1,9 @@
 # Pipeline Monitoring with Prometheus and Grafana
 
+<head>
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/ci/tekton-monitoring/" />
+</head>
+
 This documentation describes how to integrate tekton-pipelines metrics with Prometheus and Grafana monitoring stack.
 
 ## Prerequisites

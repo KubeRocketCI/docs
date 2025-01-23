@@ -3,6 +3,10 @@ import TabItem from '@theme/TabItem';
 
 # Multitenant Logging
 
+<head>
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/monitoring-and-observability/multitenant-logging/" />
+</head>
+
 Get acquainted with the multitenant logging components.
 
 ## Logging Components

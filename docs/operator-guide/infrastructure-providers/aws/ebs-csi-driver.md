@@ -1,5 +1,9 @@
 # Amazon EBS CSI Driver
 
+<head>
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/infrastructure-providers/aws/ebs-csi-driver/" />
+</head>
+
 The Amazon Elastic Block Store (Amazon EBS) Container Storage Interface (CSI) driver allows Amazon Elastic Kubernetes Service (Amazon EKS) clusters to manage the lifecycle of Amazon EBS volumes for Kubernetes Persistent Volumes.
 
 ## Prerequisites

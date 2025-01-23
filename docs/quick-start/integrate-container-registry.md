@@ -1,5 +1,9 @@
 # Integrate DockerHub
 
+<head>
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/quick-start/integrate-container-registry/" />
+</head>
+
 KubeRocketCI utilizes container registries for storing and distributing application images. This page provides instructions on integrating your platform with DockerHub.
 
 ## Integration Procedure

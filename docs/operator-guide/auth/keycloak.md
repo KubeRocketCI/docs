@@ -1,5 +1,9 @@
 # Install Keycloak
 
+<head>
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/auth/keycloak/" />
+</head>
+
 Inspect the prerequisites and the main steps to perform for installing Keycloak.
 
 :::info

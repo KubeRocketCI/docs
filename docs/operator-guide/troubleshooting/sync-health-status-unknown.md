@@ -1,5 +1,9 @@
 # Sync and Health Status Unknown
 
+<head>
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/troubleshooting/sync-health-status-unknown/" />
+</head>
+
 ## Problem
 
 In the **Stage Detail** page, the application **Health status** and **Sync Status** is unknown. The `deploy` button doesn't work when attempting to create a stage.

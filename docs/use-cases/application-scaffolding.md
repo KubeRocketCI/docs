@@ -1,5 +1,9 @@
 # Scaffold and Deploy FastAPI Application
 
+<head>
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/use-cases/application-scaffolding/" />
+</head>
+
 ## Overview
 
 This use case outlines the process of creating and deploying a FastAPI application using KubeRocketCI.

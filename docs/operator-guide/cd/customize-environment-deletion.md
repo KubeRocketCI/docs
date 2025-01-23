@@ -1,5 +1,9 @@
 # Customize Environment Cleanup
 
+<head>
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/cd/customize-environment-deletion/" />
+</head>
+
 KubeRocketCI provides capabilities to fully operate the CI/CD flow, starting from building applications to deploying its new release. The operation flow is designed to be seamless for most of the users. However, there may be cases where more specialized actions are necessary. These might include custom procedures for managing the deletion of application resources.
 
 ## Create Custom Clean Pipeline

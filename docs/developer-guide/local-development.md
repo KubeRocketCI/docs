@@ -1,5 +1,9 @@
 # Operator Development
 
+<head>
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/developer-guide/local-development/" />
+</head>
+
 This page is intended for developers with the aim to share details on how to set up the local environment and start coding in Go language for KubeRocketCI.
 
 ## Prerequisites

@@ -3,6 +3,10 @@ import TabItem from '@theme/TabItem';
 
 # Jira Integration
 
+<head>
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/project-management-and-reporting/jira-integration/" />
+</head>
+
 This documentation guide provides step-by-step instructions for enabling the Jira integration option in the Portal UI for KubeRocketCI. Jira integration allows including useful metadata in Jira tickets.
 
 ## Overview

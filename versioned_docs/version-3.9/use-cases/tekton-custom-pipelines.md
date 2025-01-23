@@ -1,5 +1,9 @@
 # Deploy Application With Custom Build Tool/Framework
 
+<head>
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/use-cases/tekton-custom-pipelines/" />
+</head>
+
 This use case demonstrates how to implement custom CI/CD pipelines within the KubeRocketCI platform to address project-specific requirements.
 KubeRocketCI extends this capability by supporting the **customization** of Applications (Components) and Tekton pipelines, allowing teams to integrate and develop functionalities or services not readily available on the platform.
 

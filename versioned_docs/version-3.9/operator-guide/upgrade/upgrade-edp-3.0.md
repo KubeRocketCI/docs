@@ -1,5 +1,9 @@
 # Upgrade EDP v2.12 to 3.0
 
+<head>
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/upgrade/upgrade-edp-3.0/" />
+</head>
+
 :::warning
   Please read carefully the following notes before upgrading EDP to 3.0:
     * Before starting the upgrade procedure, please make the necessary backups.

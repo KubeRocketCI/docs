@@ -1,5 +1,9 @@
 # Overview
 
+<head>
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/user-guide/" />
+</head>
+
 The KubeRocketCI portal user guide is intended for developers and provides details on working with the KubeRocketCI portal, different codebase types, and the KubeRocketCI CI/CD flow.
 
 ## KubeRocketCI Portal

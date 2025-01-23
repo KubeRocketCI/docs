@@ -1,5 +1,9 @@
 # Deploy OKD 4.10 Cluster
 
+<head>
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/infrastructure-providers/okd/deploy-okd-4.10/" />
+</head>
+
 This instruction provides detailed information on the OKD 4.10 cluster deployment in the AWS Cloud and contains the additional setup necessary for the managed infrastructure.
 
 A full description of the cluster deployment can be found in the [official documentation](https://docs.openshift.com/container-platform/4.10/authentication/managing_cloud_provider_credentials/cco-mode-sts.html).

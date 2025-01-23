@@ -1,5 +1,9 @@
 # Add Environment
 
+<head>
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/user-guide/add-cd-pipeline/" />
+</head>
+
 Portal provides the ability to deploy an environment on your own and specify the essential components.
 
 Navigate to the **Environments** section on the navigation bar and click **Create** (the plus sign icon on the right side of the screen). Once clicked, the **Create Environments** dialog will appear.

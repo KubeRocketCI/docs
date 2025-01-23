@@ -1,5 +1,9 @@
 # Telemetry
 
+<head>
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/developer-guide/telemetry/" />
+</head>
+
 The codebase operator for the KubeRocketCI gathers anonymous data through telemetry. This data provides a clear picture of how the platform is being used and empowers the development team to make informed decisions and strategic enhancements to meet evolving operational needs. The anonymous data collected also plays an essential role in adopting a Software Development Life Cycle (SDLC) process strategically.
 
 ## Telemetry Data

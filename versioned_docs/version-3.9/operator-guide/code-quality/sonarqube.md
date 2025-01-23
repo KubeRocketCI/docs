@@ -3,6 +3,10 @@ import TabItem from '@theme/TabItem';
 
 # SonarQube Integration
 
+<head>
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/code-quality/sonarqube/" />
+</head>
+
 This documentation offers detailed guidance on seamlessly integrating SonarQube into KubeRocketCI.
 It covers essential steps to ensure a robust connection between SonarQube's code quality and security
 analysis capabilities with the platform's continuous delivery ecosystem,

@@ -1,5 +1,9 @@
 # Install Velero
 
+<head>
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/disaster-recovery/install-velero/" />
+</head>
+
 [Velero](https://velero.io/) is an open source tool to safely back up, recover, and migrate Kubernetes clusters and persistent volumes.
 It works both on premises and in a public cloud. Velero consists of a server process running as a deployment in your
 Kubernetes cluster and a command-line interface (CLI) with which DevOps teams and platform operators configure scheduled

@@ -1,5 +1,9 @@
 # Integrate GitHub
 
+<head>
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/quick-start/integrate-github/" />
+</head>
+
 To initiate work in the KubeRocketCI, integration with a Version Control System (VCS) is essential. This integration facilitates the use of create, clone, and import strategies for handling source code.
 This tutorial focuses on the create strategy, wherein an application is directly created in the integrated VCS solution for subsequent work. Here, you will find instructions on how to integrate KubeRocketCI with GitHub.
 

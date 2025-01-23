@@ -1,5 +1,9 @@
 # Marketplace Overview
 
+<head>
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/user-guide/marketplace/" />
+</head>
+
 The KubeRocketCI marketplace offers a range of Templates, predefined tools and settings for creating software. These Templates speed up development, minimize errors, and ensure consistency.
 A key KubeRocketCI marketplace feature is customization. Organizations can create and share their own Templates, finely tuned to their needs. Each Template serves as a tailored blueprint of tools and settings.
 

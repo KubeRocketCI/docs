@@ -1,5 +1,9 @@
 # Use Cert-Manager in OpenShift
 
+<head>
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/infrastructure-providers/okd/ssl-automation-okd/" />
+</head>
+
 The following material covers [Let's Encrypt](https://letsencrypt.org/) certificate automation with [cert-manager](https://github.com/cert-manager/cert-manager) using [AWS Route53](https://aws.amazon.com/route53/).
 
 The [cert-manager](https://cert-manager.io/docs/) is a Kubernetes/OpenShift operator that allows to issue and automatically renew SSL certificates. In this tutorial, the steps to secure DNS Name will be demonstrated.

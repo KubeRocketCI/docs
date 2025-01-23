@@ -7,6 +7,10 @@ sidebar_position: 0
 <!-- markdownlint-disable MD025 -->
 This page contains a list of frequently asked questions related to artifact management in KubeRocketCI.
 
+<head>
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/faq/artifacts/" />
+</head>
+
 ### How Does Artifact Versioning Work?
 
 Artifact versioning in KubeRocketCI is designed to ensure each build and deployment can be uniquely identified, managed, and traced back to its source.

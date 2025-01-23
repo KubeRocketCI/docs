@@ -1,5 +1,9 @@
 # Install via Civo Marketplace
 
+<head>
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/install-via-civo/" />
+</head>
+
 This documentation provides detailed instructions on how to install the KubeRocketCI platform via [Civo Marketplace](https://www.civo.com/marketplace/kuberocketci).
 As a prerequisite, make sure to [sign up](https://dashboard.civo.com/signup) on Civo.
 

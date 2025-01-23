@@ -1,5 +1,9 @@
 # Container Registry Error
 
+<head>
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/troubleshooting/container-registry-error/" />
+</head>
+
 ## Problem
 
 Failed to establish a connection with the container registry.

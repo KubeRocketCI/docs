@@ -1,5 +1,9 @@
 # IAM Roles for Kaniko Service Accounts
 
+<head>
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/infrastructure-providers/aws/kaniko-irsa/" />
+</head>
+
 :::note
   The information below is relevant in case ECR is used as Docker container registry.
   Make sure that IRSA is enabled and [amazon-eks-pod-identity-webhook](https://github.com/aws/amazon-eks-pod-identity-webhook/tree/master) is deployed according to the [Associate IAM Roles With Service Accounts](enable-irsa.md) documentation.

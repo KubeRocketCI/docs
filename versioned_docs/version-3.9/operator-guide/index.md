@@ -1,5 +1,9 @@
 # Overview
 
+<head>
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/" />
+</head>
+
 The Operator guide is intended for DevOps and provides information on KubeRocketCI installation, configuration and customization, as well as the platform support. Inspect the documentation to adjust the KubeRocketCI according to your business needs:
 
 * The **Installation** section provides the prerequisites for the platform installation, including [Kubernetes](kubernetes-cluster-settings.md) or [OpenShift](openshift-cluster-settings.md) cluster setup,

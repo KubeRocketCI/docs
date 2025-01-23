@@ -5,6 +5,10 @@ sidebar_label: Harbor
 
 # Guide: Microsoft Entra SSO integration with Harbor
 
+<head>
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/microsoft-entra/harbor-authentication/" />
+</head>
+
 This guide provides instructions on how to configure Harbor with OpenID Connect (OIDC) authentication using Microsoft Entra as the Identity Provider (IdP).
 
 ## Prerequisites
@@ -116,6 +120,3 @@ After completing these steps, Harbor is configured to use Microsoft Entra as the
 ## Related Articles
 
 - [OpenID Connect (OIDC) Authentication Overview](./oidc-authentication-overview.md)
-
-
-

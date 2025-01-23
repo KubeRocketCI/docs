@@ -1,5 +1,9 @@
 # AWS EKS OIDC Integration
 
+<head>
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/auth/eks-oidc-integration/" />
+</head>
+
 This page serves as a comprehensive guide on integrating Keycloak with the [edp-keycloak-operator](https://github.com/epam/edp-keycloak-operator) to act as an identity provider for AWS Elastic Kubernetes Service (EKS). It provides detailed step-by-step instructions for creating the necessary realms, users, roles, and client configurations to seamlessly collaborate between Keycloak and EKS. Additionally, it includes instructions on installing the edp-keycloak-operator using Helm charts.
 
 ## Prerequisites

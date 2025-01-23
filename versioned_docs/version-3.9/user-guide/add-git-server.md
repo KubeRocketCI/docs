@@ -3,6 +3,10 @@ import TabItem from '@theme/TabItem';
 
 # Add Git Server
 
+<head>
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/user-guide/add-git-server/" />
+</head>
+
 This page describes how to integrate KubeRocketCI with GitLab or GitHub.
 
 <div style={{ display: 'flex', justifyContent: 'center' }}>

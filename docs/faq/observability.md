@@ -7,6 +7,10 @@ sidebar_position: 1
 <!-- markdownlint-disable MD025 -->
 This page contains a list of frequently asked questions related to logging, monitoring, and tracing capabilities in KubeRocketCI.
 
+<head>
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/faq/observability/" />
+</head>
+
 ### How to Check Logs for Applications Running in an Environment?
 
 :::warning

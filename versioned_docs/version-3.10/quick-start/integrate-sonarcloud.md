@@ -1,5 +1,9 @@
 # Integrate SonarQube
 
+<head>
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/quick-start/integrate-sonarcloud/" />
+</head>
+
 It is essential for KubeRocketCI to have SonarQube integrated with the platform as all the pipelines include the `sonar` step.
 
 SonarQube is a powerful tool used in build and code review pipelines to enhance code quality by identifying and reporting issues, as well as providing recommendations for improvement. SonarCloud, the SaaS solution offered by SonarQube, serves this purpose.

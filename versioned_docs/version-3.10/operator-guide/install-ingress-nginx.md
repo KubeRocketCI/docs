@@ -1,5 +1,9 @@
 # Install NGINX Ingress Controller
 
+<head>
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/install-ingress-nginx/" />
+</head>
+
 Inspect the prerequisites and the main steps to perform for installing [Install NGINX Ingress Controller](https://docs.nginx.com/nginx-ingress-controller/intro/overview/) on Kubernetes.
 
 ## Prerequisites

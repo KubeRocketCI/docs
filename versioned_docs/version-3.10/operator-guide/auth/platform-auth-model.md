@@ -1,5 +1,9 @@
 # Overview
 
+<head>
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/auth/platform-auth-model/" />
+</head>
+
 KubeRocketCI uses [Keycloak](https://keycloak.org) as central access management solution, handling user permissions across various platform tools, including Kubernetes. Kubernetes clusters leverage Keycloak for RBAC implementation via [OIDC](https://kubernetes.io/docs/reference/access-authn-authz/authentication/). This consistent approach allows administrators to manage access uniformly.
 Within Kubernetes, [Custom Resources (CRs)](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/) are used to refine and enforce access controls by [configuring Keycloak](https://operatorhub.io/operator/edp-keycloak-operator), translating Kubernetes configurations into Keycloak access policies.
 

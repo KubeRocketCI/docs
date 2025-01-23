@@ -1,5 +1,9 @@
 # Deployment Strategies Overview
 
+<head>
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/cd/auto-stable-trigger-type/" />
+</head>
+
 Deploying applications to production environments involves risks of downtime and service disruptions. To mitigate such issues and enhance stability, KubeRocketCI provides several deployment strategies.
 
 ## Deployment Strategies in KubeRocketCI

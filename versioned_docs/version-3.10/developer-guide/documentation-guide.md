@@ -1,5 +1,9 @@
 # Working With Documentation
 
+<head>
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/developer-guide/documentation-guide/" />
+</head>
+
 This section outlines the necessary steps to start developing the KubeRocketCI documentation using Docusaurus.
 Docusaurus is a modern static website generator that simplifies creating, deploying, and maintaining open source project websites.
 

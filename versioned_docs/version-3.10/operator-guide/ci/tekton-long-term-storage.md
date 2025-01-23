@@ -3,6 +3,10 @@ import TabItem from '@theme/TabItem';
 
 # Tekton Long-Term Log Storage
 
+<head>
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/ci/tekton-long-term-storage/" />
+</head>
+
 This guide provides detailed instructions for setting up long-term log storage in Tekton. Without this configuration, Tekton pipeline logs are lost when associated resources are deleted. By following the steps in this guide, you can ensure that logs are preserved and remain accessible via the KubeRocketCI User Interface (UI), even after Tekton pipeline resources are removed.
 
 ## Configuration

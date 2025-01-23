@@ -1,5 +1,9 @@
 # Upgrade EDP v3.5 to 3.6
 
+<head>
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/upgrade/upgrade-edp-3.6/" />
+</head>
+
 :::warning
   We suggest backing up the EDP environment before starting the upgrade procedure.
 :::

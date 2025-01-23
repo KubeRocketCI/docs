@@ -1,5 +1,9 @@
 # Manage Quick Links
 
+<head>
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/user-guide/quick-links/" />
+</head>
+
 The Links section is designed to store all the component references in one place. Additional feature is to display these references directly in the [Overview](index.md) page of the KubeRocketCI portal. Some of the links are also located in the application details and stage details pages. Integrating some of the tools will also make these links clickable.
 
 ## Add Quick Link

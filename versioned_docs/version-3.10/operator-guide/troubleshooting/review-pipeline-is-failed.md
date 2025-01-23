@@ -1,5 +1,9 @@
 # Review Pipeline is Failed
 
+<head>
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/troubleshooting/review-pipeline-is-failed/" />
+</head>
+
 ## Problem
 
 Application can't succeed with review.

@@ -3,6 +3,10 @@ import TabItem from '@theme/TabItem';
 
 # Install KubeRocketCI
 
+<head>
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/install-kuberocketci/" />
+</head>
+
 Inspect the main steps to install KubeRocketCI. Please check the [Prerequisites Overview](prerequisites.md) page before starting the installation. Also, to authenticate each of the release artifacts, please refer to the [Verification of KubeRocketCI Artifacts](../developer-guide/artifacts-verification.md) guide.
 There are multiple ways to deploy KubeRocketCI:
 

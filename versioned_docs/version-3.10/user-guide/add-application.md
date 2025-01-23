@@ -1,5 +1,9 @@
 # Add Application
 
+<head>
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/user-guide/add-application/" />
+</head>
+
 KubeRocketCI portal allows you to create an application, clone an existing repository with the application to your Version Control System (VCS), or using an external repository and importing an application to the environment. When an application is created or cloned, the system automatically generates a corresponding repository within the integrated Version Control System. You can create an Application [in YAML](#create-application-in-yaml) or [via the two-step menu](#create-application-via-ui) in the dialog.
 
 To add an application, navigate to the **Components** section on the navigation bar and click **+ Create component**:

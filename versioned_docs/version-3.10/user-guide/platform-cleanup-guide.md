@@ -3,6 +3,10 @@ import TabItem from '@theme/TabItem';
 
 # Platform Cleanup Guide
 
+<head>
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/user-guide/platform-cleanup-guide/" />
+</head>
+
 Throughout your project's lifecycle, various resources are created within the KubeRocketCI platform. Over time, some of these resources may become deprecated. It is crucial to clean up any associated artifacts to ensure the platform functions correctly, especially if you intend to re-add a component with the same name.
 
 This page provides comprehensive guidelines for completely deleting resources in KubeRocketCI, from applications to third-party resources.

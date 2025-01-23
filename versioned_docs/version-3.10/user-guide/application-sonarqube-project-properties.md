@@ -1,5 +1,9 @@
 # SonarQube Project Properties for Application
 
+<head>
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/user-guide/application-sonarqube-project-properties/" />
+</head>
+
 The KubeRocketCI platform simplifies this process by supporting SonarQube integration with predefined configurations. However, specific use cases may require customization. Below is a guide on setting the SonarQube project properties to meet all application requirements.
 
 ## Application repo structure

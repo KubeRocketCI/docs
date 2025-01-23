@@ -3,6 +3,10 @@ import TabItem from '@theme/TabItem';
 
 # Sonatype Nexus Repository OSS Integration
 
+<head>
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/artifacts-management/nexus-sonatype/" />
+</head>
+
 This documentation guide provides comprehensive instructions for integrating Sonatype Nexus Repository OSS (Nexus) with KubeRocketCI.
 
 <div style={{ display: 'flex', justifyContent: 'center' }}>

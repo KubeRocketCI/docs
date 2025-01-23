@@ -1,5 +1,9 @@
 # Deploy AWS EKS Cluster
 
+<head>
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/deploy-aws-eks/" />
+</head>
+
 This instruction offers a comprehensive guide on deploying an Amazon Elastic Kubernetes Service (EKS) cluster, ensuring a scalable and secure Kubernetes environment on AWS. For those looking to optimize their EKS cluster configurations, it is highly recommended to consult the [AWS EKS Best Practices](https://aws.github.io/aws-eks-best-practices/) guide. This resource covers a wide range of topics crucial for the successful deployment and operation of your EKS clusters, including:
 
 * **Security**: Best practices for securing your EKS clusters, including IAM roles, network policies, and secrets management.

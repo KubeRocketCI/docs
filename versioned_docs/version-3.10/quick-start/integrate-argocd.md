@@ -1,5 +1,9 @@
 # Integrate Argo CD
 
+<head>
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/quick-start/integrate-argocd/" />
+</head>
+
 KubeRocketCI employs Argo CD as a Continuous Deployment tool for its purposes. This page provides guidance on the installation procedure for Argo CD.
 
 ## Installation

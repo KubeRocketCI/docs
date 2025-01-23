@@ -1,5 +1,9 @@
 # Add Quality Gate
 
+<head>
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/user-guide/add-quality-gate/" />
+</head>
+
 This section describes how to use quality gate in KubeRocketCI and how to customize the quality gate for the CD pipeline with the selected build version of the promoted application between stages.
 
 ## Apply New Quality Gate to Pipelines

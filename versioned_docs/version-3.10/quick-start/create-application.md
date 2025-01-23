@@ -1,5 +1,9 @@
 # Create Application
 
+<head>
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/quick-start/create-application/" />
+</head>
+
 In KubeRocketCI, all software components, such as applications, libraries, Terraform infrastructures, and automated tests, are referred to as codebases. KubeRocketCI provides flexible methods for scaffolding these components.
 
 This guide will walk you through the process of creating a Go application using the Gin framework. The [Marketplace](../user-guide/marketplace.md) will be used to streamline the application creation process.

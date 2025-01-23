@@ -1,5 +1,9 @@
 # Restore KubeRocketCI Tenant With Velero
 
+<head>
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/disaster-recovery/velero-restore-platform/" />
+</head>
+
 You can use the Velero tool to restore a platform tenant. Explore the main steps for backup and restoring below.
 
 1. Delete all related entities in **Keycloak**: realm and clients from **master/openshift** realms. Navigate to the entities list in the Keycloak, select the necessary ones, and click the deletion icon on the entity overview page.

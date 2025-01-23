@@ -1,5 +1,9 @@
 # Overview
 
+<head>
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/prerequisites/" />
+</head>
+
 Before installing KubeRocketCI via Helm Chart, make sure to complete the following steps:
 
 * Install and configure [Kubernetes](kubernetes-cluster-settings.md) or [OpenShift](openshift-cluster-settings.md) cluster;

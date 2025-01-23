@@ -122,7 +122,7 @@ Follow the steps below to install Argo CD using Helm:
       - **Keycloak (KK)**: Enables Single Sign-On (SSO) for authentication.
       - **Keycloak Operator**: Simplifies the configuration and management of Keycloak instances.
 
-    These components can be installed using the prepared [add-ons repository](https://github.com/epam/edp-cluster-add-ons). Detailed installation instructions are available in the [add-ons installation guide](add-ons-overview).
+    These components can be installed using the prepared [add-ons repository](https://github.com/epam/edp-cluster-add-ons). Detailed installation instructions are available in the [add-ons installation guide](add-ons-overview.md).
 
     To configure these components, refer to the relevant sections in `values.yaml`, which include the required parameters for enabling and customizing the add-ons.
 
@@ -200,8 +200,8 @@ Follow the steps below to install Argo CD using Helm:
 
 ## Next Step
 
-  - Install third-party tools via [Add-Ons](add-ons-overview)
-  - Install [KubeRocketCI](install-kuberocketci)
+  - Install third-party tools via [Add-Ons](add-ons-overview.md)
+  - Install [KubeRocketCI](install-kuberocketci.md)
 
 After completing the steps outlined in this documentation, the following results should be achieved:
 

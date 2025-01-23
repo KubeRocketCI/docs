@@ -266,7 +266,7 @@ To access the Kubernetes cluster via [Lens](https://k8slens.dev/), follow the st
 
 ## Changing the Lifespan of an Access Token
 
-By default, the Keycloak token has a lifespan of 5 minutes. To modify this duration refer to the guidelines outlined in this [document](ui-portal-oidc#changing-the-lifespan-of-an-access-token).
+By default, the Keycloak token has a lifespan of 5 minutes. To modify this duration refer to the guidelines outlined in this [document](ui-portal-oidc.md#changing-the-lifespan-of-an-access-token).
 
 ## Related Articles
 

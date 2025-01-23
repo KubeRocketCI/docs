@@ -454,7 +454,7 @@ Please find the detailed description of the variables in the [argo-cd/variables.
 
 ## Next Step
 
-  - Install [Argo CD](install-argocd) and integrate it with [edp-cluster-add-ons](https://github.com/epam/edp-cluster-add-ons) components
+  - Install [Argo CD](install-argocd.md) and integrate it with [edp-cluster-add-ons](https://github.com/epam/edp-cluster-add-ons) components
 
 ## Related Articles
 

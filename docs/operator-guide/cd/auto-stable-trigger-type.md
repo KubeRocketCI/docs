@@ -65,5 +65,5 @@ To enable the auto-stable deployment strategy, follow the steps below:
 
 ## Related Articles
 
-* [Manage Deployment Flows](../../user-guide/manage-environments)
+* [Manage Deployment Flows](../../user-guide/manage-environments.md)
 * [Add Application](../../user-guide/add-application.md)

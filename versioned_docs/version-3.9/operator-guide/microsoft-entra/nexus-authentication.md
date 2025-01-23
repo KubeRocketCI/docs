@@ -181,7 +181,7 @@ Nexus users can also be created directly from the Nexus UI instead of using the 
 
 To be able to access Nexus using OAuth2-proxy and Microsoft Entra, it is necessary to create users in Nexus with the appropriate roles. In this example, we will demonstrate how to create users with Nexus Operator.
 
-1. Make sure that the [Nexus Operator](https://github.com/epam/edp-cluster-add-ons/tree/main/clusters/core/addons/nexus-operator) is installed. If not, follow the instructions in the [Sonatype Nexus Repository OSS Integration documentation](../artifacts-management/nexus-sonatype).
+1. Make sure that the [Nexus Operator](https://github.com/epam/edp-cluster-add-ons/tree/main/clusters/core/addons/nexus-operator) is installed. If not, follow the instructions in the [Sonatype Nexus Repository OSS Integration documentation](../artifacts-management/nexus-sonatype.md).
 
 2. Configure the following `NexusUser` custom resource to create a user with the `nx-admin` and `edp-admin` roles:
 

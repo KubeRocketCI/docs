@@ -1,5 +1,9 @@
 # Glossary
 
+<head>
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/glossary/" />
+</head>
+
 To help you navigate the platform more effectively, familiarize yourself with the definitions and context of the most useful platform terms presented in the table below.
 
  | Terms  | Details  |

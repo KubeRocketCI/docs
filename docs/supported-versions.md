@@ -1,5 +1,9 @@
 # Supported Versions and Compatibility
 
+<head>
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/supported-versions/" />
+</head>
+
 At the KubeRocketCI, our commitment to providing a robust and reliable service involves supporting the latest innovations while ensuring stability and security. To maintain this balance, we focus our active **support on our platform's three most** recent versions.
 This approach allows us to dedicate our resources to delivering cutting-edge features, enhancing performance, and fortifying security measures while ensuring a consistent and optimized user experience across the platform.
 

@@ -1,5 +1,9 @@
 # Basic Concepts
 
+<head>
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/basic-concepts/" />
+</head>
+
 Consult [KubeRocketCI Glossary](./glossary.md) section for definitions mentioned on this page. The below table contains a list of capabilities provided by the platform.
 
 |Features|Description|

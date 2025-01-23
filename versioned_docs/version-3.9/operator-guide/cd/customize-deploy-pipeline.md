@@ -1,5 +1,9 @@
 # Customize Deploy Pipeline
 
+<head>
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/cd/customize-deploy-pipeline/" />
+</head>
+
 When deploying applications into environments, it's important to automate both `pre-deployment` and `post-deployment` steps.
 
 `Pre-deployment` procedures include essential tasks such as deploying databases, configuring specific software, and preparing the environment. Additionally, `post-deployment` procedures, such as testing, configuring, and removing old information from the environment, are crucial for ensuring the smooth operation of the deployed application. To facilitate these processes, the custom deployment feature is implemented in KubeRocketCI.

@@ -1,5 +1,9 @@
 # Reference CI/CD Pipeline
 
+<head>
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/developer-guide/reference-cicd-pipeline/" />
+</head>
+
 This document provides an in-depth overview of the Continuous Integration and Continuous Delivery (CI/CD) pipeline reference architecture implemented within the KubeRocketCI. The pipeline is designed to facilitate efficient and automated software deployment across diverse environments, leveraging a suite of tools and methodologies for enhanced reliability, scalability, and security.
 
 ## CI/CD Pipeline Architecture

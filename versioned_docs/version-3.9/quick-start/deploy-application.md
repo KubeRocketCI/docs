@@ -1,5 +1,9 @@
 # Deploy Application
 
+<head>
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/quick-start/deploy-application/" />
+</head>
+
 Now, let's proceed to deploy our first application. This page offers detailed instructions on how to create an environment and deploy the application within it.
 
 ## Create GitOps Repository
@@ -7,7 +11,6 @@ Now, let's proceed to deploy our first application. This page offers detailed in
 As a prerequisite, create a GitOps repository in your GitHub account. KubeRocketCI Portal adheres to the GitOps approach when working with environments. In a GitOps repository, values are saved to redefine the default behavior (parameters) of deployment for each environment. The creation of a GitOps repository involves the following two steps:
 
 1. In the UI Portal, navigate to **Configuration** -> **Deployment** -> **GitOps** -> **ADD GITOPS REPOSITORY**, define the following values and click **Save**:
-
 
     - Git server: `github`
     - Git repo relative path: `github_account_name`

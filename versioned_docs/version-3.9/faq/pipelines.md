@@ -7,6 +7,10 @@ sidebar_position: 2
 <!-- markdownlint-disable MD025 -->
 This page contains a list of frequently asked questions related to the CI/CD Pipelines management in the KubeRocketCI.
 
+<head>
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/faq/pipelines/" />
+</head>
+
 ### What Is a Pipeline in KubeRocketCI?
 
 A pipeline in KubeRocketCI is a sequence of tasks that define the steps required to build, test, and deploy an application. Pipelines are defined using the [Tekton Pipelines framework](https://github.com/epam/edp-tekton/), which allows users to create custom pipelines using reusable tasks.

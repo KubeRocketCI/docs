@@ -1,5 +1,9 @@
 # Manage Clusters
 
+<head>
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/user-guide/cluster/" />
+</head>
+
 This section describes the subsequent possible actions that can be performed with the newly added or existing clusters.
 
 In a nutshell, cluster in KubeRocketCI Portal is a Kubernetes secret that stores credentials and endpoint to connect to the another cluster. Adding new clusters allows users to deploy applications in several clusters, thus improving flexibility of your infrastructure.

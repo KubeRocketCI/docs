@@ -1,5 +1,9 @@
 # Manage Git Servers
 
+<head>
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/user-guide/git-server-overview/" />
+</head>
+
 Git Server is responsible for integration with Version Control System, whether it is GitHub, GitLab or Gerrit.
 
 <div style={{ display: 'flex', justifyContent: 'center' }}>

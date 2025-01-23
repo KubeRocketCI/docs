@@ -1,5 +1,9 @@
 # AWS Infrastructure Cost Estimation
 
+<head>
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/developer-guide/aws-infrastructure-cost-estimation/" />
+</head>
+
 Effective planning and budgeting are essential for developing applications in cloud computing, with a key part being accurate infrastructure cost estimation. This not only helps in keeping within budget but also enables informed decision-making and resource optimization for project viability.
 
 This guide aims to offer an in-depth look at the factors affecting AWS infrastructure costs for KubeRocketCI and includes analytics and tools for cost estimation.

@@ -1,5 +1,9 @@
 # Manage Environments
 
+<head>
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/user-guide/manage-environments/" />
+</head>
+
 This page describes actions that can be performed to an already created environment. If no environments are created yet, navigate to the [Add Environment](add-cd-pipeline.md) page:
 
   ![Environments page](../assets/user-guide/environments/edp-portal-cd-pipeline-page.png "Environments page")

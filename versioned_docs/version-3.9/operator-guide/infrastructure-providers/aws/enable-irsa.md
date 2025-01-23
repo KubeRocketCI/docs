@@ -1,5 +1,9 @@
 # Associate IAM Roles With Service Accounts
 
+<head>
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/infrastructure-providers/aws/enable-irsa/" />
+</head>
+
 This page contains information on how to associate an IAM role with the service account (IRSA).
 
 Get acquainted with the [AWS Official Documentation](https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts-technical-overview.html) on the subject before proceeding.

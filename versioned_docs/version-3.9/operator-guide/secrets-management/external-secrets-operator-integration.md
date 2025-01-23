@@ -1,5 +1,9 @@
 # External Secrets Operator Integration
 
+<head>
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/secrets-management/external-secrets-operator-integration/" />
+</head>
+
 [External Secrets Operator (ESO)](https://external-secrets.io/) can be integrated with KubeRocketCI.
 
 There are [multiple Secrets Providers](https://external-secrets.io/latest/introduction/stability-support) that can be used within ESO. On this page, we detail the integration of KubeRocketCI with the two foremost providers:

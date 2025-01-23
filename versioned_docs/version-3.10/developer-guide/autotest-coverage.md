@@ -1,5 +1,9 @@
 # Quality Control
 
+<head>
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/developer-guide/autotest-coverage/" />
+</head>
+
 In KubeRocketCI, we guarantee the quality of the product not only by using the most advanced tools and best practices but also by covering the whole product functionality with our dedicated automated tests.
 
 ## Autotest Coverage Scheme

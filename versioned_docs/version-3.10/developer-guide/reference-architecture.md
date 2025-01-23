@@ -1,5 +1,9 @@
 # Reference Architecture
 
+<head>
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/developer-guide/reference-architecture/" />
+</head>
+
 The KubeRocketCI Reference Architecture serves as a blueprint for software delivery, outlining the best practices, tools, and technologies leveraged by the platform to ensure efficient and high-quality software development. It provides a comprehensive guide to navigate the complexities of software delivery, from code to deployment.
 
 KubeRocketCI operates on Kubernetes, a leading open-source system for automating deployment, scaling, and management of containerized applications. It consolidates a variety of open-source tools, ensuring a flexible and adaptable system that can seamlessly run on any public cloud or on-premises infrastructure. This versatility allows for a wide range of deployment options, **catering to diverse business needs** and **operational requirements**.

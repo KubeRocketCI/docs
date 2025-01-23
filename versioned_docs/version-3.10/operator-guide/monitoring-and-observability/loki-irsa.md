@@ -1,5 +1,9 @@
 # IAM Roles for Loki Service Accounts
 
+<head>
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/monitoring-and-observability/loki-irsa/" />
+</head>
+
 :::note
   Make sure that IRSA is enabled and [amazon-eks-pod-identity-webhook](https://github.com/aws/amazon-eks-pod-identity-webhook/tree/master#amazon-eks-pod-identity-webhook) is deployed according to the [Associate IAM Roles With Service Accounts](../infrastructure-providers/aws/enable-irsa.md) documentation.
 :::

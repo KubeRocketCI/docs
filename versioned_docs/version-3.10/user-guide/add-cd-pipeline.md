@@ -1,5 +1,9 @@
 # Add Deployment Flow
 
+<head>
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/user-guide/add-cd-pipeline/" />
+</head>
+
 In KubeRocketCI, deployments are managed through Deployment Flows, a versatile mechanism that enables GitOps, automated deploy, promotion within pipelines, and multi-environment support.
 
 Navigate to the **Deployment flows** section on the navigation bar and click **+ Create deployment flow**. Once clicked, the **Create deployment flow** dialog will appear.

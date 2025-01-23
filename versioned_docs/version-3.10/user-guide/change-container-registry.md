@@ -1,5 +1,9 @@
 # Change Container Registry
 
+<head>
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/user-guide/change-container-registry/" />
+</head>
+
 It may become essential to modify the container registry settings. This section delivers clear guidelines on how to effectively transition to a different container registry.
 
 :::warning

@@ -1,5 +1,9 @@
 # Microsoft Teams Notification
 
+<head>
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/ci/notification-msteams/" />
+</head>
+
 This section describes how to set up and add notification status to Tekton pipelines by sending pipeline status to the Microsoft Teams channel.
 
 ## Create Incoming WebHook

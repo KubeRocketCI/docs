@@ -1,5 +1,9 @@
 # Install Harbor
 
+<head>
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/artifacts-management/harbor-installation/" />
+</head>
+
 One of the storage options for application images within KubeRocketCI is Harbor, utilized during the application build process.
 
 Inspect the prerequisites and the main steps to perform for enabling [Harbor](https://goharbor.io/docs/2.8.0/) on the platform.

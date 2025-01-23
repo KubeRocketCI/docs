@@ -1,5 +1,9 @@
 # Manage Branches
 
+<head>
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/user-guide/manage-branches/" />
+</head>
+
 This page describes how to manage branches in the created component, whether it is an application, library, autotest or infrastructure. It also briefly explains two approaches of managing custom pipelines for codebases.
 
 ## Pipeline Management

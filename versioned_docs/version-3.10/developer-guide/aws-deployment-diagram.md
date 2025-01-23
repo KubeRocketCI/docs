@@ -1,5 +1,9 @@
 # KubeRocketCI Deployment on AWS
 
+<head>
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/developer-guide/aws-deployment-diagram/" />
+</head>
+
 This document describes the KubeRocketCI deployment architecture on AWS. It utilizes various AWS services such as Amazon Elastic Kubernetes Service (EKS), Amazon EC2, Amazon Route 53, and others to build and deploy software in a repeatable, automated way.
 
 ## Overview

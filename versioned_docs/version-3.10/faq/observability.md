@@ -9,6 +9,10 @@ This page contains a list of frequently asked questions related to logging, moni
 
 ### How to Check Logs for Applications Running in an Environment?
 
+<head>
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/faq/observability/" />
+</head>
+
 :::warning
   Before proceeding, ensure logging is enabled for your platform and that your application is configured to write logs to standard output.
 :::

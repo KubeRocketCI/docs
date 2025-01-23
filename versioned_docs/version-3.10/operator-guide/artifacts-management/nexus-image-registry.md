@@ -3,6 +3,10 @@ import TabItem from '@theme/TabItem';
 
 # Nexus Image Registry
 
+<head>
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/artifacts-management/nexus-image-registry/" />
+</head>
+
 This documentation guide provides comprehensive instructions for integrating **Nexus Repository Manager** as a docker image registry with KubeRocketCI.
 
 ## Installation

@@ -3,6 +3,10 @@ import TabItem from '@theme/TabItem';
 
 # Set Up Kubernetes
 
+<head>
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/kubernetes-cluster-settings/" />
+</head>
+
 Make sure the cluster meets the following conditions:
 
 1. Kubernetes cluster is installed with minimum 2 worker nodes with total capacity 8 Cores and 32Gb RAM.

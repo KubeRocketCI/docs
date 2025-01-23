@@ -1,5 +1,9 @@
 # Inject Variables Into Deploy Pipelines
 
+<head>
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/user-guide/cd-pipeline-variables-injection/" />
+</head>
+
 KubeRocketCI offers a robust set of features to build highly customizable CI/CD workflows. One of the key features is variable injection, which enables the parametrization of deploy pipelines. This capability is particularly valuable for running multiple automated tests simultaneously and efficiently. Below are some key use cases where variable injection can be beneficial:
 
 1. Redefining environment-specific configurations.

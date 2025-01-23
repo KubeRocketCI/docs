@@ -1,5 +1,9 @@
 # Add Autotest
 
+<head>
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/user-guide/add-autotest/" />
+</head>
+
 KubeRocketCI portal allows you to clone an existing repository with the autotest to your Version Control System (VCS), or using an external repository and adding an autotest for further running in stages or using them as quality gates for applications. When an autotest is cloned, the system automatically generates a corresponding repository within the integrated VCS. You can create an autotest [in YAML](#create-autotest-in-yaml) or [via the two-step menu](#create-autotest-via-ui) in the dialog.
 
 :::info

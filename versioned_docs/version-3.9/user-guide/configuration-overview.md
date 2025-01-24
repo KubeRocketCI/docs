@@ -1,4 +1,4 @@
-# Overview
+# KubeRocketCI Configuration Overview: Integrations and Features
 
 <head>
   <link rel="canonical" href="https://docs.kuberocketci.io/docs/user-guide/configuration-overview/" />

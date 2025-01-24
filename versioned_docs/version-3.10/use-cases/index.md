@@ -1,6 +1,6 @@
 import { UseCases } from '@site/src/features/use-cases/components/UseCases';
 
-# Overview
+# KubeRocketCI Use Cases: Practical Scenarios and Solutions
 
 <head>
   <link rel="canonical" href="https://docs.kuberocketci.io/docs/use-cases/" />

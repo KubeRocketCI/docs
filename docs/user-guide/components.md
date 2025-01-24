@@ -1,4 +1,4 @@
-# Overview
+# KubeRocketCI Components: Codebases and Onboarding Strategies
 
 <head>
   <link rel="canonical" href="https://docs.kuberocketci.io/docs/user-guide/components/" />

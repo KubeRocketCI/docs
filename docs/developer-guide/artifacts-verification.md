@@ -96,7 +96,7 @@ Verification for [epamedp/codebase-operator:2.20.0](https://hub.docker.com/layer
   }
   ```
 
-For more details about attestation, please refer to the official [cosign documentation](https://docs.sigstore.dev/verifying/attestation/) page.
+For more details about attestation, please refer to the official [cosign documentation](https://docs.sigstore.dev/cosign/verifying/verify/) page.
 
 ## Verify Release Pipeline
 
@@ -192,4 +192,4 @@ By signing all our artifacts, we assure you that they are trustworthy. This guid
 
 ## Related Articles
 
-* [In-Toto Attestations](https://docs.sigstore.dev/verifying/attestation/)
+* [In-Toto Attestations](https://docs.sigstore.dev/cosign/verifying/verify/)

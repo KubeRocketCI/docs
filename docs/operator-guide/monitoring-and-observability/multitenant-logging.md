@@ -15,7 +15,7 @@ To configure the multitenant logging, it is necessary to deploy the following co
 
 * [Grafana](https://grafana.com/)
 * [Loki](https://grafana.com/oss/loki/)
-* [Logging-operator](https://banzaicloud.com/docs/one-eye/logging-operator/)
+* [Logging-operator](https://kube-logging.dev/docs/)
 
 In Grafana, every tenant represents an organization, i.e. it is necessary to create an organization for every namespace in the cluster. To get more details regarding the architecture of the Logging Operator, review the Diagram below.
 
@@ -27,7 +27,7 @@ In Grafana, every tenant represents an organization, i.e. it is necessary to cre
 
 ## Review Project Logs in Grafana
 
-To find the project logs, navigate to [Grafana](https://grafana.shared.edp-epam.com) and follow the steps below:
+To find the project logs, navigate to Grafana and follow the steps below:
 
   :::note
     Grafana is a common service for different customers where each customer works in its own separated Grafana Organization

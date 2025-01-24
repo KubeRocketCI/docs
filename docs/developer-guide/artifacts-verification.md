@@ -11,7 +11,7 @@ Software Supply Chain Security is a critical aspect of modern software developme
 
 ## Prerequisites
 
-Ensure you have installed [rekor-cli](https://docs.sigstore.dev/logging/installation/) and [cosign](https://docs.sigstore.dev/system_config/installation/) on your environment before proceeding.
+Ensure you have installed [rekor-cli](https://docs.sigstore.dev/logging/installation/) and [cosign](https://docs.sigstore.dev/cosign/system_config/installation/) on your environment before proceeding.
 
 ***
 

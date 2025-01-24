@@ -1,4 +1,4 @@
-# About Platform
+# About the KubeRocketCI Platform
 
 <head>
   <link rel="canonical" href="https://docs.kuberocketci.io/docs/about-platform/" />

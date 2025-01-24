@@ -13,11 +13,11 @@ This guide provides comprehensive instructions for integrating KrakenD into Kube
 
 Ensure that an **ingress controller** and **kuberocketci-rbac** are preinstalled on the cluster. You can install them using the resources available in the [Cluster Add-Ons](https://github.com/epam/edp-cluster-add-ons) repository.
 
-# Installation
+## Installation
 
 To streamline the installation of KrakenD in your environment, use the resources available in the [Cluster Add-Ons](https://github.com/epam/edp-cluster-add-ons) repository. This method involves deploying KrakenD alongside the appropriate components, ensuring efficient management and integration into your infrastructure.
 
-# Configuration
+## Configuration
 
 1. KubeRocketCI API Gateway URL Configuration
 

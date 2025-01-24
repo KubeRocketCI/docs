@@ -1,4 +1,4 @@
-# Keycloak Integration
+# Integrating ReportPortal with Keycloak: A Step-by-Step Guide
 
 <head>
   <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/project-management-and-reporting/reportportal-keycloak/" />

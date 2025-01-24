@@ -104,6 +104,8 @@ const config: Config = {
         },
 
         blog: {
+          blogTitle: 'Blog: CI/CD Insights, DevOps and Kubernetes Guides',
+          blogDescription: 'Explore KubeRocketCI Blog for the latest insights, tutorials, and guides on CI/CD practices, DevOps culture, and Kubernetes technologies.',
           feedOptions: {
             type: 'all',
             copyright: `Copyright © ${new Date().getFullYear()} KubeRocketCI.`,

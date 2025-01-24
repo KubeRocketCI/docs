@@ -126,7 +126,7 @@ Components, highlighted in red, require additional configuration directly within
 For detailed instructions on setting up OIDC integration for various components, please refer to the following articles:
 
 1. **AWX** - [Community Documentation](https://ansible.readthedocs.io/projects/awx/en/latest/)
-2. **DefectDojo** - [DefectDojo Permissions](https://documentation.defectdojo.com/usage/permissions/)
+2. **DefectDojo** - [DefectDojo Permissions](https://docs.defectdojo.com/en/customize_dojo/user_management/configure_sso/#keycloak)
 3. **Nexus** - [Nexus authentication process](#nexus-repository-manager)
 4. **Report Portal** - [Report Portal Keycloak Integration](../project-management-and-reporting/reportportal-keycloak.md)
 5. **Vault** - [OIDC provider configuration](https://developer.hashicorp.com/vault/docs/auth/jwt/oidc-providers/keycloak)

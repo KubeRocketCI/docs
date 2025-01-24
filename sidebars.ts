@@ -592,6 +592,7 @@ const sidebars: SidebarsConfig = {
         'use-cases/custom-pipelines-flow',
         'use-cases/tekton-custom-pipelines',
         'use-cases/cd-autotests-run-with-env-variables',
+        'use-cases/deploy-application-from-feature-branch',
       ],
     },
   ],

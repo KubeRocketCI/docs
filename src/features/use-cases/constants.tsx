@@ -3,6 +3,9 @@ import { UseCaseItem } from './types';
 import BuildIcon from '@mui/icons-material/Build';
 import KeyIcon from '@mui/icons-material/Key';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
+import AccountTreeIcon from '@mui/icons-material/AccountTree';
+import SettingsSuggestIcon from '@mui/icons-material/SettingsSuggest';
+import CodeIcon from '@mui/icons-material/Code';
 
 export const useCasesList: UseCaseItem[] = [
   {
@@ -40,7 +43,7 @@ export const useCasesList: UseCaseItem[] = [
     link: '/docs/use-cases/external-secrets',
   },
   {
-    title: 'Autotest As the Quality Gate',
+    title: 'Autotest As a Quality Gate',
     Svg: CheckCircleOutlineIcon,
     description: (
       <>
@@ -53,10 +56,10 @@ export const useCasesList: UseCaseItem[] = [
   },
   {
     title: 'Creating and Using Custom Tekton Pipelines',
-    Svg: BuildIcon,
+    Svg: SettingsSuggestIcon,
     description: (
       <>
-        How to create and use custom Tekton pipelines. While KubeRocketCI offers pre-configured Tekton pipelines for common
+        Create and use custom Tekton pipelines. While KubeRocketCI offers pre-configured Tekton pipelines for common
         use cases, custom pipelines allow you to adapt workflows to meet unique project requirements.
       </>
     ),
@@ -64,7 +67,7 @@ export const useCasesList: UseCaseItem[] = [
   },
   {
     title: 'Set Test Suite Parameters Using Environment Variables in CD Pipelines',
-    Svg: BuildIcon,
+    Svg: CodeIcon,
     description: (
       <>
         Dynamically adjust parameters adding, modifying, or removing them without changing the test suite code.
@@ -74,4 +77,15 @@ export const useCasesList: UseCaseItem[] = [
     ),
     link: '/docs/use-cases/cd-autotests-run-with-env-variables',
   },
+  {
+    title: 'Deploy Application From Feature Branch',
+    Svg: AccountTreeIcon,
+    description: (
+      <>
+        Create a feature branch for your application and deploy it in a separate environment.
+        Deploying a feature branch allows for deep testing of new features under development without merging them into the main branch.
+      </>
+    ),
+    link: '/docs/use-cases/deploy-application-from-feature-branch',
+  }
 ];

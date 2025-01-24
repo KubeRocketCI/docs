@@ -22,27 +22,29 @@ Before you begin, ensure you have the following installed:
 
 ## Local Development
 
-1. Clone the KubeRocketCI documentation repository to your local machine.
+1. Fork the [KubeRocketCI documentation repository](https://github.com/KubeRocketCI/docs) to your personal account.
 
-2. Install the dependencies:
+2. Clone the forked documentation repository to your local machine.
+
+3. Install the dependencies:
 
     ```bash
     npm install
     ```
 
-3. Start a local development server:
+4. Start a local development server:
 
     ```bash
     npm start
     ```
 
-    This command starts a local development server and opens up a browser window. Most changes are reflected live without having to restart the server.
+    This command starts a local development server and opens up a browser window. Most changes are reflected live without having to restart the server. To quit the session, press `ctrl + c` or `cmd + c`.
 
-4. Navigate to `localhost:3000` (or the URL provided in the terminal after running the `npm start` command) in your web browser to view the documentation site.
+5. Navigate to `localhost:3000` (or the URL provided in the terminal after running the `npm start` command) in your web browser to view the documentation site.
 
-5. Make the necessary changes to the documentation. The files are located in the `docs` directory. Changes will automatically refresh in the browser.
+6. Make the necessary changes to the documentation. The files are located in the `docs` directory. Changes will automatically refresh in the browser.
 
-6. Commit your changes and create a pull request.
+7. Commit your changes and create a pull request.
 
 ## Build
 

@@ -9,7 +9,7 @@ In KubeRocketCI, deployments are managed through Deployment Flows, a versatile m
 Navigate to the **Deployment flows** section on the navigation bar and click **+ Create deployment flow**. Once clicked, the **Create deployment flow** dialog will appear.
 
 The creation of the Deployment Flow becomes available as soon as an application is created including its provisioning
-in a branch and the necessary entities for the Deployment FLow. You can create a Deployment FLow [in YAML](#create-deployment-flow-in-yaml) or [via the two-steps menu](#create-deployment-flow) in the dialog.
+in a branch and the necessary entities for the Deployment Flow. You can create a Deployment Flow [in YAML](#create-deployment-flow-in-yaml) or [via the two-steps menu](#create-deployment-flow) in the dialog.
 
 ## Create Deployment Flow
 

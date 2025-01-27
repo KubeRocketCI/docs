@@ -19,8 +19,8 @@
 <link rel="search" type="application/opensearchdescription+xml" title="KubeRocketCI" href="/opensearch.xml">
 
 <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@id":"https://docs.kuberocketci.io","@type":"WebSite","url":"https://docs.kuberocketci.io","name":"KubeRocketCI Documentation","description":"Explore KubeRocketCI Documentation for detailed guides, tutorials, and insights into KubeRocketCI CI/CD flow, platform components, and add-ons. Learn how to enhance your DevOps practices with KubeRocketCI.","sameAs":["https://medium.com/epam-delivery-platform","https://hub.docker.com/u/epamedp","https://epam.github.io/edp-install/"],"copyrightHolder":{"@id":"https://docs.kuberocketci.io/docs/about-platform"},"publisher":{"@id":"https://docs.kuberocketci.io/docs/about-platform"},"potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://docs.kuberocketci.io/search?q={search_term_string}"},"query-input":"required name=search_term_string"},"inLanguage":"en-UK"}]}</script><link rel="stylesheet" href="/assets/css/styles.fe3cbc28.css">
-<script src="/assets/js/runtime~main.2609cad9.js" defer="defer"></script>
-<script src="/assets/js/main.fe55282f.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.3920b029.js" defer="defer"></script>
+<script src="/assets/js/main.aac10744.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-527T2HLF" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
@@ -65,7 +65,7 @@
 <ol>
 <li>
 <p>Configure Go Build Option. Open folder in GoLand, click the <img decoding="async" loading="lazy" alt="add_config_button" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAKcAAAAeCAMAAAB+Df5jAAAAilBMVEU8P0H/gABRUVEyMjJ+VUA6PmyTuqa7u7s6VYBJnFSTa0CTurppPkBTPkA6a5RIllNTf6a6uqalupQ6PlelurpplLqlpoBGhU+6lGylf1c+SUN+pro+UUS6poClf4BHkFE9Q0Gluqa6upQ/WUZCakp+pqaToKawppR+f5REek1+a0C6lJRSVIBFSEqX3b4fAAABq0lEQVRYw+2WC1ODMAzHUWEFxksn8nDIgG2+v//XM4k1ihUOjt6NeeR2DTT/jN8S2s64PA8zFluswy5OaQvnKTkNjTb9yXlSluH8OfPScZ7z2XMS5vz7nieO4+z71XEqL6yVyQ5scy9E4f9KC0TxVpl9GDaER3JSNRG0T20/Hs2/OO1bF4aXdpa1drsBOHU0J1QzbEIA7VFHWZQpnFhNtwtEP2deho2xBdBk26XeHEz7zsfyiYeV+eXg/sbDMAWECwRPQmTWGgeW4ZWF7lh7sRAphlMZ5pxh72cDA4KG2w41QAIqNTS6NqX7nOdO2xUEUiOoPUkmZXyXkZLB2znDV/DeYVBFjU2PUsTCJ0jH9ZQ+diUBOZZ9T+ICEwzezhnOuUskqKqGVoHVnsIJ7+cITpRtDlM5GVRVB4VPTErfoUC03mEGIdqcUoa/JaAq4vfYFYdbOfxROLtAdypnnFHzU8DClSEdL6DCRwfgbc4f6leaxM0W97eY1pHMGc9JoGGj8zzCguk4j1TQRu+5GRe+bk7d5zsdqbDhzJ5zir3/2//zg23hXEyrXZ2HfQCDtiVggxCakAAAAABJRU5ErkJggg==" title="add_config_button" width="167" height="30" class="img_ev3q"> button and select the <code>Go Build</code> option:</p>
-<p><img decoding="async" loading="lazy" alt="Add configuration" src="/assets/images/add_configuration-73084a36a24889648279e022ad54f3d8.png" title="Add configuration" width="1079" height="686" class="img_ev3q"></p>
+<p><img decoding="async" loading="lazy" alt="Add configuration" src="/assets/images/add_configuration-39166da146aca379a91ec1c0b659df5e.png" title="Add configuration" width="1079" height="686" class="img_ev3q"></p>
 </li>
 <li>
 <p>Fill in the variables in Configuration tab:</p>
@@ -83,7 +83,7 @@
 <p>In the <code>Environment field</code>, also specify the platform type by setting <code>PLATFORM_TYPE</code>. It should equal either <code>kubernetes</code> or <code>openshift</code>.</p>
 </li>
 </ul>
-<p><img decoding="async" loading="lazy" alt="Build config" src="/assets/images/build_config-f5eb4e22b1cbdde4e9aba11e8e434f82.png" title="Build config" width="1070" height="676" class="img_ev3q"></p>
+<p><img decoding="async" loading="lazy" alt="Build config" src="/assets/images/build_config-6fd706bc10e09241618e0002698beab5.png" title="Build config" width="1070" height="676" class="img_ev3q"></p>
 </li>
 <li>
 <p>Check cluster connectivity and variables. Local development implies working within local Kubernetes clusters. <a href="https://kind.sigs.k8s.io/" target="_blank" rel="noopener noreferrer">Kind</a> (Kubernetes in Docker) is recommended so set this or another environment first before running code.</p>
@@ -107,7 +107,7 @@
 <p>Generate documentation in the .MD file format so the developer can read it:</p>
 <div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token function" style="color:#d73a49">make</span><span class="token plain"> api-docs</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
 <p>The command &quot;make api-docs&quot; should give the output similar to the following:</p>
-<p><img decoding="async" loading="lazy" alt="&amp;quot;make api-docs&amp;quot; command with the file contents" src="/assets/images/api-docs-f1f83eb45e21191369e1283369ea842b.png" width="1547" height="932" class="img_ev3q"></p>
+<p><img decoding="async" loading="lazy" alt="&amp;quot;make api-docs&amp;quot; command with the file contents" src="/assets/images/api-docs-493041067273dd60cb184300e3ae4e7f.png" width="1547" height="932" class="img_ev3q"></p>
 </li>
 <li>
 <p>There are also manifests within the operator that generate zz_generated.deepcopy.go file in /api/v1 directory. This file is necessary for the platform to work but it&#x27;s time-consuming to fill it by yourself so there is a mechanism that does it automatically. Update it using the following command and check if it looks properly:</p>

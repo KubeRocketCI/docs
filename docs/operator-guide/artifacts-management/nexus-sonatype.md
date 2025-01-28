@@ -22,7 +22,7 @@ Before proceeding, ensure the following prerequisites are met:
 
 ## Installation
 
-To install Nexus in environment, it's recommended to use the resources provided in the [Cluster Add-Ons](https://github.com/epam/edp-cluster-add-ons) repository. This approach involves installing both the Nexus repository manager and the [nexus-operator](https://github.com/epam/edp-nexus-operator). Leveraging the Cluster Add-Ons simplifies the deployment and management process, providing a streamlined method to integrate Nexus into infrastructure.
+To install Nexus in environment, it's recommended to use the resources provided in the [Cluster Add-Ons](https://github.com/epam/edp-cluster-add-ons) repository. This approach involves installing both the Nexus repository manager and the [nexus-operator](https://github.com/epam/edp-nexus-operator). Leveraging the Cluster Add-Ons simplifies the deployment and management process, providing a streamlined method to integrate Nexus into infrastructure:
 
 1. **Nexus Repository Manager**: First, navigate to the forked cluster Add-Ons repository and align the [nexus values.yaml](https://github.com/epam/edp-cluster-add-ons/tree/main/clusters/core/addons/nexus/values.yaml) and [nexus-operator values.yaml](https://github.com/epam/edp-cluster-add-ons/tree/main/clusters/core/addons/nexus-operator/values.yaml) files. Follow the instructions to deploy Nexus, ensuring it's correctly configured to serve as artifact repository.
 
@@ -48,9 +48,38 @@ To install Nexus in environment, it's recommended to use the resources provided 
 
 ## Configuration
 
-With [Add-ons approach](https://github.com/epam/edp-cluster-add-ons/blob/main/clusters/core) `nexus-operator` create the necessary roles,**Service Account** `ci.user`, blob stores, repository, scripts, cleanup policies automatically. Below is a comprehensive guide on how to create all resources manually.
+With [Add-ons approach](https://github.com/epam/edp-cluster-add-ons/blob/main/clusters/core) `nexus-operator` create the necessary roles, **Service Account** `ci.user`, blob stores, repository, scripts, cleanup policies automatically.
 
-## Configuration Nexus Repository Manager with nexus-operator
+KubeRocketCI organizes artifacts within Nexus according to the following hierarchy:
+
+```bash
+├── krci-dotnet-group
+   │   ├── krci-dotnet-proxy
+   │   ├── krci-dotnet-releases
+   │   ├── krci-dotnet-snapshots
+   │   └── krci-dotnet-hosted
+   krci-maven-group
+   │   ├── krci-maven-proxy
+   │   ├── krci-maven-releases
+   │   ├── krci-maven-snapshots
+   krci-npm-group
+   │   ├── krci-npm-proxy
+   │   ├── krci-npm-releases
+   │   ├── krci-npm-snapshots
+   │   └── krci-npm-hosted
+   krci-python-group
+   │   ├── krci-python-proxy
+   │   ├── krci-python-releases
+   │   ├── krci-python-snapshots
+   krci-yum-group
+   ├── krci-yum-releases
+   ├── krci-yum-snapshots
+   └── krci-container-hosted
+```
+
+Below is a comprehensive guide on how to create all the resources manually.
+
+### Configure Nexus Repository Manager With nexus-operator
 
 1. Create a Kubernetes Secret that the **nexus-operator** will use to connect to the **Nexus Repository Manager** and create all resources:
 
@@ -114,7 +143,7 @@ With [Add-ons approach](https://github.com/epam/edp-cluster-add-ons/blob/main/cl
       </TabItem>
   </Tabs>
 
-## Configuration Nexus Repository Manager without nexus-operator
+### Configure Nexus Repository Manager Without nexus-operator
 
 Without using the **nexus-operator**, manual updates are required for the Helm chart values of the **Nexus Repository Manager**, as well as the creation of blob stores, repositories, roles, and the **Service Account** `ci.user`:
 
@@ -321,7 +350,7 @@ Without using the **nexus-operator**, manual updates are required for the Helm c
 
     ![Nexus create user](../../assets/operator-guide/artifacts-management/nexus-artifact-create-user.png "Nexus create user")
 
-## Integration Nexus Repository Manager with KubeRocketCI
+## Integrate Nexus Repository Manager With KubeRocketCI
 
 For provision secret using manifest, KubeRocketCI portal or with the externalSecrets operator:
 

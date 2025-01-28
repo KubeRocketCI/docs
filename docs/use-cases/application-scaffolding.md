@@ -168,7 +168,7 @@ To ensure the application is deployed successfully, follow the steps below:
 
 This section describes the code delivery process. We need to deploy our `fastapi-demo` application that deploys `Ingress` object to expose API outside the Kubernetes cluster.
 
-Within the [GitOps](../user-guide/gitops.md) repository, follow the naming convention `<pipeline-name>/<stage-name>/<application-name>-values.yaml` to create the chart values file. For our case, use `mypipe/dev/fastapi-demo-values.yaml` as the file name.
+Within the [GitOps](../user-guide/gitops.md) repository, follow the naming convention `<deployment-flow>/<environment>/<application-name>-values.yaml` to create the chart values file. For our case, use `mypipe/dev/fastapi-demo-values.yaml` as the file name.
 
 Commit `mypipe/dev/fastapi-demo-values.yaml` file to the default branch of the GitOps repository:
 

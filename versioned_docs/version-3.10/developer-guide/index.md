@@ -8,9 +8,19 @@ The KubeRocketCI Developer Guide serves as a comprehensive technical resource sp
 
 Within these pages, you'll find architectural diagrams, component schemas, and deployment strategies essential for grasping the structural elements of the platform. These technical illustrations serve as references, providing a detailed understanding of component interactions and deployment methodologies. Understanding the architecture of the KubeRocketCI and integrating third-party solutions into its established framework enables the creation of efficient, scalable, and customizable solutions within the KubeRocketCI.
 
-The diagram below illustrates how GitHub repositories and Docker registries are interconnected within the KubeRocketCI ecosystem.
+The KubeRocketCI platform consists of several key components. These components are interconnected, and their relationships are illustrated in the diagram below:
 
-![KubeRocketCI Components Diagram](../assets/developer-guide/architecture/edp-components.inline.svg)
+![KubeRocketCI Components Diagram](../assets/developer-guide/architecture/components.svg)
+
+Each component represents one of the following:
+
+- A Helm chart with a Docker image.
+- A standalone Helm chart.
+- A standalone Docker image.
+
+All components are regularly updated and released as part of the platform's development cycle.
+
+Some components, such as keycloak-operator, nexus-operator, sonar-operator, and tekton-custom-task, are provided separately through the [edp-cluster-add-ons](https://github.com/epam/edp-cluster-add-ons) repository. These components are optional and can be installed independently of the main platform.
 
 ## Release Channels
 
@@ -39,12 +49,13 @@ Our platform components, optional enhancements, add-ons, and deployment resource
 
 Each platform component is available in its corresponding GitHub project:
 
-- [KubeRocketCI UI](https://github.com/epam/edp-headlamp/releases)
-- [Codebase Operator](https://github.com/epam/edp-codebase-operator/releases)
-- [Tekton](https://github.com/epam/edp-tekton/releases)
 - [CD Pipeline Operator](https://github.com/epam/edp-cd-pipeline-operator/releases)
-- [Gerrit Operator](https://github.com/epam/edp-gerrit-operator/releases)
+- [Codebase Operator](https://github.com/epam/edp-codebase-operator/releases)
+- [EDP Gerrit](https://github.com/epam/edp-gerrit)
 - [EDP Install](https://github.com/epam/edp-install/releases)
+- [Gerrit Operator](https://github.com/epam/edp-gerrit-operator/releases)
+- [KubeRocketCI Portal](https://github.com/epam/edp-headlamp/releases)
+- [Tekton](https://github.com/epam/edp-tekton/releases)
 
 ### Optional Components
 
@@ -56,15 +67,9 @@ These optional components enhance the platform's installation and configuration 
 
 ### Add-ons Repository
 
-The Add-ons repository provides a streamlined pathway for deploying the all-in-one solution:
+The Add-ons repository offers a streamlined deployment process. It includes additional components that can be integrated separately into the cluster:
 
 - [Cluster Add-Ons](https://github.com/epam/edp-cluster-add-ons)
-
-### Tekton Custom Library
-
-Explore additional tools and customizations in our Tekton Custom Library:
-
-- [Tekton Custom Library](https://github.com/epmd-edp/tekton-custom-library)
 
 ### Platform Test Data
 
@@ -82,15 +87,17 @@ Helm chart artifacts are available in repository:
 
 Our DockerHub repository hosts Docker images for various platform components:
 
+- [CD Pipeline Operator](https://hub.docker.com/repository/docker/epamedp/cd-pipeline-operator/)
+- [Codebase Operator](https://hub.docker.com/repository/docker/epamedp/codebase-operator/)
+- [EDP Gerrit](https://hub.docker.com/r/epamedp/edp-gerrit)
+- [Gerrit Operator](https://hub.docker.com/repository/docker/epamedp/gerrit-operator)
 - [Keycloak Operator](https://hub.docker.com/repository/docker/epamedp/keycloak-operator/)
+- [KubeRocketCI Portal](https://hub.docker.com/repository/docker/epamedp/edp-headlamp/)
 - [Nexus Operator](https://hub.docker.com/repository/docker/epamedp/nexus-operator/)
 - [Sonar Operator](https://hub.docker.com/repository/docker/epamedp/sonar-operator/)
-- [KubeRocketCI UI](https://hub.docker.com/repository/docker/epamedp/edp-headlamp/)
-- [Codebase Operator](https://hub.docker.com/repository/docker/epamedp/codebase-operator/)
 - [Tekton](https://hub.docker.com/repository/docker/epamedp/edp-tekton)
 - [Tekton Cache](https://hub.docker.com/repository/docker/epamedp/tekton-cache)
-- [CD Pipeline Operator](https://hub.docker.com/repository/docker/epamedp/cd-pipeline-operator/)
-- [Gerrit Operator](https://hub.docker.com/repository/docker/epamedp/gerrit-operator)
+- [Tekton Custom Task](https://hub.docker.com/repository/docker/epamedp/tekton-custom-task)
 
 ## Social Media
 

@@ -34,6 +34,10 @@ Before proceeding with this use case, ensure the following prerequisites are met
 
 The first step in creating and using custom Tekton pipelines is to set up a Tekton library in KubeRocketCI. This library acts as a central repository for storing and managing custom Tekton tasks, pipelines, and trigger templates.
 
+:::note
+The Tekton library template can be found in the [helm-helm-pipeline](https://github.com/epmd-edp/helm-helm-pipeline) repository.
+:::
+
 To create a Tekton library, follow these steps:
 
 1. Open the KubeRocketCI portal. Use the **Sign-In** option:
@@ -206,9 +210,6 @@ To define custom Tekton pipelines, follow these steps:
         use the template `github-build-edp.yaml` in the `templates/pipelines` directory. First, set the parameters in the `spec.params` field that will be used in the custom task:
 
         ```yaml
-        labels:
-          app.edp.epam.com/pipelinetype: build
-        ...
         spec:
           params:
             - default: "World"
@@ -228,9 +229,9 @@ To define custom Tekton pipelines, follow these steps:
         apiVersion: tekton.dev/v1
         kind: Pipeline
         metadata:
-          name: custom-deploy
+          name: github-build-edp
           labels:
-            app.edp.epam.com/pipelinetype: deploy
+            app.edp.epam.com/pipelinetype: build
         spec:
           tasks:
             ...
@@ -260,7 +261,7 @@ To define custom Tekton pipelines, follow these steps:
                     git tag -a "$(tasks.get-version.results.VCS_TAG)" -m "Tag is added automatically by CI user"
                     git push --tags
               runAfter:
-                - hello-world
+                - hello-world  # Ensure to update the runAfter field for task that should run after the custom task with the correct task name
               taskRef:
                 kind: Task
                 name: git-cli

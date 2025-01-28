@@ -52,6 +52,11 @@ Follow the steps below to configure the default namespace extension attribute in
 4. Navigate to the local terminal and run the following command to get the access token:
 
     :::note
+    The Application data, such as **Application (client) ID** and **Directory (tenant) ID**, can be found in the **Overview** section of the Application in the Microsoft Entra Admin Center.
+    ![Application Data](../../assets/operator-guide/microsoft-entra-auth/application-data-overview.png)
+    :::
+
+    :::note
     You can use the [jq](https://stedolan.github.io/jq/) tool to parse the JSON response. If you do not have it installed, you can drop the `| jq -r '.access_token'` part from the command.
     :::
 
@@ -69,6 +74,11 @@ Follow the steps below to configure the default namespace extension attribute in
 
 5. Create the `default_namespace` extension attribute for the Microsoft Entra application by running the following command:
 
+    :::note
+    The Application parameter **Object ID** can be found in the **Overview** section of the Application in the Microsoft Entra Admin Center.
+    ![Application Data](../../assets/operator-guide/microsoft-entra-auth/application-data-overview.png)
+    :::
+
     ```bash
     curl -X POST "https://graph.microsoft.com/v1.0/applications/<application_object_id>/extensionProperties" \
     -H "Authorization: Bearer <access_token>" \
@@ -82,7 +92,12 @@ Follow the steps below to configure the default namespace extension attribute in
 
     Replace `<application_object_id>` with the Object ID of the Microsoft Entra application and `<access_token>` with the saved access token.
 
-6. Assign the `default_namespace` extension attribute to the user by running the following command:
+6. Assign the `default_namespace` extension attribute to the user who needs to have the default namespace configured by running the following command:
+
+    :::note
+    The user **Object ID** parameter can be found in the **Overview** section of the user in the Microsoft Entra Admin Center.
+    ![User Data](../../assets/operator-guide/microsoft-entra-auth/user-data-overview.png)
+    :::
 
     ```bash
     curl -X PATCH "https://graph.microsoft.com/v1.0/users/<user_object_id>" \
@@ -176,6 +191,11 @@ Follow the steps below to configure the user profile picture extension attribute
 4. Navigate to the local terminal and run the following command to get the access token:
 
     :::note
+    The Application data, such as **Application (client) ID** and **Directory (tenant) ID**, can be found in the **Overview** section of the Application in the Microsoft Entra Admin Center.
+    ![Application Data](../../assets/operator-guide/microsoft-entra-auth/application-data-overview.png)
+    :::
+
+    :::note
     You can use the [jq](https://stedolan.github.io/jq/) tool to parse the JSON response. If you do not have it installed, you can drop the `| jq -r '.access_token'` part from the command.
     :::
 
@@ -193,6 +213,11 @@ Follow the steps below to configure the user profile picture extension attribute
 
 5. Create the `picture` extension attribute for the Microsoft Entra application by running the following command:
 
+    :::note
+    The Application parameter **Object ID** can be found in the **Overview** section of the Application in the Microsoft Entra Admin Center.
+    ![Application Data](../../assets/operator-guide/microsoft-entra-auth/application-data-overview.png)
+    :::
+
     ```bash
     curl -X POST "https://graph.microsoft.com/v1.0/applications/<application_object_id>/extensionProperties" \
     -H "Authorization: Bearer <access_token>" \
@@ -206,7 +231,12 @@ Follow the steps below to configure the user profile picture extension attribute
 
     Replace `<application_object_id>` with the Object ID of the Microsoft Entra application and `<access_token>` with the saved access token.
 
-6. Assign the `picture` extension attribute to the user by running the following command:
+6. Assign the `picture` extension attribute to the user who needs to have the profile picture configured by running the following command:
+
+    :::note
+    The user **Object ID** parameter can be found in the **Overview** section of the user in the Microsoft Entra Admin Center.
+    ![User Data](../../assets/operator-guide/microsoft-entra-auth/user-data-overview.png)
+    :::
 
     ```bash
     curl -X PATCH "https://graph.microsoft.com/v1.0/users/<user_object_id>" \

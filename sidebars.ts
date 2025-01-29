@@ -219,6 +219,14 @@ const sidebars: SidebarsConfig = {
         },
         {
           type: 'category',
+          label: 'Dynamic Scaling and Optimization',
+          items: [
+            'operator-guide/dynamic-scaling/overview',
+            'operator-guide/dynamic-scaling/namespace-and-cluster-autoscaling',
+          ]
+        },
+        {
+          type: 'category',
           label: 'Secrets Management',
           items: [
             'operator-guide/secrets-management/install-external-secrets-operator',

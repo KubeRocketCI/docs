@@ -264,6 +264,12 @@ words:
   - Wildfly
   - xlarge
   - zwpj
+  - Karpenter
+  - karpenter
+  - tomap
+  - nodepools
+  - nodepool
+  - nodeclasses
 enableFiletypes:
   - md
   - mdx

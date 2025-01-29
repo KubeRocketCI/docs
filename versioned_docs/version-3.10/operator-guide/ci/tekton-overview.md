@@ -15,7 +15,7 @@ The [edp-tekton](https://github.com/epam/edp-tekton) GitHub repository provides 
 The Helm charts are used to deploy the resources inside the Kubernetes cluster.
 Tekton logic is decoupled into separate components:
 
-![Edp-tekton components diagram](../../assets/operator-guide/edp-tekton-components-diagram.png)
+![Edp-tekton components diagram](../../assets/operator-guide/ci/edp-tekton-components-diagram.png)
 
 The diagram above describes the following:
 
@@ -26,18 +26,15 @@ This library contains Helm templates that generate common Tekton resources.
 Tekton CRs like Pipelines, Tasks, EventListeners, Triggers, TriggerTemplates, and other resources are delivered with
 this chart.
 
+* `EDP Interceptor` is the custom `Tekton Interceptor` which enriches the payload from the VCSs events with the KubeRocketCI data from the `Codebase` Custom Resource (CR) specification. These data are used to define the Pipeline logic.
+
 * `Custom-pipelines` is the Helm chart of the Application type which implements custom logic running
 specifically for internal platform development, for example, CI and Release.
 It also demonstrates the customization flow on the platform.
 
-* `Tekton-dashboard` is a multitenancy-adopted implementation of the upstream Tekton Dashboard.
-It is configured to share Tekton resources across a single namespace.
-
-* `EDP Interceptor` is the custom `Tekton Interceptor` which enriches the payload from the VCSs events with the KubeRocketCI data from the `Codebase` Custom Resource (CR) specification. These data are used to define the Pipeline logic.
-
 Inspect the schema below that describes the logic behind the Tekton functionality on the platform:
 
-![Component view for the Tekton on KubeRocketCI](../../assets/operator-guide/edp-tekton-component-view-diagram.png)
+![Component view for the Tekton on KubeRocketCI](../../assets/operator-guide/ci/edp-tekton-component-view-diagram.png)
 
 The platform logic consists of the following:
 

@@ -6,11 +6,17 @@
 
 The Operator guide is intended for DevOps and provides information on KubeRocketCI installation, configuration and customization, as well as the platform support. Inspect the documentation to adjust the KubeRocketCI according to your business needs:
 
-* The **Installation** section provides the prerequisites for the platform installation, including [Kubernetes](kubernetes-cluster-settings.md) or [OpenShift](openshift-cluster-settings.md) cluster setup,
-[Keycloak](auth/keycloak.md), [DefectDojo](devsecops/defectdojo.md), [Capsule](advanced-installation/capsule.md), and [Ingress-nginx](install-ingress-nginx.md) setup as well as the subsequent [deployment of KubeRocketCI](install-kuberocketci.md).
-
-* The **Configuration** section indicates the options to set the project, [backup](disaster-recovery/velero-restore-platform.md), [Tekton](../user-guide/add-git-server.md) and [logging](monitoring-and-observability/install-loki.md).
-
-* The **Integration** section comprises the [AWS](infrastructure-providers/aws/enable-irsa.md), [Jira](project-management-and-reporting/jira-integration.md) integration options.
-
-* The **Tutorials** section provides information on working with various aspects, for example, [using cert-manager in OpenShift](infrastructure-providers/okd/ssl-automation-okd.md), [deploying AWS EKS cluster](deploy-aws-eks.md), [deploying OKD 4.9 cluster](infrastructure-providers/okd/deploy-okd-4.9.md), [deploying OKD 4.10 cluster](infrastructure-providers/okd/deploy-okd-4.10.md) and [upgrading Keycloak v.17.0.x-legacy to v.19.0.x on Kubernetes](upgrade/upgrade-keycloak-19.0.md).
+* **Installation** - Provides step-by-step guidelines for the platform prerequisites and platform installation process, including various methods such as [Helm Chart](./install-kuberocketci.md), [AWS Marketplace](./aws-marketplace-install.md), [Civo Marketplace](./install-via-civo.md), and via [Cluster Add-Ons](./add-ons-overview.md).
+* **Authentication and Authorization** - Covers the platform's authentication models, including configurations for [Keycloak](auth/keycloak.md), [Namespace Management](auth/namespace-management.md), and [Microsoft Entra ID](microsoft-entra/oidc-authentication-overview.md).
+* **Artifacts Management** - Describes artifacts management using [Nexus](artifacts-management/nexus-image-registry.md) or [Harbor](artifacts-management/harbor-installation.md).
+* **Code Quality** - Provides guidelines on how to integrate platform with the mandatory [SonarQube](code-quality/sonarqube.md) component.
+* **Project Management and Reporting** - Provides integration options with project management tools like [Jira](project-management-and-reporting/jira-integration.md) and [ReportPortal](project-management-and-reporting/install-reportportal.md).
+* **Secrets Management** - Explains the installation and integration of the [External Secrets Operator](secrets-management/install-external-secrets-operator.md).
+* **Security and Compliance** - Includes guides on integrating security and compliance tools such as [Dependency-Track](devsecops/dependency-track.md) and [DefectDojo](devsecops/defectdojo.md).
+* **Monitoring and Observability** - Provides installation and configuration guides for monitoring and logging tools like [Grafana Loki](monitoring-and-observability/install-loki.md) and [Elasticsearch](monitoring-and-observability/kibana-ilm-rollover.md) stacks.
+* **Continuous Integration (CI)** - Covers the setup and configuration of [Tekton](ci/tekton-overview.md).
+* **Continuous Deployment (CD)** - This section contains guidelines on how to integrate a mandatory component [Argo CD](cd/argocd-integration/). Besides, it also contains information on creating [custom pipelines](cd/customize-deploy-pipeline), [deployment strategies](cd/auto-stable-trigger-type.md), and [deploying RPM packages](cd/deploy-rpm.md).
+* **Infrastructure Providers** - Provides information on integrating with various infrastructure providers, including [AWS](deploy-aws-eks.md) and [OpenShift](infrastructure-providers/okd/deploy-okd-4.10.md).
+* **Disaster Recovery** - Explains the installation and configuration of [Velero](disaster-recovery/install-velero.md) as a solution for disaster recovery.
+* **Upgrade** - Provides guides on upgrading KubeRocketCI and related components, including historical versions.
+* **Troubleshooting** - Includes common troubleshooting guides for various issues that may occur during the setup and operation of KubeRocketCI.

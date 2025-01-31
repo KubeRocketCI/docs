@@ -6,15 +6,17 @@ This solution enhances reliability by preventing resource shortages, supports hi
 
 ## Architecture Overview
 
-For automatic scaling, two tools are used:  
-- **Karpenter** – dynamically manages node scaling in the cluster, creating new instances as the load increases and removing resources when demand decreases.  
-- **KEDA** – adjusts the number of pods based on workload, ensuring flexibility and optimal resource utilization.  
+For automatic scaling, two tools are used:
 
-The diagram below illustrates the AWS EKS cluster architecture, including key components, dependencies, and scaling mechanisms:  
+- **Karpenter** – dynamically manages node scaling in the cluster, creating new instances as the load increases and removing resources when demand decreases.
+- **KEDA** – adjusts the number of pods based on workload, ensuring flexibility and optimal resource utilization.
+
+The diagram below illustrates the AWS EKS cluster architecture, including key components, dependencies, and scaling mechanisms:
+
 - **System Node** – contains control components such as Tekton Controller, KEDA, Ingress Controller, and Karpenter.
-- **Tekton Node** – runs CI/CD pipelines.  
-- **Dynamic Node** – hosts operators and services that are scaled by Karpenter.  
-- **Auto Scaling Groups (ASG)** – manage system and Tekton nodes.  
+- **Tekton Node** – runs CI/CD pipelines.
+- **Dynamic Node** – hosts operators and services that are scaled by Karpenter.
+- **Auto Scaling Groups (ASG)** – manage system and Tekton nodes.
 
 This approach ensures efficient resource allocation, reduces latency, and optimizes costs. 🚀
 

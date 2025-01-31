@@ -40,8 +40,8 @@ export const pricingList: PricingItem[] = [
     },
   },
   {
-    title: 'Stream',
-    description: "The essentials for when you're just getting started.",
+    title: 'Scale',
+    description: "Access advanced features and scalability options to meet the evolving needs of your growing enterprise.",
     price: 6000,
     features: ['Community Support', 'Run on any Kubernetes Cluster', 'Pipelines for Polyglot Microservice'],
     moreFeatures: {
@@ -64,7 +64,7 @@ export const pricingList: PricingItem[] = [
   {
     title: 'Enterprise',
     description:
-      'Access advanced features and scalability options to meet the evolving needs of your growing enterprise.',
+      'For mission-critical projects and extensive needs, it delivers top-tier features, priority support, and customizable solutions.',
     price: 13000,
     features: ['Community Support', 'Run on any Kubernetes Cluster', 'Pipelines for Polyglot Microservice'],
     moreFeatures: {

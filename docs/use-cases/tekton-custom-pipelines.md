@@ -18,7 +18,7 @@ KubeRocketCI extends this capability by supporting the **customization** of Appl
 - KubeRocketCI instance with GitHub and Tekton is [configured](../operator-guide/prerequisites.md);
 - Developer has access to the KubeRocketCI instances using the Single-Sign-On approach;
 - Developer has `Write` permissions for GitHub repository to merge the code;
-- Configured Argo CD instance with the [Add-ons repository](https://docs.kuberocketci.io/docs/next/operator-guide/add-ons-overview.md) added.
+- Configured Argo CD instance with the [Add-ons repository](../operator-guide/add-ons-overview.md) added.
 
 ## Scenario
 

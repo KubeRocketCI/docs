@@ -1,4 +1,12 @@
-# Namespace And Cluster Autoscaling
+---
+sidebar_label: Scaling with Karpenter and KEDA
+---
+
+# Efficient Kubernetes Autoscaling with Karpenter and KEDA: A Comprehensive Guide
+
+<head>
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/kubernetes-cluster-scaling/namespace-and-cluster-autoscaling/" />
+</head>
 
 In modern cloud environments, efficient resource management is essential to maintain performance while minimizing costs. This documentation provides a step-by-step guide to configuring **pods and cluster autoscaling** in a Kubernetes environment using **Karpenter** and **KEDA**.
 
@@ -292,11 +300,11 @@ Steps to Verify
 
     **This image** shows a query for the number of new nodes.
 
-    ![Architecture diagram](../../assets/operator-guide/dynamic-scaling/prom-pods.png "Architecture diagram")
+    ![Architecture diagram](../../assets/operator-guide/kubernetes-cluster-scaling/prom-pods.png "Architecture diagram")
 
     **This image** shows a query for the number of new requests.
 
-    ![Architecture diagram](../../assets/operator-guide/dynamic-scaling/prom-protal.png "Architecture diagram")
+    ![Architecture diagram](../../assets/operator-guide/kubernetes-cluster-scaling/prom-protal.png "Architecture diagram")
 
 By following the steps in this documentation, we have set up a flexible cluster configuration that dynamically adjusts computing resources based on the current workload.
 

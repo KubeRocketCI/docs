@@ -219,10 +219,10 @@ const sidebars: SidebarsConfig = {
         },
         {
           type: 'category',
-          label: 'Dynamic Scaling and Optimization',
+          label: 'Kubernetes Cluster Scaling',
           items: [
-            'operator-guide/dynamic-scaling/overview',
-            'operator-guide/dynamic-scaling/namespace-and-cluster-autoscaling',
+            'operator-guide/kubernetes-cluster-scaling/overview',
+            'operator-guide/kubernetes-cluster-scaling/namespace-and-cluster-autoscaling',
           ]
         },
         {

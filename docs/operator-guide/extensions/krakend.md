@@ -7,17 +7,19 @@ import TabItem from '@theme/TabItem';
   <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/extensions/krakend/" />
 </head>
 
-This guide provides comprehensive instructions for integrating KrakenD into KubeRocketCI. KrakenD is a high-performance, open-source API gateway that securely hides sensitive data and manages routing.
+This guide provides comprehensive instructions for integrating **KrakenD** into KubeRocketCI. [KrakenD](https://www.krakend.io/docs/) is a high-performance, open-source API gateway designed to securely manage requests, hide sensitive data, and optimize routing. It supports a wide variety of configuration options, including service discovery, caching, authorization, and rate limiting, allowing to tailor the gateway to the platform needs.
 
-## Prerequisites
+KubeRocketCI leverages KrakenD to integrate with various services, such as SonarQube, Dependency-Track, and OpenSearch. This integration enables the platform to retrieve data from these services and display it in the KubeRocketCI UI, providing users with a comprehensive overview of their projects and pipelines.
+
+## Configuration and Installation
 
 Ensure that an **ingress controller** and **kuberocketci-rbac** are preinstalled on the cluster. You can install them using the resources available in the [Cluster Add-Ons](https://github.com/epam/edp-cluster-add-ons) repository.
 
-## Installation
+### Installation
 
 To streamline the installation of KrakenD in your environment, use the resources available in the [Cluster Add-Ons](https://github.com/epam/edp-cluster-add-ons) repository. This method involves deploying KrakenD alongside the appropriate components, ensuring efficient management and integration into your infrastructure.
 
-## Configuration
+### Configuration
 
 1. KubeRocketCI API Gateway URL Configuration
 

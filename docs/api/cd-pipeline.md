@@ -87,7 +87,9 @@ CDPipelineSpec defines the desired state of CDPipeline.
         <td><b>deploymentType</b></td>
         <td>string</td>
         <td>
-          Which type of kind will be deployed e.g. Container, Custom<br/>
+          Type of workload to be deployed, e.g., container, custom.<br/>
+          <br/>
+            <i>Default</i>: container<br/>
         </td>
         <td>true</td>
       </tr><tr>
@@ -109,6 +111,13 @@ CDPipelineSpec defines the desired state of CDPipeline.
         <td>[]string</td>
         <td>
           A list of applications which will promote after successful release.<br/>
+        </td>
+        <td>false</td>
+      </tr><tr>
+        <td><b>description</b></td>
+        <td>string</td>
+        <td>
+          Description of CD pipeline.<br/>
         </td>
         <td>false</td>
       </tr></tbody>
@@ -189,7 +198,7 @@ CDPipelineStatus defines the observed state of CDPipeline.
         <td>string</td>
         <td>
           Detailed information regarding action result
-which were performed<br/>
+          which were performed<br/>
         </td>
         <td>false</td>
       </tr></tbody>
@@ -232,7 +241,7 @@ Stage is the Schema for the stages API.
         <td>object</td>
         <td>
           StageSpec defines the desired state of Stage.
-NOTE: for deleting the stage use stages order - delete only the latest stage.<br/>
+          NOTE: for deleting the stage use stages order - delete only the latest stage.<br/>
         </td>
         <td>false</td>
       </tr><tr>
@@ -283,11 +292,20 @@ NOTE: for deleting the stage use stages order - delete only the latest stage.
         </td>
         <td>true</td>
       </tr><tr>
+        <td><b>namespace</b></td>
+        <td>string</td>
+        <td>
+          Namespace where the application will be deployed.<br/>
+          <br/>
+            <i>Validations</i>:<li>self == oldSelf: Value is immutable</li>
+        </td>
+        <td>true</td>
+      </tr><tr>
         <td><b>order</b></td>
         <td>integer</td>
         <td>
           The order to lay out Stages.
-The order should start from 0, and the next stages should use +1 for the order.<br/>
+          The order should start from 0, and the next stages should use +1 for the order.<br/>
         </td>
         <td>true</td>
       </tr><tr>
@@ -298,17 +316,10 @@ The order should start from 0, and the next stages should use +1 for the order.<
         </td>
         <td>true</td>
       </tr><tr>
-        <td><b>triggerType</b></td>
-        <td>string</td>
-        <td>
-          Stage deployment trigger type. E.g. Manual, Auto<br/>
-        </td>
-        <td>true</td>
-      </tr><tr>
         <td><b>cleanTemplate</b></td>
         <td>string</td>
         <td>
-          CleanTemplate specifies a name of Tekton TriggerTemplate which will be used for cleaning resources.<br/>
+          CleanTemplate specifies the name of Tekton TriggerTemplate used for cleanup environment pipeline.<br/>
         </td>
         <td>false</td>
       </tr><tr>
@@ -316,16 +327,9 @@ The order should start from 0, and the next stages should use +1 for the order.<
         <td>string</td>
         <td>
           Specifies a name of cluster where the application will be deployed.
-Default value is "in-cluster" which means that application will be deployed in the same cluster where CD Pipeline is running.<br/>
+          Default value is "in-cluster" which means that application will be deployed in the same cluster where CD Pipeline is running.<br/>
           <br/>
             <i>Default</i>: in-cluster<br/>
-        </td>
-        <td>false</td>
-      </tr><tr>
-        <td><b>namespace</b></td>
-        <td>string</td>
-        <td>
-          Namespace where the application will be deployed.<br/>
         </td>
         <td>false</td>
       </tr><tr>
@@ -341,11 +345,21 @@ Default value is "in-cluster" which means that application will be deployed in t
         <td><b>triggerTemplate</b></td>
         <td>string</td>
         <td>
-          Specifies a name of Tekton TriggerTemplate which will be used as a blueprint for deployment pipeline.
-Default value is "deploy" which means that default TriggerTemplate will be used.
-The default TriggerTemplate is delivered using edp-tekton helm chart.<br/>
+          Specifies a name of Tekton TriggerTemplate used as a blueprint for deployment pipeline.
+          Default value is "deploy" which means that default TriggerTemplate will be used.
+          The default TriggerTemplate is delivered using edp-tekton helm chart.<br/>
           <br/>
             <i>Default</i>: deploy<br/>
+        </td>
+        <td>false</td>
+      </tr><tr>
+        <td><b>triggerType</b></td>
+        <td>enum</td>
+        <td>
+          Stage deployment trigger type.<br/>
+          <br/>
+            <i>Enum</i>: Auto, Manual, Auto-stable<br/>
+            <i>Default</i>: Manual<br/>
         </td>
         <td>false</td>
       </tr></tbody>
@@ -538,7 +552,7 @@ StageStatus defines the observed state of Stage.
         <td>string</td>
         <td>
           Detailed information regarding action result
-which were performed<br/>
+          which were performed<br/>
         </td>
         <td>false</td>
       </tr><tr>

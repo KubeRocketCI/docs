@@ -85,12 +85,51 @@ ApprovalTaskSpec defines the desired state of ApprovalTask
         </td>
         <td>false</td>
       </tr><tr>
+        <td><b><a href="#approvaltaskspecapprove">approve</a></b></td>
+        <td>object</td>
+        <td>
+          Approve is the approval information.<br/>
+        </td>
+        <td>false</td>
+      </tr><tr>
         <td><b>description</b></td>
         <td>string</td>
         <td>
           Description that is shown to the user for the approval action.<br/>
           <br/>
             <i>Default</i>: Proceed<br/>
+        </td>
+        <td>false</td>
+      </tr></tbody>
+</table>
+
+### ApprovalTask.spec.approve
+
+<sup><sup>[↩ Parent](#approvaltaskspec)</sup></sup>
+
+Approve is the approval information.
+
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Description</th>
+            <th>Required</th>
+        </tr>
+    </thead>
+    <tbody><tr>
+        <td><b>approvedBy</b></td>
+        <td>string</td>
+        <td>
+          ApprovedBy is indicating the identity of the approver.<br/>
+        </td>
+        <td>true</td>
+      </tr><tr>
+        <td><b>comment</b></td>
+        <td>string</td>
+        <td>
+          Comment is the comment provided by the approver.<br/>
         </td>
         <td>false</td>
       </tr></tbody>

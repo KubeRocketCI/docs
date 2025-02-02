@@ -91,7 +91,7 @@ NexusBlobStoreSpec defines the desired state of NexusBlobStore.
         <td>string</td>
         <td>
           Name of the BlobStore.
-Name should be unique across all BlobStores.<br/>
+          Name should be unique across all BlobStores.<br/>
           <br/>
             <i>Validations</i>:<li>self == oldSelf: Value is immutable</li>
         </td>
@@ -108,6 +108,13 @@ Name should be unique across all BlobStores.<br/>
         <td>object</td>
         <td>
           File type blobstore.<br/>
+        </td>
+        <td>false</td>
+      </tr><tr>
+        <td><b><a href="#nexusblobstorespecs3">s3</a></b></td>
+        <td>object</td>
+        <td>
+          S3 type blobstore.<br/>
         </td>
         <td>false</td>
       </tr><tr>
@@ -174,7 +181,536 @@ File type blobstore.
         <td>string</td>
         <td>
           The path to the blobstore contents.
-This can be an absolute path to anywhere on the system Nexus Repository Manager has access to it or can be a path relative to the sonatype-work directory.<br/>
+          This can be an absolute path to anywhere on the system Nexus Repository Manager has access to it or can be a path relative to the sonatype-work directory.<br/>
+        </td>
+        <td>false</td>
+      </tr></tbody>
+</table>
+
+### NexusBlobStore.spec.s3
+
+<sup><sup>[↩ Parent](#nexusblobstorespec)</sup></sup>
+
+S3 type blobstore.
+
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Description</th>
+            <th>Required</th>
+        </tr>
+    </thead>
+    <tbody><tr>
+        <td><b><a href="#nexusblobstorespecs3bucket">bucket</a></b></td>
+        <td>object</td>
+        <td>
+          Details of the S3 bucket such as name and region.<br/>
+        </td>
+        <td>true</td>
+      </tr><tr>
+        <td><b><a href="#nexusblobstorespecs3advancedbucketconnection">advancedBucketConnection</a></b></td>
+        <td>object</td>
+        <td>
+          A custom endpoint URL, signer type and whether path style access is enabled.<br/>
+        </td>
+        <td>false</td>
+      </tr><tr>
+        <td><b><a href="#nexusblobstorespecs3bucketsecurity">bucketSecurity</a></b></td>
+        <td>object</td>
+        <td>
+          Security details for granting access the S3 API.<br/>
+        </td>
+        <td>false</td>
+      </tr><tr>
+        <td><b><a href="#nexusblobstorespecs3encryption">encryption</a></b></td>
+        <td>object</td>
+        <td>
+          The type of encryption to use if any.<br/>
+        </td>
+        <td>false</td>
+      </tr></tbody>
+</table>
+
+### NexusBlobStore.spec.s3.bucket
+
+<sup><sup>[↩ Parent](#nexusblobstorespecs3)</sup></sup>
+
+Details of the S3 bucket such as name and region.
+
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Description</th>
+            <th>Required</th>
+        </tr>
+    </thead>
+    <tbody><tr>
+        <td><b>name</b></td>
+        <td>string</td>
+        <td>
+          The name of the S3 bucket.<br/>
+        </td>
+        <td>true</td>
+      </tr><tr>
+        <td><b>expiration</b></td>
+        <td>integer</td>
+        <td>
+          How many days until deleted blobs are finally removed from the S3 bucket (-1 to disable).<br/>
+          <br/>
+            <i>Format</i>: int32<br/>
+            <i>Default</i>: 3<br/>
+        </td>
+        <td>false</td>
+      </tr><tr>
+        <td><b>prefix</b></td>
+        <td>string</td>
+        <td>
+          The S3 blob store (i.e. S3 object) key prefix.<br/>
+        </td>
+        <td>false</td>
+      </tr><tr>
+        <td><b>region</b></td>
+        <td>string</td>
+        <td>
+          The AWS region to create a new S3 bucket in or an existing S3 bucket's region.<br/>
+          <br/>
+            <i>Default</i>: DEFAULT<br/>
+        </td>
+        <td>false</td>
+      </tr></tbody>
+</table>
+
+### NexusBlobStore.spec.s3.advancedBucketConnection
+
+<sup><sup>[↩ Parent](#nexusblobstorespecs3)</sup></sup>
+
+A custom endpoint URL, signer type and whether path style access is enabled.
+
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Description</th>
+            <th>Required</th>
+        </tr>
+    </thead>
+    <tbody><tr>
+        <td><b>endpoint</b></td>
+        <td>string</td>
+        <td>
+          A custom endpoint URL for third party object stores using the S3 API.<br/>
+        </td>
+        <td>false</td>
+      </tr><tr>
+        <td><b>forcePathStyle</b></td>
+        <td>boolean</td>
+        <td>
+          Setting this flag will result in path-style access being used for all requests.<br/>
+          <br/>
+            <i>Default</i>: false<br/>
+        </td>
+        <td>false</td>
+      </tr><tr>
+        <td><b>maxConnectionPoolSize</b></td>
+        <td>integer</td>
+        <td>
+          Setting this value will override the default connection pool size of Nexus of the s3 client for this blobstore.<br/>
+          <br/>
+            <i>Format</i>: int32<br/>
+        </td>
+        <td>false</td>
+      </tr><tr>
+        <td><b>signerType</b></td>
+        <td>enum</td>
+        <td>
+          An API signature version which may be required for third party object stores using the S3 API.<br/>
+          <br/>
+            <i>Enum</i>: DEFAULT, S3SignerType, AWSS3V4SignerType<br/>
+        </td>
+        <td>false</td>
+      </tr></tbody>
+</table>
+
+### NexusBlobStore.spec.s3.bucketSecurity
+
+<sup><sup>[↩ Parent](#nexusblobstorespecs3)</sup></sup>
+
+Security details for granting access the S3 API.
+
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Description</th>
+            <th>Required</th>
+        </tr>
+    </thead>
+    <tbody><tr>
+        <td><b><a href="#nexusblobstorespecs3bucketsecurityaccesskeyid">accessKeyId</a></b></td>
+        <td>object</td>
+        <td>
+          An IAM access key ID for granting access to the S3 bucket.<br/>
+        </td>
+        <td>true</td>
+      </tr><tr>
+        <td><b><a href="#nexusblobstorespecs3bucketsecuritysecretaccesskey">secretAccessKey</a></b></td>
+        <td>object</td>
+        <td>
+          The secret access key associated with the specified IAM access key ID.<br/>
+        </td>
+        <td>true</td>
+      </tr><tr>
+        <td><b>role</b></td>
+        <td>string</td>
+        <td>
+          An IAM role to assume in order to access the S3 bucket.<br/>
+        </td>
+        <td>false</td>
+      </tr><tr>
+        <td><b><a href="#nexusblobstorespecs3bucketsecuritysessiontoken">sessionToken</a></b></td>
+        <td>object</td>
+        <td>
+          An AWS STS session token associated with temporary security credentials which grant access to the S3 bucket.<br/>
+        </td>
+        <td>false</td>
+      </tr></tbody>
+</table>
+
+### NexusBlobStore.spec.s3.bucketSecurity.accessKeyId
+
+<sup><sup>[↩ Parent](#nexusblobstorespecs3bucketsecurity)</sup></sup>
+
+An IAM access key ID for granting access to the S3 bucket.
+
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Description</th>
+            <th>Required</th>
+        </tr>
+    </thead>
+    <tbody><tr>
+        <td><b><a href="#nexusblobstorespecs3bucketsecurityaccesskeyidconfigmapkeyref">configMapKeyRef</a></b></td>
+        <td>object</td>
+        <td>
+          Selects a key of a ConfigMap.<br/>
+        </td>
+        <td>false</td>
+      </tr><tr>
+        <td><b><a href="#nexusblobstorespecs3bucketsecurityaccesskeyidsecretkeyref">secretKeyRef</a></b></td>
+        <td>object</td>
+        <td>
+          Selects a key of a secret.<br/>
+        </td>
+        <td>false</td>
+      </tr></tbody>
+</table>
+
+### NexusBlobStore.spec.s3.bucketSecurity.accessKeyId.configMapKeyRef
+
+<sup><sup>[↩ Parent](#nexusblobstorespecs3bucketsecurityaccesskeyid)</sup></sup>
+
+Selects a key of a ConfigMap.
+
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Description</th>
+            <th>Required</th>
+        </tr>
+    </thead>
+    <tbody><tr>
+        <td><b>key</b></td>
+        <td>string</td>
+        <td>
+          The key to select.<br/>
+        </td>
+        <td>true</td>
+      </tr><tr>
+        <td><b>name</b></td>
+        <td>string</td>
+        <td>
+          Name of the referent.
+          More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+          TODO: Add other useful fields. apiVersion, kind, uid?<br/>
+        </td>
+        <td>false</td>
+      </tr></tbody>
+</table>
+
+### NexusBlobStore.spec.s3.bucketSecurity.accessKeyId.secretKeyRef
+
+<sup><sup>[↩ Parent](#nexusblobstorespecs3bucketsecurityaccesskeyid)</sup></sup>
+
+Selects a key of a secret.
+
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Description</th>
+            <th>Required</th>
+        </tr>
+    </thead>
+    <tbody><tr>
+        <td><b>key</b></td>
+        <td>string</td>
+        <td>
+          The key of the secret to select from.<br/>
+        </td>
+        <td>true</td>
+      </tr><tr>
+        <td><b>name</b></td>
+        <td>string</td>
+        <td>
+          Name of the referent.
+          More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+          TODO: Add other useful fields. apiVersion, kind, uid?<br/>
+        </td>
+        <td>false</td>
+      </tr></tbody>
+</table>
+
+### NexusBlobStore.spec.s3.bucketSecurity.secretAccessKey
+
+<sup><sup>[↩ Parent](#nexusblobstorespecs3bucketsecurity)</sup></sup>
+
+The secret access key associated with the specified IAM access key ID.
+
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Description</th>
+            <th>Required</th>
+        </tr>
+    </thead>
+    <tbody><tr>
+        <td><b><a href="#nexusblobstorespecs3bucketsecuritysecretaccesskeyconfigmapkeyref">configMapKeyRef</a></b></td>
+        <td>object</td>
+        <td>
+          Selects a key of a ConfigMap.<br/>
+        </td>
+        <td>false</td>
+      </tr><tr>
+        <td><b><a href="#nexusblobstorespecs3bucketsecuritysecretaccesskeysecretkeyref">secretKeyRef</a></b></td>
+        <td>object</td>
+        <td>
+          Selects a key of a secret.<br/>
+        </td>
+        <td>false</td>
+      </tr></tbody>
+</table>
+
+### NexusBlobStore.spec.s3.bucketSecurity.secretAccessKey.configMapKeyRef
+
+<sup><sup>[↩ Parent](#nexusblobstorespecs3bucketsecuritysecretaccesskey)</sup></sup>
+
+Selects a key of a ConfigMap.
+
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Description</th>
+            <th>Required</th>
+        </tr>
+    </thead>
+    <tbody><tr>
+        <td><b>key</b></td>
+        <td>string</td>
+        <td>
+          The key to select.<br/>
+        </td>
+        <td>true</td>
+      </tr><tr>
+        <td><b>name</b></td>
+        <td>string</td>
+        <td>
+          Name of the referent.
+          More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+          TODO: Add other useful fields. apiVersion, kind, uid?<br/>
+        </td>
+        <td>false</td>
+      </tr></tbody>
+</table>
+
+### NexusBlobStore.spec.s3.bucketSecurity.secretAccessKey.secretKeyRef
+
+<sup><sup>[↩ Parent](#nexusblobstorespecs3bucketsecuritysecretaccesskey)</sup></sup>
+
+Selects a key of a secret.
+
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Description</th>
+            <th>Required</th>
+        </tr>
+    </thead>
+    <tbody><tr>
+        <td><b>key</b></td>
+        <td>string</td>
+        <td>
+          The key of the secret to select from.<br/>
+        </td>
+        <td>true</td>
+      </tr><tr>
+        <td><b>name</b></td>
+        <td>string</td>
+        <td>
+          Name of the referent.
+          More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+          TODO: Add other useful fields. apiVersion, kind, uid?<br/>
+        </td>
+        <td>false</td>
+      </tr></tbody>
+</table>
+
+### NexusBlobStore.spec.s3.bucketSecurity.sessionToken
+
+<sup><sup>[↩ Parent](#nexusblobstorespecs3bucketsecurity)</sup></sup>
+
+An AWS STS session token associated with temporary security credentials which grant access to the S3 bucket.
+
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Description</th>
+            <th>Required</th>
+        </tr>
+    </thead>
+    <tbody><tr>
+        <td><b><a href="#nexusblobstorespecs3bucketsecuritysessiontokenconfigmapkeyref">configMapKeyRef</a></b></td>
+        <td>object</td>
+        <td>
+          Selects a key of a ConfigMap.<br/>
+        </td>
+        <td>false</td>
+      </tr><tr>
+        <td><b><a href="#nexusblobstorespecs3bucketsecuritysessiontokensecretkeyref">secretKeyRef</a></b></td>
+        <td>object</td>
+        <td>
+          Selects a key of a secret.<br/>
+        </td>
+        <td>false</td>
+      </tr></tbody>
+</table>
+
+### NexusBlobStore.spec.s3.bucketSecurity.sessionToken.configMapKeyRef
+
+<sup><sup>[↩ Parent](#nexusblobstorespecs3bucketsecuritysessiontoken)</sup></sup>
+
+Selects a key of a ConfigMap.
+
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Description</th>
+            <th>Required</th>
+        </tr>
+    </thead>
+    <tbody><tr>
+        <td><b>key</b></td>
+        <td>string</td>
+        <td>
+          The key to select.<br/>
+        </td>
+        <td>true</td>
+      </tr><tr>
+        <td><b>name</b></td>
+        <td>string</td>
+        <td>
+          Name of the referent.
+          More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+          TODO: Add other useful fields. apiVersion, kind, uid?<br/>
+        </td>
+        <td>false</td>
+      </tr></tbody>
+</table>
+
+### NexusBlobStore.spec.s3.bucketSecurity.sessionToken.secretKeyRef
+
+<sup><sup>[↩ Parent](#nexusblobstorespecs3bucketsecuritysessiontoken)</sup></sup>
+
+Selects a key of a secret.
+
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Description</th>
+            <th>Required</th>
+        </tr>
+    </thead>
+    <tbody><tr>
+        <td><b>key</b></td>
+        <td>string</td>
+        <td>
+          The key of the secret to select from.<br/>
+        </td>
+        <td>true</td>
+      </tr><tr>
+        <td><b>name</b></td>
+        <td>string</td>
+        <td>
+          Name of the referent.
+          More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+          TODO: Add other useful fields. apiVersion, kind, uid?<br/>
+        </td>
+        <td>false</td>
+      </tr></tbody>
+</table>
+
+### NexusBlobStore.spec.s3.encryption
+
+<sup><sup>[↩ Parent](#nexusblobstorespecs3)</sup></sup>
+
+The type of encryption to use if any.
+
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Description</th>
+            <th>Required</th>
+        </tr>
+    </thead>
+    <tbody><tr>
+        <td><b>encryptionKey</b></td>
+        <td>string</td>
+        <td>
+          If using KMS encryption, you can supply a Key ID. If left blank, then the default will be used.<br/>
+        </td>
+        <td>false</td>
+      </tr><tr>
+        <td><b>encryptionType</b></td>
+        <td>enum</td>
+        <td>
+          The type of S3 server side encryption to use.<br/>
+          <br/>
+            <i>Enum</i>: none, s3ManagedEncryption, kmsManagedEncryption<br/>
         </td>
         <td>false</td>
       </tr></tbody>
@@ -544,7 +1080,7 @@ NexusSpec defines the desired state of Nexus.
         <td>string</td>
         <td>
           Secret is the name of the k8s object Secret related to nexus.
-Secret should contain a user field with a nexus username and a password field with a nexus password.<br/>
+          Secret should contain a user field with a nexus username and a password field with a nexus password.<br/>
         </td>
         <td>true</td>
       </tr><tr>
@@ -626,7 +1162,7 @@ NexusRepository is the Schema for the nexusrepositories API.
         <td>object</td>
         <td>
           NexusRepositorySpec defines the desired state of NexusRepository.
-It should contain only one format of repository - go, maven, npm, etc. and only one type - proxy, hosted or group.<br/>
+          It should contain only one format of repository - go, maven, npm, etc. and only one type - proxy, hosted or group.<br/>
         </td>
         <td>false</td>
       </tr><tr>
@@ -887,7 +1423,7 @@ NexusRef is a reference to Nexus custom resource.
         <td>string</td>
         <td>
           A unique identifier for this repository.
-Only letters, digits, underscores(_), hyphens(-), and dots(.) are allowed and may not start with underscore or dot.<br/>
+          Only letters, digits, underscores(_), hyphens(-), and dots(.) are allowed and may not start with underscore or dot.<br/>
         </td>
         <td>true</td>
       </tr><tr>
@@ -1099,7 +1635,7 @@ Storage configuration.
         <td>string</td>
         <td>
           A unique identifier for this repository.
-Only letters, digits, underscores(_), hyphens(-), and dots(.) are allowed and may not start with underscore or dot.<br/>
+          Only letters, digits, underscores(_), hyphens(-), and dots(.) are allowed and may not start with underscore or dot.<br/>
         </td>
         <td>true</td>
       </tr><tr>
@@ -1560,7 +2096,7 @@ Storage configuration.
         <td>string</td>
         <td>
           A unique identifier for this repository.
-Only letters, digits, underscores(_), hyphens(-), and dots(.) are allowed and may not start with underscore or dot.<br/>
+          Only letters, digits, underscores(_), hyphens(-), and dots(.) are allowed and may not start with underscore or dot.<br/>
         </td>
         <td>true</td>
       </tr><tr>
@@ -1663,7 +2199,7 @@ Storage configuration.
         <td>string</td>
         <td>
           A unique identifier for this repository.
-Only letters, digits, underscores(_), hyphens(-), and dots(.) are allowed and may not start with underscore or dot.<br/>
+          Only letters, digits, underscores(_), hyphens(-), and dots(.) are allowed and may not start with underscore or dot.<br/>
         </td>
         <td>true</td>
       </tr><tr>
@@ -1818,7 +2354,7 @@ Storage configuration.
         <td>string</td>
         <td>
           A unique identifier for this repository.
-Only letters, digits, underscores(_), hyphens(-), and dots(.) are allowed and may not start with underscore or dot.<br/>
+          Only letters, digits, underscores(_), hyphens(-), and dots(.) are allowed and may not start with underscore or dot.<br/>
         </td>
         <td>true</td>
       </tr><tr>
@@ -2247,7 +2783,7 @@ Storage configuration.
         <td>string</td>
         <td>
           A unique identifier for this repository.
-Only letters, digits, underscores(_), hyphens(-), and dots(.) are allowed and may not start with underscore or dot.<br/>
+          Only letters, digits, underscores(_), hyphens(-), and dots(.) are allowed and may not start with underscore or dot.<br/>
         </td>
         <td>true</td>
       </tr><tr>
@@ -2653,7 +3189,7 @@ Storage configuration.
         <td>string</td>
         <td>
           A unique identifier for this repository.
-Only letters, digits, underscores(_), hyphens(-), and dots(.) are allowed and may not start with underscore or dot.<br/>
+          Only letters, digits, underscores(_), hyphens(-), and dots(.) are allowed and may not start with underscore or dot.<br/>
         </td>
         <td>true</td>
       </tr><tr>
@@ -3059,7 +3595,7 @@ Storage configuration.
         <td>string</td>
         <td>
           A unique identifier for this repository.
-Only letters, digits, underscores(_), hyphens(-), and dots(.) are allowed and may not start with underscore or dot.<br/>
+          Only letters, digits, underscores(_), hyphens(-), and dots(.) are allowed and may not start with underscore or dot.<br/>
         </td>
         <td>true</td>
       </tr><tr>
@@ -3486,7 +4022,7 @@ Storage configuration.
         <td>string</td>
         <td>
           A unique identifier for this repository.
-Only letters, digits, underscores(_), hyphens(-), and dots(.) are allowed and may not start with underscore or dot.<br/>
+          Only letters, digits, underscores(_), hyphens(-), and dots(.) are allowed and may not start with underscore or dot.<br/>
         </td>
         <td>true</td>
       </tr><tr>
@@ -3656,7 +4192,7 @@ Storage configuration.
         <td>string</td>
         <td>
           A unique identifier for this repository.
-Only letters, digits, underscores(_), hyphens(-), and dots(.) are allowed and may not start with underscore or dot.<br/>
+          Only letters, digits, underscores(_), hyphens(-), and dots(.) are allowed and may not start with underscore or dot.<br/>
         </td>
         <td>true</td>
       </tr><tr>
@@ -3864,7 +4400,7 @@ Storage configuration.
         <td>string</td>
         <td>
           A unique identifier for this repository.
-Only letters, digits, underscores(_), hyphens(-), and dots(.) are allowed and may not start with underscore or dot.<br/>
+          Only letters, digits, underscores(_), hyphens(-), and dots(.) are allowed and may not start with underscore or dot.<br/>
         </td>
         <td>true</td>
       </tr><tr>
@@ -4003,7 +4539,7 @@ DockerProxy contains data of a Docker Proxy Repository.
         <td>string</td>
         <td>
           Url of Docker Index to use.
-TODO: add cel validation. (Required if indexType is CUSTOM)<br/>
+          TODO: add cel validation. (Required if indexType is CUSTOM)<br/>
         </td>
         <td>false</td>
       </tr></tbody>
@@ -4537,7 +5073,7 @@ Storage configuration.
         <td>string</td>
         <td>
           A unique identifier for this repository.
-Only letters, digits, underscores(_), hyphens(-), and dots(.) are allowed and may not start with underscore or dot.<br/>
+          Only letters, digits, underscores(_), hyphens(-), and dots(.) are allowed and may not start with underscore or dot.<br/>
         </td>
         <td>true</td>
       </tr><tr>
@@ -4640,7 +5176,7 @@ Storage configuration.
         <td>string</td>
         <td>
           A unique identifier for this repository.
-Only letters, digits, underscores(_), hyphens(-), and dots(.) are allowed and may not start with underscore or dot.<br/>
+          Only letters, digits, underscores(_), hyphens(-), and dots(.) are allowed and may not start with underscore or dot.<br/>
         </td>
         <td>true</td>
       </tr><tr>
@@ -5053,7 +5589,7 @@ Storage configuration.
         <td>string</td>
         <td>
           A unique identifier for this repository.
-Only letters, digits, underscores(_), hyphens(-), and dots(.) are allowed and may not start with underscore or dot.<br/>
+          Only letters, digits, underscores(_), hyphens(-), and dots(.) are allowed and may not start with underscore or dot.<br/>
         </td>
         <td>true</td>
       </tr><tr>
@@ -5201,7 +5737,7 @@ Storage configuration.
         <td>string</td>
         <td>
           A unique identifier for this repository.
-Only letters, digits, underscores(_), hyphens(-), and dots(.) are allowed and may not start with underscore or dot.<br/>
+          Only letters, digits, underscores(_), hyphens(-), and dots(.) are allowed and may not start with underscore or dot.<br/>
         </td>
         <td>true</td>
       </tr><tr>
@@ -5628,7 +6164,7 @@ Storage configuration.
         <td>string</td>
         <td>
           A unique identifier for this repository.
-Only letters, digits, underscores(_), hyphens(-), and dots(.) are allowed and may not start with underscore or dot.<br/>
+          Only letters, digits, underscores(_), hyphens(-), and dots(.) are allowed and may not start with underscore or dot.<br/>
         </td>
         <td>true</td>
       </tr><tr>
@@ -5788,7 +6324,7 @@ Storage configuration.
         <td>string</td>
         <td>
           A unique identifier for this repository.
-Only letters, digits, underscores(_), hyphens(-), and dots(.) are allowed and may not start with underscore or dot.<br/>
+          Only letters, digits, underscores(_), hyphens(-), and dots(.) are allowed and may not start with underscore or dot.<br/>
         </td>
         <td>true</td>
       </tr><tr>
@@ -5993,7 +6529,7 @@ Storage configuration.
         <td>string</td>
         <td>
           A unique identifier for this repository.
-Only letters, digits, underscores(_), hyphens(-), and dots(.) are allowed and may not start with underscore or dot.<br/>
+          Only letters, digits, underscores(_), hyphens(-), and dots(.) are allowed and may not start with underscore or dot.<br/>
         </td>
         <td>true</td>
       </tr><tr>
@@ -6484,7 +7020,7 @@ Storage configuration.
         <td>string</td>
         <td>
           A unique identifier for this repository.
-Only letters, digits, underscores(_), hyphens(-), and dots(.) are allowed and may not start with underscore or dot.<br/>
+          Only letters, digits, underscores(_), hyphens(-), and dots(.) are allowed and may not start with underscore or dot.<br/>
         </td>
         <td>true</td>
       </tr><tr>
@@ -6587,7 +7123,7 @@ Storage configuration.
         <td>string</td>
         <td>
           A unique identifier for this repository.
-Only letters, digits, underscores(_), hyphens(-), and dots(.) are allowed and may not start with underscore or dot.<br/>
+          Only letters, digits, underscores(_), hyphens(-), and dots(.) are allowed and may not start with underscore or dot.<br/>
         </td>
         <td>true</td>
       </tr><tr>
@@ -6735,7 +7271,7 @@ Storage configuration.
         <td>string</td>
         <td>
           A unique identifier for this repository.
-Only letters, digits, underscores(_), hyphens(-), and dots(.) are allowed and may not start with underscore or dot.<br/>
+          Only letters, digits, underscores(_), hyphens(-), and dots(.) are allowed and may not start with underscore or dot.<br/>
         </td>
         <td>true</td>
       </tr><tr>
@@ -7199,7 +7735,7 @@ Storage configuration.
         <td>string</td>
         <td>
           A unique identifier for this repository.
-Only letters, digits, underscores(_), hyphens(-), and dots(.) are allowed and may not start with underscore or dot.<br/>
+          Only letters, digits, underscores(_), hyphens(-), and dots(.) are allowed and may not start with underscore or dot.<br/>
         </td>
         <td>true</td>
       </tr><tr>
@@ -7302,7 +7838,7 @@ Storage configuration.
         <td>string</td>
         <td>
           A unique identifier for this repository.
-Only letters, digits, underscores(_), hyphens(-), and dots(.) are allowed and may not start with underscore or dot.<br/>
+          Only letters, digits, underscores(_), hyphens(-), and dots(.) are allowed and may not start with underscore or dot.<br/>
         </td>
         <td>true</td>
       </tr><tr>
@@ -7450,7 +7986,7 @@ Storage configuration.
         <td>string</td>
         <td>
           A unique identifier for this repository.
-Only letters, digits, underscores(_), hyphens(-), and dots(.) are allowed and may not start with underscore or dot.<br/>
+          Only letters, digits, underscores(_), hyphens(-), and dots(.) are allowed and may not start with underscore or dot.<br/>
         </td>
         <td>true</td>
       </tr><tr>
@@ -7902,7 +8438,7 @@ Storage configuration.
         <td>string</td>
         <td>
           A unique identifier for this repository.
-Only letters, digits, underscores(_), hyphens(-), and dots(.) are allowed and may not start with underscore or dot.<br/>
+          Only letters, digits, underscores(_), hyphens(-), and dots(.) are allowed and may not start with underscore or dot.<br/>
         </td>
         <td>true</td>
       </tr><tr>
@@ -8329,7 +8865,7 @@ Storage configuration.
         <td>string</td>
         <td>
           A unique identifier for this repository.
-Only letters, digits, underscores(_), hyphens(-), and dots(.) are allowed and may not start with underscore or dot.<br/>
+          Only letters, digits, underscores(_), hyphens(-), and dots(.) are allowed and may not start with underscore or dot.<br/>
         </td>
         <td>true</td>
       </tr><tr>
@@ -8432,7 +8968,7 @@ Storage configuration.
         <td>string</td>
         <td>
           A unique identifier for this repository.
-Only letters, digits, underscores(_), hyphens(-), and dots(.) are allowed and may not start with underscore or dot.<br/>
+          Only letters, digits, underscores(_), hyphens(-), and dots(.) are allowed and may not start with underscore or dot.<br/>
         </td>
         <td>true</td>
       </tr><tr>
@@ -8580,7 +9116,7 @@ Storage configuration.
         <td>string</td>
         <td>
           A unique identifier for this repository.
-Only letters, digits, underscores(_), hyphens(-), and dots(.) are allowed and may not start with underscore or dot.<br/>
+          Only letters, digits, underscores(_), hyphens(-), and dots(.) are allowed and may not start with underscore or dot.<br/>
         </td>
         <td>true</td>
       </tr><tr>
@@ -9110,7 +9646,7 @@ Storage configuration.
         <td>string</td>
         <td>
           A unique identifier for this repository.
-Only letters, digits, underscores(_), hyphens(-), and dots(.) are allowed and may not start with underscore or dot.<br/>
+          Only letters, digits, underscores(_), hyphens(-), and dots(.) are allowed and may not start with underscore or dot.<br/>
         </td>
         <td>true</td>
       </tr><tr>
@@ -9685,7 +10221,7 @@ Storage configuration.
         <td>string</td>
         <td>
           A unique identifier for this repository.
-Only letters, digits, underscores(_), hyphens(-), and dots(.) are allowed and may not start with underscore or dot.<br/>
+          Only letters, digits, underscores(_), hyphens(-), and dots(.) are allowed and may not start with underscore or dot.<br/>
         </td>
         <td>true</td>
       </tr><tr>
@@ -9820,7 +10356,7 @@ Storage configuration.
         <td>string</td>
         <td>
           A unique identifier for this repository.
-Only letters, digits, underscores(_), hyphens(-), and dots(.) are allowed and may not start with underscore or dot.<br/>
+          Only letters, digits, underscores(_), hyphens(-), and dots(.) are allowed and may not start with underscore or dot.<br/>
         </td>
         <td>true</td>
       </tr><tr>
@@ -10000,7 +10536,7 @@ Storage configuration.
         <td>string</td>
         <td>
           A unique identifier for this repository.
-Only letters, digits, underscores(_), hyphens(-), and dots(.) are allowed and may not start with underscore or dot.<br/>
+          Only letters, digits, underscores(_), hyphens(-), and dots(.) are allowed and may not start with underscore or dot.<br/>
         </td>
         <td>true</td>
       </tr><tr>
@@ -10459,7 +10995,7 @@ Storage configuration.
         <td>string</td>
         <td>
           A unique identifier for this repository.
-Only letters, digits, underscores(_), hyphens(-), and dots(.) are allowed and may not start with underscore or dot.<br/>
+          Only letters, digits, underscores(_), hyphens(-), and dots(.) are allowed and may not start with underscore or dot.<br/>
         </td>
         <td>true</td>
       </tr><tr>
@@ -11137,7 +11673,7 @@ Storage configuration.
         <td>string</td>
         <td>
           A unique identifier for this repository.
-Only letters, digits, underscores(_), hyphens(-), and dots(.) are allowed and may not start with underscore or dot.<br/>
+          Only letters, digits, underscores(_), hyphens(-), and dots(.) are allowed and may not start with underscore or dot.<br/>
         </td>
         <td>true</td>
       </tr><tr>
@@ -11466,7 +12002,7 @@ Storage configuration.
         <td>string</td>
         <td>
           A unique identifier for this repository.
-Only letters, digits, underscores(_), hyphens(-), and dots(.) are allowed and may not start with underscore or dot.<br/>
+          Only letters, digits, underscores(_), hyphens(-), and dots(.) are allowed and may not start with underscore or dot.<br/>
         </td>
         <td>true</td>
       </tr><tr>
@@ -11969,7 +12505,7 @@ NexusRoleSpec defines the desired state of NexusRole.
         <td>string</td>
         <td>
           ID is the id of the role.
-ID should be unique across all roles.<br/>
+          ID should be unique across all roles.<br/>
           <br/>
             <i>Validations</i>:<li>self == oldSelf: Value is immutable</li>
         </td>
@@ -12147,7 +12683,7 @@ NexusScriptSpec defines the desired state of NexusScript.
         <td>string</td>
         <td>
           Name is the id of the script.
-Name should be unique across all scripts.<br/>
+          Name should be unique across all scripts.<br/>
           <br/>
             <i>Validations</i>:<li>self == oldSelf: Value is immutable</li>
         </td>
@@ -12334,7 +12870,7 @@ NexusUserSpec defines the desired state of NexusUser.
         <td>string</td>
         <td>
           ID is the username of the user.
-ID should be unique across all users.<br/>
+          ID should be unique across all users.<br/>
           <br/>
             <i>Validations</i>:<li>self == oldSelf: Value is immutable</li>
         </td>
@@ -12365,8 +12901,8 @@ ID should be unique across all users.<br/>
         <td>string</td>
         <td>
           Secret is the reference of the k8s object Secret for the user password.
-Format: $secret-name:secret-key.
-Updating user password is not supported.<br/>
+          Format: $secret-name:secret-key.
+          Updating user password is not supported.<br/>
         </td>
         <td>true</td>
       </tr><tr>

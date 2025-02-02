@@ -908,10 +908,117 @@ SonarSetting defines the setting of sonar.
         </td>
         <td>false</td>
       </tr><tr>
+        <td><b><a href="#sonarspecsettingsindexvalueref">valueRef</a></b></td>
+        <td>object</td>
+        <td>
+          ValueRef is a reference to a key in a ConfigMap or a Secret.<br/>
+        </td>
+        <td>false</td>
+      </tr><tr>
         <td><b>values</b></td>
         <td>[]string</td>
         <td>
           Setting multi value. To set several values, the parameter must be called once for each value.<br/>
+        </td>
+        <td>false</td>
+      </tr></tbody>
+</table>
+
+### Sonar.spec.settings[index].valueRef
+
+<sup><sup>[↩ Parent](#sonarspecsettingsindex)</sup></sup>
+
+ValueRef is a reference to a key in a ConfigMap or a Secret.
+
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Description</th>
+            <th>Required</th>
+        </tr>
+    </thead>
+    <tbody><tr>
+        <td><b><a href="#sonarspecsettingsindexvaluerefconfigmapkeyref">configMapKeyRef</a></b></td>
+        <td>object</td>
+        <td>
+          Selects a key of a ConfigMap.<br/>
+        </td>
+        <td>false</td>
+      </tr><tr>
+        <td><b><a href="#sonarspecsettingsindexvaluerefsecretkeyref">secretKeyRef</a></b></td>
+        <td>object</td>
+        <td>
+          Selects a key of a secret.<br/>
+        </td>
+        <td>false</td>
+      </tr></tbody>
+</table>
+
+### Sonar.spec.settings[index].valueRef.configMapKeyRef
+
+<sup><sup>[↩ Parent](#sonarspecsettingsindexvalueref)</sup></sup>
+
+Selects a key of a ConfigMap.
+
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Description</th>
+            <th>Required</th>
+        </tr>
+    </thead>
+    <tbody><tr>
+        <td><b>key</b></td>
+        <td>string</td>
+        <td>
+          The key to select.<br/>
+        </td>
+        <td>true</td>
+      </tr><tr>
+        <td><b>name</b></td>
+        <td>string</td>
+        <td>
+          Name of the referent.
+          More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+          TODO: Add other useful fields. apiVersion, kind, uid?<br/>
+        </td>
+        <td>false</td>
+      </tr></tbody>
+</table>
+
+### Sonar.spec.settings[index].valueRef.secretKeyRef
+
+<sup><sup>[↩ Parent](#sonarspecsettingsindexvalueref)</sup></sup>
+
+Selects a key of a secret.
+
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Description</th>
+            <th>Required</th>
+        </tr>
+    </thead>
+    <tbody><tr>
+        <td><b>key</b></td>
+        <td>string</td>
+        <td>
+          The key of the secret to select from.<br/>
+        </td>
+        <td>true</td>
+      </tr><tr>
+        <td><b>name</b></td>
+        <td>string</td>
+        <td>
+          Name of the referent.
+          More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+          TODO: Add other useful fields. apiVersion, kind, uid?<br/>
         </td>
         <td>false</td>
       </tr></tbody>

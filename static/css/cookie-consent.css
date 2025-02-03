@@ -114,44 +114,44 @@ body .bottom#onetrust-banner-sdk {
     .ot-obj-leg-btn-handler
   ):not([aria-expanded]):not(.ot-link-btn),
 #onetrust-consent-sdk #onetrust-pc-sdk .ot-leg-btn-container .ot-active-leg-btn {
-  background-color: var(--ifm-color-primary);
-  border: var(--ifm-button-border-width) solid var(--ifm-button-border-color);
-  border-radius: var(--ifm-button-border-radius);
+  background-color: var(--ifm-color-primary) !important;
+  border: var(--ifm-button-border-width) solid var(--ifm-button-border-color) !important;
+  border-radius: var(--ifm-button-border-radius) !important;
 }
 
 #onetrust-consent-sdk #onetrust-accept-btn-handler:hover {
-  background-color: var(--kuberocket-color-primary-dark);
-  color: var(--ifm-color-white);
+  background-color: var(--kuberocket-color-primary-dark) !important;
+  color: var(--ifm-color-white) !important;
 }
 
 #onetrust-pc-sdk .ot-tgl input:checked + .ot-switch .ot-switch-nob {
-  background-color: var(--ifm-color-primary);
+  background-color: var(--ifm-color-primary) !important;
 }
 
 #onetrust-banner-sdk #onetrust-policy-text,
 #onetrust-banner-sdk .ot-dpd-desc,
 #onetrust-banner-sdk .ot-b-addl-desc {
-  font-size: 1em;
+  font-size: 1em !important;
 }
 
 #onetrust-consent-sdk #onetrust-banner-sdk {
-  outline: none;
+  outline: none !important;
 }
 
 #onetrust-consent-sdk #onetrust-banner-sdk *:focus,
 #onetrust-consent-sdk #onetrust-banner-sdk:focus {
-  outline-color: var(--ifm-color-primary);
-  outline-width: 2px;
+  outline-color: var(--ifm-color-primary) !important;
+  outline-width: 2px !important;
 }
 
 @media only screen and (min-width: 890px) {
   #onetrust-banner-sdk.ot-buttons-fw:not(.ot-iab-2) #onetrust-button-group button:last-of-type {
-    margin-right: 0;
+    margin-right: 0 !important;
   }
 }
 
 @media only screen and (min-width: 890px) {
   #onetrust-banner-sdk.ot-buttons-fw:not(.ot-iab-2) #onetrust-button-group-parent {
-    padding-right: 0;
+    padding-right: 0 !important;
   }
 }

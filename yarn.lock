@@ -1801,7 +1801,7 @@
     "@types/gtag.js" "^0.0.12"
     tslib "^2.6.0"
 
-"@docusaurus/plugin-google-tag-manager@^3.6.3", "@docusaurus/plugin-google-tag-manager@3.6.3":
+"@docusaurus/plugin-google-tag-manager@3.6.3":
   version "3.6.3"
   resolved "https://registry.npmjs.org/@docusaurus/plugin-google-tag-manager/-/plugin-google-tag-manager-3.6.3.tgz"
   integrity sha512-1M6UPB13gWUtN2UHX083/beTn85PlRI9ABItTl/JL1FJ5dJTWWFXXsHf9WW/6hrVwthwTeV/AGbGKvLKV+IlCA==

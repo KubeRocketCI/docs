@@ -8,10 +8,11 @@ const siteStructuredData = {
     {
       '@id': 'https://docs.kuberocketci.io',
       '@type': 'WebSite',
-      'url': 'https://docs.kuberocketci.io',
-      'name': 'KubeRocketCI Documentation',
-      'description': 'Explore KubeRocketCI Documentation for detailed guides, tutorials, and insights into KubeRocketCI CI/CD flow, platform components, and add-ons. Learn how to enhance your DevOps practices with KubeRocketCI.',
-      'sameAs': [
+      url: 'https://docs.kuberocketci.io',
+      name: 'KubeRocketCI Documentation',
+      description:
+        'Explore KubeRocketCI Documentation for detailed guides, tutorials, and insights into KubeRocketCI CI/CD flow, platform components, and add-ons. Learn how to enhance your DevOps practices with KubeRocketCI.',
+      sameAs: [
         'https://medium.com/epam-delivery-platform',
         'https://hub.docker.com/u/epamedp',
         'https://epam.github.io/edp-install/',
@@ -33,7 +34,7 @@ const siteStructuredData = {
         'query-input': 'required name=search_term_string',
       },
       inLanguage: 'en-UK',
-    }
+    },
   ],
 };
 
@@ -74,19 +75,97 @@ const config: Config = {
       },
       innerHTML: JSON.stringify(siteStructuredData),
     },
+    ...(process.env.node_env === 'production'
+      ? [
+          {
+            tagName: 'link',
+            attributes: {
+              rel: 'stylesheet',
+              href: '/css/cookie-consent.css',
+            },
+          },
+          {
+            tagName: 'script',
+            attributes: {
+              type: 'text/javascript',
+              src: 'https://cookie-cdn.cookiepro.com/consent/0194a78c-7932-70b9-abdc-9d8096b5f261/OtAutoBlock.js',
+            },
+          },
+          {
+            tagName: 'script',
+            attributes: {
+              type: 'text/javascript',
+              src: 'https://cookie-cdn.cookiepro.com/scripttemplates/otSDKStub.js',
+              charset: 'UTF-8',
+              'data-domain-script': '0194a78c-7932-70b9-abdc-9d8096b5f261',
+            },
+          },
+          {
+            tagName: 'script',
+            attributes: {
+              type: 'text/javascript',
+            },
+            innerHTML: 'function OptanonWrapper() {}',
+          },
+          {
+            tagName: 'link',
+            attributes: {
+              rel: 'preconnect',
+              href: 'https://www.google-analytics.com',
+            },
+          },
+          {
+            tagName: 'link',
+            attributes: {
+              rel: 'preconnect',
+              href: 'https://www.googletagmanager.com',
+            },
+          },
+          {
+            tagName: 'script',
+            attributes: {
+              src: 'https://www.googletagmanager.com/gtm.js?id=GTM-527T2HLF',
+              async: 'true',
+            },
+          },
+          {
+            tagName: 'script',
+            attributes: {
+              src: 'https://www.googletagmanager.com/gtag/js?id=G-4V1NZ8PQWG',
+              async: 'true',
+            },
+          },
+          {
+            tagName: 'script',
+            attributes: {
+              type: 'text/javascript',
+            },
+            innerHTML: 'window.dataLayer=window.dataLayer||[]',
+          },
+          {
+            tagName: 'script',
+            attributes: {
+              type: 'text/javascript',
+            },
+            innerHTML:
+              'function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","G-4V1NZ8PQWG",{})',
+          },
+          {
+            tagName: 'script',
+            attributes: {
+              type: 'text/javascript',
+            },
+            innerHTML:
+              '!function(e,t,a,n,g){e[n]=e[n]||[],e[n].push({"gtm.start":(new Date).getTime(),event:"gtm.js"});var m=t.getElementsByTagName(a)[0],r=t.createElement(a);r.async=!0,r.src="https://www.googletagmanager.com/gtm.js?id=GTM-527T2HLF",m.parentNode.insertBefore(r,m)}(window,document,"script","dataLayer")',
+          },
+        ]
+      : []),
   ],
 
   presets: [
     [
       'classic',
       {
-        gtag: {
-          trackingID: 'G-4V1NZ8PQWG',
-        },
-        googleTagManager: {
-          containerId: 'GTM-527T2HLF',
-        },
-
         docs: {
           sidebarPath: './sidebars.ts',
           showLastUpdateAuthor: true,
@@ -105,11 +184,12 @@ const config: Config = {
 
         blog: {
           blogTitle: 'Blog: CI/CD Insights, DevOps and Kubernetes Guides',
-          blogDescription: 'Explore KubeRocketCI Blog for the latest insights, tutorials, and guides on CI/CD practices, DevOps culture, and Kubernetes technologies.',
+          blogDescription:
+            'Explore KubeRocketCI Blog for the latest insights, tutorials, and guides on CI/CD practices, DevOps culture, and Kubernetes technologies.',
           feedOptions: {
             type: 'all',
             copyright: `Copyright © ${new Date().getFullYear()} KubeRocketCI.`,
-            createFeedItems: async (params) => {
+            createFeedItems: async params => {
               const { blogPosts, defaultCreateFeedItems, ...rest } = params;
               return defaultCreateFeedItems({
                 // keep only the 10 most recent blog posts in the feed
@@ -130,10 +210,10 @@ const config: Config = {
           priority: 0.5,
           ignorePatterns: ['/docs/next/**', '/docs/3.9/**', '/docs/3.10/**', '/blog/tags/**'],
           filename: 'sitemap.xml',
-          createSitemapItems: async (params) => {
+          createSitemapItems: async params => {
             const { defaultCreateSitemapItems, ...rest } = params;
             const items = await defaultCreateSitemapItems(rest);
-            return items.filter((item) => !item.url.includes('/page/'));
+            return items.filter(item => !item.url.includes('/page/'));
           },
         },
       } satisfies Preset.Options,
@@ -256,13 +336,13 @@ const config: Config = {
           dropdownActiveClassDisabled: true,
           dropdownItemsAfter: [
             {
-              type: "html",
+              type: 'html',
               value: '<hr style="margin: 0.1rem">',
             },
             {
               href: 'https://github.com/epam/edp-install/blob/master/RELEASES.md',
               label: 'Releases',
-            }
+            },
           ],
         },
         {
@@ -298,7 +378,7 @@ const config: Config = {
             {
               label: 'API Reference: Use KubeRocketCI To Build Your Solutions',
               to: '/docs/api/overview',
-            }
+            },
           ],
         },
         {

@@ -1,0 +1,157 @@
+body .bottom#onetrust-banner-sdk {
+  padding: 24px;
+}
+
+#onetrust-banner-sdk #onetrust-policy {
+  margin: 0;
+}
+
+#onetrust-consent-sdk #onetrust-accept-btn-handler,
+#onetrust-banner-sdk #onetrust-reject-all-handler {
+  text-transform: uppercase;
+  font-size: 14px;
+}
+
+#onetrust-banner-sdk #onetrust-reject-all-handler {
+  background-color: #ffffff;
+  color: #008ace;
+}
+
+#onetrust-banner-sdk #onetrust-pc-btn-handler {
+  font-size: 0.75em;
+  font-weight: 300;
+  margin-right: 0;
+}
+
+#onetrust-policy-title {
+  margin-bottom: 14px;
+}
+
+@media only screen and (min-width: 550px) {
+  #onetrust-banner-sdk .ot-sdk-three.ot-sdk-columns,
+  #onetrust-pc-sdk .ot-sdk-three.ot-sdk-columns,
+  #ot-sdk-cookie-policy .ot-sdk-three.ot-sdk-columns {
+    width: 33%;
+  }
+}
+
+@media only screen and (min-width: 890px) {
+  #onetrust-banner-sdk.ot-buttons-fw:not(.ot-iab-2) #onetrust-button-group {
+    margin-top: calc(1.3em + 10px);
+    padding-bottom: calc(0.75em + 34px);
+    overflow: hidden;
+  }
+  #onetrust-banner-sdk.ot-buttons-fw:not(.ot-iab-2) #onetrust-button-group button {
+    width: auto;
+    margin-top: 0;
+  }
+  #onetrust-consent-sdk #onetrust-pc-btn-handler {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+  }
+
+  #onetrust-banner-sdk #onetrust-button-group {
+    display: inline-block;
+    width: 100%;
+    text-align: right;
+  }
+
+  #onetrust-banner-sdk.ot-buttons-fw:not(.ot-iab-2) #onetrust-button-group button:last-of-type {
+    margin-bottom: 0;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  #onetrust-banner-sdk #onetrust-policy {
+    min-height: 6em;
+  }
+  #onetrust-banner-sdk:not(.ot-iab-2) #onetrust-button-group-parent {
+    min-height: 100%;
+    width: 35%;
+  }
+  #onetrust-banner-sdk:not(.ot-iab-2) #onetrust-group-container {
+    width: 65%;
+  }
+  #onetrust-banner-sdk.vertical-align-content #onetrust-button-group-parent {
+    left: 65%;
+  }
+  #onetrust-banner-sdk #onetrust-accept-btn-handler,
+  #onetrust-banner-sdk #onetrust-reject-all-handler {
+    margin-top: 2px;
+  }
+
+  #onetrust-banner-sdk #onetrust-accept-btn-handler,
+  #onetrust-banner-sdk #onetrust-pc-btn-handler,
+  #onetrust-banner-sdk #onetrust-reject-all-handler {
+    margin-right: 0;
+  }
+
+  #onetrust-banner-sdk #onetrust-accept-btn-handler {
+    margin-left: 1em;
+  }
+}
+
+@media only screen and (min-width: 1280px) {
+  #onetrust-banner-sdk:not(.ot-iab-2) #onetrust-button-group-parent {
+    width: 30%;
+    padding-right: 0;
+  }
+
+  #onetrust-banner-sdk:not(.ot-iab-2) #onetrust-group-container {
+    width: 70%;
+  }
+
+  #onetrust-banner-sdk:not(.ot-iab-2).vertical-align-content #onetrust-button-group-parent {
+    left: 70%;
+  }
+}
+
+#onetrust-consent-sdk #onetrust-accept-btn-handler,
+#onetrust-consent-sdk
+  #onetrust-pc-sdk
+  button:not(#clear-filters-handler):not(.ot-close-icon):not(#filter-btn-handler):not(.ot-remove-objection-handler):not(
+    .ot-obj-leg-btn-handler
+  ):not([aria-expanded]):not(.ot-link-btn),
+#onetrust-consent-sdk #onetrust-pc-sdk .ot-leg-btn-container .ot-active-leg-btn {
+  background-color: var(--ifm-color-primary);
+  border: var(--ifm-button-border-width) solid var(--ifm-button-border-color);
+  border-radius: var(--ifm-button-border-radius);
+}
+
+#onetrust-consent-sdk #onetrust-accept-btn-handler:hover {
+  background-color: var(--kuberocket-color-primary-dark);
+  color: var(--ifm-color-white);
+}
+
+#onetrust-pc-sdk .ot-tgl input:checked + .ot-switch .ot-switch-nob {
+  background-color: var(--ifm-color-primary);
+}
+
+#onetrust-banner-sdk #onetrust-policy-text,
+#onetrust-banner-sdk .ot-dpd-desc,
+#onetrust-banner-sdk .ot-b-addl-desc {
+  font-size: 1em;
+}
+
+#onetrust-consent-sdk #onetrust-banner-sdk {
+  outline: none;
+}
+
+#onetrust-consent-sdk #onetrust-banner-sdk *:focus,
+#onetrust-consent-sdk #onetrust-banner-sdk:focus {
+  outline-color: var(--ifm-color-primary);
+  outline-width: 2px;
+}
+
+@media only screen and (min-width: 890px) {
+  #onetrust-banner-sdk.ot-buttons-fw:not(.ot-iab-2) #onetrust-button-group button:last-of-type {
+    margin-right: 0;
+  }
+}
+
+@media only screen and (min-width: 890px) {
+  #onetrust-banner-sdk.ot-buttons-fw:not(.ot-iab-2) #onetrust-button-group-parent {
+    padding-right: 0;
+  }
+}

@@ -75,7 +75,7 @@ const config: Config = {
       },
       innerHTML: JSON.stringify(siteStructuredData),
     },
-    ...(process.env.node_env === 'production'
+    ...(process.env.NODE_ENV === 'production'
       ? [
           {
             tagName: 'link',

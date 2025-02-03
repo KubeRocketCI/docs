@@ -23,7 +23,7 @@ export default function BlogPostPageWrapper(props) {
         '@type': 'ListItem',
         position: 2,
         name: 'Archive',
-        item: `${siteConfig.url}/archive`,
+        item: `${siteConfig.url}/blog/archive/`,
       },
       {
         '@type': 'ListItem',
@@ -48,7 +48,7 @@ export default function BlogPostPageWrapper(props) {
         '@type': 'ListItem',
         position: 2,
         name: 'Tags',
-        item: `${siteConfig.url}/tags`,
+        item: `${siteConfig.url}/blog/tags/`,
       },
       {
         '@type': 'ListItem',

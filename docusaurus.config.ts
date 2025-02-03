@@ -19,10 +19,10 @@ const siteStructuredData = {
       ],
 
       copyrightHolder: {
-        '@id': 'https://docs.kuberocketci.io/docs/about-platform',
+        '@id': 'https://docs.kuberocketci.io/docs/about-platform/',
       },
       publisher: {
-        '@id': 'https://docs.kuberocketci.io/docs/about-platform',
+        '@id': 'https://docs.kuberocketci.io/docs/about-platform/',
       },
 
       potentialAction: {
@@ -319,7 +319,7 @@ const config: Config = {
         },
         {
           label: 'Pricing',
-          to: '/pricing',
+          to: '/pricing/',
           position: 'left',
         },
         // { to: 'blog', label: 'Blog', position: 'left' },
@@ -361,19 +361,19 @@ const config: Config = {
           items: [
             {
               label: 'What is KubeRocketCI',
-              to: '/docs/about-platform',
+              to: '/docs/about-platform/',
             },
             {
               label: 'Blogs: Interesting Facts From The DevSecOps Life',
-              to: '/blog',
+              to: '/blog/',
             },
             {
               label: 'User Guide: How To Use KubeRocketCI',
-              to: '/docs/user-guide',
+              to: '/docs/user-guide/',
             },
             {
               label: 'Developer Guide: How We Build KubeRocketCI',
-              to: '/docs/developer-guide',
+              to: '/docs/developer-guide/',
             },
             {
               label: 'API Reference: Use KubeRocketCI To Build Your Solutions',
@@ -390,7 +390,7 @@ const config: Config = {
             },
             {
               label: 'Medium',
-              href: 'https://medium.com/epam-delivery-platform',
+              href: 'https://medium.com/kuberocketci',
             },
           ],
         },
@@ -415,7 +415,7 @@ const config: Config = {
             },
             {
               label: 'Blog categories',
-              href: '/blog/tags',
+              href: '/blog/tags/',
             },
             {
               label: 'RSS feed',

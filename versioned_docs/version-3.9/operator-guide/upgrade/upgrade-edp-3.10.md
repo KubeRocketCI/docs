@@ -39,9 +39,94 @@ This section provides detailed instructions for upgrading KubeRocketCI to versio
     kubectl apply -f https://raw.githubusercontent.com/epam/edp-gerrit-operator/v2.22.0/deploy-templates/crds/v2.edp.epam.com_gerrits.yaml
     ```
 
-3. (Optional) Update Tekton Pipeline labels:
+3. Update the Quick Links configuration section:
 
-    In version 3.10, Tekton pipelines require specific labels indicating their type: **build**, **review**, **clean**, or **deploy**. These labels enable **Portal UI** to correctly display pipeline data.
+    In version 3.10, the section for configuring Quick Links resources has been updated. Ensure that the `quickLinks` section is correctly defined in the `values.yaml` file. Below is an example of the updated configuration:
+
+    <Tabs
+      defaultValue="3.9"
+      values={[
+        {label: '3.9', value: '3.9'},
+        {label: '3.10', value: '3.10'}
+      ]}>
+
+      <TabItem value="3.9">
+      ```yaml title="values.yaml"
+      quickLinks:
+        # Base URL value for the argocd Quick Link
+        argocd: ""
+        # Base URL value for the defectdojo Quick Link
+        defectdojo: ""
+        # Base URL value for the dependency track Quick Link
+        dependency_track: ""
+        # Base URL value for the container registry Quick Link (e.g. Nexus, DockerHub, ECR, etc.)
+        docker_registry: ""
+        # Base URL value for the Grafana Quick Link
+        grafana: ""
+        # Base URL value for the Kibana Quick Link
+        kibana: ""
+        # Base URL value for the nexus Quick Link
+        nexus: ""
+        # Base URL value for the sonar Quick Link
+        sonar: ""
+        # Base URL value for the codemie Quick Link
+        codemie: ""
+      ```
+      </TabItem>
+
+      <TabItem value="3.10">
+      ```yaml title="values.yaml"
+      quickLinks:
+        # Base URL value for the argocd Quick Link
+        argocd: ""
+        # Base URL value for the codemie Quick Link
+        codemie: ""
+        # Base URL value for the defectdojo Quick Link
+        defectdojo: ""
+        # Base URL value for the dependency track Quick Link
+        dependency_track: ""
+        # Base URL value for the container registry Quick Link (e.g. Nexus, DockerHub, ECR, etc.)
+        docker_registry: ""
+        # Configuration for the logging Quick Link
+        logging:
+          # -- Define the provider name for correct URL generation.
+          # Available providers: "opensearch", "datadog".
+          # If the provider name is not specified, the base URL will be used.
+          provider: ""
+          # Base URL value for the logging Quick Link
+          url: ""
+        # Configuration for the monitoring Quick Link
+        monitoring:
+          # -- Define the provider name for correct URL generation.
+          # Available providers: "grafana", "datadog".
+          # If the provider name is not specified, the base URL will be used.
+          provider: ""
+          # Base URL value for the monitoring Quick Link
+          url: ""
+        # Base URL value for the nexus Quick Link
+        nexus: ""
+        # Base URL value for the sonar Quick Link
+        sonar: ""
+      ```
+      </TabItem>
+    </Tabs>
+
+    Also, ensure that the `quickLink.enabled` field is set for each Git Server provider specified in the `edp-tekton` section. Below is an example of the updated configuration:
+
+    ```yaml title="values.yaml"
+    edp-tekton:
+      enabled: true
+      ...
+      gitServers:
+        github:
+          # -- Enable creation of QuickLink for GitHub
+          quickLink:
+            enabled: true
+    ```
+
+4. (Optional) Update Tekton Pipeline labels:
+
+    In version 3.10, Tekton pipelines require specific labels to indicate their type: **build**, **review**, **clean**, or **deploy**. These labels allow KubeRocketCI portal to correctly display pipeline data.
 
     Below are examples of the required labels for each pipeline type:
 
@@ -84,15 +169,15 @@ This section provides detailed instructions for upgrading KubeRocketCI to versio
     kubectl label pipeline <pipeline-name> app.edp.epam.com/pipelinetype=<build | review | deploy> -n <krci-namespace>
     ```
 
-4. (Optional) Migrate Git providers credentials to a new AWS Parameter Store object:
+5. (Optional) Migrate Git providers credentials to a new AWS Parameter Store object:
 
     :::note
-    In version 3.9.0, Git providers credentials were included in the `manageEDPInstallSecretsName` object in AWS Parameter Store. However, due to character limit restrictions, these credentials should now be migrated to a dedicated AWS Parameter Store object named `manageGitProviderSecretsName`.
+    In version 3.9.0, Git providers credentials were included in the `manageEDPInstallSecretsName` object in AWS Parameter Store. Due to character limit restrictions, these credentials should now be migrated to a dedicated AWS Parameter Store object named `manageGitProviderSecretsName`.
     :::
 
     If you are using the **External Secret Operator** to manage secrets, specify a new field in the `values.yaml` file: `manageGitProviderSecretsName`. This field should be defined as follows:
 
-        <Tabs
+    <Tabs
       defaultValue="3.10"
       values={[
         {label: '3.9', value: '3.9'},
@@ -141,10 +226,10 @@ This section provides detailed instructions for upgrading KubeRocketCI to versio
         }
         ```
 
-5. (Optional) Enable Code Quality Widgets:
+6. (Optional) Enable Code Quality Widgets:
 
     :::note
-    Starting from version 3.10, KrakenD is used to manage Code Quality widgets in Portal UI. This migration simplifies the integration with third-party APIs, improves performance, and provides a scalable, flexible API gateway.
+    Starting from version 3.10, KrakenD is used to manage Code Quality widgets in KubeRocketCI portal. This migration simplifies the integration with third-party APIs, improves performance, and provides a scalable, flexible API gateway.
     :::
 
     By default, in version 3.10, Code Quality widgets are disabled. To enable them, follow these steps:
@@ -157,7 +242,7 @@ This section provides detailed instructions for upgrading KubeRocketCI to versio
           apiGatewayUrl: "https://api.example.com"
         ```
 
-6. (Optional) Migrate SSO (OAuth2-proxy) configuration:
+7. (Optional) Migrate SSO (OAuth2-proxy) configuration:
 
     :::danger
     Starting from version 3.10, the platform no longer supports setting single sign-on (SSO) configuration through the `edp-install` chart. This includes the installation of the `oauth2-proxy` component and the creation of required Keycloak resources.
@@ -286,7 +371,7 @@ This section provides detailed instructions for upgrading KubeRocketCI to versio
        Set the required values in the `values.yaml` file and install the chart. Ensure that **oauth2-proxy** is running correctly.
     4. Once the **kuberocketci-rbac** and **oauth2-proxy** charts are installed and verified, proceed with upgrading the platform to version 3.10.
 
-7. (Optional) Update the OIDC Integration section for **edp-headlamp** chart:
+8. (Optional) Update the OIDC Integration section for **edp-headlamp** chart:
 
     In version 3.10, the OpenID Connect (OIDC) section for the **edp-headlamp** chart has been modified. Certain fields have been renamed or removed. For example, the `keycloakUrl` field has been renamed to `issuerUrl`, and the `issuerRealm` field is no longer required.
     Refer to the example values configurations below for versions 3.9 and 3.10 to identify the fields that need to be modified for compatibility:
@@ -332,11 +417,11 @@ This section provides detailed instructions for upgrading KubeRocketCI to versio
       </TabItem>
     </Tabs>
 
-8. (Optional) Update Gerrit configuration:
+9. (Optional) Update Gerrit configuration:
 
     Update the following configuration for the **gerrit-operator** section in `values.yaml`:
 
-    1. Update the `extraEnv` variable. Modify the `OAUTH_KEYCLOAK_CLIENT_ID` value to follow the format: `gerrit-<KRCI_NAMESPACE_NAME>`.
+    1. Update the `extraEnv` variable. Modify the `OAUTH_KEYCLOAK_CLIENT_ID` value to follow the `gerrit-<KRCI_NAMESPACE_NAME>` format:
 
         ```yaml title="values.yaml"
         gerrit-operator:
@@ -349,33 +434,40 @@ This section provides detailed instructions for upgrading KubeRocketCI to versio
         ```
 
     2. Specify the Single Sign-on (SSO) configuration. Ensure the SSO configuration is defined as follows:
+
         ```yaml title="values.yaml"
         sso:
           enabled: true
           keycloakUrl: https://keycloak.example.com
           kind: ClusterKeycloakRealm
           name: main
-         ```
-
-9. (Optional) Enable Tekton Dashboard:
-
-    Starting from version 3.10, the **Tekton Dashboard** is disabled by default. To enable it, set the following configuration in the `values.yaml` file:
-
-    ```yaml title="values.yaml"
-    edp-tekton:
-      enabled: true
-      ...
-      dashboard:
-        enabled: true
-    ```
+        ```
 
 10. To upgrade KubeRocketCI to the v3.10, run the following command:
 
-     ```bash
-     helm upgrade krci epamedp/edp-install -n krci --values values.yaml --version=3.10.3
-     ```
+    ```bash
+    helm upgrade krci epamedp/edp-install -n krci --values values.yaml --version=3.10.5
+    ```
 
-     :::note
-       To verify the installation, you can test the deployment before applying it to the cluster with the `--dry-run` key:
-       `helm upgrade krci epamedp/edp-install -n krci --values values.yaml --version=3.10.3 --dry-run`
-     :::
+    :::note
+    To verify the installation, you can test the deployment before applying it to the cluster with the `--dry-run` key:
+    `helm upgrade krci epamedp/edp-install -n krci --values values.yaml --version=3.10.5 --dry-run`
+    :::
+
+## Post-Upgrade Steps
+
+1. (Optional) In version 3.10, the Tekton Dashboard is migrated from the [edp-tekton](https://github.com/epam/edp-tekton) repository to a separate Helm chart in the [edp-cluster-add-ons](https://github.com/epam/edp-cluster-add-ons) repository. To install the Tekton Dashboard using the add-ons repository, follow the steps below:
+
+    1. Clone the forked [edp-cluster-add-ons](https://github.com/epam/edp-cluster-add-ons/tree/main/clusters/core/addons/tekton-dashboard) repository.
+
+    2. Navigate to the `clusters/core/addons/tekton-dashboard` directory and configure the `values.yaml` file with the necessary values for the Tekton Dashboard installation.
+
+    3. After configuring the Tekton Dashboard Helm chart values, navigate to the `clusters/core/apps` directory. In the `values.yaml` file, update the `tekton-dashboard` section by specifying the `enable` field as `true` to enable Argo CD Application creation for the Tekton Dashboard. Also, specify the `namespace` field to define the target namespace where the Tekton Dashboard will be deployed.
+
+        ```yaml title="clusters/core/apps/values.yaml"
+        tekton-dashboard:
+          enable: true
+          namespace: krci
+        ```
+
+    4. Commit and push the changes to the remote repository. After the changes are pushed, navigate to the Argo CD and sync the Tekton Dashboard application. Verify that the Tekton Dashboard is successfully deployed.

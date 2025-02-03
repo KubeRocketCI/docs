@@ -25,7 +25,25 @@ Inspect the main steps to perform for installing DefectDojo via Helm Chart.
   and [Deploy DefectDojo into the Kubernetes cluster](https://github.com/DefectDojo/django-DefectDojo/blob/dev/readme-docs/KUBERNETES.md) sections for details.
 :::
 
-To install DefectDojo, follow the steps below:
+## Installation DefectDojo Cluster Add-On Approach
+
+To install DefectDojo in environment, it's recommended to use the resources provided in the [Cluster Add-Ons](https://github.com/epam/edp-cluster-add-ons) repository. Leveraging the Cluster Add-Ons simplifies the deployment and management process, providing a streamlined method to integrate DefectDojo into infrastructure.
+
+1. Navigate to the forked cluster Add-Ons repository and align the [defectdojo values.yaml](https://github.com/epam/edp-cluster-add-ons/tree/main/clusters/core/addons/defectdojo/values.yaml) file. Follow the instructions to deploy DefectDojo.
+
+2. Update the configuration to enable **DefectDojo** in [Add-Ons](https://github.com/epam/edp-cluster-add-ons/blob/main/clusters/core/apps/values.yaml) repository:
+
+    ```yaml title="clusters/core/apps/values.yaml"
+    defectdojo:
+      createNamespace: true
+      enable: true
+    ```
+
+3. Sync resources and wait till the all **DefectDojo** resources is created:
+
+    ![DefectDojo ArgoCD applications](../../assets/operator-guide/devsecops/defectdojo-addons-deploy.png "DefectDojo ArgoCD applications")
+
+## Installation DefectDojo Helm Chart Approach
 
 1. Check that a security namespace is created. If not, run the following command to create it:
 
@@ -212,13 +230,13 @@ To install DefectDojo, follow the steps below:
 
     </details>
 
-## Configuration
+## Configuration DefectDojo ci-user
 
 To prepare DefectDojo for integration with KubeRocketCI, follow the steps below:
 
 1. Create ci user in DefectDojo UI:
 
-    * Login to DefectDojo UI using admin credentials:
+    * Login to DefectDojo UI using `admin` credentials:
 
       ```bash
       echo "DefectDojo admin password: $(kubectl \
@@ -230,7 +248,7 @@ To prepare DefectDojo for integration with KubeRocketCI, follow the steps below:
 
     * Go to User section
 
-    * Create new user with write permission:
+    * Create new user Global role `Maintainer` permission:
 
       ![DefectDojo update manual secret](../../assets/operator-guide/devsecops/defectdojo-createuser.png "DefectDojo set user permission")
 
@@ -238,16 +256,20 @@ To prepare DefectDojo for integration with KubeRocketCI, follow the steps below:
 
     * Login to the DefectDojo UI using the credentials from previous steps.
 
-    * Go to the API v2 key (token).
+    * Click on profile button select the `API v2 key`.
 
     * Copy the API key.
 
-3. Provision the secret using `Portal UI`, `Manifest` or with the `externalSecrets` operator:
+      ![DefectDojo api key](../../assets/operator-guide/devsecops/defectdojo-api-key.png "DefectDojo api-key")
+
+## Integration DefectDojo with KubeRocketCI
+
+Provision the secret using `Portal UI`, `Manifest` or with the `externalSecrets` operator:
 
     <Tabs
       defaultValue="portal"
       values={[
-        {label: 'UI Portal', value: 'portal'},
+        {label: 'Portal UI', value: 'portal'},
         {label: 'Manifest', value: 'manifest'},
         {label: 'External Secrets Operator', value: 'eso'}
       ]}>

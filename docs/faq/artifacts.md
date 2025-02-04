@@ -30,3 +30,12 @@ KubeRocketCI supports two major **versioning schemes**:
 
 - **Version History**: A list of all versions created from the branch.
 - **Build Information**: Details of the current and last successful builds, which can include version identifiers.
+
+---
+
+### What Do Image Labels Mean?
+
+There are two image tags appended to codebase images:
+
+  * **RC**: This tag indicates applications built in release branches. This tag means that these applications are tagged as release candidates (RC).
+  * **Snapshot**: This tag marks applications and their versions as snapshots, highlighting that these versions are recommended only for development purposes.

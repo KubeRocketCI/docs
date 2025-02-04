@@ -111,13 +111,6 @@ const config: Config = {
             tagName: 'link',
             attributes: {
               rel: 'preconnect',
-              href: 'https://www.google-analytics.com',
-            },
-          },
-          {
-            tagName: 'link',
-            attributes: {
-              rel: 'preconnect',
               href: 'https://www.googletagmanager.com',
             },
           },
@@ -131,24 +124,9 @@ const config: Config = {
           {
             tagName: 'script',
             attributes: {
-              src: 'https://www.googletagmanager.com/gtag/js?id=G-4V1NZ8PQWG',
-              async: 'true',
-            },
-          },
-          {
-            tagName: 'script',
-            attributes: {
               type: 'text/javascript',
             },
             innerHTML: 'window.dataLayer=window.dataLayer||[]',
-          },
-          {
-            tagName: 'script',
-            attributes: {
-              type: 'text/javascript',
-            },
-            innerHTML:
-              'function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","G-4V1NZ8PQWG",{})',
           },
           {
             tagName: 'script',

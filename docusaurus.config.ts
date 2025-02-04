@@ -304,7 +304,7 @@ const config: Config = {
         {
           position: 'left',
           label: 'FAQ',
-          to: '/faq/artifacts',
+          to: '/faq/general-questions',
         },
         {
           label: 'Pricing',

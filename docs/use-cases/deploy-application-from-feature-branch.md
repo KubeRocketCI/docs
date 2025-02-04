@@ -1,4 +1,8 @@
-# Deploy Application From Feature Branch
+# Deploying Feature Branches with KubeRocketCI: A Comprehensive Guide for Efficient Application Testing and Deployment
+
+<head>
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/use-cases/deploy-application-from-feature-branch/" />
+</head>
 
 ## Overview
 

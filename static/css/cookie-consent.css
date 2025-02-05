@@ -22,7 +22,7 @@
 #onetrust-banner-sdk #onetrust-policy-text,
 #onetrust-banner-sdk .ot-dpd-desc,
 #onetrust-banner-sdk .ot-b-addl-desc {
-  font-size: 1em !important;
+  font-size: 1.2em !important;
 }
 
 #onetrust-consent-sdk #onetrust-banner-sdk {
@@ -100,4 +100,8 @@
 
 #onetrust-banner-sdk #onetrust-policy {
   padding-right: 5%;
+}
+
+#onetrust-banner-sdk #onetrust-pc-btn-handler {
+  font-size: 1em !important;
 }

@@ -7,11 +7,15 @@ import TabItem from '@theme/TabItem';
   <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/upgrade/upgrade-edp-3.10/" />
 </head>
 
+This section provides detailed instructions for upgrading KubeRocketCI to version 3.10. Follow the steps and requirements outlined below:
+
 :::important
-  We suggest backing up the KubeRocketCI environment before starting the upgrade procedure.
+We suggest backing up the KubeRocketCI environment before starting the upgrade procedure.
 :::
 
-This section provides detailed instructions for upgrading KubeRocketCI to version 3.10. Follow the steps and requirements outlined below:
+:::important
+Tekton Dashboard is no longer supported in version 3.10. For more information, refer to the [Post-Upgrade Steps](#post-upgrade-steps) section.
+:::
 
 1. Update Custom Resource Definitions (CRDs). Run the following command to apply all necessary CRDs to the cluster:
 
@@ -456,7 +460,15 @@ This section provides detailed instructions for upgrading KubeRocketCI to versio
 
 ## Post-Upgrade Steps
 
-1. (Optional) In version 3.10, the Tekton Dashboard is migrated from the [edp-tekton](https://github.com/epam/edp-tekton) repository to a separate Helm chart in the [edp-cluster-add-ons](https://github.com/epam/edp-cluster-add-ons) repository. To install the Tekton Dashboard using the add-ons repository, follow the steps below:
+1. (Optional) Deploy the Tekton Dashboard:
+
+    In version 3.10, the Tekton Dashboard is migrated from the [edp-tekton](https://github.com/epam/edp-tekton) repository to a separate Helm chart in the [edp-cluster-add-ons](https://github.com/epam/edp-cluster-add-ons) repository. To install the Tekton Dashboard using the add-ons repository, follow the steps below:
+
+    :::note
+    For more information about deploying applications using [edp-cluster-add-ons](https://github.com/epam/edp-cluster-add-ons) repository, refer to the [Install via Add-Ons](../add-ons-overview.md) page.
+    :::
+
+    ### Approach 1: Deploy using Argo CD
 
     1. Clone the forked [edp-cluster-add-ons](https://github.com/epam/edp-cluster-add-ons/tree/main/clusters/core/addons/tekton-dashboard) repository.
 
@@ -471,3 +483,19 @@ This section provides detailed instructions for upgrading KubeRocketCI to versio
         ```
 
     4. Commit and push the changes to the remote repository. After the changes are pushed, navigate to the Argo CD and sync the Tekton Dashboard application. Verify that the Tekton Dashboard is successfully deployed.
+
+    ### Approach 2: Deploy using Helm
+
+    1. Clone the forked [edp-cluster-add-ons](https://github.com/epam/edp-cluster-add-ons/tree/main/clusters/core/addons/tekton-dashboard) repository.
+
+    2. Navigate to the `clusters/core/addons/tekton-dashboard` directory and configure the `values.yaml` file with the necessary values for the Tekton Dashboard installation.
+
+    3. After configuring the Tekton Dashboard Helm chart values, run the following command to deploy the Tekton Dashboard:
+
+        ```bash
+        helm upgrade --install tekton-dashboard . -n <krci-namespace>
+        ```
+
+        Replace `<krci-namespace>` with the target namespace where the Tekton Dashboard will be deployed.
+
+    4. Verify that the Tekton Dashboard is successfully deployed.

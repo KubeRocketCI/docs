@@ -37,7 +37,7 @@ To install Nexus in environment, it's recommended to use the resources provided 
 
 ## Configuration
 
-With [Add-Ons approach](https://github.com/epam/edp-cluster-add-ons/blob/main/clusters/core) `nexus-operator` create the necessary roles,**Service Account** `ci.user`, blob stores, repository, scripts, cleanup policies automatically. Below is a comprehensive guide on how to create all resources manually.
+With [Add-Ons approach](https://github.com/epam/edp-cluster-add-ons/blob/main/clusters/core) `nexus-operator` create the necessary roles, **Service Account** `ci.user`, blob stores, repository, scripts, cleanup policies automatically. Below is a comprehensive guide on how to create all resources manually.
 
 ## Configuration Nexus Repository Manager with nexus-operator
 
@@ -150,7 +150,7 @@ Without using the **nexus-operator**, manual updates are required for the Helm c
 
     ![Nexus user settings](../../assets/operator-guide/artifacts-management/nexus-settings-user.png "Nexus user settings")
 
-6. Type the `ci.user` username, fill the following fields and click the **Create local user** button to create the ***Service Account**, fill the following fields and click **Save** button::
+6. Type the `ci.user` username, fill the following fields and click the **Create local user** button to create the ***Service Account**, fill the following fields and click **Save** button:
 
     * **ID**: `ci.user`
     * **First name**: `ci.user`

@@ -64,7 +64,7 @@ In our case, we will use the **Clone** strategy:
 2. Specify the autotest language properties:
 
     * **Autotest code language** - defines the code language with its supported frameworks. Selecting **Other** allows extending the default code languages and get the necessary build tool.
-    * **Language version/framework** - defines the specific framework or language version of the autotest. The field depends on the selected code language. Specify Java 8, Java 11 or Java 17 to be used.
+    * **Language version/framework** - defines the specific framework or language version of the autotest. The field depends on the selected code language. Specify Java 8, Java 11, Java 17 or Java 21 to be used.
     * **Build Tool** - allows to choose the build tool to use. In case of autotests, Gradle and Maven are available.
     * **Autotest report framework** - all the autotest reports will be created in the Allure framework by default.
 

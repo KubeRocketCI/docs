@@ -10,20 +10,17 @@ The Configuration tab of the KubeRocketCI portal is designed to integrate KubeRo
 
 Here is the list of all the sections provided in the Configuration tab. Familiarize yourself with purposes of each section:
 
-|Configuration Section|Description|
+| Configuration Section | Description |
 |:-|:-|
-|[Links](quick-links.md)|Configure links for quick access to required tools that will be displayed on the Overview page or in specific resource details, such as application or stage details. Additionally, this section is used to configure widgets, such as SonarQube and DependencyTrack.|
-|[Nexus](../operator-guide/artifacts-management/nexus-sonatype.md)|Integrate Nexus to store and manage your application artifacts, facilitating a Continuous Integration flow within the platform.|
-|[Registry](../quick-start/integrate-container-registry.md)|Integrate platform with a container registry to store container artifacts.|
-|[Clusters](add-cluster.md)|Integrate platform with external clusters to enable remote cluster deployment.|
-|[GitOps](gitops.md)|Onboard a specific repository used for the GitOps approach purposes.|
-|[Argo CD](../operator-guide/cd/argocd-integration.md)|Integrate platform with Argo CD to enable the GitOps approach.|
-|[DefectDojo](../operator-guide/devsecops/defectdojo.md)|Connect platform with DefectDojo to manage and track security defects in applications.|
-|[DependencyTrack](../operator-guide/devsecops/dependency-track.md)|Connect the platform with the DependencyTrack tool for monitoring and managing vulnerabilities within third-party components.|
-|[SonarQube](../operator-guide/code-quality/sonarqube.md)|Integrate SonarQube to enable static code analysis.|
-|[Git Server](add-git-server.md)|Connect the platform to Version Control Systems, such as GitHub, GitLab, Bitbucket, or Gerrit for source code management.|
-|[Jira](../operator-guide/project-management-and-reporting/jira-integration.md)|Integrate Jira to track and deliver the status of your projects on a dedicated dashboard.|
-|[SSO](../operator-guide/auth/keycloak.md)|Integrate platform with identity provider to enable the Single Sign-On approach.|
+| [Quick Access](quick-links.md) | Configure quick links for quick access to required tools that will be displayed on the Overview page or in specific resource details, such as application or stage details. Additionally, this section is used to configure widgets, such as SonarQube and DependencyTrack. |
+| [Tekton](../user-guide/tekton-pipelines.md) | View all the Tekton Pipelines and Tasks CRDs created in the platform. This section allows to oversee all the Tekton resources and compare them to one another. |
+| [Artifacts Storage](../user-guide/manage-container-registries.md) | This section contains settings on integrating both artifact and container registries. There are two tabs in the section:<ul><li><strong>Clusters</strong>: Connect the platform to a remote cluster to deploy application into them.</li><li><strong>GitOps</strong>: Create a GitOps repository to redefine parameters for application Helm charts.</li><li><strong>Argo CD</strong>: Configure Argo CD integration as a mandatory component for deploying applications.</li></ul> |
+| [Deployment](../quick-start/integrate-container-registry.md) | This section contains settings on related to application deployment. There are three tabs in the section:<ul><li><strong>Nexus</strong>: Integrate platform with Nexus as an application artifact storage solution.</li><li><strong>Registry</strong>: Integrate with a container registry to store container artifacts. The supported container registry solutions are AWS ECR, DockerHub, Harbor, Nexus, GitHub CR, and OpenShift CR.</li></ul> |
+| [Security](../operator-guide/devsecops/overview.md) | Integrate platform with [DefectDojo](../operator-guide/devsecops/defectdojo.md) and [DependencyTrack](../operator-guide/devsecops/dependency-track.md) to scan your codebases for security vulnerabilities.|
+| [Code Quality](../operator-guide/code-quality/sonarqube.md) | Integrate platform with SonarQube as a mandatory component to scan your application when executing deploy pipelines. This integration also enables users to view code quality metrics and dependency scan results of your application directly in the KubeRocketCI portal. |
+| [Version Control System](../user-guide/add-git-server.md) | Connect platform to a Git Server as a mandatory component to enable a CI/CD workflow. |
+| [Management Tool](../operator-guide/project-management-and-reporting/jira-integration.md) | Integrate platform with a Jira server to add pull the the useful codebase metadata into Jira tickets. |
+| [Gen AI](../user-guide/add-ai-assistant.md) | Integrate platform an AI assistant for getting intellectual answers to any questions in the chat. |
 
 ## Related Articles
 
@@ -31,4 +28,4 @@ Here is the list of all the sections provided in the Configuration tab. Familiar
 * [Add Git Server](add-git-server.md)
 * [Add Cluster](add-cluster.md)
 * [Manage GitOps](gitops.md)
-* [Manage Container Registries](../user-guide/manage-container-registries.md)
+* [Manage Container Registries](manage-container-registries.md)

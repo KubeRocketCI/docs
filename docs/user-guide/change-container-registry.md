@@ -10,9 +10,9 @@ It may become essential to modify the container registry settings. This section 
   Removing registry settings may disrupt your CI/CD process. New components created after changing the registry, including Components and Environments, will seamlessly function. However, existing 'Components' require additional steps, as outlined below.
 :::
 
-## Remove Container Registry
+## Reset Container Registry
 
-To remove container registry integration from the KubeRocketCI, follow the steps below:
+To reset container registry integration from the KubeRocketCI, follow the steps below:
 
   1. In the KubeRocketCI main menu, navigate to **Configuration** -> **Artifacts storage** -> **Registry**.
 

@@ -20,6 +20,7 @@ To view the current Git Server, you can open Portal **Configuration** -> **Git S
 * **Git Server properties** - displays the Git Server type, its host address, username, SSH/HTTPS port, public and private SSH keys.
 * **Open documentation** - opens the "Manage Git Servers" documentation page.
 * **Undo/Save changes** - these buttons apply or revert changes made to the Git Server.
+* **Add a new Git Server** - add a new blank to specify the new Git Server's parameters.
 
 ## View Authentication Data
 

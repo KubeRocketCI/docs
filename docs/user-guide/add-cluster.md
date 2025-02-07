@@ -8,7 +8,7 @@ This page provides comprehensive instructions on how to integrate a new cluster 
 
 ## Prerequisites
 
-Before moving ahead, ensure you have already performed the guidelines outlined in the [Argo CD Integration](../operator-guide/cd/argocd-integration.md#deploy-argo-cd-application-to-remote-cluster-optional) page.
+Before moving ahead, ensure you have already performed the guidelines outlined in the [Argo CD Integration](../operator-guide/cd/argocd-integration.md#deploy-argo-cd-application-to-remote-cluster-optional) page. Besides, user needs to have a cluster admin role to add clusters.
 
 ## Deploy to Remote Cluster
 
@@ -18,7 +18,7 @@ To deploy an application to a remote cluster, follow the steps below:
 
     ![Clusters menu](../assets/user-guide/add_new_cluster.png "Clusters menu")
 
-2. In the drop-down window, specify the required fields:
+2. In the drop-down window, specify the required fields. Click the **Save** button to add the cluster:
 
     * **Cluster Name** - a unique and descriptive name for the new cluster;
     * **Cluster Host** - the cluster’s endpoint URL (e.g., example-cluster-domain.com);
@@ -32,9 +32,31 @@ To deploy an application to a remote cluster, follow the steps below:
 
     ![Add cluster](../assets/user-guide/krci-portal-add-cluster.png "Add cluster")
 
-3. Click the **Save** button to add the cluster.
+3. As soon as the cluster is added, switch the KubeRocketCI portal to the Kubernetes mode:
 
-As a result, the Kubernetes secret will be created for further integration and you will be able to select the integrated cluster when creating a new stage:
+    ![Switch to K8s](../assets/user-guide/add-cluster-switch-to-k8s.png "Switch to K8s")
+
+4. In the **Configuration** section, select **Config maps**:
+
+    ![Config maps](../assets/user-guide/add-cluster-enter-config-maps.png "Config maps")
+
+5. In the Config maps list, enter the **edp-config** config map:
+
+    ![Edp config](../assets/user-guide/add-cluster-edp-config.png "Edp config")
+
+6. In the **edp-config** config map, click the pencil icon in the top right corner of the screen:
+
+    ![Edit config map](../assets/user-guide/add-cluster-edit-config-map.png "Edit config map")
+
+7. In the YAML file, add the `available_clusters` parameter, insert the cluster name, and click **Save & apply**:
+
+    ![Add new parameter](../assets/user-guide/add-available-clusters.png "Add new parameter")
+
+8. Ensure the `available_clusters` parameter is added into the config map:
+
+    ![Check added parameter](../assets/user-guide/add-cluster-check-parameter.png "Check added parameter")
+
+9. When adding a new environment, select the remote cluster in the **Cluster** field:
 
     ![Select cluster](../assets/user-guide/select-cluster.png "Select cluster")
 

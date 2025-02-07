@@ -16,19 +16,19 @@ GitOps repository is added in two steps:
 
 1. Navigate to **Configuration** -> **Deployment**-> **GitOps** and click the **+ Add GitOps Repository** button:
 
-    ![Required fields](../assets/user-guide/gitops_section.png "GitOps section")
+    ![Required fields](../assets/user-guide/gitops-section.png "GitOps section")
 
 2. Choose one of the Git servers, fill in the required fields and click **Save**:
 
-    ![Required fields](../assets/user-guide/gitops_menu.png "GitOps menu")
+    ![Required fields](../assets/user-guide/gitops-menu.png "GitOps menu")
 
 3. Check the GitOps repository connected to the platform:
 
-    ![System Codebase](../assets/user-guide/gitops_repo_added.png "System Codebase")
+    ![System Codebase](../assets/user-guide/gitops-repo-added.png "System Codebase")
 
     As the result, the `Codebase` of `system` type will be added to the Codebase list of the **Components** section:
 
-    ![GitOps Codebase](../assets/user-guide/system_codebase.png "GitOps Codebase")
+    ![GitOps Codebase](../assets/user-guide/system-codebase.png "GitOps Codebase")
 
 :::warning
   The platform allows only one GitOps repository at a time.
@@ -44,7 +44,7 @@ Once the GitOps repository is added to the platform, you can set custom paramete
 
 3. Navigate to the **Environments** section. Open the created environment, open its stage and deploy it with the **Values override** checkbox selected as it is shown below:
 
-    ![GitOps Codebase](../assets/user-guide/values_override_deploy.png "GitOps Codebase")
+    ![GitOps Codebase](../assets/user-guide/values-override-deploy.png "GitOps Codebase")
 
 ## Delete GitOps Repository
 

@@ -14,7 +14,7 @@ We suggest backing up the KubeRocketCI environment before starting the upgrade p
 :::
 
 :::important
-Tekton Dashboard is no longer supported in version 3.10. For more information, refer to the [Post-Upgrade Steps](#post-upgrade-steps) section.
+The Tekton Dashboard is no longer supported in version 3.10. For more information, refer to the [Tekton Dashboard](#tekton-dashboard) section.
 :::
 
 1. Update Custom Resource Definitions (CRDs). Run the following command to apply all necessary CRDs to the cluster:
@@ -249,7 +249,7 @@ Tekton Dashboard is no longer supported in version 3.10. For more information, r
 7. (Optional) Migrate SSO (OAuth2-proxy) configuration:
 
     :::danger
-    Starting from version 3.10, the platform no longer supports setting single sign-on (SSO) configuration through the `edp-install` chart. This includes the installation of the `oauth2-proxy` component and the creation of required Keycloak resources.
+    Starting from version 3.10, the platform no longer supports setting Single Sign-on (SSO) configuration through the `edp-install` chart. This includes the installation of the `oauth2-proxy` component and the creation of required Keycloak resources.
     :::
 
     Deprecated fields in `values.yaml` file for SSO configuration are listed below:
@@ -458,44 +458,46 @@ Tekton Dashboard is no longer supported in version 3.10. For more information, r
     `helm upgrade krci epamedp/edp-install -n krci --values values.yaml --version=3.10.5 --dry-run`
     :::
 
-## Post-Upgrade Steps
+## Tekton Dashboard
 
-1. (Optional) Deploy the Tekton Dashboard:
+In version 3.10, the Tekton Dashboard is migrated from the [edp-tekton](https://github.com/epam/edp-tekton) repository to a separate Helm chart in the [edp-cluster-add-ons](https://github.com/epam/edp-cluster-add-ons) repository. There are two approaches to install the Tekton Dashboard using the add-ons repository:
 
-    In version 3.10, the Tekton Dashboard is migrated from the [edp-tekton](https://github.com/epam/edp-tekton) repository to a separate Helm chart in the [edp-cluster-add-ons](https://github.com/epam/edp-cluster-add-ons) repository. To install the Tekton Dashboard using the add-ons repository, follow the steps below:
+:::note
+For more information about deploying applications using [edp-cluster-add-ons](https://github.com/epam/edp-cluster-add-ons) repository, refer to the [Install via Add-Ons](../add-ons-overview.md) page.
+:::
 
-    :::note
-    For more information about deploying applications using [edp-cluster-add-ons](https://github.com/epam/edp-cluster-add-ons) repository, refer to the [Install via Add-Ons](../add-ons-overview.md) page.
-    :::
+### Approach 1: Deploy Using Argo CD
 
-    ### Approach 1: Deploy using Argo CD
+The first approach implies installing the Tekton Dashboard via resource synchronization in Argo CD:
 
-    1. Clone the forked [edp-cluster-add-ons](https://github.com/epam/edp-cluster-add-ons/tree/main/clusters/core/addons/tekton-dashboard) repository.
+1. Clone the forked [edp-cluster-add-ons](https://github.com/epam/edp-cluster-add-ons/tree/main/clusters/core/addons/tekton-dashboard) repository.
 
-    2. Navigate to the `clusters/core/addons/tekton-dashboard` directory and configure the `values.yaml` file with the necessary values for the Tekton Dashboard installation.
+2. Navigate to the `clusters/core/addons/tekton-dashboard` directory and configure the `values.yaml` file with the necessary values for the Tekton Dashboard installation.
 
-    3. After configuring the Tekton Dashboard Helm chart values, navigate to the `clusters/core/apps` directory. In the `values.yaml` file, update the `tekton-dashboard` section by specifying the `enable` field as `true` to enable Argo CD Application creation for the Tekton Dashboard. Also, specify the `namespace` field to define the target namespace where the Tekton Dashboard will be deployed.
+3. After configuring the Tekton Dashboard Helm chart values, navigate to the `clusters/core/apps` directory. In the `values.yaml` file, update the `tekton-dashboard` section by specifying the `enable` field as `true` to enable Argo CD Application creation for the Tekton Dashboard. Also, specify the `namespace` field to define the target namespace where the Tekton Dashboard will be deployed.
 
-        ```yaml title="clusters/core/apps/values.yaml"
-        tekton-dashboard:
-          enable: true
-          namespace: krci
-        ```
+    ```yaml title="clusters/core/apps/values.yaml"
+    tekton-dashboard:
+      enable: true
+      namespace: krci
+    ```
 
-    4. Commit and push the changes to the remote repository. After the changes are pushed, navigate to the Argo CD and sync the Tekton Dashboard application. Verify that the Tekton Dashboard is successfully deployed.
+4. Commit and push the changes to the remote repository. After the changes are pushed, navigate to the Argo CD and sync the Tekton Dashboard application. Verify that the Tekton Dashboard is successfully deployed.
 
-    ### Approach 2: Deploy using Helm
+### Approach 2: Deploy Using Helm
 
-    1. Clone the forked [edp-cluster-add-ons](https://github.com/epam/edp-cluster-add-ons/tree/main/clusters/core/addons/tekton-dashboard) repository.
+The second approach deploys Tekton Dashboard as a common Helm chart:
 
-    2. Navigate to the `clusters/core/addons/tekton-dashboard` directory and configure the `values.yaml` file with the necessary values for the Tekton Dashboard installation.
+1. Clone the forked [edp-cluster-add-ons](https://github.com/epam/edp-cluster-add-ons/tree/main/clusters/core/addons/tekton-dashboard) repository.
 
-    3. After configuring the Tekton Dashboard Helm chart values, run the following command to deploy the Tekton Dashboard:
+2. Navigate to the `clusters/core/addons/tekton-dashboard` directory and configure the `values.yaml` file with the necessary values for the Tekton Dashboard installation.
 
-        ```bash
-        helm upgrade --install tekton-dashboard . -n <krci-namespace>
-        ```
+3. After configuring the Tekton Dashboard Helm chart values, run the following command to deploy the Tekton Dashboard:
 
-        Replace `<krci-namespace>` with the target namespace where the Tekton Dashboard will be deployed.
+    ```bash
+    helm upgrade --install tekton-dashboard . -n <krci-namespace>
+    ```
 
-    4. Verify that the Tekton Dashboard is successfully deployed.
+    Replace `<krci-namespace>` with the target namespace where the Tekton Dashboard will be deployed.
+
+4. Verify that the Tekton Dashboard is successfully deployed.

@@ -14,7 +14,7 @@ We suggest backing up the KubeRocketCI environment before starting the upgrade p
 :::
 
 :::important
-The Tekton Dashboard is no longer supported in version 3.10. For more information, refer to the [Post-Upgrade Steps](#post-upgrade-steps) section.
+The Tekton Dashboard is no longer supported in version 3.10. For more information, refer to the [Tekton Dashboard](#tekton-dashboard) section.
 :::
 
 1. Update Custom Resource Definitions (CRDs). Run the following command to apply all necessary CRDs to the cluster:
@@ -476,17 +476,17 @@ The first approach implies installing the Tekton Dashboard via resource synchron
 
 3. After configuring the Tekton Dashboard Helm chart values, navigate to the `clusters/core/apps` directory. In the `values.yaml` file, update the `tekton-dashboard` section by specifying the `enable` field as `true` to enable Argo CD Application creation for the Tekton Dashboard. Also, specify the `namespace` field to define the target namespace where the Tekton Dashboard will be deployed.
 
-  ```yaml title="clusters/core/apps/values.yaml"
-  tekton-dashboard:
-    enable: true
-    namespace: krci
-  ```
+    ```yaml title="clusters/core/apps/values.yaml"
+    tekton-dashboard:
+      enable: true
+      namespace: krci
+    ```
 
 4. Commit and push the changes to the remote repository. After the changes are pushed, navigate to the Argo CD and sync the Tekton Dashboard application. Verify that the Tekton Dashboard is successfully deployed.
 
 ### Approach 2: Deploy Using Helm
 
-The first approach deploys Tekton Dashboard as a common Helm chart:
+The second approach deploys Tekton Dashboard as a common Helm chart:
 
 1. Clone the forked [edp-cluster-add-ons](https://github.com/epam/edp-cluster-add-ons/tree/main/clusters/core/addons/tekton-dashboard) repository.
 
@@ -494,10 +494,10 @@ The first approach deploys Tekton Dashboard as a common Helm chart:
 
 3. After configuring the Tekton Dashboard Helm chart values, run the following command to deploy the Tekton Dashboard:
 
-  ```bash
-  helm upgrade --install tekton-dashboard . -n <krci-namespace>
-  ```
+    ```bash
+    helm upgrade --install tekton-dashboard . -n <krci-namespace>
+    ```
 
-  Replace `<krci-namespace>` with the target namespace where the Tekton Dashboard will be deployed.
+    Replace `<krci-namespace>` with the target namespace where the Tekton Dashboard will be deployed.
 
 4. Verify that the Tekton Dashboard is successfully deployed.

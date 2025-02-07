@@ -667,7 +667,7 @@ To install ReportPortal, follow the steps below:
 :::note
   For user access: default/1q2w3e<br />
   For admin access: superadmin/erebus<br />
-  Please refer to the [ReportPortal.io](https://reportportal.io/installation) page for details.
+  Please refer to the [ReportPortal.io](https://reportportal.io/installation/) page for details.
 :::
 
 :::note

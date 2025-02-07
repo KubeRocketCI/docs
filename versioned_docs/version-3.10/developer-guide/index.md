@@ -103,6 +103,6 @@ Our DockerHub repository hosts Docker images for various platform components:
 
 To maintain an active presence on social media channels and share valuable content about our software releases, we continuously publish materials across the following media:
 
-- [SolutionsHub](https://solutionshub.epam.com/solution/epam-delivery-platform)
+- [SolutionsHub](https://solutionshub.epam.com/solution/kuberocketci)
 - [Medium](https://medium.com/epam-delivery-platform)
 - [YouTube](https://www.youtube.com/@theplatformteam)

@@ -192,7 +192,7 @@ To grant access, the appropriate role must be assigned to the user in Keycloak.
 
 ### SonarQube Configuration
 
-[KubeRocketCI Sonar Operator](https://github.com/epam/edp-sonar-operator) provides a [SonarQube Permission Template](https://docs.sonarsource.com/sonarqube/latest/instance-administration/security/) to manage user access and permissions for SonarQube projects.
+[KubeRocketCI Sonar Operator](https://github.com/epam/edp-sonar-operator) provides a [SonarQube Permission Template](https://docs.sonarsource.com/sonarqube-server/latest/instance-administration/system-functions/security/) to manage user access and permissions for SonarQube projects.
 
 The template is stored in the SonarQube [custom resource](https://github.com/epam/edp-sonar-operator/blob/master/deploy-templates/_crd_examples/permission_template.yaml) of the operator. An example of a custom resource is shown below.
 

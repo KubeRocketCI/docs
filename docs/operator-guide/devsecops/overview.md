@@ -40,7 +40,7 @@ For obtaining and managing report post scanning, deployment of various vulnerabi
 
 ### Gitleaks
 
-[Gitleaks](https://github.com/zricethezav/gitleaks) is a versatile SAST tool used to scan Git repositories for hardcoded secrets, such as passwords and API keys, to prevent potential data leaks and unauthorized access.
+[Gitleaks](https://github.com/gitleaks/gitleaks) is a versatile SAST tool used to scan Git repositories for hardcoded secrets, such as passwords and API keys, to prevent potential data leaks and unauthorized access.
 
 ### Trivy
 
@@ -60,11 +60,11 @@ For obtaining and managing report post scanning, deployment of various vulnerabi
 
 ### Cdxgen
 
-[Cdxgen](https://github.com/AppThreat/cdxgen) is a lightweight and efficient tool for generating Software Bill of Materials (SBOM) using CycloneDX, a standard format for managing component inventory. It helps organizations maintain an up-to-date record of all software components, their versions, and related vulnerabilities, streamlining monitoring and compliance within the software supply chain.
+[Cdxgen](https://github.com/CycloneDX/cdxgen) is a lightweight and efficient tool for generating Software Bill of Materials (SBOM) using CycloneDX, a standard format for managing component inventory. It helps organizations maintain an up-to-date record of all software components, their versions, and related vulnerabilities, streamlining monitoring and compliance within the software supply chain.
 
 ### Semgrep CLI
 
-[Semgrep CLI](https://github.com/returntocorp/semgrep) is a versatile and user-friendly command-line interface for the Semgrep security scanner, enabling developers to perform Static Application Security Testing (SAST) for various programming languages. It focuses on detecting and preventing potential security vulnerabilities, code quality issues, and custom anti-patterns, ensuring secure and efficient code development.
+[Semgrep CLI](https://github.com/semgrep/semgrep) is a versatile and user-friendly command-line interface for the Semgrep security scanner, enabling developers to perform Static Application Security Testing (SAST) for various programming languages. It focuses on detecting and preventing potential security vulnerabilities, code quality issues, and custom anti-patterns, ensuring secure and efficient code development.
 
 ### Clair
 

@@ -270,6 +270,7 @@ words:
   - nodepools
   - nodepool
   - nodeclasses
+  - fasapi
 enableFiletypes:
   - md
   - mdx

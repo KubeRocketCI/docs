@@ -14,7 +14,7 @@ We suggest backing up the KubeRocketCI environment before starting the upgrade p
 :::
 
 :::important
-The Tekton Dashboard is no longer supported in version 3.10. For more information, refer to the [Tekton Dashboard](#tekton-dashboard) section.
+Starting from version 3.10, the Tekton Dashboard is no longer installed with KubeRocketCI. Instead, it is now installed via a Helm chart from the [edp-cluster-add-ons](https://github.com/epam/edp-cluster-add-ons) repository. For more information, refer to the [Tekton Dashboard](#tekton-dashboard) section.
 :::
 
 1. Update Custom Resource Definitions (CRDs). Run the following command to apply all necessary CRDs to the cluster:

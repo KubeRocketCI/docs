@@ -1,14 +1,14 @@
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-# Integrate DependencyTrack
+# Integrate Dependency-Track
 
 <head>
   <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/devsecops/dependency-track/" />
 </head>
 
 
-This documentation guide provides comprehensive instructions for installing and integrating DependencyTrack with the KubeRocketCI.
+This documentation guide provides comprehensive instructions for installing and integrating Dependency-Track with the KubeRocketCI.
 
 ## Prerequisites
 
@@ -17,7 +17,7 @@ This documentation guide provides comprehensive instructions for installing and 
 
 ## Installation
 
-To install DependencyTrack use [KubeRocketCI addons](../add-ons-overview.md) approach.
+To install Dependency-Track use [KubeRocketCI addons](../add-ons-overview.md) approach.
 
 ## Configuration
 
@@ -33,7 +33,7 @@ To install DependencyTrack use [KubeRocketCI addons](../add-ons-overview.md) app
 
 3. Click **+** in **API keys** to create token:
 
-    ![DependencyTrack settings](../../assets/operator-guide/devsecops/dependency-track-token.png "DependencyTrack settings")
+    ![Dependency-Track settings](../../assets/operator-guide/devsecops/dependency-track-token.png "Dependency-Track settings")
 
 4. Provision secrets using a manifest, Portal, or with the externalSecrets operator:
 
@@ -48,7 +48,7 @@ To install DependencyTrack use [KubeRocketCI addons](../add-ons-overview.md) app
   <TabItem value="portal">
   Go to the **Portal** open **Configuration** -> **SECURITY** -> **DEPENDENCYTRACK**. Click **+ ADD INTEGRATION** fill fields `Quick Link URL`, `URL` and `Token` click the `save` button.
 
-  ![DependencyTrack update manual secret](../../assets/operator-guide/devsecops/dependency-track-secret.png "DependencyTrack update manual secret")
+  ![Dependency-Track update manual secret](../../assets/operator-guide/devsecops/dependency-track-secret.png "Dependency-Track update manual secret")
   </TabItem>
 
   <TabItem value="manifests">
@@ -71,7 +71,7 @@ To install DependencyTrack use [KubeRocketCI addons](../add-ons-overview.md) app
   </TabItem>
 
   <TabItem value="externalsecret">
-  Store DependencyTrack URL and Token in the AWS Parameter Store with the following format:
+  Store Dependency-Track URL and Token in the AWS Parameter Store with the following format:
 
   ```yaml
   "ci-dependency-track":
@@ -83,14 +83,14 @@ To install DependencyTrack use [KubeRocketCI addons](../add-ons-overview.md) app
 
   Go to the **Portal** open **Configuration** -> **SECURITY** -> **DEPENDENCYTRACK** see the secret managed by the `Managed by External Secret`.
 
-  ![DependencyTrack managed by external secret operator](../../assets/operator-guide/devsecops/defectdojo-external-secret.png "DependencyTrack managed by external secret operator")
+  ![Dependency-Track managed by external secret operator](../../assets/operator-guide/devsecops/defectdojo-external-secret.png "Dependency-Track managed by external secret operator")
 
   More detail on External Secrets Operator Integration can be found on [the following page](../secrets-management/external-secrets-operator-integration.md)
   </TabItem>
 
 </Tabs>
 
-After following the instructions provided, you should be able to integrate your DependencyTrack with the KubeRocketCI.
+After following the instructions provided, you should be able to integrate your Dependency-Track with the KubeRocketCI.
 
 ## Related Articles
 

@@ -488,6 +488,7 @@
             }
           ]
         },
+        "user-guide/widgets",
         "user-guide/platform-cleanup-guide"
       ]
     }

@@ -27,6 +27,45 @@ To integrate KrakenD with KubeRocketCI, ensure the following prerequisites are m
 - (Optional) An [OpenSearch](https://github.com/epam/edp-cluster-add-ons/tree/main/clusters/core/addons/opensearch) instance is installed and configured (required for the [Long-Term Storage](../ci/tekton-long-term-storage.md) feature).
 - (Optional) The [External Secrets Operator](https://github.com/epam/edp-cluster-add-ons/tree/main/clusters/core/addons/external-secrets) is installed.
 
+## Installation
+
+There are two approaches to install KrakenD using [edp-cluster-add-ons](https://github.com/epam/edp-cluster-add-ons) repository:
+
+### Approach 1: Deploy Using Argo CD
+
+The first approach is to deploy KrakenD using Argo CD. Follow the steps below to install KrakenD using Argo CD:
+
+1. Clone the forked [edp-cluster-add-ons](https://github.com/epam/edp-cluster-add-ons) repository.
+
+2. Navigate to the `clusters/core/addons/krakend` directory and configure the `values.yaml` file with the necessary values for the KrakenD installation.
+
+3. After configuring the KrakenD Helm chart values, navigate to the `clusters/core/apps` directory. In the `values.yaml` file, update the `krakend` section by specifying the `enable` field as `true` to enable Argo CD Application creation for the KrakenD:
+
+    ```yaml
+    krakend:
+      enable: true
+    ```
+
+4. Commit and push the changes to the remote repository. After the changes are pushed, navigate to the Argo CD and sync the KrakenD application. Verify that the KrakenD is successfully deployed:
+
+    ![Argo CD KrakenD](../../assets/operator-guide/extensions/argo-cd-krakend.png)
+
+### Approach 2: Deploy Using Helm
+
+The second approach is to deploy KrakenD using Helm. Follow the steps below to install KrakenD using Helm:
+
+1. Clone the forked [edp-cluster-add-ons](https://github.com/epam/edp-cluster-add-ons) repository.
+
+2. Navigate to the `clusters/core/addons/krakend` directory and configure the `values.yaml` file with the necessary values for the KrakenD installation.
+
+3. After configuring the KrakenD Helm chart values, run the following command to deploy the KrakenD:
+
+    ```bash
+    helm upgrade --install krakend . -n krakend --create-namespace
+    ```
+
+4. Verify that the KrakenD is successfully deployed.
+
 ## Create Access Tokens
 
 To integrate KrakenD with KubeRocketCI, it is necessary to create access tokens for the services that KrakenD will connect to. Follow the guides below to generate the necessary tokens for each service:
@@ -219,45 +258,6 @@ To configure KrakenD as the API gateway for KubeRocketCI, follow the steps below
         ```
 
         More details about External Secrets Operator integration can be found in the [External Secrets Operator](../secrets-management/install-external-secrets-operator.md) page.
-
-## Installation
-
-There are two approaches to install KrakenD using [edp-cluster-add-ons](https://github.com/epam/edp-cluster-add-ons) repository:
-
-### Approach 1: Deploy Using Argo CD
-
-The first approach is to deploy KrakenD using Argo CD. Follow the steps below to install KrakenD using Argo CD:
-
-1. Clone the forked [edp-cluster-add-ons](https://github.com/epam/edp-cluster-add-ons) repository.
-
-2. Navigate to the `clusters/core/addons/krakend` directory and configure the `values.yaml` file with the necessary values for the KrakenD installation.
-
-3. After configuring the KrakenD Helm chart values, navigate to the `clusters/core/apps` directory. In the `values.yaml` file, update the `krakend` section by specifying the `enable` field as `true` to enable Argo CD Application creation for the KrakenD:
-
-    ```yaml
-    krakend:
-      enable: true
-    ```
-
-4. Commit and push the changes to the remote repository. After the changes are pushed, navigate to the Argo CD and sync the KrakenD application. Verify that the KrakenD is successfully deployed:
-
-    ![Argo CD KrakenD](../../assets/operator-guide/extensions/argo-cd-krakend.png)
-
-### Approach 2: Deploy Using Helm
-
-The second approach is to deploy KrakenD using Helm. Follow the steps below to install KrakenD using Helm:
-
-1. Clone the forked [edp-cluster-add-ons](https://github.com/epam/edp-cluster-add-ons) repository.
-
-2. Navigate to the `clusters/core/addons/krakend` directory and configure the `values.yaml` file with the necessary values for the KrakenD installation.
-
-3. After configuring the KrakenD Helm chart values, run the following command to deploy the KrakenD:
-
-    ```bash
-    helm upgrade --install krakend . -n krakend --create-namespace
-    ```
-
-4. Verify that the KrakenD is successfully deployed.
 
 ## Related Articles
 

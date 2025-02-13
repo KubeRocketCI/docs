@@ -1,4 +1,4 @@
-# Overview
+# Authentication and Authorization: Overview
 
 <head>
   <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/auth/platform-auth-model/" />

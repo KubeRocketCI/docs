@@ -1,4 +1,4 @@
-# Microsoft Entra OIDC Authentication Overview
+# Microsoft Entra OIDC Authentication: Overview
 
 <head>
   <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/microsoft-entra/oidc-authentication-overview/" />

@@ -5,7 +5,7 @@ Packages:
 - [v1.edp.epam.com/v1alpha1](#v1edpepamcomv1alpha1)
 - [v1.edp.epam.com/v1](#v1edpepamcomv1)
 
-# v1.edp.epam.com/v1alpha1
+## v1.edp.epam.com/v1alpha1
 
 Resource Types:
 
@@ -1426,7 +1426,7 @@ ClusterKeycloakStatus defines the observed state of ClusterKeycloak.
       </tr></tbody>
 </table>
 
-# v1.edp.epam.com/v1
+## v1.edp.epam.com/v1
 
 Resource Types:
 

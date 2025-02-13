@@ -13,8 +13,6 @@ sidebar_label: "Scaffold and Deploy FastAPI Application"
   <link rel="canonical" href="https://docs.kuberocketci.io/docs/use-cases/application-scaffolding/" />
 </head>
 
-## Overview
-
 This use case outlines the process of creating and deploying a FastAPI application using KubeRocketCI.
 The purpose is to provide developers with a streamlined approach to generate a functional code structure for a FastAPI web application, including basic read functionality. The process also allows for customization to meet specific requirements and deployment to a development environment. By utilizing a standardized process for code review, testing, and deployment, developers can save time and effort while ensuring high code quality and reliability.
 The goal is to empower the development team to release new features and applications more efficiently, while maintaining a high level of code quality and reliability.

@@ -9,6 +9,8 @@ authors: [sergk, mykolamarusenko, daniilnedostup]
 hide_table_of_contents: false
 ---
 
+# Advanced AWS EKS Management: Implementing SSO via OIDC and Keycloak
+
 In today's cloud-first world, ensuring seamless and secure access to Amazon Elastic Kubernetes Service (EKS) is essential for IT teams. Our guide helps you enhance EKS security by integrating Single Sign-On (SSO) with OpenID Connect (OIDC) and Keycloak. This integration simplifies authentication and strengthens security measures. We aim to provide you with effective strategies to implement a robust SSO solution that meets your organization's standards, making your EKS environment more secure and compliant. KubeRocketCI leverages this integration to provide Role-Based Access Control (RBAC) for your EKS clusters, ensuring that only authorized users can access platform resources.
 
 <!--truncate-->

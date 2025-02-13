@@ -5,7 +5,7 @@ Packages:
 - [v2.edp.epam.com/v1](#v2edpepamcomv1)
 - [v2.edp.epam.com/v1alpha1](#v2edpepamcomv1alpha1)
 
-# v2.edp.epam.com/v1
+## v2.edp.epam.com/v1
 
 Resource Types:
 
@@ -113,12 +113,22 @@ CDStageDeploySpec defines the desired state of CDStageDeploy.
         </td>
         <td>true</td>
       </tr><tr>
+        <td><b>strategy</b></td>
+        <td>string</td>
+        <td>
+          TriggerType specifies a strategy for auto-deploy.<br/>
+          <br/>
+            <i>Default</i>: Auto<br/>
+        </td>
+        <td>false</td>
+      </tr><tr>
         <td><b><a href="#cdstagedeployspectagsindex">tags</a></b></td>
         <td>[]object</td>
         <td>
-          A list of available tags<br/>
+          A list of available tags.
+          Deprecated: Use tag instead.<br/>
         </td>
-        <td>true</td>
+        <td>false</td>
       </tr></tbody>
 </table>
 
@@ -412,7 +422,7 @@ CodebaseBranchStatus defines the observed state of CodebaseBranch.
         <td>string</td>
         <td>
           Detailed information regarding action result
-which were performed<br/>
+          which were performed<br/>
         </td>
         <td>false</td>
       </tr><tr>
@@ -586,7 +596,7 @@ CodebaseImageStreamStatus defines the observed state of CodebaseImageStream.
         <td>string</td>
         <td>
           Detailed information regarding action result
-which were performed<br/>
+          which were performed<br/>
         </td>
         <td>false</td>
       </tr></tbody>
@@ -689,7 +699,7 @@ CodebaseSpec defines the desired state of Codebase.
         <td>string</td>
         <td>
           A name of git server which will be used as VCS.
-Example: "gerrit".<br/>
+          Example: "gerrit".<br/>
         </td>
         <td>true</td>
       </tr><tr>
@@ -734,7 +744,7 @@ Example: "gerrit".<br/>
         <td>string</td>
         <td>
           While we clone new codebase we can select specific branch to clone.
-Selected branch will become a default branch for a new codebase (e.g. master, main).<br/>
+          Selected branch will become a default branch for a new codebase (e.g. master, main).<br/>
         </td>
         <td>false</td>
       </tr><tr>
@@ -958,7 +968,7 @@ CodebaseStatus defines the observed state of Codebase.
         <td>string</td>
         <td>
           Detailed information regarding action result
-which were performed<br/>
+          which were performed<br/>
         </td>
         <td>false</td>
       </tr><tr>
@@ -972,7 +982,15 @@ which were performed<br/>
         <td><b>webHookID</b></td>
         <td>integer</td>
         <td>
-          Stores ID of webhook which was created for a codebase.<br/>
+          Stores ID of webhook which was created for a codebase.
+          Deprecated: Because the webhook id can be more than just an integer. Use WebHookRef instead.<br/>
+        </td>
+        <td>false</td>
+      </tr><tr>
+        <td><b>webHookRef</b></td>
+        <td>string</td>
+        <td>
+          WebHookRef stores unique reference to webhook which was created for a codebase.<br/>
         </td>
         <td>false</td>
       </tr></tbody>
@@ -1080,8 +1098,8 @@ GitServerSpec defines the desired state of GitServer.
         <td>
           GitProvider is a git provider type. It can be gerrit, github or gitlab. Default value is gerrit.<br/>
           <br/>
-            <i>Enum</i>: gerrit, gitlab, github<br/>
-            <i>Default</i>: gerrit<br/>
+            <i>Enum</i>: gerrit, gitlab, github, bitbucket<br/>
+            <i>Default</i>: github<br/>
         </td>
         <td>false</td>
       </tr><tr>
@@ -1105,7 +1123,7 @@ GitServerSpec defines the desired state of GitServer.
         <td>string</td>
         <td>
           WebhookUrl is a URL for webhook that will be created in the git provider.
-If not set, a new EventListener and Ingress will be created and used for webhooks.<br/>
+          If not set, a new EventListener and Ingress will be created and used for webhooks.<br/>
         </td>
         <td>false</td>
       </tr></tbody>
@@ -1145,7 +1163,7 @@ GitServerStatus defines the observed state of GitServer.
         <td>string</td>
         <td>
           Status indicates the current status of the GitServer.
-Possible values are: ok, failed.<br/>
+          Possible values are: ok, failed.<br/>
         </td>
         <td>false</td>
       </tr></tbody>
@@ -1291,7 +1309,7 @@ JiraIssueMetadataStatus defines the observed state of JiraIssueMetadata.
         <td>string</td>
         <td>
           Detailed information regarding action result
-which were performed<br/>
+          which were performed<br/>
         </td>
         <td>false</td>
       </tr></tbody>
@@ -1428,7 +1446,7 @@ JiraServerStatus defines the observed state of JiraServer.
         <td>string</td>
         <td>
           Detailed information regarding action result
-which were performed<br/>
+          which were performed<br/>
         </td>
         <td>false</td>
       </tr></tbody>
@@ -1536,7 +1554,7 @@ QuickLinkSpec defines the desired state of QuickLink.
       </tr></tbody>
 </table>
 
-# v2.edp.epam.com/v1alpha1
+## v2.edp.epam.com/v1alpha1
 
 Resource Types:
 

@@ -19,7 +19,7 @@ The platform consists of the following blocks:
 
 ## Features
 
-- Deployed and configured CI/CD toolset ([Tekton](https://tekton.dev/), [ArgoCD](https://argoproj.github.io/cd/), [Nexus Repository Manager](https://help.sonatype.com/en/sonatype-nexus-repository.html), [SonarQube](https://www.sonarsource.com/), [DefectDojo](https://www.defectdojo.org/), [Dependency-Track](https://dependencytrack.org/).
+- Deployed and configured CI/CD toolset ([Tekton](https://tekton.dev/), [ArgoCD](https://argoproj.github.io/cd/), [Nexus Repository Manager](https://help.sonatype.com/en/sonatype-nexus-repository.html), [SonarQube](https://www.sonarsource.com/), [DefectDojo](https://www.defectdojo.org/), [Dependency-Track](https://dependencytrack.org/)).
 - [GitHub](https://about.gitlab.com/features/)(by default) or [GitLab](https://about.gitlab.com/features/).
 - [Tekton](./operator-guide/install-tekton.md) is a pipeline orchestrator.
 - [CI pipelines](./user-guide/index.md) for polyglot applications:

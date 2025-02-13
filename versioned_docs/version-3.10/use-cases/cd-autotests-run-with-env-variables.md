@@ -73,7 +73,7 @@ The first step is to clone and install the Tekton chart:
 
     ```yaml
     # Replace `example.domain.com` with the appropriate wildcard domain for your setup.
-    dnsWildCard: "example.domain.com"
+     dnsWildCard: "example.domain.com"
     ```
 
 4. Install the chart:

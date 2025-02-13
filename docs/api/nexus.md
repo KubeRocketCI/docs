@@ -4,7 +4,7 @@ Packages:
 
 - [edp.epam.com/v1alpha1](#edpepamcomv1alpha1)
 
-# edp.epam.com/v1alpha1
+## edp.epam.com/v1alpha1
 
 Resource Types:
 

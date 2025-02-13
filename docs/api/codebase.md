@@ -5,7 +5,7 @@ Packages:
 - [v2.edp.epam.com/v1](#v2edpepamcomv1)
 - [v2.edp.epam.com/v1alpha1](#v2edpepamcomv1alpha1)
 
-# v2.edp.epam.com/v1
+## v2.edp.epam.com/v1
 
 Resource Types:
 
@@ -1554,7 +1554,7 @@ QuickLinkSpec defines the desired state of QuickLink.
       </tr></tbody>
 </table>
 
-# v2.edp.epam.com/v1alpha1
+## v2.edp.epam.com/v1alpha1
 
 Resource Types:
 

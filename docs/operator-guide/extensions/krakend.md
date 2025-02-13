@@ -108,8 +108,8 @@ To streamline the installation of KrakenD in your environment, use the resources
   </Tabs>
 
 * [Install KubeRocketCI With Values File](../install-kuberocketci.md)
-* [Cluster Add-Ons Overview](../add-ons-overview.md)
+* [Install via Add-Ons](../add-ons-overview.md)
 * [SonarQube Integration](../code-quality/sonarqube.md)
-* [DependencyTrack Integrate](../devsecops/dependency-track.md)
-* [Keycloak Integrate](../auth/keycloak.md)
-* [Ingress Controller](../install-ingress-nginx.md)
+* [Integrate DependencyTrack](../devsecops/dependency-track.md)
+* [Install Keycloak](../auth/keycloak.md)
+* [Install NGINX Ingress Controller](../install-ingress-nginx.md)

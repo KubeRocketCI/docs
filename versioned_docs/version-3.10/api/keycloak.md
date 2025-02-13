@@ -5,7 +5,7 @@ Packages:
 - [v1.edp.epam.com/v1alpha1](#v1edpepamcomv1alpha1)
 - [v1.edp.epam.com/v1](#v1edpepamcomv1)
 
-# v1.edp.epam.com/v1alpha1
+## v1.edp.epam.com/v1alpha1
 
 Resource Types:
 
@@ -124,7 +124,7 @@ ClusterKeycloakRealmSpec defines the desired state of ClusterKeycloakRealm.
         <td>string</td>
         <td>
           FrontendURL Set the frontend URL for the realm.
-Use in combination with the default hostname provider to override the base URL for frontend requests for a specific realm.<br/>
+          Use in combination with the default hostname provider to override the base URL for frontend requests for a specific realm.<br/>
         </td>
         <td>false</td>
       </tr><tr>
@@ -146,6 +146,13 @@ Use in combination with the default hostname provider to override the base URL f
         <td>object</td>
         <td>
           RealmEventConfig is the configuration for events in the realm.<br/>
+        </td>
+        <td>false</td>
+      </tr><tr>
+        <td><b><a href="#clusterkeycloakrealmspecsmtp">smtp</a></b></td>
+        <td>object</td>
+        <td>
+          Smtp is the configuration for email in the realm.<br/>
         </td>
         <td>false</td>
       </tr><tr>
@@ -307,6 +314,385 @@ RealmEventConfig is the configuration for events in the realm.
         <td>[]string</td>
         <td>
           EventsListeners is a list of event listeners to enable.<br/>
+        </td>
+        <td>false</td>
+      </tr></tbody>
+</table>
+
+### ClusterKeycloakRealm.spec.smtp
+
+<sup><sup>[↩ Parent](#clusterkeycloakrealmspec)</sup></sup>
+
+Smtp is the configuration for email in the realm.
+
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Description</th>
+            <th>Required</th>
+        </tr>
+    </thead>
+    <tbody><tr>
+        <td><b><a href="#clusterkeycloakrealmspecsmtpconnection">connection</a></b></td>
+        <td>object</td>
+        <td>
+          Connection specifies the email connection configuration.<br/>
+        </td>
+        <td>true</td>
+      </tr><tr>
+        <td><b><a href="#clusterkeycloakrealmspecsmtptemplate">template</a></b></td>
+        <td>object</td>
+        <td>
+          Template specifies the email template configuration.<br/>
+        </td>
+        <td>true</td>
+      </tr></tbody>
+</table>
+
+### ClusterKeycloakRealm.spec.smtp.connection
+
+<sup><sup>[↩ Parent](#clusterkeycloakrealmspecsmtp)</sup></sup>
+
+Connection specifies the email connection configuration.
+
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Description</th>
+            <th>Required</th>
+        </tr>
+    </thead>
+    <tbody><tr>
+        <td><b>host</b></td>
+        <td>string</td>
+        <td>
+          Host specifies the email server host.<br/>
+        </td>
+        <td>true</td>
+      </tr><tr>
+        <td><b><a href="#clusterkeycloakrealmspecsmtpconnectionauthentication">authentication</a></b></td>
+        <td>object</td>
+        <td>
+          Authentication specifies the email authentication configuration.<br/>
+        </td>
+        <td>false</td>
+      </tr><tr>
+        <td><b>enableSSL</b></td>
+        <td>boolean</td>
+        <td>
+          EnableSSL specifies if SSL is enabled.<br/>
+        </td>
+        <td>false</td>
+      </tr><tr>
+        <td><b>enableStartTLS</b></td>
+        <td>boolean</td>
+        <td>
+          EnableStartTLS specifies if StartTLS is enabled.<br/>
+        </td>
+        <td>false</td>
+      </tr><tr>
+        <td><b>port</b></td>
+        <td>integer</td>
+        <td>
+          Port specifies the email server port.<br/>
+          <br/>
+            <i>Default</i>: 25<br/>
+        </td>
+        <td>false</td>
+      </tr></tbody>
+</table>
+
+### ClusterKeycloakRealm.spec.smtp.connection.authentication
+
+<sup><sup>[↩ Parent](#clusterkeycloakrealmspecsmtpconnection)</sup></sup>
+
+Authentication specifies the email authentication configuration.
+
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Description</th>
+            <th>Required</th>
+        </tr>
+    </thead>
+    <tbody><tr>
+        <td><b><a href="#clusterkeycloakrealmspecsmtpconnectionauthenticationpassword">password</a></b></td>
+        <td>object</td>
+        <td>
+          Password specifies login password.<br/>
+        </td>
+        <td>true</td>
+      </tr><tr>
+        <td><b><a href="#clusterkeycloakrealmspecsmtpconnectionauthenticationusername">username</a></b></td>
+        <td>object</td>
+        <td>
+          Username specifies login username.<br/>
+        </td>
+        <td>true</td>
+      </tr></tbody>
+</table>
+
+### ClusterKeycloakRealm.spec.smtp.connection.authentication.password
+
+<sup><sup>[↩ Parent](#clusterkeycloakrealmspecsmtpconnectionauthentication)</sup></sup>
+
+Password specifies login password.
+
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Description</th>
+            <th>Required</th>
+        </tr>
+    </thead>
+    <tbody><tr>
+        <td><b><a href="#clusterkeycloakrealmspecsmtpconnectionauthenticationpasswordconfigmapkeyref">configMapKeyRef</a></b></td>
+        <td>object</td>
+        <td>
+          Selects a key of a ConfigMap.<br/>
+        </td>
+        <td>false</td>
+      </tr><tr>
+        <td><b><a href="#clusterkeycloakrealmspecsmtpconnectionauthenticationpasswordsecretkeyref">secretKeyRef</a></b></td>
+        <td>object</td>
+        <td>
+          Selects a key of a secret.<br/>
+        </td>
+        <td>false</td>
+      </tr></tbody>
+</table>
+
+### ClusterKeycloakRealm.spec.smtp.connection.authentication.password.configMapKeyRef
+
+<sup><sup>[↩ Parent](#clusterkeycloakrealmspecsmtpconnectionauthenticationpassword)</sup></sup>
+
+Selects a key of a ConfigMap.
+
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Description</th>
+            <th>Required</th>
+        </tr>
+    </thead>
+    <tbody><tr>
+        <td><b>key</b></td>
+        <td>string</td>
+        <td>
+          The key to select.<br/>
+        </td>
+        <td>true</td>
+      </tr><tr>
+        <td><b>name</b></td>
+        <td>string</td>
+        <td>
+          Name of the referent.
+          More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+          TODO: Add other useful fields. apiVersion, kind, uid?<br/>
+        </td>
+        <td>false</td>
+      </tr></tbody>
+</table>
+
+### ClusterKeycloakRealm.spec.smtp.connection.authentication.password.secretKeyRef
+
+<sup><sup>[↩ Parent](#clusterkeycloakrealmspecsmtpconnectionauthenticationpassword)</sup></sup>
+
+Selects a key of a secret.
+
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Description</th>
+            <th>Required</th>
+        </tr>
+    </thead>
+    <tbody><tr>
+        <td><b>key</b></td>
+        <td>string</td>
+        <td>
+          The key of the secret to select from.<br/>
+        </td>
+        <td>true</td>
+      </tr><tr>
+        <td><b>name</b></td>
+        <td>string</td>
+        <td>
+          Name of the referent.
+          More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+          TODO: Add other useful fields. apiVersion, kind, uid?<br/>
+        </td>
+        <td>false</td>
+      </tr></tbody>
+</table>
+
+### ClusterKeycloakRealm.spec.smtp.connection.authentication.username
+
+<sup><sup>[↩ Parent](#clusterkeycloakrealmspecsmtpconnectionauthentication)</sup></sup>
+
+Username specifies login username.
+
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Description</th>
+            <th>Required</th>
+        </tr>
+    </thead>
+    <tbody><tr>
+        <td><b><a href="#clusterkeycloakrealmspecsmtpconnectionauthenticationusernameconfigmapkeyref">configMapKeyRef</a></b></td>
+        <td>object</td>
+        <td>
+          Selects a key of a ConfigMap.<br/>
+        </td>
+        <td>false</td>
+      </tr><tr>
+        <td><b><a href="#clusterkeycloakrealmspecsmtpconnectionauthenticationusernamesecretkeyref">secretKeyRef</a></b></td>
+        <td>object</td>
+        <td>
+          Selects a key of a secret.<br/>
+        </td>
+        <td>false</td>
+      </tr><tr>
+        <td><b>value</b></td>
+        <td>string</td>
+        <td>
+          Directly specifies a value.<br/>
+        </td>
+        <td>false</td>
+      </tr></tbody>
+</table>
+
+### ClusterKeycloakRealm.spec.smtp.connection.authentication.username.configMapKeyRef
+
+<sup><sup>[↩ Parent](#clusterkeycloakrealmspecsmtpconnectionauthenticationusername)</sup></sup>
+
+Selects a key of a ConfigMap.
+
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Description</th>
+            <th>Required</th>
+        </tr>
+    </thead>
+    <tbody><tr>
+        <td><b>key</b></td>
+        <td>string</td>
+        <td>
+          The key to select.<br/>
+        </td>
+        <td>true</td>
+      </tr><tr>
+        <td><b>name</b></td>
+        <td>string</td>
+        <td>
+          Name of the referent.
+          More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+          TODO: Add other useful fields. apiVersion, kind, uid?<br/>
+        </td>
+        <td>false</td>
+      </tr></tbody>
+</table>
+
+### ClusterKeycloakRealm.spec.smtp.connection.authentication.username.secretKeyRef
+
+<sup><sup>[↩ Parent](#clusterkeycloakrealmspecsmtpconnectionauthenticationusername)</sup></sup>
+
+Selects a key of a secret.
+
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Description</th>
+            <th>Required</th>
+        </tr>
+    </thead>
+    <tbody><tr>
+        <td><b>key</b></td>
+        <td>string</td>
+        <td>
+          The key of the secret to select from.<br/>
+        </td>
+        <td>true</td>
+      </tr><tr>
+        <td><b>name</b></td>
+        <td>string</td>
+        <td>
+          Name of the referent.
+          More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+          TODO: Add other useful fields. apiVersion, kind, uid?<br/>
+        </td>
+        <td>false</td>
+      </tr></tbody>
+</table>
+
+### ClusterKeycloakRealm.spec.smtp.template
+
+<sup><sup>[↩ Parent](#clusterkeycloakrealmspecsmtp)</sup></sup>
+
+Template specifies the email template configuration.
+
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Description</th>
+            <th>Required</th>
+        </tr>
+    </thead>
+    <tbody><tr>
+        <td><b>from</b></td>
+        <td>string</td>
+        <td>
+          From specifies the sender email address.<br/>
+        </td>
+        <td>true</td>
+      </tr><tr>
+        <td><b>envelopeFrom</b></td>
+        <td>string</td>
+        <td>
+          EnvelopeFrom is an email address used for bounces .<br/>
+        </td>
+        <td>false</td>
+      </tr><tr>
+        <td><b>fromDisplayName</b></td>
+        <td>string</td>
+        <td>
+          FromDisplayName specifies the sender display for sender email address.<br/>
+        </td>
+        <td>false</td>
+      </tr><tr>
+        <td><b>replyTo</b></td>
+        <td>string</td>
+        <td>
+          ReplyTo specifies the reply-to email address.<br/>
+        </td>
+        <td>false</td>
+      </tr><tr>
+        <td><b>replyToDisplayName</b></td>
+        <td>string</td>
+        <td>
+          ReplyToDisplayName specifies display name for reply-to email address.<br/>
         </td>
         <td>false</td>
       </tr></tbody>
@@ -1040,7 +1426,7 @@ ClusterKeycloakStatus defines the observed state of ClusterKeycloak.
       </tr></tbody>
 </table>
 
-# v1.edp.epam.com/v1
+## v1.edp.epam.com/v1
 
 Resource Types:
 
@@ -1446,7 +1832,8 @@ KeycloakClientSpec defines the desired state of KeycloakClient.
         <td><b>adminUrl</b></td>
         <td>string</td>
         <td>
-          AdminUrl<br/>
+          AdminUrl is client admin url.
+          If empty - WebUrl will be used.<br/>
         </td>
         <td>false</td>
       </tr><tr>
@@ -1463,6 +1850,13 @@ KeycloakClientSpec defines the desired state of KeycloakClient.
           Attributes is a map of client attributes.<br/>
           <br/>
             <i>Default</i>: map[post.logout.redirect.uris:+]<br/>
+        </td>
+        <td>false</td>
+      </tr><tr>
+        <td><b><a href="#keycloakclientspecauthenticationflowbindingoverrides">authenticationFlowBindingOverrides</a></b></td>
+        <td>object</td>
+        <td>
+          AuthenticationFlowBindingOverrides client auth flow overrides<br/>
         </td>
         <td>false</td>
       </tr><tr>
@@ -1559,7 +1953,7 @@ KeycloakClientSpec defines the desired state of KeycloakClient.
         <td><b>homeUrl</b></td>
         <td>string</td>
         <td>
-          <br/>
+          HomeUrl is a client home url.<br/>
         </td>
         <td>false</td>
       </tr><tr>
@@ -1643,7 +2037,7 @@ KeycloakClientSpec defines the desired state of KeycloakClient.
         <td>
           Secret is kubernetes secret name where the client's secret will be stored.
           Secret should have the following format: $secretName:secretKey.
-          If not specified, a client secret will be generated and stored in a secret with the name `keycloak-client-{metadata.name}-secret`.
+          If not specified, a client secret will be generated and stored in a secret with the name `keycloak-client-metadata.name-secret`.
           If keycloak client is public, secret property will be ignored.<br/>
         </td>
         <td>false</td>
@@ -1695,6 +2089,38 @@ KeycloakClientSpec defines the desired state of KeycloakClient.
         <td>string</td>
         <td>
           WebUrl is a client web url.<br/>
+        </td>
+        <td>false</td>
+      </tr></tbody>
+</table>
+
+### KeycloakClient.spec.authenticationFlowBindingOverrides
+
+<sup><sup>[↩ Parent](#keycloakclientspec)</sup></sup>
+
+AuthenticationFlowBindingOverrides client auth flow overrides
+
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Description</th>
+            <th>Required</th>
+        </tr>
+    </thead>
+    <tbody><tr>
+        <td><b>browser</b></td>
+        <td>string</td>
+        <td>
+          <br/>
+        </td>
+        <td>false</td>
+      </tr><tr>
+        <td><b>directGrant</b></td>
+        <td>string</td>
+        <td>
+          <br/>
         </td>
         <td>false</td>
       </tr></tbody>
@@ -1952,7 +2378,7 @@ AggregatedPolicy is an aggregated policy settings.
         <td>[]string</td>
         <td>
           Policies is a list of aggregated policies names.
-Specifies all the policies that must be applied to the scopes defined by this policy or permission.<br/>
+          Specifies all the policies that must be applied to the scopes defined by this policy or permission.<br/>
         </td>
         <td>true</td>
       </tr></tbody>
@@ -4145,6 +4571,13 @@ KeycloakRealmSpec defines the desired state of KeycloakRealm.
         </td>
         <td>false</td>
       </tr><tr>
+        <td><b><a href="#keycloakrealmspecsmtp">smtp</a></b></td>
+        <td>object</td>
+        <td>
+          Smtp is the configuration for email in the realm.<br/>
+        </td>
+        <td>false</td>
+      </tr><tr>
         <td><b><a href="#keycloakrealmspecthemes">themes</a></b></td>
         <td>object</td>
         <td>
@@ -4296,6 +4729,385 @@ RealmEventConfig is the configuration for events in the realm.
         <td>[]string</td>
         <td>
           EventsListeners is a list of event listeners to enable.<br/>
+        </td>
+        <td>false</td>
+      </tr></tbody>
+</table>
+
+### KeycloakRealm.spec.smtp
+
+<sup><sup>[↩ Parent](#keycloakrealmspec)</sup></sup>
+
+Smtp is the configuration for email in the realm.
+
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Description</th>
+            <th>Required</th>
+        </tr>
+    </thead>
+    <tbody><tr>
+        <td><b><a href="#keycloakrealmspecsmtpconnection">connection</a></b></td>
+        <td>object</td>
+        <td>
+          Connection specifies the email connection configuration.<br/>
+        </td>
+        <td>true</td>
+      </tr><tr>
+        <td><b><a href="#keycloakrealmspecsmtptemplate">template</a></b></td>
+        <td>object</td>
+        <td>
+          Template specifies the email template configuration.<br/>
+        </td>
+        <td>true</td>
+      </tr></tbody>
+</table>
+
+### KeycloakRealm.spec.smtp.connection
+
+<sup><sup>[↩ Parent](#keycloakrealmspecsmtp)</sup></sup>
+
+Connection specifies the email connection configuration.
+
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Description</th>
+            <th>Required</th>
+        </tr>
+    </thead>
+    <tbody><tr>
+        <td><b>host</b></td>
+        <td>string</td>
+        <td>
+          Host specifies the email server host.<br/>
+        </td>
+        <td>true</td>
+      </tr><tr>
+        <td><b><a href="#keycloakrealmspecsmtpconnectionauthentication">authentication</a></b></td>
+        <td>object</td>
+        <td>
+          Authentication specifies the email authentication configuration.<br/>
+        </td>
+        <td>false</td>
+      </tr><tr>
+        <td><b>enableSSL</b></td>
+        <td>boolean</td>
+        <td>
+          EnableSSL specifies if SSL is enabled.<br/>
+        </td>
+        <td>false</td>
+      </tr><tr>
+        <td><b>enableStartTLS</b></td>
+        <td>boolean</td>
+        <td>
+          EnableStartTLS specifies if StartTLS is enabled.<br/>
+        </td>
+        <td>false</td>
+      </tr><tr>
+        <td><b>port</b></td>
+        <td>integer</td>
+        <td>
+          Port specifies the email server port.<br/>
+          <br/>
+            <i>Default</i>: 25<br/>
+        </td>
+        <td>false</td>
+      </tr></tbody>
+</table>
+
+### KeycloakRealm.spec.smtp.connection.authentication
+
+<sup><sup>[↩ Parent](#keycloakrealmspecsmtpconnection)</sup></sup>
+
+Authentication specifies the email authentication configuration.
+
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Description</th>
+            <th>Required</th>
+        </tr>
+    </thead>
+    <tbody><tr>
+        <td><b><a href="#keycloakrealmspecsmtpconnectionauthenticationpassword">password</a></b></td>
+        <td>object</td>
+        <td>
+          Password specifies login password.<br/>
+        </td>
+        <td>true</td>
+      </tr><tr>
+        <td><b><a href="#keycloakrealmspecsmtpconnectionauthenticationusername">username</a></b></td>
+        <td>object</td>
+        <td>
+          Username specifies login username.<br/>
+        </td>
+        <td>true</td>
+      </tr></tbody>
+</table>
+
+### KeycloakRealm.spec.smtp.connection.authentication.password
+
+<sup><sup>[↩ Parent](#keycloakrealmspecsmtpconnectionauthentication)</sup></sup>
+
+Password specifies login password.
+
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Description</th>
+            <th>Required</th>
+        </tr>
+    </thead>
+    <tbody><tr>
+        <td><b><a href="#keycloakrealmspecsmtpconnectionauthenticationpasswordconfigmapkeyref">configMapKeyRef</a></b></td>
+        <td>object</td>
+        <td>
+          Selects a key of a ConfigMap.<br/>
+        </td>
+        <td>false</td>
+      </tr><tr>
+        <td><b><a href="#keycloakrealmspecsmtpconnectionauthenticationpasswordsecretkeyref">secretKeyRef</a></b></td>
+        <td>object</td>
+        <td>
+          Selects a key of a secret.<br/>
+        </td>
+        <td>false</td>
+      </tr></tbody>
+</table>
+
+### KeycloakRealm.spec.smtp.connection.authentication.password.configMapKeyRef
+
+<sup><sup>[↩ Parent](#keycloakrealmspecsmtpconnectionauthenticationpassword)</sup></sup>
+
+Selects a key of a ConfigMap.
+
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Description</th>
+            <th>Required</th>
+        </tr>
+    </thead>
+    <tbody><tr>
+        <td><b>key</b></td>
+        <td>string</td>
+        <td>
+          The key to select.<br/>
+        </td>
+        <td>true</td>
+      </tr><tr>
+        <td><b>name</b></td>
+        <td>string</td>
+        <td>
+          Name of the referent.
+          More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+          TODO: Add other useful fields. apiVersion, kind, uid?<br/>
+        </td>
+        <td>false</td>
+      </tr></tbody>
+</table>
+
+### KeycloakRealm.spec.smtp.connection.authentication.password.secretKeyRef
+
+<sup><sup>[↩ Parent](#keycloakrealmspecsmtpconnectionauthenticationpassword)</sup></sup>
+
+Selects a key of a secret.
+
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Description</th>
+            <th>Required</th>
+        </tr>
+    </thead>
+    <tbody><tr>
+        <td><b>key</b></td>
+        <td>string</td>
+        <td>
+          The key of the secret to select from.<br/>
+        </td>
+        <td>true</td>
+      </tr><tr>
+        <td><b>name</b></td>
+        <td>string</td>
+        <td>
+          Name of the referent.
+          More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+          TODO: Add other useful fields. apiVersion, kind, uid?<br/>
+        </td>
+        <td>false</td>
+      </tr></tbody>
+</table>
+
+### KeycloakRealm.spec.smtp.connection.authentication.username
+
+<sup><sup>[↩ Parent](#keycloakrealmspecsmtpconnectionauthentication)</sup></sup>
+
+Username specifies login username.
+
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Description</th>
+            <th>Required</th>
+        </tr>
+    </thead>
+    <tbody><tr>
+        <td><b><a href="#keycloakrealmspecsmtpconnectionauthenticationusernameconfigmapkeyref">configMapKeyRef</a></b></td>
+        <td>object</td>
+        <td>
+          Selects a key of a ConfigMap.<br/>
+        </td>
+        <td>false</td>
+      </tr><tr>
+        <td><b><a href="#keycloakrealmspecsmtpconnectionauthenticationusernamesecretkeyref">secretKeyRef</a></b></td>
+        <td>object</td>
+        <td>
+          Selects a key of a secret.<br/>
+        </td>
+        <td>false</td>
+      </tr><tr>
+        <td><b>value</b></td>
+        <td>string</td>
+        <td>
+          Directly specifies a value.<br/>
+        </td>
+        <td>false</td>
+      </tr></tbody>
+</table>
+
+### KeycloakRealm.spec.smtp.connection.authentication.username.configMapKeyRef
+
+<sup><sup>[↩ Parent](#keycloakrealmspecsmtpconnectionauthenticationusername)</sup></sup>
+
+Selects a key of a ConfigMap.
+
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Description</th>
+            <th>Required</th>
+        </tr>
+    </thead>
+    <tbody><tr>
+        <td><b>key</b></td>
+        <td>string</td>
+        <td>
+          The key to select.<br/>
+        </td>
+        <td>true</td>
+      </tr><tr>
+        <td><b>name</b></td>
+        <td>string</td>
+        <td>
+          Name of the referent.
+          More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+          TODO: Add other useful fields. apiVersion, kind, uid?<br/>
+        </td>
+        <td>false</td>
+      </tr></tbody>
+</table>
+
+### KeycloakRealm.spec.smtp.connection.authentication.username.secretKeyRef
+
+<sup><sup>[↩ Parent](#keycloakrealmspecsmtpconnectionauthenticationusername)</sup></sup>
+
+Selects a key of a secret.
+
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Description</th>
+            <th>Required</th>
+        </tr>
+    </thead>
+    <tbody><tr>
+        <td><b>key</b></td>
+        <td>string</td>
+        <td>
+          The key of the secret to select from.<br/>
+        </td>
+        <td>true</td>
+      </tr><tr>
+        <td><b>name</b></td>
+        <td>string</td>
+        <td>
+          Name of the referent.
+          More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+          TODO: Add other useful fields. apiVersion, kind, uid?<br/>
+        </td>
+        <td>false</td>
+      </tr></tbody>
+</table>
+
+### KeycloakRealm.spec.smtp.template
+
+<sup><sup>[↩ Parent](#keycloakrealmspecsmtp)</sup></sup>
+
+Template specifies the email template configuration.
+
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Description</th>
+            <th>Required</th>
+        </tr>
+    </thead>
+    <tbody><tr>
+        <td><b>from</b></td>
+        <td>string</td>
+        <td>
+          From specifies the sender email address.<br/>
+        </td>
+        <td>true</td>
+      </tr><tr>
+        <td><b>envelopeFrom</b></td>
+        <td>string</td>
+        <td>
+          EnvelopeFrom is an email address used for bounces .<br/>
+        </td>
+        <td>false</td>
+      </tr><tr>
+        <td><b>fromDisplayName</b></td>
+        <td>string</td>
+        <td>
+          FromDisplayName specifies the sender display for sender email address.<br/>
+        </td>
+        <td>false</td>
+      </tr><tr>
+        <td><b>replyTo</b></td>
+        <td>string</td>
+        <td>
+          ReplyTo specifies the reply-to email address.<br/>
+        </td>
+        <td>false</td>
+      </tr><tr>
+        <td><b>replyToDisplayName</b></td>
+        <td>string</td>
+        <td>
+          ReplyToDisplayName specifies display name for reply-to email address.<br/>
         </td>
         <td>false</td>
       </tr></tbody>
@@ -4668,7 +5480,7 @@ Selector specifies the scopes for which the attribute is available.
       </tr></tbody>
 </table>
 
-### KeycloakRealm.spec.userProfileConfig
+### KeycloakRealm.spec.userProfileConfig.attributes[index].validations[key][key]
 
 <sup><sup>[↩ Parent](#keycloakrealmspecuserprofileconfigattributesindex)</sup></sup>
 

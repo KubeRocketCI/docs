@@ -1,3 +1,12 @@
+---
+
+title: "Add Gen AI Assistant"
+sidebar_label: "Add Gen AI Assistant"
+description: "Integrate a third-party AI assistant within KubeRocketCI to enhance platform navigation and obtain instant answers to queries directly in chat."
+
+---
+<!-- markdownlint-disable MD025 -->
+
 # Add Gen AI Assistant
 
 <head>

@@ -1,3 +1,12 @@
+---
+
+title: "Platform Cleanup Guide"
+sidebar_label: "Platform Cleanup Guide"
+description: "Comprehensive guidelines for deleting resources within KubeRocketCI, ensuring a clean platform environment for re-adding components and efficient management."
+
+---
+<!-- markdownlint-disable MD025 -->
+
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 

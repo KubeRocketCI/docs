@@ -1,3 +1,12 @@
+---
+
+title: "SonarQube Project Properties for Application"
+sidebar_label: SonarQube Project Properties for Application
+description: "This section describes the subsequent possible actions that can be performed with the newly added or existing applications."
+
+---
+<!-- markdownlint-disable MD025 -->
+
 # SonarQube Project Properties for Application
 
 <head>

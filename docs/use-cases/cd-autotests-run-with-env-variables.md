@@ -1,10 +1,21 @@
+---
+
+title: "Test Environment Using Environment Variables"
+description: "Discover how KubeRocketCI leverages environment variables in CD pipelines to flexibly configure test suites, ensuring streamlined workflows and precise quality control."
+sidebar_label: "Set Test Suite Parameters Using Environment Variables in CD Pipelines"
+
+---
+
+<!-- markdownlint-disable MD025 -->
+
 # Set Test Suite Parameters Using Environment Variables in CD Pipelines
 
 <head>
   <link rel="canonical" href="https://docs.kuberocketci.io/docs/use-cases/cd-autotests-run-with-env-variables/" />
 </head>
 
-This use case demonstrates how the KubeRocketCI platform uses environment variables to flexibly configure commands in deployment pipelines. Teams can dynamically adjust parameters adding, modifying, or removing them without changing the test suite code. This provides precise control over quality gates, streamlines workflows, and allows pipelines to adapt to different environments or requirements while maintaining efficiency and quality standards.
+This use case demonstrates how the KubeRocketCI platform uses environment variables to flexibly configure commands in deployment pipelines.
+Teams can dynamically adjust parameters adding, modifying, or removing them without changing the test suite code. This provides precise control over quality gates, streamlines workflows, and allows pipelines to adapt to different environments or requirements while maintaining efficiency and quality standards.
 
 ## Goals
 

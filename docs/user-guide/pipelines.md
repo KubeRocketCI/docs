@@ -1,3 +1,12 @@
+---
+
+title: "Pipelines Overview"
+sidebar_label: Pipelines Overview
+description: "Optimize CI/CD workflows with KubeRocketCI's Pipelines section, a centralized management hub for builds, reviews, and deployments."
+
+---
+<!-- markdownlint-disable MD025 -->
+
 # Pipelines Overview
 
 <head>

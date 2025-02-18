@@ -1,10 +1,21 @@
+---
+
+title: "Add Library"
+sidebar_label: "Add Library"
+description: "Discover how to add and manage libraries in KubeRocketCI, from cloning repositories to leveraging external sources for improved development."
+
+---
+
+<!-- markdownlint-disable MD025 -->
+
 # Add Library
 
 <head>
   <link rel="canonical" href="https://docs.kuberocketci.io/docs/user-guide/add-library/" />
 </head>
 
-KubeRocketCI portal allows you to create a library, clone an existing repository with the library to your Version Control System (VCS), or using an external repository and importing a library to the environment. When a library is created or cloned, the system automatically generates a corresponding repository within the integrated VCS. You can create a library [in YAML](#create-library-in-yaml) or [via the two-step menu](#create-library-via-ui) in the dialog.
+KubeRocketCI portal allows you to create a library, clone an existing repository with the library to your Version Control System (VCS), or using an external repository and importing a library to the environment.
+When a library is created or cloned, the system automatically generates a corresponding repository within the integrated VCS. You can create a library [in YAML](#create-library-in-yaml) or [via the two-step menu](#create-library-via-ui) in the dialog.
 
 To add a library, navigate to the **Components** section on the navigation bar and click **+ Create component**:
 

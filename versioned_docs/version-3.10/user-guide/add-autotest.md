@@ -1,10 +1,20 @@
+---
+
+title: "Add Autotest"
+sidebar_label: "Add Autotest"
+description: "Learn how to add autotests in KubeRocketCI, integrating them into CI/CD workflows for enhanced quality assurance and deployment."
+
+---
+<!-- markdownlint-disable MD025 -->
+
 # Add Autotest
 
 <head>
   <link rel="canonical" href="https://docs.kuberocketci.io/docs/user-guide/add-autotest/" />
 </head>
 
-KubeRocketCI portal allows you to clone an existing repository with the autotest to your Version Control System (VCS), or using an external repository and adding an autotest for further running in stages or using them as quality gates for applications. When an autotest is cloned, the system automatically generates a corresponding repository within the integrated VCS. You can create an autotest [in YAML](#create-autotest-in-yaml) or [via the two-step menu](#create-autotest-via-ui) in the dialog.
+KubeRocketCI portal allows you to clone an existing repository with the autotest to your Version Control System (VCS), or using an external repository and adding an autotest for further running in stages or using them as quality gates for applications.
+When an autotest is cloned, the system automatically generates a corresponding repository within the integrated VCS. You can create an autotest [in YAML](#create-autotest-in-yaml) or [via the two-step menu](#create-autotest-via-ui) in the dialog.
 
 :::info
   Please refer to the [Add Application](add-application.md) section for the details on how to add an application codebase type.
@@ -64,7 +74,7 @@ In our case, we will use the **Clone** strategy:
 2. Specify the autotest language properties:
 
     * **Autotest code language** - defines the code language with its supported frameworks. Selecting **Other** allows extending the default code languages and get the necessary build tool.
-    * **Language version/framework** - defines the specific framework or language version of the autotest. The field depends on the selected code language. Specify Java 8, Java 11 or Java 17 to be used.
+    * **Language version/framework** - defines the specific framework or language version of the autotest. The field depends on the selected code language. Specify Java 8, Java 11, Java 17 or Java 21 to be used.
     * **Build Tool** - allows to choose the build tool to use. In case of autotests, Gradle and Maven are available.
     * **Autotest report framework** - all the autotest reports will be created in the Allure framework by default.
 

@@ -1,3 +1,12 @@
+---
+
+title: "Scaffold and Deploy FastAPI Application"
+description: "Learn how to scaffold and deploy a FastAPI application using KubeRocketCI, from setting up your development environment to deploying with GitOps."
+sidebar_label: "Scaffold and Deploy FastAPI Application"
+
+---
+<!-- markdownlint-disable MD025 -->
+
 # Scaffold and Deploy FastAPI Application
 
 <head>

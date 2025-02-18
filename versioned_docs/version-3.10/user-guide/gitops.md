@@ -1,3 +1,13 @@
+---
+
+title: "Manage Clusters"
+description: "Explore the GitOps section in KubeRocketCI for automating infrastructure and application deployments with a Git repository-driven approach."
+sidebar_label: "Manage Clusters"
+
+---
+<!-- markdownlint-disable MD025 -->
+
+
 # Manage GitOps
 
 <head>

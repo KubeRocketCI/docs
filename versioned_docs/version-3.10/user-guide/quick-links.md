@@ -1,3 +1,12 @@
+---
+
+title: "Manage Quick Links"
+sidebar_label: "Manage Quick Links"
+description: "Guide to managing Quick Links in KubeRocketCI, enabling easy access to essential tools and resources directly from the Overview page."
+
+---
+<!-- markdownlint-disable MD025 -->
+
 # Manage Quick Links
 
 <head>

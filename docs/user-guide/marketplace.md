@@ -1,3 +1,12 @@
+---
+
+title: "Marketplace Overview"
+sidebar_label: Marketplace Overview
+description: "The KubeRocketCI marketplace offers a range of Templates, predefined tools and settings for creating software. These Templates speed up development, minimize errors, and ensure consistency."
+
+---
+<!-- markdownlint-disable MD025 -->
+
 # Marketplace Overview
 
 <head>

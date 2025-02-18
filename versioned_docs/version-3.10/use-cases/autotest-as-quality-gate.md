@@ -1,3 +1,13 @@
+---
+
+title: "Autotest as a Quality Gate"
+description: "Explore how to integrate autotests as quality gates in CD pipelines with KubeRocketCI to ensure only stable and functional application versions are promoted."
+sidebar_label: "Autotest as a Quality Gate"
+
+---
+
+<!-- markdownlint-disable MD025 -->
+
 # Autotest as a Quality Gate
 
 <head>

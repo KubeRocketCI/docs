@@ -1,3 +1,12 @@
+---
+
+title: "Manage Libraries"
+sidebar_label: "Manage Libraries"
+description: "Explore how to manage libraries in KubeRocketCI, including editing details, integrating with Jira, and managing branches for development efficiency."
+
+---
+<!-- markdownlint-disable MD025 -->
+
 # Manage Libraries
 
 <head>

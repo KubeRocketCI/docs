@@ -1,3 +1,12 @@
+---
+
+title: "Application With Custom Build Tool/Framework"
+description: "Learn how to integrate custom build tools and frameworks in KubeRocketCI for enhanced CI/CD pipelines, catering to unique project requirements and workflows."
+sidebar_label: "Deploy Application With Custom Build Tool/Framework"
+
+---
+<!-- markdownlint-disable MD025 -->
+
 # Deploy Application With Custom Build Tool/Framework
 
 <head>

@@ -1,3 +1,12 @@
+---
+
+title: "Manage Container Registries"
+description: "Step-by-step guide on integrating and managing container registries within KubeRocketCI, enhancing artifact storage and deployment processes."
+sidebar_label: "Manage Container Registries"
+
+---
+<!-- markdownlint-disable MD025 -->
+
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 

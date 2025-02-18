@@ -1,4 +1,14 @@
-# KubeRocketCI Components: Codebases and Onboarding Strategies
+---
+
+title: "Components: Codebases and Onboarding Strategies"
+sidebar_label: Components Overview
+description: "Explore the essentials of codebases and onboarding strategies in KubeRocketCI, facilitating seamless integration of software components."
+
+---
+<!-- markdownlint-disable MD025 -->
+
+
+# Components: Codebases and Onboarding Strategies
 
 <head>
   <link rel="canonical" href="https://docs.kuberocketci.io/docs/user-guide/components/" />

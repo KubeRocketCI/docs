@@ -1,3 +1,12 @@
+---
+
+title: "Add Deployment Flow"
+sidebar_label: "Add Deployment Flow"
+description: "Learn how to establish Deployment Flows in KubeRocketCI for streamlined GitOps, automated deployment, and efficient multi-environment management."
+
+---
+<!-- markdownlint-disable MD025 -->
+
 # Add Deployment Flow
 
 <head>

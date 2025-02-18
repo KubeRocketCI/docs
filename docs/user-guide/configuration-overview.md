@@ -1,4 +1,13 @@
-# KubeRocketCI Configuration Overview: Integrations and Features
+---
+
+title: "Configuration Overview: Integrations and Features"
+sidebar_label: "Configuration Overview"
+description: "Explore integration capabilities in KubeRocketCI, from container registries to security tools, enhancing your CI/CD workflows and code quality."
+
+---
+<!-- markdownlint-disable MD025 -->
+
+# Configuration Overview: Integrations and Features
 
 <head>
   <link rel="canonical" href="https://docs.kuberocketci.io/docs/user-guide/configuration-overview/" />

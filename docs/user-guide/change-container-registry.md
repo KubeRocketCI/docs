@@ -1,10 +1,19 @@
+---
+
+title: "Change Container Registry"
+sidebar_label: "Change Container Registry"
+description: "Guidelines for transitioning to a different container registry within KubeRocketCI, ensuring smooth updates for both new and existing components."
+
+---
+<!-- markdownlint-disable MD025 -->
+
 # Change Container Registry
 
 <head>
   <link rel="canonical" href="https://docs.kuberocketci.io/docs/user-guide/change-container-registry/" />
 </head>
 
-It may become essential to modify the container registry settings. This section delivers clear guidelines on how to effectively transition to a different container registry.
+Modifying container registry settings may be necessary. This section provides clear guidelines for transitioning to a different registry.
 
 :::warning
   Removing registry settings may disrupt your CI/CD process. New components created after changing the registry, including Components and Environments, will seamlessly function. However, existing 'Components' require additional steps, as outlined below.

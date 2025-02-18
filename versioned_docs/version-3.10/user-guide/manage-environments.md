@@ -1,3 +1,12 @@
+---
+
+title: "Manage Deployment Flows"
+sidebar_label: "Manage Deployment Flows"
+description: "Navigate deployment flow management in KubeRocketCI, from viewing details to editing, deleting, and troubleshooting deployment environments."
+
+---
+<!-- markdownlint-disable MD025 -->
+
 # Manage Deployment Flows
 
 <head>
@@ -21,7 +30,7 @@ This page describes actions that can be performed to an already created deployme
     Please keep in mind that after deleting the deployment flow, all the created resources within the deployment flow will be deleted.
   :::
 
-### View Deployment Flow Details
+## View Deployment Flow Details
 
 To view deployment flow details, click the deployment flow name in the deployment flows list. Once clicked, the following data will be displayed:
 

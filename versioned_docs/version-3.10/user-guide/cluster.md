@@ -1,3 +1,12 @@
+---
+
+title: "Manage Clusters"
+description: "Learn how to manage Kubernetes clusters within KubeRocketCI Portal, including viewing authentication data and deleting clusters for streamlined infrastructure management."
+sidebar_label: "Manage Clusters"
+
+---
+<!-- markdownlint-disable MD025 -->
+
 # Manage Clusters
 
 <head>

@@ -1,3 +1,13 @@
+---
+
+title: "Add Application"
+sidebar_label: "Add Application"
+description: "Master application creation in KubeRocketCI, from cloning repositories to importing projects, for streamlined software development."
+
+---
+
+<!-- markdownlint-disable MD025 -->
+
 # Add Application
 
 <head>
@@ -111,7 +121,7 @@ In the **Advanced Settings** menu, specify the branch options and define the Jir
 
 * **Deployment Options** - Select the deployment option available.
   * **helm-chart**: Application will be deployed as a Helm chart using the Argo CD tool.
-  * **rpm-package**: Application will be deployed as an rpm package using the Ansible tool.
+  * **rpm-package**: Application will be deployed as an rpm package using the Ansible tool. For more details, please refer to the [Deploy RPM Packages](../operator-guide/cd/deploy-rpm.md) page.
 
 * **Codebase versioning type** - defines how will the application tag be changed once the new image version is built. There are two versioning types:
   * **default**: Using the default versioning type, in order to specify the version of the current artifacts, images, and tags in the Version Control System, a developer should navigate to the corresponding file and change the version **manually**.

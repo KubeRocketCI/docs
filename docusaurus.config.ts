@@ -198,6 +198,17 @@ const config: Config = {
     ],
   ],
 
+  plugins: [
+    [
+      '@docusaurus/plugin-content-docs',
+      {
+        id: 'faq',
+        path: 'faq',
+        routeBasePath: 'faq',
+      },
+    ],
+  ],
+
   themeConfig: {
     metadata: [
       {
@@ -290,10 +301,9 @@ const config: Config = {
           label: 'Use Cases',
         },
         {
-          type: 'docSidebar',
-          sidebarId: 'faqSidebar',
           position: 'left',
           label: 'FAQ',
+          to: '/faq/artifacts',
         },
         {
           label: 'Pricing',

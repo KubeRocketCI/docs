@@ -28,6 +28,10 @@ Within the KubeRocketCI platform, there are **three primary types of pipelines**
    - Focused on the deployment aspect, the Deploy Pipeline automates the process of deploying software to environments. This type of pipeline can be triggered manually or automatically, based on the project's deployment strategy.
    - It often includes steps for provisioning infrastructure, deploying the application, and post-deployment tests to ensure the application runs correctly in the production environment.
 
+4. **Clean Pipeline**:
+   - Clean Pipeline is used to customize environment cleanup. While the **Delete** button deletes an Argo CD Application resource the Clean Pipeline aims to cleanup non-platform dependencies, such databases, third-party tools, etc. This pipeline can be triggered in the environment details page.
+   - It implies users to create a custom clean pipeline and apply it to the platform to implement user-defined cleanup logic.
+
 ---
 
 ### Does KubeRocketCI Integrate with GitHub Actions, GitLab CI, or Azure Pipelines for CI/CD?
@@ -37,22 +41,6 @@ KubeRocketCI is built upon [Tekton](../operator-guide/ci/tekton-overview.md) and
 It does not integrate with GitHub Actions, GitLab CI, Azure Pipelines, or similar CI/CD tools.
 
 This design choice ensures that KubeRocketCI remains `vendor-neutral` and `cloud-agnostic`, allowing it to operate effectively across any Kubernetes environment without reliance on specific CI services or cloud platforms.
-
----
-
-### How to Re-trigger a Pipeline in KubeRocketCI?
-
-If you need to re-trigger a pipeline due to a failed run or to incorporate new changes, you have several options available:
-
-- **KubeRocketCI Portal**: Navigate to the **Pipelines** section or the **Component details** -> **Branches** section, identify the failed pipeline, and select the action **Run again**.
-
-- **Tekton Dashboard**: If Tekton Dashboard is integrated. In the KubeRocketCI Portal navigate **Overview** -> **Links** and click on **Tekton**. In the Tekton Dashboard navigate to the **PipelineRuns** section, identify the failed pipeline, and select the action **Rerun**.
-
-- **Through VCS (GitHub/GitLab)**: Add a comment with word `/recheck` or `/ok-to-test` to your Pull Request (PR) or Merge Request (MR), and the pipeline will be triggered automatically.
-
-:::tip
-  Use comment approach with `/recheck` or `/ok-to-test` if the Pipeline is not available either on KubeRocketCI or Tekton Dashboard.
-:::
 
 ---
 
@@ -128,16 +116,3 @@ The [three primary types](#what-is-a-pipeline-in-kuberocketci) of pipelines in K
   - This pipeline is designed to automatically deploy the newly built images to the appropriate environments.
 
 For further details on configuring these triggers review the `TektonTriggers` configuration available in the [Tekton repository](https://github.com/epam/edp-tekton/tree/master/charts/pipelines-library/templates/triggers).
-
----
-
-### How to Manage Trigger Owner Verification in Tekton?
-
-Tekton provides a feature to control which commits can trigger Tekton pipelines, enhancing security by preventing the execution of potentially harmful scripts from unauthorized contributors. This is achieved through the use of Tekton Interceptors, which verify whether the individual initiating a pull request is an owner of the repository (i.e., has write access) before permitting pipeline execution. For more details consult official [GitHub documentation](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners).
-
-This functionality is enabled by default. To disable it, you need to update the relevant flag in the [values.yaml](https://github.com/epam/edp-tekton/blob/master/charts/pipelines-library/values.yaml#L64) file during the installation of Tekton.
-
-```yaml title="values.yaml"
-githubOwners:
-  enabled: false
-```

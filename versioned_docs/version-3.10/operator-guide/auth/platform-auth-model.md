@@ -1,4 +1,9 @@
-# Overview
+---
+id: platform-auth-model
+sidebar_label: Overview
+---
+
+# Authentication and Authorization: Overview
 
 <head>
   <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/auth/platform-auth-model/" />
@@ -151,25 +156,25 @@ These composite roles simplify the assignment of administrative and development 
 
 The table below provides an overview of the `shared` realm roles and their types:
 
-| Realm Role Name | Regular Role | Composite role |
-| - | :-: | :-: |
-| administrator | | :white_check_mark: |
-| developer | | :white_check_mark: |
-| sonar-administrators | :white_check_mark: | |
-| sonar-developers | :white_check_mark: | |
+| Realm Role Name      |    Regular Role    |   Composite role   |
+| -------------------- | :----------------: | :----------------: |
+| administrator        |                    | :white_check_mark: |
+| developer            |                    | :white_check_mark: |
+| sonar-administrators | :white_check_mark: |                    |
+| sonar-developers     | :white_check_mark: |                    |
 
 ### Groups
 
 KubeRocketCI uses the `shared` realm for group management. The [groups](https://github.com/epam/edp-install/tree/master/deploy-templates/templates/rbac) are designed to control access to various components such as Argo CD, the KubeRocketCI portal, and the EKS cluster.
 
-| Group Name          | Purpose                                                                    |
-|---------------------|----------------------------------------------------------------------------|
-| `ArgoCDAdmins`        | Administrator access to Argo CD instance                                |
-| `ArgoCD-${platform}-users`    | Access to the Argo CD project mapped to the `${platform}` tenant                                |
-| `oidc-cluster-admins` | Full administrator (cluster-admin) access to the kubernetes cluster     |
-| `${platform}-oidc-admins`     | Administrator access to KubeRocketCI                               |
-| `${platform}-oidc-developers` | Developer access to KubeRocketCI |
-| `${platform}-oidc-viewers`    | Read-only access to view resources in KubeRocketCI                |
+| Group Name                    | Purpose                                                             |
+| ----------------------------- | ------------------------------------------------------------------- |
+| `ArgoCDAdmins`                | Administrator access to Argo CD instance                            |
+| `ArgoCD-${platform}-users`    | Access to the Argo CD project mapped to the `${platform}` tenant    |
+| `oidc-cluster-admins`         | Full administrator (cluster-admin) access to the kubernetes cluster |
+| `${platform}-oidc-admins`     | Administrator access to KubeRocketCI                                |
+| `${platform}-oidc-developers` | Developer access to KubeRocketCI                                    |
+| `${platform}-oidc-viewers`    | Read-only access to view resources in KubeRocketCI                  |
 
 These groups simplify the management of permissions and ensure that users have the appropriate level of access based on their roles and responsibilities.
 
@@ -241,12 +246,12 @@ These groups provide different levels of access based on the user's role and res
 
 The following table describes the permissions assigned to each group:
 
-| Group Name               | Sonar Permissions                             |
-|--------------------------|-----------------------------------------------|
-| view-group    | user                                          |
-| sonar-administrators     | admin, user                                   |
-| sonar-developers         | codeviewer, issueadmin, securityhotspotadmin, user |
-| sonar-users              | -                                             |
+| Group Name           | Sonar Permissions                                  |
+| -------------------- | -------------------------------------------------- |
+| view-group           | user                                               |
+| sonar-administrators | admin, user                                        |
+| sonar-developers     | codeviewer, issueadmin, securityhotspotadmin, user |
+| sonar-users          | -                                                  |
 
 ## Nexus Repository Manager
 
@@ -322,27 +327,77 @@ Both the KubeRocketCI Portal and the Kubernetes cluster use Keycloak groups for 
 
 ### Keycloak Groups
 
-| Group Name | View | Build | Deploy | Full Namespace Access |
-| - | :-: | :-: | :-: | :-: |
-|`${platform}-oidc-admins`    | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |
-|`${platform}-oidc-developers`| :white_check_mark: | :white_check_mark: | :white_check_mark: | |
-|`${platform}-oidc-viewers`   | :white_check_mark: | | | |
+Each Keycloak group corresponds to a specific level of access within the Kubernetes cluster and the KubeRocketCI portal. The table below summarizes the groups and their associated permissions.
+
+| Group Name                    |        View        |       Build        |       Deploy       | Full Namespace Access |
+|-------------------------------|:------------------:|:------------------:|:------------------:|:---------------------:|
+| `${platform}-oidc-admins`     | :white_check_mark: | :white_check_mark: | :white_check_mark: |  :white_check_mark:   |
+| `${platform}-oidc-developers` | :white_check_mark: | :white_check_mark: | :white_check_mark: |          :x:          |
+| `${platform}-oidc-viewers`    | :white_check_mark: |        :x:         |        :x:         |          :x:          |
+
+#### View Permissions
+
+In the KubeRocketCI portal, the following **View** permissions are granted to users based on their group membership:
+
+| Group Name                    |  View Components   |   View Branches    |   View Pipelines   | View Deployment Flows | View Environments  |    View Widgets    |
+|-------------------------------|:------------------:|:------------------:|:------------------:|:---------------------:|:------------------:|:------------------:|
+| `${platform}-oidc-admins`     | :white_check_mark: | :white_check_mark: | :white_check_mark: |  :white_check_mark:   | :white_check_mark: | :white_check_mark: |
+| `${platform}-oidc-developers` | :white_check_mark: | :white_check_mark: | :white_check_mark: |  :white_check_mark:   | :white_check_mark: | :white_check_mark: |
+| `${platform}-oidc-viewers`    | :white_check_mark: | :white_check_mark: | :white_check_mark: |  :white_check_mark:   | :white_check_mark: | :white_check_mark: |
+
+#### Permissions for the Configuration sections and Kubernetes resources
+
+Permissions for **Configuration** sections in the KubeRocketCI portal:
+
+| Group Name                    |  View QuickLinks   | Create QuickLinks  |  Edit QuickLinks   | Delete QuickLinks  |    View GitOps     |   Create GitOps    |   Delete GitOps    |   View Clusters    |  Create Clusters   |   Edit Clusters    |  Delete Clusters   |  View GitServers   | Create GitServers  |  Edit GitServers   | Delete GitServers  | View Integrations  | Create Integrations | Edit Integrations  | Delete Integrations |
+|-------------------------------|:------------------:|:------------------:|:------------------:|:------------------:|:------------------:|:------------------:|:------------------:|:------------------:|:------------------:|:------------------:|:------------------:|:------------------:|:------------------:|:------------------:|:------------------:|:------------------:|:-------------------:|:------------------:|:-------------------:|
+| `${platform}-oidc-admins`     | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark:  | :white_check_mark: | :white_check_mark:  |
+| `${platform}-oidc-developers` | :white_check_mark: |        :x:         |        :x:         |        :x:         | :white_check_mark: |        :x:         |        :x:         |        :x:         |        :x:         |        :x:         |        :x:         |        :x:         |        :x:         |        :x:         |        :x:         |        :x:         |         :x:         |        :x:         |         :x:         |
+| `${platform}-oidc-viewers`    | :white_check_mark: |        :x:         |        :x:         |        :x:         | :white_check_mark: |        :x:         |        :x:         |        :x:         |        :x:         |        :x:         |        :x:         |        :x:         |        :x:         |        :x:         |        :x:         |        :x:         |         :x:         |        :x:         |         :x:         |
+
+Permissions for the most common Kubernetes resources:
+
+| Group Name                    |     View Pods      |    Create Pods     |     Edit Pods      |    Delete Pods     |  View Deployments  | Create Deployments |  Edit Deployments  | Delete Deployments |   View Ingresses   |  Create Ingresses  |   Edit Ingresses   |  Delete Ingresses  |   View Services    |  Create Services   |   Edit Services    |  Delete Services   |  View Config Maps  | Create Config Maps |  Edit Config Maps  | Delete Config Maps |   View Cron Jobs   |  Create Cron Jobs  |   Edit Cron Jobs   |  Delete Cron Jobs  |    View Secrets    |   Create Secrets   |    Edit Secrets    |   Delete Secrets   |     View Roles     |    Create Roles    |     Edit Roles     |    Delete Roles    | View Role Bindings | Create Role Bindings | Edit Role Bindings | Delete Role Bindings |
+|-------------------------------|:------------------:|:------------------:|:------------------:|:------------------:|:------------------:|:------------------:|:------------------:|:------------------:|:------------------:|:------------------:|:------------------:|:------------------:|:------------------:|:------------------:|:------------------:|:------------------:|:------------------:|:------------------:|:------------------:|:------------------:|:------------------:|:------------------:|:------------------:|:------------------:|:------------------:|:------------------:|:------------------:|:------------------:|:------------------:|:------------------:|:------------------:|:------------------:|:------------------:|:--------------------:|:------------------:|:--------------------:|
+| `${platform}-oidc-admins`     | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |  :white_check_mark:  | :white_check_mark: |  :white_check_mark:  |
+| `${platform}-oidc-developers` | :white_check_mark: |        :x:         |        :x:         |        :x:         | :white_check_mark: |        :x:         |        :x:         |        :x:         | :white_check_mark: |        :x:         |        :x:         |        :x:         | :white_check_mark: |        :x:         |        :x:         |        :x:         | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |        :x:         |        :x:         |        :x:         |        :x:         |        :x:         |        :x:         |        :x:         |        :x:         |        :x:         |        :x:         |        :x:         |        :x:         |         :x:          |        :x:         |         :x:          |
+| `${platform}-oidc-viewers`    | :white_check_mark: |        :x:         |        :x:         |        :x:         | :white_check_mark: |        :x:         |        :x:         |        :x:         | :white_check_mark: |        :x:         |        :x:         |        :x:         | :white_check_mark: |        :x:         |        :x:         |        :x:         | :white_check_mark: |        :x:         |        :x:         |        :x:         | :white_check_mark: |        :x:         |        :x:         |        :x:         |        :x:         |        :x:         |        :x:         |        :x:         |        :x:         |        :x:         |        :x:         |        :x:         |        :x:         |         :x:          |        :x:         |         :x:          |
+
+#### Build Permissions
+
+The following **Build** permissions are granted to users based on their group membership:
+
+| Group Name                    |  Create Component  |   Edit Component   |  Delete Component  |   Create Branch    |    Edit Branch     |   Delete Branch    |  Build Component   |
+|-------------------------------|:------------------:|:------------------:|:------------------:|:------------------:|:------------------:|:------------------:|:------------------:|
+| `${platform}-oidc-admins`     | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |
+| `${platform}-oidc-developers` |        :x:         |        :x:         |        :x:         | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |
+| `${platform}-oidc-viewers`    |        :x:         |        :x:         |        :x:         |        :x:         |        :x:         |        :x:         |        :x:         |
+
+#### Deploy Permissions
+
+The following **Deploy** permissions are granted to users based on their group membership:
+
+| Group Name                    |  Create PipelineRun   | Create Deployment Flow | Edit Deployment Flow | Delete Deployment Flow | Create Environment |  Edit Environment  | Delete Environment | Clean Environment  | Deploy Environment | Approve/Reject ApprovalTasks |
+|-------------------------------|:---------------------:|:----------------------:|:--------------------:|:----------------------:|:------------------:|:------------------:|:------------------:|:------------------:|:------------------:|:----------------------------:|
+| `${platform}-oidc-admins`     |  :white_check_mark:   |   :white_check_mark:   |  :white_check_mark:  |   :white_check_mark:   | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |      :white_check_mark:      |
+| `${platform}-oidc-developers` |  :white_check_mark:   |   :white_check_mark:   |  :white_check_mark:  |   :white_check_mark:   | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |      :white_check_mark:      |
+| `${platform}-oidc-viewers`    |          :x:          |          :x:           |         :x:          |          :x:           |        :x:         |        :x:         |        :x:         |        :x:         |        :x:         |             :x:              |
 
 ### Cluster RBAC Resources
 
 The platform defines five RoleBindings that grant the necessary permissions to the corresponding Keycloak groups mentioned above.
 
-| RoleBinding Name| Role Name | Groups |
-| - | - | - |
-| tenant-admin | cluster-admin | `${platform}-oidc-admins` |
-| tenant-developer | tenant-developer | `${platform}-oidc-developers` |
-| tenant-viewer | view | `${platform}-oidc-viewers` , `${platform}-oidc-developers` |
+| RoleBinding Name | Role Name        | Groups                                                     |
+| ---------------- | ---------------- | ---------------------------------------------------------- |
+| tenant-admin     | cluster-admin    | `${platform}-oidc-admins`                                  |
+| tenant-developer | tenant-developer | `${platform}-oidc-developers`                              |
+| tenant-viewer    | view             | `${platform}-oidc-viewers` , `${platform}-oidc-developers` |
 
 Platform includes RBAC settings for the full cluster administration privileges.
 
-| Cluster Role Binding Name| Cluster Role Name | Group |
-| - | - | - |
-| cluster-admin | cluster-admin | `oidc-cluster-admins` |
+| Cluster Role Binding Name | Cluster Role Name | Group                 |
+| ------------------------- | ----------------- | --------------------- |
+| cluster-admin             | cluster-admin     | `oidc-cluster-admins` |
 
 :::note
   KubeRocketCI provides an [aggregated](https://kubernetes.io/docs/reference/access-authn-authz/rbac/#aggregated-clusterroles) ClusterRole `edp-aggregate-view-${platform}` with the permissions to view the KubeRocketCI [custom resources](../../api/overview.md).

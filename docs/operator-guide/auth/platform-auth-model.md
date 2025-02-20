@@ -1,3 +1,8 @@
+---
+id: platform-auth-model
+sidebar_label: Overview
+---
+
 # Authentication and Authorization: Overview
 
 <head>
@@ -322,11 +327,61 @@ Both the KubeRocketCI Portal and the Kubernetes cluster use Keycloak groups for 
 
 ### Keycloak Groups
 
+Each Keycloak group corresponds to a specific level of access within the Kubernetes cluster and the KubeRocketCI portal. The table below summarizes the groups and their associated permissions.
+
 | Group Name                    |        View        |       Build        |       Deploy       | Full Namespace Access |
-| ----------------------------- | :----------------: | :----------------: | :----------------: | :-------------------: |
+|-------------------------------|:------------------:|:------------------:|:------------------:|:---------------------:|
 | `${platform}-oidc-admins`     | :white_check_mark: | :white_check_mark: | :white_check_mark: |  :white_check_mark:   |
-| `${platform}-oidc-developers` | :white_check_mark: | :white_check_mark: | :white_check_mark: |                       |
-| `${platform}-oidc-viewers`    | :white_check_mark: |                    |                    |                       |
+| `${platform}-oidc-developers` | :white_check_mark: | :white_check_mark: | :white_check_mark: |          :x:          |
+| `${platform}-oidc-viewers`    | :white_check_mark: |        :x:         |        :x:         |          :x:          |
+
+#### View Permissions
+
+In the KubeRocketCI portal, the following **View** permissions are granted to users based on their group membership:
+
+| Group Name                    |  View Components   |   View Branches    |   View Pipelines   | View Deployment Flows | View Environments  |    View Widgets    |
+|-------------------------------|:------------------:|:------------------:|:------------------:|:---------------------:|:------------------:|:------------------:|
+| `${platform}-oidc-admins`     | :white_check_mark: | :white_check_mark: | :white_check_mark: |  :white_check_mark:   | :white_check_mark: | :white_check_mark: |
+| `${platform}-oidc-developers` | :white_check_mark: | :white_check_mark: | :white_check_mark: |  :white_check_mark:   | :white_check_mark: | :white_check_mark: |
+| `${platform}-oidc-viewers`    | :white_check_mark: | :white_check_mark: | :white_check_mark: |  :white_check_mark:   | :white_check_mark: | :white_check_mark: |
+
+#### Permissions for the Configuration sections and Kubernetes resources
+
+Permissions for **Configuration** sections in the KubeRocketCI portal:
+
+| Group Name                    |  View QuickLinks   | Create QuickLinks  |  Edit QuickLinks   | Delete QuickLinks  |    View GitOps     |   Create GitOps    |   Delete GitOps    |   View Clusters    |  Create Clusters   |   Edit Clusters    |  Delete Clusters   |  View GitServers   | Create GitServers  |  Edit GitServers   | Delete GitServers  | View Integrations  | Create Integrations | Edit Integrations  | Delete Integrations |
+|-------------------------------|:------------------:|:------------------:|:------------------:|:------------------:|:------------------:|:------------------:|:------------------:|:------------------:|:------------------:|:------------------:|:------------------:|:------------------:|:------------------:|:------------------:|:------------------:|:------------------:|:-------------------:|:------------------:|:-------------------:|
+| `${platform}-oidc-admins`     | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark:  | :white_check_mark: | :white_check_mark:  |
+| `${platform}-oidc-developers` | :white_check_mark: |        :x:         |        :x:         |        :x:         | :white_check_mark: |        :x:         |        :x:         |        :x:         |        :x:         |        :x:         |        :x:         |        :x:         |        :x:         |        :x:         |        :x:         |        :x:         |         :x:         |        :x:         |         :x:         |
+| `${platform}-oidc-viewers`    | :white_check_mark: |        :x:         |        :x:         |        :x:         | :white_check_mark: |        :x:         |        :x:         |        :x:         |        :x:         |        :x:         |        :x:         |        :x:         |        :x:         |        :x:         |        :x:         |        :x:         |         :x:         |        :x:         |         :x:         |
+
+Permissions for the most common Kubernetes resources:
+
+| Group Name                    |     View Pods      |    Create Pods     |     Edit Pods      |    Delete Pods     |  View Deployments  | Create Deployments |  Edit Deployments  | Delete Deployments |   View Ingresses   |  Create Ingresses  |   Edit Ingresses   |  Delete Ingresses  |   View Services    |  Create Services   |   Edit Services    |  Delete Services   |  View Config Maps  | Create Config Maps |  Edit Config Maps  | Delete Config Maps |   View Cron Jobs   |  Create Cron Jobs  |   Edit Cron Jobs   |  Delete Cron Jobs  |    View Secrets    |   Create Secrets   |    Edit Secrets    |   Delete Secrets   |     View Roles     |    Create Roles    |     Edit Roles     |    Delete Roles    | View Role Bindings | Create Role Bindings | Edit Role Bindings | Delete Role Bindings |
+|-------------------------------|:------------------:|:------------------:|:------------------:|:------------------:|:------------------:|:------------------:|:------------------:|:------------------:|:------------------:|:------------------:|:------------------:|:------------------:|:------------------:|:------------------:|:------------------:|:------------------:|:------------------:|:------------------:|:------------------:|:------------------:|:------------------:|:------------------:|:------------------:|:------------------:|:------------------:|:------------------:|:------------------:|:------------------:|:------------------:|:------------------:|:------------------:|:------------------:|:------------------:|:--------------------:|:------------------:|:--------------------:|
+| `${platform}-oidc-admins`     | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |  :white_check_mark:  | :white_check_mark: |  :white_check_mark:  |
+| `${platform}-oidc-developers` | :white_check_mark: |        :x:         |        :x:         |        :x:         | :white_check_mark: |        :x:         |        :x:         |        :x:         | :white_check_mark: |        :x:         |        :x:         |        :x:         | :white_check_mark: |        :x:         |        :x:         |        :x:         | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |        :x:         |        :x:         |        :x:         |        :x:         |        :x:         |        :x:         |        :x:         |        :x:         |        :x:         |        :x:         |        :x:         |        :x:         |         :x:          |        :x:         |         :x:          |
+| `${platform}-oidc-viewers`    | :white_check_mark: |        :x:         |        :x:         |        :x:         | :white_check_mark: |        :x:         |        :x:         |        :x:         | :white_check_mark: |        :x:         |        :x:         |        :x:         | :white_check_mark: |        :x:         |        :x:         |        :x:         | :white_check_mark: |        :x:         |        :x:         |        :x:         | :white_check_mark: |        :x:         |        :x:         |        :x:         |        :x:         |        :x:         |        :x:         |        :x:         |        :x:         |        :x:         |        :x:         |        :x:         |        :x:         |         :x:          |        :x:         |         :x:          |
+
+#### Build Permissions
+
+The following **Build** permissions are granted to users based on their group membership:
+
+| Group Name                    |  Create Component  |   Edit Component   |  Delete Component  |   Create Branch    |    Edit Branch     |   Delete Branch    |  Build Component   |
+|-------------------------------|:------------------:|:------------------:|:------------------:|:------------------:|:------------------:|:------------------:|:------------------:|
+| `${platform}-oidc-admins`     | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |
+| `${platform}-oidc-developers` |        :x:         |        :x:         |        :x:         | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |
+| `${platform}-oidc-viewers`    |        :x:         |        :x:         |        :x:         |        :x:         |        :x:         |        :x:         |        :x:         |
+
+#### Deploy Permissions
+
+The following **Deploy** permissions are granted to users based on their group membership:
+
+| Group Name                    |  Create PipelineRun   | Create Deployment Flow | Edit Deployment Flow | Delete Deployment Flow | Create Environment |  Edit Environment  | Delete Environment | Clean Environment  | Deploy Environment | Approve/Reject ApprovalTasks |
+|-------------------------------|:---------------------:|:----------------------:|:--------------------:|:----------------------:|:------------------:|:------------------:|:------------------:|:------------------:|:------------------:|:----------------------------:|
+| `${platform}-oidc-admins`     |  :white_check_mark:   |   :white_check_mark:   |  :white_check_mark:  |   :white_check_mark:   | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |      :white_check_mark:      |
+| `${platform}-oidc-developers` |  :white_check_mark:   |   :white_check_mark:   |  :white_check_mark:  |   :white_check_mark:   | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |      :white_check_mark:      |
+| `${platform}-oidc-viewers`    |          :x:          |          :x:           |         :x:          |          :x:           |        :x:         |        :x:         |        :x:         |        :x:         |        :x:         |             :x:              |
 
 ### Cluster RBAC Resources
 

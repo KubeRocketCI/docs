@@ -24,7 +24,7 @@ KubeRocketCI supports two major **versioning schemes**:
   User can implement **Custom Versioning** by updating [`get-version`](https://github.com/epam/edp-tekton/tree/master/charts/pipelines-library/templates/tasks/getversion) CI step.
 :::
 
-**Artifact Tagging and Storage**: Artifacts are tagged on the `build pipeline` and stored in `git`, [`CodebaseImageStream`](../api/codebase.md#codebaseimagestream) and [`CodebaseBranch`](../api/codebase.md#codebasebranch).
+**Artifact Tagging and Storage**: Artifacts are tagged on the `build pipeline` and stored in `git`, [`CodebaseImageStream`](https://docs.kuberocketci.io/docs/api/codebase/#codebaseimagestream) and [`CodebaseBranch`](https://docs.kuberocketci.io/docs/api/codebase/#codebasebranch).
 
 **CodebaseBranch**: The CodebaseBranch custom resource is integral to the artifact versioning process in KubeRocketCI. It tracks and stores versioning details related to each branch. This includes:
 

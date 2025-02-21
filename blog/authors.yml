@@ -7,6 +7,7 @@ sergk:
     x: sergiy_kulanov
     github: sergk
     linkedin: skulanov
+
 mykolamarusenko:
   name: Mykola Marusenko
   title: Co-creator of KubeRocketCI
@@ -15,6 +16,7 @@ mykolamarusenko:
   socials:
     linkedin: mykola-marusenko
     github: mykolamarusenko
+
 daniilnedostup:
   name: Daniil Nedostup
   title: Systems Engineer

@@ -205,6 +205,7 @@ const config: Config = {
         id: 'faq',
         path: 'faq',
         routeBasePath: 'faq',
+        sidebarPath: './sidebarsFAQ.ts',
       },
     ],
   ],

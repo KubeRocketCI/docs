@@ -3,6 +3,9 @@
   "platform": {
     "apiRuntime": "node:18"
   },
+  "navigationFallback": {
+    "rewrite": "/index.html"
+  },
   "routes": [
     {
       "route": "https://www.docs.kuberocketci.io",
@@ -16,6 +19,12 @@
     {
       "route": "/404",
       "statusCode": 404
+    },
+    {
+      "route": "/img/*",
+      "headers": {
+        "cache-control": "max-age=604800"
+      }
     },
     {
       "route": "/assets/*",
@@ -36,7 +45,13 @@
       }
     },
     {
-      "route": "/tags/*",
+      "route": "/blog/tags/*",
+      "headers": {
+        "X-Robots-Tag": "noindex"
+      }
+    },
+    {
+      "route": "/blog/authors/*",
       "headers": {
         "X-Robots-Tag": "noindex"
       }

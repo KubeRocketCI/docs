@@ -55,7 +55,7 @@
     }
   ],
   "globalHeaders": {
-    "content-security-policy": "default-src https: 'unsafe-eval' 'unsafe-inline'; object-src 'none'; script-src 'self' https://www.googleanalytics.com https://www.google-analytics.com https://www.googleoptimize.com https://www.googletagmanager.com https://gist.github.com https://cookie-cdn.cookiepro.com 'unsafe-inline'; img-src 'self' data: https://docs.kuberocketci.io https://www.docs.kuberocketci.io https://www.google-analytics.com https://www.googletagmanager.com https://dev.to https://res.cloudinary.com https://avatars.githubusercontent.com https://media.licdn.com https://cookie-cdn.cookiepro.com; font-src 'self' https://docs.kuberocketci.io https://www.docs.kuberocketci.io https://fonts.gstatic.com",
+    "content-security-policy": "default-src https: 'unsafe-eval' 'unsafe-inline'; object-src 'none'; script-src 'self' https://www.googleanalytics.com https://www.google-analytics.com https://www.googleoptimize.com https://www.googletagmanager.com https://gist.github.com https://cookie-cdn.cookiepro.com https://privacyportal.cookiepro.com 'unsafe-inline'; img-src 'self' data: https://docs.kuberocketci.io https://www.docs.kuberocketci.io https://www.google-analytics.com https://www.googletagmanager.com https://dev.to https://res.cloudinary.com https://avatars.githubusercontent.com https://media.licdn.com https://cookie-cdn.cookiepro.com https://privacyportal.cookiepro.com; font-src 'self' https://docs.kuberocketci.io https://www.docs.kuberocketci.io https://fonts.gstatic.com",
     "Access-Control-Allow-Origin": "*"
   },
   "mimeTypes": {

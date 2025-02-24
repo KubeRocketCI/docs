@@ -31,7 +31,7 @@ jobs:
         run: |
           npm ci
           DOCUSAURUS_SSR_CONCURRENCY=5 IS_LIVE_SITE=${{ github.event_name != 'pull_request' }} npm run build
-          # cp staticwebapp.config.json build/staticwebapp.config.json
+          cp staticwebapp.config.json build/staticwebapp.config.json
 
       - name: Build And Deploy
         id: builddeploy
@@ -45,7 +45,7 @@ jobs:
           ###### Repository/Build Configurations - These values can be configured to match your app requirements. ######
           # For more information regarding Static Web App workflow configurations, please visit: https://aka.ms/swaworkflowconfig
           app_location: "/build" # App source code path
-          api_location: "/api" # Api source code path - optional
+          # api_location: "/api" # Api source code path - optional
           # output_location: "build" # Built app content directory - optional
           ###### End of Repository/Build Configurations ######
 

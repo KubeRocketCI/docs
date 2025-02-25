@@ -22,7 +22,7 @@
 <script src="https://www.googletagmanager.com/gtm.js?id=GTM-527T2HLF" async="true"></script>
 <script>window.dataLayer=window.dataLayer||[]</script>
 <script>!function(e,t,a,n,g){e[n]=e[n]||[],e[n].push({"gtm.start":(new Date).getTime(),event:"gtm.js"});var m=t.getElementsByTagName(a)[0],r=t.createElement(a);r.async=!0,r.src="https://www.googletagmanager.com/gtm.js?id=GTM-527T2HLF",m.parentNode.insertBefore(r,m)}(window,document,"script","dataLayer")</script><link rel="stylesheet" href="/assets/css/styles.4fa8fdbf.css">
-<script src="/assets/js/runtime~main.6810f2d5.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.3cb42285.js" defer="defer"></script>
 <script src="/assets/js/main.96013670.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
@@ -55,7 +55,7 @@
 </ol>
 <hr>
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="does-kuberocketci-integrate-with-github-actions-gitlab-ci-or-azure-pipelines-for-cicd">Does KubeRocketCI Integrate with GitHub Actions, GitLab CI, or Azure Pipelines for CI/CD?<a href="#does-kuberocketci-integrate-with-github-actions-gitlab-ci-or-azure-pipelines-for-cicd" class="hash-link" aria-label="Direct link to Does KubeRocketCI Integrate with GitHub Actions, GitLab CI, or Azure Pipelines for CI/CD?" title="Direct link to Does KubeRocketCI Integrate with GitHub Actions, GitLab CI, or Azure Pipelines for CI/CD?">​</a></h3>
-<p>KubeRocketCI is built upon <a href="https://docs.kuberocketci.io/docs/operator-guide/ci/tekton-overview/" target="_blank" rel="noopener noreferrer">Tekton</a> and <a href="https://docs.kuberocketci.io/docs/operator-guide/cd/argocd-integration/" target="_blank" rel="noopener noreferrer">Argo CD</a> for its CI/CD processes, emphasizing a Kubernetes-native strategy.</p>
+<p>KubeRocketCI is built upon <a href="/docs/operator-guide/ci/tekton-overview/">Tekton</a> and <a href="/docs/operator-guide/cd/argocd-integration/">Argo CD</a> for its CI/CD processes, emphasizing a Kubernetes-native strategy.</p>
 <p>It does not integrate with GitHub Actions, GitLab CI, Azure Pipelines, or similar CI/CD tools.</p>
 <p>This design choice ensures that KubeRocketCI remains <code>vendor-neutral</code> and <code>cloud-agnostic</code>, allowing it to operate effectively across any Kubernetes environment without reliance on specific CI services or cloud platforms.</p>
 <hr>
@@ -104,7 +104,7 @@ ensuring that the appropriate actions are taken in response to changes in the co
 </ul>
 </li>
 <li>
-<p><strong>Deploy Pipeline (in case of <a href="https://docs.kuberocketci.io/docs/user-guide/add-cd-pipeline/#the-environments-menu" target="_blank" rel="noopener noreferrer">auto deploy</a>)</strong>:</p>
+<p><strong>Deploy Pipeline (in case of <a href="/docs/user-guide/add-cd-pipeline/#the-environments-menu">auto deploy</a>)</strong>:</p>
 <ul>
 <li>Triggered when a new tag is added to a <code>codebaseimagestream</code>, upon successful completion of the <code>build pipeline</code>.</li>
 <li>This pipeline is designed to automatically deploy the newly built images to the appropriate environments.</li>

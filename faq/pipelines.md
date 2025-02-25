@@ -32,7 +32,7 @@ Within the KubeRocketCI platform, there are **three primary types of pipelines**
 
 ### Does KubeRocketCI Integrate with GitHub Actions, GitLab CI, or Azure Pipelines for CI/CD?
 
-KubeRocketCI is built upon [Tekton](https://docs.kuberocketci.io/docs/operator-guide/ci/tekton-overview/) and [Argo CD](https://docs.kuberocketci.io/docs/operator-guide/cd/argocd-integration/) for its CI/CD processes, emphasizing a Kubernetes-native strategy.
+KubeRocketCI is built upon [Tekton](/docs/operator-guide/ci/tekton-overview/) and [Argo CD](/docs/operator-guide/cd/argocd-integration/) for its CI/CD processes, emphasizing a Kubernetes-native strategy.
 
 It does not integrate with GitHub Actions, GitLab CI, Azure Pipelines, or similar CI/CD tools.
 
@@ -123,7 +123,7 @@ The [three primary types](#what-is-a-pipeline-in-kuberocketci) of pipelines in K
     ```
     </details>
 
-- **Deploy Pipeline (in case of [auto deploy](https://docs.kuberocketci.io/docs/user-guide/add-cd-pipeline/#the-environments-menu))**:
+- **Deploy Pipeline (in case of [auto deploy](/docs/user-guide/add-cd-pipeline/#the-environments-menu))**:
   - Triggered when a new tag is added to a `codebaseimagestream`, upon successful completion of the `build pipeline`.
   - This pipeline is designed to automatically deploy the newly built images to the appropriate environments.
 

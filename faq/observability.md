@@ -24,6 +24,6 @@ Using KubeRocketCI UI:
 - **Via Deployment Flows Section:**
   - Navigate to **Deployment Flows**, select `<Deployment Flow name>`, and click the **Kibana** icon located at the top-left corner of the Environment `Swimlane`.
 - **Via Deployment Flow Details Page:**
-  - Access each [Deployment Flow details page](https://docs.kuberocketci.io/docs/user-guide/manage-environments/#view-deployment-flow-details) to find **Kibana** links at the top.
+  - Access each [Deployment Flow details page](/docs/user-guide/manage-environments/#view-deployment-flow-details) to find **Kibana** links at the top.
 - **Through Argo CD Integration:**
   - Go to the **Deployment Flows** page, choose the desired `<Deployment Flow name>`, and click on the **Argo CD** icon. Within the Argo CD UI, select the application of interest (useful if you run more than one), click on **Pod(s)**, and then select the **Logs** tab.

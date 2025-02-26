@@ -271,6 +271,11 @@ words:
   - nodepool
   - nodeclasses
   - fasapi
+  - applicationset
+  - rolearn
+  - eksadminrole
+  - rolebinding
+  - сontrol
 enableFiletypes:
   - md
   - mdx

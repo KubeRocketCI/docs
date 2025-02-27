@@ -1,3 +1,10 @@
+---
+title: "KubeRocketCI Developer Guide: Architecture, Components, and Contribution Workflow"
+description: "A comprehensive guide for developers on KubeRocketCI's architecture, core components, and contribution workflow, including technical resources and best practices."
+sidebar_label: "Overview"
+---
+<!-- markdownlint-disable MD025 -->
+
 # Overview
 
 <head>

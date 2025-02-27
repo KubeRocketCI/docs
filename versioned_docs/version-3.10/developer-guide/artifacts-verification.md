@@ -1,3 +1,10 @@
+---
+title: "Verification of KubeRocketCI Artifacts"
+description: "Learn how to verify the authenticity and provenance of KubeRocketCI artifacts using SLSA framework, rekor-cli, and cosign for enhanced supply chain security."
+sidebar_label: "Verification of KubeRocketCI Artifacts"
+---
+<!-- markdownlint-disable MD025 -->
+
 # Verification of KubeRocketCI Artifacts
 
 <head>

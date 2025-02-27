@@ -1,3 +1,10 @@
+---
+title: "Reference CI/CD Pipeline"
+description: "A comprehensive guide to the CI/CD pipeline architecture within KubeRocketCI, detailing stages from source code to deployment with a focus on security, scalability, and automation."
+sidebar_label: "Reference CI/CD Pipeline"
+---
+<!-- markdownlint-disable MD025 -->
+
 # Reference CI/CD Pipeline
 
 <head>

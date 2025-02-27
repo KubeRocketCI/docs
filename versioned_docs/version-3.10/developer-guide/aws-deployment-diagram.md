@@ -1,3 +1,10 @@
+---
+title: "KubeRocketCI Deployment on AWS"
+description: "Explore the architecture and deployment strategy of KubeRocketCI on AWS, leveraging services like EKS, EC2, Route 53 for scalable and secure CI/CD systems."
+sidebar_label: "KubeRocketCI Deployment on AWS"
+---
+<!-- markdownlint-disable MD025 -->
+
 # KubeRocketCI Deployment on AWS
 
 <head>

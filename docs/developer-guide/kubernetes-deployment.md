@@ -1,3 +1,10 @@
+---
+title: "Kubernetes Deployment"
+description: "Explore the deployment approach of KubeRocketCI on Kubernetes, highlighting the operator pattern approach, component overview, and platform's core functionalities."
+sidebar_label: "Kubernetes Deployment"
+---
+<!-- markdownlint-disable MD025 -->
+
 # Kubernetes Deployment
 
 <head>

@@ -1,3 +1,10 @@
+---
+title: "KubeRocketCI Contribution"
+description: "Guidelines for contributing to KubeRocketCI, including project rules, working process with GitHub and Jira, and commit message conventions."
+sidebar_label: "KubeRocketCI Contribution"
+---
+<!-- markdownlint-disable MD025 -->
+
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 

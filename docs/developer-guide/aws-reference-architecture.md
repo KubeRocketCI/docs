@@ -1,3 +1,11 @@
+---
+title: "KubeRocketCI Reference Architecture on AWS"
+description: "Explore the scalable and secure reference architecture of KubeRocketCI on AWS, utilizing AWS Managed Services for efficient CI/CD processes."
+sidebar_label: "KubeRocketCI Reference Architecture on AWS"
+---
+<!-- markdownlint-disable MD025 -->
+
+
 # KubeRocketCI Reference Architecture on AWS
 
 <head>

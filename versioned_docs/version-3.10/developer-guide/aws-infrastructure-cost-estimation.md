@@ -1,3 +1,10 @@
+---
+title: "AWS Infrastructure Cost Estimation"
+description: "A detailed guide for estimating AWS infrastructure costs for KubeRocketCI, including component descriptions, purposes, and approximate monthly costs."
+sidebar_label: "AWS Infrastructure Cost Estimation"
+---
+<!-- markdownlint-disable MD025 -->
+
 # AWS Infrastructure Cost Estimation
 
 <head>

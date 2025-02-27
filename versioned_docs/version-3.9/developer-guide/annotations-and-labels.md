@@ -1,3 +1,12 @@
+---
+
+title: "Annotations and Labels"
+description: "Guide on the usage of labels and annotations in KubeRocketCI for resource interaction, monitoring, and governance within a Kubernetes cluster."
+sidebar_label: "Annotations and Labels"
+
+---
+<!-- markdownlint-disable MD025 -->
+
 # Annotations and Labels
 
 <head>

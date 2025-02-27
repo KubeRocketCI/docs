@@ -1,3 +1,12 @@
+---
+
+title: "Integrate DockerHub"
+description: "Guide on integrating KubeRocketCI with DockerHub for storing and distributing application images, including generating access tokens and configuring registry settings."
+sidebar_label: "Integrate DockerHub"
+
+---
+<!-- markdownlint-disable MD025 -->
+
 # Integrate DockerHub
 
 <head>

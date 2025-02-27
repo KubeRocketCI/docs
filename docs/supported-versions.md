@@ -1,3 +1,12 @@
+---
+
+title: "Supported Versions and Compatibility"
+description: "Details on KubeRocketCI's support for its three most recent versions, including a release schedule, lifecycle, and compatibility with EKS and OpenShift versions."
+sidebar_label: "Supported Versions"
+
+---
+<!-- markdownlint-disable MD025 -->
+
 # Supported Versions and Compatibility
 
 <head>

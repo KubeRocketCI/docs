@@ -1,3 +1,12 @@
+---
+
+title: "Compliance"
+description: "An overview of KubeRocketCI's commitment to compliance with security standards, demonstrating the platform's adherence to rigorous third-party audits and trustworthiness in deployments."
+sidebar_label: "Compliance"
+
+---
+<!-- markdownlint-disable MD025 -->
+
 # Compliance
 
 <head>

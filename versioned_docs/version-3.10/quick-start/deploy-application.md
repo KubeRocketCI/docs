@@ -1,3 +1,12 @@
+---
+
+title: "Deploy Application"
+description: "Detailed guide on deploying your first application in KubeRocketCI, including creating a GitOps repository, deployment flow, and executing the deployment."
+sidebar_label: "Deploy Application"
+
+---
+<!-- markdownlint-disable MD025 -->
+
 # Deploy Application
 
 <head>

@@ -1,3 +1,12 @@
+---
+
+title: "Integrate GitHub"
+description: "Guide on integrating GitHub with KubeRocketCI for handling source code through create, clone, and import strategies, including generating SSH keys and access tokens."
+sidebar_label: "Integrate GitHub"
+
+---
+<!-- markdownlint-disable MD025 -->
+
 # Integrate GitHub
 
 <head>

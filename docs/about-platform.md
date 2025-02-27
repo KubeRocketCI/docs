@@ -1,3 +1,12 @@
+---
+
+title: "About the KubeRocketCI Platform"
+description: "Introduction to KubeRocketCI, an open-source cloud-agnostic SaaS/PaaS solution for software development, highlighting its features, architecture, and technology stack."
+sidebar_label: "About KubeRocketCI"
+
+---
+<!-- markdownlint-disable MD025 -->
+
 # About the KubeRocketCI Platform
 
 <head>

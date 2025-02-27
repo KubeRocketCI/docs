@@ -1,3 +1,12 @@
+---
+
+title: "Create Application"
+description: "Step-by-step guide on creating a Go application using the Gin framework in KubeRocketCI via Marketplace, including build and deployment steps."
+sidebar_label: "Create Application"
+
+---
+<!-- markdownlint-disable MD025 -->
+
 # Create Application
 
 <head>

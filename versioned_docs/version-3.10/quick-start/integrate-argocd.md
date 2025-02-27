@@ -1,3 +1,12 @@
+---
+
+title: "Integrate Argo CD"
+description: "Guide on integrating Argo CD with KubeRocketCI for Continuous Deployment, including installation steps, Argo CD configuration for GitHub access, and project setup."
+sidebar_label: "Integrate Argo CD"
+
+---
+<!-- markdownlint-disable MD025 -->
+
 # Integrate Argo CD
 
 <head>

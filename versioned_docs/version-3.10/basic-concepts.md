@@ -1,3 +1,12 @@
+---
+
+title: "Basic Concepts"
+description: "Overview of the core features and capabilities of the KubeRocketCI platform, including CI/CD for microservices, VCS integration, branching strategy, and artifacts versioning."
+sidebar_label: "Basic Concepts"
+
+---
+<!-- markdownlint-disable MD025 -->
+
 # Basic Concepts
 
 <head>

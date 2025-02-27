@@ -1,3 +1,12 @@
+---
+
+title: "Basic Concepts"
+description: "A comprehensive glossary outlining essential KubeRocketCI terms and features, including platform components, business entities, CI/CD processes, and Kubernetes/OpenShift concepts."
+sidebar_label: "Basic Concepts"
+
+---
+<!-- markdownlint-disable MD025 -->
+
 # Glossary
 
 <head>

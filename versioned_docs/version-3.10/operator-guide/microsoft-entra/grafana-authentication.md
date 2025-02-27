@@ -1,9 +1,13 @@
 ---
-id: grafana-authentication
-sidebar_label: Grafana
----
 
-# Guide: Microsoft Entra SSO integration with Grafana
+title: "Guide: Microsoft Entra SSO Integration With Grafana"
+description: "Step-by-step guide on configuring Grafana with OpenID Connect authentication using Microsoft Entra as the Identity Provider for enhanced access management."
+sidebar_label: "Grafana"
+
+---
+<!-- markdownlint-disable MD025 -->
+
+# Guide: Microsoft Entra SSO Integration With Grafana
 
 <head>
   <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/microsoft-entra/grafana-authentication/" />

@@ -1,3 +1,10 @@
+---
+title: "Tekton Overview"
+description: "Explore the implementation of Continuous Integration with Tekton in KubeRocketCI, including core components, pipeline logic, and the Kubernetes native approach."
+sidebar_label: "Tekton Overview"
+---
+<!-- markdownlint-disable MD025 -->
+
 # Tekton Overview
 
 <head>

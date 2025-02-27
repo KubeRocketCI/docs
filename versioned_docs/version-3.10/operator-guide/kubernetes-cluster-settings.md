@@ -1,3 +1,12 @@
+---
+
+title: "Set Up Kubernetes"
+description: "Guide on preparing a Kubernetes cluster for KubeRocketCI, including prerequisites like worker nodes requirements, ingress controller setup, Keycloak installation, and storage class configuration."
+sidebar_label: "Set Up Kubernetes"
+
+---
+<!-- markdownlint-disable MD025 -->
+
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 

@@ -1,3 +1,10 @@
+---
+title: "EKS OIDC With Keycloak"
+description: "Step-by-step guide on configuring Keycloak as OIDC Identity Provider for EKS, enabling Single Sign-On capabilities for enhanced security."
+sidebar_label: "EKS OIDC With Keycloak"
+---
+<!-- markdownlint-disable MD025 -->
+
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 

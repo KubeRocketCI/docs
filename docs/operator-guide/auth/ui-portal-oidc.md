@@ -1,3 +1,10 @@
+---
+title: "Portal OIDC Configuration"
+description: "Configure OIDC authorization for the KubeRocketCI Portal UI with Keycloak, enabling Single Sign-On for streamlined access management."
+sidebar_label: "Portal OIDC Configuration"
+---
+<!-- markdownlint-disable MD025 -->
+
 # Portal OIDC Configuration
 
 <head>

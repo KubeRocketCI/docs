@@ -1,3 +1,10 @@
+---
+title: "Customize Environment Cleanup"
+description: "Guidelines on creating custom clean pipelines in KubeRocketCI for tailored environment cleanup procedures, enhancing resource management during deletion."
+sidebar_label: "Customize Environment Cleanup"
+---
+<!-- markdownlint-disable MD025 -->
+
 # Customize Environment Cleanup
 
 <head>

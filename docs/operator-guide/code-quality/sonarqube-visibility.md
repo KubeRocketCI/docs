@@ -1,3 +1,10 @@
+---
+title: "Manage Project Visibility"
+description: "Guide on configuring SonarQube project permissions in KubeRocketCI to enhance security, including setting new projects to private and adjusting existing project visibility."
+sidebar_label: "Manage Project Visibility"
+---
+<!-- markdownlint-disable MD025 -->
+
 # Manage Project Visibility
 
 <head>

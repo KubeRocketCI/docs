@@ -1,3 +1,12 @@
+---
+
+title: "Use Cert-Manager in OpenShift"
+description: "Automate Let's Encrypt certificate issuance and renewal in OpenShift using cert-manager with AWS Route53 for secured DNS name and wildcard certificates."
+sidebar_label: "Use Cert-Manager in OpenShift"
+
+---
+<!-- markdownlint-disable MD025 -->
+
 # Use Cert-Manager in OpenShift
 
 <head>

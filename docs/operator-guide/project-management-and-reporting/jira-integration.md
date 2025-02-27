@@ -1,3 +1,12 @@
+---
+
+title: "Jira Integration"
+description: "Guide for enabling Jira integration in KubeRocketCI, detailing steps for configuring Jira with OIDC authentication using Microsoft Entra and setting up multitenant logging components."
+sidebar_label: "Jira Integration"
+
+---
+<!-- markdownlint-disable MD025 -->
+
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 

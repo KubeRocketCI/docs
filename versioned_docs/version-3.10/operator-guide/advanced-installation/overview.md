@@ -1,3 +1,10 @@
+---
+title: "Advanced Installation Overview: Third-Party Tools"
+description: "Explore advanced third-party tools enhancing KubeRocketCI for a comprehensive CI/CD environment, from Tekton pipelines to Keycloak authentication."
+sidebar_label: "Overview"
+---
+<!-- markdownlint-disable MD025 -->
+
 # Advanced Installation Overview: Third-Party Tools
 
 

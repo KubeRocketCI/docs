@@ -1,3 +1,12 @@
+---
+
+title: "Migrate CI Pipelines From Jenkins to Tekton"
+description: "Step-by-step guide on migrating CI pipelines for a codebase from Jenkins to Tekton within KubeRocketCI, including disabling Jenkins triggers and managing Tekton triggers."
+sidebar_label: "Migrate Jenkins to Tekton"
+
+---
+<!-- markdownlint-disable MD025 -->
+
 # Migrate CI Pipelines From Jenkins to Tekton
 
 <head>

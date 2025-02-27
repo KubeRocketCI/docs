@@ -1,3 +1,10 @@
+---
+title: "Kubernetes Namespace Management"
+description: "Explore the process of managing Kubernetes namespaces within KubeRocketCI, including disabling automatic creation and manual setup guidelines."
+sidebar_label: "Kubernetes Namespace Management"
+---
+<!-- markdownlint-disable MD025 -->
+
 # Kubernetes Namespace Management
 
 <head>

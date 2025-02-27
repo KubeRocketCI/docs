@@ -1,9 +1,13 @@
 ---
-id: aws-eks-portal-authentication
-sidebar_label: AWS EKS & KubeRocketCI Portal
----
 
-# Guide: Microsoft Entra SSO integration with AWS EKS & KubeRocketCI Portal
+title: "Guide: Microsoft Entra SSO Integration With AWS EKS & KubeRocketCI Portal"
+description: "Comprehensive instructions on configuring OIDC authentication for AWS EKS and KubeRocketCI Portal using Microsoft Entra, including default namespace and user picture configuration."
+sidebar_label: "AWS EKS & KubeRocketCI Portal"
+
+---
+<!-- markdownlint-disable MD025 -->
+
+# Guide: Microsoft Entra SSO Integration With AWS EKS & KubeRocketCI Portal
 
 <head>
   <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/microsoft-entra/aws-eks-portal-authentication/" />

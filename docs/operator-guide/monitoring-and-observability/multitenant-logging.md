@@ -1,3 +1,12 @@
+---
+
+title: "Multitenant Logging"
+description: "Guide on configuring multitenant logging with Grafana, Loki, and Logging-operator, highlighting the transition from ELK to EFK stack for enhanced log management in KubeRocketCI."
+sidebar_label: "Multitenant Logging"
+
+---
+<!-- markdownlint-disable MD025 -->
+
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 

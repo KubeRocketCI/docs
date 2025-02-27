@@ -1,3 +1,10 @@
+---
+title: "AWS EKS OIDC Integration"
+description: "Comprehensive guide on integrating Keycloak with AWS EKS for OIDC authentication, enhancing security with Single Sign-On capabilities."
+sidebar_label: "AWS EKS OIDC Integration"
+---
+<!-- markdownlint-disable MD025 -->
+
 # AWS EKS OIDC Integration
 
 <head>

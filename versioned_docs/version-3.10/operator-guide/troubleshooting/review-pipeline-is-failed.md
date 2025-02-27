@@ -1,3 +1,12 @@
+---
+
+title: "Review Pipeline is Failed"
+description: "Troubleshooting guide for resolving review pipeline failures in KubeRocketCI, including solutions for Sonar Scanner errors and other common issues."
+sidebar_label: "Review Pipeline Failure"
+
+---
+<!-- markdownlint-disable MD025 -->
+
 # Review Pipeline is Failed
 
 <head>

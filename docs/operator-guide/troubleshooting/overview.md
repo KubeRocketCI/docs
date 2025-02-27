@@ -1,3 +1,12 @@
+---
+
+title: "Troubleshooting Guide Overview"
+description: "Comprehensive overview of the Troubleshooting Guide for KubeRocketCI, providing solutions to common issues such as container registry errors, codebase creation, and more."
+sidebar_label: "Troubleshooting Guide"
+
+---
+<!-- markdownlint-disable MD025 -->
+
 # Troubleshooting Guide Overview
 
 <head>

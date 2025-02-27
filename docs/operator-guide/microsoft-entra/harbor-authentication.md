@@ -1,9 +1,13 @@
 ---
-id: harbor-authentication
-sidebar_label: Harbor
----
 
-# Guide: Microsoft Entra SSO integration with Harbor
+title: "Guide: Microsoft Entra SSO Integration With Harbor"
+description: "Step-by-step guide on configuring Harbor with OIDC authentication using Microsoft Entra as the Identity Provider for secure and streamlined access."
+sidebar_label: "Harbor"
+
+---
+<!-- markdownlint-disable MD025 -->
+
+# Guide: Microsoft Entra SSO Integration With Harbor
 
 <head>
   <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/microsoft-entra/harbor-authentication/" />

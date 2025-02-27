@@ -1,6 +1,11 @@
 ---
-sidebar_label: Overview
+
+title: "Kubernetes Cluster Scaling"
+description: "Explore KubeRocketCI's dynamic scaling solution for Kubernetes clusters, utilizing Karpenter for node scaling and KEDA for pod scaling to optimize performance and costs."
+sidebar_label: "Overview"
+
 ---
+<!-- markdownlint-disable MD025 -->
 
 # Kubernetes Cluster Scaling
 

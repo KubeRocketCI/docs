@@ -1,3 +1,10 @@
+---
+title: "Customize Deploy Pipeline"
+description: "Guidelines on customizing deploy pipelines in KubeRocketCI, including pre-deployment and post-deployment steps automation for optimal application deployment."
+sidebar_label: "Customize Deploy Pipeline"
+---
+<!-- markdownlint-disable MD025 -->
+
 # Customize Deploy Pipeline
 
 <head>

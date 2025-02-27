@@ -1,8 +1,11 @@
 ---
-id: krakend
-sidebar_label: KrakenD
----
 
+title: "KrakenD Integration"
+description: "Integrate KrakenD with KubeRocketCI for enhanced API management, including service discovery, caching, and security features like JWT authentication."
+sidebar_label: "KrakenD"
+
+---
+<!-- markdownlint-disable MD025 -->
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 

@@ -1,3 +1,12 @@
+---
+
+title: "Overview"
+description: "Prerequisites for KubeRocketCI installation, including Kubernetes or OpenShift setup, Nginx ingress, Tekton, and Argo CD."
+sidebar_label: "Prerequisites Overview"
+
+---
+<!-- markdownlint-disable MD025 -->
+
 # Overview
 
 <head>

@@ -1,3 +1,10 @@
+---
+title: "Manual Approval in Pipelines"
+description: "Guide on implementing manual approval in deploy pipelines within KubeRocketCI, ensuring controlled promotion of applications to critical environments."
+sidebar_label: "Manual Approval in Pipelines"
+---
+<!-- markdownlint-disable MD025 -->
+
 # Manual Approval in Pipelines
 
 <head>

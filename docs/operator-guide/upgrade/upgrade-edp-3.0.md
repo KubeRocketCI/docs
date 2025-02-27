@@ -1,3 +1,12 @@
+---
+
+title: "Upgrade EDP v2.12 to 3.0"
+description: "Comprehensive guide on upgrading EDP to version 3.0, addressing prerequisites, Keycloak integration adjustments, and steps for migrating from Jenkins to Tekton CI pipelines."
+sidebar_label: "Upgrade EDP to 3.0"
+
+---
+<!-- markdownlint-disable MD025 -->
+
 # Upgrade EDP v2.12 to 3.0
 
 <head>

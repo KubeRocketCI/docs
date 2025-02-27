@@ -1,7 +1,11 @@
 ---
-id: argo-cd-authentication
-sidebar_label: Argo CD
+
+title: "Guide: Microsoft Entra SSO integration with Argo CD"
+description: "Learn how to configure OIDC authentication for Argo CD using Microsoft Entra as the Identity Provider, ensuring secure and efficient access management."
+sidebar_label: "Argo CD"
+
 ---
+<!-- markdownlint-disable MD025 -->
 
 # Guide: Microsoft Entra SSO integration with Argo CD
 

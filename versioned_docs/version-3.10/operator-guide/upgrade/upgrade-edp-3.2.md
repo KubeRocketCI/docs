@@ -1,3 +1,12 @@
+---
+
+title: "Upgrade EDP v3.1 to 3.2"
+description: "Guide on upgrading EDP to version 3.2, including steps for updating Custom Resource Definitions and performing the upgrade procedure."
+sidebar_label: "Upgrade EDP to 3.2"
+
+---
+<!-- markdownlint-disable MD025 -->
+
 # Upgrade EDP v3.1 to 3.2
 
 <head>

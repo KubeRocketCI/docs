@@ -1,9 +1,13 @@
 ---
-id: awx-operator-authentication
-sidebar_label: Ansible AWX
----
 
-# Guide: Microsoft Entra SSO integration with Ansible AWX
+title: "Guide: Microsoft Entra SSO Integration With Ansible AWX"
+description: "Step-by-step instructions on configuring Ansible AWX with OIDC authentication using Microsoft Entra as the Identity Provider for enhanced security."
+sidebar_label: "Ansible AWX"
+
+---
+<!-- markdownlint-disable MD025 -->
+
+# Guide: Microsoft Entra SSO Integration With Ansible AWX
 
 <head>
   <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/microsoft-entra/awx-operator-authentication/" />

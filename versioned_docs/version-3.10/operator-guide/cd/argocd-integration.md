@@ -1,3 +1,10 @@
+---
+title: "Argo CD Integration"
+description: "Guide on integrating Argo CD with KubeRocketCI for GitOps-based deployments, including setup instructions for Keycloak OIDC authentication."
+sidebar_label: "Argo CD Integration"
+---
+<!-- markdownlint-disable MD025 -->
+
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 

@@ -1,3 +1,10 @@
+---
+title: "Sonatype Nexus Repository OSS Integration"
+description: "Guide on integrating Sonatype Nexus Repository OSS with KubeRocketCI for centralized artifact management, enhancing CI/CD workflows."
+sidebar_label: "Sonatype Nexus Integration"
+---
+<!-- markdownlint-disable MD025 -->
+
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 

@@ -1,3 +1,12 @@
+---
+
+title: "Install ReportPortal"
+description: "Comprehensive guide on installing ReportPortal with OpenID Connect authentication using Microsoft Entra, including prerequisites and configuration steps for MinIO, RabbitMQ, Elasticsearch, and PostgreSQL."
+sidebar_label: "Install ReportPortal"
+
+---
+<!-- markdownlint-disable MD025 -->
+
 # Install ReportPortal
 
 <head>

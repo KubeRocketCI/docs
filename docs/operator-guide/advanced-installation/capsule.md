@@ -1,3 +1,10 @@
+---
+title: "Install Capsule"
+description: "Learn how to install and configure Capsule for resource isolation in KubeRocketCI, ensuring secure and flexible environment management."
+sidebar_label: "Install Capsule"
+---
+<!-- markdownlint-disable MD025 -->
+
 # Install Capsule
 
 <head>

@@ -1,3 +1,10 @@
+---
+title: "Tekton Dashboard Authentication"
+description: "Guide on securing Tekton Dashboard using OAuth2-Proxy with Keycloak OIDC provider, enhancing endpoint security within KubeRocketCI."
+sidebar_label: "Tekton Dashboard Authentication"
+---
+<!-- markdownlint-disable MD025 -->
+
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 

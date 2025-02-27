@@ -1,3 +1,10 @@
+---
+title: "Sonatype Nexus Repository OSS Integration"
+description: "Comprehensive instructions for integrating Sonatype Nexus Repository OSS with KubeRocketCI for centralized artifact management."
+sidebar_label: "Sonatype Nexus Integration"
+---
+<!-- markdownlint-disable MD025 -->
+
 # Package Registry
 
 <head>

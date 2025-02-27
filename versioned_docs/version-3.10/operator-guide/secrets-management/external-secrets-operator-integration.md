@@ -1,3 +1,12 @@
+---
+
+title: "External Secrets Operator Integration"
+description: "Guide on integrating the External Secrets Operator with KubeRocketCI for secure and efficient secrets management using Kubernetes Secrets and AWS Systems Manager Parameter Store."
+sidebar_label: "External Secrets Operator Integration"
+
+---
+<!-- markdownlint-disable MD025 -->
+
 # External Secrets Operator Integration
 
 <head>

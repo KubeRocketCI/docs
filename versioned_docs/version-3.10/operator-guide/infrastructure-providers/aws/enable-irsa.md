@@ -1,3 +1,12 @@
+---
+
+title: "Associate IAM Roles With Service Accounts"
+description: "Step-by-step guide on associating IAM roles with Kubernetes service accounts in AWS EKS, including IAM role creation, pod identity webhook setup, and service account annotation."
+sidebar_label: "Associate IAM Roles With Service Accounts"
+
+---
+<!-- markdownlint-disable MD025 -->
+
 # Associate IAM Roles With Service Accounts
 
 <head>

@@ -1,9 +1,13 @@
 ---
-id: dependency-track-authentication
-sidebar_label: Dependency-Track
----
 
-# Guide: Microsoft Entra SSO integration with Dependency-Track
+title: "Guide: Microsoft Entra SSO Integration With DefectDojo"
+description: "Comprehensive guide on configuring DefectDojo with OIDC authentication using Microsoft Entra as the Identity Provider for secure access management."
+sidebar_label: "DefectDojo"
+
+---
+<!-- markdownlint-disable MD025 -->
+
+# Guide: Microsoft Entra SSO Integration With Dependency-Track
 
 <head>
   <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/microsoft-entra/dependency-track-authentication/" />

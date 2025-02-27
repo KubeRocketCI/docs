@@ -1,7 +1,9 @@
 ---
-id: platform-auth-model
-sidebar_label: Overview
+title: "Authentication and Authorization: Overview"
+description: "Comprehensive overview of authentication and authorization in KubeRocketCI using Keycloak, including configuring roles, groups, and integrating third-party tools."
+sidebar_label: "Overview"
 ---
+<!-- markdownlint-disable MD025 -->
 
 # Authentication and Authorization: Overview
 

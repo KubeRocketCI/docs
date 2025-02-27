@@ -1,3 +1,10 @@
+---
+title: "Tekton Long-Term Log Storage"
+description: "Learn how to configure and access long-term logs for Tekton pipelines in KubeRocketCI using OpenSearch, enhancing log management and observability."
+sidebar_label: "Tekton Long-Term Log Storage"
+---
+<!-- markdownlint-disable MD025 -->
+
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 

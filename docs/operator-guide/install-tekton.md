@@ -1,3 +1,12 @@
+---
+
+title: "Install Tekton"
+description: "Step-by-step guide on installing Tekton resources in KubeRocketCI, covering prerequisites, installation steps for Kubernetes and OKD clusters, and integration with Tekton Operator."
+sidebar_label: "Install Tekton"
+
+---
+<!-- markdownlint-disable MD025 -->
+
 # Install Tekton
 
 <head>

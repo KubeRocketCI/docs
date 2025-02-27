@@ -1,3 +1,12 @@
+---
+
+title: "Modify GitOps Repository Path"
+description: "Guide on how to change the GitOps repository path in KubeRocketCI, including steps for adjusting the Codebase custom resource and deleting and recreating the repository."
+sidebar_label: "Modify GitOps Repo Path"
+
+---
+<!-- markdownlint-disable MD025 -->
+
 # Modify GitOps Repository Path
 
 <head>

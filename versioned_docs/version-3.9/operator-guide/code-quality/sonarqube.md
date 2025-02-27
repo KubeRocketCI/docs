@@ -1,3 +1,10 @@
+---
+title: "SonarQube Integration"
+description: "Guide on integrating SonarQube with KubeRocketCI for code quality and security analysis, including setup instructions and project analysis flow."
+sidebar_label: "SonarQube Integration"
+---
+<!-- markdownlint-disable MD025 -->
+
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 

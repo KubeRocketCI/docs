@@ -1,3 +1,12 @@
+---
+
+title: "Install External Secrets Operator"
+description: "Guide on enabling the External Secrets Operator in KubeRocketCI for advanced secrets management, including prerequisites and Helm installation steps."
+sidebar_label: "Install External Secrets Operator"
+
+---
+<!-- markdownlint-disable MD025 -->
+
 # Install External Secrets Operator
 
 <head>

@@ -1,3 +1,10 @@
+---
+title: "Custom Certificates"
+description: "Learn how to add custom certificates to KubeRocketCI and configure Keycloak for secure component communication and enhanced platform security."
+sidebar_label: "Custom Certificates"
+---
+<!-- markdownlint-disable MD025 -->
+
 # Custom Certificates
 
 <head>

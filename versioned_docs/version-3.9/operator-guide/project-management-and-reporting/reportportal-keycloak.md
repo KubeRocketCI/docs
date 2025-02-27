@@ -1,3 +1,12 @@
+---
+
+title: "Integrating ReportPortal with Keycloak: A Step-by-Step Guide"
+description: "Comprehensive guide on integrating ReportPortal with Keycloak for SAML-based authentication, including detailed steps for Keycloak configuration and ReportPortal setup."
+sidebar_label: "ReportPortal Keycloak Integration"
+
+---
+<!-- markdownlint-disable MD025 -->
+
 # Integrating ReportPortal with Keycloak: A Step-by-Step Guide
 
 <head>

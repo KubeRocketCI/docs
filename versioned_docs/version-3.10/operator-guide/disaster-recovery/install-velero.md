@@ -1,3 +1,10 @@
+---
+title: "Install Velero"
+description: "Learn how to install Velero for Kubernetes backup, recovery, and migration, covering installation steps, AWS plugin configuration, and basic commands for backup and restore."
+sidebar_label: "Install Velero"
+---
+<!-- markdownlint-disable MD025 -->
+
 # Install Velero
 
 <head>

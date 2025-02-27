@@ -1,3 +1,10 @@
+---
+title: "Install Keycloak"
+description: "Comprehensive guide on installing Keycloak within KubeRocketCI for robust identity and access management, including prerequisites and configuration steps."
+sidebar_label: "Install Keycloak"
+---
+<!-- markdownlint-disable MD025 -->
+
 # Install Keycloak
 
 <head>

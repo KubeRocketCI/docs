@@ -1,3 +1,12 @@
+---
+
+title: "Deploy OKD 4.10 Cluster"
+description: "Comprehensive guide on deploying OKD 4.10 cluster in AWS Cloud, detailing prerequisites, required tools, and step-by-step instructions for a managed infrastructure setup."
+sidebar_label: "Deploy OKD 4.10 Cluster"
+
+---
+<!-- markdownlint-disable MD025 -->
+
 # Deploy OKD 4.10 Cluster
 
 <head>

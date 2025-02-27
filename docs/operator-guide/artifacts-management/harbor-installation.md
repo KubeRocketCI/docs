@@ -1,3 +1,10 @@
+---
+title: "Install Harbor"
+description: "Step-by-step guide on installing Harbor within KubeRocketCI for secure and efficient application image storage during the build process."
+sidebar_label: "Install Harbor"
+---
+<!-- markdownlint-disable MD025 -->
+
 # Install Harbor
 
 <head>

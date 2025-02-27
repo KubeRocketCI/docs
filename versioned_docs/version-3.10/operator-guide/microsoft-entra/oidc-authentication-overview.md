@@ -1,3 +1,12 @@
+---
+
+title: "Microsoft Entra OIDC Authentication: Overview"
+description: "Overview of integrating Microsoft Entra as the Identity Provider for secure and seamless authentication across various components using OIDC protocol."
+sidebar_label: "Overview"
+
+---
+<!-- markdownlint-disable MD025 -->
+
 # Microsoft Entra OIDC Authentication: Overview
 
 <head>

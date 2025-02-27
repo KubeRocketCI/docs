@@ -1,3 +1,12 @@
+---
+
+title: "Restore KubeRocketCI Tenant With Velero"
+description: "Learn how to effectively restore a KubeRocketCI tenant using Velero, including steps for deleting Keycloak entities and removing operator locks."
+sidebar_label: "Restore KubeRocketCI Tenant With Velero"
+
+---
+<!-- markdownlint-disable MD025 -->
+
 # Restore KubeRocketCI Tenant With Velero
 
 <head>

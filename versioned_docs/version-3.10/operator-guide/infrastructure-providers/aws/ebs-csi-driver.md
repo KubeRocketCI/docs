@@ -1,3 +1,12 @@
+---
+
+title: "Amazon EBS CSI Driver"
+description: "Enable Amazon EKS clusters to manage Amazon EBS volumes with the EBS CSI driver, covering prerequisites, IAM setup, and add-on installation."
+sidebar_label: "Amazon EBS CSI Driver"
+
+---
+<!-- markdownlint-disable MD025 -->
+
 # Amazon EBS CSI Driver
 
 <head>

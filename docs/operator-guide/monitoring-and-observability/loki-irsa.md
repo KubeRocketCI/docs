@@ -1,3 +1,12 @@
+---
+
+title: "IAM Roles for Loki Service Accounts"
+description: "Guide on creating AWS IAM roles for Loki service accounts to use Amazon S3 as object storage, including policy creation and service account annotation."
+sidebar_label: "Loki IAM Roles"
+
+---
+<!-- markdownlint-disable MD025 -->
+
 # IAM Roles for Loki Service Accounts
 
 <head>

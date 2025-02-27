@@ -1,9 +1,13 @@
 ---
-id: defectdojo-oidc-authentication
-sidebar_label: DefectDojo
----
 
-# Guide: Microsoft Entra SSO integration with DefectDojo
+title: "Guide: Microsoft Entra SSO Integration With Ansible AWX"
+description: "Step-by-step instructions on configuring Ansible AWX with OIDC authentication using Microsoft Entra as the Identity Provider for enhanced security."
+sidebar_label: "Ansible AWX"
+
+---
+<!-- markdownlint-disable MD025 -->
+
+# Guide: Microsoft Entra SSO Integration With DefectDojo
 
 <head>
   <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/microsoft-entra/defectdojo-oidc-authentication/" />

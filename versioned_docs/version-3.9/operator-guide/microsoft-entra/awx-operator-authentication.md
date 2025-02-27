@@ -1,9 +1,13 @@
 ---
-id: awx-operator-authentication
-sidebar_label: Ansible AWX
----
 
-# Guide: Microsoft Entra SSO integration with Ansible AWX
+title: "Guide: Microsoft Entra SSO Integration With AWS EKS & KubeRocketCI Portal"
+description: "Comprehensive instructions on configuring OIDC authentication for AWS EKS and KubeRocketCI Portal using Microsoft Entra, including default namespace and user picture configuration."
+sidebar_label: "AWS EKS & KubeRocketCI Portal"
+
+---
+<!-- markdownlint-disable MD025 -->
+
+# Guide: Microsoft Entra SSO Integration With Ansible AWX
 
 <head>
   <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/microsoft-entra/awx-operator-authentication/" />

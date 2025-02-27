@@ -1,3 +1,12 @@
+---
+
+title: "Upgrade KubeRocketCI v3.9 to 3.10"
+description: "Guide on upgrading KubeRocketCI to version 3.10, including steps for updating Custom Resource Definitions and performing the upgrade procedure."
+sidebar_label: "Upgrade KubeRocketCI to 3.10"
+
+---
+<!-- markdownlint-disable MD025 -->
+
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 

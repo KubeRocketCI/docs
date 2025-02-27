@@ -1,6 +1,11 @@
 ---
-sidebar_label: Scaling with Karpenter and KEDA
+
+title: "Efficient Kubernetes Autoscaling with Karpenter and KEDA: A Comprehensive Guide"
+description: "Step-by-step guide on configuring pod and cluster autoscaling in Kubernetes with Karpenter and KEDA for cost-effective, scalable, and efficient infrastructure."
+sidebar_label: "Scaling with Karpenter and KEDA"
+
 ---
+<!-- markdownlint-disable MD025 -->
 
 # Efficient Kubernetes Autoscaling with Karpenter and KEDA: A Comprehensive Guide
 

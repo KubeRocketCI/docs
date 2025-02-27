@@ -1,3 +1,10 @@
+---
+title: "Deploy RPM Packages"
+description: "Explore the deployment of RPM packages in KubeRocketCI using the default and AWX approaches for efficient application delivery on Linux distributions."
+sidebar_label: "Deploy RPM Packages"
+---
+<!-- markdownlint-disable MD025 -->
+
 # Deploy RPM Packages
 
 <head>

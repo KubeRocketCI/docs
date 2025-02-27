@@ -1,9 +1,13 @@
 ---
-id: opensearch-authentication
-sidebar_label: OpenSearch
----
 
-# Guide: Microsoft Entra SSO integration with OpenSearch
+title: "Guide: Microsoft Entra SSO Integration With OpenSearch"
+description: "Step-by-step guide on configuring OpenSearch with OIDC authentication using Microsoft Entra as the Identity Provider for enhanced security."
+sidebar_label: "OpenSearch"
+
+---
+<!-- markdownlint-disable MD025 -->
+
+# Guide: Microsoft Entra SSO Integration With OpenSearch
 
 <head>
   <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/microsoft-entra/opensearch-authentication/" />

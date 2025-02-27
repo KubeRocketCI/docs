@@ -1,3 +1,10 @@
+---
+title: "Integrate Harbor With Tekton Pipelines"
+description: "Guide on integrating Harbor with Tekton pipelines in KubeRocketCI for centralized storage of container images, enhancing automation and security."
+sidebar_label: "Integrate Harbor With Tekton"
+---
+<!-- markdownlint-disable MD025 -->
+
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 

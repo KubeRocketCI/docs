@@ -1,3 +1,10 @@
+---
+title: "IAM Roles for Velero Kubernetes Service Accounts"
+description: "Guide on configuring IAM roles for Velero service accounts in AWS EKS, enabling Velero to access AWS resources for backup and recovery operations."
+sidebar_label: "IAM Roles for Velero"
+---
+<!-- markdownlint-disable MD025 -->
+
 # IAM Roles for Velero Kubernetes Service Accounts
 
 <head>

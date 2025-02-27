@@ -1,3 +1,12 @@
+---
+
+title: "Install via Civo Marketplace"
+description: "Detailed instructions on installing KubeRocketCI via the Civo Marketplace, covering prerequisites, deployment steps, and integration with essential DevOps tools."
+sidebar_label: "Install via Civo Marketplace"
+
+---
+<!-- markdownlint-disable MD025 -->
+
 # Install via Civo Marketplace
 
 <head>

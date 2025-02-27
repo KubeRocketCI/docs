@@ -1,9 +1,13 @@
 ---
-id: nexus-authentication
-sidebar_label: Nexus
----
 
-# Guide: Microsoft Entra SSO integration with Nexus
+title: "Guide: Microsoft Entra SSO Integration With Nexus"
+description: "Instructions on configuring Nexus with OIDC authentication using Microsoft Entra as the Identity Provider, including OAuth2-proxy setup for secure access."
+sidebar_label: "Nexus"
+
+---
+<!-- markdownlint-disable MD025 -->
+
+# Guide: Microsoft Entra SSO Integration With Nexus
 
 <head>
   <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/microsoft-entra/nexus-authentication/" />

@@ -1,3 +1,12 @@
+---
+
+title: "Uninstall KubeRocketCI"
+description: "Guidance on properly uninstalling KubeRocketCI, including preliminary steps and commands for resource deletion via Helm or Argo CD."
+sidebar_label: "Uninstall KubeRocketCI"
+
+---
+<!-- markdownlint-disable MD025 -->
+
 # Uninstall KubeRocketCI
 
 <head>

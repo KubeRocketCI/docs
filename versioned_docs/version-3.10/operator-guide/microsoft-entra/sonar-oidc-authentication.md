@@ -1,9 +1,13 @@
 ---
-id: sonar-oidc-authentication
-sidebar_label: SonarQube
----
 
-# Guide: Microsoft Entra SSO integration with SonarQube
+title: "Guide: Microsoft Entra SSO Integration With SonarQube"
+description: "Learn how to configure SonarQube with OIDC authentication using Microsoft Entra as the Identity Provider for secure and centralized access management."
+sidebar_label: "SonarQube"
+
+---
+<!-- markdownlint-disable MD025 -->
+
+# Guide: Microsoft Entra SSO Integration With SonarQube
 
 <head>
   <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/microsoft-entra/sonar-oidc-authentication/" />

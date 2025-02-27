@@ -1,3 +1,12 @@
+---
+
+title: "Upgrade Keycloak v17.0 to 19.0"
+description: "Guide on upgrading Keycloak from version 17.0.x-legacy to 19.0.x on Kubernetes, detailing prerequisites, database migration strategies, and Keycloak configuration adjustments."
+sidebar_label: "Upgrade Keycloak to 19.0"
+
+---
+<!-- markdownlint-disable MD025 -->
+
 # Upgrade Keycloak v17.0 to 19.0
 
 <head>

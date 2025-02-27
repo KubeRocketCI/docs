@@ -1,3 +1,10 @@
+---
+title: "Integrate DefectDojo"
+description: "Guide on integrating DefectDojo with KubeRocketCI for vulnerability management, including installation steps and configuring DefectDojo for CI/CD integration."
+sidebar_label: "Integrate DefectDojo"
+---
+<!-- markdownlint-disable MD025 -->
+
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 

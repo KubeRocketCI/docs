@@ -1,3 +1,12 @@
+---
+
+title: "Install Grafana Loki"
+description: "Step-by-step guide to install Grafana Loki for log aggregation in KubeRocketCI, including configuration for Amazon S3 object storage."
+sidebar_label: "Install Grafana Loki"
+
+---
+<!-- markdownlint-disable MD025 -->
+
 # Install Grafana Loki
 
 <head>

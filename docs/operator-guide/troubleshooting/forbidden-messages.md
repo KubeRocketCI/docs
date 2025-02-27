@@ -1,3 +1,12 @@
+---
+
+title: "Forbidden Messages on the Overview Page"
+description: "Troubleshooting guide for resolving issues with forbidden messages on the KubeRocketCI portal overview page, detailing solutions for service account token and Keycloak users."
+sidebar_label: "Forbidden Messages"
+
+---
+<!-- markdownlint-disable MD025 -->
+
 # Forbidden Messages on the Overview Page
 
 <head>

@@ -1,3 +1,12 @@
+---
+
+title: "Install via Add-Ons"
+description: "Overview of Cluster Add-Ons for KubeRocketCI, explaining how to seamlessly integrate additional components like SonarQube, Nexus, Keycloak, and Jira using Argo CD applications."
+sidebar_label: "Install via Add-Ons"
+
+---
+<!-- markdownlint-disable MD025 -->
+
 # Install via Add-Ons
 
 <head>

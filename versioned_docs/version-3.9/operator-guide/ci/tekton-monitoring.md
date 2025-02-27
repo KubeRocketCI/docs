@@ -1,3 +1,10 @@
+---
+title: "Pipeline Monitoring with Prometheus and Grafana"
+description: "Guide on integrating Tekton pipelines metrics with Prometheus and Grafana in KubeRocketCI for comprehensive monitoring and visualization."
+sidebar_label: "Pipeline Monitoring with Prometheus and Grafana"
+---
+<!-- markdownlint-disable MD025 -->
+
 # Pipeline Monitoring with Prometheus and Grafana
 
 <head>

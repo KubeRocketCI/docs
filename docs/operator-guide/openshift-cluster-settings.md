@@ -1,3 +1,12 @@
+---
+
+title: "Set Up OpenShift"
+description: "Guidelines for preparing an OpenShift cluster for KubeRocketCI, including worker nodes requirements, load balancer configuration, Keycloak installation, and storage class setup."
+sidebar_label: "Set Up OpenShift"
+
+---
+<!-- markdownlint-disable MD025 -->
+
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 

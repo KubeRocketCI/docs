@@ -1,3 +1,10 @@
+---
+title: "Nexus Image Registry"
+description: "Comprehensive guide on integrating Nexus Repository Manager as a docker image registry with KubeRocketCI for streamlined artifact management."
+sidebar_label: "Nexus Image Registry"
+---
+<!-- markdownlint-disable MD025 -->
+
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 

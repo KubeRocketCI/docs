@@ -1,3 +1,12 @@
+---
+
+title: "Integrating ReportPortal with Tekton: A Step-by-Step Guide"
+description: "Learn how to integrate ReportPortal with Tekton for centralized management of automation outcomes and reports, enhancing team collaboration and efficiency in automation processes."
+sidebar_label: "Tekton Integration"
+
+---
+<!-- markdownlint-disable MD025 -->
+
 # Tekton Integration
 
 <head>

@@ -1,3 +1,12 @@
+---
+
+title: "Configuring Fluent Bit for Elasticsearch ILM Rollover"
+description: "Learn how to configure Fluent Bit for Elasticsearch ILM Rollover with Microsoft Entra as the Identity Provider, enhancing log management in KubeRocketCI."
+sidebar_label: "Fluent Bit Elasticsearch ILM"
+
+---
+<!-- markdownlint-disable MD025 -->
+
 # Configuring Fluent Bit for Elasticsearch ILM Rollover
 
 <head>

@@ -1,3 +1,10 @@
+---
+title: "CI Pipeline for Terraform"
+description: "Explore the CI pipeline stages for Terraform in KubeRocketCI, ensuring code quality, security, and compliance for Infrastructure as Code (IaC) management."
+sidebar_label: "CI Pipeline for Terraform"
+---
+<!-- markdownlint-disable MD025 -->
+
 # CI Pipeline for Terraform
 
 <head>

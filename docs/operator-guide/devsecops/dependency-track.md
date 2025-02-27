@@ -1,3 +1,10 @@
+---
+title: "Integrate Dependency-Track"
+description: "Guide on installing and integrating Dependency-Track with KubeRocketCI for enhanced vulnerability management and software component analysis."
+sidebar_label: "Integrate Dependency-Track"
+---
+<!-- markdownlint-disable MD025 -->
+
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 

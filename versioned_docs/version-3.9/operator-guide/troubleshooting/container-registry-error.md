@@ -1,3 +1,12 @@
+---
+
+title: "Container Registry Error"
+description: "Troubleshooting steps for resolving connection issues with the container registry in KubeRocketCI, including credential updates through External Secret Operator and manual provisioning."
+sidebar_label: "Container Registry Error"
+
+---
+<!-- markdownlint-disable MD025 -->
+
 # Container Registry Error
 
 <head>

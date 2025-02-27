@@ -1,3 +1,12 @@
+---
+
+title: "Install via AWS Marketplace"
+description: "Detailed instructions on installing KubeRocketCI via the AWS Marketplace, including prerequisites, deployment steps, and optional Portal access configurations."
+sidebar_label: "Install via AWS Marketplace"
+
+---
+<!-- markdownlint-disable MD025 -->
+
 # Install via AWS Marketplace
 
 <head>

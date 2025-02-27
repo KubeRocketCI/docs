@@ -1,3 +1,12 @@
+---
+
+title: "Install Argo CD"
+description: "Comprehensive guide on enabling Argo CD within KubeRocketCI, including prerequisites, installation steps using Helm, and integration with add-ons for enhanced platform functionality."
+sidebar_label: "Install Argo CD"
+
+---
+<!-- markdownlint-disable MD025 -->
+
 # Install Argo CD
 
 <head>

@@ -1,3 +1,10 @@
+---
+title: "Harbor OIDC Configuration"
+description: "Guidelines for configuring OIDC authorization with Harbor in KubeRocketCI, enabling Single Sign-On capabilities for enhanced security and user management."
+sidebar_label: "Harbor OIDC Configuration"
+---
+<!-- markdownlint-disable MD025 -->
+
 # Harbor OIDC Configuration
 
 <head>

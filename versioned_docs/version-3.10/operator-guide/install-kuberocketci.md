@@ -1,3 +1,12 @@
+---
+
+title: "Install KubeRocketCI"
+description: "Comprehensive guide on installing KubeRocketCI, covering prerequisites, various deployment methods including Helm, Argo CD GitOps, and AWS Marketplace, and additional setup options."
+sidebar_label: "Install KubeRocketCI"
+
+---
+<!-- markdownlint-disable MD025 -->
+
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 

@@ -1,9 +1,13 @@
 ---
-id: defectdojo-oidc-authentication
-sidebar_label: DefectDojo
----
 
-# Guide: Microsoft Entra SSO integration with DefectDojo
+title: "Guide: Microsoft Entra SSO Integration With DefectDojo"
+description: "Comprehensive guide on configuring DefectDojo with OIDC authentication using Microsoft Entra as the Identity Provider for secure access management."
+sidebar_label: "DefectDojo"
+
+---
+<!-- markdownlint-disable MD025 -->
+
+# Guide: Microsoft Entra SSO Integration With DefectDojo
 
 <head>
   <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/microsoft-entra/defectdojo-oidc-authentication/" />

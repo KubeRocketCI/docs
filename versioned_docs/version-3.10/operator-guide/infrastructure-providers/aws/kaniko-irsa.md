@@ -1,3 +1,12 @@
+---
+
+title: "IAM Roles for Kaniko Service Accounts"
+description: "Guide on creating IAM roles for Kaniko service accounts in AWS EKS, including policy creation and role association to enable ECR integration in Tekton pipelines."
+sidebar_label: "IAM Roles for Kaniko Service Accounts"
+
+---
+<!-- markdownlint-disable MD025 -->
+
 # IAM Roles for Kaniko Service Accounts
 
 <head>

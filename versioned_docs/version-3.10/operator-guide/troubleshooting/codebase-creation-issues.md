@@ -1,3 +1,12 @@
+---
+
+title: "Codebase Creation Issues"
+description: "Troubleshooting guidance for resolving issues encountered during codebase creation in KubeRocketCI portal, including insufficient permissions and naming conflicts."
+sidebar_label: "Codebase Creation Issues"
+
+---
+<!-- markdownlint-disable MD025 -->
+
 # Codebase Creation Issues
 
 <head>

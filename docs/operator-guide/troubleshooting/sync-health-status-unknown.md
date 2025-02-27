@@ -1,3 +1,12 @@
+---
+
+title: "Sync and Health Status Unknown"
+description: "Troubleshooting guide for resolving unknown health and sync status issues in KubeRocketCI, focusing on correct configuration of ArgoCD integration."
+sidebar_label: "Sync & Health Status"
+
+---
+<!-- markdownlint-disable MD025 -->
+
 # Sync and Health Status Unknown
 
 <head>

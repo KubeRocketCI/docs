@@ -1,3 +1,12 @@
+---
+
+title: "Install NGINX Ingress Controller"
+description: "Step-by-step guide on installing the NGINX Ingress Controller on Kubernetes, detailing prerequisites, Helm installation process, and chart customization."
+sidebar_label: "Install NGINX Ingress Controller"
+
+---
+<!-- markdownlint-disable MD025 -->
+
 # Install NGINX Ingress Controller
 
 <head>

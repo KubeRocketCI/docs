@@ -1,3 +1,12 @@
+---
+
+title: "Configure AWS WAF With Terraform"
+description: "Secure your web applications by configuring AWS WAF using Terraform to prevent Host Header vulnerabilities and ensure secured traffic exposure."
+sidebar_label: "Configure AWS WAF With Terraform"
+
+---
+<!-- markdownlint-disable MD025 -->
+
 # Configure AWS WAF With Terraform
 
 <head>

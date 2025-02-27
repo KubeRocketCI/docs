@@ -1,3 +1,12 @@
+---
+
+title: "Deploy AWS EKS Cluster"
+description: "Comprehensive guide on deploying an Amazon Elastic Kubernetes Service (EKS) cluster, highlighting best practices for security, networking, and cost optimization."
+sidebar_label: "Deploy AWS EKS Cluster"
+
+---
+<!-- markdownlint-disable MD025 -->
+
 # Deploy AWS EKS Cluster
 
 <head>

@@ -1,3 +1,10 @@
+---
+title: "Microsoft Teams Notification"
+sidebar_label: "Microsoft Teams Notification"
+description: "Configure Microsoft Teams notifications for Tekton pipelines, ensuring prompt status updates in the associated channel."
+---
+<!-- markdownlint-disable MD025 -->
+
 # Microsoft Teams Notification
 
 <head>

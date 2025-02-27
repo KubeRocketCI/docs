@@ -1,3 +1,10 @@
+---
+title: "Working With Documentation"
+description: "A comprehensive guide to developing KubeRocketCI documentation with Docusaurus, covering prerequisites, local development, and deployment."
+sidebar_label: "Working With Documentation"
+---
+<!-- markdownlint-disable MD025 -->
+
 # Working With Documentation
 
 <head>

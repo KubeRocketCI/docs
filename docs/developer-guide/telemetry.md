@@ -1,3 +1,10 @@
+---
+title: "Telemetry"
+description: "Overview of the telemetry data collection by the KubeRocketCI codebase operator, including the types of data collected and instructions on how to disable telemetry if desired."
+sidebar_label: "Telemetry"
+---
+<!-- markdownlint-disable MD025 -->
+
 # Telemetry
 
 <head>

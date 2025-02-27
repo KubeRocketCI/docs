@@ -1,3 +1,10 @@
+---
+title: "Reference Architecture"
+description: "Explore the KubeRocketCI Reference Architecture, a blueprint for efficient and high-quality software development on Kubernetes, highlighting security, DevSecOps, and automated testing."
+sidebar_label: "Reference Architecture"
+---
+<!-- markdownlint-disable MD025 -->
+
 # Reference Architecture
 
 <head>

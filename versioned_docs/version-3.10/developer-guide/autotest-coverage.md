@@ -1,3 +1,10 @@
+---
+title: "Quality Control"
+description: "Discover how KubeRocketCI ensures product quality through advanced tools, best practices, and comprehensive automated test coverage for all functionalities."
+sidebar_label: "Quality Control"
+---
+<!-- markdownlint-disable MD025 -->
+
 # Quality Control
 
 <head>

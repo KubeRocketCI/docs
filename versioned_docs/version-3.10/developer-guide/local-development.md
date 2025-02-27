@@ -1,3 +1,10 @@
+---
+title: "Operator Development"
+description: "Learn how to set up your local environment for KubeRocketCI operator development with Go language, including IDE setup, pre-commit activities, testing, and linting."
+sidebar_label: "Operator Development"
+---
+<!-- markdownlint-disable MD025 -->
+
 # Operator Development
 
 <head>

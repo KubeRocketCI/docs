@@ -1,3 +1,12 @@
+---
+
+title: "Manage Git Servers"
+sidebar_label: "Manage Git Servers"
+description: "Discover how to manage Git Server integrations in KubeRocketCI for seamless Version Control System connectivity, ensuring streamlined workflows."
+
+---
+<!-- markdownlint-disable MD025 -->
+
 # Manage Git Servers
 
 <head>

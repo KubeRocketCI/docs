@@ -1,3 +1,12 @@
+---
+
+title: "Manage Branches"
+sidebar_label: "Manage Branches"
+description: "Explore branch management in KubeRocketCI, from adding new branches, editing properties, to integrating pipelines for applications, libraries, and more."
+
+---
+<!-- markdownlint-disable MD025 -->
+
 # Manage Branches
 
 <head>

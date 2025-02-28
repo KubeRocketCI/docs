@@ -1,3 +1,12 @@
+---
+
+title: "Configuration Overview: Integrations and Features"
+sidebar_label: "Configuration Overview"
+description: "Explore integration capabilities in KubeRocketCI, from container registries to security tools, enhancing your CI/CD workflows and code quality."
+
+---
+<!-- markdownlint-disable MD025 -->
+
 # KubeRocketCI Configuration Overview: Integrations and Features
 
 <head>

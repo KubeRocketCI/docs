@@ -1,3 +1,12 @@
+---
+
+title: "Manage Deployment Flows"
+sidebar_label: "Manage Deployment Flows"
+description: "Navigate deployment flow management in KubeRocketCI, from viewing details to editing, deleting, and troubleshooting deployment environments."
+
+---
+<!-- markdownlint-disable MD025 -->
+
 # Manage Environments
 
 <head>

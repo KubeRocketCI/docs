@@ -1,3 +1,12 @@
+---
+
+title: "User Guide: Portal Features and CI/CD Flow"
+description: "EThe KubeRocketCI portal user guide is intended for developers and provides details on working with the KubeRocketCI portal, different codebase types, and the KubeRocketCI CI/CD flow."
+sidebar_label: "Overview"
+
+---
+<!-- markdownlint-disable MD025 -->
+
 # KubeRocketCI User Guide: Portal Features and CI/CD Flow
 
 <head>

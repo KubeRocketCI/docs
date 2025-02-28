@@ -1,3 +1,12 @@
+---
+
+title: "Add Autotest"
+sidebar_label: "Add Autotest"
+description: "Learn how to add autotests in KubeRocketCI, integrating them into CI/CD workflows for enhanced quality assurance and deployment."
+
+---
+<!-- markdownlint-disable MD025 -->
+
 # Add Autotest
 
 <head>

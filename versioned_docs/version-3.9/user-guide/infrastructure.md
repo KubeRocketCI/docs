@@ -1,3 +1,12 @@
+---
+
+title: "Manage Infrastructures"
+sidebar_label: "Manage Infrastructures"
+description: "Guide to managing infrastructures in KubeRocketCI, including setup, modification, and integration with Jira for comprehensive development management."
+
+---
+<!-- markdownlint-disable MD025 -->
+
 # Manage Infrastructures
 
 <head>

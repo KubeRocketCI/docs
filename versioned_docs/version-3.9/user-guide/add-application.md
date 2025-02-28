@@ -1,3 +1,13 @@
+---
+
+title: "Add Application"
+sidebar_label: "Add Application"
+description: "Master application creation in KubeRocketCI, from cloning repositories to importing projects, for streamlined software development."
+
+---
+
+<!-- markdownlint-disable MD025 -->
+
 # Add Application
 
 <head>

@@ -1,3 +1,12 @@
+---
+
+title: "Manage Applications"
+sidebar_label: Manage Applications
+description: "This section describes the subsequent possible actions that can be performed with the newly added or existing applications."
+
+---
+<!-- markdownlint-disable MD025 -->
+
 # Manage Applications
 
 <head>

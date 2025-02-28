@@ -1,3 +1,12 @@
+---
+
+title: "Change Container Registry"
+sidebar_label: "Change Container Registry"
+description: "Guidelines for transitioning to a different container registry within KubeRocketCI, ensuring smooth updates for both new and existing components."
+
+---
+<!-- markdownlint-disable MD025 -->
+
 # Change Container Registry
 
 <head>

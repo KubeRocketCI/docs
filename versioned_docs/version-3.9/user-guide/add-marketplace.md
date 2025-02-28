@@ -1,3 +1,12 @@
+---
+
+title: "Create Component via Marketplace"
+sidebar_label: Create Component via Marketplace
+description: "This page contains detailed guidelines on how to easily create a new application by clicking several buttons with the help of the Marketplace feature."
+
+---
+<!-- markdownlint-disable MD025 -->
+
 # Create Component via Marketplace
 
 <head>

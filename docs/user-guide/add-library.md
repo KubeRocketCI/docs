@@ -1,8 +1,8 @@
 ---
 
 title: "Add Library"
-sidebar_label: "Add Library"
 description: "Discover how to add and manage libraries in KubeRocketCI, from cloning repositories to leveraging external sources for improved development."
+sidebar_label: "Add Library"
 
 ---
 

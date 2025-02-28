@@ -1,3 +1,10 @@
+---
+title: "Add Git Server"
+description: "Step-by-step guide on integrating GitLab, GitHub, or Bitbucket with KubeRocketCI for seamless CI/CD workflows, including SSH key generation, API token creation, and secret setup."
+sidebar_label: "Add Git Server"
+---
+<!-- markdownlint-disable MD025 -->
+
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 

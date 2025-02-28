@@ -1,3 +1,12 @@
+---
+
+title: "Add Infrastructure"
+sidebar_label: "Add Infrastructure"
+description: "Learn how to add, clone, and import infrastructure projects in KubeRocketCI, automating resource creation in the cloud for robust development."
+
+---
+<!-- markdownlint-disable MD025 -->
+
 # Add Infrastructure
 
 <head>

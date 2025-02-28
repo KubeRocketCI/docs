@@ -1,3 +1,12 @@
+---
+
+title: "Add Cluster"
+sidebar_label: "Add Cluster"
+description: "Step-by-step guide on integrating new clusters into KubeRocketCI for multi-cluster deployment, enhancing environment segregation and management."
+
+---
+<!-- markdownlint-disable MD025 -->
+
 # Add Cluster
 
 <head>

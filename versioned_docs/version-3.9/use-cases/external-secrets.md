@@ -1,3 +1,12 @@
+---
+
+title: "Secured Secrets for Application Deployment"
+description: "Implement secure secrets management in KubeRocketCI with External Secret Operator, enhancing application security by securely storing and accessing sensitive data."
+sidebar_label: "Secured Secrets Management for Application Deployment"
+
+---
+<!-- markdownlint-disable MD025 -->
+
 # Secured Secrets Management for Application Deployment
 
 <head>

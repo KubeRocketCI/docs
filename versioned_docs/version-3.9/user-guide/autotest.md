@@ -1,3 +1,12 @@
+---
+
+title: "Manage Autotests"
+sidebar_label: "Manage Autotests"
+description: "Guide to managing autotests in KubeRocketCI, including editing, integrating with Jira, and adding as quality gates in CI/CD workflows."
+
+---
+<!-- markdownlint-disable MD025 -->
+
 # Manage Autotests
 
 <head>

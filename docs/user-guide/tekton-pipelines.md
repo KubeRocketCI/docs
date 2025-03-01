@@ -60,12 +60,12 @@ Proper pipeline configuration depends on its purpose. Pipeline configuration is 
 
 Two approaches are available for defining review and build pipelines:
 
-1. [Custom Framework/Build Tool](https://docs.kuberocketci.io/docs/use-cases/tekton-custom-pipelines):
+1. [Custom Framework/Build Tool](/docs/use-cases/tekton-custom-pipelines):
 
 * Useful for onboarding multiple projects with the same pipeline structure.
 * Pipelines follow a naming pattern and are mapped to projects via project settings.
 
-2. [Branch-Specific Pipelines](https://docs.kuberocketci.io/docs/use-cases/custom-pipelines-flow#replace-existing-pipelines-for-components-with-custom-pipelines):
+2. [Branch-Specific Pipelines](/docs/use-cases/custom-pipelines-flow#replace-existing-pipelines-for-components-with-custom-pipelines):
 
 * Ideal for enabling different pipelines for different branches of a project.
 * Pipelines are explicitly defined for specific branches.

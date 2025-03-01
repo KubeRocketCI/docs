@@ -11,7 +11,7 @@ sidebar_label: "Create and Use Custom Tekton Pipelines"
 # Create and Use Custom Tekton Pipelines
 
 <head>
-  <link rel="canonical" href="https://docs.kuberocketci.io/docs/use-cases/custom-pipelines-flow/" />
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/use-cases/custom-pipelines-flow" />
 </head>
 
 This use case explains how to create and use custom Tekton pipelines on the KubeRocketCI Platform. While KubeRocketCI offers pre-configured Tekton pipelines for common use cases, custom pipelines allow you to adapt workflows to meet unique project requirements.

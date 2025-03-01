@@ -1,7 +1,7 @@
 # Build Pipeline
 
 <head>
-  <link rel="canonical" href="https://docs.kuberocketci.io/docs/user-guide/build-pipeline/" />
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/user-guide/build-pipeline" />
 </head>
 
 This section provides details on the Build pipeline of the KubeRocket CI/CD pipeline framework. Explore below the pipeline purpose, stages and possible actions to perform.

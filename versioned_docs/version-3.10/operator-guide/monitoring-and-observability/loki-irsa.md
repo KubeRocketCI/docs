@@ -10,7 +10,7 @@ sidebar_label: "Loki IAM Roles"
 # IAM Roles for Loki Service Accounts
 
 <head>
-  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/monitoring-and-observability/loki-irsa/" />
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/monitoring-and-observability/loki-irsa" />
 </head>
 
 :::note

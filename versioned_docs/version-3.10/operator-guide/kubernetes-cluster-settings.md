@@ -13,7 +13,7 @@ import TabItem from '@theme/TabItem';
 # Set Up Kubernetes
 
 <head>
-  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/kubernetes-cluster-settings/" />
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/kubernetes-cluster-settings" />
 </head>
 
 Make sure the cluster meets the following conditions:

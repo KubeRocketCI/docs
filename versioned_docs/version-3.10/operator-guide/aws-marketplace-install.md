@@ -10,7 +10,7 @@ sidebar_label: "Install via AWS Marketplace"
 # Install via AWS Marketplace
 
 <head>
-  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/aws-marketplace-install/" />
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/aws-marketplace-install" />
 </head>
 
 This documentation provides detailed instructions on how to install the KubeRocketCI via the AWS Marketplace.

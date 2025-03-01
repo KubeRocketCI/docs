@@ -8,7 +8,7 @@ sidebar_label: "Portal OIDC Configuration"
 # Portal OIDC Configuration
 
 <head>
-  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/auth/ui-portal-oidc/" />
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/auth/ui-portal-oidc" />
 </head>
 
 This page provides instructions for configuring the [OIDC authorization](https://openid.net/connect/) for the KubeRocketCI [Portal UI](../../user-guide/index.md), enabling the use of Single Sign-On (SSO) for authorization in the Portal. This configuration allows for centralized control of user access and rights from a single configuration point.

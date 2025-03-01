@@ -10,7 +10,7 @@ description: "This page contains detailed guidelines on how to easily create a n
 # Create Component via Marketplace
 
 <head>
-  <link rel="canonical" href="https://docs.kuberocketci.io/docs/user-guide/add-marketplace/" />
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/user-guide/add-marketplace" />
 </head>
 
 With the built-in Marketplace, users can easily create a new application by clicking several buttons. This page contains detailed guidelines on how to create a new component with the help of the Marketplace feature.

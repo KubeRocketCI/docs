@@ -8,7 +8,7 @@ sidebar_label: "Reference Architecture"
 # Reference Architecture
 
 <head>
-  <link rel="canonical" href="https://docs.kuberocketci.io/docs/developer-guide/reference-architecture/" />
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/developer-guide/reference-architecture" />
 </head>
 
 The KubeRocketCI Reference Architecture serves as a blueprint for software delivery, outlining the best practices, tools, and technologies leveraged by the platform to ensure efficient and high-quality software development. It provides a comprehensive guide to navigate the complexities of software delivery, from code to deployment.

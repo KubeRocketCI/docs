@@ -13,7 +13,7 @@ import TabItem from '@theme/TabItem';
 # Manage Container Registries
 
 <head>
-  <link rel="canonical" href="https://docs.kuberocketci.io/docs/user-guide/manage-container-registries/" />
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/user-guide/manage-container-registries" />
 </head>
 
 This guide provides instructions on integrating the container registry with the KubeRocketCI.

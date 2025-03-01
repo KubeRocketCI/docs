@@ -10,7 +10,7 @@ sidebar_label: "Deploy OKD 4.10 Cluster"
 # Deploy OKD 4.10 Cluster
 
 <head>
-  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/infrastructure-providers/okd/deploy-okd-4.10/" />
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/infrastructure-providers/okd/deploy-okd-4.10" />
 </head>
 
 This instruction provides detailed information on the OKD 4.10 cluster deployment in the AWS Cloud and contains the additional setup necessary for the managed infrastructure.

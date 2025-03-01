@@ -13,7 +13,7 @@ import TabItem from '@theme/TabItem';
 # Set Up OpenShift
 
 <head>
-  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/openshift-cluster-settings/" />
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/openshift-cluster-settings" />
 </head>
 
 Make sure the cluster meets the following conditions:

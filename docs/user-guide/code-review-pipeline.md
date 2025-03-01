@@ -1,7 +1,7 @@
 # Code Review Pipeline
 
 <head>
-  <link rel="canonical" href="https://docs.kuberocketci.io/docs/user-guide/code-review-pipeline/" />
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/user-guide/code-review-pipeline" />
 </head>
 
 This section provides details on the Code Review pipeline of the KubeRocketCI CI/CD framework. Explore below the pipeline purpose, stages and possible actions to perform.

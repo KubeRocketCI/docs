@@ -10,7 +10,7 @@ sidebar_label: "Install via Add-Ons"
 # Install via Add-Ons
 
 <head>
-  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/add-ons-overview/" />
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/add-ons-overview" />
 </head>
 
 This page provides an overview of Cluster Add-Ons for KubeRocketCI, including their purpose, benefits, and usage.

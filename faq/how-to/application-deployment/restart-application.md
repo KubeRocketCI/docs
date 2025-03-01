@@ -1,7 +1,7 @@
 # How to Restart an Application?
 
 <head>
-  <link rel="canonical" href="https://docs.kuberocketci.io/faq/how-to/application-deployment/restart-application/" />
+  <link rel="canonical" href="https://docs.kuberocketci.io/faq/how-to/application-deployment/restart-application" />
 </head>
 
 To restart an application, follow these steps:

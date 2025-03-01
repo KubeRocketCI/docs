@@ -1,7 +1,7 @@
 # Integrate GitHub
 
 <head>
-  <link rel="canonical" href="https://docs.kuberocketci.io/docs/quick-start/integrate-github/" />
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/quick-start/integrate-github" />
 </head>
 
 To initiate work in the KubeRocketCI, integration with a Version Control System (VCS) is essential. This integration facilitates the use of create, clone, and import strategies for handling source code.

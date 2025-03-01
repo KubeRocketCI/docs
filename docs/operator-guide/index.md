@@ -10,7 +10,7 @@ sidebar_label: "Operator Guide"
 # KubeRocketCI Operator Guide: Installation, Configuration, and Administration
 
 <head>
-  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/" />
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide" />
 </head>
 
 The Operator guide is intended for DevOps and provides information on KubeRocketCI installation, configuration and customization, as well as the platform support. Inspect the documentation to adjust the KubeRocketCI according to your business needs:

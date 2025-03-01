@@ -10,7 +10,7 @@ sidebar_label: "Install ReportPortal"
 # Install ReportPortal
 
 <head>
-  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/project-management-and-reporting/install-reportportal/" />
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/project-management-and-reporting/install-reportportal" />
 </head>
 
 Inspect the prerequisites and the main steps to perform for installing ReportPortal.

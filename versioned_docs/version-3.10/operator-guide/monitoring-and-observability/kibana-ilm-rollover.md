@@ -10,7 +10,7 @@ sidebar_label: "Fluent Bit Elasticsearch ILM"
 # Configuring Fluent Bit for Elasticsearch ILM Rollover
 
 <head>
-  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/monitoring-and-observability/kibana-ilm-rollover/" />
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/monitoring-and-observability/kibana-ilm-rollover" />
 </head>
 
 This guide delves into the benefits of adopting the EFK stack over the conventional ELK stack, highlighting the significant enhancements it brings to KubeRocketCI. It provides a comprehensive walkthrough on configuring the EFK stack, enabling the integration of a sophisticated logging system with your applications.

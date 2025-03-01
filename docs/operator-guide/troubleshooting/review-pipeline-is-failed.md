@@ -10,7 +10,7 @@ sidebar_label: "Review Pipeline Failure"
 # Review Pipeline is Failed
 
 <head>
-  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/troubleshooting/review-pipeline-is-failed/" />
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/troubleshooting/review-pipeline-is-failed" />
 </head>
 
 ## Problem

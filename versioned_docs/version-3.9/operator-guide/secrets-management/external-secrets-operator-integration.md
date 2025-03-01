@@ -10,7 +10,7 @@ sidebar_label: "External Secrets Operator Integration"
 # External Secrets Operator Integration
 
 <head>
-  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/secrets-management/external-secrets-operator-integration/" />
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/secrets-management/external-secrets-operator-integration" />
 </head>
 
 [External Secrets Operator (ESO)](https://external-secrets.io/) can be integrated with KubeRocketCI.

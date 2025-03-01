@@ -8,7 +8,7 @@ sidebar_label: "Security and Compliance Overview"
 # Overview
 
 <head>
-  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/devsecops/overview/" />
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/devsecops/overview" />
 </head>
 
 KubeRocketCI emphasizes the importance of incorporating security practices into the software development lifecycle through the DevSecOps approach. By integrating a diverse range of open-source and enterprise security tools tailored to specific functionalities, organizations can ensure efficient and secure software development. These tools, combined with fundamental DevSecOps principles such as collaboration, continuous security, and automation, contribute to the identification and remediation of vulnerabilities early in the process, minimizes risks, and fosters a security-first culture across the organization.

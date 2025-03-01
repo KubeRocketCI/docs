@@ -11,7 +11,7 @@ sidebar_label: "Set Test Suite Parameters Using Environment Variables in CD Pipe
 # Set Test Suite Parameters Using Environment Variables in CD Pipelines
 
 <head>
-  <link rel="canonical" href="https://docs.kuberocketci.io/docs/use-cases/cd-autotests-run-with-env-variables/" />
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/use-cases/cd-autotests-run-with-env-variables" />
 </head>
 
 This use case demonstrates how the KubeRocketCI platform uses environment variables to flexibly configure commands in deployment pipelines.

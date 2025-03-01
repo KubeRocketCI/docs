@@ -10,7 +10,7 @@ sidebar_label: "Overview"
 # KubeRocketCI Infrastructure Providers: AWS, Azure, GCP, and On-Premises Overview
 
 <head>
-  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/infrastructure-providers/overview/" />
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/infrastructure-providers/overview" />
 </head>
 
 This section provides a technical overview and integration guidelines for Amazon Web Services (AWS), Microsoft Azure, Google Cloud Platform (GCP), and on-premises solutions through the perspective of KubeRocketCI.

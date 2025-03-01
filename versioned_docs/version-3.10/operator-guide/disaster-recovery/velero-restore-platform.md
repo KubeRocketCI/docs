@@ -10,7 +10,7 @@ sidebar_label: "Restore KubeRocketCI Tenant With Velero"
 # Restore KubeRocketCI Tenant With Velero
 
 <head>
-  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/disaster-recovery/velero-restore-platform/" />
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/disaster-recovery/velero-restore-platform" />
 </head>
 
 You can use the Velero tool to restore a platform tenant. Explore the main steps for backup and restoring below.

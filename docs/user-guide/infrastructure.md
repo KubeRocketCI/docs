@@ -10,7 +10,7 @@ description: "Guide to managing infrastructures in KubeRocketCI, including setup
 # Manage Infrastructures
 
 <head>
-  <link rel="canonical" href="https://docs.kuberocketci.io/docs/user-guide/infrastructure/" />
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/user-guide/infrastructure" />
 </head>
 
 This section describes the subsequent possible actions that can be performed with the newly added or existing infrastructures.

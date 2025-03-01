@@ -10,7 +10,7 @@ sidebar_label: "IAM Roles for Kaniko Service Accounts"
 # IAM Roles for Kaniko Service Accounts
 
 <head>
-  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/infrastructure-providers/aws/kaniko-irsa/" />
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/infrastructure-providers/aws/kaniko-irsa" />
 </head>
 
 :::note

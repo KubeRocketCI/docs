@@ -10,7 +10,7 @@ sidebar_label: "Integrate SonarQube"
 # Install KubeRocketCI
 
 <head>
-  <link rel="canonical" href="https://docs.kuberocketci.io/docs/quick-start/platform-installation/" />
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/quick-start/platform-installation" />
 </head>
 
 This page serves as the starting point for the quick start guide, where we will install Tekton as a prerequisite and then proceed to install the KubeRocketCI itself.

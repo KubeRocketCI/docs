@@ -11,7 +11,7 @@ import TabItem from '@theme/TabItem';
 # Integrate Harbor With Tekton Pipelines
 
 <head>
-  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/artifacts-management/harbor-integration/" />
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/artifacts-management/harbor-integration" />
 </head>
 
 [Harbor](https://goharbor.io/) is an advanced, open-source cloud-native registry that securely manages container images and Helm charts, and also supports a wide range of OCI artifacts. It enforces policies and role-based access control, while ensuring all managed content, including container images and other artifacts, are scanned and certified free from vulnerabilities. For those looking to integrate Harbor into their workflow, the documentation provides comprehensive steps on [creating projects](https://goharbor.io/docs/2.0.0/working-with-projects/create-projects/) and establishing robot accounts. These accounts facilitate automated and secure interactions with the registry, crucial for CI pipelines and enhancing overall security and efficiency in artifact management.

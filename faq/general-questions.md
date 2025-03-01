@@ -9,7 +9,7 @@ This page provides answers to frequently asked questions about KubeRocketCI oper
 ### How Does Artifact Versioning Work?
 
 <head>
-  <link rel="canonical" href="https://docs.kuberocketci.io/faq/general-questions/" />
+  <link rel="canonical" href="https://docs.kuberocketci.io/faq/general-questions" />
 </head>
 
 Artifact versioning in KubeRocketCI is designed to ensure each build and deployment can be uniquely identified, managed, and traced back to its source.

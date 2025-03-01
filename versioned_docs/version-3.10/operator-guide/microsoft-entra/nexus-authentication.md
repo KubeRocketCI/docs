@@ -10,7 +10,7 @@ sidebar_label: "Nexus"
 # Guide: Microsoft Entra SSO Integration With Nexus
 
 <head>
-  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/microsoft-entra/nexus-authentication/" />
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/microsoft-entra/nexus-authentication" />
 </head>
 
 This guide provides instructions on how to configure Nexus with OpenID Connect (OIDC) authentication using Microsoft Entra as the Identity Provider (IdP) and OAuth2-proxy as an authentication proxy.

@@ -10,7 +10,7 @@ sidebar_label: "Ansible AWX"
 # Guide: Microsoft Entra SSO Integration With DefectDojo
 
 <head>
-  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/microsoft-entra/defectdojo-oidc-authentication/" />
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/microsoft-entra/defectdojo-oidc-authentication" />
 </head>
 
 This guide provides instructions on how to configure DefectDojo with OpenID Connect (OIDC) authentication using Microsoft Entra as the Identity Provider (IdP).

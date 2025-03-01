@@ -11,7 +11,7 @@ import TabItem from '@theme/TabItem';
 # Integrate DependencyTrack
 
 <head>
-  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/devsecops/dependency-track/" />
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/devsecops/dependency-track" />
 </head>
 
 This documentation guide provides comprehensive instructions for installing and integrating DependencyTrack with the KubeRocketCI.

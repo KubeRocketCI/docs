@@ -8,7 +8,7 @@ sidebar_label: "KubeRocketCI Reference Architecture on AWS"
 # KubeRocketCI Reference Architecture on AWS
 
 <head>
-  <link rel="canonical" href="https://docs.kuberocketci.io/docs/developer-guide/aws-reference-architecture/" />
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/developer-guide/aws-reference-architecture" />
 </head>
 
 The reference architecture of the KubeRocketCI on AWS is designed to provide a robust and scalable CI/CD system for developing and deploying software in a repeatable and automated manner. The architecture leverages AWS Managed Services to enable developers to quickly deploy and manage infrastructure and applications. KubeRocketCI recommends to follow the best practices and patterns from the Well-Architected Framework, the AWS Architecture Center, and EKS Best Practices Guide.

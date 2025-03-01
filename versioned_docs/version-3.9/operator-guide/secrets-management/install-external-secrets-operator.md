@@ -10,7 +10,7 @@ sidebar_label: "Install External Secrets Operator"
 # Install External Secrets Operator
 
 <head>
-  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/secrets-management/install-external-secrets-operator/" />
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/secrets-management/install-external-secrets-operator" />
 </head>
 
 Inspect the prerequisites and the main steps to perform for enabling [External Secrets Operator](https://external-secrets.io/) in KubeRocketCI.

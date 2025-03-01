@@ -10,7 +10,7 @@ sidebar_label: "Container Registry Error"
 # Container Registry Error
 
 <head>
-  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/troubleshooting/container-registry-error/" />
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/troubleshooting/container-registry-error" />
 </head>
 
 ## Problem

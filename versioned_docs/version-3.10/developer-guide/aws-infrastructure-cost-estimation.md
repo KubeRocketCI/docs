@@ -8,7 +8,7 @@ sidebar_label: "AWS Infrastructure Cost Estimation"
 # AWS Infrastructure Cost Estimation
 
 <head>
-  <link rel="canonical" href="https://docs.kuberocketci.io/docs/developer-guide/aws-infrastructure-cost-estimation/" />
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/developer-guide/aws-infrastructure-cost-estimation" />
 </head>
 
 Effective planning and budgeting are essential for developing applications in cloud computing, with a key part being accurate infrastructure cost estimation. This not only helps in keeping within budget but also enables informed decision-making and resource optimization for project viability.

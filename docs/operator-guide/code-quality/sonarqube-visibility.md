@@ -8,7 +8,7 @@ sidebar_label: "Manage Project Visibility"
 # Manage Project Visibility
 
 <head>
-  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/code-quality/sonarqube-visibility/" />
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/code-quality/sonarqube-visibility" />
 </head>
 
 This manual offers detailed guidance on configuring permissions for SonarQube projects, ensuring that only authorized personnel can access and interact with the data on the SonarQube platform. It caters to both new and existing SonarQube projects, providing a clear pathway to refine visibility settings for enhanced security.

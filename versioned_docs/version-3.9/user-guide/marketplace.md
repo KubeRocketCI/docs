@@ -10,7 +10,7 @@ description: "The KubeRocketCI marketplace offers a range of Templates, predefin
 # Marketplace Overview
 
 <head>
-  <link rel="canonical" href="https://docs.kuberocketci.io/docs/user-guide/marketplace/" />
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/user-guide/marketplace" />
 </head>
 
 The KubeRocketCI marketplace offers a range of Templates, predefined tools and settings for creating software. These Templates speed up development, minimize errors, and ensure consistency.

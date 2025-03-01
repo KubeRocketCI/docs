@@ -10,7 +10,7 @@ sidebar_label: "Deploy Application"
 # Deploy Application
 
 <head>
-  <link rel="canonical" href="https://docs.kuberocketci.io/docs/quick-start/deploy-application/" />
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/quick-start/deploy-application" />
 </head>
 
 Now, let's proceed to deploy our first application. This page offers detailed instructions on how to create an environment and deploy the application within it.

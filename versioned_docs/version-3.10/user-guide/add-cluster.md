@@ -10,7 +10,7 @@ description: "Step-by-step guide on integrating new clusters into KubeRocketCI f
 # Add Cluster
 
 <head>
-  <link rel="canonical" href="https://docs.kuberocketci.io/docs/user-guide/add-cluster/" />
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/user-guide/add-cluster" />
 </head>
 
 This page provides comprehensive instructions on how to integrate a new cluster into the KubeRocketCI workloads. By doing so, it creates an opportunity for users to employ multi-cluster deployment, thereby facilitating the segregation of different environments across various clusters.

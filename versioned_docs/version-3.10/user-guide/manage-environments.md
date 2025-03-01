@@ -10,7 +10,7 @@ description: "Navigate deployment flow management in KubeRocketCI, from viewing 
 # Manage Deployment Flows
 
 <head>
-  <link rel="canonical" href="https://docs.kuberocketci.io/docs/user-guide/manage-environments/" />
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/user-guide/manage-environments" />
 </head>
 
 This page describes actions that can be performed to an already created deployment flow. If no deployment flows are created yet, navigate to the [Add Deployment Flow](add-cd-pipeline.md) page:

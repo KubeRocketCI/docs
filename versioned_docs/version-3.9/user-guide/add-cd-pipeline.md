@@ -10,7 +10,7 @@ description: "Learn how to establish Deployment Flows in KubeRocketCI for stream
 # Add Environment
 
 <head>
-  <link rel="canonical" href="https://docs.kuberocketci.io/docs/user-guide/add-cd-pipeline/" />
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/user-guide/add-cd-pipeline" />
 </head>
 
 Portal provides the ability to deploy an environment on your own and specify the essential components.

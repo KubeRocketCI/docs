@@ -10,7 +10,7 @@ sidebar_label: "Argo CD"
 # Guide: Microsoft Entra SSO Integration With Argo CD
 
 <head>
-  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/microsoft-entra/argo-cd-authentication/" />
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/microsoft-entra/argo-cd-authentication" />
 </head>
 
 This guide provides instructions on how to configure OIDC authentication for the Argo CD using Microsoft Entra as the Identity Provider.

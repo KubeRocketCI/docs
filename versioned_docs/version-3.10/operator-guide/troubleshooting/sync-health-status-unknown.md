@@ -10,7 +10,7 @@ sidebar_label: "Sync & Health Status"
 # Sync and Health Status Unknown
 
 <head>
-  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/troubleshooting/sync-health-status-unknown/" />
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/troubleshooting/sync-health-status-unknown" />
 </head>
 
 ## Problem

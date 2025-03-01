@@ -1,7 +1,7 @@
 # CD Pipeline Details
 
 <head>
-  <link rel="canonical" href="https://docs.kuberocketci.io/docs/user-guide/cd-pipeline-details/" />
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/user-guide/cd-pipeline-details" />
 </head>
 
 **CD Pipeline (Continuous Delivery Pipeline)** - KubeRocketCI business entity that describes the whole delivery process of the selected application set via the respective stages.

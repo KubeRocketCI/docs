@@ -10,7 +10,7 @@ description: "Explore integration capabilities in KubeRocketCI, from container r
 # Configuration Overview: Integrations and Features
 
 <head>
-  <link rel="canonical" href="https://docs.kuberocketci.io/docs/user-guide/configuration-overview/" />
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/user-guide/configuration-overview" />
 </head>
 
 The Configuration tab of the KubeRocketCI portal is designed to integrate KubeRocketCI with third-party components. In this page you will get a brief overview of all the sections presented in the Configuration tab.

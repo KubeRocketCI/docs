@@ -10,7 +10,7 @@ sidebar_label: "Configure AWS WAF With Terraform"
 # Configure AWS WAF With Terraform
 
 <head>
-  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/infrastructure-providers/aws/waf-tf-configuration/" />
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/infrastructure-providers/aws/waf-tf-configuration" />
 </head>
 
 This page contains accurate information on how to configure [AWS WAF](https://aws.amazon.com/waf/) using Terraform with the aim to have a secured traffic exposure and to prevent the Host Header vulnerabilities.

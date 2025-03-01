@@ -8,7 +8,7 @@ sidebar_label: "Working With Documentation"
 # Working With Documentation
 
 <head>
-  <link rel="canonical" href="https://docs.kuberocketci.io/docs/developer-guide/documentation-guide/" />
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/developer-guide/documentation-guide" />
 </head>
 
 This section outlines the necessary steps to start developing the KubeRocketCI documentation using Docusaurus.

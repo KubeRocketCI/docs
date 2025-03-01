@@ -10,7 +10,7 @@ description: "Discover how to manage Git Server integrations in KubeRocketCI for
 # Manage Git Servers
 
 <head>
-  <link rel="canonical" href="https://docs.kuberocketci.io/docs/user-guide/git-server-overview/" />
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/user-guide/git-server-overview" />
 </head>
 
 Git Server is responsible for integration with Version Control System, whether it is GitHub, GitLab, Bitbucket, or Gerrit.

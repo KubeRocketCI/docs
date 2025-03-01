@@ -10,7 +10,7 @@ sidebar_label: "Codebase Creation Issues"
 # Codebase Creation Issues
 
 <head>
-  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/troubleshooting/codebase-creation-issues/" />
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/troubleshooting/codebase-creation-issues" />
 </head>
 
 This troubleshooting page covers issues related to codebases.

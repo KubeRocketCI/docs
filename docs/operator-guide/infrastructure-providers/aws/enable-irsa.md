@@ -10,7 +10,7 @@ sidebar_label: "Associate IAM Roles With Service Accounts"
 # Associate IAM Roles With Service Accounts
 
 <head>
-  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/infrastructure-providers/aws/enable-irsa/" />
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/infrastructure-providers/aws/enable-irsa" />
 </head>
 
 This page contains information on how to associate an IAM role with the service account (IRSA).

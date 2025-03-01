@@ -11,7 +11,7 @@ import TabItem from '@theme/TabItem';
 # Add Git Server
 
 <head>
-  <link rel="canonical" href="https://docs.kuberocketci.io/docs/user-guide/add-git-server/" />
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/user-guide/add-git-server" />
 </head>
 
 This guide outlines the steps for integrating KubeRocketCI with GitLab, GitHub, or Bitbucket, enabling seamless CI/CD workflows across these version control platforms.

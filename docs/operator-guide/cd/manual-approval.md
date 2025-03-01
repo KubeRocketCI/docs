@@ -8,7 +8,7 @@ sidebar_label: "Manual Approval in Pipelines"
 # Manual Approval in Pipelines
 
 <head>
-  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/cd/manual-approval/" />
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/cd/manual-approval" />
 </head>
 
 The manual approval feature gives users a smooth and controlled process of promoting applications from lower, non-critical environments, such as development or QA, to mission-critical environments like production. Additionally, it ensures that only thoroughly tested and verified changes are deployed to production, minimizing the risk of causing errors or instability.

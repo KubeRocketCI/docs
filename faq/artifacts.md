@@ -10,7 +10,7 @@ This page contains a list of frequently asked questions related to artifact mana
 ### How Does Artifact Versioning Work?
 
 <head>
-  <link rel="canonical" href="https://docs.kuberocketci.io/docs/faq/artifacts/" />
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/faq/artifacts" />
 </head>
 
 Artifact versioning in KubeRocketCI is designed to ensure each build and deployment can be uniquely identified, managed, and traced back to its source.

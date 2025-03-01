@@ -10,7 +10,7 @@ sidebar_label: "Integrate SonarQube"
 # Integrate SonarQube
 
 <head>
-  <link rel="canonical" href="https://docs.kuberocketci.io/docs/quick-start/integrate-sonarcloud/" />
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/quick-start/integrate-sonarcloud" />
 </head>
 
 It is essential for KubeRocketCI to have SonarQube integrated with the platform as all the pipelines include the `sonar` step.

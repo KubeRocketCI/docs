@@ -1,7 +1,7 @@
 # How Can I Access Application Logs?
 
 <head>
-  <link rel="canonical" href="https://docs.kuberocketci.io/faq/how-to/developer/access-application-logs/" />
+  <link rel="canonical" href="https://docs.kuberocketci.io/faq/how-to/developer/access-application-logs" />
 </head>
 
 There are two options to view application logs:

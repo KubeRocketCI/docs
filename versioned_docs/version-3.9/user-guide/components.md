@@ -10,7 +10,7 @@ description: "Explore the essentials of codebases and onboarding strategies in K
 # KubeRocketCI Components: Codebases and Onboarding Strategies
 
 <head>
-  <link rel="canonical" href="https://docs.kuberocketci.io/docs/user-guide/components/" />
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/user-guide/components" />
 </head>
 
 In this section, we will introduce you to the different types of codebases and strategies for onboarding codebases onto the KubeRocketCI.

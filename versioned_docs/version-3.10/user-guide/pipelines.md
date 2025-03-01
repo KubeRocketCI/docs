@@ -10,7 +10,7 @@ description: "Optimize CI/CD workflows with KubeRocketCI's Pipelines section, a 
 # Pipelines Overview
 
 <head>
-  <link rel="canonical" href="https://docs.kuberocketci.io/docs/user-guide/pipelines/" />
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/user-guide/pipelines" />
 </head>
 
 Pipelines are integral part of any CI/CD. They are involved in code code builds, reviews, and deployments. Such big variety of pipelines result in a demand of having a single place where the pipelines can be managed. For this purpose, the Pipelines section was added to the KubeRocketCI portal.

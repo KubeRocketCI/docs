@@ -10,7 +10,7 @@ sidebar_label: "OpenSearch"
 # Guide: Microsoft Entra SSO Integration With OpenSearch
 
 <head>
-  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/microsoft-entra/opensearch-authentication/" />
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/microsoft-entra/opensearch-authentication" />
 </head>
 
 This guide provides instructions on how to configure OpenSearch with OpenID Connect (OIDC) authentication using Microsoft Entra as the Identity Provider (IdP).

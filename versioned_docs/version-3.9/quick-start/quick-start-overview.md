@@ -1,7 +1,7 @@
 # Quick Start: Overview
 
 <head>
-  <link rel="canonical" href="https://docs.kuberocketci.io/docs/quick-start/quick-start-overview/" />
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/quick-start/quick-start-overview" />
 </head>
 
 This page serves as an introductory part of the Quick Start guide. It outlines the core steps and reasons to perform them.

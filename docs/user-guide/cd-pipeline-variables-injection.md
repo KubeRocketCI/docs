@@ -10,7 +10,7 @@ description: "Explore variable injection in KubeRocketCI deploy pipelines for dy
 # Inject Variables Into Deploy Pipelines
 
 <head>
-  <link rel="canonical" href="https://docs.kuberocketci.io/docs/user-guide/cd-pipeline-variables-injection/" />
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/user-guide/cd-pipeline-variables-injection" />
 </head>
 
 KubeRocketCI offers a robust set of features to build highly customizable CI/CD workflows. One of the key features is variable injection, which enables the parametrization of deploy pipelines.

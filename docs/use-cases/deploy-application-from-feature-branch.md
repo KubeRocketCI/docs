@@ -10,7 +10,7 @@ sidebar_label: "Deploy Application From a Feature Branch"
 # Deploying Feature Branches With KubeRocketCI: A Comprehensive Guide for Efficient Application Testing and Deployment
 
 <head>
-  <link rel="canonical" href="https://docs.kuberocketci.io/docs/use-cases/deploy-application-from-feature-branch/" />
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/use-cases/deploy-application-from-feature-branch" />
 </head>
 
 Deploying feature branches is crucial for testing activities, including manual testing of the product's functionality, running quality gates, and verifying dependencies or integrations with other components.

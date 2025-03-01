@@ -13,7 +13,7 @@ import TabItem from '@theme/TabItem';
 # Upgrade EDP v3.4 to 3.5
 
 <head>
-  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/upgrade/upgrade-edp-3.5/" />
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/upgrade/upgrade-edp-3.5" />
 </head>
 
 

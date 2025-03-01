@@ -10,7 +10,7 @@ sidebar_label: "Deploy Application With Custom Build Tool/Framework"
 # Deploy Application With Custom Build Tool/Framework
 
 <head>
-  <link rel="canonical" href="https://docs.kuberocketci.io/docs/use-cases/tekton-custom-pipelines/" />
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/use-cases/tekton-custom-pipelines" />
 </head>
 
 This use case demonstrates how to implement custom CI/CD pipelines within the KubeRocketCI platform to address project-specific requirements.

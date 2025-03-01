@@ -10,7 +10,7 @@ sidebar_label: "Forbidden Messages"
 # Forbidden Messages on the Overview Page
 
 <head>
-  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/troubleshooting/forbidden-messages/" />
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/troubleshooting/forbidden-messages" />
 </head>
 
 ## Problem

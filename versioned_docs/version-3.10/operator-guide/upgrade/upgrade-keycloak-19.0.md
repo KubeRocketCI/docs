@@ -10,7 +10,7 @@ sidebar_label: "Upgrade Keycloak to 19.0"
 # Upgrade Keycloak v17.0 to 19.0
 
 <head>
-  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/upgrade/upgrade-keycloak-19.0/" />
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/upgrade/upgrade-keycloak-19.0" />
 </head>
 
 Starting from Keycloak v.18.x.x, the Keycloak server has been moved from the Wildfly (JBoss) Application Server to [Quarkus](https://quarkus.io/) framework and is called Keycloak.X.

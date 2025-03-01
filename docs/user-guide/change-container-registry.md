@@ -10,7 +10,7 @@ description: "Guidelines for transitioning to a different container registry wit
 # Change Container Registry
 
 <head>
-  <link rel="canonical" href="https://docs.kuberocketci.io/docs/user-guide/change-container-registry/" />
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/user-guide/change-container-registry" />
 </head>
 
 Modifying container registry settings may be necessary. This section provides clear guidelines for transitioning to a different registry.

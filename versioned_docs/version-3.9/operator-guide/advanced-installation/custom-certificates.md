@@ -8,7 +8,7 @@ sidebar_label: "Custom Certificates"
 # Custom Certificates
 
 <head>
-  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/advanced-installation/custom-certificates/" />
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/advanced-installation/custom-certificates" />
 </head>
 
 Familiarize yourself with the detailed instructions on adding certificates to KubeRocketCI resources as well as with the respective setup for Keycloak.

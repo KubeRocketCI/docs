@@ -10,7 +10,7 @@ sidebar_label: "Create Application"
 # Create Application
 
 <head>
-  <link rel="canonical" href="https://docs.kuberocketci.io/docs/quick-start/create-application/" />
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/quick-start/create-application" />
 </head>
 
 In KubeRocketCI, all software components, such as applications, libraries, Terraform infrastructures, and automated tests, are referred to as codebases. KubeRocketCI provides flexible methods for scaffolding these components.

@@ -10,7 +10,7 @@ sidebar_label: "Scaling with Karpenter and KEDA"
 # Efficient Kubernetes Autoscaling with Karpenter and KEDA: A Comprehensive Guide
 
 <head>
-  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/kubernetes-cluster-scaling/namespace-and-cluster-autoscaling/" />
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/kubernetes-cluster-scaling/namespace-and-cluster-autoscaling" />
 </head>
 
 In modern cloud environments, efficient resource management is essential to maintain performance while minimizing costs. This documentation provides a step-by-step guide to configuring **pods and cluster autoscaling** in a Kubernetes environment using **Karpenter** and **KEDA**.

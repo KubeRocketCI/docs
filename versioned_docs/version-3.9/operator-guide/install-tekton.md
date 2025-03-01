@@ -10,7 +10,7 @@ sidebar_label: "Install Tekton"
 # Install Tekton
 
 <head>
-  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/install-tekton/" />
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/install-tekton" />
 </head>
 
 EPAM KubeRocketCI uses Tekton resources, such as Tasks, Pipelines, Triggers, Interceptors, and Chains for running the CI/CD pipelines.

@@ -8,7 +8,7 @@ sidebar_label: "Install Capsule"
 # Install Capsule
 
 <head>
-  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/advanced-installation/capsule/" />
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/advanced-installation/capsule" />
 </head>
 
 This article explains how the KubeRocketCI leverages Capsule capabilities to enable isolation for both the [core](../install-kuberocketci.md) platform components and the business applications [workload](../../user-guide/add-cd-pipeline.md).

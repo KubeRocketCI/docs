@@ -10,7 +10,7 @@ sidebar_label: "Manage Clusters"
 # Manage GitOps
 
 <head>
-  <link rel="canonical" href="https://docs.kuberocketci.io/docs/user-guide/gitops/" />
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/user-guide/gitops" />
 </head>
 
 This page is dedicated to the `GitOps` section of the `Configuration` tab, the process of establishing the GitOps repository, outline benefits it extends to users within the platform capabilities. GitOps, short for "Git Operations", is a modern approach to managing and automating infrastructure and application deployments. In GitOps, the desired state of your environment is declared and stored in a Git repository. With GitOps, you can ensure that your infrastructure and applications are always in sync with your intended configurations and readily adapt to changing requirements.

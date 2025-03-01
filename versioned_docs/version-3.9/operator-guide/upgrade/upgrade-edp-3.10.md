@@ -13,7 +13,7 @@ import TabItem from '@theme/TabItem';
 # Upgrade KubeRocketCI v3.9 to 3.10
 
 <head>
-  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/upgrade/upgrade-edp-3.10/" />
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/upgrade/upgrade-edp-3.10" />
 </head>
 
 This section provides detailed instructions for upgrading KubeRocketCI to version 3.10. Follow the steps and requirements outlined below:

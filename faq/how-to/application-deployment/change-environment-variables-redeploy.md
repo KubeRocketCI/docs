@@ -1,7 +1,7 @@
 # How to Change Variables for an Environment and Redeploy with Updated Variables?
 
 <head>
-  <link rel="canonical" href="https://docs.kuberocketci.io/faq/how-to/application-deployment/change-environment-variables-redeploy/" />
+  <link rel="canonical" href="https://docs.kuberocketci.io/faq/how-to/application-deployment/change-environment-variables-redeploy" />
 </head>
 
 

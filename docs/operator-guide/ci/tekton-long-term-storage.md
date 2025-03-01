@@ -11,7 +11,7 @@ import TabItem from '@theme/TabItem';
 # Tekton Long-Term Log Storage
 
 <head>
-  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/ci/tekton-long-term-storage/" />
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/ci/tekton-long-term-storage" />
 </head>
 
 KubeRocketCI Portal provides the capability to view long-term logs for pipelines. The long-term logs are stored in the OpenSearch cluster and can be viewed in the KubeRocketCI Portal after pipeline cleanup or deletion. This guide describes how to configure and view long-term logs in the KubeRocketCI Portal.

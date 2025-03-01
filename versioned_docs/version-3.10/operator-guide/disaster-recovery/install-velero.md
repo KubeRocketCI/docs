@@ -8,7 +8,7 @@ sidebar_label: "Install Velero"
 # Install Velero
 
 <head>
-  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/disaster-recovery/install-velero/" />
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/disaster-recovery/install-velero" />
 </head>
 
 [Velero](https://velero.io/) is an open source tool to safely back up, recover, and migrate Kubernetes clusters and persistent volumes.

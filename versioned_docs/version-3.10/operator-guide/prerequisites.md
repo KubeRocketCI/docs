@@ -10,7 +10,7 @@ sidebar_label: "Prerequisites Overview"
 # Overview
 
 <head>
-  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/prerequisites/" />
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/prerequisites" />
 </head>
 
 Before installing KubeRocketCI via Helm Chart, make sure to complete the following steps:

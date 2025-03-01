@@ -10,7 +10,7 @@ sidebar_label: "Overview"
 # Microsoft Entra OIDC Authentication: Overview
 
 <head>
-  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/microsoft-entra/oidc-authentication-overview/" />
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/microsoft-entra/oidc-authentication-overview" />
 </head>
 
 OpenID Connect (OIDC) is a standard protocol for enabling secure and seamless authentication across applications. OIDC ensures consistent identity management, enhances security, and streamlines user access to critical services.

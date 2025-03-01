@@ -10,7 +10,7 @@ sidebar_label: "ReportPortal Keycloak Integration"
 # Integrating ReportPortal with Keycloak: A Step-by-Step Guide
 
 <head>
-  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/project-management-and-reporting/reportportal-keycloak/" />
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/project-management-and-reporting/reportportal-keycloak" />
 </head>
 
 Follow the steps below to integrate the ReportPortal with Keycloak.

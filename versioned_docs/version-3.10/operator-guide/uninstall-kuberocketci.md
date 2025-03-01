@@ -10,7 +10,7 @@ sidebar_label: "Uninstall KubeRocketCI"
 # Uninstall KubeRocketCI
 
 <head>
-  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/uninstall-kuberocketci/" />
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/uninstall-kuberocketci" />
 </head>
 
 This guide offers comprehensive steps for effectively removing the KubeRocketCI from your system.

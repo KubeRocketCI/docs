@@ -10,7 +10,7 @@ description: "Explore how to manage libraries in KubeRocketCI, including editing
 # Manage Libraries
 
 <head>
-  <link rel="canonical" href="https://docs.kuberocketci.io/docs/user-guide/library/" />
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/user-guide/library" />
 </head>
 
 This section describes the subsequent possible actions that can be performed with the newly added or existing libraries.

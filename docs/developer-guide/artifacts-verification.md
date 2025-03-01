@@ -8,7 +8,7 @@ sidebar_label: "Verification of KubeRocketCI Artifacts"
 # Verification of KubeRocketCI Artifacts
 
 <head>
-  <link rel="canonical" href="https://docs.kuberocketci.io/docs/developer-guide/artifacts-verification/" />
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/developer-guide/artifacts-verification" />
 </head>
 
 This documentation outlines platform SLSA integration and guides verifying image authenticity and provenance.

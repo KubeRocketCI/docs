@@ -8,7 +8,7 @@ sidebar_label: "Install Harbor"
 # Install Harbor
 
 <head>
-  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/artifacts-management/harbor-installation/" />
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/artifacts-management/harbor-installation" />
 </head>
 
 One of the storage options for application images within KubeRocketCI is Harbor, utilized during the application build process.

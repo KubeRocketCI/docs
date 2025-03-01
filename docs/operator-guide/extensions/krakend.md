@@ -12,7 +12,7 @@ import TabItem from '@theme/TabItem';
 # KrakenD Integration
 
 <head>
-  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/extensions/krakend/" />
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/extensions/krakend" />
 </head>
 
 This guide explains how to integrate KrakenD with KubeRocketCI. [KrakenD](https://www.krakend.io/docs/) is a fast, open-source API gateway that helps manage requests, protect sensitive data, and optimize routing. It offers options for service discovery, caching, authorization, and rate limiting, which can be customized for the platform.

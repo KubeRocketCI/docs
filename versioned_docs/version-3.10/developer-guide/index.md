@@ -8,7 +8,7 @@ sidebar_label: "Overview"
 # Overview
 
 <head>
-  <link rel="canonical" href="https://docs.kuberocketci.io/docs/developer-guide/" />
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/developer-guide" />
 </head>
 
 The KubeRocketCI Developer Guide serves as a comprehensive technical resource specifically designed for developers. It offers detailed insights into expanding the functionalities of KubeRocketCI. This section focuses on explaining the development approach and fundamental architectural blueprints that form the basis of the platform's ecosystem.

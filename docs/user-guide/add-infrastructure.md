@@ -10,7 +10,7 @@ description: "Learn how to add, clone, and import infrastructure projects in Kub
 # Add Infrastructure
 
 <head>
-  <link rel="canonical" href="https://docs.kuberocketci.io/docs/user-guide/add-infrastructure/" />
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/user-guide/add-infrastructure" />
 </head>
 
 KubeRocketCI portal allows you to create an application, clone an existing repository with the application to your Version Control System (VCS), or using an external repository and importing an application to the environment.

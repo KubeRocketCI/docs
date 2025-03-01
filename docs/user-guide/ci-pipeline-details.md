@@ -1,7 +1,7 @@
 # CI Pipeline Details
 
 <head>
-  <link rel="canonical" href="https://docs.kuberocketci.io/docs/user-guide/ci-pipeline-details/" />
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/user-guide/ci-pipeline-details" />
 </head>
 
 **CI Pipeline (Continuous Integration Pipeline)** - KubeRocketCI business entity that describes the integration of changes made to a codebase into a single project. The main idea of the CI pipeline is to review the changes in the code submitted through a Version Control System (VCS) and build a new codebase version so that it can be transmitted to the Continuous Delivery Pipeline for the rest of the delivery process.

@@ -1,7 +1,7 @@
 # About the KubeRocketCI Platform
 
 <head>
-  <link rel="canonical" href="https://docs.kuberocketci.io/docs/about-platform/" />
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/about-platform" />
 </head>
 
 **KubeRocketCI (previously known as EPAM Delivery Platform)** is an **open-source** cloud-agnostic SaaS/PaaS solution for software development, licensed under **Apache License 2.0**. It provides a pre-defined set of CI/CD patterns and tools, which allow a user to start product development quickly with established **code review**, **release**, **versioning**, **branching**, **build** processes. These processes include static code analysis, security checks, linters, validators, dynamic feature environments provisioning. Platform consolidates the top Open-Source CI/CD tools by running them on Kubernetes/OpenShift, enabling web/app development in isolated (on-prem) or cloud environments.

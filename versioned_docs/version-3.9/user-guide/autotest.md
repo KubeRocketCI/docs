@@ -10,7 +10,7 @@ description: "Guide to managing autotests in KubeRocketCI, including editing, in
 # Manage Autotests
 
 <head>
-  <link rel="canonical" href="https://docs.kuberocketci.io/docs/user-guide/autotest/" />
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/user-guide/autotest" />
 </head>
 
 This section describes the subsequent possible actions that can be performed with the newly added or existing autotests.
@@ -35,7 +35,7 @@ The added autotest will be listed in the Autotests list allowing you to do the f
 * **Open documentation** - opens the autotest related documentation page.
 * **Enable filtering** - enables filtering by autotest name and namespace where this custom resource is located in.
 * **Selector** - Allows you to select multiple autotets for bulk actions.
-* **Delete selected** - Deletes all selected autotets. This option is only 
+* **Delete selected** - Deletes all selected autotets. This option is only
 * **Create new omponent** - displays the **Create new component** menu.
 * **Actions menu** provides additional options for each individual application:
 * **Edit** - edit the autotest by selecting the options icon next to its name in the autotests list, and then selecting **Edit**. For details see the [Edit Existing Autotest](#edit-existing-autotest) section.

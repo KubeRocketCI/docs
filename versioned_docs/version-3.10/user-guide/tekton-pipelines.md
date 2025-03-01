@@ -10,7 +10,7 @@ description: "KubeRocketCI is a platform that utilizes the Tekton stack to imple
 # KubeRocketCI: Tekton Overview
 
 <head>
-  <link rel="canonical" href="https://docs.kuberocketci.io/docs/user-guide/tekton-pipelines/" />
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/user-guide/tekton-pipelines" />
 </head>
 
 KubeRocketCI is a platform that utilizes the Tekton stack to implement continuous integration and continuous delivery (CI/CD) pipelines, offering access to all Tekton features.

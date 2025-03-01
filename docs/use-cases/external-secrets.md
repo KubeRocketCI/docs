@@ -10,7 +10,7 @@ sidebar_label: "Secured Secrets Management for Application Deployment"
 # Secured Secrets Management for Application Deployment
 
 <head>
-  <link rel="canonical" href="https://docs.kuberocketci.io/docs/use-cases/external-secrets/" />
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/use-cases/external-secrets" />
 </head>
 
 This use case demonstrates the secure management of sensitive data, such as passwords, API keys, and other credentials used by an application during development or production runtime.

@@ -10,7 +10,7 @@ description: "Learn how to add, clone, and import infrastructure projects in Kub
 # Add Infrastructure
 
 <head>
-  <link rel="canonical" href="https://docs.kuberocketci.io/docs/user-guide/add-infrastructure/" />
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/user-guide/add-infrastructure" />
 </head>
 
 KubeRocketCI portal allows you to create an application, clone an existing repository with the application to your Version Control System (VCS), or using an external repository and importing an application to the environment. When an application is created or cloned, the system automatically generates a corresponding repository within the integrated Version Control System. The functionality of the Infrastructure codebase type is to create resources in cloud provider. You can create an Infrastructure [in YAML](#create-infrastructure-in-yaml) or [via the two-step menu](#create-infrastructure-via-ui) in the dialog.

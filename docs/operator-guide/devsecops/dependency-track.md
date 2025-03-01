@@ -11,7 +11,7 @@ import TabItem from '@theme/TabItem';
 # Integrate Dependency-Track
 
 <head>
-  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/devsecops/dependency-track/" />
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/devsecops/dependency-track" />
 </head>
 
 

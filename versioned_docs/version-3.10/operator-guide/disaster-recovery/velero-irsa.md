@@ -8,7 +8,7 @@ sidebar_label: "IAM Roles for Velero"
 # IAM Roles for Velero Kubernetes Service Accounts
 
 <head>
-  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/disaster-recovery/velero-irsa/" />
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/disaster-recovery/velero-irsa" />
 </head>
 
 :::note

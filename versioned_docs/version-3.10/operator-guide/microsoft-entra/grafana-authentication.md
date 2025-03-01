@@ -10,7 +10,7 @@ sidebar_label: "Grafana"
 # Guide: Microsoft Entra SSO Integration With Grafana
 
 <head>
-  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/microsoft-entra/grafana-authentication/" />
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/microsoft-entra/grafana-authentication" />
 </head>
 
 This guide provides instructions on configuring OpenID Connect (OIDC) authentication with Microsoft Entra for Grafana.

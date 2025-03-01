@@ -11,7 +11,7 @@ import TabItem from '@theme/TabItem';
 # SonarQube Integration
 
 <head>
-  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/code-quality/sonarqube/" />
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/code-quality/sonarqube" />
 </head>
 
 This documentation offers detailed guidance on seamlessly integrating SonarQube into KubeRocketCI.

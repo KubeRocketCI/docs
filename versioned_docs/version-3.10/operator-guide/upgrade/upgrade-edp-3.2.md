@@ -10,7 +10,7 @@ sidebar_label: "Upgrade EDP to 3.2"
 # Upgrade EDP v3.1 to 3.2
 
 <head>
-  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/upgrade/upgrade-edp-3.2/" />
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/upgrade/upgrade-edp-3.2" />
 </head>
 
 :::warning

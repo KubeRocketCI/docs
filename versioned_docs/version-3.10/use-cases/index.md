@@ -3,7 +3,7 @@ import { UseCases } from '@site/src/features/use-cases/components/UseCases';
 # KubeRocketCI Use Cases: Practical Scenarios and Solutions
 
 <head>
-  <link rel="canonical" href="https://docs.kuberocketci.io/docs/use-cases/" />
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/use-cases" />
 </head>
 
 The Use Cases section provides useful recommendations of how to operate with the KubeRocketCI tools and manage the

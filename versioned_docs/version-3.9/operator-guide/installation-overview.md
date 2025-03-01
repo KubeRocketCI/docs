@@ -10,7 +10,7 @@ sidebar_label: "Installation Overview"
 # Installation Overview
 
 <head>
-  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/installation-overview/" />
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/installation-overview" />
 </head>
 
 This documentation provides a concise introduction to the KubeRocketCI installation options. KubeRocketCI can be installed using different approaches. Each of them comes with its own benefits:

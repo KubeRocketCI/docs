@@ -10,7 +10,7 @@ sidebar_label: "Install Argo CD"
 # Install Argo CD
 
 <head>
-  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/install-argocd/" />
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/install-argocd" />
 </head>
 
 Review the necessary prerequisites and follow the steps to enable Argo CD within KubeRocketCI.

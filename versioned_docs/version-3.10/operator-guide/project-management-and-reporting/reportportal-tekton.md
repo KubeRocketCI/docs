@@ -10,7 +10,7 @@ sidebar_label: "Tekton Integration"
 # Tekton Integration
 
 <head>
-  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/project-management-and-reporting/reportportal-tekton/" />
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/project-management-and-reporting/reportportal-tekton" />
 </head>
 
 Integrating ReportPortal with Tekton centralizes the management of all automation outcomes and reports, enabling the visualization of metrics and analytics. This integration facilitates team collaboration by associating statistical results, enhancing the overall efficiency and insight into the automation processes.

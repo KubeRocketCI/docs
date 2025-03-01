@@ -8,7 +8,7 @@ sidebar_label: "Kubernetes Deployment"
 # Kubernetes Deployment
 
 <head>
-  <link rel="canonical" href="https://docs.kuberocketci.io/docs/developer-guide/kubernetes-deployment/" />
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/developer-guide/kubernetes-deployment" />
 </head>
 
 This section provides a comprehensive overview of the KubeRocketCI deployment approach on a Kubernetes cluster. KubeRocketCI is designed and functions based on a set of key guiding principles:

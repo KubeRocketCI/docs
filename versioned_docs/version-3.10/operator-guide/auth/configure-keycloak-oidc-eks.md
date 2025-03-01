@@ -11,7 +11,7 @@ import TabItem from '@theme/TabItem';
 # EKS OIDC With Keycloak
 
 <head>
-  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/auth/configure-keycloak-oidc-eks/" />
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/auth/configure-keycloak-oidc-eks" />
 </head>
 
 This article provides the instruction of configuring Keycloak as [OIDC Identity Provider](https://aws.amazon.com/blogs/containers/introducing-oidc-identity-provider-authentication-amazon-eks/) for EKS.

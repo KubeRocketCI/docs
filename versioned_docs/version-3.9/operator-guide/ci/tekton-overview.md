@@ -8,7 +8,7 @@ sidebar_label: "Tekton Overview"
 # Tekton Overview
 
 <head>
-  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/ci/tekton-overview/" />
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/ci/tekton-overview" />
 </head>
 
 KubeRocketCI provides Continuous Integration based on [Tekton](https://tekton.dev/).

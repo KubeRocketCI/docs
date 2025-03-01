@@ -1,7 +1,7 @@
 # How Can I Open the Application Terminal?
 
 <head>
-  <link rel="canonical" href="https://docs.kuberocketci.io/faq/how-to/developer/open-application-terminal/" />
+  <link rel="canonical" href="https://docs.kuberocketci.io/faq/how-to/developer/open-application-terminal" />
 </head>
 
 There are two options to view application logs:

@@ -10,7 +10,7 @@ sidebar_label: "Scaffold and Deploy FastAPI Application"
 # Scaffold and Deploy FastAPI Application
 
 <head>
-  <link rel="canonical" href="https://docs.kuberocketci.io/docs/use-cases/application-scaffolding/" />
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/use-cases/application-scaffolding" />
 </head>
 
 This use case outlines the process of creating and deploying a FastAPI application using KubeRocketCI.

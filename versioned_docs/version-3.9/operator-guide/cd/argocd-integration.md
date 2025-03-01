@@ -11,7 +11,7 @@ import TabItem from '@theme/TabItem';
 # Argo CD Integration
 
 <head>
-  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/cd/argocd-integration/" />
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/cd/argocd-integration" />
 </head>
 
 KubeRocketCI uses Argo CD as a [part of the Continuous Delivery/Continuous Deployment](../../user-guide/cd-pipeline-details.md)

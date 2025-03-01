@@ -11,7 +11,7 @@ import TabItem from '@theme/TabItem';
 # KubeRocketCI Contribution
 
 <head>
-  <link rel="canonical" href="https://docs.kuberocketci.io/docs/developer-guide/edp-workflow/" />
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/developer-guide/edp-workflow" />
 </head>
 
 This page contains the details on the project rules and working process for KubeRocketCI team and contributors. Explore the main points about working with GitHub, following the main commit flow, as well as the details about commit types and message below.

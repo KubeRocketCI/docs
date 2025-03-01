@@ -8,7 +8,7 @@ sidebar_label: "CI Pipeline for Terraform"
 # CI Pipeline for Terraform
 
 <head>
-  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/ci/ci-pipeline-terraform/" />
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/ci/ci-pipeline-terraform" />
 </head>
 
 KubeRocketCI ensures the implemented Terraform support by adding a separate component type called **Infrastructure**. The **Infrastructure** codebase type allows to work with Terraform code that is processed by means of stages in the **Code-Review** and **Build** pipelines.

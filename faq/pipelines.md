@@ -8,7 +8,7 @@ sidebar_position: 2
 This page contains a list of frequently asked questions related to the CI/CD Pipelines management in the KubeRocketCI.
 
 <head>
-  <link rel="canonical" href="https://docs.kuberocketci.io/docs/faq/pipelines/" />
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/faq/pipelines" />
 </head>
 
 ### What Is a Pipeline in KubeRocketCI?

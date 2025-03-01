@@ -10,7 +10,7 @@ description: "Guide to managing autotests in KubeRocketCI, including editing, in
 # Manage Autotests
 
 <head>
-  <link rel="canonical" href="https://docs.kuberocketci.io/docs/user-guide/autotest/" />
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/user-guide/autotest" />
 </head>
 
 This section describes the subsequent possible actions that can be performed with the newly added or existing autotests.

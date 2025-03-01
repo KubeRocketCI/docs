@@ -1,7 +1,7 @@
 # How to Verify the Inclusion of My Changes in a Deployment Version Within KubeRocketCI?
 
 <head>
-  <link rel="canonical" href="https://docs.kuberocketci.io/faq/how-to/developer/verify-changes-in-deployment/" />
+  <link rel="canonical" href="https://docs.kuberocketci.io/faq/how-to/developer/verify-changes-in-deployment" />
 </head>
 
 To ensure that your changes are included into the deployment version, follow the steps below:

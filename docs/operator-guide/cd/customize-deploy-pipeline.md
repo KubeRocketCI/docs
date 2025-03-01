@@ -8,7 +8,7 @@ sidebar_label: "Customize Deploy Pipeline"
 # Customize Deploy Pipeline
 
 <head>
-  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/cd/customize-deploy-pipeline/" />
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/cd/customize-deploy-pipeline" />
 </head>
 
 When deploying applications into environments, it's important to automate both `pre-deployment` and `post-deployment` steps.

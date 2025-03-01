@@ -10,7 +10,7 @@ description: "Guide to managing Quick Links in KubeRocketCI, enabling easy acces
 # Manage Quick Links
 
 <head>
-  <link rel="canonical" href="https://docs.kuberocketci.io/docs/user-guide/quick-links/" />
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/user-guide/quick-links" />
 </head>
 
 The Links section is designed to store all external references in one place. These links are displayed directly on the [Overview](index.md) page of the KubeRocketCI portal. Additionally, some links are also shown on the Component and Environment sections.

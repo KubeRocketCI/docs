@@ -247,7 +247,7 @@ The `cert-manager` should be configured to validate Wildcard certificates using 
 1. Create the [ClusterIssuer](https://cert-manager.io/docs/configuration/acme/) resource for Let's Encrypt Staging and Prod environments that signs a Certificate using `cert-manager`.
 
     :::note
-      Let's Encrypt has a [limit](https://letsencrypt.org/docs/duplicate-certificate-limit/) of duplicate certificates in the Prod environment. Therefore, a `ClusterIssuer` has been created for [Let's Encrypt Staging](https://letsencrypt.org/docs/staging-environment/) environment. By default, Let's Encrypt Staging certificates will not be trusted in your browser. The certificate validation cannot be tested in the Let's Encrypt Staging environment.
+      Let's Encrypt has a [limit](https://letsencrypt.org/docs/rate-limits/) of duplicate certificates in the Prod environment. Therefore, a `ClusterIssuer` has been created for [Let's Encrypt Staging](https://letsencrypt.org/docs/staging-environment/) environment. By default, Let's Encrypt Staging certificates will not be trusted in your browser. The certificate validation cannot be tested in the Let's Encrypt Staging environment.
     :::
 
     * Change `user@example.com` with your contact email.

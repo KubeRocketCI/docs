@@ -133,8 +133,6 @@ In order to adjust the Jira server integration, add the JiraServer CR by perform
       3. **Add Comments:** Required for adding external links and comments to issues.
     :::
 
-
-
 ## Enable Jira During Platform Deployment
 
 KubeRocketCI offers the capability to incorporate Jira integration as part of its deployment process. To follow this approach, please review the following parameters of the [values.yaml](https://github.com/epam/edp-install/blob/release/3.9/deploy-templates/values.yaml#L145) file. Enabling the `jira.integration` parameter creates the following custom resources:

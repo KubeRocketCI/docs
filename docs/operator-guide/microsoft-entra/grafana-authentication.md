@@ -7,7 +7,6 @@ sidebar_label: "Grafana"
 ---
 <!-- markdownlint-disable MD025 -->
 
-
 # Guide: Microsoft Entra SSO Integration With Grafana
 
 <head>

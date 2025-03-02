@@ -100,7 +100,6 @@ After the changes are applied, the tekton-pipelines metrics will be available in
 
     ![Tekton dashboard](../../assets/operator-guide/grafana-dashboard-is-created.png "Tekton dashboard is created")
 
-
 ## Related Articles
 
 * [Install Tekton](../install-tekton.md)

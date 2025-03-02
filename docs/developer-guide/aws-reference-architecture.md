@@ -5,7 +5,6 @@ sidebar_label: "KubeRocketCI Reference Architecture on AWS"
 ---
 <!-- markdownlint-disable MD025 -->
 
-
 # KubeRocketCI Reference Architecture on AWS
 
 <head>

@@ -301,7 +301,6 @@ This section provides the information on how to test the integration with Argo C
 
     </details>
 
-
 2. Check that your new Application is added to the Argo CD UI under the `edp` Project scope.
 
 ## Deploy Argo CD Application to Remote Cluster (Optional)

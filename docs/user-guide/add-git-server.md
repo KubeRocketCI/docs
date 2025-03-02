@@ -119,6 +119,7 @@ For [Bitbucket](https://support.atlassian.com/bitbucket-cloud/docs/app-passwords
    ```bash
    echo -n "username:AppPassword" | base64
    ```
+
    :::
 
     <Tabs

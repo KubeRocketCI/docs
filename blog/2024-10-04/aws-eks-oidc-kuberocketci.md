@@ -119,7 +119,7 @@ Keycloak is an open-source identity and access management solution for modern ap
 
 The first step to enable OIDC authentication to the AWS EKS cluster using Keycloak is to set up Keycloak with the necessary configurations, such as realm, client, groups, and other settings. For this purpose, we will use the [kuberocketci-rbac](https://github.com/epam/edp-cluster-add-ons/tree/main/clusters/core/addons/kuberocketci-rbac) Helm chart available in the [edp-cluster-add-ons](https://github.com/epam/edp-cluster-add-ons) repository.
 
-1. Clone the forked [edp-cluster-add-ons](https://github.com/epam/edp-cluster-add-on) repository and navigate to the `clusters/core/addons/kuberocketci-rbac` directory.
+1. Clone the forked [edp-cluster-add-ons](https://github.com/epam/edp-cluster-add-ons) repository and navigate to the `clusters/core/addons/kuberocketci-rbac` directory.
 
 2. In the `values.yaml` file, set the `kubernetes.enabled` field to `true` to enable the creation of the necessary Keycloak resources:
 

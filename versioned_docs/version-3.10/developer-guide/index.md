@@ -94,22 +94,22 @@ Helm chart artifacts are available in repository:
 
 Our DockerHub repository hosts Docker images for various platform components:
 
-- [CD Pipeline Operator](https://hub.docker.com/repository/docker/epamedp/cd-pipeline-operator/)
-- [Codebase Operator](https://hub.docker.com/repository/docker/epamedp/codebase-operator/)
+- [CD Pipeline Operator](https://hub.docker.com/r/epamedp/cd-pipeline-operator/)
+- [Codebase Operator](https://hub.docker.com/r/epamedp/codebase-operator/)
 - [EDP Gerrit](https://hub.docker.com/r/epamedp/edp-gerrit)
-- [Gerrit Operator](https://hub.docker.com/repository/docker/epamedp/gerrit-operator)
-- [Keycloak Operator](https://hub.docker.com/repository/docker/epamedp/keycloak-operator/)
-- [KubeRocketCI Portal](https://hub.docker.com/repository/docker/epamedp/edp-headlamp/)
-- [Nexus Operator](https://hub.docker.com/repository/docker/epamedp/nexus-operator/)
-- [Sonar Operator](https://hub.docker.com/repository/docker/epamedp/sonar-operator/)
-- [Tekton](https://hub.docker.com/repository/docker/epamedp/edp-tekton)
-- [Tekton Cache](https://hub.docker.com/repository/docker/epamedp/tekton-cache)
-- [Tekton Custom Task](https://hub.docker.com/repository/docker/epamedp/tekton-custom-task)
+- [Gerrit Operator](https://hub.docker.com/r/epamedp/gerrit-operator)
+- [Keycloak Operator](https://hub.docker.com/r/epamedp/keycloak-operator/)
+- [KubeRocketCI Portal](https://hub.docker.com/r/epamedp/edp-headlamp/)
+- [Nexus Operator](https://hub.docker.com/r/epamedp/nexus-operator/)
+- [Sonar Operator](https://hub.docker.com/r/epamedp/sonar-operator/)
+- [Tekton](https://hub.docker.com/r/epamedp/edp-tekton/)
+- [Tekton Cache](https://hub.docker.com/r/epamedp/tekton-cache/)
+- [Tekton Custom Task](https://hub.docker.com/r/epamedp/tekton-custom-task/)
 
 ## Social Media
 
 To maintain an active presence on social media channels and share valuable content about our software releases, we continuously publish materials across the following media:
 
 - [SolutionsHub](https://solutionshub.epam.com/solution/kuberocketci)
-- [Medium](https://medium.com/epam-delivery-platform)
+- [Medium](https://medium.com/kuberocketci)
 - [YouTube](https://www.youtube.com/@theplatformteam)

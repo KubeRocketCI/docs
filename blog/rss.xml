@@ -261,7 +261,7 @@
 </li>
 <li>
 <p>After applying the changes, the KubeRocketCI Portal will be configured to use Microsoft Entra OIDC authentication. Users will be able to log in to the Portal using <strong>Sign In</strong> option.</p>
-<p><img decoding="async" loading="lazy" alt="Sign In" src="https://docs.kuberocketci.io/assets/images/sign-in-fc29d9aa4a004d68c4b951366b54cba9.png" width="3364" height="1660" class="img_ev3q"></p>
+<p><img decoding="async" loading="lazy" alt="Sign In" src="https://docs.kuberocketci.io/assets/images/sign-in-61897514acf347a032e4a3eaa2582c2d.png" width="3364" height="1660" class="img_ev3q"></p>
 </li>
 </ol>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="conclusion">Conclusion<a href="https://docs.kuberocketci.io/blog/integrating-oidc-authentication-microsoft-entra-aws-eks#conclusion" class="hash-link" aria-label="Direct link to Conclusion" title="Direct link to Conclusion">​</a></h2>
@@ -335,7 +335,7 @@
 <p>The first step to enable OIDC authentication to the AWS EKS cluster using Keycloak is to set up Keycloak with the necessary configurations, such as realm, client, groups, and other settings. For this purpose, we will use the <a href="https://github.com/epam/edp-cluster-add-ons/tree/main/clusters/core/addons/kuberocketci-rbac" target="_blank" rel="noopener noreferrer">kuberocketci-rbac</a> Helm chart available in the <a href="https://github.com/epam/edp-cluster-add-ons" target="_blank" rel="noopener noreferrer">edp-cluster-add-ons</a> repository.</p>
 <ol>
 <li>
-<p>Clone the forked <a href="https://github.com/epam/edp-cluster-add-on" target="_blank" rel="noopener noreferrer">edp-cluster-add-ons</a> repository and navigate to the <code>clusters/core/addons/kuberocketci-rbac</code> directory.</p>
+<p>Clone the forked <a href="https://github.com/epam/edp-cluster-add-ons" target="_blank" rel="noopener noreferrer">edp-cluster-add-ons</a> repository and navigate to the <code>clusters/core/addons/kuberocketci-rbac</code> directory.</p>
 </li>
 <li>
 <p>In the <code>values.yaml</code> file, set the <code>kubernetes.enabled</code> field to <code>true</code> to enable the creation of the necessary Keycloak resources:</p>
@@ -471,7 +471,7 @@
 </li>
 <li>
 <p>After applying the changes, the KubeRocketCI Portal will be configured to use Keycloak OIDC authentication. Users will be able to log in to the Portal using <strong>Sign In</strong> option.</p>
-<p><img decoding="async" loading="lazy" alt="Sign In" src="https://docs.kuberocketci.io/assets/images/sign-in-fc29d9aa4a004d68c4b951366b54cba9.png" width="3364" height="1660" class="img_ev3q"></p>
+<p><img decoding="async" loading="lazy" alt="Sign In" src="https://docs.kuberocketci.io/assets/images/sign-in-61897514acf347a032e4a3eaa2582c2d.png" width="3364" height="1660" class="img_ev3q"></p>
 </li>
 </ol>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="conclusion">Conclusion<a href="https://docs.kuberocketci.io/blog/advanced-aws-eks-management-oidc-keycloak#conclusion" class="hash-link" aria-label="Direct link to Conclusion" title="Direct link to Conclusion">​</a></h2>

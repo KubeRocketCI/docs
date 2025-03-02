@@ -28,12 +28,11 @@ In KubeRocketCI, RPM support allows to collect applications, store them as Nexus
 - **Customizable Task Execution**: Offers flexible configuration of task execution sequences.
 - **No UI**: Operates entirely without a graphical user interface, relying on code-based configurations.
 
-#### AWX Operator:
+#### AWX Operator
 
 - **User-Friendly Interface**: Features a convenient UI for managing configurations and tasks.
 - **Partial Code-Based Configurations**: Retrieves some configurations (such as Ansible tasks) directly from the repository.
 - **UI-Based Configuration**: All configurations are performed within the graphical user interface.
-
 
 ## Default Approach
 
@@ -171,7 +170,6 @@ Below is a structure of a GitOps repository designed for deploying RPM packages:
     ```
     </details>
 
-
 The main configuration files description:
 
 - **nexus.repo**: Contains the configuration for connecting to Nexus, to pull artifacts to the instance.
@@ -246,7 +244,6 @@ To set up RPM integration using AWX tool, follow the steps below. Completing the
       ```
     </details>
 
-
     Here is a breakdown of the scheme above:
 
     * **package-install.yaml**: This is the main file that refers to playbooks located in the **roles** directory.
@@ -314,7 +311,6 @@ To set up RPM integration using AWX tool, follow the steps below. Completing the
     :::
 
       ![AWX template](../../assets/operator-guide/rpm/awx-template.png "AWX template")
-
 
 4. Create application with the **rpm-package** deployment option. Refer to the [Add Application](../../user-guide/add-application.md) page for more details:
 

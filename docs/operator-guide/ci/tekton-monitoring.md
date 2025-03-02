@@ -90,16 +90,15 @@ As soon as the dashboard procedure is completed, you can track the newcoming met
 The [edp-install](https://github.com/epam/edp-install/) helm chart allows to integrate tekton-pipelines metrics with the Prometheus and Grafana stack through the `edp-tekton.grafana.enabled` field in [values.yaml](https://github.com/epam/edp-install/blob/d149baeb9756bdf113996620630f9b04f896e08d/deploy-templates/values.yaml#L309) file.
 To enable integration, set the `edp-tekton.grafana.enabled` field to `true` and apply the changes to the cluster.
 
-    ```yaml values.yaml
-    edp-tekton:
-      grafana:
-        enabled: true
-    ```
+  ```yaml values.yaml
+  edp-tekton:
+    grafana:
+      enabled: true
+  ```
 
 After the changes are applied, the tekton-pipelines metrics will be available in the `KRCI Tekton overview` Grafana dashboard:
 
     ![Tekton dashboard](../../assets/operator-guide/grafana-dashboard-is-created.png "Tekton dashboard is created")
-
 
 ## Related Articles
 

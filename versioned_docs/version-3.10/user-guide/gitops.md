@@ -7,7 +7,6 @@ sidebar_label: "Manage Clusters"
 ---
 <!-- markdownlint-disable MD025 -->
 
-
 # Manage GitOps
 
 <head>

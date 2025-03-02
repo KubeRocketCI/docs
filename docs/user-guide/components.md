@@ -7,7 +7,6 @@ description: "Explore the essentials of codebases and onboarding strategies in K
 ---
 <!-- markdownlint-disable MD025 -->
 
-
 # Components: Codebases and Onboarding Strategies
 
 <head>

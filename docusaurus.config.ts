@@ -13,7 +13,7 @@ const siteStructuredData = {
       description:
         'Explore KubeRocketCI Documentation for detailed guides, tutorials, and insights into KubeRocketCI CI/CD flow, platform components, and add-ons. Learn how to enhance your DevOps practices with KubeRocketCI.',
       sameAs: [
-        'https://medium.com/epam-delivery-platform',
+        'https://medium.com/kuberocketci',
         'https://hub.docker.com/u/epamedp',
         'https://epam.github.io/edp-install/',
       ],

@@ -54,8 +54,8 @@ To customize your deployment pipeline, follow the steps below:
 5. (Optional) In case you need to implement custom deployment in a remote cluster, do the following:
 
     * Connect the KubeRocketCI platform with the remote cluster if it is not integrated yet. Please refer to the [Add Cluster](../../user-guide/add-cluster.md) page for more details;
-    * Mount the secret to the `run-quality-gate` resource by changing the [volumes](https://github.com/epam/edp-tekton/blob/master/charts/pipelines-library/templates/tasks/run-quality-gate.yaml#L19) and [volumeMounts](https://github.com/epam/edp-tekton/blob/master/charts/pipelines-library/templates/tasks/run-quality-gate.yaml#L27) sections;
-    * Switch the [context](https://github.com/epam/edp-tekton/blob/master/charts/pipelines-library/templates/tasks/run-quality-gate.yaml#L32) by specifying the appropriate kube config file of the `run-quality-gate` resource;
+    * Mount the secret to the `run-quality-gate` resource by changing the [volumes](https://github.com/epam/edp-tekton/blob/release/0.16/charts/pipelines-library/templates/tasks/cd/run-quality-gate.yaml#L9) and [volumeMounts](https://github.com/epam/edp-tekton/blob/release/0.16/charts/pipelines-library/templates/tasks/cd/run-quality-gate.yaml#L40) sections;
+    * Switch the [context](https://github.com/epam/edp-tekton/blob/release/0.16/charts/pipelines-library/templates/tasks/cd/run-quality-gate.yaml#L33) by specifying the appropriate kube config file of the `run-quality-gate` resource;
     * On the `Create stage` step on the KubeRocketCI portal, select the appropriate cluster in the `cluster` section:
 
       ![Select cluster](../../assets/user-guide/select-cluster.png "Select cluster")

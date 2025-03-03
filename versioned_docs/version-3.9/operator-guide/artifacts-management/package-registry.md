@@ -1,7 +1,7 @@
 ---
-title: "Sonatype Nexus Repository OSS Integration"
-description: "Comprehensive instructions for integrating Sonatype Nexus Repository OSS with KubeRocketCI for centralized artifact management."
-sidebar_label: "Sonatype Nexus Integration"
+title: "Package Registry"
+description: "Description of supported package registry providers by KubeRocketCI, including Sonatype Nexus, GitLab, GitHub, and Azure DevOps, and how to configure them."
+sidebar_label: "Package Registry"
 ---
 <!-- markdownlint-disable MD025 -->
 

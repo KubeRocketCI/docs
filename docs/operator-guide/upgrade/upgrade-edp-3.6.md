@@ -1,9 +1,7 @@
 ---
-
 title: "Upgrade EDP v3.5 to 3.6"
 description: "Guide on upgrading EDP to version 3.6, including steps for updating Custom Resource Definitions and performing the upgrade procedure."
-sidebar_label: "Upgrade EDP to 3.6"
-
+sidebar_label: "v3.5 to 3.6"
 ---
 <!-- markdownlint-disable MD025 -->
 

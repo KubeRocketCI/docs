@@ -1,9 +1,7 @@
 ---
-
-title: "Integrate SonarQube"
-description: "Guide on integrating SonarQube with KubeRocketCI for code quality analysis in build and review pipelines, including steps for setting up SonarCloud."
-sidebar_label: "Integrate SonarQube"
-
+title: "Install KubeRocketCI"
+description: "Quick start guide for installing KubeRocketCI, including prerequisites like Tekton installation, deploying the platform with Helm, and accessing the Portal UI."
+sidebar_label: "Install KubeRocketCI"
 ---
 <!-- markdownlint-disable MD025 -->
 

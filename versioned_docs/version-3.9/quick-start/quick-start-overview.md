@@ -1,3 +1,12 @@
+---
+
+title: "Quick Start: Overview"
+description: "Introductory overview of the Quick Start guide for KubeRocketCI, covering the setup flow from prerequisites through platform installation, integration, to application deployment."
+sidebar_label: "Overview"
+
+---
+<!-- markdownlint-disable MD025 -->
+
 # Quick Start: Overview
 
 <head>

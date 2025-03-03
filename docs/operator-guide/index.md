@@ -1,9 +1,7 @@
 ---
-
 title: "KubeRocketCI Operator Guide: Installation, Configuration, and Administration"
 description: "Comprehensive guide for DevOps on installing, configuring, and administering KubeRocketCI. Includes information on platform support, authentication, artifacts management, code quality, project management, secrets management, security, monitoring, CI/CD, infrastructure providers, disaster recovery, upgrades, and troubleshooting."
-sidebar_label: "Operator Guide"
-
+sidebar_label: "Overview"
 ---
 <!-- markdownlint-disable MD025 -->
 

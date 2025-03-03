@@ -1,9 +1,7 @@
 ---
-
 title: "Upgrade KubeRocketCI v3.7 to 3.8"
 description: "Guide on upgrading KubeRocketCI to version 3.8, including steps for updating Custom Resource Definitions and performing the upgrade procedure."
-sidebar_label: "Upgrade KubeRocketCI to 3.8"
-
+sidebar_label: "v3.7 to 3.8"
 ---
 <!-- markdownlint-disable MD025 -->
 

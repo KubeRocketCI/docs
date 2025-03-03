@@ -1,3 +1,12 @@
+---
+
+title: "Integrate SonarQube"
+description: "Guide on integrating SonarQube with KubeRocketCI for code quality analysis in build and review pipelines, including steps for setting up SonarCloud."
+sidebar_label: "Integrate SonarQube"
+
+---
+<!-- markdownlint-disable MD025 -->
+
 # Integrate SonarQube
 
 <head>

@@ -1,3 +1,10 @@
+---
+title: "Install KubeRocketCI"
+description: "Quick start guide for installing KubeRocketCI, including prerequisites like Tekton installation, deploying the platform with Helm, and accessing the Portal UI."
+sidebar_label: "Install KubeRocketCI"
+---
+<!-- markdownlint-disable MD025 -->
+
 # Install KubeRocketCI
 
 <head>

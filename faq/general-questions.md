@@ -26,6 +26,7 @@ Edp versioning offers more advanced tagging. There are two image tags appended t
 
 :::note
   You can't set the branch as a release candidate via KubeRocketCI portal if you use default versioning.
+:::
 
 :::tip
   User can implement **Custom Versioning** by updating [`get-version`](https://github.com/epam/edp-tekton/tree/master/charts/pipelines-library/templates/tasks/getversion) CI step.

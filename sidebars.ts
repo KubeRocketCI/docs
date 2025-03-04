@@ -456,6 +456,7 @@ const sidebars: SidebarsConfig = {
               ],
             },
             'user-guide/manage-branches',
+            'user-guide/artifact-versioning',
           ],
         },
         {

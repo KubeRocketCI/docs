@@ -111,7 +111,7 @@ For [Bitbucket](https://support.atlassian.com/bitbucket-cloud/docs/app-passwords
       </TabItem>
     </Tabs>
 
-3. Create a secret in the namespace where KubeRocketCI is installed (default: `edp`) to securely store the Git account credentials, including the **id_rsa**, **username**, and **token** fields:
+3. Create a secret in the namespace where KubeRocketCI is installed (default: `krci`) to securely store the Git account credentials, including the **id_rsa**, **username**, and **token** fields:
 
    :::warning
    For integration with **Bitbucket**, the **token** field should be in the format `username:AppPassword`, encoded in base64. You can generate the encoded token using the following command:
@@ -149,7 +149,7 @@ For [Bitbucket](https://support.atlassian.com/bitbucket-cloud/docs/app-passwords
         kind: Secret
         metadata:
           name: ci-github
-          namespace: edp
+          namespace: krci
           labels:
             app.edp.epam.com/secret-type: repository
         type: Opaque

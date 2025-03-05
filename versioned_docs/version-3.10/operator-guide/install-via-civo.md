@@ -1,8 +1,8 @@
 ---
 
-title: "Installation Overview"
-description: "Overview of the various KubeRocketCI installation options, including Quick Start Guide, installation via Add-Ons, Helm Charts, AWS Marketplace, and Civo Marketplace."
-sidebar_label: "Installation Overview"
+title: "Install via Civo Marketplace"
+description: "Detailed instructions on installing KubeRocketCI via the Civo Marketplace, covering prerequisites, deployment steps, and integration with essential DevOps tools."
+sidebar_label: "Install via Civo Marketplace"
 
 ---
 <!-- markdownlint-disable MD025 -->

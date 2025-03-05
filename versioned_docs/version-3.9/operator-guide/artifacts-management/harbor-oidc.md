@@ -28,11 +28,11 @@ This section details the procedure to configure Harbor with Keycloak for secure 
 
     Start by creating a secret named `keycloak-client-harbor-secret` for Keycloak. This can be accomplished either through the commands provided below or by employing the External Secrets Operator. The secret acts as a secure token for establishing communication between Keycloak and Harbor.
 
-    Generate the secret using OpenSSL and store it in a Kubernetes secret within the platform namespace (e.g, `edp`):
+    Generate the secret using OpenSSL and store it in a Kubernetes secret within the platform namespace (e.g, `krci`):
 
     ```bash
     KEYCLOAK_CLIENT_HARBOR_SECRET=$(openssl rand -base64 32 | head -c 32)
-    kubectl -n edp create secret generic keycloak-client-harbor-secret \
+    kubectl -n krci create secret generic keycloak-client-harbor-secret \
         --from-literal=cookie-secret=${KEYCLOAK_CLIENT_HARBOR_SECRET}
     ```
 

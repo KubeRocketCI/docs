@@ -47,13 +47,13 @@ To fix the problem, follow the steps below:
 
     ```bash
     serviceaccount=<ServiceAccount_name>
-    kubectl get rolebindings -n edp -o json | jq -r --arg sa "$serviceaccount" '.items[] | select(.subjects[]? | select(.kind == "ServiceAccount" and .name == $sa)) | .metadata.name'
+    kubectl get rolebindings -n krci -o json | jq -r --arg sa "$serviceaccount" '.items[] | select(.subjects[]? | select(.kind == "ServiceAccount" and .name == $sa)) | .metadata.name'
     ```
 
 3. Check permissions of the role used in the role binding:
 
     ```bash
-    kubectl describe role <role-name> -n edp
+    kubectl describe role <role-name> -n krci
     ```
 
 4. Refresh the page and verify that the new RBAC settings are functioning properly.

@@ -29,7 +29,7 @@ For integration, take the following steps:
     type: Opaque
     metadata:
       name: rp-credentials
-      namespace: edp
+      namespace: krci
     stringData:
       rp_uuid: <access-token>
     ```
@@ -62,7 +62,7 @@ For integration, take the following steps:
       labels:
         app.kubernetes.io/version: '0.1'
       name: pytest-reportportal
-      namespace: edp
+      namespace: krci
     spec:
       description: |-
         This task can be used to run pytest integrated with report portal.

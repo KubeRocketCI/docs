@@ -46,7 +46,7 @@ There are multiple ways to deploy KubeRocketCI:
     ```bash
     helm search repo epamedp/edp-install
     NAME                    CHART VERSION   APP VERSION     DESCRIPTION
-    epamedp/edp-install     3.9.0           3.9.0           A Helm chart for EDP Install
+    epamedp/edp-install     3.9.0           3.9.0           A Helm chart for KubeRocketCI Platform
     ```
 
     :::note
@@ -185,7 +185,7 @@ There are multiple ways to deploy KubeRocketCI:
         url: "harbor.example.com"
     ```
 
-7. Install platform in the **edp** namespace with the Helm tool:
+7. Install platform in the **krci** namespace with the Helm tool:
 
     Check the parameters in the installation chart [values.yaml](https://github.com/epam/edp-install/blob/v3.9.0/deploy-templates/values.yaml) file.
 
@@ -193,7 +193,7 @@ There are multiple ways to deploy KubeRocketCI:
     helm install edp epamedp/edp-install --wait --timeout=900s \
     --version 3.9.0 \
     --values values.yaml \
-    --namespace edp \
+    --namespace krci \
     --create-namespace
     ```
 
@@ -255,7 +255,7 @@ There are multiple ways to deploy KubeRocketCI:
     ```
 
     :::note
-      Set `global.platform=openshift` while deploying EDP in OpenShift.
+      Set `global.platform=openshift` while deploying KubeRocketCI in OpenShift.
     :::
 
     :::info
@@ -265,13 +265,13 @@ There are multiple ways to deploy KubeRocketCI:
 8. To check if the installation is successful, run the command below:
 
     ```bash
-    helm status edp -n edp
+    helm status edp -n krci
     ```
 
     You can also check ingress endpoints to get the Portal endpoint to enter Portal UI:
 
     ```bash
-    kubectl get ingress portal -n edp
+    kubectl get ingress portal -n krci
     ```
 
 9. Once KubeRocketCI is successfully installed, you can explore our [Use Cases](../use-cases/index.md) to try out the functionality of the KubeRocketCI platform.

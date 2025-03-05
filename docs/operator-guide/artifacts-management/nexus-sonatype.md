@@ -383,7 +383,7 @@ For provision secret using manifest, KubeRocketCI portal or with the externalSec
       kind: Secret
       metadata:
         name: ci-nexus
-        namespace: edp
+        namespace: krci
         labels:
           app.edp.epam.com/secret-type: nexus
           app.edp.epam.com/integration-secret: "true"

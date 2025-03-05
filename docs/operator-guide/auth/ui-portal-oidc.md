@@ -55,7 +55,7 @@ To proceed with the Keycloak configuration, perform the following:
     kind: Secret
     metadata:
       name: keycloak-client-headlamp-secret
-      namespace: edp
+      namespace: krci
     type: Opaque
     stringData:
       clientSecret: <keycloak_client_secret_key>

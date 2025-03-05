@@ -22,7 +22,7 @@ graph LR;
     A(Create TriggerTemplate resource) --> B(Create Pipeline resource) --> C(Create Task resource) --> D(Apply changes to environment)
 ```
 
-Clear pipeline consists of **Trigger Template**, **Pipeline**, and **Task** custom resources. To create a custom clean pipeline, follow the steps below:
+Clean pipeline consists of **Trigger Template**, **Pipeline**, and **Task** custom resources. To create a custom clean pipeline, follow the steps below:
 
 1. Create and apply the **TriggerTemplate** custom resource. Refer to the example [TriggerTemplate](https://github.com/epam/edp-tekton/blob/master/charts/pipelines-library/templates/triggers/cd/clean.yaml). Ensure to set the appropriate pipeline type in the labels:
 
@@ -33,8 +33,6 @@ Clear pipeline consists of **Trigger Template**, **Pipeline**, and **Task** cust
   ...
   ```
 
-2. Create and apply the **Pipeline** custom resource. Refer to the example [Pipeline](https://github.com/epam/edp-tekton/blob/master/charts/pipelines-library/templates/pipelines/cd/clean.yaml). Ensure to set the concrete task to trigger:
-
   ```bash
   ...
   spec:
@@ -44,6 +42,8 @@ Clear pipeline consists of **Trigger Template**, **Pipeline**, and **Task** cust
       name: clean-custom
   ...
   ```
+
+2. Create and apply the **Pipeline** custom resource. Refer to the example [Pipeline](https://github.com/epam/edp-tekton/blob/master/charts/pipelines-library/templates/pipelines/cd/clean.yaml). Ensure to set the concrete task to trigger:
 
   Additionally, set the concrete task to run:
 
@@ -65,13 +65,13 @@ As soon as all the three custom resources are correctly configured and applied, 
 
 To apply the newly created clean pipeline to your environments, follow the steps below:
 
-1. In the deployment flow details page, click the **Add environment** button:
+1. In the deployment flow details page, click the **Create environment** button:
 
-  ![CD stages](../../assets/operator-guide/create-environment-button.png "CD stages")
+  ![Create environment button"](../../assets/operator-guide/create-environment-button.png "Create environment button")
 
-2. In the **Add environment** window, select the custom clean pipeline:
+2. In the **Create environment** window, select the custom clean pipeline:
 
-  ![CD stages](../../assets/operator-guide/custom-clean-pipeline1.png "CD stages")
+  ![Select custom clean pipeline](../../assets/operator-guide/custom-clean-pipeline1.png "Select custom clean pipeline")
 
 ### Existing Environments
 
@@ -79,11 +79,11 @@ If you need to change the delete pipeline in an already existing environment, fo
 
 1. Navigate to the environment details page and click the **Edit** button:
 
-  ![CD stages](../../assets/operator-guide/edit-environment-button.png "CD stages")
+  ![Edit environment button](../../assets/operator-guide/edit-environment-button.png "Edit environment button")
 
-2. In the **Add environment** window, select the custom clean pipeline:
+2. In the **Edit environment** window, select the custom clean pipeline:
 
-  ![CD stages](../../assets/operator-guide/custom-clean-pipeline2.png "CD stages")
+  ![Select custom clean pipeline](../../assets/operator-guide/custom-clean-pipeline2.png "Select custom clean pipeline")
 
 As soon as the clean pipeline is created and selected within an environment, you can trigger it by clicking the **Clean** button.
 

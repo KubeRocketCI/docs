@@ -119,7 +119,7 @@ Follow the steps below to install Argo CD using Helm:
 
     :::info
       By default, to access the console with administrative privileges, use the following credentials:
-      - URL: localhost:8080
+	    - URL: localhost:8080
       -	Login: admin
     :::
 

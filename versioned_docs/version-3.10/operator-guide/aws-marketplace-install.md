@@ -55,23 +55,23 @@ To deploy the platform, follow the steps below:
 2. Define the mandatory parameters you would like to use for installation using the following command:
 
     ```bash
-    kubectl create ns edp
+    kubectl create ns krci
     helm install edp-install \
-      --namespace edp ./* \
+      --namespace krci ./* \
       --set global.dnsWildCard=example.com \
     ```
 
 3. (Optional) Provide token to sign in to the Portal. Run the following command to create Service Account with cluster admin permissions:
 
     ```bash
-    kubectl create serviceaccount edp-admin -n edp
-    kubectl create clusterrolebinding edp-cluster-admin --clusterrole=cluster-admin --serviceaccount=edp:edp-admin
+    kubectl create serviceaccount edp-admin -n krci
+    kubectl create clusterrolebinding edp-cluster-admin --clusterrole=cluster-admin --serviceaccount=krci:edp-admin
     kubectl apply -f - <<EOF
     apiVersion: v1
     kind: Secret
     metadata:
       name: edp-admin-token
-      namespace: edp
+      namespace: krci
       annotations:
         kubernetes.io/service-account.name: edp-admin
     type: kubernetes.io/service-account-token
@@ -81,7 +81,7 @@ To deploy the platform, follow the steps below:
 4. (Optional) To get access to the Portal, run the port-forwarding command:
 
     ```bash
-    kubectl port-forward service/portal 59480:80 -n edp
+    kubectl port-forward service/portal 59480:80 -n krci
     ```
 
 5. (Optional) To open Portal, navigate to the `http://localhost:59480`.
@@ -89,7 +89,7 @@ To deploy the platform, follow the steps below:
 6. (Optional) To get admin token to sign in to the Portal:
 
     ```bash
-    kubectl get secrets -o jsonpath="{.items[?(@.metadata.annotations['kubernetes\.io/service-account\.name']=='edp-admin')].data.token}" -n edp|base64 --decode; echo
+    kubectl get secrets -o jsonpath="{.items[?(@.metadata.annotations['kubernetes\.io/service-account\.name']=='edp-admin')].data.token}" -n krci|base64 --decode; echo
     ```
 
 As a result, you will get access to KubeRocketCI components via KubeRocketCI Portal UI. Navigate to our [Use Cases](../use-cases/index.md) to try out KubeRocketCI functionality. Visit other subsections of the [Operator Guide](../operator-guide/index.md) to figure out how to configure KubeRocketCI and integrate it with various tools.

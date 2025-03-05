@@ -1,3 +1,10 @@
+---
+title: "Add Git Server"
+description: "Step-by-step guide on integrating GitLab, GitHub, or Bitbucket with KubeRocketCI for seamless CI/CD workflows, including SSH key generation, API token creation, and secret setup."
+sidebar_label: "Add Git Server"
+---
+<!-- markdownlint-disable MD025 -->
+
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
@@ -104,7 +111,7 @@ For [Bitbucket](https://support.atlassian.com/bitbucket-cloud/docs/app-passwords
       </TabItem>
     </Tabs>
 
-3. Create a secret in the namespace where KubeRocketCI is installed (default: `edp`) to securely store the Git account credentials, including the **id_rsa**, **username**, and **token** fields:
+3. Create a secret in the namespace where KubeRocketCI is installed (default: `krci`) to securely store the Git account credentials, including the **id_rsa**, **username**, and **token** fields:
 
    :::warning
    For integration with **Bitbucket**, the **token** field should be in the format `username:AppPassword`, encoded in base64. You can generate the encoded token using the following command:
@@ -112,6 +119,7 @@ For [Bitbucket](https://support.atlassian.com/bitbucket-cloud/docs/app-passwords
    ```bash
    echo -n "username:AppPassword" | base64
    ```
+
    :::
 
     <Tabs
@@ -141,7 +149,7 @@ For [Bitbucket](https://support.atlassian.com/bitbucket-cloud/docs/app-passwords
         kind: Secret
         metadata:
           name: ci-github
-          namespace: edp
+          namespace: krci
           labels:
             app.edp.epam.com/secret-type: repository
         type: Opaque

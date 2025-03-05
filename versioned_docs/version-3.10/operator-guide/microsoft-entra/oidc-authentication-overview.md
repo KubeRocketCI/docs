@@ -19,7 +19,7 @@ This section focuses on integrating Microsoft Entra as the Identity Provider for
 
 Configuring OIDC authentication with Microsoft Entra brings significant benefits, including improved security, simplified access management, and compliance with enterprise standards.
 
-### Supported Components
+## Supported Components
 
 Below is the list of components with OIDC integration instructions:
 

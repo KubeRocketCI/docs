@@ -36,7 +36,7 @@ Teams can utilize these fields to enhance their work prioritization, identify de
 
 In order to adjust the Jira server integration, add the JiraServer CR by performing the following:
 
-1. Provision the **ci-jira** secret using `EDP Portal`, `Manifest` or with the `externalSecrets` operator:
+1. Provision the **ci-jira** secret using `KubeRocketCI portal`, `Manifest` or with the `externalSecrets` operator:
 
     <Tabs
       defaultValue="portal"
@@ -66,7 +66,7 @@ In order to adjust the Jira server integration, add the JiraServer CR by perform
           kind: Secret
           metadata:
             name: ci-jira
-            namespace: edp
+            namespace: krci
             labels:
               app.edp.epam.com/secret-type=jira
           stringData:
@@ -81,7 +81,7 @@ In order to adjust the Jira server integration, add the JiraServer CR by perform
           kind: JiraServer
           metadata:
             name: jira-server
-            namespace: edp
+            namespace: krci
           spec:
             apiUrl: 'https://jira-api.example.com'
             credentialName: ci-jira
@@ -112,7 +112,7 @@ In order to adjust the Jira server integration, add the JiraServer CR by perform
           kind: JiraServer
           metadata:
             name: jira-server
-            namespace: edp
+            namespace: krci
           spec:
             apiUrl: 'https://jira-api.example.com'
             credentialName: ci-jira
@@ -143,7 +143,7 @@ KubeRocketCI offers the capability to incorporate Jira integration as part of it
 
 To set up Jira integration along with the platform, follow the steps below:
 
-1. Create the **ci-jira** secret in the platform namespace (e.g., `edp`) as it's described [above](#integration-procedure).
+1. Create the **ci-jira** secret in the platform namespace (e.g., `krci`) as it's described [above](#integration-procedure).
 
 2. Deploy the platform with the `jira.integration` parameter set to `true` in the [values.yaml](https://github.com/epam/edp-install/blob/release/3.8/deploy-templates/values.yaml#L138) file.
 
@@ -183,7 +183,7 @@ Upon successful configuration of the Jira integration, your tickets will be enri
 
   ![Additional Metadata](../../assets/operator-guide/project-management-and-reporting/jira_versioning_type_example.png "Additional Metadata")
 
-Should you encounter an issue where metadata is not appearing within a Jira ticket, it's advisable to inspect the status field of the `JiraIssueMetadata` custom resources located in the platform namespace (e.g, `edp`). The codebase-operator typically removes this resource after post-processing, it may persist in case of reconciliation issues, remaining within the namespace.
+Should you encounter an issue where metadata is not appearing within a Jira ticket, it's advisable to inspect the status field of the `JiraIssueMetadata` custom resources located in the platform namespace (e.g, `krci`). The codebase-operator typically removes this resource after post-processing, it may persist in case of reconciliation issues, remaining within the namespace.
 
 ## Related Articles
 

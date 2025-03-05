@@ -292,7 +292,7 @@ Provision the secret using `Portal UI`, `Manifest` or with the `externalSecrets`
       kind: Secret
       metadata:
         name: ci-defectdojo
-        namespace: edp
+        namespace: krci
         labels:
           app.edp.epam.com/secret-type: defectdojo
           app.edp.epam.com/integration-secret: "true"

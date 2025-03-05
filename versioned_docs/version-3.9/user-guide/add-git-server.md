@@ -92,7 +92,7 @@ To start from, it is required to add both Secret with SSH key, API token, and Gi
       </TabItem>
     </Tabs>
 
-3. Create a secret in the namespace where KubeRocketCI is installed (`edp` by default) for the Git account with the **id_rsa**, **username**, and **token** fields.
+3. Create a secret in the namespace where KubeRocketCI is installed (`krci` by default) for the Git account with the **id_rsa**, **username**, and **token** fields.
 
     <Tabs
       defaultValue="portal"
@@ -121,7 +121,7 @@ To start from, it is required to add both Secret with SSH key, API token, and Gi
         kind: Secret
         metadata:
           name: ci-github
-          namespace: edp
+          namespace: krci
           labels:
             app.edp.epam.com/secret-type: repository
         type: Opaque

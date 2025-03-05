@@ -159,7 +159,7 @@ Permissions in SonarQube are associated with projects through permission templat
 
 Quality Gates are used to ensure that code quality standards are met before further development or deployment proceeds:
 
-* **EDP way (default):** KuberocketCI quality gates are defined in the SonarQube instance, specifically tailored for the KubeRocketCI project.
+* **KubeRocketCI way (default):** KuberocketCI quality gates are defined in the SonarQube instance, specifically tailored for the KubeRocketCI project.
 * **Sonar way (built-in):** These are predefined quality gates available directly in SonarQube, not customized for any specific project but rather standardized for general use.
 
     ![sonarqube kuberocketci quality gate](../../assets/operator-guide/code-quality/sonarqube-kuberocketci-qualitygate.png "sonarqube kuberocketci quality gate")
@@ -167,7 +167,7 @@ Quality Gates are used to ensure that code quality standards are met before furt
 ### Quality Profiles
 
 Quality Profiles define the rules used during code analysis. The Sonar Operator manages quality profiles with the following default setup:
-* **EDP way (default):** A Java quality profile based on KubeRocketCI best practices, offering tailored rule sets.
+* **KubeRocketCI way (default):** A Java quality profile based on KubeRocketCI best practices, offering tailored rule sets.
 
 ## Configuration SonarQube ci-user without sonar-operator
 
@@ -210,7 +210,7 @@ For provision secret using manifest, KubeRocketCI portal or with the externalSec
   kind: Secret
   metadata:
     name: ci-sonarqube
-    namespace: edp
+    namespace: krci
     labels:
       app.edp.epam.com/secret-type: sonar
       app.edp.epam.com/integration-secret: "true"

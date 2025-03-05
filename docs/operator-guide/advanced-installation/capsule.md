@@ -15,7 +15,7 @@ This article explains how the KubeRocketCI leverages Capsule capabilities to ena
 
 KubeRocketCI uses Capsule to ensure resource isolation. It is essential to define constraints through the Capsule tenant approach. This approach serves two primary objectives: limiting the resources allocated to the KubeRocketCI components and regulating the resources utilized by each deployed environment.
 
-To ensure isolation for the core platform components, create the `edp` namespace under the Capsule tenant. Use the template provided in this instruction to create the Capsule tenant specifically for the core components.
+To ensure isolation for the core platform components, create the `krci` namespace under the Capsule tenant. Use the template provided in this instruction to create the Capsule tenant specifically for the core components.
 
 ## Integration
 
@@ -33,7 +33,7 @@ graph LR;
 
 3. **Impersonation** - Impersonation plays a role in managing user identities and permissions within the Capsule environment. This step ensures secure and controlled access to resources.
 
-4. **Create Namespace** - The creation of a dedicated namespace under Capsule is crucial for isolating and managing the core components of the platform. This step establishes the environment where KubeRocketCI will be deployed (`edp` by default).
+4. **Create Namespace** - The creation of a dedicated namespace under Capsule is crucial for isolating and managing the core components of the platform. This step establishes the environment where KubeRocketCI will be deployed (`krci` by default).
 
 5. **Deploy KubeRocketCI** - The final step involves deploying the platform within the configured Capsule environment.
 
@@ -53,7 +53,7 @@ The installation procedure consists of two steps:
         capsuleUserGroups:
           - capsule.clastix.io
           # enable for cd-pipeline-operator https://github.com/epam/edp-cd-pipeline-operator/blob/release/2.17/deploy-templates/values.yaml#L10
-          - system:serviceaccounts:edp  # edp - Namespace where KubeRocketCI will be installed.
+          - system:serviceaccounts:krci  # krci - Namespace where KubeRocketCI will be installed.
           - masters                     # Kubernetes group that manages the KubeRocketCI tenant.
           # uncomment if Argo CD manage main KubeRocketCI tenant
           #- system:serviceaccounts:argocd
@@ -69,11 +69,11 @@ After installing Capsule, the next crucial step is configuration. Follow the gui
 
 1. Specify the Capsule tenant configuration:
 
-    ```yaml title="edp-tenant-example.yaml"
+    ```yaml title="krci-tenant-example.yaml"
     apiVersion: capsule.clastix.io/v1beta2
     kind: Tenant
     metadata:
-      name: edp-tenant
+      name: krci-tenant
     spec:
       ...
       owners:
@@ -109,7 +109,7 @@ After installing Capsule, the next crucial step is configuration. Follow the gui
       apiVersion: capsule.clastix.io/v1beta2
       kind: Tenant
       metadata:
-        name: edp-tenant
+        name: krci-tenant
       spec:
         ingressOptions:
           allowWildcardHostnames: false
@@ -144,7 +144,7 @@ After installing Capsule, the next crucial step is configuration. Follow the gui
                 - from:
                     - namespaceSelector:
                         matchLabels:
-                          capsule.clastix.io/tenant: edp-tenant
+                          capsule.clastix.io/tenant: krci-tenant
                     - podSelector: {}
                     - ipBlock:
                         cidr: 172.32.0.0/16
@@ -199,13 +199,13 @@ After installing Capsule, the next crucial step is configuration. Follow the gui
     1. Log in as a `system:masters` member and create a namespace for platform deployment under the Capsule tenant using the following command:
 
         ```bash
-        kubectl create namespace edp
+        kubectl create namespace krci
         ```
 
-    2. To ensure that the `edp` namespace is successfully created under the Capsule tenant, you can verify the status of the Capsule tenant using the following command:
+    2. To ensure that the `krci` namespace is successfully created under the Capsule tenant, you can verify the status of the Capsule tenant using the following command:
 
         ```bash
-        kubectl get tenant edp-tenant -o yaml
+        kubectl get tenant krci-tenant -o yaml
         ```
 
         Expected output:
@@ -214,7 +214,7 @@ After installing Capsule, the next crucial step is configuration. Follow the gui
         ...
         status:
           namespaces:
-          - edp
+          - krci
           size: 1
           state: Active
         ```

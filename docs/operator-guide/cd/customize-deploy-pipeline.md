@@ -45,7 +45,7 @@ To customize your deployment pipeline, follow the steps below:
 
 2. Create the custom pipeline with your custom logic. Refer to the custom pipeline [example](https://github.com/epam/edp-tekton/blob/release/0.12/charts/pipelines-library/templates/triggers/cd/deploy.yaml) for more details.
 
-3. Apply the created manifest files in the platform namespace (e.g., `edp`).
+3. Apply the created manifest files in the platform namespace (e.g., `krci`).
 
 4. On the `Create stage` step on the KubeRocketCI portal, select the added trigger template in the `Pipeline template` section:
 

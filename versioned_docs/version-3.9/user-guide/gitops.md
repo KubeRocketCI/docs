@@ -64,7 +64,7 @@ In case you need to delete the GitOps repository, do the following:
 2. Delete the Codebase custom resource using the `kubectl delete` command:
 
     ```bash
-    kubectl delete Codebase edp-gitops -n edp
+    kubectl delete Codebase krci-gitops -n krci
     ```
 
 ## Related Articles

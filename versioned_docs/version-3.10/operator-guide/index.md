@@ -5,7 +5,7 @@ sidebar_label: "Overview"
 ---
 <!-- markdownlint-disable MD025 -->
 
-# Overview
+# KubeRocketCI Operator Guide: Installation, Configuration, and Administration
 
 <head>
   <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide" />

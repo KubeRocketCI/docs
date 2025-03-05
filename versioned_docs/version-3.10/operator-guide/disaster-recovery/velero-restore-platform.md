@@ -25,5 +25,5 @@ You can use the Velero tool to restore a platform tenant. Explore the main steps
 3. Remove all locks for operators. Delete all config maps that have `<OPERATOR_NAME>-operator-lock` names. Then restart all pods with operators, or simply run the following command:
 
     ```bash
-    kubectl -n edp delete cm $(kubectl -n edp get cm | grep 'operator-lock' | awk '{print $1}')
+    kubectl -n krci delete cm $(kubectl -n krci get cm | grep 'operator-lock' | awk '{print $1}')
     ```

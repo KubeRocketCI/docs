@@ -8,7 +8,7 @@ sidebar_label: "Overview"
 # Advanced Installation Overview: Third-Party Tools
 
 <head>
-  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/advanced-installation/overview" />
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/advanced-installation" />
 </head>
 
 This page provides a concise overview of the advanced components available in KubeRocketCI. While these third-party tools are not obligatory, they greatly enhance the capabilities of the platform, enabling the creation of a robust CI/CD environment.

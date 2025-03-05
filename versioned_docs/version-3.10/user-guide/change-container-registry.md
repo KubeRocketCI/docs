@@ -36,7 +36,7 @@ KubeRocketCI uses `CodebaseImageStream` custom resource to define Container Regi
 1. List all the existing `CodebaseImageStream` CR(s) and copy their `<name>` and `<codebase name>` fields:
 
     ```bash
-      kubectl get codebaseimagestream -n edp
+      kubectl get codebaseimagestream -n krci
     ```
 
 2. Patch the `CodebaseImageStream` CR(s) using the commands for the registry you switched to:
@@ -44,31 +44,31 @@ KubeRocketCI uses `CodebaseImageStream` custom resource to define Container Regi
     * AWS ECR:
 
       ```bash
-      kubectl patch codebaseimagestream <name> -n edp --type='json' -p='[{"op": "replace", "path": "/spec/imageName", "value": "<Registry Endpoint>/<Registry Space>/<codebase name>"}]'
+      kubectl patch codebaseimagestream <name> -n krci --type='json' -p='[{"op": "replace", "path": "/spec/imageName", "value": "<Registry Endpoint>/<Registry Space>/<codebase name>"}]'
       ```
 
     * DockerHub
 
       ```bash
-      kubectl patch codebaseimagestream <name> -n edp --type='json' -p='[{"op": "replace", "path": "/spec/imageName", "value": "dockerhub.io/<User>/<codebase name>"}]'
+      kubectl patch codebaseimagestream <name> -n krci --type='json' -p='[{"op": "replace", "path": "/spec/imageName", "value": "dockerhub.io/<User>/<codebase name>"}]'
       ```
 
     * Harbor
 
       ```bash
-      kubectl patch codebaseimagestream <name> -n edp --type='json' -p='[{"op": "replace", "path": "/spec/imageName", "value": "<Registry Endpoint>/<Registry Space>/<codebase name>}]'
+      kubectl patch codebaseimagestream <name> -n krci --type='json' -p='[{"op": "replace", "path": "/spec/imageName", "value": "<Registry Endpoint>/<Registry Space>/<codebase name>}]'
       ```
 
     * Nexus
 
       ```bash
-      kubectl patch codebaseimagestream <name> -n edp --type='json' -p='[{"op": "replace", "path": "/spec/imageName", "value": "<Registry Endpoint>/<Registry Space>/<codebase name>}]'
+      kubectl patch codebaseimagestream <name> -n krci --type='json' -p='[{"op": "replace", "path": "/spec/imageName", "value": "<Registry Endpoint>/<Registry Space>/<codebase name>}]'
       ```
 
-If necessary, update the registry credentials for the existing `CD pipelines` by copying the `regcred` secret from the `edp` namespace to all the namespaces managed by the platform. To get the list of the namespaces, run the following command:
+If necessary, update the registry credentials for the existing `CD pipelines` by copying the `regcred` secret from the `krci` namespace to all the namespaces managed by the platform. To get the list of the namespaces, run the following command:
 
 ```bash
-kubectl get stages -n edp -o jsonpath='{range .items[*]}{.spec.namespace}{"\n"}{end}'
+kubectl get stages -n krci -o jsonpath='{range .items[*]}{.spec.namespace}{"\n"}{end}'
 ```
 
 ## Related Articles

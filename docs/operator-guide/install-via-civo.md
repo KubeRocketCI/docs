@@ -80,7 +80,7 @@ As soon as the cluster is deployed, it is time to install the KubeRocketCI appli
 4. Wait till all the pods are up and running. Use the `kubectl get pods` command to check the status of the pods:
 
     ```bash
-    kubectl get pods -n edp
+    kubectl get pods -n krci
     ```
 
     ![KubeRocketCI pods](../assets/operator-guide/civo-check-kuberocketci-ns.png "KubeRocketCI pods")
@@ -99,7 +99,7 @@ As soon as the cluster is deployed, it is time to install the KubeRocketCI appli
 
     ![Click notification](../assets/operator-guide/civo-cluster-settings.png "Click notification")
 
-10. In the Cluster Settings menu, enter **edp** in both default and allowed namespaces and click the **CLOSE** button:
+10. In the Cluster Settings menu, enter **krci** in both default and allowed namespaces and click the **CLOSE** button:
 
     :::note
       Don't forget to click the **+ ADD** button to add the allowed namespace.

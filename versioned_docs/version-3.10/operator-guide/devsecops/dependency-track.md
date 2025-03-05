@@ -64,7 +64,7 @@ To install Dependency-Track use [KubeRocketCI addons](../add-ons-overview.md) ap
   kind: Secret
   metadata:
     name: ci-dependency-track
-    namespace: <edp>
+    namespace: krci
     labels:
       app.edp.epam.com/secret-type: dependency-track
       app.edp.epam.com/integration-secret: "true"

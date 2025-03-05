@@ -1,7 +1,7 @@
 ---
 title: "Security and Compliance: Overview"
 description: "Explore DevSecOps solutions in KubeRocketCI, integrating security tools for code quality, container security, and compliance in the software development lifecycle."
-sidebar_label: "Security and Compliance Overview"
+sidebar_label: "Overview"
 ---
 <!-- markdownlint-disable MD025 -->
 

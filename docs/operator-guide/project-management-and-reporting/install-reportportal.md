@@ -28,10 +28,10 @@ Inspect the prerequisites and the main steps to perform for installing ReportPor
 
 To install MinIO, follow the steps below:
 
-1. Check that `edp` namespace is created. If not, run the following command to create it:
+1. Check that `krci` namespace is created. If not, run the following command to create it:
 
     ```bash
-    kubectl create namespace edp
+    kubectl create namespace krci
     ```
 
     :::warning For the OpenShift users
@@ -154,7 +154,7 @@ To install MinIO, follow the steps below:
 3. Create MinIO admin secret:
 
     ```bash
-    kubectl -n edp create secret generic reportportal-minio-creds \
+    kubectl -n krci create secret generic reportportal-minio-creds \
     --from-literal=root-password=<root_password> \
     --from-literal=root-user=<root_user>
     ```
@@ -165,7 +165,7 @@ To install MinIO, follow the steps below:
     helm install minio bitnami/minio \
     --version 11.10.3 \
     --values values.yaml \
-    --namespace edp
+    --namespace krci
     ```
 
     Check out the _values.yaml_ file sample of the MinIO customization:
@@ -186,14 +186,14 @@ To install MinIO, follow the steps below:
 
 To install RabbitMQ, follow the steps below:
 
-1. Use `edp` namespace from the MinIO installation.
+1. Use the `krci` namespace from the MinIO installation.
 
 2. Use `bitnami` chart repository from the MinIO installation.
 
 3. Create RabbitMQ admin secret:
 
     ```bash
-    kubectl -n edp create secret generic reportportal-rabbitmq-creds \
+    kubectl -n krci create secret generic reportportal-rabbitmq-creds \
     --from-literal=rabbitmq-password=<rabbitmq_password> \
     --from-literal=rabbitmq-erlang-cookie=<rabbitmq_erlang_cookie>
     ```
@@ -209,7 +209,7 @@ To install RabbitMQ, follow the steps below:
     helm install rabbitmq bitnami/rabbitmq \
     --version 10.3.8 \
     --values values.yaml \
-    --namespace edp
+    --namespace krci
     ```
 
     Check out the _values.yaml_ file sample of the RabbitMQ customization:
@@ -230,14 +230,14 @@ To install RabbitMQ, follow the steps below:
 5. After the rabbitmq pod gets the status Running, you need to configure the RabbitMQ memory threshold
 
     ```bash
-    kubectl -n edp exec -it rabbitmq-0 -- rabbitmqctl set_vm_memory_high_watermark 0.8
+    kubectl -n krci exec -it rabbitmq-0 -- rabbitmqctl set_vm_memory_high_watermark 0.8
     ```
 
 ## Elasticsearch Installation
 
 To install Elasticsearch, follow the steps below:
 
-1. Use `edp` namespace from the MinIO installation.
+1. Use `krci` namespace from the MinIO installation.
 
 2. Add a chart repository:
 
@@ -252,7 +252,7 @@ To install Elasticsearch, follow the steps below:
     helm install elasticsearch elastic/elasticsearch \
     --version 7.17.3 \
     --values values.yaml \
-    --namespace edp
+    --namespace krci
     ```
 
     Check out the _values.yaml_ file sample of the Elasticsearch customization:
@@ -289,7 +289,7 @@ To install Elasticsearch, follow the steps below:
 
 To install PostgreSQL, follow the steps below:
 
-1. Use `edp` namespace from the MinIO installation.
+1. Use `krci` namespace from the MinIO installation.
 
 2. Add a chart repository:
 
@@ -301,7 +301,7 @@ To install PostgreSQL, follow the steps below:
 3. Create PostgreSQL admin secret:
 
     ```bash
-    kubectl -n edp create secret generic reportportal-postgresql-creds \
+    kubectl -n krci create secret generic reportportal-postgresql-creds \
     --from-literal=postgresql-password=<postgresql_password> \
     --from-literal=postgresql-postgres-password=<postgresql_postgres_password>
     ```
@@ -316,7 +316,7 @@ To install PostgreSQL, follow the steps below:
     helm install postgresql bitnami-archive/postgresql \
     --version 10.9.4 \
     --values values.yaml \
-    --namespace edp
+    --namespace krci
     ```
 
     Check out the _values.yaml_ file sample of the PostgreSQL customization:
@@ -347,7 +347,7 @@ To install PostgreSQL, follow the steps below:
 
 To install ReportPortal, follow the steps below:
 
-1. Use `edp` namespace from the MinIO installation.
+1. Use `krci` namespace from the MinIO installation.
 
     :::warning For the OpenShift users
       When using the OpenShift platform, install the `SecurityContextConstraints` resource.<br />
@@ -415,7 +415,7 @@ To install ReportPortal, follow the steps below:
     ```bash
     helm install report-portal report-portal/reportportal \
     --values values.yaml \
-    --namespace edp
+    --namespace krci
     ```
 
     Check out the _values.yaml_ file sample of the ReportPortal customization:

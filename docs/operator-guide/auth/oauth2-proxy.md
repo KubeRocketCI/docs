@@ -53,16 +53,16 @@ The example below illustrates how to use OAuth2-Proxy in practice when using the
           tekton_dashboard_cookie_secret=$(openssl rand -base64 32 | head -c 32)
           ```
 
-          2. Create `tekton-dashboard-proxy-cookie-secret` in the edp namespace:
+          2. Create `tekton-dashboard-proxy-cookie-secret` in the krci namespace:
 
           ```bash
-          kubectl -n edp create secret generic tekton-dashboard-proxy-cookie-secret \
+          kubectl -n krci create secret generic tekton-dashboard-proxy-cookie-secret \
             --from-literal=cookie-secret=${tekton_dashboard_cookie_secret}
           ```
           3. Run `helm upgrade` to update edp-install release:
 
           ```bash
-          helm upgrade --version <version> --set 'edp-tekton.dashboard.openshift_proxy.enabled=true' edp-install --namespace edp
+          helm upgrade --version <version> --set 'edp-tekton.dashboard.openshift_proxy.enabled=true' edp-install --namespace krci
           ```
       </TabItem>
     </Tabs>

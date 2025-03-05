@@ -43,13 +43,13 @@ To deploy the platform, follow the steps below:
 2. Deploy the platform using the `helm install` command:
 
     ```bash
-    helm install edp epamedp/edp-install --version 3.10.3 --create-namespace --atomic -n edp --set global.dnsWildCard=example.com
+    helm install edp epamedp/edp-install --version 3.10.5 --create-namespace --atomic -n krci --set global.dnsWildCard=example.com
     ```
 
 3. Upon successful deployment of the KubeRocketCI Helm Chart, run the `kubectl port-forward` command:
 
     ```bash
-    kubectl port-forward service/portal 59480:80 -n edp
+    kubectl port-forward service/portal 59480:80 -n krci
     ```
 
 4. Enter the localhost in your browser to access the login menu:
@@ -63,9 +63,9 @@ To deploy the platform, follow the steps below:
 5. Create the edp-admin service account and generate an access token to open the KubeRocketCI:
 
     ```bash
-    kubectl -n edp create serviceaccount edp-admin
-    kubectl create clusterrolebinding edp-admin --serviceaccount=edp:edp-admin --clusterrole=cluster-admin
-    kubectl create token edp-admin -n edp
+    kubectl -n krci create serviceaccount edp-admin
+    kubectl create clusterrolebinding edp-admin --serviceaccount=krci:edp-admin --clusterrole=cluster-admin
+    kubectl create token edp-admin -n krci
     ```
 
 6. In the login menu, paste the generated token in the **ID token** field and click the **SIGN IN** button.
@@ -76,8 +76,8 @@ To deploy the platform, follow the steps below:
 
 8. In the **Cluster Settings** page, define the following for fields:
 
-    * Default namespace: `edp`
-    * Allowed namespaces: `edp`
+    * Default namespace: `krci`
+    * Allowed namespaces: `krci`
 
     ![Cluster Settings menu](../assets/quick-start/cluster_settings.png "Cluster Settings menu")
 

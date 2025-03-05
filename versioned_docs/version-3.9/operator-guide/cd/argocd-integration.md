@@ -28,7 +28,7 @@ Argo CD can be installed using [two different approaches](https://argo-cd.readth
 Both approaches can be deployed with High Availability (HA) or Non High Availability (non HA) installation manifests.
 
 KubeRocketCI uses the HA deployment with the cluster-admin permissions, to minimize cluster resources consumption by sharing
-single Argo CD instance across multiple EDP Tenants. Please follow [the installation instructions](../install-argocd.md) to deploy Argo CD.
+single Argo CD instance across multiple KubeRocketCI Tenants. Please follow [the installation instructions](../install-argocd.md) to deploy Argo CD.
 
 ## Integration
 
@@ -40,7 +40,7 @@ See a diagram below for the details:
 * Argo CD uses a `cluster-admin` role for managing cluster-scope resources.
 * The `control-plane` application is created using the App of Apps approach, and its code is managed by the `control-plane` members.
 * The `control-plane` is used to onboard new Argo CD Tenants (Argo CD Projects - AppProject).
-* The `KubeRocketCI Tenant Member` manages `Argo CD Applications` using `kind: Application` in the `edpTenant` namespace.
+* The `KubeRocketCI Tenant Member` manages `Argo CD Applications` using `kind: Application` in the `krciTenant` namespace.
 
 The [App Of Apps approach](https://argo-cd.readthedocs.io/en/stable/operator-manual/cluster-bootstrapping/) is used to
 manage the `KubeRocketCI Tenants`. Inspect the [edp-grub](https://github.com/SergK/edp-grub) repository structure that is used to
@@ -72,7 +72,7 @@ The Root Application must be created under the `control-plane` scope.
 
 Now that Argo CD is integrated, it is time to configure it properly. To configure Argo CD for KubeRocketCI, follow the steps below:
 
-1. Modify the `argocd-cmd-params-cm` ConfigMap in the `argocd` namespace and add the `application.namespaces` parameter to the subsection data:
+1. Modify the `argocd-cmd-params-cm` ConfigMap in the `argocd` namespace and add the `application.namespaces` parameter to the `data` subsection:
 
     <Tabs
       defaultValue="kubectl"
@@ -83,31 +83,31 @@ Now that Argo CD is integrated, it is time to configure it properly. To configur
 
       <TabItem value="kubectl">
         ```bash
-        kubectl patch configmap argocd-cmd-params-cm -n argocd --type merge -p '{"data":{"application.namespaces":"edp"}}'
+        kubectl patch configmap argocd-cmd-params-cm -n argocd --type merge -p '{"data":{"application.namespaces":"krci"}}'
         ```
       </TabItem>
 
       <TabItem value="manifest">
         ```yaml
         data:
-          application.namespaces: edp
+          application.namespaces: krci
         ```
       </TabItem>
     </Tabs>
 
 2. Add a [credential template](https://argo-cd.readthedocs.io/en/stable/user-guide/private-repositories/#private-repositories)
-for GitHub, GitLab, Gerrit integrations. The credential template must be created for each Git server.
+for GitHub, GitLab, Bitbucket, or Gerrit integrations. The credential template must be created for each Git Server.
 
     <Tabs
       defaultValue="github"
       values={[
-        {label: 'GitHub/GitLab', value: 'github'},
+        {label: 'GitHub/GitLab/Bitbucket', value: 'github'},
         {label: 'Gerrit', value: 'gerrit'}
       ]}>
 
       <TabItem value="github">
 
-      Generate an SSH key pair and add a public key to GitLab or GitHub account.
+      Generate an SSH key pair and add a public key to GitLab, GitHub, or Bitbucket account.
 
       :::warning
         Use an additional GitHub/GitLab User to access a repository. For example:<br />
@@ -119,52 +119,51 @@ for GitHub, GitLab, Gerrit integrations. The credential template must be created
       ssh-keygen -t ed25519 -C "email@example.com" -f argocd
       ```
 
-      Copy SSH private key to Argo CD namespace
+      Copy SSH private key to Argo CD namespace.
 
       ```bash
-      EDP_NAMESPACE="edp"
-      VCS_HOST="<github.com_or_gitlab.com>"
+      KRCI_NAMESPACE="krci"
+      VCS_HOST="<github.com_or_gitlab.com_or_bitbucket.org>"
       ACCOUNT_NAME="<ACCOUNT_NAME>"
       URL="ssh://git@${VCS_HOST}:22/${ACCOUNT_NAME}"
 
-      kubectl create secret generic ${EDP_NAMESPACE} -n argocd \
+      kubectl create secret generic ${KRCI_NAMESPACE} -n argocd \
         --from-file=sshPrivateKey=argocd \
         --from-literal=url="${URL}"
-      kubectl label --overwrite secret ${EDP_NAMESPACE} -n argocd "argocd.argoproj.io/secret-type=repo-creds"
+      kubectl label --overwrite secret ${KRCI_NAMESPACE} -n argocd "argocd.argoproj.io/secret-type=repo-creds"
       ```
 
-      Add public SSH key to GitHub/GitLab account.
       </TabItem>
 
       <TabItem value="gerrit">
-        Copy existing SSH private key for Gerrit to Argo CD namespace
+        Copy existing SSH private key for Gerrit to Argo CD namespace.
 
         ```bash
-        EDP_NAMESPACE="edp"
-        GERRIT_PORT=$(kubectl get gerrit gerrit -n ${EDP_NAMESPACE} -o jsonpath='{.spec.sshPort}')
+        KRCI_NAMESPACE="krci"
+        GERRIT_PORT=$(kubectl get gerrit gerrit -n ${KRCI_NAMESPACE} -o jsonpath='{.spec.sshPort}')
         GERRIT_ARGOCD_SSH_KEY_NAME="gerrit-ciuser-sshkey"
-        GERRIT_URL=$(echo "ssh://edp-ci@gerrit.${EDP_NAMESPACE}:${GERRIT_PORT}" | base64)
-        kubectl get secret ${GERRIT_ARGOCD_SSH_KEY_NAME} -n ${EDP_NAMESPACE} -o json | jq 'del(.data.username,.metadata.annotations,.metadata.creationTimestamp,.metadata.labels,.metadata.resourceVersion,.metadata.uid,.metadata.ownerReferences)' | jq '.metadata.namespace = "argocd"' | jq --arg name "${EDP_NAMESPACE}" '.metadata.name = $name' | jq --arg url "${GERRIT_URL}" '.data.url = $url' | jq '.data.sshPrivateKey = .data.id_rsa' | jq 'del(.data.id_rsa,.data."id_rsa.pub")' | kubectl apply -f -
-        kubectl label --overwrite secret ${EDP_NAMESPACE} -n argocd "argocd.argoproj.io/secret-type=repo-creds"
+        GERRIT_URL=$(echo "ssh://edp-ci@gerrit.${KRCI_NAMESPACE}:${GERRIT_PORT}" | base64)
+        kubectl get secret ${GERRIT_ARGOCD_SSH_KEY_NAME} -n ${KRCI_NAMESPACE} -o json | jq 'del(.data.username,.metadata.annotations,.metadata.creationTimestamp,.metadata.labels,.metadata.resourceVersion,.metadata.uid,.metadata.ownerReferences)' | jq '.metadata.namespace = "argocd"' | jq --arg name "${KRCI_NAMESPACE}" '.metadata.name = $name' | jq --arg url "${GERRIT_URL}" '.data.url = $url' | jq '.data.sshPrivateKey = .data.id_rsa' | jq 'del(.data.id_rsa,.data."id_rsa.pub")' | kubectl apply -f -
+        kubectl label --overwrite secret ${KRCI_NAMESPACE} -n argocd "argocd.argoproj.io/secret-type=repo-creds"
         ```
       </TabItem>
     </Tabs>
 
 3. Add [SSH Known hosts](https://argo-cd.readthedocs.io/en/stable/user-guide/private-repositories/#unknown-ssh-hosts)
-   for Gerrit, GitHub, GitLab integration.
+   for GitHub, GitLab, Bitbucket, or Gerrit integration.
 
     <Tabs
       defaultValue="github"
       values={[
-        {label: 'GitHub/GitLab', value: 'github'},
+        {label: 'GitHub/GitLab/Bitbucket', value: 'github'},
         {label: 'Gerrit', value: 'gerrit'}
       ]}>
 
       <TabItem value="github">
-        Add GitHub/GitLab host to Argo CD config map with known hosts
+        Add GitHub, GitLab, or Bitbucket host to Argo CD config map with known hosts.
 
         ```bash
-        EDP_NAMESPACE="edp"
+        KRCI_NAMESPACE="krci"
         VCS_HOST="<VCS_HOST>"
         KNOWN_HOSTS_FILE="/tmp/ssh_known_hosts"
         ARGOCD_KNOWN_HOSTS_NAME="argocd-ssh-known-hosts-cm"
@@ -180,34 +179,34 @@ for GitHub, GitLab, Gerrit integrations. The credential template must be created
         Add Gerrit host to Argo CD config map with known hosts
 
         ```bash
-        EDP_NAMESPACE="edp"
+        KRCI_NAMESPACE="krci"
         KNOWN_HOSTS_FILE="/tmp/ssh_known_hosts"
         ARGOCD_KNOWN_HOSTS_NAME="argocd-ssh-known-hosts-cm"
-        GERRIT_PORT=$(kubectl get gerrit gerrit -n ${EDP_NAMESPACE} -o jsonpath='{.spec.sshPort}')
+        GERRIT_PORT=$(kubectl get gerrit gerrit -n ${KRCI_NAMESPACE} -o jsonpath='{.spec.sshPort}')
 
         rm -f ${KNOWN_HOSTS_FILE}
         kubectl get cm ${ARGOCD_KNOWN_HOSTS_NAME} -n argocd -o jsonpath='{.data.ssh_known_hosts}' > ${KNOWN_HOSTS_FILE}
-        kubectl exec -it deployment/gerrit -n ${EDP_NAMESPACE} -- ssh-keyscan -p ${GERRIT_PORT} gerrit.${EDP_NAMESPACE} >> ${KNOWN_HOSTS_FILE}
+        kubectl exec -it deployment/gerrit -n ${KRCI_NAMESPACE} -- ssh-keyscan -p ${GERRIT_PORT} gerrit.${KRCI_NAMESPACE} >> ${KNOWN_HOSTS_FILE}
         kubectl create configmap ${ARGOCD_KNOWN_HOSTS_NAME} -n argocd --from-file ${KNOWN_HOSTS_FILE} -o yaml --dry-run=client | kubectl apply -f -
         ```
       </TabItem>
     </Tabs>
 
-4. Create an Argo CD Project (Tenant), for example, with the `edp` name:
+4. Create an Argo CD Project (Tenant), for example, with the `krci` name:
 
     ```yaml title="AppProject"
     apiVersion: argoproj.io/v1alpha1
     kind: AppProject
     metadata:
-      name: edp
+      name: krci
       namespace: argocd
       # Finalizer that ensures that project is not deleted until it is not referenced by any application
       finalizers:
         - resources-finalizer.argocd.argoproj.io
     spec:
       destinations:
-        # by default edp work with 'edp-*' namespace
-        - namespace: 'edp-*'
+        # by default krci work with 'krci-*' namespace
+        - namespace: 'krci-*'
         # allow to deploy to specific server (local in our case)
           name: in-cluster
       # Deny all cluster-scoped resources from being created, except for Namespace
@@ -226,21 +225,21 @@ for GitHub, GitLab, Gerrit integrations. The credential template must be created
       namespaceResourceWhitelist:
       - group: '*'
         kind: '*'
-      # enable access only for specific git server. The example below 'edp' - it is namespace where KubeRocketCI deployed
+      # enable access only for specific git server. The example below 'krci' - it is namespace where KubeRocketCI deployed
       sourceRepos:
         - ssh://git@github.com/*
       # enable capability to deploy objects from namespaces
       sourceNamespaces:
-        - edp
+        - krci
     ```
 
-5. Check that your new Repository, Known Hosts, and AppProject are added to the Argo CD UI.
+5. Check that your new **Repository**, **Known Hosts**, and **AppProject** are added to the Argo CD UI.
 
 6. Generate Argo CD project token for deploy integration:
 
     ```bash
     URL=<ARGO CD URL>
-    TOKEN=$(argocd proj role create-token edp developer -i argocd-ci -t)
+    TOKEN=$(argocd proj role create-token krci developer -i argocd-ci -t)
 
 
     cat <<EOF | kubectl apply -f -
@@ -248,7 +247,7 @@ for GitHub, GitLab, Gerrit integrations. The credential template must be created
     kind: Secret
     metadata:
       name: argocd-ci
-      namespace: edp
+      namespace: krci
       labels:
         app.edp.epam.com/integration-secret: "true"
         app.edp.epam.com/secret-type: "argocd"
@@ -276,9 +275,9 @@ This section provides the information on how to test the integration with Argo C
         metadata:
           name: demo
         spec:
-          project: edp
+          project: krci
           destination:
-            namespace: edp-demo
+            namespace: krci-demo
             server: https://kubernetes.default.svc
           source:
             helm:
@@ -289,8 +288,8 @@ This section provides the information on how to test the integration with Argo C
                   value: image-repo
             path: deploy-templates
             # github/gitlab example ssh://git@github.com/<github_account_name>/<repository_name>.git
-            # gerrit example ssh://<gerrit_user>@gerrit.edp:30007/<repository_name>.git
-            repoURL: ssh://git@github.com/edp/demo.git
+            # gerrit example ssh://<gerrit_user>@gerrit.krci:30007/<repository_name>.git
+            repoURL: ssh://git@github.com/krci/demo.git
             targetRevision: master
           syncPolicy:
             syncOptions:
@@ -302,7 +301,7 @@ This section provides the information on how to test the integration with Argo C
 
     </details>
 
-2. Check that your new Application is added to the Argo CD UI under the `edp` Project scope.
+2. Check that your new Application is added to the Argo CD UI under the `krci` Project scope.
 
 ## Deploy Argo CD Application to Remote Cluster (Optional)
 
@@ -322,32 +321,32 @@ KubeRocketCI also supports deploying Argo CD applications to a remote cluster. T
     apiVersion: v1
     kind: Secret
     metadata:
-      name: edp-remote-cluster
+      name: krci-remote-cluster
       namespace: argocd
     data:
       # Remote cluster config
       config: {"bearerToken":"<BEAR_TOKEN>","tlsClientConfig":{"insecure":false,"caData":"<certificate-authority-data>"}}
       # Remote cluster name
-      name: "edp-remote-cluster"
+      name: "krci-remote-cluster"
       # Cluster endpoint URL
       server: "https://xxxxxxxxxxxxxxxxxxxx.sk1.eu-central-1.eks.amazonaws.com"
     type: stringData
     ```
 
-4. Update an Argo CD Project (EDP Tenant), with the `edp` name:
+4. Update an Argo CD Project (KubeRocketCI Tenant), with the `krci` name:
 
     ```yaml title="AppProject"
     apiVersion: argoproj.io/v1alpha1
     kind: AppProject
     metadata:
-      name: edp
+      name: krci
     spec:
       destinations:
           # Add block that allow deploy in remote cluster
-          # by default edp work with 'edp-*' namespace
-        - namespace: 'edp-*'
+          # by default, krci works with 'krci-*' namespaces
+        - namespace: 'krci-*'
           # allow to deploy to specific server (remote in our case)
-          name: edp-remote-cluster
+          name: krci-remote-cluster
     ```
 
 5. Add a remote cluster in the KubeRocketCI portal. Please refer to the [Add Cluster](../../user-guide/add-cluster.md) page for details.
@@ -424,9 +423,9 @@ To provide Argo CD with the Keycloak SSO authorization mechanism, follow the gui
     apiVersion: v1.edp.epam.com/v1
     kind: KeycloakRealmGroup
     metadata:
-      name: argocd-edp-users
+      name: argocd-krci-users
     spec:
-      name: ArgoCD-edp-users
+      name: ArgoCD-krci-users
       realm: main
     ```
 
@@ -452,30 +451,30 @@ To provide Argo CD with the Keycloak SSO authorization mechanism, follow the gui
       webUrl: "https://argocd.<.Values.global.dnsWildCard>"
     ```
 
-5. In Keycloak, add users to the `ArgoCD-edp-users` Keycloak Group.
+5. In Keycloak, add users to the `ArgoCD-krci-users` Keycloak Group.
 
 6. Update spec in project:
 
     ```yaml title="AppProject"
     spec:
-      description: CD pipelines for edp
+      description: CD pipelines for krci
       roles:
         - name: developer
-          description: Users for edp tenant
+          description: Users for krci tenant
           policies:
-            - p, proj:edp:developer, applications, create, edp/*, allow
-            - p, proj:edp:developer, applications, delete, edp/*, allow
-            - p, proj:edp:developer, applications, get, edp/*, allow
-            - p, proj:edp:developer, applications, override, edp/*, allow
-            - p, proj:edp:developer, applications, sync, edp/*, allow
-            - p, proj:edp:developer, applications, update, edp/*, allow
-            - p, proj:edp:developer, repositories, create, edp/*, allow
-            - p, proj:edp:developer, repositories, delete, edp/*, allow
-            - p, proj:edp:developer, repositories, update, edp/*, allow
-            - p, proj:edp:developer, repositories, get, edp/*, allow
+            - p, proj:krci:developer, applications, create, krci/*, allow
+            - p, proj:krci:developer, applications, delete, krci/*, allow
+            - p, proj:krci:developer, applications, get, krci/*, allow
+            - p, proj:krci:developer, applications, override, krci/*, allow
+            - p, proj:krci:developer, applications, sync, krci/*, allow
+            - p, proj:krci:developer, applications, update, krci/*, allow
+            - p, proj:krci:developer, repositories, create, krci/*, allow
+            - p, proj:krci:developer, repositories, delete, krci/*, allow
+            - p, proj:krci:developer, repositories, update, krci/*, allow
+            - p, proj:krci:developer, repositories, get, krci/*, allow
           groups:
             # Keycloak Group name
-            - ArgoCD-edp-users
+            - ArgoCD-krci-users
     ```
 
 7. Then restart the deployment:

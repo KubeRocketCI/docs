@@ -50,7 +50,7 @@ The error highlighted above indicates the necessity for users to manually create
       subjects:
         - kind: ServiceAccount
           name: edp-cd-pipeline-operator
-          namespace: edp
+          namespace: krci
       roleRef:
         apiGroup: rbac.authorization.k8s.io
         kind: ClusterRole

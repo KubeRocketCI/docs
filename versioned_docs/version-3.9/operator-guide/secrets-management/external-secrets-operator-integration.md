@@ -54,9 +54,9 @@ The list below represents the baseline required for full operation within platfo
 
 All secrets are stored in Kubernetes in pre-defined namespaces. Platform suggests using the following approach for secrets management:
 
-* `EDP_NAMESPACE-vault`, where `EDP_NAMESPACE` is a name of the namespace where KubeRocketCI is deployed, such as `edp-vault`. This namespace is used by the platform. Access to secrets in the `edp-vault` is granted only for `Administrators`.
+* `KRCI_NAMESPACE-vault`, where `KRCI_NAMESPACE` is a name of the namespace where KubeRocketCI is deployed, such as `krci-vault`. This namespace is used by the platform. Access to secrets in the `krci-vault` is granted only for `Administrators`.
 
-* `EDP_NAMESPACE-cicd-vault`, where `EDP_NAMESPACE` is a name of the namespace where KubeRocketCI is deployed, such as `edp-cicd-vault`. Development team uses secrets in the `edp-cicd-vault` for microservices development.
+* `KRCI_NAMESPACE-cicd-vault`, where `KRCI_NAMESPACE` is a name of the namespace where KubeRocketCI is deployed, such as `krci-cicd-vault`. Development team uses secrets in the `krci-cicd-vault` for microservices development.
 
 See a diagram below for more details:
 
@@ -67,31 +67,31 @@ In order to [Install KubeRocketCI](../install-kuberocketci.md), a list of passwo
 1. Create a common namespace for secrets and platform:
 
     ```bash
-    kubectl create namespace edp-vault
-    kubectl create namespace edp
+    kubectl create namespace krci-vault
+    kubectl create namespace krci
     ```
 
-2. Create secrets in the `edp-vault` namespace:
+2. Create secrets in the `krci-vault` namespace:
 
     ```yaml
     apiVersion: v1
     kind: Secret
     metadata:
       name: keycloak
-      namespace: edp-vault
+      namespace: krci-vault
     data:
       password: cGFzcw==  # pass in base64
       username: dXNlcg==  # user in base64
     type: Opaque
     ```
 
-3. In the `edp-vault` namespace, create a Role with a permission to read secrets:
+3. In the `krci-vault` namespace, create a Role with a permission to read secrets:
 
     ```yaml
     apiVersion: rbac.authorization.k8s.io/v1
     kind: Role
     metadata:
-      namespace: edp-vault
+      namespace: krci-vault
       name: external-secret-store
     rules:
     - apiGroups: [""]
@@ -109,46 +109,46 @@ In order to [Install KubeRocketCI](../install-kuberocketci.md), a list of passwo
       - create
     ```
 
-4. In the `edp-vault` namespace, create a ServiceAccount used by `SecretStore`:
+4. In the `krci-vault` namespace, create a ServiceAccount used by `SecretStore`:
 
     ```yaml
     apiVersion: v1
     kind: ServiceAccount
     metadata:
       name: secret-manager
-      namespace: edp
+      namespace: krci
     ```
 
-5. Connect the Role from the `edp-vault` namespace with the ServiceAccount in the `edp` namespace:
+5. Connect the Role from the `krci-vault` namespace with the ServiceAccount in the `krci` namespace:
 
     ```yaml
     apiVersion: rbac.authorization.k8s.io/v1
     kind: RoleBinding
     metadata:
-      name: eso-from-edp
-      namespace: edp-vault
+      name: eso-from-krci
+      namespace: krci-vault
     subjects:
       - kind: ServiceAccount
         name: secret-manager
-        namespace: edp
+        namespace: krci
     roleRef:
       apiGroup: rbac.authorization.k8s.io
       kind: Role
       name: external-secret-store
     ```
 
-6. Create a SecretStore in the `edp` namespace, and use ServiceAccount for authentication:
+6. Create a SecretStore in the `krci` namespace, and use ServiceAccount for authentication:
 
     ```yaml
     apiVersion: external-secrets.io/v1beta1
     kind: SecretStore
     metadata:
-      name: edp-vault
-      namespace: edp
+      name: krci-vault
+      namespace: krci
     spec:
       provider:
         kubernetes:
-          remoteNamespace: edp-vault  # namespace with secrets
+          remoteNamespace: krci-vault  # namespace with secrets
           auth:
             serviceAccount:
               name: secret-manager
@@ -159,19 +159,19 @@ In order to [Install KubeRocketCI](../install-kuberocketci.md), a list of passwo
               key: ca.crt
     ```
 
-7. Each secret must be defined by the `ExternalSecret` object. A code example below creates the `keycloak` secret in the `edp` namespace based on a secret with the same name in the `edp-vault` namespace:
+7. Each secret must be defined by the `ExternalSecret` object. A code example below creates the `keycloak` secret in the `krci` namespace based on a secret with the same name in the `krci-vault` namespace:
 
     ```yaml
     apiVersion: external-secrets.io/v1beta1
     kind: ExternalSecret
     metadata:
       name: keycloak
-      namespace: edp
+      namespace: krci
     spec:
       refreshInterval: 1h
       secretStoreRef:
         kind: SecretStore
-        name: edp-vault
+        name: krci-vault
       # target:
       #   name: secret-to-be-created  # name of the k8s Secret to be created. metadata.name used if not defined
       data:
@@ -199,7 +199,7 @@ In order to [Install KubeRocketCI](../install-kuberocketci.md), a list of passwo
 
 1. In the AWS, create an AWS IAM policy and an IAM role used by `ServiceAccount` in `SecretStore`. The IAM role must have permissions to get values from the SSM Parameter Store.
 
-    a. Create an IAM policy that allows to get values from the Parameter Store with the `edp/` path. Use your `AWS Region` and `AWS Account Id`:
+    a. Create an IAM policy that allows to get values from the Parameter Store with the `krci/` path. Use your `AWS Region` and `AWS Account Id`:
 
     ```json
     {
@@ -209,7 +209,7 @@ In order to [Install KubeRocketCI](../install-kuberocketci.md), a list of passwo
             "Sid": "VisualEditor0",
             "Effect": "Allow",
             "Action": "ssm:GetParameter*",
-            "Resource": "arn:aws:ssm:eu-central-1:012345678910:parameter/edp/*"
+            "Resource": "arn:aws:ssm:eu-central-1:012345678910:parameter/krci/*"
         }
     ]
     }
@@ -229,7 +229,7 @@ In order to [Install KubeRocketCI](../install-kuberocketci.md), a list of passwo
                 "Action": "sts:AssumeRoleWithWebIdentity",
                 "Condition": {
                     "StringLike": {
-                        "oidc.eks.eu-central-1.amazonaws.com/id/XXXXXXXXXXXXXXXXXX:sub": "system:serviceaccount:edp:*"
+                        "oidc.eks.eu-central-1.amazonaws.com/id/XXXXXXXXXXXXXXXXXX:sub": "system:serviceaccount:krci:*"
                     }
                 }
             }
@@ -237,7 +237,7 @@ In order to [Install KubeRocketCI](../install-kuberocketci.md), a list of passwo
     }
     ```
 
-2. Create a secret in the AWS Parameter Store with the name `/edp/my-json-secret`. This secret is represented as a parameter of type string within the AWS Parameter Store:
+2. Create a secret in the AWS Parameter Store with the name `/krci/my-json-secret`. This secret is represented as a parameter of type string within the AWS Parameter Store:
 
     <details>
       <summary><b>View: Parameter Store JSON</b></summary>
@@ -324,8 +324,10 @@ In order to [Install KubeRocketCI](../install-kuberocketci.md), a list of passwo
 3. Set External Secret operator enabled by updating the values.yaml file:
 
     ```yaml install values.yaml
-    externalSecrets:
-      enabled: true
+    external-secrets:
+      createNamespace: false
+      enable: false
+      namespace: external-secrets
     ```
 
 4. Install/upgrade edp-install:
@@ -334,7 +336,7 @@ In order to [Install KubeRocketCI](../install-kuberocketci.md), a list of passwo
     helm upgrade --install edp epamedp/edp-install --wait --timeout=900s \
     --version <edp_version> \
     --values values.yaml \
-    --namespace edp \
+    --namespace krci \
     --atomic
     ```
 

@@ -466,7 +466,8 @@ const sidebars: SidebarsConfig = {
           items: [
             'user-guide/add-cd-pipeline',
             'user-guide/manage-environments',
-            "user-guide/cd-pipeline-variables-injection"
+            "user-guide/cd-pipeline-variables-injection",
+            'user-guide/application-and-pipeline-statuses',
           ],
         },
         {

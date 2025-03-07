@@ -95,10 +95,10 @@ To import custom certificates to Keycloak, follow the steps below:
 
 Creating custom certificates is a necessary but not sufficient condition for applying, therefore, certificates should be enabled as well.
 
-1. Create the `custom-ca-certificates` secret in the platform namespace (e.g `edp`).
+1. Create the `custom-ca-certificates` secret in the platform namespace (e.g `krci`).
 
    ```bash
-   kubectl -n edp create secret generic custom-ca-certificates \
+   kubectl -n krci create secret generic custom-ca-certificates \
    --from-file=CA.crt
    ```
 
@@ -176,7 +176,7 @@ Also, the `jenkins-agent-opt-java-openjdk-lib-security-cacerts` secret contains 
 
       ```bash
       # Fill in the variables `ns` and `ca_file`
-      ns="edp-project"
+      ns="krci"
       ca_file="/tmp/CA.crt"
 
       images=$(kubectl get -n "${ns}" cm jenkins-slaves -ojson | jq -r ".data[]" | grep image\> | sed 's/\s*<.*>\(.*\)<.*>/\1/')
@@ -220,7 +220,7 @@ Also, the `jenkins-agent-opt-java-openjdk-lib-security-cacerts` secret contains 
     * the script collects all the images from the `jenkins-slaves` ConfigMap and uses the image of
       the `maven-java8` agent as the base image of the temporary pod to get the keystore files;
     * custom certificate is imported using the `keytool` application;
-    * the `jenkins-agent-opt-java-openjdk-lib-security-cacerts` and `jenkins-agent-etc-ssl-certs-java-cacerts` secrets will be created in the `edp` namespace.
+    * the `jenkins-agent-opt-java-openjdk-lib-security-cacerts` and `jenkins-agent-etc-ssl-certs-java-cacerts` secrets will be created in the `krci` namespace.
 
 2. Run the `copy_certs.sh` script from the previous point after the requirements are met.
 
@@ -263,7 +263,7 @@ Also, the `jenkins-agent-opt-java-openjdk-lib-security-cacerts` secret contains 
 4. Reload the Jenkins pod:
 
     ```bash
-    ns="edp"
+    ns="krci"
     kubectl rollout restart -n "${ns}" deployment/jenkins
     ```
 

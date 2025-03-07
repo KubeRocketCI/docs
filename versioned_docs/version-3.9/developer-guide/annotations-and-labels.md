@@ -98,7 +98,7 @@ To demonstrate label usage in the Tekton pipelines, find below some KubeRocketCI
     ...
     cdPipeline: mypipe
     name: dev
-    namespace: edp-delivery-ms-delivery-dev-mypipe-dev
+    namespace: krci-delivery-ms-delivery-dev-mypipe-dev
     qualityGates:
       - autotestName: autotests
         branchName: master

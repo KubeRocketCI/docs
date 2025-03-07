@@ -32,7 +32,7 @@ The added cluster will be listed in the clusters list allowing you to do the fol
 To view authentication data that is used to log in to the cluster, run the `kubectl describe` command:
 
   ```bash
-  kubectl describe secret cluster_name -n edp
+  kubectl describe secret cluster_name -n krci
   ```
 
 ## Delete Cluster
@@ -40,7 +40,7 @@ To view authentication data that is used to log in to the cluster, run the `kube
 To delete cluster, use the `kubectl delete` command as follows:
 
   ```bash
-  kubectl delete secret cluster_name -n edp
+  kubectl delete secret cluster_name -n krci
   ```
 
 ## Related Articles

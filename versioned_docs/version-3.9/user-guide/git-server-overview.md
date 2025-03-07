@@ -13,7 +13,7 @@ description: "Discover how to manage Git Server integrations in KubeRocketCI for
   <link rel="canonical" href="https://docs.kuberocketci.io/docs/user-guide/git-server-overview" />
 </head>
 
-Git Server is responsible for integration with Version Control System, whether it is GitHub, GitLab or Gerrit.
+Git Server is responsible for integration with Version Control System, whether it is GitHub, GitLab, Bitbucket, or Gerrit.
 
 <div style={{ display: 'flex', justifyContent: 'center' }}>
 <iframe width="560" height="315" src="https://www.youtube.com/embed/pzheGwBLZvU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen"></iframe>
@@ -29,13 +29,14 @@ To view the current Git Server, you can open Portal **Configuration** -> **Git S
 * **Git Server properties** - displays the Git Server type, its host address, username, SSH/HTTPS port, public and private SSH keys.
 * **Open documentation** - opens the "Manage Git Servers" documentation page.
 * **Undo/Save changes** - these buttons apply or revert changes made to the Git Server.
+* **Add a new Git Server** - add a new blank to specify the new Git Server's parameters.
 
 ## View Authentication Data
 
 To view authentication data that is used to connect to the Git server, use `kubectl describe` command as follows:
 
   ```bash
-  kubectl describe GitServer git_server_name -n edp
+  kubectl describe GitServer git_server_name -n krci
   ```
 
 ## Delete Git Server
@@ -43,7 +44,7 @@ To view authentication data that is used to connect to the Git server, use `kube
 To remove a Git Server from the Git Servers list, utilize the `kubectl delete` command as follows:
 
   ```bash
-  kubectl delete GitServer git_server_name -n edp
+  kubectl delete GitServer git_server_name -n krci
   ```
 
 ## Related Articles

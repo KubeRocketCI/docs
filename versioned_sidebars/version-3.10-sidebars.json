@@ -428,7 +428,8 @@
                 "user-guide/infrastructure"
               ]
             },
-            "user-guide/manage-branches"
+            "user-guide/manage-branches",
+            "user-guide/artifact-versioning"
           ]
         },
         {

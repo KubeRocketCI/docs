@@ -303,6 +303,7 @@ const sidebars: SidebarsConfig = {
               label: 'GitOps',
               items: [
                 'operator-guide/cd/argocd-integration',
+                'operator-guide/cd/argocd-and-kuberocketci-statuses',
               ],
             },
           ],

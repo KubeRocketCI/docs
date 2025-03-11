@@ -123,24 +123,24 @@ To define custom Tekton pipelines, follow these steps:
     │   │   │   ├── custom-clean.yaml
     │   │   │   └── custom-deploy.yaml
     │   │   ├── bitbucket-build-default.yaml
-    │   │   ├── bitbucket-build-edp.yaml
+    │   │   ├── bitbucket-build-semver.yaml
     │   │   ├── bitbucket-build-lib-default.yaml
-    │   │   ├── bitbucket-build-lib-edp.yaml
+    │   │   ├── bitbucket-build-lib-semver.yaml
     │   │   ├── bitbucket-review.yaml
     │   │   ├── gerrit-build-default.yaml
-    │   │   ├── gerrit-build-edp.yaml
+    │   │   ├── gerrit-build-semver.yaml
     │   │   ├── gerrit-build-lib-default.yaml
-    │   │   ├── gerrit-build-lib-edp.yaml
+    │   │   ├── gerrit-build-lib-semver.yaml
     │   │   ├── gerrit-review.yaml
     │   │   ├── github-build-default.yaml
-    │   │   ├── github-build-edp.yaml
+    │   │   ├── github-build-semver.yaml
     │   │   ├── github-build-lib-default.yaml
-    │   │   ├── github-build-lib-edp.yaml
+    │   │   ├── github-build-lib-semver.yaml
     │   │   ├── github-review.yaml
     │   │   ├── gitlab-build-default.yaml
-    │   │   ├── gitlab-build-edp.yaml
+    │   │   ├── gitlab-build-semver.yaml
     │   │   ├── gitlab-build-lib-default.yaml
-    │   │   ├── gitlab-build-lib-edp.yaml
+    │   │   ├── gitlab-build-lib-semver.yaml
     │   │   └── gitlab-review.yaml
     │   ├── resources
     │   │   └── npm-settings.yaml
@@ -158,7 +158,7 @@ To define custom Tekton pipelines, follow these steps:
 
     - The `templates/pipelines` directory contains Tekton pipeline templates for build and review processes. For each Git server (e.g., GitHub, GitLab, Bitbucket, or Gerrit), there are specific templates, organized by component and versioning type.
       - The appropriate template should be selected based on the configuration of your component. For example:
-        - If the component is created in GitHub, has the `Application` component type, and uses `edp` versioning, you should use the `github-build-edp.yaml` template.
+        - If the component is created in GitHub, has the `Application` component type, and uses `semver` versioning, you should use the `github-build-semver.yaml` template.
         - If the component is created in Bitbucket, has the `Library` component type, and uses the `default` versioning, you should use the `bitbucket-build-lib-default.yaml` template.
 
         Here is an example illustrating the naming conventions used in template filenames:
@@ -215,8 +215,8 @@ To define custom Tekton pipelines, follow these steps:
 
     2. Create a Custom Tekton Pipeline.
 
-        Define a custom Tekton pipeline that uses the `hello-world` custom task. Since the application for which this pipeline will be used is located in GitHub, has the component type `Application`, and has the versioning type `edp`,
-        use the template `github-build-edp.yaml` in the `templates/pipelines` directory. First, set the parameters in the `spec.params` field that will be used in the custom task:
+        Define a custom Tekton pipeline that uses the `hello-world` custom task. Since the application for which this pipeline will be used is located in GitHub, has the component type `Application`, and has the versioning type `semver`,
+        use the template `github-build-semver.yaml` in the `templates/pipelines` directory. First, set the parameters in the `spec.params` field that will be used in the custom task:
 
         ```yaml
         spec:
@@ -232,13 +232,13 @@ To define custom Tekton pipelines, follow these steps:
 
         Then, in the `spec.tasks` field, after the `get-version` task, describe the custom `hello-world` task. Also, in the subsequent `git-tag` task, specify the `runAfter: hello-world` field to maintain the sequence of execution.
 
-        Here is an example of part of the `github-build-edp.yaml` pipeline template:
+        Here is an example of part of the `github-build-semver.yaml` pipeline template:
 
         ```yaml
         apiVersion: tekton.dev/v1
         kind: Pipeline
         metadata:
-          name: github-build-edp
+          name: github-build-semver
           labels:
             app.edp.epam.com/pipelinetype: build
         spec:
@@ -279,7 +279,7 @@ To define custom Tekton pipelines, follow these steps:
 
     3. Create a Custom Tekton Trigger Template.
 
-        Create a Tekton Trigger Template to invoke the custom `github-build-edp pipeline`. Use the `custom-deploy.yaml` template in the `templates/triggers` directory. Modify the `.spec.resourcetemplates.spec.pipelineRef.name` field to reference the custom pipeline that uses the `hello-world` custom Tekton task, in this case, `custom-deploy`.
+        Create a Tekton Trigger Template to invoke the custom `github-build-semver` pipeline. Use the `custom-deploy.yaml` template in the `templates/triggers` directory. Modify the `.spec.resourcetemplates.spec.pipelineRef.name` field to reference the custom pipeline that uses the `hello-world` custom Tekton task, in this case, `custom-deploy`.
 
         Here is the relevant part of the `custom-deploy.yaml` trigger template:
 

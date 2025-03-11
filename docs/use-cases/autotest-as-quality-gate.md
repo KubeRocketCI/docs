@@ -78,7 +78,7 @@ To implement autotests as Quality Gates, follow the steps below:
 7. On the **Advanced settings** tab, define the below values and push the **Create** button:
 
     - Default branch: `main`
-    - Codebase versioning type: `edp`
+    - Codebase versioning type: `semver`
 
     ![Advanced settings tab](../assets/use-cases/autotest-as-quality-gate/advanced_settings.png "Advanced settings tab")
 
@@ -93,7 +93,7 @@ To implement autotests as Quality Gates, follow the steps below:
     - Language version/Provider: `Gin`
     - Build tool: `Go`
     - Default branch: `main`
-    - Codebase versioning type: `edp`
+    - Codebase versioning type: `semver`
 
     python-application:
     - Git server: `github`
@@ -104,7 +104,7 @@ To implement autotests as Quality Gates, follow the steps below:
     - Language version/Provider: `FastAPI`
     - Build tool: `Python`
     - Default branch: `main`
-    - Codebase versioning type: `edp`
+    - Codebase versioning type: `semver`
 
 9. In the **Components** tab, click one of the applications name to enter the application menu:
 
@@ -161,7 +161,7 @@ The steps below instruct how to create autotests in KubeRocketCI:
 4. On the **Advanced settings** tab define the below values and push the **Create** button:
 
     - Default branch: `main`
-    - Codebase versioning type: `edp`
+    - Codebase versioning type: `semver`
 
     ![Advanced settings tab for autotests](../assets/use-cases/autotest-as-quality-gate/autotest_advanced_settings.png "Advanced settings tab for autotests")
 
@@ -177,7 +177,7 @@ The steps below instruct how to create autotests in KubeRocketCI:
     - Build tool: `Maven`
     - Autotest report framework: `Allure`
     - Default branch: `main`
-    - Codebase versioning type: `edp`
+    - Codebase versioning type: `semver`
 
 ### Create CD Pipeline
 

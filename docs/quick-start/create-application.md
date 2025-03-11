@@ -37,7 +37,7 @@ To create the first application, complete the instructions below:
     - Description: `My first application`
     - Git server: `github`
     - Repository name: `<github_account_name>/my-go-gin-app`
-    - Codebase versioning type: `edp`
+    - Codebase versioning type: `semver`
     - Start version from: `0.1.0`
     - Suffix: `SNAPSHOT`
 

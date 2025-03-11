@@ -109,7 +109,7 @@ As soon as the Helm chart is installed, the new deploy pipeline will appear in t
    * Description: `Simple spring boot application`
    * Git server: `github`
    * Repository name: `<github_account_name>/spring-boot-app`
-   * Codebase versioning type: `edp`
+   * Codebase versioning type: `semver`
    * Start version from: `0.1.0`
    * Suffix: `SNAPSHOT`
 
@@ -159,7 +159,7 @@ Specify the autotest language properties:
 5. Fill in the following fields in **Specify advanced settings*** and click **CREATE**:
 
   * Default branch: `master`
-  * Codebase versioning type: `edp`
+  * Codebase versioning type: `semver`
   * Start version from: `0.1.0`
   * Suffix: `SNAPSHOT`
 

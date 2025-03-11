@@ -79,7 +79,7 @@ To streamline the process of implementing custom logic within the KubeRocketCI p
 7. In the **Advances Settings** tab, define the below values and click the **Create** button:
 
     - Default branch: `main`
-    - Codebase versioning type: `edp`
+    - Codebase versioning type: `semver`
     - Leave `Specify the pattern to validate a commit message` empty.
 
     ![Application Menu](../assets/use-cases/tekton-custom/tekton-custom04.png "Application Menu")
@@ -138,7 +138,7 @@ KubeRocketCI allows for the creation of custom Tekton libraries to address speci
 5. In the `Advances Settings` tab, define the below values and click the `Apply` button:
 
     - Default branch: `main`
-    - Codebase versioning type: `edp`
+    - Codebase versioning type: `semver`
     - Leave `Specify the pattern to validate a commit message` empty.
 
     ![Advanced Settings](../assets/use-cases/tekton-custom/tekton-custom09.png "Advanced settings")

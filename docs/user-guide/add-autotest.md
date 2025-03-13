@@ -66,7 +66,7 @@ In our case, we will use the **Clone** strategy:
 
 1. Select all the settings that define how the autotest will be added to Git server:
 
-    * **Git server** - the pre-configured server where the component will be hosted. Select one from the from the drop-down list. Please refer to the [Manage Git Servers](git-server-overview.md) page to learn how to create the one.
+    * **Git server** - the pre-configured server where the component will be hosted. Select one from the drop-down list. Please refer to the [Manage Git Servers](git-server-overview.md) page to learn how to create the one.
     * **Repository name** - the relative path to the repository, such as `/epmd-edp/examples/basic/edp-auto-tests-simple-example`.
     * **Component name** - the name of the autotest. Must be at least two characters using the lower-case letters, numbers and inner dashes.
     * **Description** - brief and concise description that explains the purpose of the autotest.
@@ -93,6 +93,7 @@ In the **Advanced Settings** menu, specify the branch options and define the Jir
     :::
 
 * **Codebase versioning type** - defines how will the autotest tag be changed once the new image version is built. There are two versioning types:
+
   * **default**: Using the `default` versioning type, in order to specify the version of the current artifacts, images, and tags in the Version Control System, a developer should navigate to the corresponding file and change the version **manually**.
   * **semver**: Using the `semver` versioning type, a developer indicates the version number from which all the artifacts will be versioned and, as a result, **automatically** registered in the corresponding file (e.g. pom.xml). When selecting the `semver` versioning type, the extra fields will appear, type the version number from which you want the artifacts to be versioned:
 
@@ -131,7 +132,7 @@ and have a respective label in the **Fix Version** field.
 
     * For the **Fix Version/s** field, select the **EDP_VERSION** variable that represents an KubeRocketCI upgrade version, as in _2.7.0-SNAPSHOT_.Combine variables to make the value more informative. For example, the pattern **EDP_VERSION-EDP_COMPONENT** will be displayed as _2.7.0-SNAPSHOT-nexus-operator_ in Jira.
     * For the **Component/s** field select the **EDP_COMPONENT** variable that defines the name of the existing repository. For example, _nexus-operator_.
-    * For the **Labels** field select the **EDP_GITTAG**variable that defines a tag assigned to the commit in Git Hub. For example, _build/2.7.0-SNAPSHOT.59_.
+    * For the **Labels** field select the **EDP_GITTAG** variable that defines a tag assigned to the commit in Git Hub. For example, _build/2.7.0-SNAPSHOT.59_.
 
   * Click the bin icon to remove the Jira field name.
 

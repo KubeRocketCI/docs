@@ -66,6 +66,7 @@ To streamline the process of implementing custom logic within the KubeRocketCI p
 
 6. In the **Add component info** tab, define the following values and click the **Proceed** button:
 
+    - Git Server: select the available GitHub server
     - Repository URL: `https://github.com/epmd-edp/go-go-beego.git`
     - Repository name: `tekton-hello-world`
     - Component name: `tekton-hello-world`
@@ -76,9 +77,10 @@ To streamline the process of implementing custom logic within the KubeRocketCI p
 
     ![Application Menu](../assets/use-cases/tekton-custom/tekton-custom03.png "Application Menu")
 
-7. In the **Advances Settings** tab, define the below values and click the **Create** button:
+7. In the **Advanced Settings** tab, define the below values and click the **Create** button:
 
     - Default branch: `main`
+    - Deployment option: `helm-chart`
     - Codebase versioning type: `semver`
     - Leave `Specify the pattern to validate a commit message` empty.
 
@@ -135,7 +137,7 @@ KubeRocketCI allows for the creation of custom Tekton libraries to address speci
 
     ![Codebase Info](../assets/use-cases/tekton-custom/tekton-custom08.png "Step codebase info")
 
-5. In the `Advances Settings` tab, define the below values and click the `Apply` button:
+5. In the `Advanced Settings` tab, define the below values and click the `Apply` button:
 
     - Default branch: `main`
     - Codebase versioning type: `semver`

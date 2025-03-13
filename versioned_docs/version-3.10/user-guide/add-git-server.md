@@ -130,7 +130,7 @@ For [Bitbucket](https://support.atlassian.com/bitbucket-cloud/docs/app-passwords
       ]}>
 
       <TabItem value="portal">
-      Navigate to **Configuration** -> **Version Control System**. Fill in the required fields:
+      Navigate to **Configuration** -> **Version Control System**. Fill in the required fields and click **Save**:
 
       ![VCS Integration in KubeRocketCI portal](../assets/operator-guide/github_integration.png "GitHub integration")
       </TabItem>

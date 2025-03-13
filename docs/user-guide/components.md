@@ -21,6 +21,8 @@ From a business perspective, `Components` represent the functional building bloc
 
 From a technical implementation perspective, `Codebases` are the Kubernetes custom resources that manage the technical aspects of these Components. They serve as the bridge between the business logic represented by Components and the underlying Git repositories. Codebases are responsible for the technical implementation, ensuring that the Components are efficiently stored, versioned, and synchronized with the version control system. They represent the state of Components from a technical standpoint.
 
+The created codebase will be stored in the Version Control System. This is why it is required to add a [Git server](./add-git-server.md) first to create components.
+
 ### Components
 
 Components are the building blocks of software projects. They come in different types, such as `Applications`, `Libraries`, `Autotests`, and `Infrastructure`. Each component type serves a specific purpose in the development process. Applications are the deployable unit of projects, libraries contain reusable code, autotests facilitate automated testing, and infrastructure defines a project's infrastructure settings.

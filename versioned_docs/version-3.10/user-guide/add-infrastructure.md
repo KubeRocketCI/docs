@@ -67,7 +67,7 @@ In our example, we will use the **Create from template** strategy.
 
     ![Create infrastructure](../assets/user-guide/components/infrastructure/infrastructure-create-infrastructure.png "Create infrastructure")
 
-    * **Git server** - the pre-configured server where the component will be hosted. Select one from the from the drop-down list. Please refer to the [Manage Git Servers](git-server-overview.md) page to learn how to create the one.
+    * **Git server** - the pre-configured server where the component will be hosted. Select one from the drop-down list. Please refer to the [Manage Git Servers](git-server-overview.md) page to learn how to create the one.
     * **Repository name** - the relative path to the repository, such as `epmd-edp/python-python-flask`.
     * **Component name** - the name of the infrastructure. Must be at least two characters using the lower-case letters, numbers and inner dashes.
     * **Description** - brief and concise description that explains the purpose of the infrastructure.
@@ -129,11 +129,11 @@ Follow the instructions below to fill in the fields of the **Advanced Setting** 
 
     * For the **Fix Version/s** field, select the **EDP_VERSION** variable that represents an EDP upgrade version, as in _2.7.0-SNAPSHOT_.Combine variables to make the value more informative. For example, the pattern **EDP_VERSION-EDP_COMPONENT** will be displayed as _2.7.0-SNAPSHOT-nexus-operator_ in Jira.
     * For the **Component/s** field select the **EDP_COMPONENT** variable that defines the name of the existing repository. For example, _nexus-operator_.
-    * For the **Labels** field select the **EDP_GITTAG**variable that defines a tag assigned to the commit in Git Hub. For example, _build/2.7.0-SNAPSHOT.59_.
+    * For the **Labels** field select the **EDP_GITTAG** variable that defines a tag assigned to the commit in Git Hub. For example, _build/2.7.0-SNAPSHOT.59_.
 
   * Click the bin icon to remove the Jira field name.
 
-Click the **Apply** button to add the infrastructure to the Components list.
+Click the **Create** button to add the infrastructure to the Components list.
 
 :::note
   After the complete adding of the application, inspect the [Manage Infrastructures](infrastructure.md) page to learn how you can operate with infrastructure codebase types.

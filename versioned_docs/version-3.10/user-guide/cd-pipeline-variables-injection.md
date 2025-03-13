@@ -41,7 +41,7 @@ To add a key-value variable in deploy pipelines, follow the steps below:
 
   ![Deployment Flows section](../assets/user-guide/deployment-flows-page.png "Deployment Flows section")
 
-2. Enter your deployment flow and then enter the environment you need to add a variable to. In the environment details page, select the **Variables** tab. Click the **+** button to add a variable:
+2. Enter your deployment flow and then enter the environment you need to add a variable to. In the environment details page, select the **Variables** tab. Use the **Click here to add a new variable** button to add a variable:
 
   ![Variables tab](../assets/user-guide/variables-tab.png "Variables tab")
 

@@ -159,16 +159,6 @@ To deploy an application, follow the steps below:
     In case of using OpenShift internal registry, if the deployment fails with the ImagePullBackOff error, delete the pod that was created for this application.
   :::
 
-To uninstall the application, click the **Delete** button:
-
-![Uninstall the application](../assets/user-guide/environments/edp-portal-uninstall-application.png "Uninstall the application")
-
-As a result, the application will be uninstalled in the Argo CD tool as well.
-
-Alternatively, you can use the **Clean** button. This way will be appropriate when you have some specific requirements to the environment cleanup procedure. Note that you need to make up your own logic in the cleanup pipeline to use the button or choose one of the pre-defined pipelines offered by KubeRocketCI:
-
-![Clean up application](../assets/user-guide/environments/edp-portal-clean-application.png "Clean up application")
-
 ### Troubleshoot Application
 
 There is a couple of KubeRocketCI portal capabilities that will help in monitoring and troubleshooting deployed applications, namely, terminal and logs.

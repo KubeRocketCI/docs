@@ -121,7 +121,7 @@ As a result, a new environment will be created in the environments list.
 
 ## Create Deployment Flow in YAML
 
-Click **Edit YAML** in the upper-right corner of the **Create CD Pipeline** dialog to open the YAML editor and create a deployment flow:
+Click **Edit YAML** in the upper-right corner of the **Create deployment flow** dialog to open the YAML editor and create a deployment flow:
 
   ![Edit YAML](../assets/user-guide/environments/deployment-flow-edit-yaml.png "Edit YAML")
 

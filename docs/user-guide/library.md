@@ -30,21 +30,28 @@ The added library will be listed in the Libraries list allowing to do the follow
 
 ![Library menu](../assets/user-guide/components/components-manage-components-menu.png  "Library menu")
 
+* **Open documentation** - Opens the library related documentation page.
+* **Create new component** - Opens the **Create new component** menu when clicking.
+* **Display settings** - This button allows to show/hide columns to display in the codebase list. By default, all the columns are shown.
+* **Actions menu** - Provides additional options for each individual library, such as **Edit** and **Delete**.
+* **Edit component** - Allows you to modify the library's settings. You can access this option by clicking the options icon (vertical ellipsis) next to the library's name in the list, and then selecting **Edit**. For more details, see the [Edit Existing Library](#edit-existing-library) section.
+* **Delete component** - Deletes the selected library.
 * **Component status** - displays the library status. Can be red or green depending on if the KubeRocketCI portal managed to connect to the Git Server with the specified credentials or not.
-* **Component name (clickable)** - displays the library name set during the library creation.
-* **Open documentation** - opens the library related documentation page.
-* **Enable filtering** - enables filtering by library name and namespace where this custom resource is located in.
-* **Selector** - Allows you to select multiple library for bulk actions.
-* **Delete selected** - Deletes all selected library. This option is only available when one or more library`s are selected using the **Selector**.
-* **Create new component** - displays the **Create new component** menu.
-* ***Actions menu**
-* **Edit** - edit the library by selecting the options icon next to its name in the libraries list, and then selecting **Edit**. For details see the [Edit Existing Library](#edit-existing-library) section.
-* **Delete** - remove library by clicking the vertical ellipsis button and then selecting **Delete**.
+* **Component name (clickable)** - Displays the library name set during the library creation.
+
+  :::warning
+    The application that is used in a CD pipeline cannot be removed.
+  :::
 
 There are also options to sort the libraries:
 
-* **Enable filtering** - Sort the existing libraries in a table by clicking the sorting icons in the table header. Sort the libraries alphabetically by their name, language, build tool, framework, and CI tool. You can also sort the libraries by their status: Created, Failed, or In progress.
-* **Pagination menu** - Select a number of libraries displayed per page (15, 25 or 50 rows) and navigate between pages if the number of libraries exceeds the capacity of a single page.
+* **Pagination menu** - select a number of libraries displayed per page (15, 25 or 50 rows) and navigate between pages if the number of libraries exceeds the capacity of a single page.
+
+* **Filters** - Filter codebases by their name and type. Additionally, sort the existing libraries in a table by clicking the sorting icons in the table header. Sort the libraries alphabetically by their name, language, build tool, framework, and CI tool. You can also sort the libraries by their status: Created, Failed, or In progress.
+
+* **Selector** - Allows you to select multiple libraries for bulk delete.
+
+* **Columns (clickable)** - Sort the existing libraries in a list by clicking the sorting icons in the list header.
 
 ## Edit Existing Library
 

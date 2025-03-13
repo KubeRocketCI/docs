@@ -13,7 +13,7 @@ description: "Optimize CI/CD workflows with KubeRocketCI's Pipelines section, a 
   <link rel="canonical" href="https://docs.kuberocketci.io/docs/user-guide/pipelines" />
 </head>
 
-Pipelines are integral part of any CI/CD. They are involved in code code builds, reviews, and deployments. Such big variety of pipelines result in a demand of having a single place where the pipelines can be managed. For this purpose, the Pipelines section was added to the KubeRocketCI portal.
+Pipelines are integral part of any CI/CD. They are involved in code build, review, and deployment procedures. Such big variety of pipelines result in a demand of having a single place where the pipelines can be managed. For this purpose, the Pipelines section was added to the KubeRocketCI portal.
 
 ## Pipelines Page Overview
 
@@ -52,7 +52,7 @@ To see the Pipelines section, open the KubeRocketCI portal and select the **Pipe
 
   In this tab, you can view the general information and resources that the pipeline is connected with.
 
-3. Navigate to the **View** tab:
+3. Navigate to the **View YAML** tab:
 
   ![Pipeline view YAML](../assets/user-guide/pipelines-view-yaml-tab.png "Pipeline view YAML")
 
@@ -68,7 +68,7 @@ To see the Pipelines section, open the KubeRocketCI portal and select the **Pipe
 
 The Pipelines section allows you to track, restart, and delete pipelines.
 
-To restart the pipeline run, click the actions button and select **Re-run**:
+To restart the pipeline run, click the actions button and select **Run again**:
 
   ![Restart pipeline run](../assets/user-guide/restart-pipeline-run.png "Restart pipeline run")
 

@@ -67,11 +67,11 @@ Follow the instructions below to fill in the fields of the **Codebase Info** men
 
 1. Select all the settings that define how the application will be added to Git server:
 
-    * **Git server** - the pre-configured server where the component will be hosted. Select one from the from the drop-down list. Please refer to the [Manage Git Servers](git-server-overview.md) page to learn how to create the one.
-    * **Repository name** - the relative path to the repository, such as `epmd-edp/python-python-flask`.
+    * **Git server** - the pre-configured server where the component will be hosted. Select one from the drop-down list. Please refer to the [Manage Git Servers](git-server-overview.md) page to learn how to create the one.
+    * **Repository name** - the relative path to the Git repository where codebase will be created (e.g., `epmd-edp/python-python-flask`).
     * **Component name** - the name of the application. Must be at least two characters using the lower-case letters, numbers and inner dashes.
     * **Description** - brief and concise description that explains the purpose of the application.
-    * **Empty project** - check this box to create a application with an empty repository. The empty repository option is available only for the **Create from template** strategy.
+    * **Empty project** - check this box to create an application with an empty repository. The empty repository option is available only for the **Create from template** strategy.
 
 2. Specify the application language properties:
 
@@ -160,11 +160,11 @@ and have a respective label in the **Fix Version** field.
 
     * For the **Fix Version/s** field, select the **EDP_VERSION** variable that represents an EDP upgrade version, as in _2.7.0-SNAPSHOT_.Combine variables to make the value more informative. For example, the pattern **EDP_VERSION-EDP_COMPONENT** will be displayed as _2.7.0-SNAPSHOT-nexus-operator_ in Jira.
     * For the **Component/s** field select the **EDP_COMPONENT** variable that defines the name of the existing repository. For example, _nexus-operator_.
-    * For the **Labels** field select the **EDP_GITTAG**variable that defines a tag assigned to the commit in Git Hub. For example, _build/2.7.0-SNAPSHOT.59_.
+    * For the **Labels** field select the **EDP_GITTAG** variable that defines a tag assigned to the commit in Git Hub. For example, _build/2.7.0-SNAPSHOT.59_.
 
   * Click the bin icon to remove the Jira field name.
 
-Click the **Apply** button to add the application to the Components list.
+Click the **Create** button to add the application to the Components list.
 
 :::note
   After the complete adding of the application, inspect the [Manage Applications](application.md) page to learn how you can operate applications.

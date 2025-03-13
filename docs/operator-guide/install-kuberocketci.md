@@ -216,7 +216,7 @@ There are multiple ways to deploy KubeRocketCI:
     Check the parameters in the installation chart [values.yaml](https://github.com/epam/edp-install/blob/v3.10.3/deploy-templates/values.yaml) file.
 
     ```bash
-    helm install edp epamedp/edp-install --wait --timeout=900s \
+    helm install krci epamedp/edp-install --wait --timeout=900s \
     --version 3.10.5 \
     --values values.yaml \
     --namespace krci \

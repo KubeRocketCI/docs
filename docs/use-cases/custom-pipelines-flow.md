@@ -379,11 +379,15 @@ This section demonstrates how to replace existing build, review, deploy, and cle
 
         ![Deployment Flow](../assets/use-cases/custom-tekton-pipelines/deployment-flow.png "Deployment Flow")
 
-    2. Choose the required Environment:
+    2. Click the **Edit** button to edit the Environment:
+
+        ![Deployment Flow](../assets/use-cases/custom-tekton-pipelines/edit-environment.png "Deployment Flow")
+
+    3. Choose the required Environment:
 
         ![Environment](../assets/use-cases/custom-tekton-pipelines/environment.png "Environment")
 
-    3. In the **Edit Environment** dialog, select the required deploy or clean pipeline from the dropdown list:
+    4. In the **Edit Environment** dialog, select the required deploy or clean pipeline from the dropdown list:
 
         ![Select Pipeline](../assets/use-cases/custom-tekton-pipelines/custom-deploy-clean-pipelines.png "Select Pipeline")
 

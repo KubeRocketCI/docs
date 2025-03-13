@@ -49,7 +49,7 @@ Click **Edit YAML** in the upper-right corner of the **Create Library** dialog t
 
   ![Edit YAML](../assets/user-guide/components/library/library-yaml-edit.png "Edit YAML")
 
-To edit YAML in the minimal editor, turn on the **Use minimal editor** toggle in the upper-right corner of the **Create Application** dialog.
+To edit YAML in the minimal editor, turn on the **Use minimal editor** toggle in the upper-right corner of the **Create Library** dialog.
 
 To save the changes, select the **Save & Apply** button.
 
@@ -68,7 +68,7 @@ In our example, we will use the **Create from template** strategy:
 
 1. Select all the settings that define how the library will be added to Git server:
 
-    * **Git server** - the pre-configured server where the component will be hosted. Select one from the from the drop-down list. Please refer to the [Manage Git Servers](git-server-overview.md) page to learn how to create the one.
+    * **Git server** - the pre-configured server where the component will be hosted. Select one from the drop-down list. Please refer to the [Manage Git Servers](git-server-overview.md) page to learn how to create the one.
     * **Repository name** - the relative path to the repository, such as `epmd-edp/python-python-flask`.
     * **Component name** - the name of the library. Must be at least two characters using the lower-case letters, numbers and inner dashes.
     * **Description** - brief and concise description that explains the purpose of the library.
@@ -98,7 +98,7 @@ In our example, we will use the **Create from template** strategy:
     * **Language version/framework** - defines the specific framework or language version of the library. The field depends on the selected code language.
     * **Build Tool** - allows to choose the build tool to use. A set tools and can be changed in accordance with the selected code language.
 
-Click the **Proceed** button to switch to the next menu.
+Click the **Next** button to switch to the next menu.
 
 ### The Advanced Settings Menu
 
@@ -149,11 +149,11 @@ and have a respective label in the **Fix Version** field.
 
     * For the **Fix Version/s** field, select the **EDP_VERSION** variable that represents an EDP upgrade version, as in _2.7.0-SNAPSHOT_.Combine variables to make the value more informative. For example, the pattern **EDP_VERSION-EDP_COMPONENT** will be displayed as _2.7.0-SNAPSHOT-nexus-operator_ in Jira.
     * For the **Component/s** field select the **EDP_COMPONENT** variable that defines the name of the existing repository. For example, _nexus-operator_.
-    * For the **Labels** field select the **EDP_GITTAG**variable that defines a tag assigned to the commit in Git Hub. For example, _build/2.7.0-SNAPSHOT.59_.
+    * For the **Labels** field select the **EDP_GITTAG** variable that defines a tag assigned to the commit in Git Hub. For example, _build/2.7.0-SNAPSHOT.59_.
 
   * Click the bin icon to remove the Jira field name.
 
-Click the **Apply** button to add the library to the Components list.
+Click the **Create** button to add the library to the Components list.
 
 After the complete adding of the library, inspect the [Library Overview](library.md) page to learn how you can operate applications.
 

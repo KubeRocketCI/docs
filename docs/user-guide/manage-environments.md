@@ -19,7 +19,7 @@ This page describes actions that can be performed to an already created deployme
 
 * **Deployment flow status** - displays the deployment flow status. Can be red or green depending on if the KubeRocketCI portal managed to connect to the Git Server with the specified credentials or not.
 * **Deployment flow name** (clickable) - displays the Git Server name set during the Git Server creation.
-* **Open documentation** - opens the documentation that leads to this page.
+* **Open documentation** - opens the [Add Deployment Flow](./add-cd-pipeline.md) page.
 * **Enable filtering** - enables filtering by Git Server name and namespace where this deployment flow is located in.
 * **Create new deployment flow** - displays the Create new component menu.
 * **Edit deployment flow** - edit the deployment flow by selecting the options icon next to its name in the deployment flow list, and then selecting Edit. For details see the [Edit Existing Deployment Flow](#edit-existing-deployment-flow) section.

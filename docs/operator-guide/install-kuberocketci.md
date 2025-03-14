@@ -291,7 +291,7 @@ There are multiple ways to deploy KubeRocketCI:
 8. To check if the installation is successful, run the command below:
 
     ```bash
-    helm status edp -n krci
+    helm status krci -n krci
     ```
 
     You can also check ingress endpoints to get the Portal endpoint to enter Portal UI:

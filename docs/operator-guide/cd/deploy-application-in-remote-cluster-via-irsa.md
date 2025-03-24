@@ -492,7 +492,7 @@ This configuration enables secure cluster connection using IAM Roles for Service
 
   * **Cluster name** : a unique and descriptive name for the new cluster (e.g., prod-cluster)
   * **Cluster Host** : the cluster’s endpoint URL (e.g., example-cluster-domain.com);
-  * **Authority Data** : base64-encoded kubernetes certificate essential for authentication. Obtain this certificate from the configuration file of the user account you intend to use for accessing the cluster.
+  * **Authority Data** : base64-encoded Kubernetes certificate essential for authentication. Obtain this certificate from the configuration file of the user account you intend to use for accessing the cluster.
   * **Role ARN** : arn:aws:iam::\<AWS_ACCOUNT_A_ID\>:role/AWSIRSA_\{cluster_name\}_CDPipelineOperator
 
   ![Add cluster IRSA](../../assets/operator-guide/deploy-application-in-remote-cluster-via-irsa/cluster-irsa-add-cluster.png "Add cluster IRSA")

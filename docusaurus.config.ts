@@ -208,9 +208,20 @@ const config: Config = {
         sidebarPath: './sidebarsFAQ.ts',
       },
     ],
+    [
+      require.resolve('./plugins/plugin-image-zoom'),
+      {
+        selector: '.markdown img',
+        options: {
+          margin: 24,
+          background: '#000',
+        },
+      },
+    ],
   ],
 
   themeConfig: {
+
     metadata: [
       {
         name: 'keywords',

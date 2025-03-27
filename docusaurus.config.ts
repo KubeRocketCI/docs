@@ -208,6 +208,17 @@ const config: Config = {
         sidebarPath: './sidebarsFAQ.ts',
       },
     ],
+    [
+      'plugin-image-zoom',
+      {
+        selector: '.markdown img',
+        options: {
+          margin: 24,
+          background: '#000',
+          scrollOffset: 0,
+        },
+      },
+    ],
   ],
 
   themeConfig: {

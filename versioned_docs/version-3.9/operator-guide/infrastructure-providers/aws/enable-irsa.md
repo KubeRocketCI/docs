@@ -114,14 +114,12 @@ To successfully associate the IAM role with the service account, follow the step
       kind: Pod
       metadata:
         name: irsa-test
-        namespace: <POD_NAMESPACE>
+        namespace: default
       spec:
         serviceAccountName: <SERVICE_ACCOUNT_NAME>
-        securityContext:
-          fsGroup: 65534
         containers:
-        - name: terraform
-          image: epamedp/edp-jenkins-terraform-agent:3.0.9
+        - name: irsa
+          image: public.ecr.aws/aws-cli/aws-cli:2.25.4
           command: ['sh', '-c', 'aws sts "get-caller-identity" && sleep 3600']
       ```
 

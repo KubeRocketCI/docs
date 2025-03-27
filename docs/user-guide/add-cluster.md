@@ -19,7 +19,7 @@ This page provides comprehensive instructions on how to integrate a new cluster 
 
 Before moving ahead, ensure you have already performed the guidelines outlined in the [Argo CD Integration](../operator-guide/cd/argocd-integration.md#deploy-argo-cd-application-to-remote-cluster-optional) page. Besides, user needs to have a cluster admin role to add clusters.
 
-## Deploy to Remote Cluster
+## Add Cluster With Bearer Token
 
 To deploy an application to a remote cluster, follow the steps below:
 
@@ -68,6 +68,25 @@ To deploy an application to a remote cluster, follow the steps below:
 9. When adding a new environment, select the remote cluster in the **Cluster** field:
 
     ![Select cluster](../assets/user-guide/select-cluster.png "Select cluster")
+
+## Add Cluster With IRSA Token
+
+To add cluster using IRSA token, follow the steps below:
+
+1. Navigate to **Configuration** -> **Deployment** -> **Clusters** and click the **+ Add cluster** button:
+
+  ![Clusters menu](../assets/user-guide/add_new_cluster.png "Clusters menu")
+
+2. Fill in the following fields and click **Save**:
+
+  * **Cluster name** : a unique and descriptive name for the new cluster (e.g., prod-cluster);
+  * **Cluster Host** : the cluster’s endpoint URL (e.g., example-cluster-domain.com);
+  * **Certificate Authority Data** : base64-encoded Kubernetes certificate essential for authentication. Obtain this certificate from the configuration file of the user account you intend to use for accessing the cluster;
+  * **Role ARN** : arn:aws:iam::\<AWS_ACCOUNT_A_ID\>:role/AWSIRSA_\{cluster_name\}_CDPipelineOperator.
+
+  ![Add cluster IRSA](../assets/operator-guide/deploy-application-in-remote-cluster-via-irsa/cluster-irsa-add-cluster.png "Add cluster IRSA")
+
+For more details on how to work with clusters integrated using IRSA approach, please refer to the [Deploy Application In Remote Cluster via IRSA](../operator-guide/cd/deploy-application-in-remote-cluster-via-irsa.md) page.
 
 ## Related Articles
 

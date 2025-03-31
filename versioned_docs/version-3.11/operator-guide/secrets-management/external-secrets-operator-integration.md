@@ -334,7 +334,7 @@ In order to [Install KubeRocketCI](../install-kuberocketci.md), a list of passwo
 4. Install/upgrade edp-install:
 
     ```bash
-    helm upgrade --install edp epamedp/edp-install --wait --timeout=900s \
+    helm upgrade --install krci epamedp/edp-install --wait --timeout=900s \
     --version <edp_version> \
     --values values.yaml \
     --namespace krci \

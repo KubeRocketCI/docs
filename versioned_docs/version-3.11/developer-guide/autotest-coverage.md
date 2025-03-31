@@ -19,7 +19,7 @@ Autotests are significant part of our verification flow. Continuous improvement 
 
 The autotest coverage status is presented on the scheme below:
 
-  ![Autotest coverage status](../assets/developer-guide/autotests-coverage.png "Autotest coverage status")
+![Autotest coverage status](../assets/developer-guide/autotests-coverage.png "Autotest coverage status")
 
 ## Release Testing
 

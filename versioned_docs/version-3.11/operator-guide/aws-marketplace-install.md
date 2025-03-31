@@ -58,7 +58,7 @@ To deploy the platform, follow the steps below:
     kubectl create ns krci
     helm install edp-install \
       --namespace krci ./* \
-      --set global.dnsWildCard=example.com \
+      --set global.dnsWildCard=example.com
     ```
 
 3. (Optional) Provide token to sign in to the Portal. Run the following command to create Service Account with cluster admin permissions:

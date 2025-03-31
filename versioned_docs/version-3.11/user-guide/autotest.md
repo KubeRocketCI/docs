@@ -30,26 +30,28 @@ The added autotest will be listed in the Autotests list allowing you to do the f
 
 ![Autotests page](../assets/user-guide/components/components-manage-components-menu.png "Autotests page")
 
-* **Component status** - displays the autotest status. Can be red or green depending on KubeRocketCI portal managed to connect to the Git Server with the specified credentials or not.
-* **Component name (clickable)** - displays the autotest name set during the autotest creation.
-* **Open documentation** - opens the autotest related documentation page.
-* **Enable filtering** - enables filtering by autotest name and namespace where this custom resource is located in.
-* **Selector** - Allows you to select multiple autotests for bulk actions.
-* **Delete selected** - Deletes all selected autotests.
-* **Create new component** - displays the **Create new component** menu.
-* **Actions menu** provides additional options for each individual application:
-* **Edit** - edit the autotest by selecting the options icon next to its name in the autotests list, and then selecting **Edit**. For details see the [Edit Existing Autotest](#edit-existing-autotest) section.
-* **Delete** - remove autotest by clicking the vertical ellipsis button and then selecting **Delete**.
+* **Open documentation** - Opens the autotest related documentation page.
+* **Create new component** - Opens the **Create new component** menu when clicking.
+* **Display settings** - This button allows to show/hide columns to display in the codebase list. By default, all the columns are shown.
+* **Actions menu** - Provides additional options for each individual autotest, such as **Edit** and **Delete**.
+* **Edit component** - Allows you to modify the autotest's settings. You can access this option by clicking the options icon (vertical ellipsis) next to the autotest's name in the list, and then selecting **Edit**. For more details, see the [Edit Existing Autotest](#edit-existing-autotest) section.
+* **Delete component** - Deletes the selected autotest.
+* **Component status** - displays the autotest status. Can be red or green depending on if the KubeRocketCI portal managed to connect to the Git Server with the specified credentials or not.
+* **Component name (clickable)** - Displays the autotest name set during the autotest creation.
 
-  :::note
-    The autotest that is used in a CD pipeline cannot be removed.
+  :::warning
+    The application that is used in a CD pipeline cannot be removed.
   :::
 
 There are also options to sort the autotests:
 
-* **Enable filtering** - Sort the existing autotests in a table by clicking the sorting icons in the table header. Sort the autotests alphabetically by their name, language, build tool, framework, and CI tool. You can also sort the autotests by their status: Created, Failed, or In progress.
+* **Pagination menu** - select a number of autotests displayed per page (15, 25 or 50 rows) and navigate between pages if the number of autotests exceeds the capacity of a single page.
 
-* **Pagination menu** - Select a number of autotests displayed per page (15, 25 or 50 rows)  and navigate between pages if the number of autotests exceeds the capacity of a single page.
+* **Filters** - Filter codebases by their name and type. Additionally, sort the existing autotests in a table by clicking the sorting icons in the table header. Sort the autotests alphabetically by their name, language, build tool, framework, and CI tool. You can also sort the autotests by their status: Created, Failed, or In progress.
+
+* **Selector** - Allows you to select multiple autotests for bulk delete.
+
+* **Columns (clickable)** - Sort the existing autotests in a list by clicking the sorting icons in the list header.
 
 ## Edit Existing Autotest
 
@@ -81,7 +83,7 @@ KubeRocketCI portal provides the ability to enable, disable or edit the Jira Int
 
     * Click the **Apply** button to apply the changes.
 
-4. To create, edit and delete application branches, please refer to the [Manage Branches](../user-guide/manage-branches.md) page.
+4. To create, edit and delete autotest branches, please refer to the [Manage Branches](../user-guide/manage-branches.md) page.
 
 ## Add Autotest as a Quality Gate
 

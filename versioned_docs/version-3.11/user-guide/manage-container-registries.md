@@ -1,8 +1,8 @@
 ---
 
-title: "Add Container Registry"
+title: "Manage Container Registries"
 description: "Step-by-step guide on integrating and managing container registries within KubeRocketCI, enhancing artifact storage and deployment processes."
-sidebar_label: "Add Container Registry"
+sidebar_label: "Manage Container Registries"
 
 ---
 <!-- markdownlint-disable MD025 -->
@@ -10,7 +10,7 @@ sidebar_label: "Add Container Registry"
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-# Add Container Registry
+# Manage Container Registries
 
 <head>
   <link rel="canonical" href="https://docs.kuberocketci.io/docs/user-guide/manage-container-registries" />

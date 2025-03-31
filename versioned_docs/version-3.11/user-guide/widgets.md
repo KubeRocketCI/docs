@@ -28,7 +28,7 @@ These widgets reflect all the resources in the **default namespace**:
 * **Deployment Flows**: Displays all the created deployment flows;
 * **Environments**: Shows the total amount of created environments.
 
-The status of the resources is displayed real-time and doesn't require any preliminary configuration for widgets to work. Not only these widgets display the amount of resources but also their statuses (success, fail, in progress).
+The status of the resources is displayed real-time and doesn't require any preliminary configuration to for widgets to work. Not only these widgets display the amount of resources but also their statuses (success, fail, in progress).
 
 ## SonarQube & Dependency-Track Widgets
 

@@ -26,16 +26,14 @@ The added application will be listed in the Applications list allowing you to do
 
 ![Applications menu](../assets/user-guide/components/components-manage-components-menu.png "Applications menu")
 
+* **Open documentation** - Opens the application related documentation page.
+* **Create new component** - Opens the **Create new component** menu when clicking.
+* **Display settings** - This button allows to show/hide columns to display in the codebase list. By default, all the columns are shown.
+* **Actions menu** - Provides additional options for each individual application, such as **Edit** and **Delete**.
+* **Edit component** - Allows you to modify the application's settings. You can access this option by clicking the options icon (vertical ellipsis) next to the application's name in the list, and then selecting **Edit**. For more details, see the [Edit Existing Application](#edit-existing-application) section.
+* **Delete component** - Deletes the selected application.
 * **Component status** - displays the application status. Can be red or green depending on if the KubeRocketCI portal managed to connect to the Git Server with the specified credentials or not.
-* **Component name (clickable)** - displays the application name set during the application creation.
-* **Open documentation** - opens the application related documentation page.
-* **Enable filtering** - enables filtering by application name and namespace where this custom resource is located in.
-* **Create new application** - displays the **Create new component** menu.
-* **Selector** - Allows you to select multiple applications for bulk actions.
-* **Delete selected** - Deletes all selected applications. This option is only available when one or more applications are selected using the **Selector**.
-* ***Actions menu** provides additional options for each individual application:
-* **Edit** - Allows you to modify the application's settings. You can access this option by clicking the options icon (vertical ellipsis) next to the application's name in the list, and then selecting **Edit**. For more details, see the [Edit Existing Application](#edit-existing-application) section.
-* **Delete** - Removes the application from the KubeRocketCI portal. You can access this option by clicking the options icon (vertical ellipsis) next to the application's name in the list, and then selecting **Delete**.
+* **Component name (clickable)** - Displays the application name set during the application creation.
 
   :::warning
     The application that is used in a CD pipeline cannot be removed.
@@ -45,7 +43,11 @@ There are also options to sort the applications:
 
 * **Pagination menu** - select a number of applications displayed per page (15, 25 or 50 rows) and navigate between pages if the number of applications exceeds the capacity of a single page.
 
-* **Enable filtering** - sort the existing applications in a table by clicking the sorting icons in the table header. Sort the applications alphabetically by their name, language, build tool, framework, and CI tool. You can also sort the applications by their status: Created, Failed, or In progress.
+* **Filters** - Filter codebases by their name and type. Additionally, sort the existing applications in a table by clicking the sorting icons in the table header. Sort the applications alphabetically by their name, language, build tool, framework, and CI tool. You can also sort the applications by their status: Created, Failed, or In progress.
+
+* **Selector** - Allows you to select multiple applications for bulk delete.
+
+* **Columns (clickable)** - Sort the existing autotests in a list by clicking the sorting icons in the list header.
 
 ## Edit Existing Application
 

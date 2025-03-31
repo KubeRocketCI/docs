@@ -78,7 +78,7 @@ When adding a component, the default branch is a **main** branch. In order to ad
   ![Yaml edit](../assets/user-guide/components/branches/branches-yaml-edit.png "Yaml edit")
 
   :::info
-    Adding of a new branch is indicated in the context of the `EDP versioning` type.
+    Adding of a new branch is indicated in the context of the `semver` versioning type.
   :::
 
 ## Edit Existing Branch

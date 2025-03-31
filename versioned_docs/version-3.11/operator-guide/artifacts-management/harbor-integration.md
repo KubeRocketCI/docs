@@ -261,7 +261,7 @@ To facilitate seamless interaction between KubeRocketCI and a Harbor project, it
 8. (Optional) If you've already deployed the edp-install Helm chart, you can update it using the following command:
 
     ```bash
-    helm update --install edp epamedp/edp-install \
+    helm update --install krci epamedp/edp-install \
     --values values.yaml \
     --namespace krci
     ```

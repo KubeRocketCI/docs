@@ -26,22 +26,28 @@ The added infrastructure will be listed in the infrastructure list allowing you 
 
 ![Components menu](../assets/user-guide/components/components-manage-components-menu.png "Components menu")
 
+* **Open documentation** - Opens the infrastructure related documentation page.
+* **Create new component** - Opens the **Create new component** menu when clicking.
+* **Display settings** - This button allows to show/hide columns to display in the codebase list. By default, all the columns are shown.
+* **Actions menu** - Provides additional options for each individual infrastructure, such as **Edit** and **Delete**.
+* **Edit component** - Allows you to modify the infrastructure's settings. You can access this option by clicking the options icon (vertical ellipsis) next to the infrastructure's name in the list, and then selecting **Edit**. For more details, see the [Edit Existing Infrastructure](#edit-existing-infrastructure) section.
+* **Delete component** - Deletes the selected infrastructure.
 * **Component status** - displays the infrastructure status. Can be red or green depending on if the KubeRocketCI portal managed to connect to the Git Server with the specified credentials or not.
-* **Component name (clickable)** - displays the infrastructure name set during the library creation.
-* **Open documentation** - opens the infrastructure related documentation page.
-* **Enable filtering** - enables filtering by library name and namespace where this custom resource is located in.
-* **Create new component** - displays the **Create new component** menu.
-* **Selector** - Allows you to select multiple infrastructures for bulk actions.
-* **Delete selected** - Deletes all selected infrastructures. This option is only available when one or more infrastructures are selected using the **Selector**.
-* ***Actions menu** provides additional options for each individual infrastructure:
-* **Edit** - edit the infrastructure by selecting the options icon next to its name in the infrastructures list, and then selecting **Edit**. For details see the [Edit Existing Infrastructure](#edit-existing-infrastructure) section.
-* **Delete** - remove infrastructure by clicking the vertical ellipsis button and then selecting **Delete**.
+* **Component name (clickable)** - Displays the infrastructure name set during the infrastructure creation.
+
+  :::warning
+    The application that is used in a CD pipeline cannot be removed.
+  :::
 
 There are also options to sort the infrastructures:
 
-* **Enable filtering** - Sort the existing infrastructures in a table by clicking the sorting icons in the table header. Sort the infrastructures alphabetically by their name, language, build tool, framework, and CI tool. You can also sort the infrastructures by their status: Created, Failed, or In progress.
+* **Pagination menu** - select a number of infrastructures displayed per page (15, 25 or 50 rows) and navigate between pages if the number of infrastructures exceeds the capacity of a single page.
 
-* **Pagination menu** - Select a number of infrastructures displayed per page (15, 25 or 50 rows)  and navigate between pages if the number of items exceeds the capacity of a single page.
+* **Filters** - Filter codebases by their name and type. Additionally, sort the existing infrastructures in a table by clicking the sorting icons in the table header. Sort the infrastructures alphabetically by their name, language, build tool, framework, and CI tool. You can also sort the infrastructures by their status: Created, Failed, or In progress.
+
+* **Selector** - Allows you to select multiple infrastructures for bulk delete.
+
+* **Columns (clickable)** - Sort the existing infrastructures in a list by clicking the sorting icons in the list header.
 
 ## Edit Existing Infrastructure
 

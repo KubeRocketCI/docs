@@ -155,9 +155,9 @@ During the codebase creation process, proceed to the **Advanced Settings** tab. 
 
   ![Advanced settings](../../assets/operator-guide/project-management-and-reporting/jira_integration_ac.png "Advanced settings")
 
-There are four predefined variables, each with specific values, that can be utilized individually or in combination. These variables display varying data based on the versioning type in use (`edp` or `default`):
+There are four predefined variables, each with specific values, that can be utilized individually or in combination. These variables display varying data based on the versioning type in use (`semver` or `default`):
 
-When using the `edp versioning` scheme:
+When using the `semver versioning` scheme:
 
 * **EDP_COMPONENT** – yields the name of the application;
 * **EDP_VERSION** – produces either 0.0.0-SNAPSHOT or 0.0.0-RC as output;

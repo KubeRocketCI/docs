@@ -27,13 +27,17 @@ To create the first application, complete the instructions below:
 
     ![Marketplace applications](../assets/quick-start/marketplace_application.png "Marketplace applications")
 
+3. On the application template details window, click **Proceed**:
+
+    ![Marketplace applications](../assets/quick-start/marketplace-template-details.png "Marketplace applications")
+
 3. In the appeared window, define the following values and click **Apply**:
 
     - Component name: `my-go-gin-app`
     - Description: `My first application`
     - Git server: `github`
     - Repository name: `<github_account_name>/my-go-gin-app`
-    - Codebase versioning type: `edp`
+    - Codebase versioning type: `semver`
     - Start version from: `0.1.0`
     - Suffix: `SNAPSHOT`
 
@@ -97,7 +101,7 @@ Having created the Go application, proceed to build it by performing the followi
 
     ![Pipelinerun logs](../assets/quick-start/pipelinerun_status.png "Pipelinerun logs")
 
-9. Once the build fails, click the failed stage name to open the Tekton pipeline run:
+9. Once the build fails, click the failed task name to open the Tekton pipeline run:
 
     ![Failure details](../assets/quick-start/sonar_step_status.png "Failure details")
 

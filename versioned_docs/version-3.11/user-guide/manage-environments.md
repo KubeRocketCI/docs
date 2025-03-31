@@ -19,7 +19,7 @@ This page describes actions that can be performed to an already created deployme
 
 * **Deployment flow status** - displays the deployment flow status. Can be red or green depending on if the KubeRocketCI portal managed to connect to the Git Server with the specified credentials or not.
 * **Deployment flow name** (clickable) - displays the Git Server name set during the Git Server creation.
-* **Open documentation** - opens the documentation that leads to this page.
+* **Open documentation** - opens the [Add Deployment Flow](./add-cd-pipeline.md) page.
 * **Enable filtering** - enables filtering by Git Server name and namespace where this deployment flow is located in.
 * **Create new deployment flow** - displays the Create new component menu.
 * **Edit deployment flow** - edit the deployment flow by selecting the options icon next to its name in the deployment flow list, and then selecting Edit. For details see the [Edit Existing Deployment Flow](#edit-existing-deployment-flow) section.
@@ -158,6 +158,16 @@ To deploy an application, follow the steps below:
   :::info
     In case of using OpenShift internal registry, if the deployment fails with the ImagePullBackOff error, delete the pod that was created for this application.
   :::
+
+To uninstall the application, click the **Delete** button:
+
+![Uninstall the application](../assets/user-guide/environments/edp-portal-uninstall-application.png "Uninstall the application")
+
+As a result, the application will be uninstalled in the Argo CD tool as well.
+
+Alternatively, you can use the **Clean** button. This way will be appropriate when you have some specific requirements to the environment cleanup procedure. Note that you need to make up your own logic in the cleanup pipeline to use the button or choose one of the pre-defined pipelines offered by KubeRocketCI:
+
+![Clean up application](../assets/user-guide/environments/edp-portal-clean-application.png "Clean up application")
 
 ### Troubleshoot Application
 

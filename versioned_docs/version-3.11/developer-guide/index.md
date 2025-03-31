@@ -5,7 +5,7 @@ sidebar_label: "Overview"
 ---
 <!-- markdownlint-disable MD025 -->
 
-# Overview
+# KubeRocketCI Developer Guide: Architecture, Components, and Contribution Workflow
 
 <head>
   <link rel="canonical" href="https://docs.kuberocketci.io/docs/developer-guide" />

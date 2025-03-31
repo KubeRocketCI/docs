@@ -55,6 +55,35 @@ Once the GitOps repository is added to the platform, you can set custom paramete
 
     ![GitOps Codebase](../assets/user-guide/values-override-deploy.png "GitOps Codebase")
 
+## Customize Yamllint Scan Rules
+
+:::note
+Ability to customize yamllint rules is available starting from platform version 3.11.
+:::
+
+Review and build pipelines for a GitOps repository use `yamllint` to scan YAML files. By default, predefined rules are applied automatically. However, it is possible to customize and extend the default rules by adding a `.yamllint` configuration file to the root of the GitOps repository. This file should define the required rules and parameters. For example:
+
+    ```yaml title=".yamllint"
+    # yamllint configuration file
+    # Extends the default configuration:
+    # https://yamllint.readthedocs.io/en/stable/configuration.html#default-configuration
+
+    extends: default
+
+    ignore:
+      - '.yamllint'
+
+    rules:
+      line-length: disable     # Disable line-length rule
+      document-start: disable  # Disable rule for requiring '---' at the document start
+    ```
+
+In this example, the `line-length` and `document-start` rules are disabled. For more details on available rules and their configurations, refer to the yamllint [documentation](https://yamllint.readthedocs.io/en/stable/rules.html).
+
+After creating the `.yamllint` file, commit it to the main branch of the GitOps repository. Once the changes are applied, the `yamllint` scan in review and build pipelines will use the custom rules defined in the `.yamllint` file.
+
+  ![Yamllint rules](../assets/user-guide/yamllint-rules.png "Yamllint rules")
+
 ## Delete GitOps Repository
 
 In case you need to delete the GitOps repository, do the following:

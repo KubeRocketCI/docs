@@ -21,8 +21,8 @@ KubeRocketCI supports two major **versioning schemes**:
 
 Edp versioning offers more advanced tagging. There are two image tags appended to codebase images:
 
-  * **RC**: This tag indicates applications built in release branches. This tag means that these applications are tagged as release candidates (RC).
-  * **Snapshot**: This tag marks applications and their versions as snapshots, highlighting that these versions are recommended only for development purposes.
+- **RC**: This tag indicates applications built in release branches. This tag means that these applications are tagged as release candidates (RC).
+- **Snapshot**: This tag marks applications and their versions as snapshots, highlighting that these versions are recommended only for development purposes.
 
 :::note
   You can't set the branch as a release candidate via KubeRocketCI portal if you use default versioning.
@@ -45,8 +45,8 @@ Edp versioning offers more advanced tagging. There are two image tags appended t
 
 There are two types of tags in KubeRocketCI:
 
-* **VCS tags**: These tags are applied to the application version in the Version Control System (VCS).
-* **Codebase tags**: These tags are applied to the codebase image streams (CBIS).
+- **VCS tags**: These tags are applied to the application version in the Version Control System (VCS).
+- **Codebase tags**: These tags are applied to the codebase image streams (CBIS).
 
 Both of these tags are added when the build pipeline completes successfully. VCS tag is added in the `git-tag` step, whereas codebase tag is added on the `update-cbis` step of build pipeline.
 Tags help you differ images from each other. In the Version Control System, you can see the code of a specific version by selecting the corresponding VCS tag. When deploying applications, you select a codebase image tag.
@@ -55,10 +55,32 @@ Generally, VCS tags and codebase tags have identical naming. If the newly built 
 
 Codebase tags also have special marks and appear only in the KubeRocketCI portal when selecting an application to deploy:
 
-* **Latest**: Assigned when a new application version is built and deployment is initiated.
-* **Stable**: Assigned to the latest successfully deployed application after passing the project's quality gates.
+- **Latest**: Assigned when a new application version is built and deployment is initiated.
+- **Stable**: Assigned to the latest successfully deployed application after passing the project's quality gates.
 
 To learn more about codebase tags, read the [Deployment Strategies Overview](/docs/operator-guide/cd/auto-stable-trigger-type) page.
+
+---
+
+### What Are the Platform Modes Available in KubeRocketCI?
+
+KubeRocketCI offers two distinct operation modes that provide different ways to interact with the platform:
+
+1. **Portal Mode**:
+    - The default mode when accessing the KubeRocketCI portal
+    - Provides a user-friendly interface to manage KubeRocketCI-specific resources
+    - Allows managing codebases (applications, libraries, autotests), CD pipelines, quality gates, and other platform-specific resources
+    - Offers simplified workflows for DevOps operations without requiring deep Kubernetes knowledge
+
+2. **Kubernetes Mode**:
+    - Accessed by toggling the mode switcher in the KubeRocketCI portal
+    - Provides direct access to the underlying Kubernetes resources and configurations
+    - Allows working with all Kubernetes objects (deployments, pods, services, config maps, etc.)
+    - Ideal for advanced cluster management, troubleshooting, and custom configurations
+
+You can switch between these modes using the **KubeRocketCI/Kubernetes mode switcher** in the portal UI. This toggle enables you to seamlessly transition between managing high-level platform resources and working directly with Kubernetes objects, providing flexibility for users with different roles and expertise levels.
+
+---
 
 ### What Is a Pipeline in KubeRocketCI?
 
@@ -71,15 +93,15 @@ Within the KubeRocketCI platform, there are **three primary types of pipelines**
    - The primary goal is to detect integration errors as quickly as possible, which is achieved by triggering the pipeline on each code commit to a repository.
 
 2. **Build Pipeline**:
-   - The Build Pipeline takes center stage following the completion of the code review process. Its primary function is to automate the compilation, testing, and packaging of the code into a build artifact. This artifact can then be deployed to various environments for further testing and promotion to production.
+    - The Build Pipeline takes center stage following the completion of the code review process. Its primary function is to automate the compilation, testing, and packaging of the code into a build artifact. This artifact can then be deployed to various environments for further testing and promotion to production.
 
 3. **Deploy Pipeline**:
-   - Focused on the deployment aspect, the Deploy Pipeline automates the process of deploying software to environments. This type of pipeline can be triggered manually or automatically, based on the project's deployment strategy.
-   - It often includes steps for provisioning infrastructure, deploying the application, and post-deployment tests to ensure the application runs correctly in the production environment.
+    - Focused on the deployment aspect, the Deploy Pipeline automates the process of deploying software to environments. This type of pipeline can be triggered manually or automatically, based on the project's deployment strategy.
+    - It often includes steps for provisioning infrastructure, deploying the application, and post-deployment tests to ensure the application runs correctly in the production environment.
 
 4. **Clean Pipeline**:
-   - Clean Pipeline is used to customize environment cleanup. While the **Delete** button deletes an Argo CD Application resource the Clean Pipeline aims to cleanup non-platform dependencies, such databases, third-party tools, etc. This pipeline can be triggered in the environment details page.
-   - It implies users to create a custom clean pipeline and apply it to the platform to implement user-defined cleanup logic.
+    - Clean Pipeline is used to customize environment cleanup. While the **Delete** button deletes an Argo CD Application resource the Clean Pipeline aims to cleanup non-platform dependencies, such databases, third-party tools, etc. This pipeline can be triggered in the environment details page.
+    - It implies users to create a custom clean pipeline and apply it to the platform to implement user-defined cleanup logic.
 
 ---
 

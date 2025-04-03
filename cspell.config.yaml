@@ -50,6 +50,7 @@ words:
   - clusterrolebinding
   - cmctl
   - codebasebranch
+  - codebasebranches
   - codebaseimagestream
   - codecentric
   - Codemie
@@ -180,6 +181,7 @@ words:
   - pgdb
   - PGPASSWORD
   - pipelinerun
+  - pipelineruns
   - pipelinetype
   - PKCS
   - preconfigured
@@ -248,6 +250,7 @@ words:
   - toolset
   - traefik
   - trgm
+  - triggertemplate
   - trustcacerts
   - truststore
   - usedomainname

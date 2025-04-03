@@ -457,7 +457,7 @@ const sidebars: SidebarsConfig = {
             },
             'user-guide/manage-branches',
             'user-guide/artifact-versioning',
-            'user-guide/protected-label'
+            'user-guide/protected-label',
           ],
         },
         {
@@ -469,6 +469,7 @@ const sidebars: SidebarsConfig = {
             'user-guide/manage-environments',
             "user-guide/cd-pipeline-variables-injection",
             'user-guide/application-and-pipeline-statuses',
+            'user-guide/argo-cd-preview',
           ],
         },
         {

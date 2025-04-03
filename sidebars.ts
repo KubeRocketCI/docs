@@ -298,6 +298,7 @@ const sidebars: SidebarsConfig = {
             'operator-guide/cd/deploy-rpm',
             'operator-guide/cd/auto-stable-trigger-type',
             'operator-guide/cd/deploy-application-in-remote-cluster-via-irsa',
+            'operator-guide/cd/argo-cd-preview',
             {
               type: 'category',
               label: 'GitOps',

@@ -125,7 +125,7 @@ In the **Advanced Settings** menu, specify the branch options and define the Jir
 
 * **Codebase versioning type** - defines how will the application tag be changed once the new image version is built. There are two versioning types:
   * **default**: Using the `default` versioning type, in order to specify the version of the current artifacts, images, and tags in the Version Control System, a developer should navigate to the corresponding file and change the version **manually**.
-  * **semver**: Using the `semver` versioning type, a developer indicates the version number from which all the artifacts will be versioned and, as a result, **automatically** registered in the corresponding file (e.g. pom.xml). When selecting the `edp` versioning type, the extra fields will appear, type the version number from which you want the artifacts to be versioned:
+  * **semver**: Using the `semver` versioning type, a developer indicates the version number from which all the artifacts will be versioned and, as a result, **automatically** registered in the corresponding file (e.g. pom.xml). When selecting the `semver` versioning type, the extra fields will appear, type the version number from which you want the artifacts to be versioned:
 
       ![Semver versioning](../assets/user-guide/components/components-edp-versioning.png "Semver versioning")
 

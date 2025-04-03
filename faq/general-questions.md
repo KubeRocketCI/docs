@@ -17,9 +17,9 @@ Artifact versioning in KubeRocketCI is designed to ensure each build and deploym
 KubeRocketCI supports two major **versioning schemes**:
 
 - **default**: generates versions based on the branch name and datetime, `BRANCH-DATE-TIME` (e.g. main-20250211-133456).
-- **edp**: structures versions as `MAJOR.MINOR.PATCH-BUILD_ID-TAG`, based on the Semantic Versioning standards. (e.g. build/0.1.0-SNAPSHOT.3).
+- **SemVer**: structures versions as `MAJOR.MINOR.PATCH-BUILD_ID-TAG`, based on the Semantic Versioning standards. (e.g. build/0.1.0-SNAPSHOT.3).
 
-Edp versioning offers more advanced tagging. There are two image tags appended to codebase images:
+SemVer versioning offers more advanced tagging. There are two image tags appended to codebase images:
 
 - **RC**: This tag indicates applications built in release branches. This tag means that these applications are tagged as release candidates (RC).
 - **Snapshot**: This tag marks applications and their versions as snapshots, highlighting that these versions are recommended only for development purposes.

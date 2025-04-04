@@ -297,6 +297,7 @@ const sidebars: SidebarsConfig = {
             'operator-guide/cd/manual-approval',
             'operator-guide/cd/deploy-rpm',
             'operator-guide/cd/auto-stable-trigger-type',
+            'operator-guide/cd/deploy-application-in-remote-cluster-via-token',
             'operator-guide/cd/deploy-application-in-remote-cluster-via-irsa',
             {
               type: 'category',

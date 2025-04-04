@@ -93,28 +93,14 @@ Below is a Trust Policy that allows to control access to Account B resources:
 <summary><b>View: AWSIRSA_\{cluster_name\}_CDPipelineAgent (AWS Account B)</b></summary>
 ```json
 {
-  "Version": "2012-10-17",
-  "Statement": [
-    {
-      "Effect": "Allow",
-      "Principal": {
-        "AWS": "arn:aws:iam::<AWS_ACCOUNT_A_ID>:role/AWSIRSA_{cluster_name}_CDPipelineOperator"
-      },
-      "Action": "sts:AssumeRole"
-    },
-    {
-      "Effect": "Allow",
-      "Principal": {
-        "Federated": "arn:aws:iam::<AWS_ACCOUNT_B_ID>:oidc-provider/oidc.eks.<AWS_REGION>.amazonaws.com/id/EXAMPLED539D4633E53DE1B71EXAMPLE"
-      },
-      "Action": "sts:AssumeRoleWithWebIdentity",
-      "Condition": {
-        "StringLike": {
-          "oidc.eks.<AWS_REGION>.amazonaws.com/id/EXAMPLED539D4633E53DE1B71EXAMPLE:sub": "system:serviceaccount:*"
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": "sts:AssumeRole",
+            "Resource": "arn:aws:iam::<AWS_ACCOUNT_A_ID>:role/AWSIRSA_{cluster_name}_CDPipelineOperator"
         }
-      }
-    }
-  ]
+    ]
 }
 ```
 </details>
@@ -149,9 +135,31 @@ This IAM role is used by Argo CD to authenticate via OIDC and assume required pe
 
   ![Argo CD IRSA access model](../../assets/operator-guide/deploy-application-in-remote-cluster-via-irsa/cluster-irsa-argocd-acess-model.jpg "Argo CD IRSA access model")
 
+IAM Policy for AWSIRSA_\{cluster_name}_ArgoCDMaster:
+
 <details>
 <summary><b>View: AWSIRSA_\{cluster_name\}_ArgoCDMaster (AWS Account A)</b></summary>
 
+```json
+{
+    "Statement": [
+        {
+            "Action": "sts:AssumeRole",
+            "Effect": "Allow",
+            "Resource": [
+                "arn:aws:iam::<AWS_ACCOUNT_B_ID>:role/AWSIRSA_{cluster_name}_ArgoCDAgentAccess"
+            ]
+        }
+    ],
+    "Version": "2012-10-17"
+}
+```
+</details>
+
+Trust Relationship for AWSIRSA_\{cluster_name}_ArgoCDMaster:
+
+<details>
+<summary><b>View: AWSIRSA_\{cluster_name\}_ArgoCDMasterClusterAccess (AWS Account A)</b></summary>
 ```json
 {
     "Version": "2012-10-17",
@@ -159,22 +167,17 @@ This IAM role is used by Argo CD to authenticate via OIDC and assume required pe
         {
             "Effect": "Allow",
             "Principal": {
-                "AWS": "arn:aws:iam::<AWS_ACCOUNT_A_ID>:role/AWSIRSA_{cluster_name}_ArgoCDMaster"
-            },
-            "Action": "sts:AssumeRole"
-        },
-        {
-            "Effect": "Allow",
-            "Principal": {
-                "Federated": "arn:aws:iam::<AWS_ACCOUNT_B_ID>:oidc-provider/oidc.eks.<AWS_REGION>.amazonaws.com/id/EXAMPLED539D4633E53DE1B71EXAMPLE"
+                "Federated": "arn:aws:iam::<AWS_ACCOUNT_A_ID>:oidc-provider/oidc.eks.<AWS_REGION>.amazonaws.com/id/EXAMPLED539D4633E53DE1B71EXAMPLE"
             },
             "Action": "sts:AssumeRoleWithWebIdentity",
             "Condition": {
                 "StringLike": {
-                    "oidc.eks.<AWS_REGION>.amazonaws.com/id/EXAMPLED539D4633E53DE1B71EXAMPLE:sub": "system:serviceaccount:*"
-                },
-                "StringEquals": {
-                    "oidc.eks.<AWS_REGION>.amazonaws.com/id/EXAMPLED539D4633E53DE1B71EXAMPLE:aud": "sts.amazonaws.com"
+                    "oidc.eks.<AWS_REGION>.amazonaws.com/id/EXAMPLED539D4633E53DE1B71EXAMPLE:aud": "sts.amazonaws.com",
+                    "oidc.eks.<AWS_REGION>.amazonaws.com/id/EXAMPLED539D4633E53DE1B71EXAMPLE:sub": [
+                      "system:serviceaccount:argocd:argocd-application-controller",
+                      "system:serviceaccount:argocd:argocd-applicationset-controller",
+                      "system:serviceaccount:argocd:argocd-server"
+                  ],
                 }
             }
         }
@@ -183,10 +186,10 @@ This IAM role is used by Argo CD to authenticate via OIDC and assume required pe
 ```
 </details>
 
-This Policy allows Argo CD in Account A to describe and access the EKS cluster in Account B:
+IAM Policy for AWSIRSA_\{cluster_name}_ArgoCDAgentAccess:
 
 <details>
-<summary><b>View: AWSIRSA_\{cluster_name\}_ArgoCDMasterClusterAccess (AWS Account A)</b></summary>
+<summary><b>View: AWSIRSA_\{cluster_name\}_ArgoCDAgentAccess (AWS Account B)</b></summary>
 ```json
 {
     "Version": "2012-10-17",
@@ -205,37 +208,7 @@ This Policy allows Argo CD in Account A to describe and access the EKS cluster i
 ```
 </details>
 
-This Role allows Argo CD service accounts to assume permissions necessary for managing deployments in Account B:
-
-<details>
-<summary><b>View: AWSIRSA_\{cluster_name\}_ArgoCDAgentAccess (AWS Account B)</b></summary>
-```json
-{
-  "Version": "2012-10-17",
-  "Statement": [
-    {
-      "Effect": "Allow",
-      "Principal": {
-        "Federated": "arn:aws:iam::<AWS_ACCOUNT_A_ID>:oidc-provider/oidc.eks.<AWS_REGION>.amazonaws.com/id/EXAMPLED539D4633E53DE1B71EXAMPLE"
-      },
-      "Action": "sts:AssumeRoleWithWebIdentity",
-      "Condition": {
-        "StringEquals": {
-          "oidc.eks.<AWS_REGION>.amazonaws.com/id/EXAMPLED539D4633E53DE1B71EXAMPLE:sub": [
-            "system:serviceaccount:argocd:argocd-application-controller",
-            "system:serviceaccount:argocd:argocd-applicationset-controller",
-            "system:serviceaccount:argocd:argocd-server"
-          ],
-          "oidc.eks.<AWS_REGION>.amazonaws.com/id/EXAMPLED539D4633E53DE1B71EXAMPLE:aud": "sts.amazonaws.com"
-        }
-      }
-    }
-  ]
-}
-```
-</details>
-
-This role enables Argo CD to assume the necessary permissions within the EKS cluster in Account B:
+Trust Relationship for AWSIRSA_\{cluster_name}_ArgoCDAgentAccess:
 
 <details>
 <summary><b>View: AWSIRSA_\{cluster_name\}_ArgoCDAssume (AWS Account B)</b></summary>
@@ -246,7 +219,7 @@ This role enables Argo CD to assume the necessary permissions within the EKS clu
         {
             "Effect": "Allow",
             "Action": "sts:AssumeRole",
-            "Resource": "arn:aws:iam::<AWS_ACCOUNT_B_ID>:role/AWSIRSA_{cluster_name}_ArgoCDAgentAccess"
+            "Resource": "arn:aws:iam::<AWS_ACCOUNT_A_ID>:role/AWSIRSA_{cluster_name}_ArgoCDMaster"
         }
     ]
 }
@@ -262,17 +235,37 @@ The next step is to add proper annotations to service accounts to grant permissi
 Add annotations to the Service Account of cd-pipeline-operator:
 
 <Tabs
-  defaultValue="patch"
+  defaultValue="values"
   values={[
-    {label: 'patch', value: 'patch'},
+    {label: 'Values.yaml', value: 'values'},
+    {label: 'CLI', value: 'cli'},
     {label: 'Manifests', value: 'manifests'},
   ]}>
 
-  <TabItem value="patch">
+  <TabItem value="values">
+    Update the `CD-Pipeline-Operator` configuration in [edp-install](https://github.com/epam/edp-install/blob/master/deploy-templates/values.yaml) repository to automatically add annotations to service account:
+
+    ```yaml title="deploy-templates/values.yaml"
+    cd-pipeline-operator:
+      serviceAccount:
+        annotations:
+          eks.amazonaws.com/role-arn: "arn:aws:iam::<AWS_ACCOUNT_A_ID>:role/AWSIRSA_{cluster_name}_CDPipelineOperator"
+    ```
+  
+
+  </TabItem>
+
+  <TabItem value="cli">
 
   ```bash title="ServiceAccount: edp-cd-pipeline-operator"
   kubectl patch serviceaccount edp-cd-pipeline-operator -n krci \
     -p '{"metadata": {"annotations": {"eks.amazonaws.com/role-arn": "arn:aws:iam::<AWS_ACCOUNT_A_ID>:role/AWSIRSA_{cluster_name}_CDPipelineOperator"}}}'
+  ```
+
+  After applying annotations to service accounts, it is necessary to restart the corresponding deployments to ensure new pods are created with the updated IAM roles configuration. Use the following command:
+
+  ```bash
+  kubectl rollout restart deployment cd-pipeline-operator -n krci
   ```
 
   </TabItem>
@@ -289,28 +282,57 @@ Add annotations to the Service Account of cd-pipeline-operator:
     namespace: krci
   ```
 
+  After applying annotations to service accounts, it is necessary to restart the corresponding deployments to ensure new pods are created with the updated IAM roles configuration. Use the following command:
+
+  ```bash
+  kubectl rollout restart deployment cd-pipeline-operator -n krci
+  ```
+
   </TabItem>
 
 </Tabs>
 
-After applying annotations to service accounts, it is necessary to restart the corresponding deployments to ensure new pods are created with the updated IAM roles configuration. Use the following command:
 
-```bash
-kubectl rollout restart deployment cd-pipeline-operator -n krci
-```
 
 ### Annotate Service Accounts in Kubernetes (Account A)
 
 Annotate the service accounts in the account where Argo CD is located with the corresponding role ARN:
 
 <Tabs
-  defaultValue="patch"
+  defaultValue="values"
   values={[
-  {label: 'patch', value: 'patch'},
+  {label: 'Values.yaml', value: 'values'},
+  {label: 'CLI', value: 'cli'},
   {label: 'Manifests', value: 'manifests'},
   ]}>
 
-  <TabItem value="patch">
+  <TabItem value="values">
+    Update the Argo CD configuration in [Add-Ons](https://github.com/epam/edp-cluster-add-ons/blob/main/clusters/core/addons/argo-cd/values.yaml) repository to automatically add annotations to service accounts:
+
+    ```yaml title="clusters/core/addons/argo-cd/values.yaml"
+    argo-cd:
+      controller:
+        serviceAccount:
+          # -- Annotations applied to created service account
+          annotations:
+            eks.amazonaws.com/role-arn: "arn:aws:iam::<AWS_ACCOUNT_A_ID>:role/AWSIRSA_{cluster_name}_ArgoCDMaster"
+
+      server:
+        serviceAccount:
+          # -- Annotations applied to created service account
+          annotations:
+            eks.amazonaws.com/role-arn: "arn:aws:iam::<AWS_ACCOUNT_A_ID>:role/AWSIRSA_{cluster_name}_ArgoCDMaster"
+
+      applicationSet:
+        serviceAccount:
+          # -- Annotations applied to created service account
+          annotations:
+            eks.amazonaws.com/role-arn: "arn:aws:iam::<AWS_ACCOUNT_A_ID>:role/AWSIRSA_{cluster_name}_ArgoCDMaster"
+
+    ```
+  </TabItem>
+
+  <TabItem value="cli">
 
   ```bash title="ServiceAccount: argocd-application-controller"
 
@@ -327,6 +349,17 @@ Annotate the service accounts in the account where Argo CD is located with the c
   kubectl patch serviceaccount argocd-server -n argocd \
     -p '{"metadata": {"annotations": {"eks.amazonaws.com/role-arn": "arn:aws:iam::<AWS_ACCOUNT_A_ID>:role/AWSIRSA_{cluster_name}_ArgoCDMaster"}}}'
   ```
+
+  After applying annotations to service accounts, it is necessary to restart the corresponding workloads to ensure new pods are created with the updated IAM roles configuration. To do this, use the following commands:
+
+  ```bash
+  kubectl delete pod -l app.kubernetes.io/name=argocd-application-controller -n argocd
+
+  kubectl delete pod -l app.kubernetes.io/name=argocd-applicationset-controller -n argocd
+
+  kubectl delete pod -l app.kubernetes.io/name=argocd-server -n argocd
+  ```
+
   </TabItem>
 
   <TabItem value="manifests">
@@ -356,19 +389,23 @@ Annotate the service accounts in the account where Argo CD is located with the c
     name: argocd-server
     namespace: argocd
   ```
+
+
+  After applying annotations to service accounts, it is necessary to restart the corresponding workloads to ensure new pods are created with the updated IAM roles configuration. To do this, use the following commands:
+
+  ```bash
+  kubectl delete pod -l app.kubernetes.io/name=argocd-application-controller -n argocd
+
+  kubectl delete pod -l app.kubernetes.io/name=argocd-applicationset-controller -n argocd
+
+  kubectl delete pod -l app.kubernetes.io/name=argocd-server -n argocd
+  ```
+
   </TabItem>
 
 </Tabs>
 
-After applying annotations to service accounts, it is necessary to restart the corresponding workloads to ensure new pods are created with the updated IAM roles configuration. To do this, use the following commands:
 
-```bash
-kubectl delete pod -l app.kubernetes.io/name=argocd-application-controller -n argocd
-
-kubectl delete pod -l app.kubernetes.io/name=argocd-applicationset-controller -n argocd
-
-kubectl delete pod -l app.kubernetes.io/name=argocd-server -n argocd
-```
 
 ## Define Argo CD Project for Remote Clusters (Account A)
 
@@ -383,7 +420,7 @@ metadata:
 spec:
   destinations:
     - namespace: krci-*
-      server: https://EXAMPLED539D4633E53DE1B71EXAMPLE.gr7.<AWS_REGION>.eks.amazonaws.com
+      server: https://EXAMPLED539D4633E53DE1B71EXAMPLE.gr7.<AWS_REGION_ACCOUNT_B>.eks.amazonaws.com
 ```
 
 ## Update aws_auth ConfigMap in Target Cluster (Account B)
@@ -402,12 +439,12 @@ data:
   mapRoles: |
     - groups:
       - "cd-pipeline-operator"
-      rolearn: "arn:aws:iam::<AWS_ACCOUNT_A_ID>:role/AWSIRSA_{cluster_name}_CDPipelineOperator"
+      rolearn: "arn:aws:iam::<AWS_ACCOUNT_B_ID>:role/AWSIRSA_{cluster_name}_CDPipelineAgent"
       username: "eksadminrole"
     - groups:
       - "system:masters"
-      rolearn: "arn:aws:iam::<AWS_ACCOUNT_A_ID>:role/AWSIRSA_{cluster_name}_ArgoCDMaster"
-      username: "arn:aws:iam::<AWS_ACCOUNT_A_ID>:role/AWSIRSA_{cluster_name}_ArgoCDMaster"
+      rolearn: "arn:aws:iam::<AWS_ACCOUNT_B_ID>:role/AWSIRSA_{cluster_name}_ArgoCDAgentAccess"
+      username: "arn:aws:iam::<AWS_ACCOUNT_B_ID>:role/AWSIRSA_{cluster_name}_ArgoCDAgentAccess"
 ```
 </details>
 
@@ -415,291 +452,120 @@ data:
 
 Associate the IAM Role with the **cd-pipeline-operator** group:
 
+
 <Tabs
-  defaultValue="kubectl"
+  defaultValue="kubernetes"
   values={[
-  {label: 'kubectl', value: 'kubectl'},
-  {label: 'Manifests', value: 'manifests'},
+  {label: 'Kubernetes RBAC', value: 'kubernetes'},
+  {label: 'Capsule', value: 'capsule'},
   ]}>
 
-  <TabItem value="kubectl">
+  <TabItem value="kubernetes">
 
-  ```bash title="ServiceAccount: argocd-application-controller"
-  kubectl create clusterrole cd-pipeline-rolebinding-access \
-    --verb=get,list,create,delete \
-    --resource=rolebindings.rbac.authorization.k8s.io \
-    --verb=create,get,list \
-    --resource=secrets
-
-  kubectl create clusterrolebinding cd-pipeline-operator-rolebinding-access \
-    --clusterrole=cd-pipeline-rolebinding-access \
-    --group=cd-pipeline-operator
-  ```
-  </TabItem>
-
-  <TabItem value="manifests">
-
-  ```yaml title="cd-pipeline-rolebinding-access.yaml"
-  apiVersion: rbac.authorization.k8s.io/v1
-  kind: ClusterRole
-  metadata:
-    name: cd-pipeline-rolebinding-access
-  rules:
-    - verbs:
-        - get
-        - list
-        - create
-        - delete
-      apiGroups:
-        - rbac.authorization.k8s.io
-      resources:
-        - rolebindings
-    - verbs:
-        - create
-        - get
-        - list
-      apiGroups:
-        - ''
-      resources:
-        - secrets
-  ```
-
-  ```yaml title="cd-pipeline-operator-rolebinding-access.yaml"
-  apiVersion: rbac.authorization.k8s.io/v1
-  kind: ClusterRoleBinding
-  metadata:
-    name: cd-pipeline-operator-rolebinding-access
-  subjects:
-    - kind: Group
-      apiGroup: rbac.authorization.k8s.io
-      name: cd-pipeline-operator
-  roleRef:
-    apiGroup: rbac.authorization.k8s.io
-    kind: ClusterRole
-    name: cd-pipeline-rolebinding-access
-  ```
-  </TabItem>
-
-</Tabs>
-
-
-## Clusters Secret Configuration
-
-The following step is to configure secrets.
-
-### KuberocketCI IRSA Cluster Connection Secret Configuration
-
-This configuration enables secure cluster connection using IAM Roles for Service Accounts (IRSA) in AWS. You can set it up using one of the following methods:
-
-<Tabs
-  defaultValue="kuberocketci"
-  values={[
-    {label: 'KubeRocketCI portal', value: 'kuberocketci'},
+  <Tabs
+    defaultValue="kubectl"
+    values={[
+    {label: 'kubectl', value: 'kubectl'},
     {label: 'Manifests', value: 'manifests'},
-    {label: 'External Secrets Operator', value: 'externalsecret'},
-  ]}>
+    ]}>
 
-  <TabItem value="kuberocketci">
-  Navigate to **KuberocketCI portal** -> **Configuration** -> **DEPLOYMENT** -> **CLUSTERS** and click the **+ ADD CLUSTER** fill in the following fields and click **SAVE** button:
+    <TabItem value="kubectl">
+    ```bash title="ServiceAccount: argocd-application-controller"
+    kubectl create clusterrole cd-pipeline-rolebinding-access \
+      --verb=get,list,create,delete \
+      --resource=rolebindings.rbac.authorization.k8s.io \
+      --verb=create,get,list \
+      --resource=secrets 
 
-  * **Cluster name**: a unique and descriptive name for the new cluster (e.g., prod-cluster);
-  * **Cluster Host**: the cluster’s endpoint URL (e.g., example-cluster-domain.com);
-  * **Authority Data**: base64-encoded Kubernetes certificate essential for authentication. Obtain this certificate from the configuration file of the user account you intend to use for accessing the cluster;
-  * **Role ARN**: an AWS Role for the remote cluster. E.g., arn:aws:iam::\<AWS_ACCOUNT_A_ID\>:role/AWSIRSA_\{cluster_name\}_CDPipelineOperator.
 
-  ![Add cluster IRSA](../../assets/operator-guide/deploy-application-in-remote-cluster-via-irsa/cluster-irsa-add-cluster.png "Add cluster IRSA")
+
+    kubectl create clusterrolebinding cd-pipeline-operator-rolebinding-access \
+      --clusterrole=cd-pipeline-rolebinding-access \
+      --group=cd-pipeline-operator
+    ```
+    </TabItem>
+
+    <TabItem value="manifests">
+
+    ```yaml title="cd-pipeline-rolebinding-access.yaml"
+    apiVersion: rbac.authorization.k8s.io/v1
+    kind: ClusterRole
+    metadata:
+      name: cd-pipeline-rolebinding-access
+    rules:
+      - verbs:
+          - get
+          - list
+          - create
+          - delete
+        apiGroups:
+          - rbac.authorization.k8s.io
+        resources:
+          - rolebindings
+      - verbs:
+          - create
+          - get
+          - list
+        apiGroups:
+          - ''
+        resources:
+          - secrets
+    ```
+
+    ```yaml title="cd-pipeline-operator-rolebinding-access.yaml"
+    apiVersion: rbac.authorization.k8s.io/v1
+    kind: ClusterRoleBinding
+    metadata:
+      name: cd-pipeline-operator-rolebinding-access
+    subjects:
+      - kind: Group
+        apiGroup: rbac.authorization.k8s.io
+        name: cd-pipeline-operator
+    roleRef:
+      apiGroup: rbac.authorization.k8s.io
+      kind: ClusterRole
+      name: cd-pipeline-rolebinding-access
+    ```
+    </TabItem>
+
+  </Tabs>
+
   </TabItem>
 
-  <TabItem value="manifests">
+  <TabItem value="capsule">
 
-  ```yaml
-  apiVersion: v1
-  kind: Secret
+  ```yaml title="Capsule configuration"
+  apiVersion: capsule.clastix.io/v1beta2
+  kind: CapsuleConfiguration
   metadata:
-    name: <cluster-name>-cluster
-    namespace: krci
-    labels:
-      app.edp.epam.com/cluster-type: irsa
-      app.edp.epam.com/secret-type: cluster
-      argocd.argoproj.io/secret-type: cluster
-  data:
-    config: >-
-      {
-        "server": "https://EXAMPLED539D4633E53DE1B71EXAMPLE.gr7.<AWS_REGION>.eks.amazonaws.com",
-        "awsAuthConfig": {
-          "clusterName": "<cluster-name>",
-          "roleARN": "arn:aws:iam::<AWS_ACCOUNT_A_ID>:role/AWSIRSA_{cluster_name}_CDPipelineOperator"
-        },
-        "tlsClientConfig": {
-          "insecure": false,
-          "caData": "<Base64-encoded CA certificate of the target cluster>"
-        }
-      }
-    name: "<cluster-name>"
-    server: "https://EXAMPLED539D4633E53DE1B71EXAMPLE.gr7.<AWS_REGION>.eks.amazonaws.com"
+    name: default
+  spec:
+    userGroups:
+      - capsule.clastix.io
+      - cd-pipeline-operator
   ```
 
-  </TabItem>
-
-  <TabItem value="externalsecret">
-
-  ```json
-  "<cluster-name>-cluster": {
-    "config": {
-      "server": "https://EXAMPLED539D4633E53DE1B71EXAMPLE.gr7.<AWS_REGION>.eks.amazonaws.com",
-      "awsAuthConfig": {
-        "clusterName": "<cluster-name>",
-        "roleARN": "arn:aws:iam::<AWS_ACCOUNT_A_ID>:role/AWSIRSA_{cluster_name}_CDPipelineOperator"
-      },
-      "tlsClientConfig": {
-        "insecure": false,
-        "caData": "<Base64-encoded CA certificate of the target cluster>"
-      }
-    },
-    "name": "<cluster-name>",
-    "server": "https://EXAMPLED539D4633E53DE1B71EXAMPLE.gr7.<AWS_REGION>.eks.amazonaws.com"
-  }
+  ```yaml title="Tenant configuration"
+  apiVersion: capsule.clastix.io/v1beta2
+  kind: Tenant
+  metadata:
+    name: krci
+  spec:
+    owners:
+      - clusterRoles:
+          - admin
+          - capsule-namespace-deleter
+        kind: Group
+        name: cd-pipeline-operator
   ```
-
   </TabItem>
+
 </Tabs>
 
-### Argo CD IRSA Cluster Connection Secret Configuration
+## Next Steps
 
-Create a Secret to integrate the remote cluster with Argo CD:
-
-<Tabs
- defaultValue="manifests"
- values={[
- {label: 'Manifests', value: 'manifests'},
- {label: 'External Secrets Operator', value: 'externalsecret'},
- ]}>
-
-  <TabItem value="manifests">
-
-  ```yaml
-  apiVersion: v1
-  kind: Secret
-  metadata:
-    name: <cluster-name>-cluster
-    namespace: argocd
-    labels:
-      argocd.argoproj.io/secret-type: cluster
-  stringData:
-    config: |
-      {
-        "awsAuthConfig": {
-          "clusterName": "<cluster-name>",
-          "roleARN": "arn:aws:iam::<AWS_ACCOUNT_A_ID>:role/AWSIRSA_{cluster_name}_ArgoCDMaster"
-        },
-        "tlsClientConfig": {
-          "insecure": false,
-          "caData": "<Base64-encoded CA certificate of the target cluster>"
-        }
-      }
-    name: "<cluster-name>"
-    server: "https://EXAMPLED539D4633E53DE1B71EXAMPLE.gr7.<AWS_REGION>.eks.amazonaws.com"
-  ```
-  </TabItem>
-
-  <TabItem value="externalsecret">
-
-  ```json
-  "<cluster-name>-cluster": {
-    "config": {
-      "awsAuthConfig": {
-        "clusterName": "<cluster-name>",
-        "roleARN": "arn:aws:iam::<AWS_ACCOUNT_A_ID>:role/AWSIRSA_{cluster_name}_ArgoCDMaster"
-      },
-      "tlsClientConfig": {
-        "insecure": false,
-        "caData": "<Base64-encoded CA certificate of the target cluster>"
-      }
-    },
-    "name": "<cluster-name>",
-    "server": "https://EXAMPLED539D4633E53DE1B71EXAMPLE.gr7.<AWS_REGION>.eks.amazonaws.com"
-  }
-  ```
-  </TabItem>
-</Tabs>
-
-After applying the configuration, you can verify the cluster connection `ArgoCD` -> `Settings` -> `Clusters` -> `<cluster-name>`:
-
-  ![Argo CD cluster IRSA status](../../assets/operator-guide/deploy-application-in-remote-cluster-via-irsa/cluster-irsa-argocd-status.png "Argo CD cluster IRSA status")
-
-## Update KuberocketCI ConfigMap To Add New Cluster
-
-To add cluster to the KuberocketCI platform click on `kubernetes` icon -> `Configuration` -> `ConfigMap` -> `edp-config` and add parameter `available_clusters` in data with value `<cluster-name>` and click **Save & apply**:
-
-  ```yaml title="edp-config.yaml"
-  data:
-    available_clusters: <cluster-name>
-  ```
-
-  ![Add cluster via configmap edp-config](../../assets/operator-guide/deploy-application-in-remote-cluster-via-irsa/cluster-irsa-configmap-edp-config.png "Add cluster via configmap edp-config")
-
-## Deploy Application on New Cluster
-
-Now that the remote cluster is integrated, you can deploy applications in it.
-
-### Create Deployment Flow
-
-To create a deployment flow, follow the steps below:
-
-1. Navigate to the **Deployment Flows** tab and click the **+ Create Deployment Flow** button.
-
-2. The **Enter name** tab of the **Create Deployment Flow**:
-
-  ![Create deployment flow](../../assets/operator-guide/deploy-application-in-remote-cluster-via-irsa/cluster-irsa-deployment-flow.png "Create deployment flow")
-
-3. Enter the deployment flow name that will be displayed in the Deployment Flows list. Enter at least two characters, use the lower-case letters, numbers, and dashes.
-
-4. Click the **Next** button to move onto the **Add applications** tab.
-
-  :::note
-    The namespace created by the environment has the following pattern combination: **[KubeRocketCI namespace]-[environment name]-[stage name]**.
-    Please be aware that the namespace length should not exceed 63 symbols.
-  :::
-
-5. The Component tab of the Environments menu is presented below:
-
-  ![Create deployment flow](../../assets/operator-guide/deploy-application-in-remote-cluster-via-irsa/cluster-irsa-create-deployment-flow.png "Add cluster via configmap edp-config")
-
-6. Click the Create button to finish deployment flow configuration and proceed with configuring environment.
-
-### Create IRSA Cluster Environment
-
-1. On the Environments menu, click the **Create Environment** button.
-
-2. The Configure Stage tab of the Create Stage menu is presented below:
-
-  ![Select cluster](../../assets/operator-guide/deploy-application-in-remote-cluster-via-irsa/cluster-irsa-select-cluster.png "Select cluster")
-
-Set the proper cluster options:
-
-  * **Cluster** - Choose the `<cluster-name>` to deploy the stage in;
-  * **Stage name** - Enter the stage name;
-  * **Description** - Enter the description for this stage.
-
-3. Click the **Next** button to move onto the **Add quality gates** tab. Define quality gates and click **Create**. Read the [Add Deployment Flow](../../user-guide/add-cd-pipeline.md) for more details.
-
-4. Ensure the Environment uses the proper cluster:
-
-  ![Environment overview](../../assets/operator-guide/deploy-application-in-remote-cluster-via-irsa/cluster-irsa-environment-overview.png "Environment overview")
-
-5. Deploy application to verify the platform interacts with your cluster correctly. Read the [Manage Deployment Flows](../../user-guide/manage-environments.md#deploy-application) for more details.
-
-### Deployment Application Summary
-
-As soon as the application is deployed, verify that Environment has the green status:
-
-  ![Environment overview](../../assets/operator-guide/deploy-application-in-remote-cluster-via-irsa/cluster-irsa-krci-deployed-application.png "Environment overview")
-
-In the Argo CD Application resource, you can also check the cluster your application is deployed in:
-
-  ![Argo CD deployed application summary](../../assets/operator-guide/deploy-application-in-remote-cluster-via-irsa/cluster-irsa-deployed-application-summary.png "Argo CD deployed application summary")
-
-Now your platform can use your remote AWS EKS cluster as an additional workload for your Deployment Flows.
+By completing all the steps in this documentation, you will obtain a token for integration with the Kubernetes cluster.
+The next step is to configure the cluster integration with KubeRocketCI, as described in the documentation [Add Cluster](../../user-guide/add-cluster.md).
 
 ## Related Articles
 

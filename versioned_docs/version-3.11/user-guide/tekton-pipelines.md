@@ -99,10 +99,10 @@ Trigger a review pipeline using one of the four methods:
 
   ![Delete branch](../assets/user-guide/tekton-pipelines/review-pipeline-tekton-dashboard-run-again.png "Delete branch")
 
-4. Add a comment with the `/recheck` command on the pull request page:
+4. Add a comment that begins with the `/recheck` or `/ok-to-test` command on the pull request page:
 
 :::note
-The `/recheck` command works for all the available Version Control Systems.
+The `/recheck` and `/ok-to-test` commands must be at the beginning of your comment to be recognized. These commands work for all the available Version Control Systems.
 :::
 
   ![Delete branch](../assets/user-guide/tekton-pipelines/bitbucket-pull-request-recheck.png "Delete branch")

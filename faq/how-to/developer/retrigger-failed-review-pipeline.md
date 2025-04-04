@@ -4,4 +4,4 @@
   <link rel="canonical" href="https://docs.kuberocketci.io/faq/how-to/developer/retrigger-failed-review-pipeline" />
 </head>
 
-Use the `/recheck` or `/ok-to-test` comment in a pull request. Alternative methods are described in the [KubeRocketCI: Tekton Overview](/docs/user-guide/tekton-pipelines#review-pipeline) page.
+Use a comment that begins with `/recheck` or `/ok-to-test` in a pull request. The command must be at the beginning of your comment to be recognized. Alternative methods are described in the [KubeRocketCI: Tekton Overview](/docs/user-guide/tekton-pipelines#review-pipeline) page.

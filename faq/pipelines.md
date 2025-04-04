@@ -48,10 +48,10 @@ If you need to re-trigger a pipeline due to a failed run or to incorporate new c
 
 - **Tekton Dashboard**: If Tekton Dashboard is integrated. In the KubeRocketCI Portal navigate **Overview** -> **Links** and click on **Tekton**. In the Tekton Dashboard navigate to the **PipelineRuns** section, identify the failed pipeline, and select the action **Rerun**.
 
-- **Through VCS (GitHub/GitLab)**: Add a comment with word `/recheck` or `/ok-to-test` to your Pull Request (PR) or Merge Request (MR), and the pipeline will be triggered automatically.
+- **Through VCS (GitHub/GitLab)**: Add a comment that begins with `/recheck` or `/ok-to-test` to your Pull Request (PR) or Merge Request (MR), and the pipeline will be triggered automatically.
 
 :::tip
-  Use comment approach with `/recheck` or `/ok-to-test` if the Pipeline is not available either on KubeRocketCI or Tekton Dashboard.
+  Use comment approach with `/recheck` or `/ok-to-test` if the Pipeline is not available either on KubeRocketCI or Tekton Dashboard. The command must be at the beginning of your comment to be recognized.
 :::
 
 ---

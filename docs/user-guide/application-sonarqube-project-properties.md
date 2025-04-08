@@ -13,7 +13,7 @@ description: "This section describes the subsequent possible actions that can be
   <link rel="canonical" href="https://docs.kuberocketci.io/docs/user-guide/application-sonarqube-project-properties" />
 </head>
 
-The KubeRocketCI platform simplifies this process by supporting SonarQube integration with predefined configurations. However, specific use cases may require customization. Below is a guide on setting the SonarQube project properties to meet all application requirements.
+KubeRocketCI simplifies the process of managing SonarQube projects by supporting SonarQube integration with predefined configurations. However, specific use cases may require customization. Below is a guide on setting the SonarQube project properties to meet all application requirements.
 
 ## Application repo structure
 
@@ -41,12 +41,14 @@ When an application is added to the KubeRocketCI, a default `sonar-project.prope
 
 ## Default project parameters
 
+Below are the default SonarQube project properties used in the platform:
+
 * **sonar.projectKey:** A unique identifier for the SonarQube project. This is also set to the application **codebase name** by the KubeRocketCI pipelines.
 * **sonar.projectName:** A readable name for the project. This is also set to the application **codebase name** by the KubeRocketCI pipelines.
 * **sonar.qualitygate.wait:** Enables waiting for Quality Gate results before proceeding (e.g., **true** or **false**) by default KubeRocketCI pipelines set it **true**.
 * **sonar.host.url:** by default set from KuberocketCI pipelines from [KuberocketCI sonarqube integration **url**](../operator-guide/code-quality/sonarqube.md#configuration).
 * **sonar.login:** by default set from KuberocketCI pipelines from [KuberocketCI sonarqube integration **token**](../operator-guide/code-quality/sonarqube.md#configuration).
-* **sonar.organization:** by default not set from KuberocketCI pipelines and used only for [sonar cloud integration](../quick-start/integrate-sonarcloud.md).
+* **sonar.organization:** by default not set from KuberocketCI pipelines and used only for [SonarQube Cloud integration](../quick-start/integrate-sonarcloud.md).
 
   <details>
   <summary><b>sonar-project.properties: file example of configuration</b></summary>
@@ -58,7 +60,7 @@ When an application is added to the KubeRocketCI, a default `sonar-project.prope
   ```
   </details>
 
-For additional assistance with configuring SonarQube properties, please refer to the [SonarQube documentation](https://docs.sonarsource.com/sonarqube-server/10.6/analyzing-source-code/scanners/sonarscanner/)
+For additional assistance with configuring SonarQube properties, please refer to the [SonarQube documentation](https://docs.sonarsource.com/sonarqube-server/10.6/analyzing-source-code/scanners/sonarscanner/).
 
 ## Related Articles
 

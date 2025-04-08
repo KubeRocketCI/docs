@@ -19,7 +19,7 @@ This solution enhances reliability by preventing resource shortages, supports hi
 
 ## Architecture Overview
 
-For automatic scaling, two tools are used:
+KubeRocketCI can use these tools for automatic resource scaling:
 
 - **Karpenter** – dynamically manages node scaling in the cluster, creating new instances as the load increases and removing resources when demand decreases.
 - **KEDA** – adjusts the number of pods based on workload, ensuring flexibility and optimal resource utilization.
@@ -29,8 +29,8 @@ The diagram below illustrates the AWS EKS cluster architecture, including key co
 - **System Node** – contains control components such as Tekton Controller, KEDA, Ingress Controller, and Karpenter.
 - **Tekton Node** – runs CI/CD pipelines.
 - **Dynamic Node** – hosts operators and services that are scaled by Karpenter.
-- **Auto Scaling Groups (ASG)** – manage system and Tekton nodes.
-
-This approach ensures efficient resource allocation, reduces latency, and optimizes costs. 🚀
+- **Auto Scaling Groups (ASG)** – manage system and Tekton Nodes.
 
 ![Architecture diagram](../../assets/operator-guide/kubernetes-cluster-scaling/architecture-diagram.png "Architecture diagram")
+
+Automatic scaling ensures efficient resource allocation, reduces latency, and optimizes costs. Read the [Efficient Kubernetes Autoscaling with Karpenter and KEDA: A Comprehensive Guide](./namespace-and-cluster-autoscaling.md) to set up automatic scaling in your cluster.

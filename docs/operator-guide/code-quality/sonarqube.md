@@ -23,6 +23,7 @@ facilitating enhanced code inspection and improvement practices within your deve
 <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/0duxqmIKFpQ" title="SonarQube Integration" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen"></iframe>
 </div>
 
+
 ## Prerequisites
 
 Before proceeding, ensure the following prerequisites are in place:

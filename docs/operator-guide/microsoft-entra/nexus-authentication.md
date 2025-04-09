@@ -17,30 +17,32 @@ This guide provides instructions on how to configure Nexus with OpenID Connect (
 
 ## Prerequisites
 
+Before you begin, make sure the following prerequisites are met:
+
 - Access to the [Microsoft Entra Admin Center](https://entra.microsoft.com/) with administrative privileges.
-- Created Microsoft Entra Tenant.
-- Installed [Nexus](https://github.com/epam/edp-cluster-add-ons/tree/0a1bd78c52899294ef7e17bfae5d3e6477206109/clusters/core/addons/nexus) (can be installed during **Configuring Helm chart** step).
-- Installed [Nexus Operator](https://github.com/epam/edp-cluster-add-ons/tree/main/clusters/core/addons/nexus-operator) (can be installed during **Configuring Helm chart** step).
-- Fork copy of the [edp-cluster-add-ons](https://github.com/epam/edp-cluster-add-ons) repository.
-- (Optional) Installed External Secrets Operator.
+- [Microsoft Entra](https://learn.microsoft.com/en-us/entra/fundamentals/create-new-tenant) Tenant is created.
+- [Nexus](https://github.com/epam/edp-cluster-add-ons/tree/0a1bd78c52899294ef7e17bfae5d3e6477206109/clusters/core/addons/nexus) in installed (can be installed during **Configuring Helm chart** step).
+- [Nexus Operator](https://github.com/epam/edp-cluster-add-ons/tree/main/clusters/core/addons/nexus-operator) is installed (can be installed during **Configuring Helm chart** step).
+- A forked copy of the [edp-cluster-add-ons](https://github.com/epam/edp-cluster-add-ons) repository is created.
+- (Optional) [External Secrets Operator](../secrets-management/install-external-secrets-operator.md) is installed.
 
 ## Configuring Microsoft Entra Application
 
-To configure Microsoft Entra as the Identity Provider for Nexus, it is necessary to create and configure an Application in the Microsoft Entra Admin Center.
+To configure Microsoft Entra as the Identity Provider for Nexus, it is necessary to create and configure an Application in the Microsoft Entra Admin Center:
 
-1. Log in to the [Microsoft Entra Admin Center](https://entra.microsoft.com/?feature.msaljs=true#home).
+1. Log in to the [Microsoft Entra Admin Center](https://entra.microsoft.com/?feature.msaljs=true#home):
 
     ![Microsoft Entra Admin Center](../../assets/operator-guide/microsoft-entra-auth/microsoft-entra-admin-center.png)
 
-2. In the left sidebar menu, select **Applications** and click **App registrations**.
+2. In the left sidebar menu, select **Applications** and click **App registrations**:
 
     ![App registrations](../../assets/operator-guide/microsoft-entra-auth/app-registrations.png)
 
-3. Click on the **New registration** button.
+3. Click on the **New registration** button:
 
     ![New registration](../../assets/operator-guide/microsoft-entra-auth/new-registration.png)
 
-4. Fill in the required fields, such as **Name**, **Supported account types** and **Redirect URI** (You can skip setting the **Redirect URI** if you don't deploy OAuth2-proxy yet). Click **Register** to create the application.
+4. Fill in the required fields, such as **Name**, **Supported account types** and **Redirect URI** (You can skip setting the **Redirect URI** if you don't deploy OAuth2-proxy yet). Click **Register** to create the application:
 
     :::note
     The **Redirect URI** should be in the format `https://<OAuth2-proxy ingress endpoint>/oauth2/callback`.
@@ -49,19 +51,19 @@ To configure Microsoft Entra as the Identity Provider for Nexus, it is necessary
 
     ![Register application](../../assets/operator-guide/microsoft-entra-auth/register-application.png)
 
-5. In the created application, navigate to the **Authentication** section from the left sidebar menu. In the **Implicit grant and hybrid flows** section, select **ID tokens** for the token type. In the **Allow public client flows** section, set the value to **No**.
+5. In the created application, navigate to the **Authentication** section from the left sidebar menu. In the **Implicit grant and hybrid flows** section, select **ID tokens** for the token type. In the **Allow public client flows** section, set the value to **No**:
 
     ![Authentication settings](../../assets/operator-guide/microsoft-entra-auth/nexus-authentication-settings.png)
 
-6. Navigate to the **Certificates & secrets** section. In the **Client secrets** tab, click on the **New client secret** button to create a new secret. Fill in the required fields and click **Add**.
+6. Navigate to the **Certificates & secrets** section. In the **Client secrets** tab, click on the **New client secret** button to create a new secret. Fill in the required fields and click **Add**:
 
     ![Client secrets](../../assets/operator-guide/microsoft-entra-auth/nexus-client-secrets.png)
 
-7. Copy the generated client secret value and store it securely. You will need this value to configure the OAuth2-proxy Helm chart.
+7. Copy the generated client secret value and store it securely. You will need this value to configure the OAuth2-proxy Helm chart:
 
     ![Client secret](../../assets/operator-guide/microsoft-entra-auth/nexus-client-secret.png)
 
-8. Navigate to the **Token configuration** section and click on **Add groups claim** button. Choose the group type as **Security Groups** and for the ID token type, select **Group ID**.
+8. Navigate to the **Token configuration** section and click on **Add groups claim** button. Choose the group type as **Security Groups** and for the ID token type, select **Group ID**:
 
     ![Token configuration](../../assets/operator-guide/microsoft-entra-auth/nexus-token-configuration.png)
 
@@ -80,11 +82,11 @@ To configure Microsoft Entra as the Identity Provider for Nexus, it is necessary
 
 To manage access to Nexus using OAuth2-proxy, it is necessary to create groups in the Microsoft Entra Admin Center and add users to these groups.
 
-1. In the Microsoft Entra Admin Center, in the left sidebar menu, select **Groups** and then **All groups**. Click on **New group** button to create a new group(s) for users who will have access to Nexus (e.g., `administrator`, `developer`).
+1. In the Microsoft Entra Admin Center, in the left sidebar menu, select **Groups** and then **All groups**. Click on **New group** button to create a new group(s) for users who will have access to Nexus (e.g., `administrator`, `developer`):
 
     ![New group](../../assets/operator-guide/microsoft-entra-auth/new-group.png)
 
-2. Fill in the required fields, such as **Groups type** and **Group name**. In the **Members** section, add users who will have access to SonarQube.
+2. Fill in the required fields, such as **Groups type** and **Group name**. In the **Members** section, add users who will have access to SonarQube:
 
     ![Create group](../../assets/operator-guide/microsoft-entra-auth/create-group.png)
 
@@ -94,7 +96,7 @@ To manage access to Nexus using OAuth2-proxy, it is necessary to create groups i
 
 To integrate Nexus with the configured Microsoft Entra Application, it is necessary to configure the Nexus and OAuth2-proxy Helm charts. In this example, we will use the [edp-cluster-add-ons](https://github.com/epam/edp-cluster-add-ons) repository to deploy Nexus and OAuth2-proxy to the Kubernetes (e.g. AWS EKS) cluster.
 
-1. Navigate to the forked [Cluster Add-Ons repository](https://github.com/epam/edp-cluster-add-ons) and locate the `values.yaml` file in the `clusters/core/addons/nexus` directory.
+1. Navigate to the forked [Cluster Add-Ons repository](https://github.com/epam/edp-cluster-add-ons) and locate the `values.yaml` file in the `clusters/core/addons/nexus` directory:
 
     Update the `oauth2-proxy` section in the `values.yaml` file with the following values:
 
@@ -138,7 +140,7 @@ To integrate Nexus with the configured Microsoft Entra Application, it is necess
     - `<Application (client) ID>` with the Application ID of the Microsoft Entra Application.
     - `nexus.example.com` with the desired redirect URL for the OAuth2-proxy.
 
-2. Update or create the `oauth2-proxy` secret with the Client Secret and other necessary values.
+2. Update or create the `oauth2-proxy` secret with the Client Secret and other necessary values:
 
     - Using External Secrets Operator
 
@@ -189,7 +191,7 @@ Nexus users can also be created directly from the Nexus UI instead of using the 
 
 To be able to access Nexus using OAuth2-proxy and Microsoft Entra, it is necessary to create users in Nexus with the appropriate roles. In this example, we will demonstrate how to create users with Nexus Operator.
 
-1. Make sure that the [Nexus Operator](https://github.com/epam/edp-cluster-add-ons/tree/main/clusters/core/addons/nexus-operator) is installed. If not, follow the instructions in the [Sonatype Nexus Repository OSS Integration documentation](../artifacts-management/nexus-sonatype.md).
+1. Make sure that the [Nexus Operator](https://github.com/epam/edp-cluster-add-ons/tree/main/clusters/core/addons/nexus-operator) is installed. If not, follow the instructions in the [Sonatype Nexus Repository OSS Integration documentation](../artifacts-management/nexus-sonatype.md):
 
 2. Configure the following `NexusUser` custom resource to create a user with the `nx-admin` and `edp-admin` roles:
 
@@ -220,7 +222,7 @@ To be able to access Nexus using OAuth2-proxy and Microsoft Entra, it is necessa
 
 4. Repeat the process for each user you want to grant access to Nexus.
 
-5. Verify that the OIDC Authentication is configured correctly by logging in to Nexus using the OAuth2-proxy endpoint. Click on the **Sign in with Open ID Connect** button to authenticate with Microsoft Entra credentials.
+5. Verify that the OIDC Authentication is configured correctly by logging in to Nexus using the OAuth2-proxy endpoint. Click on the **Sign in with Open ID Connect** button to authenticate with Microsoft Entra credentials:
 
     ![Nexus login](../../assets/operator-guide/microsoft-entra-auth/login-nexus.png)
 

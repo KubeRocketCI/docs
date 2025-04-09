@@ -32,9 +32,10 @@ Cross-account interaction is performed through IRSA with a two-tiered IAM role s
 - `AWSIRSA_\{cluster_name\}_CDPipelineOperator` can then assume the `AWSIRSA_\{cluster_name\}_CDPipelineAgent` role in AWS Account B.
 - `AWSIRSA_\{cluster_name\}_CDPipelineAgent` configures the environment (Stage) by creating namespaces, generating service accounts, copying secrets, and preparing for deployment.
 
-### Required IAM Roles, and polices for KRCI
+### Required IAM Roles and Polices for KRCI
 
-Trust policy for the initial IRSA role that the service account assumes.
+Below is a Trust Policy for the initial IRSA role that the service account assumes:
+
 <details>
 <summary><b>View: AWSIRSA_\{cluster_name\}_CDPipelineOperator (AWS Account A)</b></summary>
 ```json
@@ -67,7 +68,8 @@ Trust policy for the initial IRSA role that the service account assumes.
 }
 ```
 </details>
-Policy allows assuming roles in Account B.
+
+Below is a Policy that allows assuming roles in Account B:
 
 <details>
 <summary><b>View: AWSIRSA_\{cluster_name\}_CDPipelineAssume (AWS Account A)</b></summary>
@@ -85,7 +87,7 @@ Policy allows assuming roles in Account B.
 ```
 </details>
 
-Trust policy to control access to Account B resources.
+Below is a Trust Policy that allows to control access to Account B resources:
 
 <details>
 <summary><b>View: AWSIRSA_\{cluster_name\}_CDPipelineAgent (AWS Account B)</b></summary>
@@ -117,7 +119,7 @@ Trust policy to control access to Account B resources.
 ```
 </details>
 
-Policy defines permissions for deployments.
+Below is a Policy that defines permissions for deployments:
 
 <details>
 <summary><b>View: AWSIRSA_\{cluster_name\}_CDPipelineClusterAccess (AWS Account B)</b></summary>
@@ -139,13 +141,13 @@ Policy defines permissions for deployments.
 ```
 </details>
 
-### Required IAM Roles and Policies for ArgoCD Cross-Account Deployment
+### Required IAM Roles and Policies for Argo CD Cross-Account Deployment
 
-This section outlines the necessary IAM roles and policies required for ArgoCD to manage Kubernetes clusters across AWS accounts securely. The setup follows AWS best practices by using IAM Roles for Service Accounts (IRSA) and cross-account access to limit privileges effectively.
+This section outlines the necessary IAM roles and policies required for Argo CD to manage Kubernetes clusters across AWS accounts securely. The setup follows AWS best practices by using IAM Roles for Service Accounts (IRSA) and cross-account access to limit privileges effectively.
 
-This IAM role is used by ArgoCD to authenticate via OIDC and assume required permissions.
+This IAM role is used by Argo CD to authenticate via OIDC and assume required permissions:
 
-  ![ArgoCD IRSA access model](../../assets/operator-guide/deploy-application-in-remote-cluster-via-irsa/cluster-irsa-argocd-acess-model.jpg "ArgoCD IRSA access model")
+  ![Argo CD IRSA access model](../../assets/operator-guide/deploy-application-in-remote-cluster-via-irsa/cluster-irsa-argocd-acess-model.jpg "Argo CD IRSA access model")
 
 <details>
 <summary><b>View: AWSIRSA_\{cluster_name\}_ArgoCDMaster (AWS Account A)</b></summary>
@@ -181,7 +183,7 @@ This IAM role is used by ArgoCD to authenticate via OIDC and assume required per
 ```
 </details>
 
-This policy allows ArgoCD in Account A to describe and access the EKS cluster in Account B.
+This Policy allows Argo CD in Account A to describe and access the EKS cluster in Account B:
 
 <details>
 <summary><b>View: AWSIRSA_\{cluster_name\}_ArgoCDMasterClusterAccess (AWS Account A)</b></summary>
@@ -203,7 +205,7 @@ This policy allows ArgoCD in Account A to describe and access the EKS cluster in
 ```
 </details>
 
-This role allows ArgoCD service accounts to assume permissions necessary for managing deployments in Account B.
+This Role allows Argo CD service accounts to assume permissions necessary for managing deployments in Account B:
 
 <details>
 <summary><b>View: AWSIRSA_\{cluster_name\}_ArgoCDAgentAccess (AWS Account B)</b></summary>
@@ -233,7 +235,7 @@ This role allows ArgoCD service accounts to assume permissions necessary for man
 ```
 </details>
 
-This role enables ArgoCD to assume the necessary permissions within the EKS cluster in Account B.
+This role enables Argo CD to assume the necessary permissions within the EKS cluster in Account B:
 
 <details>
 <summary><b>View: AWSIRSA_\{cluster_name\}_ArgoCDAssume (AWS Account B)</b></summary>
@@ -251,9 +253,13 @@ This role enables ArgoCD to assume the necessary permissions within the EKS clus
 ```
 </details>
 
-## Add annotations to service accounts (Account A)
+## Add Annotations to Service Accounts (Account A)
 
-### Add annotations to cd-pipeline-operator service account (Account A)
+The next step is to add proper annotations to service accounts to grant permissions defined in the Roles.
+
+### CD-Pipeline-Operator Service Account (Account A)
+
+Add annotations to the Service Account of cd-pipeline-operator:
 
 <Tabs
   defaultValue="patch"
@@ -354,7 +360,7 @@ Annotate the service accounts in the account where Argo CD is located with the c
 
 </Tabs>
 
-After applying annotations to service accounts, it is necessary to restart the corresponding workloads to ensure new pods are created with the updated IAM roles configuration. . Use the following commands:
+After applying annotations to service accounts, it is necessary to restart the corresponding workloads to ensure new pods are created with the updated IAM roles configuration. To do this, use the following commands:
 
 ```bash
 kubectl delete pod -l app.kubernetes.io/name=argocd-application-controller -n argocd
@@ -382,6 +388,8 @@ spec:
 
 ## Update aws_auth ConfigMap in Target Cluster (Account B)
 
+Update the **aws_auth** ConfigMap in Target Cluster to access and operate in that Target Cluster:
+
 <details>
 <summary><b>View: aws-auth-configmap.yaml</b></summary>
 ```yaml
@@ -403,7 +411,9 @@ data:
 ```
 </details>
 
-## Create ClusterCore and ClusterRoleBinding (Account B)
+## Create ClusterRole and ClusterRoleBinding (Account B)
+
+Associate the IAM Role with the **cd-pipeline-operator** group:
 
 <Tabs
   defaultValue="kubectl"
@@ -473,9 +483,11 @@ data:
 </Tabs>
 
 
-## Clusters secret configuration
+## Clusters Secret Configuration
 
-### KuberocketCI IRSA cluster connection secret configuration
+The following step is to configure secrets.
+
+### KuberocketCI IRSA Cluster Connection Secret Configuration
 
 This configuration enables secure cluster connection using IAM Roles for Service Accounts (IRSA) in AWS. You can set it up using one of the following methods:
 
@@ -490,10 +502,10 @@ This configuration enables secure cluster connection using IAM Roles for Service
   <TabItem value="kuberocketci">
   Navigate to **KuberocketCI portal** -> **Configuration** -> **DEPLOYMENT** -> **CLUSTERS** and click the **+ ADD CLUSTER** fill in the following fields and click **SAVE** button:
 
-  * **Cluster name** : a unique and descriptive name for the new cluster (e.g., prod-cluster)
-  * **Cluster Host** : the cluster’s endpoint URL (e.g., example-cluster-domain.com);
-  * **Authority Data** : base64-encoded kubernetes certificate essential for authentication. Obtain this certificate from the configuration file of the user account you intend to use for accessing the cluster.
-  * **Role ARN** : arn:aws:iam::\<AWS_ACCOUNT_A_ID\>:role/AWSIRSA_\{cluster_name\}_CDPipelineOperator
+  * **Cluster name**: a unique and descriptive name for the new cluster (e.g., prod-cluster);
+  * **Cluster Host**: the cluster’s endpoint URL (e.g., example-cluster-domain.com);
+  * **Authority Data**: base64-encoded Kubernetes certificate essential for authentication. Obtain this certificate from the configuration file of the user account you intend to use for accessing the cluster;
+  * **Role ARN**: an AWS Role for the remote cluster. E.g., arn:aws:iam::\<AWS_ACCOUNT_A_ID\>:role/AWSIRSA_\{cluster_name\}_CDPipelineOperator.
 
   ![Add cluster IRSA](../../assets/operator-guide/deploy-application-in-remote-cluster-via-irsa/cluster-irsa-add-cluster.png "Add cluster IRSA")
   </TabItem>
@@ -552,7 +564,9 @@ This configuration enables secure cluster connection using IAM Roles for Service
   </TabItem>
 </Tabs>
 
-### ArgoCD IRSA cluster connection secret configuration
+### Argo CD IRSA Cluster Connection Secret Configuration
+
+Create a Secret to integrate the remote cluster with Argo CD:
 
 <Tabs
  defaultValue="manifests"
@@ -611,9 +625,9 @@ This configuration enables secure cluster connection using IAM Roles for Service
 
 After applying the configuration, you can verify the cluster connection `ArgoCD` -> `Settings` -> `Clusters` -> `<cluster-name>`:
 
-  ![ArgoCD cluster IRSA status](../../assets/operator-guide/deploy-application-in-remote-cluster-via-irsa/cluster-irsa-argocd-status.png "ArgoCD cluster IRSA status")
+  ![Argo CD cluster IRSA status](../../assets/operator-guide/deploy-application-in-remote-cluster-via-irsa/cluster-irsa-argocd-status.png "Argo CD cluster IRSA status")
 
-## Update KuberocketCI configmap add new cluster
+## Update KuberocketCI ConfigMap To Add New Cluster
 
 To add cluster to the KuberocketCI platform click on `kubernetes` icon -> `Configuration` -> `ConfigMap` -> `edp-config` and add parameter `available_clusters` in data with value `<cluster-name>` and click **Save & apply**:
 
@@ -624,7 +638,9 @@ To add cluster to the KuberocketCI platform click on `kubernetes` icon -> `Confi
 
   ![Add cluster via configmap edp-config](../../assets/operator-guide/deploy-application-in-remote-cluster-via-irsa/cluster-irsa-configmap-edp-config.png "Add cluster via configmap edp-config")
 
-## Deploy application on new cluster
+## Deploy Application on New Cluster
+
+Now that the remote cluster is integrated, you can deploy applications in it.
 
 ### Create Deployment Flow
 
@@ -645,15 +661,15 @@ To create a deployment flow, follow the steps below:
     Please be aware that the namespace length should not exceed 63 symbols.
   :::
 
-3. The Component tab of the Environments menu is presented below:
+5. The Component tab of the Environments menu is presented below:
 
   ![Create deployment flow](../../assets/operator-guide/deploy-application-in-remote-cluster-via-irsa/cluster-irsa-create-deployment-flow.png "Add cluster via configmap edp-config")
 
-4. Click the Create button to finish deployment flow configuration and proceed with configuring environment.
+6. Click the Create button to finish deployment flow configuration and proceed with configuring environment.
 
-### Create IRSA cluster Environment
+### Create IRSA Cluster Environment
 
-1. On the Environments menu, click the Create Environment button.
+1. On the Environments menu, click the **Create Environment** button.
 
 2. The Configure Stage tab of the Create Stage menu is presented below:
 
@@ -663,20 +679,29 @@ Set the proper cluster options:
 
   * **Cluster** - Choose the `<cluster-name>` to deploy the stage in;
   * **Stage name** - Enter the stage name;
-  * **Description** - Enter the description for this stage;
+  * **Description** - Enter the description for this stage.
 
-3. Click the Next button to move onto the Add quality gates tab.
+3. Click the **Next** button to move onto the **Add quality gates** tab. Define quality gates and click **Create**. Read the [Add Deployment Flow](../../user-guide/add-cd-pipeline.md) for more details.
 
-4. Click the Create button to start the provisioning of the pipeline. cluster-irsa-krci-deployed-application.png
+4. Ensure the Environment uses the proper cluster:
 
   ![Environment overview](../../assets/operator-guide/deploy-application-in-remote-cluster-via-irsa/cluster-irsa-environment-overview.png "Environment overview")
 
-### Deployed application summary
+5. Deploy application to verify the platform interacts with your cluster correctly. Read the [Manage Deployment Flows](../../user-guide/manage-environments.md#deploy-application) for more details.
+
+### Deployment Application Summary
+
+As soon as the application is deployed, verify that Environment has the green status:
 
   ![Environment overview](../../assets/operator-guide/deploy-application-in-remote-cluster-via-irsa/cluster-irsa-krci-deployed-application.png "Environment overview")
 
-  ![ArgoCD deployed application summary](../../assets/operator-guide/deploy-application-in-remote-cluster-via-irsa/cluster-irsa-deployed-application-summary.png "ArgoCD deployed application summary")
+In the Argo CD Application resource, you can also check the cluster your application is deployed in:
 
+  ![Argo CD deployed application summary](../../assets/operator-guide/deploy-application-in-remote-cluster-via-irsa/cluster-irsa-deployed-application-summary.png "Argo CD deployed application summary")
+
+Now your platform can use your remote AWS EKS cluster as an additional workload for your Deployment Flows.
+
+## Related Articles
 
 * [Argo CD Integration](argocd-integration.md)
 * [Add Cluster](../../user-guide/add-cluster.md)

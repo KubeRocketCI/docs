@@ -26,7 +26,7 @@ This guide provides instructions on how to configure OpenID Connect (OIDC) authe
 
 ## Integrate AWS EKS and KubeRocketCI Portal with Microsoft Entra
 
-For a detailed step-by-step guide on integrating OIDC authentication for AWS EKS and the KubeRocketCI Portal with Microsoft Entra, please refer to the [Integrating OIDC Authentication with Microsoft Entra in AWS EKS](/blog/integrating-oidc-authentication-microsoft-entra-aws-eks) blog post.
+For a detailed step-by-step guide on integrating OIDC authentication for AWS EKS and the KubeRocketCI Portal with Microsoft Entra, please refer to the [Integrating OIDC Authentication With Microsoft Entra in AWS EKS](/blog/integrating-oidc-authentication-microsoft-entra-aws-eks) blog post.
 
 The blog covers the process of creating a Microsoft Entra tenant, configuring an application, and managing users and groups. It also explains how to integrate the created application with the AWS EKS cluster and set up authentication for the KubeRocketCI Portal.
 

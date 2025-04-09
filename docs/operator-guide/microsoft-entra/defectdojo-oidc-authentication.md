@@ -17,11 +17,13 @@ This guide provides instructions on how to configure DefectDojo with OpenID Conn
 
 ## Prerequisites
 
+Before you begin, make sure the following prerequisites are met:
+
 - Access to the [Microsoft Entra Admin Center](https://entra.microsoft.com/) with administrative privileges.
-- Created Microsoft Entra Tenant.
-- Installed DefectDojo (can be installed during **Configuring Helm chart** step).
-- Fork copy of the [edp-cluster-add-ons](https://github.com/epam/edp-cluster-add-ons) repository.
-- (Optional) Installed External Secrets Operator.
+- [Microsoft Entra](https://learn.microsoft.com/en-us/entra/fundamentals/create-new-tenant) Tenant is created.
+- [DefectDojo](../devsecops/defectdojo.md) is installed (can be installed during **Configuring Helm chart** step).
+- A forked copy of the [edp-cluster-add-ons](https://github.com/epam/edp-cluster-add-ons) repository is created.
+- (Optional) [External Secrets Operator](../secrets-management/install-external-secrets-operator.md) is installed.
 
 ## Configuring Microsoft Entra Application
 

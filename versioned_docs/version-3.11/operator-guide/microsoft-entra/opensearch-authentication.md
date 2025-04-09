@@ -17,29 +17,31 @@ This guide provides instructions on how to configure OpenSearch with OpenID Conn
 
 ## Prerequisites
 
+Before you begin, make sure the following prerequisites are met:
+
 - Access to the [Microsoft Entra Admin Center](https://entra.microsoft.com/) with administrative privileges.
-- Created Microsoft Entra Tenant.
-- Installed OpenSearch (can be installed during **Configuring Helm chart** step).
-- Fork copy of the [edp-cluster-add-ons](https://github.com/epam/edp-cluster-add-ons) repository.
-- (Optional) Installed External Secrets Operator.
+- [Microsoft Entra](https://learn.microsoft.com/en-us/entra/fundamentals/create-new-tenant) Tenant is created.
+- [OpenSearch](https://github.com/epam/edp-cluster-add-ons/blob/main/clusters/core/apps/values.yaml#L208) is installed (can be installed during **Configuring Helm chart** step).
+- A forked copy of the [edp-cluster-add-ons](https://github.com/epam/edp-cluster-add-ons) repository is created.
+- (Optional) [External Secrets Operator](../secrets-management/install-external-secrets-operator.md) is installed.
 
 ## Configuring Microsoft Entra Application
 
-To configure Microsoft Entra as the Identity Provider for OpenSearch, it is necessary to create and configure an Application in the Microsoft Entra Admin Center.
+To configure Microsoft Entra as the Identity Provider for OpenSearch, it is necessary to create and configure an Application in the Microsoft Entra Admin Center:
 
-1. Log in to the [Microsoft Entra Admin Center](https://entra.microsoft.com/?feature.msaljs=true#home).
+1. Log in to the [Microsoft Entra Admin Center](https://entra.microsoft.com/?feature.msaljs=true#home):
 
     ![Microsoft Entra Admin Center](../../assets/operator-guide/microsoft-entra-auth/microsoft-entra-admin-center.png)
 
-2. In the left sidebar menu, select **Applications** and click **App registrations**.
+2. In the left sidebar menu, select **Applications** and click **App registrations**:
 
     ![App registrations](../../assets/operator-guide/microsoft-entra-auth/app-registrations.png)
 
-3. Click on the **New registration** button.
+3. Click on the **New registration** button:
 
     ![New registration](../../assets/operator-guide/microsoft-entra-auth/new-registration.png)
 
-4. Fill in the required fields, such as **Name**, **Supported account types** and **Redirect URI** (You can skip setting the **Redirect URI** if you don't deploy OpenSearch yet). Click **Register** to create the application.
+4. Fill in the required fields, such as **Name**, **Supported account types** and **Redirect URI** (You can skip setting the **Redirect URI** if you don't deploy OpenSearch yet). Click **Register** to create the application:
 
     :::note
     The **Redirect URI** should be in the format `https://<OpenSearch Dashboard URL>/auth/openid/login`.
@@ -47,19 +49,19 @@ To configure Microsoft Entra as the Identity Provider for OpenSearch, it is nece
 
     ![Register application](../../assets/operator-guide/microsoft-entra-auth/register-application.png)
 
-5. In the created application, navigate to the **Authentication** section from the left sidebar menu. In the **Implicit grant and hybrid flows** section, select **ID tokens** for the token type. In the **Allow public client flows** section, set the value to **No**.
+5. In the created application, navigate to the **Authentication** section from the left sidebar menu. In the **Implicit grant and hybrid flows** section, select **ID tokens** for the token type. In the **Allow public client flows** section, set the value to **No**:
 
     ![Authentication settings](../../assets/operator-guide/microsoft-entra-auth/opensearch-authentication-settings.png)
 
-6. Navigate to the **Certificates & secrets** section. In the **Client secrets** tab, click on the **New client secret** button to create a new secret. Fill in the required fields and click **Add**.
+6. Navigate to the **Certificates & secrets** section. In the **Client secrets** tab, click on the **New client secret** button to create a new secret. Fill in the required fields and click **Add**:
 
     ![Client secrets](../../assets/operator-guide/microsoft-entra-auth/opensearch-client-secrets.png)
 
-7. Copy the generated client secret value and store it securely. You will need this value to configure the OpenSearch Helm chart.
+7. Copy the generated client secret value and store it securely. You will need this value to configure the OpenSearch Helm chart:
 
     ![Client secret](../../assets/operator-guide/microsoft-entra-auth/opensearch-client-secret.png)
 
-8. Navigate to the **Token configuration** section and click on **Add groups claim** button. Choose the group type as **Security Groups** and for the ID token type, select **Group ID**. Also, choose the **Emit groups as role claims** option.
+8. Navigate to the **Token configuration** section and click on **Add groups claim** button. Choose the group type as **Security Groups** and for the ID token type, select **Group ID**. Also, choose the **Emit groups as role claims** option:
 
     ![Token configuration](../../assets/operator-guide/microsoft-entra-auth/opensearch-token-configuration.png)
 
@@ -80,11 +82,11 @@ After configuring the Microsoft Entra Application, you can proceed with the Open
 
 To manage access to OpenSearch, it is necessary to create the groups in Microsoft Entra and assign users to it.
 
-1. In the Microsoft Entra Admin Center, in the left sidebar menu, select **Groups** and then **All groups**. Click on **New group** button to create a new group(s) for users who will have access to OpenSearch (e.g., `administrator`, `developer`).
+1. In the Microsoft Entra Admin Center, in the left sidebar menu, select **Groups** and then **All groups**. Click on **New group** button to create a new group(s) for users who will have access to OpenSearch (e.g., `administrator`, `developer`):
 
     ![New group](../../assets/operator-guide/microsoft-entra-auth/new-group.png)
 
-2. Fill in the required fields, such as **Groups type** and **Group name**. In the **Members** section, add users who will be part of the group.
+2. Fill in the required fields, such as **Groups type** and **Group name**. In the **Members** section, add users who will be part of the group:
 
     ![Create group](../../assets/operator-guide/microsoft-entra-auth/create-group.png)
 
@@ -104,7 +106,7 @@ The **Object ID** can be found in the **Overview** section of the group in the M
 ![Group Object ID](../../assets/operator-guide/microsoft-entra-auth/oauth2-proxy-group-object-id.png)
 :::
 
-1. Navigate to the forked [Cluster Add-Ons repository](https://github.com/epam/edp-cluster-add-ons) and locate the `values.yaml` file in the `clusters/core/addons/opensearch` directory.
+1. Navigate to the forked [Cluster Add-Ons repository](https://github.com/epam/edp-cluster-add-ons) and locate the `values.yaml` file in the `clusters/core/addons/opensearch` directory:
 
     Update the `opensearch` section in the `values.yaml` file with the following values:
 
@@ -194,9 +196,9 @@ The **Object ID** can be found in the **Overview** section of the group in the M
     - `<Directory (tenant) ID>`: The Directory ID of your Microsoft Entra Tenant.
     - `<Application (client) ID>`: The Application ID from the Microsoft Entra Application settings.
 
-2. Update or create the `opensearch-dashboards-account` secret with the Application Client Secret value.
+2. Update or create the `opensearch-dashboards-account` secret with the Application Client Secret value:
 
-    - Using External Secrets Operator
+    - Using External Secrets Operator:
 
       Be sure to update the AWS Parameter Store object path specified in the `clusters/core/addons/opensearch/values.yaml` file in the `eso.secretName` field with the `username`, `password`, `cookie` and `OIDC_CLIENT_SECRET` values.
 
@@ -211,7 +213,7 @@ The **Object ID** can be found in the **Overview** section of the group in the M
       }
       ```
 
-    - Manual approach
+    - Manual approach:
 
       Create the `opensearch-dashboards-account` secret manually using the following template:
 
@@ -231,7 +233,7 @@ The **Object ID** can be found in the **Overview** section of the group in the M
 
 3. After updating the `values.yaml` file and creating the `opensearch-dashboards-account` secret, commit the changes to the repository and apply the changes with Helm or Argo CD.
 
-4. Navigate to the Microsoft Entra Application and add the **Redirect URI** in the **Authentication** section if you haven't done it before.
+4. Navigate to the Microsoft Entra Application and add the **Redirect URI** in the **Authentication** section if you haven't done it before:
 
     :::note
     The **Redirect URI** should be in the format `https://<OpenSearch Dashboard URL>/auth/openid/login`.
@@ -239,7 +241,7 @@ The **Object ID** can be found in the **Overview** section of the group in the M
 
     ![Redirect URI](../../assets/operator-guide/microsoft-entra-auth/opensearch-redirect-uri.png)
 
-5. Verify that the OIDC authentication is configured correctly by logging in to OpenSearch using the Microsoft Entra credentials.
+5. Verify that the OIDC authentication is configured correctly by logging in to OpenSearch using the Microsoft Entra credentials:
 
     ![OpenSearch login](../../assets/operator-guide/microsoft-entra-auth/opensearch-login.png)
 

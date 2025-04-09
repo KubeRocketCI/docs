@@ -17,29 +17,31 @@ This guide provides instructions on how to configure OIDC authentication for the
 
 ## Prerequisites
 
+Before you begin, make sure the following prerequisites are met:
+
 - Access to the [Microsoft Entra Admin Center](https://entra.microsoft.com/) with administrative privileges.
-- Created Microsoft Entra Tenant.
-- Installed Argo CD (can be installed during **Configuring Helm chart** step).
-- Fork copy of the [edp-cluster-add-ons](https://github.com/epam/edp-cluster-add-ons) repository.
-- (Optional) Installed External Secrets Operator.
+- [Microsoft Entra](https://learn.microsoft.com/en-us/entra/fundamentals/create-new-tenant) Tenant is created.
+- [Argo CD](../install-argocd.md) is installed (can be installed during **Configuring Helm chart** step).
+- A forked copy of the [edp-cluster-add-ons](https://github.com/epam/edp-cluster-add-ons) repository is created.
+- (Optional) [External Secrets Operator](../secrets-management/install-external-secrets-operator.md) is installed.
 
 ## Configuring Microsoft Entra Application
 
-To configure Microsoft Entra as the Identity Provider for the Argo CD, it is necessary to create and configure an Application in the Microsoft Entra Admin Center.
+To configure Microsoft Entra as the Identity Provider for the Argo CD, it is necessary to create and configure an Application in the Microsoft Entra Admin Center:
 
-1. Log in to the [Microsoft Entra Admin Center](https://entra.microsoft.com/?feature.msaljs=true#home).
+1. Log in to the [Microsoft Entra Admin Center](https://entra.microsoft.com/?feature.msaljs=true#home):
 
     ![Microsoft Entra Admin Center](../../assets/operator-guide/microsoft-entra-auth/microsoft-entra-admin-center.png)
 
-2. In the left sidebar menu, select **Applications** and click **App registrations**.
+2. In the left sidebar menu, select **Applications** and click **App registrations**:
 
     ![App registrations](../../assets/operator-guide/microsoft-entra-auth/app-registrations.png)
 
-3. Click on the **New registration** button.
+3. Click on the **New registration** button:
 
     ![New registration](../../assets/operator-guide/microsoft-entra-auth/new-registration.png)
 
-4. Fill in the required fields, such as **Name**, **Supported account types** and **Redirect URI** (You can skip setting the **Redirect URI** if you don't deploy Argo CD yet). Click **Register** to create the application.
+4. Fill in the required fields, such as **Name**, **Supported account types** and **Redirect URI** (you can skip setting the **Redirect URI** if you don't deploy Argo CD yet). Click **Register** to create the application:
 
     :::note
     The **Redirect URI** should be in the format `https://<Argo CD URL>/auth/callback`.
@@ -47,23 +49,23 @@ To configure Microsoft Entra as the Identity Provider for the Argo CD, it is nec
 
     ![Register application](../../assets/operator-guide/microsoft-entra-auth/register-application.png)
 
-5. In the created application, navigate to the **Authentication** section from the left sidebar menu. In the **Implicit grant and hybrid flows** section, select **ID tokens** for the token type. In the **Allow public client flows** section, set the value to **No**.
+5. In the created application, navigate to the **Authentication** section from the left sidebar menu. In the **Implicit grant and hybrid flows** section, select **ID tokens** for the token type. In the **Allow public client flows** section, set the value to **No**:
 
     ![Authentication settings](../../assets/operator-guide/microsoft-entra-auth/argocd-authentication-settings.png)
 
-6. Navigate to the **Certificates & secrets** section. In the **Client secrets** tab, click on the **New client secret** button to create a new secret. Fill in the required fields and click **Add**.
+6. Navigate to the **Certificates & secrets** section. In the **Client secrets** tab, click on the **New client secret** button to create a new secret. Fill in the required fields and click **Add**:
 
     ![Client secrets](../../assets/operator-guide/microsoft-entra-auth/argocd-client-secrets.png)
 
-7. Copy the generated client secret value and store it securely. You will need this value to configure the Argo CD Helm chart.
+7. Copy the generated client secret value and store it securely. You will need this value to configure the Argo CD Helm chart:
 
     ![Client secret](../../assets/operator-guide/microsoft-entra-auth/argocd-client-secret.png)
 
-8. Navigate to the **Token configuration** section and click on **Add group claim** button. Choose the group type as **Security Groups** and for the ID token type, select **Group ID**.
+8. Navigate to the **Token configuration** section and click on **Add group claim** button. Choose the group type as **Security Groups** and for the ID token type, select **Group ID**:
 
     ![Token configuration](../../assets/operator-guide/microsoft-entra-auth/argocd-token-configuration.png)
 
-    Also, add the **preferred_username** and **email** optional claims.
+    Also, add the **preferred_username** and **email** optional claims:
 
     ![Token configuration](../../assets/operator-guide/microsoft-entra-auth/argocd-token-configuration-2.png)
 
@@ -82,7 +84,7 @@ To configure Microsoft Entra as the Identity Provider for the Argo CD, it is nec
 
 To manage access to the Argo CD, it is necessary to create groups in the Microsoft Entra Admin Center and assign users to them.
 
-1. In the Microsoft Entra Admin Center, in the left sidebar menu, select **Groups** and then **All groups**. Click on **New group** button to create a new group(s) for users who will have access to Argo CD (e.g., `ArgoCDAdmins`, `ArgoCDReadOnly`, etc.).
+1. In the Microsoft Entra Admin Center, in the left sidebar menu, select **Groups** and then **All groups**. Click on **New group** button to create a new group(s) for users who will have access to Argo CD (e.g., `ArgoCDAdmins`, `ArgoCDReadOnly`, etc.):
 
     ![New group](../../assets/operator-guide/microsoft-entra-auth/new-group.png)
 
@@ -106,7 +108,7 @@ The **Object ID** can be found in the **Overview** section of the group in the M
 ![Group Object ID](../../assets/operator-guide/microsoft-entra-auth/argocd-group-object-id.png)
 :::
 
-1. Navigate to the forked [Cluster Add-Ons repository](https://github.com/epam/edp-cluster-add-ons) and locate the `values.yaml` file in the `argo-cd` directory.
+1. Navigate to the forked [Cluster Add-Ons repository](https://github.com/epam/edp-cluster-add-ons) and locate the `values.yaml` file in the `argo-cd` directory:
 
     Update the `values.yaml` file with the following values:
 
@@ -147,7 +149,7 @@ The **Object ID** can be found in the **Overview** section of the group in the M
     - `<Object ID of ArgoCDAdmins group>` - Object ID of the **ArgoCDAdmins** group created in the Microsoft Entra Admin Center.
     - `<Object ID of ArgoCDReadOnly group>` - Object ID of the **ArgoCDReadOnly** group created in the Microsoft Entra Admin Center.
 
-2. Update or create the `keycloak-client-argocd-secret` secret with the Application Client Secret value.
+2. Update or create the `keycloak-client-argocd-secret` secret with the Application Client Secret value:
 
     - Using External Secrets Operator
 
@@ -177,7 +179,7 @@ The **Object ID** can be found in the **Overview** section of the group in the M
 
 3. After updating the `values.yaml` file, commit the changes to the repository and apply the changes with Helm or Argo CD.
 
-4. Navigate to the Microsoft Entra Application and add the **Redirect URI** in the **Authentication** section if you haven't done it before.
+4. Navigate to the Microsoft Entra Application and add the **Redirect URI** in the **Authentication** section if you haven't done it before:
 
     :::note
     The **Redirect URI** should be in the format `https://<Argo CD URL>/auth/callback`.
@@ -185,7 +187,7 @@ The **Object ID** can be found in the **Overview** section of the group in the M
 
     ![Redirect URI](../../assets/operator-guide/microsoft-entra-auth/argocd-redirect-uri.png)
 
-5. Verify that the OIDC authentication is configured correctly by logging in to Argo CD using the **Log in via Entra** option.
+5. Verify that the OIDC authentication is configured correctly by logging in to Argo CD using the **Log in via Entra** option:
 
     ![Argo CD login](../../assets/operator-guide/microsoft-entra-auth/argocd-login.png)
 

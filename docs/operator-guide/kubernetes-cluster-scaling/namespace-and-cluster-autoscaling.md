@@ -1,23 +1,23 @@
 ---
 
-title: "Efficient Kubernetes Autoscaling with Karpenter and KEDA: A Comprehensive Guide"
+title: "Efficient Kubernetes Autoscaling With Karpenter and KEDA: A Comprehensive Guide"
 description: "Step-by-step guide on configuring pod and cluster autoscaling in Kubernetes with Karpenter and KEDA for cost-effective, scalable, and efficient infrastructure."
-sidebar_label: "Scaling with Karpenter and KEDA"
+sidebar_label: "Scaling With Karpenter and KEDA"
 
 ---
 <!-- markdownlint-disable MD025 -->
 
-# Efficient Kubernetes Autoscaling with Karpenter and KEDA: A Comprehensive Guide
+# Efficient Kubernetes Autoscaling With Karpenter and KEDA: A Comprehensive Guide
 
 <head>
   <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/kubernetes-cluster-scaling/namespace-and-cluster-autoscaling" />
 </head>
 
-In modern cloud environments, efficient resource management is essential to maintain performance while minimizing costs. This documentation provides a step-by-step guide to configuring **pods and cluster autoscaling** in a Kubernetes environment using **Karpenter** and **KEDA**.
+In modern cloud environments, efficient resource management is essential to maintain performance while minimizing costs. This documentation provides a step-by-step guide to configuring pods and cluster autoscaling in a Kubernetes environment using Karpenter and KEDA.
 
 Karpenter dynamically provisions and removes nodes based on real-time demand, ensuring that the cluster has just the right amount of capacity. KEDA, on the other hand, scales workloads by adjusting pod replicas based on key metrics, such as pipeline activity and user requests.
 
-By implementing this approach, the cluster remains responsive to workload fluctuations, preventing over-provisioning and reducing unnecessary resource usage. This results in a **cost-effective, scalable, and efficient** infrastructure that adapts to real-time demands without manual intervention.
+By implementing this approach, the cluster remains responsive to workload fluctuations, preventing over-provisioning and reducing unnecessary resource usage. This results in a cost-effective, scalable, and efficient infrastructure that adapts to real-time demands without manual intervention.
 
 ## Prerequisites
 
@@ -28,7 +28,7 @@ Before setting up AutoScaling, ensure the following requirements are met:
 
 ## Karpenter
 
-The configuration and installation of Karpenter involve several steps, including:
+The configuration and installation of Karpenter involves several steps, including:
 
 - **Setting up resources in the AWS provider** – configuring IAM roles, permissions, and networking.
 - **Installing the Karpenter Helm chart** – deploying Karpenter controller in the Kubernetes cluster.
@@ -45,11 +45,13 @@ To ensure Karpenter can properly manage node provisioning, it is essential to co
 Karpenter does not use Auto Scaling Groups (ASG) when creating new nodes. Instead, it provisions EC2 instances directly and registers them with the cluster.
 :::
 
-1. IRSA Configuration
+To prepare your AWS cluster for Karpenter, follow the steps below:
+
+1. Configure IRSA:
 
     To allow Karpenter to interact with AWS services securely, configure IAM Roles for Service Accounts (IRSA). This configuration can be done automatically during cluster installation using a [terraform-aws-platform](https://github.com/KubeRocketCI/terraform-aws-platform/blob/master/eks/irsa.tf#L143) template or **manually** after the cluster is deployed.
 
-2. Network and Security Groups Configuration
+2. Configure Network and Security Groups:
 
     Ensure that the required tags are added to VPC `subnets` and `security group` so Karpenter can use them for provisioning new nodes.
 
@@ -88,7 +90,7 @@ karpenter:
       eks.amazonaws.com/role-arn: arn:aws:iam::0123456789:role/KarpenterControllerRole-eks
 ```
 
-Since Karpenter is installed in a separate namespace, you need to update the configuration of its CRD used for Webhook Validation resources.
+Since Karpenter is installed in a separate namespace, you need to update the configuration of its CRD used for Webhook Validation resources:
 
 **Node Pools**:
 
@@ -232,16 +234,16 @@ To verify the functionality of Karpenter, you can create a pod and adjust the nu
     kubectl delete deployment inflate
     ```
 
-## Keda
+## KEDA
 
-The configuration and installation of Keda involve several steps, including:
+The configuration and installation of KEDA involves several steps, including:
 
-- **Installing the Keda Helm chart** – deploying Keda controller in the Kubernetes cluster.
+- **Installing the KEDA Helm chart** – deploying KEDA controller in the Kubernetes cluster.
 - **Configuring essential components** – setting up `Scaled Object`, and integrating with cluster resources.
 
-### Install Keda
+### Install KEDA
 
-Install and configure Keda using the [add-ons approach](https://github.com/epam/edp-cluster-add-ons/tree/main/clusters/core/addons/keda) or manually. Specify **tolerations** and **nodeSelector** if necessary:
+Install and configure KEDA using the [add-ons approach](https://github.com/epam/edp-cluster-add-ons/tree/main/clusters/core/addons/keda) or manually. Specify **tolerations** and **nodeSelector** if necessary:
 
 ```yaml title="values.yaml"
 keda:
@@ -254,7 +256,7 @@ keda:
   #   type: system
 ```
 
-### Install Keda Resources
+### Install KEDA Resources
 
 KEDA operates based on configurations stored in its Custom Resources. It supports multiple data sources to determine the appropriate number of replicas for a deployment. In this setup, the scaling decisions are based on **Prometheus metrics**, which have been selected based on the behavior of the KRCI platform.
 
@@ -265,13 +267,13 @@ Below are the key metrics used for scaling analysis:
 
 These metrics help maintain an optimal balance between performance and resource efficiency.
 
-1. Install and configure Keda-tenant using the [add-ons approach](https://github.com/epam/edp-cluster-add-ons/tree/main/clusters/core/addons/keda-tenants) or manually.
+1. Install and configure KEDA-tenant using the [add-ons approach](https://github.com/epam/edp-cluster-add-ons/tree/main/clusters/core/addons/keda-tenants) or manually.
 
     Before installing, ensure that you have set the correct values in the **KEDA Tenants** configuration. The following parameters should be customized according to your setup:
 
     - **`namespaces`** – List of namespaces where the KRCI platform is installed.
     - **`timeInterval`** – Idle time after which the platform will automatically scale down to **0 replicas**.
-    - **`gitProviders`** – List of Git providers configured to work with the platform (this list must match the configuration set during the installation of the [`edp-install`](https://github.com/epam/edp-install/blob/master/deploy-templates/values.yaml#L26) Helm chart).
+    - **`gitProviders`** – List of Git providers configured to work with the platform (this list must match the configuration set during the installation of the [`edp-install`](https://github.com/epam/edp-install/blob/release/3.11/deploy-templates/values.yaml#L32) Helm chart).
 
     Below are the key parameters for configuring the KEDA Tenants Helm chart:
 
@@ -292,24 +294,24 @@ These metrics help maintain an optimal balance between performance and resource 
       # - gerrit
     ```
 
-### Verify Keda Functionality
+### Verify KEDA Functionality
 
-Steps to Verify
+To verify that KEDA is operating correctly, follow the steps below:
 
-1. **Access Prometheus**
-   - Use **Ingress** or **port-forwarding** to access the Prometheus UI:
+1. Access Prometheus. Use **Ingress** or **port-forwarding** to access the Prometheus UI.
 
-2. **Expected Results**
+2. Verify the expected results:
+
     - If the metric values are **greater than 0**, KEDA will keep the deployments running.
     - If the metric values drop **below 0**, KEDA will scale the deployments down to **0 replicas**.
 
-    **This image** shows a query for the number of new nodes.
+    Use the query below to get the number of new nodes:
 
-    ![Architecture diagram](../../assets/operator-guide/kubernetes-cluster-scaling/prom-pods.png "Architecture diagram")
+    ![Get the number of new nodes](../../assets/operator-guide/kubernetes-cluster-scaling/prom-pods.png "Get the number of new nodes")
 
-    **This image** shows a query for the number of new requests.
+    Use the query below to get the number of new requests:
 
-    ![Architecture diagram](../../assets/operator-guide/kubernetes-cluster-scaling/prom-protal.png "Architecture diagram")
+    ![Get the number of new requests](../../assets/operator-guide/kubernetes-cluster-scaling/prom-protal.png "Get the number of new requests")
 
 By following the steps in this documentation, we have set up a flexible cluster configuration that dynamically adjusts computing resources based on the current workload.
 

@@ -17,30 +17,32 @@ This guide provides instructions on how to configure OAuth2-proxy for the Tekton
 
 ## Prerequisites
 
+Before you begin, make sure the following prerequisites are met:
+
 - Access to the [Microsoft Entra Admin Center](https://entra.microsoft.com/) with administrative privileges.
-- Created Microsoft Entra Tenant.
-- Installed Tekton Dashboard.
-- Installed OAuth2-proxy (can be installed during **Configuring Helm chart** step).
-- Fork copy of the [edp-cluster-add-ons](https://github.com/epam/edp-cluster-add-ons) repository.
-- (Optional) Installed External Secrets Operator.
+- [Microsoft Entra](https://learn.microsoft.com/en-us/entra/fundamentals/create-new-tenant) Tenant is created.
+- [Tekton Dashboard](https://github.com/epam/edp-cluster-add-ons/blob/main/clusters/core/apps/values.yaml#L267) is installed.
+- [OAuth2-proxy](https://github.com/epam/edp-cluster-add-ons/blob/main/clusters/core/apps/values.yaml#L202) is installed (can be installed during **Configuring Helm chart** step).
+- A forked copy of the [edp-cluster-add-ons](https://github.com/epam/edp-cluster-add-ons) repository is created.
+- (Optional) [External Secrets Operator](../secrets-management/install-external-secrets-operator.md) is installed.
 
 ## Configuring Microsoft Entra Application
 
-To configure Microsoft Entra as the Identity Provider for the OAuth2-proxy, it is necessary to create and configure an Application in the Microsoft Entra Admin Center.
+To configure Microsoft Entra as the Identity Provider for the OAuth2-proxy, it is necessary to create and configure an Application in the Microsoft Entra Admin Center:
 
-1. Log in to the [Microsoft Entra Admin Center](https://entra.microsoft.com/?feature.msaljs=true#home).
+1. Log in to the [Microsoft Entra Admin Center](https://entra.microsoft.com/?feature.msaljs=true#home):
 
     ![Microsoft Entra Admin Center](../../assets/operator-guide/microsoft-entra-auth/microsoft-entra-admin-center.png)
 
-2. In the left sidebar menu, select **Applications** and click **App registrations**.
+2. In the left sidebar menu, select **Applications** and click **App registrations**:
 
     ![App registrations](../../assets/operator-guide/microsoft-entra-auth/app-registrations.png)
 
-3. Click on the **New registration** button.
+3. Click on the **New registration** button:
 
     ![New registration](../../assets/operator-guide/microsoft-entra-auth/new-registration.png)
 
-4. Fill in the required fields, such as **Name**, **Supported account types** and **Redirect URI** (You can skip setting the **Redirect URI** if you don't deploy OAuth2-proxy yet). Click **Register** to create the application.
+4. Fill in the required fields, such as **Name**, **Supported account types** and **Redirect URI** (You can skip setting the **Redirect URI** if you don't deploy OAuth2-proxy yet). Click **Register** to create the application:
 
     :::note
     The **Redirect URI** should be in the format `https://<OAuth2-proxy ingress URL>/oauth2/callback`.
@@ -48,15 +50,15 @@ To configure Microsoft Entra as the Identity Provider for the OAuth2-proxy, it i
 
     ![Register application](../../assets/operator-guide/microsoft-entra-auth/register-application.png)
 
-5. In the created application, navigate to the **Certificates & secrets** section from the left sidebar menu. In the **Client secrets** tab, click on the **New client secret** button to create a new secret. Fill in the required fields and click **Add**.
+5. In the created application, navigate to the **Certificates & secrets** section from the left sidebar menu. In the **Client secrets** tab, click on the **New client secret** button to create a new secret. Fill in the required fields and click **Add**:
 
     ![Client secrets](../../assets/operator-guide/microsoft-entra-auth/oauth2-proxy-client-secrets.png)
 
-6. Copy the generated Client secret value and store it securely. You will need this value to configure the OAuth2-proxy Helm chart.
+6. Copy the generated Client secret value and store it securely. You will need this value to configure the OAuth2-proxy Helm chart:
 
     ![Client secret](../../assets/operator-guide/microsoft-entra-auth/oauth2-proxy-client-secret.png)
 
-7. Navigate to the **Token configuration** section and click on **Add groups claim** button. Choose the group type as **Security Groups** and for the ID token type, select **Group ID**.
+7. Navigate to the **Token configuration** section and click on **Add groups claim** button. Choose the group type as **Security Groups** and for the ID token type, select **Group ID**:
 
     ![Token configuration](../../assets/operator-guide/microsoft-entra-auth/oauth2-proxy-token-configuration.png)
 
@@ -77,11 +79,11 @@ After the application is configured, you can proceed with the OAuth2-proxy Helm 
 
 To manage access to the Tekton Dashboard (or any other application with OAuth2-proxy), it is necessary to create groups in the Microsoft Entra Admin Center and assign users to it.
 
-1. In the Microsoft Entra Admin Center, in the left sidebar menu, select **Groups** and then **All groups**. Click on **New group** button to create a new group(s) for users who will have access to Tekton Dashboard (e.g., `administrator`, `developer`).
+1. In the Microsoft Entra Admin Center, in the left sidebar menu, select **Groups** and then **All groups**. Click on **New group** button to create a new group(s) for users who will have access to Tekton Dashboard (e.g., `administrator`, `developer`):
 
     ![New group](../../assets/operator-guide/microsoft-entra-auth/new-group.png)
 
-2. Fill in the required fields, such as **Groups type** and **Group name**. In the **Members** section, add users who will have access to SonarQube.
+2. Fill in the required fields, such as **Groups type** and **Group name**. In the **Members** section, add users who will have access to SonarQube:
 
     ![Create group](../../assets/operator-guide/microsoft-entra-auth/create-group.png)
 
@@ -101,7 +103,7 @@ The **Object ID** can be found in the **Overview** section of the group in the M
 ![Group Object ID](../../assets/operator-guide/microsoft-entra-auth/oauth2-proxy-group-object-id.png)
 :::
 
-1. Navigate to the forked [Cluster Add-Ons repository](https://github.com/epam/edp-cluster-add-ons) and locate the `values.yaml` file in the `clusters/core/addons/oauth2-proxy` directory.
+1. Navigate to the forked [Cluster Add-Ons repository](https://github.com/epam/edp-cluster-add-ons) and locate the `values.yaml` file in the `clusters/core/addons/oauth2-proxy` directory:
 
     Update the `values.yaml` file with the following values:
 
@@ -145,9 +147,9 @@ The **Object ID** can be found in the **Overview** section of the group in the M
     - `<Application (client) ID>` - Application (client) ID of the Microsoft Entra Application created in the previous step.
     - `example.domain.com` - Domain name associated with the OAuth2-proxy.
 
-2. Update or create the `oauth2-proxy` secret with the Application Client Secret value.
+2. Update or create the `oauth2-proxy` secret with the Application Client Secret value:
 
-    - Using External Secrets Operator
+    - Using External Secrets Operator:
 
       Be sure to update the AWS Parameter Store object path specified in the `clusters/core/addons/oauth2-proxy/values.yaml` file in the `eso.secretName` field with the `client-id`, `client-secret` and `cookie-secret` values.
 
@@ -167,7 +169,7 @@ The **Object ID** can be found in the **Overview** section of the group in the M
       }
       ```
 
-    - Manual approach
+    - Manual approach:
 
       Create the `oauth2-proxy` secret manually using the following template:
 
@@ -196,7 +198,7 @@ To configure the Tekton Dashboard to use OAuth2-proxy for OIDC authentication, i
 
 1. Log in to the Kubernetes cluster where the Tekton Dashboard is installed.
 
-2. Edit the Ingress resource associated with the Tekton Dashboard by adding `auth-signin` and `auth-url` of oauth2-proxy to the annotations.
+2. Edit the Ingress resource associated with the Tekton Dashboard by adding `auth-signin` and `auth-url` of oauth2-proxy to the annotations:
 
     ```bash
     kubectl annotate ingress <application-ingress-name> -n <namespace> \
@@ -206,7 +208,7 @@ To configure the Tekton Dashboard to use OAuth2-proxy for OIDC authentication, i
 
     Replace the following placeholders with the actual values.
 
-3. Verify that the OIDC authentication is configured correctly by accessing the Tekton Dashboard URL and logging in with the Microsoft Entra credentials.
+3. Verify that the OIDC authentication is configured correctly by accessing the Tekton Dashboard URL and logging in with the Microsoft Entra credentials:
 
     ![Tekton Dashboard login](../../assets/operator-guide/microsoft-entra-auth/tekton-dashboard-login.png)
 

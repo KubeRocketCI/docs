@@ -139,7 +139,7 @@ const sidebars: SidebarsConfig = {
             'operator-guide/auth/namespace-management',
             {
               type: 'category',
-              label: 'OIDC Authentication with Microsoft Entra',
+              label: 'OIDC Authentication With Microsoft Entra',
               items: [
                 'operator-guide/microsoft-entra/oidc-authentication-overview',
                 'operator-guide/microsoft-entra/argo-cd-authentication',

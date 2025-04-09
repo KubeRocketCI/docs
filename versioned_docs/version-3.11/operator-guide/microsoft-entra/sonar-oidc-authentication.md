@@ -17,28 +17,30 @@ This guide provides instructions on how to configure SonarQube with OpenID Conne
 
 ## Prerequisites
 
+Before you begin, make sure the following prerequisites are met:
+
 - Access to the [Microsoft Entra Admin Center](https://entra.microsoft.com/) with administrative privileges.
-- Created Microsoft Entra Tenant.
-- Installed SonarQube.
-- Fork copy of the [edp-cluster-add-ons](https://github.com/epam/edp-cluster-add-ons) repository.
+- [Microsoft Entra](https://learn.microsoft.com/en-us/entra/fundamentals/create-new-tenant) Tenant is created.
+- [SonarQube](../code-quality/sonarqube.md) is installed.
+- A forked copy of the [edp-cluster-add-ons](https://github.com/epam/edp-cluster-add-ons) repository is created.
 
 ## Configuring Microsoft Entra Application
 
-To configure Microsoft Entra as the Identity Provider for SonarQube, it is necessary to create and configure an Application in the Microsoft Entra Admin Center.
+To configure Microsoft Entra as the Identity Provider for SonarQube, it is necessary to create and configure an Application in the Microsoft Entra Admin Center:
 
-1. Log in to the [Microsoft Entra Admin Center](https://entra.microsoft.com/?feature.msaljs=true#home).
+1. Log in to the [Microsoft Entra Admin Center](https://entra.microsoft.com/?feature.msaljs=true#home):
 
     ![Microsoft Entra Admin Center](../../assets/operator-guide/microsoft-entra-auth/microsoft-entra-admin-center.png)
 
-2. In the left sidebar menu, select **Applications** and click **App registrations**.
+2. In the left sidebar menu, select **Applications** and click **App registrations**:
 
     ![App registrations](../../assets/operator-guide/microsoft-entra-auth/app-registrations.png)
 
-3. Click on the **New registration** button.
+3. Click on the **New registration** button:
 
     ![New registration](../../assets/operator-guide/microsoft-entra-auth/new-registration.png)
 
-4. Fill in the required fields, such as **Name**, **Supported account types** and **Redirect URI**. Click **Register** to create the application.
+4. Fill in the required fields, such as **Name**, **Supported account types** and **Redirect URI**. Click **Register** to create the application:
 
     :::note
     The **Redirect URI** should be in the format `https://<SonarQube URL>/oauth2/callback/oidc`.
@@ -46,23 +48,23 @@ To configure Microsoft Entra as the Identity Provider for SonarQube, it is neces
 
     ![Register application](../../assets/operator-guide/microsoft-entra-auth/register-application.png)
 
-5. In the created application, navigate to the **Authentication** section from the left sidebar menu. In the **Implicit grant and hybrid flows** section, select **ID tokens** for the token type. In the **Allow public client flows** section, set the value to **No**.
+5. In the created application, navigate to the **Authentication** section from the left sidebar menu. In the **Implicit grant and hybrid flows** section, select **ID tokens** for the token type. In the **Allow public client flows** section, set the value to **No**:
 
     ![Authentication settings](../../assets/operator-guide/microsoft-entra-auth/authentication-settings.png)
 
-6. Navigate to the **Certificates & secrets** section. In the **Client secrets** tab, click on the **New client secret** button to create a new secret. Fill in the required fields and click **Add**.
+6. Navigate to the **Certificates & secrets** section. In the **Client secrets** tab, click on the **New client secret** button to create a new secret. Fill in the required fields and click **Add**:
 
     ![Client secrets](../../assets/operator-guide/microsoft-entra-auth/client-secrets.png)
 
-7. Copy the generated client secret value and store it securely. You will need this value to configure the SonarQube Helm chart.
+7. Copy the generated client secret value and store it securely. You will need this value to configure the SonarQube Helm chart:
 
     ![Client secret](../../assets/operator-guide/microsoft-entra-auth/client-secret.png)
 
-8. Navigate to the **Token configuration** section and click on **Add groups claim** button. Choose the group type as **Security Groups** and for the ID token type, select **Group ID**.
+8. Navigate to the **Token configuration** section and click on **Add groups claim** button. Choose the group type as **Security Groups** and for the ID token type, select **Group ID**:
 
     ![Token configuration](../../assets/operator-guide/microsoft-entra-auth/token-configuration.png)
 
-    Also, add the **preferred_username** optional claim.
+    Also, add the **preferred_username** optional claim:
 
     ![Token configuration](../../assets/operator-guide/microsoft-entra-auth/token-configuration-2.png)
 
@@ -82,15 +84,15 @@ To configure Microsoft Entra as the Identity Provider for SonarQube, it is neces
 
 To manage access to SonarQube, it is necessary to create the groups in Microsoft Entra and assign users to it.
 
-1. In the Microsoft Entra Admin Center, in the left sidebar menu, select **Groups** and then **All groups**. Click on **New group** button to create a new group(s) for users who will have access to SonarQube (e.g., `sonar-administrators`, `sonar-developers`).
+1. In the Microsoft Entra Admin Center, in the left sidebar menu, select **Groups** and then **All groups**. Click on **New group** button to create a new group(s) for users who will have access to SonarQube (e.g., `sonar-administrators`, `sonar-developers`):
 
     ![New group](../../assets/operator-guide/microsoft-entra-auth/new-group.png)
 
-2. Fill in the required fields, such as **Groups type** and **Group name**. In the **Members** section, add users who will be part of the group.
+2. Fill in the required fields, such as **Groups type** and **Group name**. In the **Members** section, add users who will be part of the group:
 
     ![Create group](../../assets/operator-guide/microsoft-entra-auth/create-group.png)
 
-3. After adding the necessary members, review the group settings and click **Create** to save the group. Repeat this process for each required group.
+3. After adding the necessary members, review the group settings and click **Create** to save the group. Repeat this process for each required group:
 
     :::important
     Ensure that the groups created in Microsoft Entra correspond to the groups configured in SonarQube. In SonarQube, the group name **must exactly match the Object ID** of the corresponding Microsoft Entra group, as this is required for proper synchronization and access control.
@@ -113,7 +115,7 @@ SonarQube OIDC configuration can also be configured directly from the SonarQube 
 
 In this section, we will demonstrate how to set up OIDC authentication for SonarQube using the [edp-sonar-operator](https://github.com/epam/edp-sonar-operator) Helm chart. This approach aligns with the automation and consistency principles of the KubeRocketCI platform.
 
-1. Navigate to the forked [Cluster Add-Ons repository](https://github.com/epam/edp-cluster-add-ons) and locate the `sonar.yaml` file at the following path `clusters/core/addons/sonar-operator/templates/sonar/sonar.yaml`.
+1. Navigate to the forked [Cluster Add-Ons repository](https://github.com/epam/edp-cluster-add-ons) and locate the `sonar.yaml` file at the following path `clusters/core/addons/sonar-operator/templates/sonar/sonar.yaml`:
 
     Update the `sonar.yaml` file to match the configuration below:
 
@@ -155,7 +157,7 @@ In this section, we will demonstrate how to set up OIDC authentication for Sonar
 
 2. After updating the `sonar.yaml` file, commit the changes to the repository and apply the changes with Helm or Argo CD.
 
-3. Verify that the OIDC authentication is configured correctly by logging in to SonarQube using **Log in with OpenID Connect** option.
+3. Verify that the OIDC authentication is configured correctly by logging in to SonarQube using **Log in with OpenID Connect** option:
 
     ![SonarQube login](../../assets/operator-guide/microsoft-entra-auth/sonar-login.png)
 

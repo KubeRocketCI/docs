@@ -9,7 +9,7 @@ authors: [daniilnedostup]
 hide_table_of_contents: false
 ---
 
-# Integrating OIDC Authentication with Microsoft Entra in AWS EKS
+# Integrating OIDC Authentication With Microsoft Entra in AWS EKS
 
 In modern cloud environments, secure and efficient access management is essential, especially for platforms like Amazon EKS. This blog will guide you through integrating OpenID Connect (OIDC) authentication using Microsoft Entra, making it easier to manage access to your EKS clusters and KubeRocketCI Portal. By implementing this approach, you can simplify user authentication while ensuring strong security controls. Whether you're improving compliance or streamlining access for your team, this integration is a practical solution to enhance your cloud-native workflows.
 

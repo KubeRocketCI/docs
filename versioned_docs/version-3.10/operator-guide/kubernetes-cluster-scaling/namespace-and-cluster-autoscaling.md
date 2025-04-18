@@ -1,23 +1,23 @@
 ---
 
-title: "Efficient Kubernetes Autoscaling with Karpenter and KEDA: A Comprehensive Guide"
+title: "Efficient Kubernetes Autoscaling With Karpenter and KEDA: A Comprehensive Guide"
 description: "Step-by-step guide on configuring pod and cluster autoscaling in Kubernetes with Karpenter and KEDA for cost-effective, scalable, and efficient infrastructure."
-sidebar_label: "Scaling with Karpenter and KEDA"
+sidebar_label: "Scaling With Karpenter and KEDA"
 
 ---
 <!-- markdownlint-disable MD025 -->
 
-# Efficient Kubernetes Autoscaling with Karpenter and KEDA: A Comprehensive Guide
+# Efficient Kubernetes Autoscaling With Karpenter and KEDA: A Comprehensive Guide
 
 <head>
   <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/kubernetes-cluster-scaling/namespace-and-cluster-autoscaling" />
 </head>
 
-In modern cloud environments, efficient resource management is essential to maintain performance while minimizing costs. This documentation provides a step-by-step guide to configuring **pods and cluster autoscaling** in a Kubernetes environment using **Karpenter** and **KEDA**.
+In modern cloud environments, efficient resource management is essential to maintain performance while minimizing costs. This documentation provides a step-by-step guide to configuring pods and cluster autoscaling in a Kubernetes environment using Karpenter and KEDA.
 
 Karpenter dynamically provisions and removes nodes based on real-time demand, ensuring that the cluster has just the right amount of capacity. KEDA, on the other hand, scales workloads by adjusting pod replicas based on key metrics, such as pipeline activity and user requests.
 
-By implementing this approach, the cluster remains responsive to workload fluctuations, preventing over-provisioning and reducing unnecessary resource usage. This results in a **cost-effective, scalable, and efficient** infrastructure that adapts to real-time demands without manual intervention.
+By implementing this approach, the cluster remains responsive to workload fluctuations, preventing over-provisioning and reducing unnecessary resource usage. This results in a cost-effective, scalable, and efficient infrastructure that adapts to real-time demands without manual intervention.
 
 ## Prerequisites
 
@@ -28,153 +28,95 @@ Before setting up AutoScaling, ensure the following requirements are met:
 
 ## Karpenter
 
-The configuration and installation of Karpenter involve several steps, including:
+Configuring and installing Karpenter involves several key steps:
 
-- **Setting up resources in the AWS provider** – configuring IAM roles, permissions, and networking.
-- **Installing the Karpenter Helm chart** – deploying Karpenter controller in the Kubernetes cluster.
-- **Configuring essential components** – setting up `Node Pools` and `Node Class`, and integrating with cluster resources.
+- **Setting up AWS resources** – configuring IAM roles, permissions, and networking.
+- **Installing Karpenter** – deploying Karpenter controller in the Kubernetes cluster.
+- **Configuring essential components** – setting up `Node Pools` and `Node Classes` to enable automatic node provisioning.
 
 ### AWS Configuration
 
-To ensure Karpenter can properly manage node provisioning, it is essential to configure AWS resources correctly. This includes:
+To enable Karpenter to manage node provisioning effectively, it is essential to properly configure the necessary AWS resources. These steps include:
 
 - **Creating IAM roles and policies** – Karpenter requires specific permissions to provision and manage EC2 instances.
-- **Tagging VPC Subnets and Security Groups** – Karpenter uses these tags to determine which network subnets and security groups to apply when creating new nodes.
+- **Tagging VPC Subnets and Security Groups** – Karpenter uses these tags to determine which network subnets and security groups should be applied when provisioning new nodes.
 
 :::info
-Karpenter does not use Auto Scaling Groups (ASG) when creating new nodes. Instead, it provisions EC2 instances directly and registers them with the cluster.
+Karpenter does not use Auto Scaling Groups (ASG) for node creation. Instead, it provisions EC2 instances directly and registers them with the Kubernetes cluster.
 :::
 
-1. IRSA Configuration
+#### IAM Role and Policies
 
-    To allow Karpenter to interact with AWS services securely, configure IAM Roles for Service Accounts (IRSA). This configuration can be done automatically during cluster installation using a [terraform-aws-platform](https://github.com/KubeRocketCI/terraform-aws-platform/blob/master/eks/irsa.tf#L143) template or **manually** after the cluster is deployed.
+Karpenter needs specific IAM permissions to manage EC2 instances, including the ability to create and terminate EC2 instances in your AWS account. It also requires permissions to register and manage nodes in the Kubernetes cluster.
 
-2. Network and Security Groups Configuration
+To simplify the setup, we recommend using the [terraform-aws-karpenter](https://registry.terraform.io/modules/terraform-aws-modules/eks/aws/latest/submodules/karpenter) module. This module automates the creation of the necessary IAM roles and policies for Karpenter.
 
-    Ensure that the required tags are added to VPC `subnets` and `security group` so Karpenter can use them for provisioning new nodes.
+This setup assumes your cluster uses on-demand instances with 24/7 availability. If your cluster configuration differs, adjust the settings to match your needs. You can find Karpenter configuration parameters in the [terraform-aws-platform](https://github.com/KubeRocketCI/terraform-aws-platform/blob/master/eks/main.tf#L277) repository.
 
-    ```hcl
-    module "vpc" {
-      source  = "terraform-aws-modules/vpc/aws"
-      version = "5.1.2"
+With this configuration, the following resources will be created:
+- **IAM Role**: `Karpenter-<CLUSTER_NAME>` with the following policies:
+  - `AmazonEC2ContainerRegistryReadOnly`
+  - `AmazonEKS_CNI_Policy`
+  - `AmazonEKSWorkerNodePolicy`
+  - `AmazonSSMManagedInstanceCore`
 
-      private_subnet_tags = merge(var.tags, tomap({ "karpenter.sh/discovery" = "${var.cluster_name}" }))
-      default_security_group_tags = merge(var.tags, tomap({ "karpenter.sh/discovery" = "${var.cluster_name}" }))
-      tags = var.tags
-    }
-    ```
+This role will be used by Karpenter to manage EC2 instances. We will configure this role later in the Karpenter [Node Class setup](https://github.com/epam/edp-cluster-add-ons/blob/main/clusters/core/addons/karpenter-np/templates/node-class.yaml#L8).
 
-    :::info
-    This method will add tags to all private subnets created during cluster initialization. If your cluster operates in a single-subnet zone, you must manually add the required tags to the appropriate subnets, as Terraform does not support tagging individual subnets.
-    :::
+- **IAM Role**: `KarpenterController` with the following custom policy:
+  - `KarpenterController`
+
+This role also includes `system:nodes` access to the Kubernetes cluster and will be used by the [Karpenter controller](https://github.com/epam/edp-cluster-add-ons/blob/main/clusters/core/addons/karpenter/values.yaml#L33) deployed within the cluster.
+
+#### Configure Network and Security Groups
+
+Karpenter needs to know which subnets and security groups to use when provisioning new nodes. This is done by tagging your VPC subnets and security groups. Verify the tags in your required subnets and security groups. If necessary, modify your [terraform configuration](https://github.com/KubeRocketCI/terraform-aws-platform/blob/master/vpc/main.tf#L37) to add new, unique tags. These tags will be used in the Karpenter [Node Class configuration](https://github.com/epam/edp-cluster-add-ons/blob/main/clusters/core/addons/karpenter-np/templates/node-class.yaml).
+
 
 ### Install Karpenter
 
-Install and configure Karpenter using the [add-ons approach](https://github.com/epam/edp-cluster-add-ons/tree/main/clusters/core/addons/karpenter) or manually. Specify the controller role that was created in AWS, and configure **tolerations** and **nodeSelector** if necessary:
+To deploy Karpenter in your Kubernetes cluster, we recommend using the [add-ons approach](https://github.com/epam/edp-cluster-add-ons/tree/main/clusters/core/addons/karpenter).
+For best practices, Karpenter should be deployed on nodes that are not managed by Karpenter itself. This ensures that Karpenter can manage the cluster independently of its own scaling actions. To achieve this, you should use the affinity configuration in the values.yaml file.
+
+Additionally, Karpenter requires the `KarpenterController` IAM role to manage the cluster's nodes. This role must be specified in the Service Account configuration. The clusterName should also be set in the settings section. Here's an example of how to configure values.yaml before installation:
 
 ```yaml title="values.yaml"
 karpenter:
-  # tolerations:
-  # - key: "type"
-  #   operator: "Equal"
-  #   value: "system"
-  #   effect: "NoSchedule"
-  # nodeSelector:
-  #   type: system
-
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+          - matchExpressions:
+              - key: karpenter.sh/nodepool
+                operator: DoesNotExist
   # -- Karpenter IAM role to manage cluster nodes
   serviceAccount:
     annotations:
-      eks.amazonaws.com/role-arn: arn:aws:iam::0123456789:role/KarpenterControllerRole-eks
+      eks.amazonaws.com/role-arn: arn:aws:iam::0123456789:role/KarpenterController
+  # -- EKS cluster name
+  settings:
+    clusterName: <CLUSTER_NAME>
 ```
 
-Since Karpenter is installed in a separate namespace, you need to update the configuration of its CRD used for Webhook Validation resources.
+### Deploy Karpenter Resources
 
-**Node Pools**:
+Once Karpenter is installed, you need to create a Node Class and Node Pool. The Node Class defines the configuration for nodes that Karpenter will provision, while the Node Pool specifies the criteria for selecting which nodes to use. We recommend using the [add-ons approach](https://github.com/epam/edp-cluster-add-ons/blob/main/clusters/core/addons/karpenter-np/values.yaml) to deploy Karpenter resources. First, adjust the values.yaml file according to your specific requirements:
 
-```bash
-kubectl patch crd nodepools.karpenter.sh --type=merge -p '{
-  "spec": {
-    "conversion": {
-      "webhook": {
-        "clientConfig": {
-          "service": {
-            "namespace": "karpenter"
-          }
-        }
-      }
-    }
-  }
-}'
-```
-
-**Node Class**:
-
-```bash
-kubectl patch crd ec2nodeclasses.karpenter.k8s.aws --type=merge -p '{
-  "spec": {
-    "conversion": {
-      "webhook": {
-        "clientConfig": {
-          "service": {
-            "namespace": "karpenter"
-          }
-        }
-      }
-    }
-  }
-}'
-```
-
-### Install Karpenter Resources
-
-Karpenter uses its own custom resources to manage node provisioning logic in a Kubernetes cluster. Proper configuration and installation of these resources ensure system stability.
-
-First, you need to set up the **values** file. Here, you must specify:
-
-- The **AMI** that will be used for nodes.
-- The **cluster name** (also used in AWS resource tags).
-- The **instance settings**, such as instance types, limits, and constraints.
 
 ```yaml title="values.yaml"
 karpenter:
-# -- AMI that used by nodes in EKS cluster
+# -- AMI used by nodes in the EKS cluster
 amiID: ami-XXXXXXXXXXXXXXXXX
-
-# -- EKS cluster name, must be the same as in Karpenter configuration
-clusterName: "eks"
-
+# -- EKS cluster name (must match the Karpenter configuration)
+clusterName: "<CLUSTER_NAME>"
+# Instance type settings
 instanceType:
-  category: ["m", "c", "r"]
-  family: ["m5", "c5", "r5"]
-  size: ["xlarge", "2xlarge", "4xlarge"]
-  type: ["on-demand", "spot"]
+  category: ["m"]
+  family: ["m7i"]
+  size: ["xlarge"]
+  type: ["on-demand"]
 ```
 
-:::note
-By default, Karpenter does not have a built-in mechanism to operate on a cron schedule. If your ASG uses scheduled scaling, keep in mind that once the node running Karpenter shuts down, the nodes it provisioned will remain active.
-
-This Helm chart includes a custom feature that manages resources based on a schedule. To enable it, **turn on scheduling** and set the correct time.
-:::
-
-```yaml title="values.yaml"
-karpenter:
-  # Set the same as Karpenter configuration
-  # Used for cron job node assignment
-  tolerations: []
-  # - key: "type"
-  #   operator: "Equal"
-  #   value: "system"
-  #   effect: "NoSchedule"
-  nodeSelector: {}
-  #   type: system
-
-# -- This block enable CronJob to create and delete nodepool
-cronjob:
-  enabled: true
-  startTime: "00 9 * * *"
-  endTime: "00 18 * * *"
-```
+You can adjust the Node Pools and Node Class configuration based on your workload requirements. For instance, you can specify different instance types, categories, and families. More detailed information on configuring Node Pools and Node Classes can be found in the [Karpenter documentation](https://karpenter.sh/docs/).
 
 ### Verify Karpenter Functionality
 
@@ -232,16 +174,16 @@ To verify the functionality of Karpenter, you can create a pod and adjust the nu
     kubectl delete deployment inflate
     ```
 
-## Keda
+## KEDA
 
-The configuration and installation of Keda involve several steps, including:
+The configuration and installation of KEDA involves several steps, including:
 
-- **Installing the Keda Helm chart** – deploying Keda controller in the Kubernetes cluster.
+- **Installing the KEDA Helm chart** – deploying KEDA controller in the Kubernetes cluster.
 - **Configuring essential components** – setting up `Scaled Object`, and integrating with cluster resources.
 
-### Install Keda
+### Install KEDA
 
-Install and configure Keda using the [add-ons approach](https://github.com/epam/edp-cluster-add-ons/tree/main/clusters/core/addons/keda) or manually. Specify **tolerations** and **nodeSelector** if necessary:
+Install and configure KEDA using the [add-ons approach](https://github.com/epam/edp-cluster-add-ons/tree/main/clusters/core/addons/keda) or manually. Specify **tolerations** and **nodeSelector** if necessary:
 
 ```yaml title="values.yaml"
 keda:
@@ -254,7 +196,7 @@ keda:
   #   type: system
 ```
 
-### Install Keda Resources
+### Install KEDA Resources
 
 KEDA operates based on configurations stored in its Custom Resources. It supports multiple data sources to determine the appropriate number of replicas for a deployment. In this setup, the scaling decisions are based on **Prometheus metrics**, which have been selected based on the behavior of the KRCI platform.
 
@@ -265,13 +207,13 @@ Below are the key metrics used for scaling analysis:
 
 These metrics help maintain an optimal balance between performance and resource efficiency.
 
-1. Install and configure Keda-tenant using the [add-ons approach](https://github.com/epam/edp-cluster-add-ons/tree/main/clusters/core/addons/keda-tenants) or manually.
+1. Install and configure KEDA-tenant using the [add-ons approach](https://github.com/epam/edp-cluster-add-ons/tree/main/clusters/core/addons/keda-tenants) or manually.
 
     Before installing, ensure that you have set the correct values in the **KEDA Tenants** configuration. The following parameters should be customized according to your setup:
 
     - **`namespaces`** – List of namespaces where the KRCI platform is installed.
     - **`timeInterval`** – Idle time after which the platform will automatically scale down to **0 replicas**.
-    - **`gitProviders`** – List of Git providers configured to work with the platform (this list must match the configuration set during the installation of the [`edp-install`](https://github.com/epam/edp-install/blob/master/deploy-templates/values.yaml#L26) Helm chart).
+    - **`gitProviders`** – List of Git providers configured to work with the platform (this list must match the configuration set during the installation of the [`edp-install`](https://github.com/epam/edp-install/blob/release/3.11/deploy-templates/values.yaml#L32) Helm chart).
 
     Below are the key parameters for configuring the KEDA Tenants Helm chart:
 
@@ -292,24 +234,24 @@ These metrics help maintain an optimal balance between performance and resource 
       # - gerrit
     ```
 
-### Verify Keda Functionality
+### Verify KEDA Functionality
 
-Steps to Verify
+To verify that KEDA is operating correctly, follow the steps below:
 
-1. **Access Prometheus**
-   - Use **Ingress** or **port-forwarding** to access the Prometheus UI:
+1. Access Prometheus. Use **Ingress** or **port-forwarding** to access the Prometheus UI.
 
-2. **Expected Results**
+2. Verify the expected results:
+
     - If the metric values are **greater than 0**, KEDA will keep the deployments running.
     - If the metric values drop **below 0**, KEDA will scale the deployments down to **0 replicas**.
 
-    **This image** shows a query for the number of new nodes.
+    Use the query below to get the number of new nodes:
 
-    ![Architecture diagram](../../assets/operator-guide/kubernetes-cluster-scaling/prom-pods.png "Architecture diagram")
+    ![Get the number of new nodes](../../assets/operator-guide/kubernetes-cluster-scaling/prom-pods.png "Get the number of new nodes")
 
-    **This image** shows a query for the number of new requests.
+    Use the query below to get the number of new requests:
 
-    ![Architecture diagram](../../assets/operator-guide/kubernetes-cluster-scaling/prom-protal.png "Architecture diagram")
+    ![Get the number of new requests](../../assets/operator-guide/kubernetes-cluster-scaling/prom-protal.png "Get the number of new requests")
 
 By following the steps in this documentation, we have set up a flexible cluster configuration that dynamically adjusts computing resources based on the current workload.
 

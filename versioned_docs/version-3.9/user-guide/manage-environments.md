@@ -1,8 +1,8 @@
 ---
 
-title: "Manage Deployment Flows"
-sidebar_label: "Manage Deployment Flows"
-description: "Navigate deployment flow management in KubeRocketCI, from viewing details to editing, deleting, and troubleshooting deployment environments."
+title: "Manage Environments"
+sidebar_label: "Manage Environments"
+description: "Navigate Environment management in KubeRocketCI, from viewing details to editing, deleting, and troubleshooting deployment environments."
 
 ---
 <!-- markdownlint-disable MD025 -->
@@ -150,7 +150,7 @@ To deploy an application, follow the steps below:
         In case of using OpenShift internal registry, if the deployment fails with the ImagePullBackOff error, delete the pod that was created for this application.
       :::
 
-To uninstall the application, click the **Delete** button:
+2. To uninstall the application, click the **Delete** button:
 
 ![Uninstall the application](../assets/user-guide/environments/edp-portal-uninstall-application.png "Uninstall the application")
 
@@ -178,7 +178,29 @@ To inspect the deployed application in KubeRocketCI portal, take the following s
 
     ![Inspect application](../assets/user-guide/environments/application_terminal.png "Inspect application")
 
-### Related Articles
+### Monitor Application
+
+KubeRocketCI portal offers monitoring capabilities powered by Grafana and Prometheus Operator.
+
+:::info
+  To view the deployment monitoring data, you need to have Grafana and Prometheus Operator installed. We recommend installing it using our [add-ons](https://github.com/epam/edp-cluster-add-ons/blob/3fc8a60ccfbca1c7aa757cb36226a0daf2c8a224/clusters/core/addons/prometheus-operator/values.yaml).
+:::
+
+To monitor an application using Grafana, follow the steps below:
+
+1. Navigate to the Environment details page.
+
+2. In the Environment details page, open the **Monitoring** tab:
+
+    ![Monitoring tab](../assets/user-guide/environments/monitoring-tab.png "Monitoring tab")
+
+3. In the **Monitoring** tab, view the deployment metrics:
+
+    ![Grafana monitoring dashboard](../assets/user-guide/environments/grafana-monitoring-dashboard.png "Grafana monitoring dashboard")
+
+The **Monitoring** tab provides the visual representation of the basic application deployment metrics, such as CPU and Memory requests and limits.
+
+## Related Articles
 
 * [Add Environment](add-cd-pipeline.md)
 * [Add Quality Gate](../user-guide/add-quality-gate.md)

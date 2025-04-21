@@ -191,6 +191,28 @@ To inspect the deployed application in KubeRocketCI portal, take the following s
 
     ![Inspect application](../assets/user-guide/environments/application_terminal.png "Inspect application")
 
+### Monitor Application
+
+KubeRocketCI portal offers monitoring capabilities powered by Grafana and Prometheus Operator.
+
+:::info
+  To view the deployment monitoring data, you need to have Grafana and Prometheus Operator installed. We recommend installing it using our [add-ons](https://github.com/epam/edp-cluster-add-ons/blob/3fc8a60ccfbca1c7aa757cb36226a0daf2c8a224/clusters/core/addons/prometheus-operator/values.yaml).
+:::
+
+To monitor an application using Grafana, follow the steps below:
+
+1. Navigate to the Environment details page.
+
+2. In the Environment details page, open the **Monitoring** tab:
+
+    ![Monitoring tab](../assets/user-guide/environments/monitoring-tab.png "Monitoring tab")
+
+3. In the **Monitoring** tab, view the deployment metrics:
+
+    ![Grafana monitoring dashboard](../assets/user-guide/environments/grafana-monitoring-dashboard.png "Grafana monitoring dashboard")
+
+The **Monitoring** tab provides the visual representation of the basic application deployment metrics, such as CPU and Memory requests and limits.
+
 ### Delete Application
 
 There are two buttons on the environment page that can be utilized to delete application in the portal:
@@ -208,7 +230,7 @@ KubeRocketCI provides an intuitive and streamlined pipeline by default. Initiall
 
 For more details on how to create a custom delete pipeline, navigate to the [Customize Environment Cleanup](../operator-guide/cd/customize-environment-deletion.md)
 
-### Related Articles
+## Related Articles
 
 * [Customize Environment Cleanup](../operator-guide/cd/customize-environment-deletion.md)
 * [Add Deployment Flow](add-cd-pipeline.md)

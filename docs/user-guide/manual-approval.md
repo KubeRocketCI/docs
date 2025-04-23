@@ -29,11 +29,11 @@ To apply the **deploy-with-approve** pipeline template to your environments, fol
 
 1. In the deployment flow details page, click the **Create environment** button:
 
-  ![Create environment button](../../assets/operator-guide/create-environment-button-deploy.png "Create environment button")
+  ![Create environment button](../assets/operator-guide/create-environment-button-deploy.png "Create environment button")
 
 2. In the **Create environment** window, select the **deploy-with-approve** pipeline:
 
-  ![Select pipeline with approval](../../assets/operator-guide/custom-approve-pipeline1.png "Select pipeline with approval")
+  ![Select pipeline with approval](../assets/operator-guide/custom-approve-pipeline1.png "Select pipeline with approval")
 
 ### Existing Environments
 
@@ -41,25 +41,25 @@ If you need to change the default deploy pipeline template in an already existin
 
 1. Navigate to the environment details page and click the **Edit** button:
 
-  ![Edit environment button](../../assets/operator-guide/edit-environment-button-deploy.png "Edit environment button")
+  ![Edit environment button](../assets/operator-guide/edit-environment-button-deploy.png "Edit environment button")
 
 2. In the **Edit environment** window, select another deploy pipeline:
 
-  ![Select pipeline with approval](../../assets/operator-guide/custom-approve-pipeline2.png "Select pipeline with approval")
+  ![Select pipeline with approval](../assets/operator-guide/custom-approve-pipeline2.png "Select pipeline with approval")
 
 ## Approve/Reject Deployment
 
 Once the deploy pipeline has been launched and reached the approval step, you will see a corresponding notification on the pipeline details page:
 
-  ![Approve step](../../assets/operator-guide/approve_step.png "Approve step")
+  ![Approve step](../assets/operator-guide/approve_step.png "Approve step")
 
 If the approval is rejected, the pipeline status will be failed:
 
-  ![Manual approve rejected](../../assets/operator-guide/manual_approve_rejected.png "Manual approve rejected")
+  ![Manual approve rejected](../assets/operator-guide/manual_approve_rejected.png "Manual approve rejected")
 
 If you don’t make a selection within the pipeline processing time, which is **60 minutes** by default, you’ll see a crossed clock icon as the task run status, indicating that the pipeline has timed out:
 
-  ![Approval timed out](../../assets/operator-guide/manual_approve_timeout.png "Approval timed out")
+  ![Approval timed out](../assets/operator-guide/manual_approve_timeout.png "Approval timed out")
 
 :::note
   You can set a custom timeout duration in the relevant [TriggerTemplate](https://github.com/epam/edp-tekton/blob/v0.13.0/charts/pipelines-library/templates/triggers/cd/deploy-with-approve.yaml#L46).
@@ -67,7 +67,7 @@ If you don’t make a selection within the pipeline processing time, which is **
 
 If you choose the **Approve** option, the pipeline will proceed running:
 
-  ![Pipeline approved](../../assets/operator-guide/manual_approve_approved.png "Pipeline approved")
+  ![Pipeline approved](../assets/operator-guide/manual_approve_approved.png "Pipeline approved")
 
 ## Create Pipeline With Approval Task
 
@@ -118,7 +118,7 @@ To create a deploy pipeline with a manual approval task, follow the steps below:
 
 ## Related Articles
 
-* [Customize Environment Cleanup](../../operator-guide/cd/customize-environment-deletion.md)
-* [Customize Deploy Pipeline](../../operator-guide/cd/customize-deploy-pipeline.md)
-* [Add Deployment Flow](../../user-guide/add-cd-pipeline.md)
-* [Manage Deployment Flows](../../user-guide/manage-environments.md)
+* [Customize Environment Cleanup](../operator-guide/cd/customize-environment-deletion.md)
+* [Customize Deploy Pipeline](../operator-guide/cd/customize-deploy-pipeline.md)
+* [Add Deployment Flow](../user-guide/add-cd-pipeline.md)
+* [Manage Deployment Flows](../user-guide/manage-environments.md)

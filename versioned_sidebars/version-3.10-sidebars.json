@@ -269,9 +269,7 @@
           "items": [
             "operator-guide/cd/customize-deploy-pipeline",
             "operator-guide/cd/customize-environment-deletion",
-            "operator-guide/cd/manual-approval",
             "operator-guide/cd/deploy-rpm",
-            "operator-guide/cd/auto-stable-trigger-type",
             {
               "type": "category",
               "label": "GitOps",
@@ -439,6 +437,8 @@
           "items": [
             "user-guide/add-cd-pipeline",
             "user-guide/manage-environments",
+            "user-guide/auto-stable-trigger-type",
+            "user-guide/manual-approval",
             "user-guide/cd-pipeline-variables-injection",
             "user-guide/application-and-pipeline-statuses"
           ]

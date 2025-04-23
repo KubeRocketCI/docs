@@ -294,11 +294,8 @@ const sidebars: SidebarsConfig = {
           items: [
             'operator-guide/cd/customize-deploy-pipeline',
             'operator-guide/cd/customize-environment-deletion',
-            'operator-guide/cd/manual-approval',
             'operator-guide/cd/deploy-rpm',
-            'operator-guide/cd/auto-stable-trigger-type',
-            'operator-guide/cd/deploy-application-in-remote-cluster-via-token',
-            'operator-guide/cd/deploy-application-in-remote-cluster-via-irsa',
+            "operator-guide/cd/deploy-application-in-remote-cluster-via-irsa",
             {
               type: 'category',
               label: 'GitOps',
@@ -469,7 +466,9 @@ const sidebars: SidebarsConfig = {
           items: [
             'user-guide/add-cd-pipeline',
             'user-guide/manage-environments',
-            "user-guide/cd-pipeline-variables-injection",
+            "user-guide/auto-stable-trigger-type",
+            "user-guide/manual-approval",
+            'user-guide/cd-pipeline-variables-injection',
             'user-guide/application-and-pipeline-statuses',
             'user-guide/argo-cd-preview',
           ],

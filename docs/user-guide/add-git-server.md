@@ -17,7 +17,7 @@ import TabItem from '@theme/TabItem';
 This guide outlines the steps for integrating KubeRocketCI with GitLab, GitHub, or Bitbucket, enabling seamless CI/CD workflows across these version control platforms.
 
 <div style={{ display: 'flex', justifyContent: 'center' }}>
-<iframe width="560" height="315" src="https://www.youtube.com/embed/pzheGwBLZvU" title="Install KubeRocketCI via Civo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen"></iframe>
+<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/pzheGwBLZvU" title="Install KubeRocketCI via Civo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen"></iframe>
 </div>
 
 ## Integration Procedure

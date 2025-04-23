@@ -21,7 +21,7 @@ The goal is to empower the development team to release new features and applicat
 The KubeRocketCI is used to facilitate this process.
 
 <div style={{ display: 'flex', justifyContent: 'center' }}>
-<iframe width="560" height="315" src="https://www.youtube.com/embed/TcPcIKYvKFo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen"></iframe>
+<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/TcPcIKYvKFo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen"></iframe>
 </div>
 
 ### Roles

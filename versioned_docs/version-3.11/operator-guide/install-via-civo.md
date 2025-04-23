@@ -17,7 +17,7 @@ This documentation provides detailed instructions on how to install the KubeRock
 As a prerequisite, make sure to [sign up](https://dashboard.civo.com/signup) on Civo.
 
 <div style={{ display: 'flex', justifyContent: 'center' }}>
-<iframe width="560" height="315" src="https://www.youtube.com/embed/QjZoPnIKDtA" title="Install KubeRocketCI via Civo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen"></iframe>
+<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/QjZoPnIKDtA" title="Install KubeRocketCI via Civo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen"></iframe>
 </div>
 
 ## Launch Cluster

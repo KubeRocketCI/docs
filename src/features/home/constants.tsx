@@ -10,7 +10,7 @@ import { FeatureItem } from './types';
 
 export const featuresList: FeatureItem[] = [
   {
-    title: 'Application scaffolding',
+    title: 'Application Scaffolding',
     Svg: HandymanIcon,
     description: (
       <>
@@ -21,7 +21,7 @@ export const featuresList: FeatureItem[] = [
     link: 'docs/user-guide/add-application',
   },
   {
-    title: 'CI/CD pipelines',
+    title: 'CI/CD Pipelines',
     Svg: RocketLaunchIcon,
     description: (
       <>
@@ -43,7 +43,7 @@ export const featuresList: FeatureItem[] = [
     link: 'docs/user-guide/add-cd-pipeline',
   },
   {
-    title: 'Single sign-on',
+    title: 'Single Sign-On',
     Svg: KeyIcon,
     description: (
       <>

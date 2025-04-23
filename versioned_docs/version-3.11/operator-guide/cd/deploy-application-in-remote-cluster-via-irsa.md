@@ -689,7 +689,7 @@ Set the proper cluster options:
 
 5. Deploy application to verify the platform interacts with your cluster correctly. Read the [Manage Deployment Flows](../../user-guide/manage-environments.md#deploy-application) for more details.
 
-### Deployment Application Summary
+### Application Deployment Summary
 
 As soon as the application is deployed, verify that Environment has the green status:
 

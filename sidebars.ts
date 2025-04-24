@@ -310,6 +310,7 @@ const sidebars: SidebarsConfig = {
           label: 'Infrastructure Providers',
           items: [
             'operator-guide/infrastructure-providers/overview',
+            'operator-guide/infrastructure-providers/atlantis-installation',
             {
               type: 'category',
               label: 'AWS Integration',

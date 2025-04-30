@@ -19,6 +19,7 @@ export const redirectMaps: Record<string, string> = {
   'compliance': 'https://docs.kuberocketci.io/docs/compliance',
   'developer-guide': 'https://docs.kuberocketci.io/docs/developer-guide',
   'developer-guide/reference-architecture': 'https://docs.kuberocketci.io/docs/developer-guide/reference-architecture',
+  'use-cases': 'https://docs.kuberocketci.io/docs/use-cases',
 
   // Operator guide redirects
   'operator-guide/installation-overview': 'https://docs.kuberocketci.io/docs/operator-guide/installation-overview',

@@ -38,6 +38,7 @@ jobs:
           cd api
           npm ci
           npm run build
+          npm prune --production
 
       - name: Deploy App
         id: builddeploy

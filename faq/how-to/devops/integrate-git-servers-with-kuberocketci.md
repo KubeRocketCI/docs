@@ -1,4 +1,4 @@
-## How to Integrate Git Servers With KubeRocketCI?
+# How to Integrate Git Servers With KubeRocketCI?
 
 <head>
   <link rel="canonical" href="https://docs.kuberocketci.io/faq/how-to/devops/integrate-git-servers-with-kuberocketci" />

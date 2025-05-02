@@ -1,6 +1,6 @@
 ---
-title: "Atlantis Installation"
-description: "Step-by-step guide on installing and configuring Atlantis for Terraform automation, including authentication setup, webhook configuration, and provider credentials management."
+title: "Atlantis Installation and Configuration Guide for Kubernetes: Terraform Automation"
+description: "Complete step-by-step guide for installing Atlantis on Kubernetes with Helm or Argo CD, configuring security with OAuth2 or basic auth, setting up Git webhooks (GitHub, GitLab, Bitbucket), and IAM credentials for seamless Terraform automation workflows."
 sidebar_label: "Atlantis Installation"
 ---
 <!-- markdownlint-disable MD025 -->
@@ -12,9 +12,9 @@ import TabItem from '@theme/TabItem';
   <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/infrastructure-providers/atlantis-installation" />
 </head>
 
-# Installing and Configuring Atlantis for Terraform Automation
+# Atlantis: Enterprise-Grade Terraform Automation for Kubernetes
 
-Atlantis is a tool for automating Terraform workflows. It provides a web interface and integrates with version control systems (VCS) to automatically run Terraform operations as part of the pull request process. This allows teams to review, approve, and apply infrastructure changes in a consistent and auditable way.
+Atlantis is an enterprise-ready tool for automating Terraform workflows in Kubernetes environments. It provides a robust web interface and seamlessly integrates with version control systems (VCS) to automatically run Terraform operations as part of the pull request process. This enables teams to systematically review, approve, and apply infrastructure changes in a consistent, secure, and auditable manner.
 
 This guide covers the full process of installing and configuring Atlantis as Helm chart. It includes setting up authentication, configuring integration with supported version control systems (such as Bitbucket, GitHub, or GitLab), and preparing Atlantis to automate Terraform workflows triggered by pull/merge requests.
 
@@ -36,8 +36,8 @@ To install and configure Atlantis, ensure the following prerequisites are met:
 
 There are two approaches to install Atlantis using [edp-cluster-add-ons](https://github.com/epam/edp-cluster-add-ons) repository:
 
-* **Using Argo CD**: This approach implies installing Atlantis as an Argo CD Application resource.
-* **Using Helm**: This approach involves installing Atlantis via common Helm commands.
+- **Using Argo CD**: This approach implies installing Atlantis as an Argo CD Application resource.
+- **Using Helm**: This approach involves installing Atlantis via common Helm commands.
 
 ### Approach 1: Using Argo CD
 
@@ -195,6 +195,7 @@ To configure an external authentication proxy (e.g., OAuth2 Proxy) with Keycloak
       <summary><b>kubectl</b></summary>
 
     Run the following command to create a secret:
+
     ```bash
     kubectl create secret generic keycloak-client-atlantis-secret -n atlantis \
       --from-literal=clientSecret=<keycloak_client_secret>
@@ -206,6 +207,7 @@ To configure an external authentication proxy (e.g., OAuth2 Proxy) with Keycloak
       <summary><b>External Secrets Operator</b></summary>
 
     Enable ESO section in the `values.yaml` file and configure the necessary parameters. For example:
+
     ```yaml
     eso:
       # -- Install components of the ESO.
@@ -237,6 +239,7 @@ To configure an external authentication proxy (e.g., OAuth2 Proxy) with Keycloak
     ```
 
     AWS Parameter Store object/Vault secret structure:
+
     ```json
     {
       "clientSecret": "<keycloak_client_secret>"
@@ -290,6 +293,7 @@ To configure an external authentication proxy (e.g., OAuth2 Proxy) with Keycloak
       <summary><b>kubectl</b></summary>
 
     Run the following command to create a secret:
+
     ```bash
     kubectl create secret generic oauth2-proxy -n atlantis \
       --from-literal=client-id=<keycloak_client_id> \
@@ -303,6 +307,7 @@ To configure an external authentication proxy (e.g., OAuth2 Proxy) with Keycloak
       <summary><b>External Secrets Operator</b></summary>
 
     Enable ESO section in the `values.yaml` file and configure the necessary parameters. For example:
+
     ```yaml
     eso:
       # -- Install components of the ESO.
@@ -334,6 +339,7 @@ To configure an external authentication proxy (e.g., OAuth2 Proxy) with Keycloak
     ```
 
     AWS Parameter Store object/Vault secret structure:
+
     ```json
     {
       "oauth2-proxy": {
@@ -444,6 +450,7 @@ After configuring the webhook, it is necessary to create the Atlantis webhook Ku
       <summary><b>kubectl</b></summary>
 
     Run the following command to create a secret, e.g. for Bitbucket:
+
     ```bash
     kubectl create secret generic atlantis-webhook \
       --from-literal=bitbucket_token=<bitbucket_token> \
@@ -456,6 +463,7 @@ After configuring the webhook, it is necessary to create the Atlantis webhook Ku
       <summary><b>External Secrets Operator (Bitbucket only)</b></summary>
 
     Enable ESO section in the `values.yaml` file and configure the necessary parameters. For example:
+
     ```yaml
     eso:
       # -- Install components of the ESO.
@@ -487,6 +495,7 @@ After configuring the webhook, it is necessary to create the Atlantis webhook Ku
     ```
 
     AWS Parameter Store object/Vault secret structure:
+
     ```json
     {
       "bitbucket_token": "<bitbucket_token>",

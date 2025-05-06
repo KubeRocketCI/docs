@@ -30,7 +30,7 @@ export const redirectMaps: Record<string, string> = {
 
   'operator-guide': 'https://docs.kuberocketci.io/docs/operator-guide',
   'operator-guide/add-ons-overview': 'https://docs.kuberocketci.io/docs/operator-guide/add-ons-overview',
-  'operator-guide/add-security-scanner': 'https://docs.kuberocketci.io/docs/operator-guide/add-security-scanner',
+  'operator-guide/add-security-scanner': 'https://docs.kuberocketci.io/docs/operator-guide/devsecops/overview',
   'operator-guide/advanced-installation-overview': 'https://docs.kuberocketci.io/docs/operator-guide/advanced-installation/overview',
   'operator-guide/argocd-integration': 'https://docs.kuberocketci.io/docs/operator-guide/cd/argocd-integration',
   'operator-guide/artifacts-verification': 'https://docs.kuberocketci.io/docs/developer-guide/artifacts-verification',

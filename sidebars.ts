@@ -398,6 +398,7 @@ const sidebars: SidebarsConfig = {
       collapsible: false,
       items: [
         'user-guide/index',
+        'user-guide/portal-settings',
         {
           type: 'category',
           label: 'Pipelines',

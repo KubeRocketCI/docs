@@ -26,9 +26,32 @@ These widgets reflect all the resources in the **default namespace**:
 * **Branches**: Shows the total amount of codebase branches;
 * **Pipelines**: Shows all the initiated pipeline runs;
 * **Deployment Flows**: Displays all the created deployment flows;
-* **Environments**: Shows the total amount of created environments.
+* **Environments**: Shows the total amount of created environments;
+* **+ Add Widget**: Opens the **Add new widget** window.
 
 The status of the resources is displayed real-time and doesn't require any preliminary configuration to for widgets to work. Not only these widgets display the amount of resources but also their statuses (success, fail, in progress).
+
+Additionally, users can track any specific application status and deployed versions using custom widgets. To add a custom widget, follow the steps below:
+
+1. On the **Overview** section, click the **+ Add Widget** button:
+
+  ![Add widget button](../assets/user-guide/widgets/add-widget.png "Add widget button")
+
+2. On the **Add new widget** window, select the **Application deployed versions** widget type:
+
+  ![Select widget type](../assets/user-guide/widgets/select-widget-type.png "Select widget type")
+
+3. Select the application to track and click **Add**:
+
+  ![Select application to track](../assets/user-guide/widgets/select-application-to-track.png "Select application to track")
+
+4. View the application widget to get the information about Deployment Flows and Environments where application is deployed:
+
+  ![View widget details](../assets/user-guide/widgets/application-track-widget.png "View widget details")
+
+5. To delete the widget, hover your mouse cursor over the widget block and click the bin icon that appears:
+
+  ![Delete widget](../assets/user-guide/widgets/delete-widget.png "Delete widget")
 
 ## SonarQube & Dependency-Track Widgets
 

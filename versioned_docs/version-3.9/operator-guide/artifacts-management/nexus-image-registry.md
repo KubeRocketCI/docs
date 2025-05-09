@@ -22,15 +22,7 @@ To install Nexus in environment, it's recommended to use the resources provided 
 
 1. Navigate to the forked cluster Add-Ons repository and align the [nexus values.yaml](https://github.com/epam/edp-cluster-add-ons/tree/main/clusters/core/addons/nexus/values.yaml) and [nexus-operator values.yaml](https://github.com/epam/edp-cluster-add-ons/tree/main/clusters/core/addons/nexus-operator/values.yaml) files. Follow the instructions to deploy Nexus, ensuring it's correctly configured to serve as artifact repository.
 
-2. Sync resources and wait till the all **nexus** and **nexus-operator** resources is created:
-
-    ![Nexus ArgoCD applications](../../assets/operator-guide/artifacts-management/nexus-registry-addons-deploy.png "Nexus ArgoCD applications")
-
-3. **Sign In** into **Nexus Repository Manager** using the default credentials **Username**: `admin` and **Password**: `admin123` and update the default password for better security:
-
-    ![Nexus ArgoCD applications](../../assets/operator-guide/artifacts-management/nexus-registry-change-password.png "Nexus ArgoCD applications")
-
-4. Update the configuration to enable **nexus** and **nexus-operator** in [Add-Ons](https://github.com/epam/edp-cluster-add-ons/blob/main/clusters/core/apps/values.yaml) repository:
+2. Update the configuration to enable **nexus** and **nexus-operator** in [Add-Ons](https://github.com/epam/edp-cluster-add-ons/blob/main/clusters/core/apps/values.yaml) repository:
 
     ```yaml title="clusters/core/apps/values.yaml"
     nexus:
@@ -42,11 +34,19 @@ To install Nexus in environment, it's recommended to use the resources provided 
       enable: true
     ```
 
+3. Sync resources and wait till the all **nexus** and **nexus-operator** resources are created:
+
+    ![Nexus ArgoCD applications](../../assets/operator-guide/artifacts-management/nexus-registry-addons-deploy.png "Nexus ArgoCD applications")
+
+4. **Sign in** into **Nexus Repository Manager** using the default credentials **Username**: `admin` and **Password**: `admin123` and update the default password for better security:
+
+    ![Nexus ArgoCD applications](../../assets/operator-guide/artifacts-management/nexus-registry-change-password.png "Nexus ArgoCD applications")
+
 ## Configuration
 
-With [Add-Ons approach](https://github.com/epam/edp-cluster-add-ons/blob/main/clusters/core) `nexus-operator` create the necessary roles, **Service Account** `ci.user`, blob stores, repository, scripts, cleanup policies automatically. Below is a comprehensive guide on how to create all resources manually.
+With [Add-Ons approach](https://github.com/epam/edp-cluster-add-ons/blob/main/clusters/core) `nexus-operator` create the necessary roles, the **Service Account** `ci.user`, blob stores, repository, scripts, cleanup policies automatically. Below is a comprehensive guide on how to create all resources manually.
 
-## Configuration Nexus Repository Manager with nexus-operator
+## Configuration Nexus Repository Manager using nexus-operator
 
 1. Create a Kubernetes Secret that the **nexus-operator** will use to connect to the **Nexus Repository Manager** and create all resources:
 

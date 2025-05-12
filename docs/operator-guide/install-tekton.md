@@ -19,7 +19,7 @@ Here are the main steps to follow for installing the Tekton resources using the 
 
 ## Prerequisites
 
-* Kubectl version 1.26+ is installed. Please refer to the [Kubernetes official website](https://kubernetes.io/releases/) for details.
+* Kubectl version 1.28+ is installed. Please refer to the [Kubernetes official website](https://kubernetes.io/releases/) for details.
 * For Openshift/OKD, the latest version of the `oc` utility is required. Please refer to the [OKD page](https://github.com/okd-project/okd/releases) on GitHub for details.
 
 ## Installation on Kubernetes Cluster

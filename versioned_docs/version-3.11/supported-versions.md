@@ -22,7 +22,7 @@ gantt
     title Release Schedule and Lifecycle
 
     section (Under Development)
-    KubeRocketCI 3.11 SNAPSHOT: crit, r41, 2025-03-21, 2025-07-21
+    KubeRocketCI 3.12 SNAPSHOT: crit, r41, 2025-03-21, 2025-07-21
 
     section (Supported)
     KubeRocketCI 3.11 Release: active, r41, 2025-03-21, 2025-07-21

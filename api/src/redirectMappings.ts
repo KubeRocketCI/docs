@@ -23,6 +23,7 @@ export const redirectMaps: Record<string, string> = {
   'developer-guide/telemetry': 'https://docs.kuberocketci.io/docs/developer-guide/telemetry',
 
   'faq': 'https://docs.kuberocketci.io/faq/general-questions',
+  'faq/how-to/enable-local-access-to-kubernetes-environment': 'https://docs.kuberocketci.io/faq/how-to/application-deployment/enable-local-access-to-kubernetes-environment',
   'features': 'https://docs.kuberocketci.io/docs/basic-concepts',
   'getting-started': 'https://docs.kuberocketci.io/docs/quick-start/quick-start-overview',
   'glossary': 'https://docs.kuberocketci.io/docs/glossary',

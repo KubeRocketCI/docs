@@ -100,7 +100,7 @@ rename it in the correspondence with project name:
 
 ## AWS IAM Roles
 
-This step covers the `KRCIDeployerRole` AWS IAM role creation. To create the role, take the following steps:
+This step covers the `KRCIDeployerRole` and `Atlantis` AWS IAM roles creation procedure. To create the roles, take the following steps:
 
 1. Navigate to the IAM module directory:
 
@@ -117,6 +117,9 @@ Find the detailed description of the variables in the [iam/variables.tf](https:/
 
     # If you need to set role boundary
     iam_permissions_boundary_policy_arn = "arn:aws:iam::012345678910:policy/role_boundary"
+
+    # OpenID Connect provider URL used for creating Atlantis IAM role
+    oidc_provider="oidc.eks.<REGION>.amazonaws.com/id/<AWS_OIDC_ID>"
 
     tags = {
       "SysName"     = "KubeRocketCI"
@@ -138,8 +141,10 @@ Find the detailed description of the variables in the [iam/variables.tf](https:/
       ```bash
       Outputs:
 
-      deployer_iam_role_arn = "arn:aws:iam::012345678910:role/KRCIDeployerRole"
+      deployer_iam_role_arn  = "arn:aws:iam::012345678910:role/KRCIDeployerRole"
       deployer_iam_role_name = "KRCIDeployerRole"
+      atlantis_iam_role_arn  = "arn:aws:iam::012345678910:role/Atlantis"
+      atlantis_iam_role_name = "Atlantis"
       ```
 
     :::

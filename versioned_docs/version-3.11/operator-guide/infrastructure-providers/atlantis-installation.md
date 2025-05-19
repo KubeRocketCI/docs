@@ -524,7 +524,9 @@ After configuring the webhook secret, Atlantis will be able to authenticate inco
 For more details on configuring provider credentials, refer to the [Atlantis Provider Credentials documentation](https://www.runatlantis.io/docs/provider-credentials).
 :::
 
-Depending on the selected provider, Atlantis needs to be provided with the necessary permissions to perform Terraform operations. In this section, it is described how to create the required AWS IAM Role and attach it to the Atlantis service account.
+Depending on the selected provider, Atlantis needs to be provided with the necessary permissions to perform Terraform operations. In this section, it is described how to create the required AWS IAM Role or use the built-in Atlantis IAM Role from the [terraform-aws-platform](https://github.com/KubeRocketCI/terraform-aws-platform) repository.
+
+### Creating Atlantis IAM Role
 
 To create the AWS IAM Role for Atlantis, follow the steps below:
 
@@ -564,6 +566,32 @@ After creating the AWS IAM Role, it is necessary to attach the role to the Atlan
     ```
 
 3. Apply the changes by using the `helm upgrade` command or syncing the Argo CD application.
+
+After configuring the AWS IAM Role, Atlantis will be able to assume the role and perform Terraform operations using the provided permissions.
+
+### Using built-in Atlantis IAM Role
+
+:::note
+For more details about Atlantis IAM Role, refer to the [terraform-aws-platform](https://github.com/KubeRocketCI/terraform-aws-platform/tree/master/iam) repository.
+:::
+
+In case of using the [terraform-aws-platform](https://github.com/KubeRocketCI/terraform-aws-platform) repository to manage the AWS infrastructure, Atlantis can use the built-in **Atlantis** IAM Role created by the repository. This IAM Role is automatically created and configured with the necessary permissions to assume the **KRCIDeployerRole** IAM Role for performing Terraform operations.
+
+To use the built-in Atlantis IAM Role, follow the steps below:
+
+1. Navigate to the AWS Management Console and open the [IAM](https://aws.amazon.com/iam/) service.
+2. Under the **Access management** section, select **Roles**. Ensure that the **Atlantis** IAM Role is created. If not, create the role using the [Deploy AWS EKS Cluster](../deploy-aws-eks.md) guide.
+3. Navigate to the `clusters/core/addons/atlantis` directory of the forked [edp-cluster-add-ons](https://github.com/epam/edp-cluster-add-ons) repository.
+4. Open the `values.yaml` file and update the `atlantis.serviceAccount.annotations` field to include the ARN of the Atlantis IAM Role. For example:
+
+    ```yaml title="values.yaml"
+    atlantis:
+      serviceAccount:
+        annotations:
+          eks.amazonaws.com/role-arn: arn:aws:iam::<AWS_ACCOUNT_ID>:role/<ROLE_NAME>
+    ```
+
+5. Apply the changes by using the `helm upgrade` command or syncing the Argo CD application.
 
 After configuring the AWS IAM Role, Atlantis will be able to assume the role and perform Terraform operations using the provided permissions.
 

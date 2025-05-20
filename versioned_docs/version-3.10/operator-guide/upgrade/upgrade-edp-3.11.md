@@ -194,7 +194,199 @@ We suggest backing up the KubeRocketCI environment before starting the upgrade p
     done
     ```
 
-5. Replace `edp-config` ConfigMap for Tekton Custom Tasks:
+5. Update ApplicationSet Custom Resources:
+
+    :::note
+    It is highly recommended to update the ApplicationSet resources manually to avoid unexpected behavior when using a bash script.
+    :::
+
+    In version 3.11, the `edp` versioning type was renamed to `semver`. Due to this change, it is necessary to update the existing ApplicationSet resources with the new versioning type name.
+
+    1. Replace `edp` with `semver` in the `versionType` field within the `spec.generators.list.elements` section. For example:
+
+        <Tabs
+          defaultValue="3.11"
+          values={[
+            {label: '3.10', value: '3.10'},
+            {label: '3.11', value: '3.11'}
+          ]}>
+
+          <TabItem value="3.10">
+          ```yaml title="ApplicationSet"
+          apiVersion: argoproj.io/v1alpha1
+          kind: ApplicationSet
+          metadata:
+            name: demo
+            namespace: krci
+          spec:
+            generators:
+              - list:
+                  elements:
+                    - cluster: in-cluster
+                      codebase: java-app
+                      ...
+                      versionType: edp
+          ```
+          </TabItem>
+
+          <TabItem value="3.11">
+          ```yaml title="ApplicationSet"
+          apiVersion: argoproj.io/v1alpha1
+          kind: ApplicationSet
+          metadata:
+            name: demo
+            namespace: krci
+          spec:
+            generators:
+              - list:
+                  elements:
+                    - cluster: in-cluster
+                      codebase: java-app
+                      ...
+                      versionType: semver
+          ```
+          </TabItem>
+        </Tabs>
+
+    2. Update the conditional expression in the `targetRevision` fields of the `spec.template.spec.source` and `spec.templatePatch.spec.sources` sections. For example:
+
+        <Tabs
+          defaultValue="3.11"
+          values={[
+            {label: '3.10', value: '3.10'},
+            {label: '3.11', value: '3.11'}
+          ]}>
+
+          <TabItem value="3.10">
+          ```yaml title="ApplicationSet"
+          apiVersion: argoproj.io/v1alpha1
+          kind: ApplicationSet
+          metadata:
+            name: demo
+            namespace: krci
+          spec:
+            template:
+              spec:
+                source:
+                  targetRevision: '{{ if eq .versionType "edp" }}build/{{ .imageTag }}{{ else }}{{ .imageTag }}{{ end }}'
+            ...
+            templatePatch: |2-
+                  {{- if .customValues }}
+                  spec:
+                    sources:
+                      - helm:
+                          parameters:
+                            - name: image.tag
+                              value: '{{ .imageTag }}'
+                            - name: image.repository
+                              value: {{ .imageRepository }}
+                          releaseName: '{{ .codebase }}'
+                          valueFiles:
+                            - $values/platform/{{ .stage }}/{{ .codebase }}-values.yaml
+                        targetRevision: '{{ if eq .versionType "edp" }}build/{{ .imageTag }}{{ else }}{{ .imageTag }}{{ end }}'
+          ```
+          </TabItem>
+
+          <TabItem value="3.11">
+          ```yaml title="ApplicationSet"
+          apiVersion: argoproj.io/v1alpha1
+          kind: ApplicationSet
+          metadata:
+            name: demo
+            namespace: krci
+          spec:
+            template:
+              spec:
+                source:
+                  targetRevision: '{{ if eq .versionType "semver" }}build/{{ .imageTag }}{{ else }}{{ .imageTag }}{{ end }}'
+            ...
+            templatePatch: |2-
+                  {{- if .customValues }}
+                  spec:
+                    sources:
+                      - helm:
+                          parameters:
+                            - name: image.tag
+                              value: '{{ .imageTag }}'
+                            - name: image.repository
+                              value: {{ .imageRepository }}
+                          releaseName: '{{ .codebase }}'
+                          valueFiles:
+                            - $values/platform/{{ .stage }}/{{ .codebase }}-values.yaml
+                        targetRevision: '{{ if eq .versionType "semver" }}build/{{ .imageTag }}{{ else }}{{ .imageTag }}{{ end }}'
+          ```
+          </TabItem>
+        </Tabs>
+
+    To automate the update of the ApplicationSet resources, it is possible to use the following bash script:
+
+    <Tabs
+      defaultValue="linux"
+      values={[
+        {label: 'Linux', value: 'linux'},
+        {label: 'macOS', value: 'macOS'}
+      ]}>
+
+      <TabItem value="linux">
+      ```bash title="patch-applicationset.sh"
+      #!/bin/bash
+
+      applicationsets=$(kubectl get applicationset -n krci -o jsonpath='{.items[*].metadata.name}')
+
+      for applicationset_name in $applicationsets; do
+        echo "Patching ApplicationSet: $applicationset_name"
+
+        # Export the current ApplicationSet resource to a temporary file
+        kubectl get applicationset "$applicationset_name" -n krci -o yaml > tmp-applicationset.yaml
+
+        # Replace 'versionType: edp' with 'versionType: semver'
+        sed -i 's/versionType: edp/versionType: semver/g' tmp-applicationset.yaml
+
+        # Replace conditionals in targetRevision
+        sed -i 's/{{ if eq .versionType "edp" }}/{{ if eq .versionType "semver" }}/g' tmp-applicationset.yaml
+
+        # Apply the modified ApplicationSet
+        kubectl apply -f tmp-applicationset.yaml
+
+        echo "Patched $applicationset_name"
+      done
+
+      # Cleanup
+      rm -f tmp-applicationset.yaml
+      ```
+      </TabItem>
+
+      <TabItem value="macOS">
+      ```bash title="patch-applicationset.sh"
+      #!/bin/bash
+
+      applicationsets=$(kubectl get applicationset -n krci -o jsonpath='{.items[*].metadata.name}')
+
+      for applicationset_name in $applicationsets; do
+        echo "Patching ApplicationSet: $applicationset_name"
+
+        # Export the current ApplicationSet resource to a temporary file
+        kubectl get applicationset "$applicationset_name" -n krci -o yaml > tmp-applicationset.yaml
+
+        # Replace 'versionType: edp' with 'versionType: semver'
+        sed -i '' 's/versionType: edp/versionType: semver/g' tmp-applicationset.yaml
+
+        # Replace conditionals in targetRevision
+        sed -i '' 's/{{ if eq .versionType "edp" }}/{{ if eq .versionType "semver" }}/g' tmp-applicationset.yaml
+
+        # Apply the modified ApplicationSet
+        kubectl apply -f tmp-applicationset.yaml
+
+        echo "Patched $applicationset_name"
+      done
+
+      # Cleanup
+      rm -f tmp-applicationset.yaml
+      ```
+      </TabItem>
+    </Tabs>
+
+6. Replace `edp-config` ConfigMap for Tekton Custom Tasks:
 
     Starting from version 3.11, the `edp-config` ConfigMap was renamed to `krci-config`. For Tekton custom tasks, that are using the `edp-config` ConfigMap, it is necessary to replace it with the `krci-config` in the task resource. For example:
 
@@ -242,7 +434,7 @@ We suggest backing up the KubeRocketCI environment before starting the upgrade p
       </TabItem>
     </Tabs>
 
-6. Update `pipelineUrl` parameter for Tekton Custom Pipelines:
+7. Update `pipelineUrl` parameter for Tekton Custom Pipelines:
 
     :::note
     The `pipelineUrl` parameter is used to update the Pull Request status with the corresponding pipeline URL, which is generated when the review or build pipeline is triggered automatically.
@@ -286,7 +478,7 @@ We suggest backing up the KubeRocketCI environment before starting the upgrade p
       </TabItem>
     </Tabs>
 
-7. (Optional) Add yamllint config to the GitOps repository:
+8. (Optional) Add yamllint config to the GitOps repository:
 
     :::note
     By default, yamllint uses the default configuration to lint YAML files in the GitOps repository. For more details on available yamllint rules, refer to the yamllint [documentation](https://yamllint.readthedocs.io/en/stable/rules.html).
@@ -313,7 +505,7 @@ We suggest backing up the KubeRocketCI environment before starting the upgrade p
 
     ![Yamllint rules](../../assets/user-guide/yamllint-rules.png "Yamllint rules")
 
-8. Security Tekton Task migration:
+9. Security Tekton Task migration:
 
     Starting from version 3.11, the `security` Tekton task, previously used in build pipelines, has been migrated to a separate `security-scan` pipeline. After the upgrade process, a new `security-scan` pipeline will be created for each available Git server.
 
@@ -337,7 +529,7 @@ We suggest backing up the KubeRocketCI environment before starting the upgrade p
 
         ![Security scan pipeline run](../../assets/operator-guide/upgrade/security-scan-pipeline-run.png "Security scan pipeline run")
 
-9. To upgrade KubeRocketCI to the v3.11, run the following command:
+10. To upgrade KubeRocketCI to the v3.11, run the following command:
 
     :::note
     To verify the installation, it is possible to test the deployment before applying it to the cluster with the `--dry-run` key:

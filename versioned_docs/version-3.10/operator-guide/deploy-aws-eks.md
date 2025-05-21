@@ -119,7 +119,7 @@ Find the detailed description of the variables in the [iam/variables.tf](https:/
     iam_permissions_boundary_policy_arn = "arn:aws:iam::012345678910:policy/role_boundary"
 
     # OpenID Connect provider URL used for creating Atlantis IAM role
-    oidc_provider="oidc.eks.<REGION>.amazonaws.com/id/<AWS_OIDC_ID>"
+    oidc_provider = "oidc.eks.<REGION>.amazonaws.com/id/<AWS_OIDC_ID>"
 
     tags = {
       "SysName"     = "KubeRocketCI"
@@ -177,6 +177,7 @@ Insert the missing fields in the file `vpc/versions.tf`:
         acl            = "bucket-owner-full-control"
         dynamodb_table = "terraform_locks"
         encrypt        = true
+        role_arn       = "arn:aws:iam::<AWS_ACCOUNT_ID>:role/KRCIDeployerRole"
       }
     ...
     ```
@@ -262,6 +263,7 @@ Insert the missing fields in the `eks/versions.tf` file:
         acl            = "bucket-owner-full-control"
         dynamodb_table = "terraform_locks"
         encrypt        = true
+        role_arn       = "arn:aws:iam::<AWS_ACCOUNT_ID>:role/KRCIDeployerRole"
       }
     ...
     ```
@@ -348,6 +350,7 @@ Insert the missing fields in the `argo-cd/versions.tf` file:
         acl            = "bucket-owner-full-control"
         dynamodb_table = "terraform_locks"
         encrypt        = true
+        role_arn       = "arn:aws:iam::<AWS_ACCOUNT_ID>:role/KRCIDeployerRole"
       }
     ...
     ```
@@ -428,6 +431,7 @@ Insert the missing fields in the `argo-cd/versions.tf` file:
         acl            = "bucket-owner-full-control"
         dynamodb_table = "terraform_locks"
         encrypt        = true
+        role_arn       = "arn:aws:iam::<AWS_ACCOUNT_ID>:role/KRCIDeployerRole"
       }
     ...
     ```

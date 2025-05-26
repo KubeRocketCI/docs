@@ -19,10 +19,11 @@ KubeRocketCI uses labels to interact with various resources in a Kubernetes clus
 
 The table below contains all the labels used in KubeRocketCI:
 
-| Label Key                           | Target Resources                    | Possible Values                                                                    | Description                                                       |
+| Label Key                           | Target Resources                    | Possible Values                                                                    | Description        |
 | :---------------------------------- |:---------------------------------| :----------------------------------------------------------------------------------| :-------------------------------------------------------------------------- |
 | app.edp.epam.com/secret-type        | Secrets                                     | `jira`, `nexus`, `sonar`, `defectdojo`, `dependency-track`,`repository` | Identifies the type of the secret.                                              |
 | app.edp.epam.com/integration-secret | Secrets                                     | `true`                                                                  | Indicates if the secret is used for integration.                                         |
+| app.edp.epam.com/integration        | Codebase                                    | `codemie`                                                              | Indicates that the codebase should be integrated with Codemie. When applied, the Codemie operator reconciles the codebase and creates a Codemie Application.                                        |
 | app.edp.epam.com/codebase           | PipelineRun, CodebaseImageStream            | `<codebase_name>`                                                       | Identifies the codebase associated with the PipelineRun and CodebaseImageStream.                                 |
 | app.edp.epam.com/codebasebranch     | PipelineRun, CodebaseImageStream            | `<codebasebranch_name>`                                                 | Identifies the codebase branch associated with the PipelineRun and CodebaseImageStream.                                 |
 | app.edp.epam.com/pipeline           | PipelineRun, TaskRun                        | `<environment_name>`                                                    | Used by the KubeRocketCI to display autotests' status (on Deploy environment)                                         |

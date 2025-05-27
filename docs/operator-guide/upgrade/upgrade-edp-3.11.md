@@ -533,9 +533,9 @@ We suggest backing up the KubeRocketCI environment before starting the upgrade p
 
     :::note
     To verify the installation, it is possible to test the deployment before applying it to the cluster with the `--dry-run` key:
-    `helm upgrade krci epamedp/edp-install -n krci --values values.yaml --version=3.11.2 --dry-run`
+    `helm upgrade krci epamedp/edp-install -n krci --values values.yaml --version=3.11.3 --dry-run`
     :::
 
     ```bash
-    helm upgrade krci epamedp/edp-install -n krci --values values.yaml --version=3.11.2
+    helm upgrade krci epamedp/edp-install -n krci --values values.yaml --version=3.11.3
     ```

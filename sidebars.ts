@@ -296,6 +296,7 @@ const sidebars: SidebarsConfig = {
             'operator-guide/cd/customize-environment-deletion',
             'operator-guide/cd/deploy-rpm',
             "operator-guide/cd/deploy-application-in-remote-cluster-via-irsa",
+            "operator-guide/cd/deploy-application-in-remote-cluster-via-token",
             {
               type: 'category',
               label: 'GitOps',

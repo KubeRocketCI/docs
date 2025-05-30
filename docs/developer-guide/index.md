@@ -5,11 +5,18 @@ sidebar_label: "Overview"
 ---
 <!-- markdownlint-disable MD025 -->
 
-# KubeRocketCI Developer Guide: Architecture, Components, and Contribution Workflow
+import Head from '@docusaurus/Head';
 
-<head>
+<Head>
+  <meta property="og:title" content="KubeRocketCI Developer Guide: Architecture, Components, and Contribution Workflow" />
+  <meta property="og:description" content="Technical guide on KubeRocketCI's architecture, components, and contribution workflow for developers. Includes resources, diagrams, and best practices." />
+  <meta property="og:image" content="https://docs.kuberocketci.io/img/logo-white-vertical.png" />
+  <meta property="og:url" content="https://docs.kuberocketci.io/docs/developer-guide" />
+  <meta property="og:type" content="article" />
   <link rel="canonical" href="https://docs.kuberocketci.io/docs/developer-guide" />
-</head>
+</Head>
+
+# KubeRocketCI Developer Guide: Architecture, Components, and Contribution Workflow
 
 The KubeRocketCI Developer Guide serves as a comprehensive technical resource specifically designed for developers. It offers detailed insights into expanding the functionalities of KubeRocketCI. This section focuses on explaining the development approach and fundamental architectural blueprints that form the basis of the platform's ecosystem.
 

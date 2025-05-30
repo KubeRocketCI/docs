@@ -5,11 +5,18 @@ sidebar_label: "Overview"
 ---
 <!-- markdownlint-disable MD025 -->
 
-# KubeRocketCI Operator Guide: Installation, Configuration, and Administration
+import Head from '@docusaurus/Head';
 
-<head>
+<Head>
+  <meta property="og:title" content="KubeRocketCI Operator Guide: Installation, Configuration, and Administration" />
+  <meta property="og:description" content="Full DevOps guide: install, configure, and manage KubeRocketCI. Covers platform support, authentication, artifacts, CI/CD, infrastructure, recovery, upgrades, and more." />
+  <meta property="og:image" content="https://docs.kuberocketci.io/img/logo-white-vertical.png" />
+  <meta property="og:url" content="https://docs.kuberocketci.io/docs/operator-guide" />
+  <meta property="og:type" content="article" />
   <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide" />
-</head>
+</Head>
+
+# KubeRocketCI Operator Guide: Installation, Configuration, and Administration
 
 The Operator guide is intended for DevOps and provides information on KubeRocketCI installation, configuration and customization, as well as the platform support. Inspect the documentation to adjust the KubeRocketCI according to your business needs:
 

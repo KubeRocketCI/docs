@@ -5,11 +5,17 @@ sidebar_label: "Install KubeRocketCI"
 ---
 <!-- markdownlint-disable MD025 -->
 
-# Install KubeRocketCI
+import Head from '@docusaurus/Head';
 
-<head>
-  <link rel="canonical" href="https://docs.kuberocketci.io/docs/quick-start/platform-installation" />
-</head>
+<Head>
+  <meta property="og:title" content="Install KubeRocketCI" />
+  <meta property="og:description" content="Quick start guide for installing KubeRocketCI, including prerequisites like Tekton installation, deploying the platform with Helm, and accessing the Portal UI." />
+  <meta property="og:image" content="https://docs.kuberocketci.io/img/logo-white-vertical.png" />
+  <meta property="og:url" content="https://docs.kuberocketci.io/docs/quick-start/platform-installation" />
+  <meta property="og:type" content="article" />
+</Head>
+
+# Install KubeRocketCI
 
 This page serves as the starting point for the quick start guide, where we will install Tekton as a prerequisite and then proceed to install the KubeRocketCI itself.
 

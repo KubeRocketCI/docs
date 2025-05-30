@@ -32,7 +32,7 @@ Cross-account interaction is performed through IRSA with a two-tiered IAM role s
 - `AWSIRSA_\{cluster_name\}_CDPipelineOperator` can then assume the `AWSIRSA_\{cluster_name\}_CDPipelineAgent` role in AWS Account B.
 - `AWSIRSA_\{cluster_name\}_CDPipelineAgent` configures the environment (Stage) by creating namespaces, generating service accounts, copying secrets, and preparing for deployment.
 
-### Required IAM Roles and Polices for KRCI
+### Required IAM Roles and Policies for KRCI
 
 Below is a Trust Policy for the initial IRSA role that the service account assumes:
 

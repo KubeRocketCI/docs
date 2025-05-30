@@ -16,6 +16,8 @@ This section enables the creation of the necessary resources to configure access
 
 ## Using Kubernetes RBAC
 
+To configure application deployment in remote cluster using Kubernetes RBAC, follow the steps below:
+
 1. Create a ServiceAccount:
 
     ```yaml
@@ -27,7 +29,7 @@ This section enables the creation of the necessary resources to configure access
     ```
 
 2. Bind the ServiceAccount to the cluster-admin role using ClusterRoleBinding
-   
+
     ```yaml
     apiVersion: rbac.authorization.k8s.io/v1
     kind: ClusterRoleBinding
@@ -44,7 +46,7 @@ This section enables the creation of the necessary resources to configure access
     ```
 
 3. Create a Secret with a token for the ServiceAccount
-   
+
     ```yaml
     apiVersion: v1
     kind: Secret
@@ -57,6 +59,8 @@ This section enables the creation of the necessary resources to configure access
     ```
 
 ## Using Capsule
+
+To configure application deployment in remote cluster using the Capsule tool, follow the steps below:
 
 1. Create a ServiceAccount for deployment
 

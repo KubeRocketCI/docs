@@ -195,4 +195,6 @@ export const redirectMaps: Record<string, string> = {
   'user-guide/quick-links': 'https://docs.kuberocketci.io/docs/user-guide/quick-links',
   'user-guide/tekton-pipelines': 'https://docs.kuberocketci.io/docs/user-guide/tekton-pipelines',
   'user-guide/terraform-stages': 'https://docs.kuberocketci.io/docs/operator-guide/ci/ci-pipeline-terraform',
+
+  'google8d28c574bd766c92.html': 'https://docs.kuberocketci.io/google8d28c574bd766c92.html',
 };

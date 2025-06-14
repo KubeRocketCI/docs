@@ -15,12 +15,16 @@ description: "Explore branch management in KubeRocketCI, from adding new branche
 
 This page describes how to manage branches in the created component, whether it is an application, library, autotest or infrastructure. It also briefly explains two approaches of managing custom pipelines for codebases.
 
+<div style={{ display: 'flex', justifyContent: 'center' }}>
+<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/AsWQKiRvNDY" title="Integrate KubeRocketCI with Nexus" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen"></iframe>
+</div>
+
 ## Pipeline Management
 
-There are two approaches to define a codebases with Tekton pipelines:
+There are two approaches to define codebases with Tekton pipelines:
 
-  * Using [build tool and framework](../use-cases/tekton-custom-pipelines.md)
-  * Using codebase [branch settings](../use-cases/custom-pipelines-flow.md)
+  * Using [build tool and framework](../use-cases/tekton-custom-pipelines.md);
+  * Using codebase [branch settings](../use-cases/custom-pipelines-flow.md).
 
 ### Build Tool/Framework Approach
 
@@ -44,10 +48,10 @@ If you need to frequently and quickly redefine a build or review pipeline, this 
 ## Add New Branch
 
 :::note
-  When working with libraries, pay attention when specifying the branch name: the branch name is involved in the formation of the library version, so it must comply with the [semantic versioning](https://semver.org/) rules for the library.
+  When working with libraries, pay attention to specifying the branch name: the branch name is involved in the formation of the library version, so it must comply with the [semantic versioning](https://semver.org/) rules for the library.
 :::
 
-When adding a component, the default branch is a **main** branch. In order to add a new branch, follow the steps below:
+When adding a component, the default branch is **main**. To add a new branch, follow the steps below:
 
 1. Navigate to the **Branches** block by clicking the component name link in the Components list.
 
@@ -57,15 +61,30 @@ When adding a component, the default branch is a **main** branch. In order to ad
 
   ![New branch](../assets/user-guide/components/branches/branches-create-new-branch.png "New branch")
 
-    a. **Branch name** - type the branch name. Pay attention that this field remains static if you create a release branch. For the **Clone** and **Import** strategies: if you want to use the existing branch, enter its name into this field.
+    a. **Learn more** - opens a documentation page the explains how to [add new branch](../user-guide/manage-branches.md#add-new-branch).
 
-    b. **From commit hash** - paste the commit hash from which the branch will be created. For the **Clone** and **Import** strategies: Note that if the **From commit hash** field is empty, the latest commit from the branch name will be used.
+    b. **Release branch** - select this option to make a release branch. Codebases from release branches are marked with a different tag.
 
-    c. **Build pipeline** - select the build pipeline you want to use to build the application or leave the default one.
+  :::note
+  When working with release branches, keep in mind that only the **semver** versioning type supports release branches. In the **default** versioning type, this option is unavailable.
+  Additionally, the SNAPSHOT version is reset each time you create a release branch.
+  :::
 
-    d. **Review pipeline** - select the review pipeline you want to use to review the application or leave the default one.
+    When the **Release branch** option is selected, you will also need to specify release tag the application will be marked:
 
-    e. **View diagram** - view the pipeline to verify this is the exact pipeline you need:
+    ![Release branch](../assets/user-guide/components/branches/branches-release-branch.png "Release branch")
+
+    c. **Branch name** - type the branch name. Note that this field remains static if you create a release branch. For the **Clone** and **Import** strategies: if you want to use an existing branch, enter its name in this field.
+
+    d. **From commit hash** - paste the commit hash from which the branch will be created. For the **Clone** and **Import** strategies: Note that if the **From commit hash** field is empty, the latest commit from the branch name will be used.
+
+    e. **Branch version** - specify the application version and tag (SNAPSHOT by default).
+
+    f. **Build pipeline** - select the build pipeline you want to use to build the application or leave the default one.
+
+    g. **Review pipeline** - select the review pipeline you want to use to review the application or leave the default one.
+
+    h. **View diagram** - view the pipeline to verify this is the exact pipeline you need:
 
     ![View pipeline diagram](../assets/user-guide/components/branches/branches-pipeline-diagram.png "View pipeline diagram")
 
@@ -78,8 +97,12 @@ When adding a component, the default branch is a **main** branch. In order to ad
   ![Yaml edit](../assets/user-guide/components/branches/branches-yaml-edit.png "Yaml edit")
 
   :::info
-    Adding of a new branch is indicated in the context of the `EDP versioning` type.
+    Adding of a new branch is indicated in the context of the `semver` versioning type.
   :::
+
+## Add Existing Branch
+
+Onboarding a branch that has already been created in Git to the platform follows the same steps as when you [add a new branch](../user-guide/manage-branches.md#add-new-branch).
 
 ## Edit Existing Branch
 
@@ -131,6 +154,7 @@ The tree diagram window is presented below:
 
 :::note
   The default **master/main** branch cannot be removed.
+  Additionally, deleting a branch in the portal doesn’t remove it from Git. It is required to delete it there as well if necessary.
 :::
 
 In order to delete the added branch with the corresponding record in the KubeRocketCI portal database, do the following:

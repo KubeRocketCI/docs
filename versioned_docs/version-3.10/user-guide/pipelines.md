@@ -40,7 +40,7 @@ To see the Pipelines section, open the KubeRocketCI portal and select the **Pipe
 
 ## Pipeline Overview
 
-1. Click the pipeline name to view their details:
+1. Click the pipeline name to view its details:
 
   ![Pipeline details](../assets/user-guide/pipeline-details-tab.png "Pipeline details")
 

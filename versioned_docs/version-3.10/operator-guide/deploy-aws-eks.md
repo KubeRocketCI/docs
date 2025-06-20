@@ -100,7 +100,7 @@ rename it in the correspondence with project name:
 
 ## AWS IAM Roles
 
-This step covers the `KRCIDeployerRole` and `Atlantis` AWS IAM roles creation procedure. To create the roles, take the following steps:
+This step covers the `KRCIDeployerRole` AWS IAM role creation procedure. To create the role, follow the steps below:
 
 1. Navigate to the IAM module directory:
 
@@ -117,9 +117,6 @@ Find the detailed description of the variables in the [iam/variables.tf](https:/
 
     # If you need to set role boundary
     iam_permissions_boundary_policy_arn = "arn:aws:iam::012345678910:policy/role_boundary"
-
-    # OpenID Connect provider URL used for creating Atlantis IAM role
-    oidc_provider = "oidc.eks.<REGION>.amazonaws.com/id/<AWS_OIDC_ID>"
 
     tags = {
       "SysName"     = "KubeRocketCI"
@@ -143,8 +140,6 @@ Find the detailed description of the variables in the [iam/variables.tf](https:/
 
       deployer_iam_role_arn  = "arn:aws:iam::012345678910:role/KRCIDeployerRole"
       deployer_iam_role_name = "KRCIDeployerRole"
-      atlantis_iam_role_arn  = "arn:aws:iam::012345678910:role/Atlantis"
-      atlantis_iam_role_name = "Atlantis"
       ```
 
     :::
@@ -242,6 +237,7 @@ This step will cover the following topics:
 * Create the AWS ASGs for the EKS Cluster
 * Create the AWS ALB
 * (Optional) Create the Kaniko AWS IAM Role
+* (Optional) Create the Atlantis AWS IAM Role
 
 To accomplish the tasks outlined above, follow these steps:
 
@@ -304,14 +300,28 @@ Please find the detailed description of the variables in the [eks/variables.tf](
 
     Once the EKS cluster and the Kaniko AWS IAM Role are successfully created, you can use the resulting Amazon Resource Name (ARN) in the `edp-tekton.kaniko.roleArn` field within the `values.yaml` file during the [KubeRocketCI installation](install-kuberocketci.md).
 
-5. Initialize the backend and apply the changes:
+5. (Optional) Create the Atlantis AWS IAM Role:
+
+    If Atlantis will be used for automating Terraform workflows in Kubernetes environments, it is necessary to create a specific IAM role for Atlantis.
+
+    To create the Atlantis AWS IAM Role, set the `create_atlantis_iam_role` variable to `true` in the `eks/template.tfvars` configuration file:
+
+    ```tf title="eks/template.tfvars"
+    create_atlantis_iam_role = true
+    ```
+
+    The Atlantis AWS IAM Role will be created as part of the EKS cluster provisioning process.
+
+    Once the EKS cluster and the Atlantis AWS IAM Role are successfully created, you can proceed with the [Atlantis installation](./infrastructure-providers/atlantis-installation.md) and use the resulting Amazon Resource Name (ARN) in the `atlantis.serviceAccount.annotations` field within the `values.yaml` file for the Atlantis Helm chart.
+
+6. Initialize the backend and apply the changes:
 
     ```bash
     terraform init
     terraform apply -var-file=./template.tfvars
     ```
 
-6. Update local Kubernetes configuration.
+7. Update local Kubernetes configuration.
 
     After the EKS cluster is successfully deployed, update the local Kubernetes configuration to interact with the cluster:
 
@@ -319,7 +329,7 @@ Please find the detailed description of the variables in the [eks/variables.tf](
     aws eks update-kubeconfig --region <REGION> --name <CLUSTER_NAME>
     ```
 
-7. Once AWS EKS Cluster is successfully deployed, you can navigate to our [KubeRocketCI addons](add-ons-overview.md) to install and manage cluster applications using the GitOps approach.
+8. Once AWS EKS Cluster is successfully deployed, you can navigate to our [KubeRocketCI addons](add-ons-overview.md) to install and manage cluster applications using the GitOps approach.
 
 ## Argo CD Configuration (Optional)
 

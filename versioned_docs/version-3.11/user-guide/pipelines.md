@@ -13,7 +13,7 @@ description: "Optimize CI/CD workflows with KubeRocketCI's Pipelines section, a 
   <link rel="canonical" href="https://docs.kuberocketci.io/docs/user-guide/pipelines" />
 </head>
 
-Pipelines are integral part of any CI/CD. They are involved in code build, review, and deployment procedures. Such big variety of pipelines result in a demand of having a single place where the pipelines can be managed. For this purpose, the Pipelines section was added to the KubeRocketCI portal.
+Pipelines are an integral part of any CI/CD. They are involved in code build, review, and deployment procedures. Such a big variety of pipelines results in a demand for having a single place where the pipelines can be managed. For this purpose, the Pipelines section was added to the KubeRocketCI portal.
 
 ## Pipelines Page Overview
 
@@ -40,13 +40,13 @@ To see the Pipelines section, open the KubeRocketCI portal and select the **Pipe
 
 ## Pipeline Overview
 
-To inspect a pipeline details, follow the steps below:
+To inspect pipeline details, follow the steps below:
 
-1. Click the pipeline name to view its details:
+1. Click the PipelineRun name to view its details:
 
   ![PipelineRun name](../assets/user-guide/pipelines/click-pipeline-run-name.png "PipelineRun name")
 
-2. The first tab that you view once you click the PipelineRun name is the **Details** tab:
+2. The first tab that appears when you click the PipelineRun name is the **Details** tab:
 
   ![Pipeline details](../assets/user-guide/pipelines/pipeline-details-tab.png "Pipeline details")
 
@@ -70,15 +70,25 @@ To inspect a pipeline details, follow the steps below:
 
   This tab shows the resulting artifact that was built in the pipeline.
 
+  There are also a couple of ways to view the build pipeline results: from the codebase details page and the Pipelines section:
+
+  From the codebase details page:
+
+  ![Pipeline results in codebase details page](../assets/user-guide/pipelines/results-in-codebase.png "Pipeline results in codebase details page")
+
+  From the Pipelines section:
+
+  ![Pipeline results in Pipelines section](../assets/user-guide/pipelines/results-in-pipelines-section.png "Pipeline results in Pipelines section")
+
 :::note
-This tab is accessible only in Build Pipelines.
+This tab is accessible only in Build Pipelines that produce artifacts.
 :::
 
 6. Navigate to the **Diagram** tab:
 
   ![Pipeline diagram](../assets/user-guide/pipelines/pipelines-diagram-tab.png "Pipeline diagram")
 
-  Diagram displays the pipeline's real-time status. You click the task name to navigate to the corresponding task in the **Details** tab.
+  The diagram displays the pipeline's real-time status. Click the task name to navigate to the corresponding task in the **Details** tab.
 
 ## Operate With Pipelines
 
@@ -111,6 +121,14 @@ To view and manage Tekton Pipelines, select the **Pipelines** tab:
 To view and manage Tekton Tasks, select the **Tasks** tab:
 
   ![Tasks tab](../assets/user-guide/pipelines/tasks-tab.png "Tasks tab")
+
+The **History** tab shows logs saved in the alternative log stash tools, such as OpenSearch:
+
+  ![History tab](../assets/user-guide/pipelines/history-tab.png "History tab")
+
+:::note
+The **History** tab operates if the OpenSearch tool is installed. You can install OpenSearch using our [cluster add-ons](https://github.com/epam/edp-cluster-add-ons/blob/main/clusters/core/apps/values.yaml#L207).
+:::
 
 ## Edit Table View
 

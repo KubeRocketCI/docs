@@ -5,6 +5,10 @@ sidebar_label: "Argo CD Deployment Preview"
 ---
 <!-- markdownlint-disable MD025 -->
 
+<head>
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/user-guide/argo-cd-preview" />
+</head>
+
 # Preview Argo CD Diff in Deploy Pipelines
 
 Comprehensive oversight of deployment procedures is critical when introducing changes to environments, particularly in production contexts. The **deploy-diff-approve** pipeline addresses this requirement by enabling a controlled deployment review process. Prior to approving or rejecting a deployment, the pipeline presents a link to the corresponding Argo CD Application resource in the logs. This integration allows operators to examine the precise Kubernetes resource changes that will be applied during deployment using Argo CD's native diff visualization capabilities.

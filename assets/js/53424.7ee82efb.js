@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkkuberocketci_docs=self.webpackChunkkuberocketci_docs||[]).push([[53424],{53424:(e,c,k)=>{k.d(c,{createArchitectureServices:()=>r.S});var r=k(94318);k(21028)}}]);

@@ -1,6 +1,8 @@
+import React from 'react';
+
 export interface UseCaseItem {
   title: string;
   Svg: React.ComponentType<React.ComponentProps<'svg'>>;
-  description: JSX.Element;
+  description: React.JSX.Element;
   link: string;
 }

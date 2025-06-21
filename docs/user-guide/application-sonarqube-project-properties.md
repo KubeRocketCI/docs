@@ -2,7 +2,7 @@
 
 title: "SonarQube Project Properties for Application"
 sidebar_label: SonarQube Project Properties for Application
-description: "This section describes the subsequent possible actions that can be performed with the newly added or existing applications."
+description: "Learn how to configure SonarQube project properties for applications in KubeRocketCI, including default settings, custom configurations, and repository structure requirements."
 
 ---
 <!-- markdownlint-disable MD025 -->

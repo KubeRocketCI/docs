@@ -1,6 +1,6 @@
 ---
 
-title: Glossary"
+title: Platform Glossary
 description: "A comprehensive glossary outlining essential KubeRocketCI terms and features, including platform components, business entities, CI/CD processes, and Kubernetes/OpenShift concepts."
 sidebar_label: "Glossary"
 

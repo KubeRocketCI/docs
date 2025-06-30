@@ -58,7 +58,7 @@ Codebase tags also have special marks and appear only in the KubeRocketCI portal
 - **Latest**: Assigned when a new application version is built and deployment is initiated.
 - **Stable**: Assigned to the latest successfully deployed application after passing the project's quality gates.
 
-To learn more about codebase tags, read the [Deployment Strategies Overview](/docs/operator-guide/cd/auto-stable-trigger-type) page.
+To learn more about codebase tags, read the [Deployment Strategies Overview](/docs/user-guide/auto-stable-trigger-type) page.
 
 ---
 

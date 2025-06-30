@@ -59,5 +59,5 @@ To utilize the pipeline with Argo CD preview functionality, follow this sequence
 ## Related Articles
 
 * [Customize Deploy Pipeline](../operator-guide/cd/customize-deploy-pipeline.md)
-* [Deployment Strategies in KubeRocketCI](../operator-guide/cd/auto-stable-trigger-type.md)
+* [Deployment Strategies in KubeRocketCI](../user-guide/auto-stable-trigger-type.md)
 * [Argo CD Integration](../operator-guide/cd/argocd-integration.md)

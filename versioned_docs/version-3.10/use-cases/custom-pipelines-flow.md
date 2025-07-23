@@ -328,6 +328,7 @@ To deploy custom pipelines to the cluster, you can use Argo CD, which includes a
 
 :::note
 Before proceeding, ensure you have added Add-Ons repository and application according to the [Install via Add-Ons](../operator-guide/add-ons-overview.md) page.
+Ensure to add the credentials template in the Argo CD settings to grant Argo CD access to both your Add-Ons and tekton-custom-pipelines repositories.
 :::
 
 To deliver custom Tekton pipelines to the cluster, follow these steps:

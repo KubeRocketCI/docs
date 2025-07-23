@@ -23,9 +23,9 @@ KubeRocketCI relies on Tekton resources, including Tasks, Pipelines, Triggers, a
 To install Tekton, run the commands below:
 
   ```bash
-  kubectl apply -f https://storage.googleapis.com/tekton-releases/pipeline/previous/v0.53.4/release.yaml
-  kubectl apply -f https://storage.googleapis.com/tekton-releases/triggers/previous/v0.25.3/release.yaml
-  kubectl apply -f https://storage.googleapis.com/tekton-releases/triggers/previous/v0.25.3/interceptors.yaml
+  kubectl apply -f https://storage.googleapis.com/tekton-releases/pipeline/previous/v1.0.0/release.yaml
+  kubectl apply -f https://storage.googleapis.com/tekton-releases/triggers/previous/v0.32.0/release.yaml
+  kubectl apply -f https://storage.googleapis.com/tekton-releases/triggers/previous/v0.32.0/interceptors.yaml
   ```
 
 ## Install platform

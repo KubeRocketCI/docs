@@ -93,7 +93,7 @@ Follow the instructions below to fill in the fields of the **Codebase Info** men
     * **Select Build Tool** -  allows to choose the build tool to use. A set tools and can be changed in accordance with the selected code language.
 
       * Java - selecting Java allows using the Gradle or Maven tool.
-      * JavaScript - selecting JavaScript allows using the NPM tool.
+      * JavaScript - selecting JavaScript allows using the NPM or PNPM tool.
       * C# - selecting C# allows using the .Net tool.
       * Python - selecting Python allows using Python tool.
       * Go - selecting Go allows using Go tool.

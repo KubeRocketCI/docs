@@ -39,7 +39,7 @@ The platform consists of the following blocks:
   |C|None|Make,CMake|:white_check_mark:|||
   |C++|None|Make,CMake|:white_check_mark:|||
   |Go|Beego, Gin, Operator SDK|Go|:white_check_mark:|||
-  |JavaScript|React, Vue, Angular, Express, Next.js, Antora|NPM|:white_check_mark:|:white_check_mark:||
+  |JavaScript|React, Vue, Angular, Express, Next.js, Antora|NPM, PNPM|:white_check_mark:|:white_check_mark:||
   |HCL|Terraform|Terraform||:white_check_mark:||
   |Helm|Helm, Pipeline|Helm||:white_check_mark:||
   |Groovy|Codenarc|Codenarc||:white_check_mark:||

@@ -18,7 +18,7 @@ import TabItem from '@theme/TabItem';
 
 This guide explains how to integrate KrakenD with KubeRocketCI. [KrakenD](https://www.krakend.io/docs/) is a fast, open-source API gateway that helps manage requests, protect sensitive data, and optimize routing. It offers options for service discovery, caching, authorization, and rate limiting, which can be customized for the platform.
 
-KubeRocketCI uses KrakenD to connect with services like SonarQube, Dependency-Track, and OpenSearch. This integration allows the platform to fetch data from these services and show it in the KubeRocketCI portal, giving users a clear view of their projects and pipelines. For enhanced security, KrakenD uses JWT tokens from Identity Providers (such as Keycloak or Microsoft Entra ID) to authenticate and authorize requests.
+KubeRocketCI uses KrakenD to connect with services like SonarQube, Dependency-Track, OpenSearch, and GitFusion. This integration allows the platform to fetch data from these services and show it in the KubeRocketCI portal, giving users a clear view of their projects and pipelines. For enhanced security, KrakenD uses JWT tokens from Identity Providers (such as Keycloak or Microsoft Entra ID) to authenticate and authorize requests.
 
 ## Prerequisites
 
@@ -203,6 +203,12 @@ To configure KrakenD as the API gateway for KubeRocketCI, follow the steps below
         echo -n "admin:MySecurePass123" | base64
         ```
 
+    * **GITFUSION_URL**: The URL of the [GitFusion](https://github.com/KubeRocketCI/gitfusion) instance. For example: `http://gitfusion.<krci-namespace>:8080`
+
+        :::note
+        The `<krci-namespace>` should be replaced with the actual namespace where GitFusion is deployed.
+        :::
+
     * **JWK_URL**: The URL of the Identity Provider (Keycloak or Microsoft Entra ID) to fetch the JSON Web Key (JWK) set.
 
         - For Keycloak, the URL should be in the following format: `https://keycloak.example.com/auth/realms/<realmName>/protocol/openid-connect/certs`.
@@ -226,6 +232,7 @@ To configure KrakenD as the API gateway for KubeRocketCI, follow the steps below
           DEPTRACK_TOKEN: <dependency-track-token>
           OPENSEARCH_URL: https://opensearch-cluster-master.logging:9200
           OPENSEARCH_CREDS: <base64-encoded-credentials>
+          GITFUSION_URL: http://gitfusion.<krci-namespace>:8080
           JWK_URL: https://keycloak.example.com/auth/realms/<realmName>/protocol/openid-connect/certs
         ```
 
@@ -241,6 +248,7 @@ To configure KrakenD as the API gateway for KubeRocketCI, follow the steps below
           "DEPTRACK_TOKEN": "<dependency-track-token>",
           "OPENSEARCH_URL": "https://opensearch-cluster-master.logging:9200",
           "OPENSEARCH_CREDS": "<base64-encoded-credentials>",
+          "GITFUSION_URL": "http://gitfusion.<krci-namespace>:8080",
           "JWK_URL": "https://keycloak.example.com/auth/realms/<realmName>/protocol/openid-connect/certs"
         }
         ```

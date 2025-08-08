@@ -237,26 +237,96 @@ for GitHub, GitLab, Bitbucket, or Gerrit integrations. The credential template m
 
 6. Generate Argo CD project token for deploy integration:
 
-    ```bash
-    URL=<ARGO CD URL>
-    TOKEN=$(argocd proj role create-token krci developer -i argocd-ci -t)
+    <Tabs
+      defaultValue="yaml"
+      values={[
+        {label: 'YAML', value: 'yaml'},
+        {label: 'UI', value: 'ui'}
+      ]}>
+
+      <TabItem value="yaml">
+
+        ```bash
+        URL=<ARGO CD URL>
+        TOKEN=$(argocd proj role create-token krci developer -i argocd-ci -t)
 
 
-    cat <<EOF | kubectl apply -f -
-    apiVersion: v1
-    kind: Secret
-    metadata:
-      name: argocd-ci
-      namespace: krci
-      labels:
-        app.edp.epam.com/integration-secret: "true"
-        app.edp.epam.com/secret-type: "argocd"
-    type: Opaque
-    stringData:
-      token: $TOKEN
-      url: $URL
-    EOF
-    ```
+        cat <<EOF | kubectl apply -f -
+        apiVersion: v1
+        kind: Secret
+        metadata:
+          name: argocd-ci
+          namespace: krci
+          labels:
+            app.edp.epam.com/integration-secret: "true"
+            app.edp.epam.com/secret-type: "argocd"
+        type: Opaque
+        stringData:
+          token: $TOKEN
+          url: $URL
+        EOF
+        ```
+
+      </TabItem>
+
+      <TabItem value="ui">
+        Generate Argo CD project token via UI, follow the steps below:
+
+        1. Open your Argo CD endpoint.
+
+        2. In the Argo CD main menu, select **Settings**:
+
+          ![Argo CD settings](../../assets/operator-guide/cd/argo-cd-open-settings.png "Argo CD settings")
+
+        3. On the **Settings** page, select **Projects**:
+
+          ![Argo CD projects](../../assets/operator-guide/cd/argo-cd-open-projects.png "Argo CD projects")
+
+        4. On the **Projects** page, select the previously created Argo CD project:
+
+          ![Select krci project](../../assets/operator-guide/cd/argo-cd-project-krci.png "Select krci project")
+
+        5. On the project details page, select the **Roles** tab:
+
+          ![Roles tab](../../assets/operator-guide/cd/argo-cd-project-roles-tab.png "Roles tab")
+
+        6. On the **Roles** tab, select the **developer** role:
+
+          ![Developer role](../../assets/operator-guide/cd/argo-cd-project-select-role.png "Developer role")
+
+        7. On the appeared window, scroll down to the **JWT Tokens** section, specify the required fields and click **Create**:
+
+          * **Token ID**: Token name.
+          * **Expires in**: Defines the period for which the token is considered valid. Must be in the "[0-9]+[s,m,h,d]" format. For example, "12h", "7d".
+
+          ![Create JWT token](../../assets/operator-guide/cd/argo-cd-project-create-token.png "Create JWT token")
+
+        8. Confirm the token creation:
+
+          ![Confirm token creation](../../assets/operator-guide/cd/argo-cd-create-token-confirmation.png "Confirm token creation")
+
+        9. Copy the data of the newly created token:
+
+          ![Copy token data](../../assets/operator-guide/cd/argo-cd-project-copy-token.png "Copy token data")
+
+        10. Navigate to **KubeRocketCI portal** -> **Configuration** -> **Deployment** -> **Argo CD** and click **+ Add integration**:
+
+          ![Argo CD configuration page](../../assets/operator-guide/cd/argo-cd-integration-portal.png "Argo CD configuration page")
+
+        11. In the integration window, specify the required fields and click **Save**:
+
+          * **Quick Link URL**: Enter the URL of your Argo CD instance (e.g., https://argocd.example.com). A quick link will be added to the Overview section for quick access to Argo CD from the KubeRocketCI portal.
+          * **URL**:  Enter the URL of your Argo CD instance (e.g., https://argocd.example.com).
+          * **Token**: Paste the JWT token data copied earlier.
+
+          ![Specify required fields](../../assets/operator-guide/cd/argo-cd-project-integration-portal.png "Specify required fields")
+
+        12. Verify that the integration status is green:
+
+          ![Verify integration status](../../assets/operator-guide/cd/argo-cd-project-token-added.png "Verify integration status")
+
+      </TabItem>
+    </Tabs>
 
 Once Argo CD is successfully integrated, KubeRocketCI user can utilize Argo CD to deploy [CD pipelines](../../user-guide/add-cd-pipeline.md).
 

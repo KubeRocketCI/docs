@@ -22,10 +22,7 @@ in a branch and the necessary entities for the Deployment Flow. You can create a
 
 ## Create Deployment Flow
 
-The **Create Deployment Flow** dialog contains the two steps:
-
-* The **Enter name** step
-* The **Add applications** step
+The **Create Deployment Flow** dialog has two steps: **Enter name** and **Add applications**.
 
 ### The Deployment Flow Menu
 
@@ -45,7 +42,9 @@ To create a deployment flow, follow the steps below:
 
     1. Enter the deployment flow name that will be displayed in the Deployment Flows list. Enter at least two characters, use the lower-case letters, numbers, and dashes.
 
-    2. Click the **Next** button to move onto the **Add applications** tab.
+    2. Enter informative but concise description.
+
+    3. Click the **Next** button to move onto the **Add applications** tab.
 
     :::note
       The namespace created by the environment has the following pattern combination: **[KubeRocketCI namespace]-[environment name]-[stage name]**.
@@ -62,10 +61,7 @@ To create a deployment flow, follow the steps below:
 
         * **Branch** - Select the application branch from the drop-down menu.
 
-        * **Promote in pipeline** - Select the this check box in order to transfer the application from one to another stage
-        by the specified codebase branch. If the **Promote in pipeline** check box is not selected,
-        the same codebase stream will be deployed regardless of the stage, i.e. the codebase stream input,
-        which was selected for the pipeline, will always be used.
+        * **Promote applications** - When enabled, applications will be promoted through stages using the latest successful build from each previous stage. When disabled, all stages will deploy the same version that was initially selected for the pipeline, regardless of any newer builds.
 
         :::note
           If there is another deployed environment stage with the respective codebase stream (equal image stream as an OpenShift term), the pattern combination will be as follows: `[pipeline name]-[stage name]-[application name]-[verified]`.
@@ -79,11 +75,11 @@ To create a deployment flow, follow the steps below:
 
 Stages are created the following way:
 
-1. On the **Environments** menu, click the **Create Environment** button and fill in the necessary fields in the corresponding window:
+1. On the **Environments** menu, click the **Create Environment** button:
 
     ![CD stages](../assets/user-guide/environments/edp-portal-cd-pipeline-add-stages.png "CD stages")
 
-2. The **Configure Stage** tab of the **Create Stage** menu is presented below:
+2. On the **Configure Stage** tab of the **Create Stage** menu, fill in the necessary fields in the corresponding window and click **Next**:
 
     ![CD stages](../assets/user-guide/environments/edp-portal-cd-pipeline-stages.png "CD stages")
 
@@ -97,14 +93,14 @@ Stages are created the following way:
       * **Pipeline template** - Choose a predefined blueprint outlining the deployment process for your application. While you have the option to incorporate custom deployment templates by generating a resource of the PipelineTemplate category, you can also opt for one of the preexisting options: with autotests or without.
       * **Clean Pipeline template** - Choose one of the pre-defined pipelines offered by KubeRocketCI to define the cleanup logic. In case if you have specific requirements to the environment cleanup procedure, you can make up your own cleanup pipeline to use, which will be added to the **Clean Pipeline template** drop-down list.
 
-3. Click the **Next** button to move onto the **Add quality gates** tab:
+3. On the **Add quality gates** tab, specify your quality gates and click **Create**:
 
     ![Add quality gates menu](../assets/user-guide/environments/edp-portal-cd-adding-stage1.png "Add quality gates menu")
 
     Select the quality gate options:
       * **Quality gate type** - Select the quality gate type:
-        * Manual - means that the promoting process should be confirmed in Tekton manually;
-        * Autotests - means that the promoting process should be confirmed by the successful passing of the autotests.;
+        * Manual - The promoting process should be confirmed in Tekton manually;
+        * Autotests - The promoting process should be confirmed by the successful passing of the autotests;
       * **Step name** - Type the step name, which will be displayed in Tekton, for every quality gate;
       * **Autotest** - Select the previously created [autotest](add-autotest.md) name;
       * **Autotest branch** - Specify a branch for the autotest.
@@ -113,11 +109,13 @@ Stages are created the following way:
           The image promotion and execution of the pipelines depend on the sequence in which the environments are added.
         :::
 
-4. Click the **Create** button to start the provisioning of the pipeline:
+4. Click the **Go to environment** button to start the provisioning of the pipeline:
 
     ![Adding stage](../assets/user-guide/environments/edp-portal-stage-final.png "Adding stage")
 
-As a result, a new environment will be created in the environments list.
+As a result, a new environment will be created in the environments list. You can switch between the detailed and compact view using the **Show more/less details** buttons:
+
+    ![Switch view](../assets/user-guide/environments/edp-portal-switch-view.png "Switch view")
 
 ## Create Deployment Flow in YAML
 

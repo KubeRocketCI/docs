@@ -23,8 +23,8 @@
 <script src="https://www.googletagmanager.com/gtm.js?id=GTM-527T2HLF" async="true"></script>
 <script>window.dataLayer=window.dataLayer||[]</script>
 <script>!function(e,t,a,n){e[n]=e[n]||[],e[n].push({"gtm.start":(new Date).getTime(),event:"gtm.js"});var g=t.getElementsByTagName(a)[0],m=t.createElement(a);m.async=!0,m.src="https://www.googletagmanager.com/gtm.js?id=GTM-527T2HLF",g.parentNode.insertBefore(m,g)}(window,document,"script","dataLayer")</script><link rel="stylesheet" href="/assets/css/styles.e79f24dc.css">
-<script src="/assets/js/runtime~main.a3e14e7f.js" defer="defer"></script>
-<script src="/assets/js/main.e9603048.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.d61b436b.js" defer="defer"></script>
+<script src="/assets/js/main.f9a4a245.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
 <svg xmlns="http://www.w3.org/2000/svg" style="display: none;"><defs>
@@ -37,11 +37,7 @@
 <p>The creation of the Deployment Flow becomes available as soon as an application is created including its provisioning
 in a branch and the necessary entities for the Deployment Flow. You can create a Deployment Flow <a href="#create-deployment-flow-in-yaml">in YAML</a> or <a href="#create-deployment-flow">via the two-steps menu</a> in the dialog.</p>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="create-deployment-flow">Create Deployment Flow<a href="#create-deployment-flow" class="hash-link" aria-label="Direct link to Create Deployment Flow" title="Direct link to Create Deployment Flow">​</a></h2>
-<p>The <strong>Create Deployment Flow</strong> dialog contains the two steps:</p>
-<ul>
-<li>The <strong>Enter name</strong> step</li>
-<li>The <strong>Add applications</strong> step</li>
-</ul>
+<p>The <strong>Create Deployment Flow</strong> dialog has two steps: <strong>Enter name</strong> and <strong>Add applications</strong>.</p>
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="the-deployment-flow-menu">The Deployment Flow Menu<a href="#the-deployment-flow-menu" class="hash-link" aria-label="Direct link to The Deployment Flow Menu" title="Direct link to The Deployment Flow Menu">​</a></h3>
 <p>Before proceeding, ensure to familiarize yourself with the <a href="/docs/3.11/user-guide/gitops">Manage GitOps</a> page as it is required to add a GitOps repository first before creating an environment:</p>
 <p><img decoding="async" loading="lazy" alt="Add GitOps repository" src="/assets/images/add-gitops-repo-1dfb288c07cdb9e9f0b6c4b6e4f389db.png" title="Add GitOps repository" width="1920" height="1109" class="img_ev3q"></p>
@@ -53,10 +49,13 @@ in a branch and the necessary entities for the Deployment Flow. You can create a
 </li>
 <li>
 <p>The <strong>Enter name</strong> tab of the <strong>Create Deployment Flow</strong> window is presented below:</p>
-<p><img decoding="async" loading="lazy" alt="Create CD pipeline" src="/assets/images/edp-portal-pipeline-menu-71aa6cdde27bf2e9aafa8d9622c234a5.png" title="Create CD pipeline" width="1918" height="1111" class="img_ev3q"></p>
+<p><img decoding="async" loading="lazy" alt="Create CD pipeline" src="/assets/images/edp-portal-pipeline-menu-8435d025e465127d05a3215ca58c25dc.png" title="Create CD pipeline" width="1922" height="1114" class="img_ev3q"></p>
 <ol>
 <li>
 <p>Enter the deployment flow name that will be displayed in the Deployment Flows list. Enter at least two characters, use the lower-case letters, numbers, and dashes.</p>
+</li>
+<li>
+<p>Enter informative but concise description.</p>
 </li>
 <li>
 <p>Click the <strong>Next</strong> button to move onto the <strong>Add applications</strong> tab.</p>
@@ -67,7 +66,7 @@ Please be aware that the namespace length should not exceed 63 symbols.</p></div
 </li>
 <li>
 <p>The <strong>Component</strong> tab of the <strong>Environments</strong> menu is presented below:</p>
-<p><img decoding="async" loading="lazy" alt="Environment applications" src="/assets/images/edp-portal-cd-pipeline-applications-2455d0ace2763190a257a28b1f7c1412.png" title="Environment applications" width="1919" height="1112" class="img_ev3q"></p>
+<p><img decoding="async" loading="lazy" alt="Environment applications" src="/assets/images/edp-portal-cd-pipeline-applications-fb4808391afda563811f463c0d04757d.png" title="Environment applications" width="1922" height="1114" class="img_ev3q"></p>
 <ol>
 <li>
 <p>Select the necessary application from the <strong>Mapping field name</strong> drop-down menu and click by it name.</p>
@@ -79,10 +78,7 @@ Please be aware that the namespace length should not exceed 63 symbols.</p></div
 <p><strong>Branch</strong> - Select the application branch from the drop-down menu.</p>
 </li>
 <li>
-<p><strong>Promote in pipeline</strong> - Select the this check box in order to transfer the application from one to another stage
-by the specified codebase branch. If the <strong>Promote in pipeline</strong> check box is not selected,
-the same codebase stream will be deployed regardless of the stage, i.e. the codebase stream input,
-which was selected for the pipeline, will always be used.</p>
+<p><strong>Promote applications</strong> - When enabled, applications will be promoted through stages using the latest successful build from each previous stage. When disabled, all stages will deploy the same version that was initially selected for the pipeline, regardless of any newer builds.</p>
 </li>
 </ul>
 <div class="theme-admonition theme-admonition-note admonition_xJq3 alert alert--secondary"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M6.3 5.69a.942.942 0 0 1-.28-.7c0-.28.09-.52.28-.7.19-.18.42-.28.7-.28.28 0 .52.09.7.28.18.19.28.42.28.7 0 .28-.09.52-.28.7a1 1 0 0 1-.7.3c-.28 0-.52-.11-.7-.3zM8 7.99c-.02-.25-.11-.48-.31-.69-.2-.19-.42-.3-.69-.31H6c-.27.02-.48.13-.69.31-.2.2-.3.44-.31.69h1v3c.02.27.11.5.31.69.2.2.42.31.69.31h1c.27 0 .48-.11.69-.31.2-.19.3-.42.31-.69H8V7.98v.01zM7 2.3c-3.14 0-5.7 2.54-5.7 5.68 0 3.14 2.56 5.7 5.7 5.7s5.7-2.55 5.7-5.7c0-3.15-2.56-5.69-5.7-5.69v.01zM7 .98c3.86 0 7 3.14 7 7s-3.14 7-7 7-7-3.12-7-7 3.14-7 7-7z"></path></svg></span>note</div><div class="admonitionContent_BuS1"><p>If there is another deployed environment stage with the respective codebase stream (equal image stream as an OpenShift term), the pattern combination will be as follows: <code>[pipeline name]-[stage name]-[application name]-[verified]</code>.</p></div></div>
@@ -91,19 +87,19 @@ which was selected for the pipeline, will always be used.</p>
 </li>
 <li>
 <p>Click the <strong>Create</strong> button to finish deployment flow configuration and proceed with configuring environment.</p>
-<p><img decoding="async" loading="lazy" alt="Adding stage" src="/assets/images/edp-portal-environment-final-e3f71b53f4ac163ebd2bddcf109128ab.png" title="Adding stage" width="1917" height="1112" class="img_ev3q"></p>
+<p><img decoding="async" loading="lazy" alt="Adding stage" src="/assets/images/edp-portal-environment-final-215041fa7943eb467b4a792ba7e086ba.png" title="Adding stage" width="1922" height="1114" class="img_ev3q"></p>
 </li>
 </ol>
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="the-environments-menu">The Environments Menu<a href="#the-environments-menu" class="hash-link" aria-label="Direct link to The Environments Menu" title="Direct link to The Environments Menu">​</a></h3>
 <p>Stages are created the following way:</p>
 <ol>
 <li>
-<p>On the <strong>Environments</strong> menu, click the <strong>Create Environment</strong> button and fill in the necessary fields in the corresponding window:</p>
-<p><img decoding="async" loading="lazy" alt="CD stages" src="/assets/images/edp-portal-cd-pipeline-add-stages-090598e2cb5a1df1d7322a54bf352404.png" title="CD stages" width="1919" height="1111" class="img_ev3q"></p>
+<p>On the <strong>Environments</strong> menu, click the <strong>Create Environment</strong> button:</p>
+<p><img decoding="async" loading="lazy" alt="CD stages" src="/assets/images/edp-portal-cd-pipeline-add-stages-aa4493129097b897fbce292329881924.png" title="CD stages" width="1922" height="1114" class="img_ev3q"></p>
 </li>
 <li>
-<p>The <strong>Configure Stage</strong> tab of the <strong>Create Stage</strong> menu is presented below:</p>
-<p><img decoding="async" loading="lazy" alt="CD stages" src="/assets/images/edp-portal-cd-pipeline-stages-7a0816446400ce12282b5714f5f30d49.png" title="CD stages" width="1918" height="1111" class="img_ev3q"></p>
+<p>On the <strong>Configure Stage</strong> tab of the <strong>Create Stage</strong> menu, fill in the necessary fields in the corresponding window and click <strong>Next</strong>:</p>
+<p><img decoding="async" loading="lazy" alt="CD stages" src="/assets/images/edp-portal-cd-pipeline-stages-529e117112d2c170dbf53728e74f5536.png" title="CD stages" width="1922" height="1114" class="img_ev3q"></p>
 <p>Set the proper cluster options:</p>
 <ul>
 <li><strong>Cluster</strong> - Choose the cluster to deploy the stage in;</li>
@@ -116,15 +112,15 @@ which was selected for the pipeline, will always be used.</p>
 </ul>
 </li>
 <li>
-<p>Click the <strong>Next</strong> button to move onto the <strong>Add quality gates</strong> tab:</p>
-<p><img decoding="async" loading="lazy" alt="Add quality gates menu" src="/assets/images/edp-portal-cd-adding-stage1-797d69a0ce9d79a081f30c36430d1416.png" title="Add quality gates menu" width="1918" height="1112" class="img_ev3q"></p>
+<p>On the <strong>Add quality gates</strong> tab, specify your quality gates and click <strong>Create</strong>:</p>
+<p><img decoding="async" loading="lazy" alt="Add quality gates menu" src="/assets/images/edp-portal-cd-adding-stage1-cabe4312178129d95e05dc2af5eba3c0.png" title="Add quality gates menu" width="1922" height="1114" class="img_ev3q"></p>
 <p>Select the quality gate options:</p>
 <ul>
 <li>
 <p><strong>Quality gate type</strong> - Select the quality gate type:</p>
 <ul>
-<li>Manual - means that the promoting process should be confirmed in Tekton manually;</li>
-<li>Autotests - means that the promoting process should be confirmed by the successful passing of the autotests.;</li>
+<li>Manual - The promoting process should be confirmed in Tekton manually;</li>
+<li>Autotests - The promoting process should be confirmed by the successful passing of the autotests;</li>
 </ul>
 </li>
 <li>
@@ -140,22 +136,23 @@ which was selected for the pipeline, will always be used.</p>
 </ul>
 </li>
 <li>
-<p>Click the <strong>Create</strong> button to start the provisioning of the pipeline:</p>
-<p><img decoding="async" loading="lazy" alt="Adding stage" src="/assets/images/edp-portal-stage-final-ecd06b81355e991cf7764d3e0b64fe84.png" title="Adding stage" width="1916" height="1108" class="img_ev3q"></p>
+<p>Click the <strong>Go to environment</strong> button to start the provisioning of the pipeline:</p>
+<p><img decoding="async" loading="lazy" alt="Adding stage" src="/assets/images/edp-portal-stage-final-31f15024849827c68a42590b3344a2c6.png" title="Adding stage" width="1922" height="1114" class="img_ev3q"></p>
 </li>
 </ol>
-<p>As a result, a new environment will be created in the environments list.</p>
+<p>As a result, a new environment will be created in the environments list. You can switch between the detailed and compact view using the <strong>Show more/less details</strong> buttons:</p>
+<p><img decoding="async" loading="lazy" alt="Switch view" src="/assets/images/edp-portal-switch-view-0ba2fbe2805f119e4dc107b684d6819b.png" title="Switch view" width="1922" height="1114" class="img_ev3q"></p>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="create-deployment-flow-in-yaml">Create Deployment Flow in YAML<a href="#create-deployment-flow-in-yaml" class="hash-link" aria-label="Direct link to Create Deployment Flow in YAML" title="Direct link to Create Deployment Flow in YAML">​</a></h2>
 <p>Click <strong>Edit YAML</strong> in the upper-right corner of the <strong>Create deployment flow</strong> dialog to open the YAML editor and create a deployment flow:</p>
-<p><img decoding="async" loading="lazy" alt="Edit YAML" src="/assets/images/deployment-flow-edit-yaml-ddd90e2846d494d1664532b22540580e.png" title="Edit YAML" width="1919" height="1111" class="img_ev3q"></p>
+<p><img decoding="async" loading="lazy" alt="Edit YAML" src="/assets/images/deployment-flow-edit-yaml-0cbae09cee2c51856a9f3da2f01e020c.png" title="Edit YAML" width="1922" height="1114" class="img_ev3q"></p>
 <p>Type you pipeline configuration in the YAML format:</p>
-<p><img decoding="async" loading="lazy" alt="Deployment flow in YAML" src="/assets/images/edp-portal-yaml-editor-30031abe51d68d5b2057d716c7f7e32b.png" title="Deployment flow in YAML" width="1918" height="1113" class="img_ev3q"></p>
+<p><img decoding="async" loading="lazy" alt="Deployment flow in YAML" src="/assets/images/edp-portal-yaml-editor-b68982194e59d4b9d6b89d305757bdb1.png" title="Deployment flow in YAML" width="1922" height="1114" class="img_ev3q"></p>
 <p>To edit YAML in the minimal editor, turn on the <strong>Use minimal editor</strong> toggle in the upper-right corner of the <strong>Create CD Pipeline</strong> dialog.</p>
 <p>To save the changes, select the <strong>Save &amp; Apply</strong> button.</p>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="related-articles">Related Articles<a href="#related-articles" class="hash-link" aria-label="Direct link to Related Articles" title="Direct link to Related Articles">​</a></h2>
 <ul>
 <li><a href="/docs/3.11/user-guide/manage-environments">Manage Deployment Flows</a></li>
 <li><a href="/docs/3.11/user-guide/add-quality-gate">Add Quality Gate</a></li>
-</ul></div><footer class="theme-doc-footer docusaurus-mt-lg"><div class="row margin-top--sm theme-doc-footer-edit-meta-row"><div class="col"><a href="https://github.com/KubeRocketCI/docs/edit/main/docs/user-guide/add-cd-pipeline.md" target="_blank" rel="noopener noreferrer" class="theme-edit-this-page"><svg fill="currentColor" height="20" width="20" viewBox="0 0 40 40" class="iconEdit_Z9Sw" aria-hidden="true"><g><path d="m34.5 11.7l-3 3.1-6.3-6.3 3.1-3q0.5-0.5 1.2-0.5t1.1 0.5l3.9 3.9q0.5 0.4 0.5 1.1t-0.5 1.2z m-29.5 17.1l18.4-18.5 6.3 6.3-18.4 18.4h-6.3v-6.2z"></path></g></svg>Edit this page</a></div><div class="col lastUpdated_JAkA"><span class="theme-last-updated">Last updated<!-- --> on <b><time datetime="2025-03-31T08:30:28.000Z" itemprop="dateModified">Mar 31, 2025</time></b> by <b>Mykola Serdiuk</b></span></div></div></footer></article><nav class="docusaurus-mt-lg pagination-nav" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--prev" href="/docs/3.11/user-guide/protected-label"><div class="pagination-nav__sublabel">Previous</div><div class="pagination-nav__label">Protect Resources From Deletion/Modification</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/docs/3.11/user-guide/manage-environments"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">Manage Deployment Flows</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#create-deployment-flow" class="table-of-contents__link toc-highlight">Create Deployment Flow</a><ul><li><a href="#the-deployment-flow-menu" class="table-of-contents__link toc-highlight">The Deployment Flow Menu</a></li><li><a href="#the-environments-menu" class="table-of-contents__link toc-highlight">The Environments Menu</a></li></ul></li><li><a href="#create-deployment-flow-in-yaml" class="table-of-contents__link toc-highlight">Create Deployment Flow in YAML</a></li><li><a href="#related-articles" class="table-of-contents__link toc-highlight">Related Articles</a></li></ul></div></div></div></div></main></div></div></div><footer class="theme-layout-footer footer footer--dark"><div class="container container-fluid"><div class="row footer__links"><div class="theme-layout-footer-column col footer__col"><div class="footer__title">Readings</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/docs/about-platform">What is KubeRocketCI</a></li><li class="footer__item"><a class="footer__link-item" href="/blog">Blogs: Interesting Facts From The DevSecOps Life</a></li><li class="footer__item"><a class="footer__link-item" href="/docs/user-guide">User Guide: How To Use KubeRocketCI</a></li><li class="footer__item"><a class="footer__link-item" href="/docs/developer-guide">Developer Guide: How We Build KubeRocketCI</a></li><li class="footer__item"><a class="footer__link-item" href="/docs/api/overview">API Reference: Use KubeRocketCI To Build Your Solutions</a></li></ul></div><div class="theme-layout-footer-column col footer__col"><div class="footer__title">Our Community</div><ul class="footer__items clean-list"><li class="footer__item"><a href="https://www.youtube.com/@theplatformteam" target="_blank" rel="noopener noreferrer" class="footer__link-item">YouTube<svg width="13.5" height="13.5" aria-hidden="true" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li><li class="footer__item"><a href="https://medium.com/kuberocketci" target="_blank" rel="noopener noreferrer" class="footer__link-item">Medium<svg width="13.5" height="13.5" aria-hidden="true" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li></ul></div><div class="theme-layout-footer-column col footer__col"><div class="footer__title">Learn More</div><ul class="footer__items clean-list"><li class="footer__item"><a href="https://github.com/kuberocketci/docs" target="_blank" rel="noopener noreferrer" class="footer__link-item">KubeRocketCI on the GitHub<svg width="13.5" height="13.5" aria-hidden="true" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li><li class="footer__item"><a href="https://artifacthub.io/packages/search?repo=epmdedp" target="_blank" rel="noopener noreferrer" class="footer__link-item">KubeRocketCI on the ArtifactHub<svg width="13.5" height="13.5" aria-hidden="true" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li><li class="footer__item"><a href="https://operatorhub.io/?keyword=edp" target="_blank" rel="noopener noreferrer" class="footer__link-item">KubeRocketCI on the OperatorHub<svg width="13.5" height="13.5" aria-hidden="true" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li><li class="footer__item"><a href="https://hub.docker.com/u/epamedp" target="_blank" rel="noopener noreferrer" class="footer__link-item">Docker Hub<svg width="13.5" height="13.5" aria-hidden="true" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li><li class="footer__item"><a class="footer__link-item" href="/blog/tags">Blog categories</a></li><li class="footer__item"><a href="https://docs.kuberocketci.io/blog/rss.xml" target="_blank" rel="noopener noreferrer" class="footer__link-item">RSS feed<svg width="13.5" height="13.5" aria-hidden="true" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li><li class="footer__item"><a href="https://docs.kuberocketci.io/blog/atom.xml" target="_blank" rel="noopener noreferrer" class="footer__link-item">Atom feed<svg width="13.5" height="13.5" aria-hidden="true" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li></ul></div></div><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2025 KubeRocketCI. Built with Docusaurus.</div></div></div></footer></div>
+</ul></div><footer class="theme-doc-footer docusaurus-mt-lg"><div class="row margin-top--sm theme-doc-footer-edit-meta-row"><div class="col"><a href="https://github.com/KubeRocketCI/docs/edit/main/docs/user-guide/add-cd-pipeline.md" target="_blank" rel="noopener noreferrer" class="theme-edit-this-page"><svg fill="currentColor" height="20" width="20" viewBox="0 0 40 40" class="iconEdit_Z9Sw" aria-hidden="true"><g><path d="m34.5 11.7l-3 3.1-6.3-6.3 3.1-3q0.5-0.5 1.2-0.5t1.1 0.5l3.9 3.9q0.5 0.4 0.5 1.1t-0.5 1.2z m-29.5 17.1l18.4-18.5 6.3 6.3-18.4 18.4h-6.3v-6.2z"></path></g></svg>Edit this page</a></div><div class="col lastUpdated_JAkA"><span class="theme-last-updated">Last updated<!-- --> on <b><time datetime="2025-08-15T07:22:26.000Z" itemprop="dateModified">Aug 15, 2025</time></b> by <b>Oleksandr_Stepanov@epam.com</b></span></div></div></footer></article><nav class="docusaurus-mt-lg pagination-nav" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--prev" href="/docs/3.11/user-guide/protected-label"><div class="pagination-nav__sublabel">Previous</div><div class="pagination-nav__label">Protect Resources From Deletion/Modification</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/docs/3.11/user-guide/manage-environments"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">Manage Deployment Flows</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#create-deployment-flow" class="table-of-contents__link toc-highlight">Create Deployment Flow</a><ul><li><a href="#the-deployment-flow-menu" class="table-of-contents__link toc-highlight">The Deployment Flow Menu</a></li><li><a href="#the-environments-menu" class="table-of-contents__link toc-highlight">The Environments Menu</a></li></ul></li><li><a href="#create-deployment-flow-in-yaml" class="table-of-contents__link toc-highlight">Create Deployment Flow in YAML</a></li><li><a href="#related-articles" class="table-of-contents__link toc-highlight">Related Articles</a></li></ul></div></div></div></div></main></div></div></div><footer class="theme-layout-footer footer footer--dark"><div class="container container-fluid"><div class="row footer__links"><div class="theme-layout-footer-column col footer__col"><div class="footer__title">Readings</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/docs/about-platform">What is KubeRocketCI</a></li><li class="footer__item"><a class="footer__link-item" href="/blog">Blogs: Interesting Facts From The DevSecOps Life</a></li><li class="footer__item"><a class="footer__link-item" href="/docs/user-guide">User Guide: How To Use KubeRocketCI</a></li><li class="footer__item"><a class="footer__link-item" href="/docs/developer-guide">Developer Guide: How We Build KubeRocketCI</a></li><li class="footer__item"><a class="footer__link-item" href="/docs/api/overview">API Reference: Use KubeRocketCI To Build Your Solutions</a></li></ul></div><div class="theme-layout-footer-column col footer__col"><div class="footer__title">Our Community</div><ul class="footer__items clean-list"><li class="footer__item"><a href="https://www.youtube.com/@theplatformteam" target="_blank" rel="noopener noreferrer" class="footer__link-item">YouTube<svg width="13.5" height="13.5" aria-hidden="true" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li><li class="footer__item"><a href="https://medium.com/kuberocketci" target="_blank" rel="noopener noreferrer" class="footer__link-item">Medium<svg width="13.5" height="13.5" aria-hidden="true" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li></ul></div><div class="theme-layout-footer-column col footer__col"><div class="footer__title">Learn More</div><ul class="footer__items clean-list"><li class="footer__item"><a href="https://github.com/kuberocketci/docs" target="_blank" rel="noopener noreferrer" class="footer__link-item">KubeRocketCI on the GitHub<svg width="13.5" height="13.5" aria-hidden="true" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li><li class="footer__item"><a href="https://artifacthub.io/packages/search?repo=epmdedp" target="_blank" rel="noopener noreferrer" class="footer__link-item">KubeRocketCI on the ArtifactHub<svg width="13.5" height="13.5" aria-hidden="true" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li><li class="footer__item"><a href="https://operatorhub.io/?keyword=edp" target="_blank" rel="noopener noreferrer" class="footer__link-item">KubeRocketCI on the OperatorHub<svg width="13.5" height="13.5" aria-hidden="true" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li><li class="footer__item"><a href="https://hub.docker.com/u/epamedp" target="_blank" rel="noopener noreferrer" class="footer__link-item">Docker Hub<svg width="13.5" height="13.5" aria-hidden="true" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li><li class="footer__item"><a class="footer__link-item" href="/blog/tags">Blog categories</a></li><li class="footer__item"><a href="https://docs.kuberocketci.io/blog/rss.xml" target="_blank" rel="noopener noreferrer" class="footer__link-item">RSS feed<svg width="13.5" height="13.5" aria-hidden="true" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li><li class="footer__item"><a href="https://docs.kuberocketci.io/blog/atom.xml" target="_blank" rel="noopener noreferrer" class="footer__link-item">Atom feed<svg width="13.5" height="13.5" aria-hidden="true" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li></ul></div></div><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2025 KubeRocketCI. Built with Docusaurus.</div></div></div></footer></div>
 </body>
 </html>

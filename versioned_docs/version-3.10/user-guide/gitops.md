@@ -7,6 +7,9 @@ sidebar_label: "Manage GitOps"
 ---
 <!-- markdownlint-disable MD025 -->
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 # Manage GitOps
 
 <head>
@@ -27,9 +30,40 @@ GitOps repository is added in two steps:
 
     ![Required fields](../assets/user-guide/gitops-section.png "GitOps section")
 
-2. Choose one of the Git servers, fill in the required fields and click **Save**:
+2. Select the creation strategy, fill in the required fields, and click **Save**:
 
-    ![Required fields](../assets/user-guide/gitops-menu.png "GitOps menu")
+  <Tabs
+    defaultValue="create"
+    values={[
+      { label: 'Create', value: 'create' },
+      { label: 'Import', value: 'import' },
+    ]}>
+
+    <TabItem value="create">
+
+      The **Create** strategy allows you to create a new repository from scratch:
+
+        ![Create GitOps repository](../assets/user-guide/gitops-menu.png "Create GitOps repository")
+
+        * **Git server**: Select the [added Git server](./add-git-server.md) where the GitOps repository will be created.
+        * **Git repo relative path**: Enter your Git account.
+        * **Repository name**: Specify the name for the new repository.
+
+    </TabItem>
+
+    <TabItem value="import">
+
+      Select the **Import** strategy if you already have a repository that stores your application Helm charts' configurations:
+
+        ![Import GitOps repository](../assets/user-guide/gitops-menu-import.png "Import GitOps repository")
+
+        * **Git server**: Select the [added Git server](./add-git-server.md) that has credentials to access the GitOps repository.
+        * **Git repo relative path**: Enter your Git account.
+        * **Repository name**: Specify the name of the repository to import.
+
+    </TabItem>
+
+  </Tabs>
 
 3. Check the GitOps repository connected to the platform:
 

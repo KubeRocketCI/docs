@@ -20,6 +20,10 @@ This section provides detailed instructions for upgrading KubeRocketCI to versio
 We suggest backing up the KubeRocketCI environment before starting the upgrade procedure.
 :::
 
+:::important
+In version 3.12, the `docker.io/epamedp/tekton-cache` image has been [deprecated](https://github.com/epam/edp-tekton/issues/511) and replaced with `ghcr.io/kuberocketci/krci-cache`. In case of using the [tekton-cache](https://github.com/epam/edp-tekton/tree/master/charts/tekton-cache) Helm chart, the image will be automatically updated during the upgrade process.
+:::
+
 1. (Optional) Update Tekton Custom Pipelines
 
     :::note
@@ -421,6 +425,10 @@ We suggest backing up the KubeRocketCI environment before starting the upgrade p
         </Tabs>
 
 2. (Optional) Enable Repository Discovery
+
+    :::warning
+    In case of using GitFusion with the Bitbucket Git provider, it is necessary to update the Bitbucket app password permissions to include the `account:read` scope. For more details on how to create a Bitbucket app password with the required permissions, refer to the [Add Git Server](../../user-guide/add-git-server.md) guide.
+    :::
 
     :::note
     For more information about the GitFusion microservice, refer to the [GitFusion](https://github.com/KubeRocketCI/gitfusion) repository.

@@ -32,55 +32,11 @@ To install and configure Atlantis, ensure the following prerequisites are met:
 - (Optional) [External Secrets Operator](../secrets-management/external-secrets-operator-integration) is installed and configured.
 - (Optional) [Keycloak](../auth/keycloak) and [keycloak-operator](https://github.com/epam/edp-keycloak-operator) is installed and configured.
 
-## Installing Atlantis
-
-There are two approaches to install Atlantis using [edp-cluster-add-ons](https://github.com/epam/edp-cluster-add-ons) repository:
-
-- **Using Argo CD**: This approach implies installing Atlantis as an Argo CD Application resource.
-- **Using Helm**: This approach involves installing Atlantis via common Helm commands.
-
-### Approach 1: Using Argo CD
-
-:::note
-For more information on configuring [edp-cluster-add-ons](https://github.com/epam/edp-cluster-add-ons) repository, refer to the [Install via Add-Ons](../add-ons-overview.md) page.
-:::
-
-The first approach is to deploy Atlantis using Argo CD. Follow the steps below to install Atlantis using Argo CD:
-
-1. Clone the forked [edp-cluster-add-ons](https://github.com/epam/edp-cluster-add-ons) repository.
-
-2. Navigate to the `clusters/core/addons/atlantis` directory and configure the `values.yaml` file with the necessary values for the Atlantis installation.
-
-3. After configuring the Atlantis Helm chart values, navigate to the `clusters/core/apps` directory. In the `values.yaml` file, update the `atlantis` section by specifying the `enable` field as `true` to enable Argo CD Application creation for the Atlantis. Modify the `createNamespace` and `namespace` fields as needed. For example:
-
-    ```yaml
-    atlantis:
-      createNamespace: true
-      enable: true
-      namespace: atlantis
-    ```
-
-4. Commit and push the changes to the remote repository. After the changes are pushed, navigate to the Argo CD and sync the Atlantis application. Verify that the Atlantis is successfully deployed:
-
-    ![Argo CD KrakenD](../../assets/operator-guide/infrastructure-providers/argo-cd-atlantis.png)
-
-### Approach 2: Deploy Using Helm
-
-The second approach is to deploy Atlantis using Helm. Follow the steps below to install Atlantis using Helm:
-
-1. Clone the forked [edp-cluster-add-ons](https://github.com/epam/edp-cluster-add-ons) repository.
-
-2. Navigate to the `clusters/core/addons/atlantis` directory and configure the `values.yaml` file with the necessary values for the Atlantis installation.
-
-3. After configuring the Atlantis Helm chart values, run the following command to deploy the Atlantis:
-
-    ```bash
-    helm upgrade --install atlantis . -n atlantis --create-namespace
-    ```
-
-4. Verify that the Atlantis is successfully deployed.
-
 ## Configuring Atlantis
+
+:::important
+All configuration steps described in this section are based on the [Atlantis](https://github.com/epam/edp-cluster-add-ons/tree/main/clusters/core/addons/atlantis) Helm chart that can be found in the [edp-cluster-add-ons](https://github.com/epam/edp-cluster-add-ons/tree/main) repository.
+:::
 
 This section describes how to configure Atlantis for integration with supported version control systems (VCS), including setting up authentication for Atlantis Web Server, configuring Webhooks, and creating the AWS IAM Role which is required for Atlantis to perform Terraform operations on the selected provider.
 
@@ -115,6 +71,8 @@ To configure Basic Authentication for Atlantis Web Server, follow the steps belo
           --from-literal=password=<password>
         ```
 
+        The `username` and `password` are the credentials that will be used to access the Atlantis Web Server.
+
         </details>
 
         <details>
@@ -129,33 +87,26 @@ To configure Basic Authentication for Atlantis Web Server, follow the steps belo
           provider: "aws"
           # -- Defines the path to the secret in the provider. If provider is `vault`, this is the path must be prefixed with `secret/`.
           secretPath: "/infra/core/addons/atlantis"
-          # -- Vault configuration (if provider is `vault`).
-          vault:
-            # -- Vault server URL.
-            server: "http://vault.vault:8200"
-            # -- Mount path for the Kubernetes authentication method.
-            mountPath: "core"
-            # -- Vault role for the Kubernetes authentication method.
-            role: atlantis
           # -- AWS configuration (if provider is `aws`).
           aws:
             # -- AWS region.
             region: "eu-central-1"
             # -- AWS role ARN for the ExternalSecretOperator to assume.
             roleArn: "arn:aws:iam::012345678910:role/AWSIRSA_Shared_ExternalSecretOperatorAccess"
-          generic:
-            secretStore:
-              # -- Defines SecretStore provider configuration.
-              providerConfig: {}
-              #  gcpsm:
-              #    projectID: "alphabet-123"
         ```
 
-        AWS Parameter Store object/Vault secret structure:
+        Specify the `username` and `password` fields in the AWS Parameter Store object. For example:
         ```json
         {
+          "oauth2-proxy": {
+            "client-id": "",
+            "cookie-secret": ""
+          },
+          "bitbucket_token": "",
+          "bitbucket_secret": "",
           "username": "<username>",
-          "password": "<password>"
+          "password": "<password>",
+          "clientSecret": ""
         }
         ```
 
@@ -178,14 +129,16 @@ After configuring and enabling Basic Authentication, users will be required to p
 
 To configure an external authentication proxy (e.g., OAuth2 Proxy) with Keycloak for Atlantis Web Server, follow the steps below:
 
-1. Update the `values.yaml` by setting the `oidc.enabled` field to `true` for enabling KeycloakClient resource creation. For example:
+1. Ensure that the Keycloak and [keycloak-operator](https://github.com/epam/edp-keycloak-operator) are installed and configured.
+
+2. Update the `values.yaml` by setting the `oidc.enabled` field to `true` for enabling KeycloakClient resource creation. For example:
 
     ```yaml title="values.yaml"
     oidc:
       enabled: true
     ```
 
-2. Create a Kubernetes secret containing the Keycloak client credentials. The secret should include the `clientSecret` field with the value of the Keycloak client secret. For example:
+3. Create a Kubernetes secret containing the Keycloak client credentials. The secret should include the `clientSecret` field with the value of the Keycloak client secret. For example:
 
     :::note
     The `keycloak-client-atlantis-secret` is used by keycloak-operator to create the `KeycloakClient` resource.
@@ -201,6 +154,12 @@ To configure an external authentication proxy (e.g., OAuth2 Proxy) with Keycloak
       --from-literal=clientSecret=<keycloak_client_secret>
     ```
 
+    The `clientSecret` is a random generated string that is used to authenticate the Atlantis client with Keycloak. It can be generated using the following command:
+
+    ```bash
+    openssl rand -base64 32 | head -c 32
+    ```
+
     </details>
 
     <details>
@@ -216,41 +175,41 @@ To configure an external authentication proxy (e.g., OAuth2 Proxy) with Keycloak
       provider: "aws"
       # -- Defines the path to the secret in the provider. If provider is `vault`, this is the path must be prefixed with `secret/`.
       secretPath: "/infra/core/addons/atlantis"
-      # -- Vault configuration (if provider is `vault`).
-      vault:
-        # -- Vault server URL.
-        server: "http://vault.vault:8200"
-        # -- Mount path for the Kubernetes authentication method.
-        mountPath: "core"
-        # -- Vault role for the Kubernetes authentication method.
-        role: atlantis
       # -- AWS configuration (if provider is `aws`).
       aws:
         # -- AWS region.
         region: "eu-central-1"
         # -- AWS role ARN for the ExternalSecretOperator to assume.
         roleArn: "arn:aws:iam::012345678910:role/AWSIRSA_Shared_ExternalSecretOperatorAccess"
-      generic:
-        secretStore:
-          # -- Defines SecretStore provider configuration.
-          providerConfig: {}
-          #  gcpsm:
-          #    projectID: "alphabet-123"
     ```
 
-    AWS Parameter Store object/Vault secret structure:
+    Specify the `clientSecret` field in the AWS Parameter Store object. For example:
 
     ```json
     {
+      "oauth2-proxy": {
+        "client-id": "",
+        "cookie-secret": ""
+      },
+      "bitbucket_token": "",
+      "bitbucket_secret": "",
+      "username": "",
+      "password": "",
       "clientSecret": "<keycloak_client_secret>"
     }
+    ```
+
+    The `clientSecret` is a random generated string that is used to authenticate the Atlantis client with Keycloak. It can be generated using the following command:
+
+    ```bash
+    openssl rand -base64 32 | head -c 32
     ```
 
     After configuring the ESO section, the External Secrets Operator will automatically create the Kubernetes secret `keycloak-client-atlantis-secret` during installation or upgrade of the Atlantis Helm chart.
 
     </details>
 
-3. Enable the `oauth2-proxy` section in the `values.yaml` file and configure the necessary parameters for the external authentication proxy. For example:
+4. Enable the `oauth2-proxy` section in the `values.yaml` file and configure the necessary parameters for the external authentication proxy. For example:
 
     ```yaml title="values.yaml"
     oauth2-proxy:
@@ -265,7 +224,8 @@ To configure an external authentication proxy (e.g., OAuth2 Proxy) with Keycloak
           code_challenge_method="S256"
           cookie_csrf_expire="5m"
           cookie_csrf_per_request="true"
-          cookie_secure = "false"
+          cookie_domains = ["atlantis.example.com"]
+          cookie_secure = "true"
           email_domains = [ "*" ]
           insecure_oidc_allow_unverified_email = "true"
           oidc_issuer_url = "https://keycloak.example.com/realms/<realm_name>"
@@ -276,7 +236,7 @@ To configure an external authentication proxy (e.g., OAuth2 Proxy) with Keycloak
           redirect_url = "https://atlantis.example.com/oauth2/callback"
           skip_jwt_bearer_tokens = "true"
           upstreams = [ "http://atlantis:80" ]
-          whitelist_domains = ["*"]
+          whitelist_domains = [".example.com"]
           silence_ping_logging = "true"
 
         existingSecret: oauth2-proxy
@@ -287,7 +247,7 @@ To configure an external authentication proxy (e.g., OAuth2 Proxy) with Keycloak
           - atlantis.example.com
     ```
 
-4. Create a Kubernetes secret `oauth2-proxy` containing the `client-id`, `client-secret`, and `cookie-secret` values. The `client-id` and `client-secret` values should match the Keycloak client credentials. The `cookie-secret` value is a random string used to encrypt the session cookies:
+5. Create a Kubernetes secret `oauth2-proxy` containing the `client-id`, `client-secret`, and `cookie-secret` values. The `client-id` and `client-secret` values should match the Keycloak client credentials. The `cookie-secret` value is a random string used to encrypt the session cookies:
 
     <details>
       <summary><b>kubectl</b></summary>
@@ -296,9 +256,17 @@ To configure an external authentication proxy (e.g., OAuth2 Proxy) with Keycloak
 
     ```bash
     kubectl create secret generic oauth2-proxy -n atlantis \
-      --from-literal=client-id=<keycloak_client_id> \
+      --from-literal=client-id=atlantis \
       --from-literal=client-secret=<keycloak_client_secret> \
-      --from-literal=cookie-secret=<random_string>
+      --from-literal=cookie-secret=<random_generated_string>
+    ```
+
+    The `client-secret` is the random string generated in the previous step.
+
+    The `cookie-secret` is a random generated string that is used to encrypt the session cookies. It can be generated using the following command:
+
+    ```bash
+    openssl rand -base64 32 | head -c 32
     ```
 
     </details>
@@ -316,47 +284,44 @@ To configure an external authentication proxy (e.g., OAuth2 Proxy) with Keycloak
       provider: "aws"
       # -- Defines the path to the secret in the provider. If provider is `vault`, this is the path must be prefixed with `secret/`.
       secretPath: "/infra/core/addons/atlantis"
-      # -- Vault configuration (if provider is `vault`).
-      vault:
-        # -- Vault server URL.
-        server: "http://vault.vault:8200"
-        # -- Mount path for the Kubernetes authentication method.
-        mountPath: "core"
-        # -- Vault role for the Kubernetes authentication method.
-        role: atlantis
-      # -- AWS configuration (if provider is `aws`).
       aws:
         # -- AWS region.
         region: "eu-central-1"
         # -- AWS role ARN for the ExternalSecretOperator to assume.
         roleArn: "arn:aws:iam::012345678910:role/AWSIRSA_Shared_ExternalSecretOperatorAccess"
-      generic:
-        secretStore:
-          # -- Defines SecretStore provider configuration.
-          providerConfig: {}
-          #  gcpsm:
-          #    projectID: "alphabet-123"
     ```
 
-    AWS Parameter Store object/Vault secret structure:
+    Specify the `oauth2-proxy` section in the AWS Parameter Store object. Also, make sure that the `clientSecret` field is included. For example:
 
     ```json
     {
       "oauth2-proxy": {
         "client-id": "atlantis",
-        "client-secret": "<keycloak_client_secret>",
         "cookie-secret": "<random_generated_string>"
-      }
+      },
+      "bitbucket_token": "",
+      "bitbucket_secret": "",
+      "username": "",
+      "password": "",
+      "clientSecret": "<keycloak_client_secret>"
     }
+    ```
+
+    The `clientSecret` is the random string generated in the previous step.
+
+    The `oauth2-proxy.cookie-secret` is a random generated string that is used to encrypt the session cookies. It can be generated using the following command:
+
+    ```bash
+    openssl rand -base64 32 | head -c 32
     ```
 
     After configuring the ESO section, the External Secrets Operator will automatically create the Kubernetes secret `oauth2-proxy` during installation or upgrade of the Atlantis Helm chart.
 
     </details>
 
-5. Apply the changes by using the `helm upgrade` command or syncing the Argo CD application.
+6. Apply the changes by using the `helm upgrade` command or syncing the Argo CD application.
 
-6. After configuring the external authentication proxy, users will be required to authenticate using Keycloak credentials to access the Atlantis Web Server:
+7. After configuring the external authentication proxy, users will be required to authenticate using Keycloak credentials to access the Atlantis Web Server:
 
     ![OAuth2 Proxy](../../assets/operator-guide/infrastructure-providers/oauth2-proxy.png)
 
@@ -438,18 +403,16 @@ After configuring the webhook, it is necessary to create the Atlantis webhook Ku
 
 1. Create a Kubernetes webhook secret containing the **Access Token** and **Secret** parameters.
 
-    :::note
-    Replace `bitbucket_token` and `bitbucket_secret` with names matching your Git server. For example, use `github_token` and `github_secret` for GitHub, and `gitlab_token` and `gitlab_secret` for GitLab.
-    :::
-
-    :::note
-    Currently, only Bitbucket is supported for the creation of the webhook secret with the External secrets operator. But, is possible to create the External secrets manifests manually for GitHub and GitLab cases.
-    :::
-
     <details>
       <summary><b>kubectl</b></summary>
 
-    Run the following command to create a secret, e.g. for Bitbucket:
+    :::note
+    It is also possible to specify tokens and webhook secrets for multiple providers in the same Kubernetes secret. Atlantis will automatically use the appropriate fields based on the provider specified in the webhook configuration.
+    :::
+
+    Run the following command to create a secret with the Git provider credentials.
+
+    For Bitbucket, run the following command:
 
     ```bash
     kubectl create secret generic atlantis-webhook \
@@ -457,10 +420,38 @@ After configuring the webhook, it is necessary to create the Atlantis webhook Ku
       --from-literal=bitbucket_secret=<bitbucket_secret>
     ```
 
+    The `bitbucket_token` is the generated [Access Token](https://www.runatlantis.io/docs/access-credentials.html#generating-an-access-token) for the Bitbucket user.
+
+    The `bitbucket_secret` is the generated [secret](https://www.runatlantis.io/docs/webhook-secrets.html) for the Bitbucket webhook.
+
+    For GitHub, run the following command:
+
+    ```bash
+    kubectl create secret generic atlantis-webhook \
+      --from-literal=github_token=<github_token> \
+      --from-literal=github_secret=<github_secret>
+    ```
+
+    The `github_token` is the generated [Access Token](https://www.runatlantis.io/docs/access-credentials.html#generating-an-access-token) for the GitHub user.
+
+    The `github_secret` is the generated [secret](https://www.runatlantis.io/docs/webhook-secrets.html) for the GitHub webhook.
+
+    For GitLab, run the following command:
+
+    ```bash
+    kubectl create secret generic atlantis-webhook \
+      --from-literal=gitlab_token=<gitlab_token> \
+      --from-literal=gitlab_secret=<gitlab_secret>
+    ```
+
+    The `gitlab_token` is the generated [Access Token](https://www.runatlantis.io/docs/access-credentials.html#generating-an-access-token) for the GitLab user.
+
+    The `gitlab_secret` is the generated [secret](https://www.runatlantis.io/docs/webhook-secrets.html) for the GitLab webhook.
+
     </details>
 
     <details>
-      <summary><b>External Secrets Operator (Bitbucket only)</b></summary>
+      <summary><b>External Secrets Operator</b></summary>
 
     Enable ESO section in the `values.yaml` file and configure the necessary parameters. For example:
 
@@ -472,46 +463,88 @@ After configuring the webhook, it is necessary to create the Atlantis webhook Ku
       provider: "aws"
       # -- Defines the path to the secret in the provider. If provider is `vault`, this is the path must be prefixed with `secret/`.
       secretPath: "/infra/core/addons/atlantis"
-      # -- Vault configuration (if provider is `vault`).
-      vault:
-        # -- Vault server URL.
-        server: "http://vault.vault:8200"
-        # -- Mount path for the Kubernetes authentication method.
-        mountPath: "core"
-        # -- Vault role for the Kubernetes authentication method.
-        role: atlantis
-      # -- AWS configuration (if provider is `aws`).
       aws:
         # -- AWS region.
         region: "eu-central-1"
         # -- AWS role ARN for the ExternalSecretOperator to assume.
         roleArn: "arn:aws:iam::012345678910:role/AWSIRSA_Shared_ExternalSecretOperatorAccess"
-      generic:
-        secretStore:
-          # -- Defines SecretStore provider configuration.
-          providerConfig: {}
-          #  gcpsm:
-          #    projectID: "alphabet-123"
     ```
 
-    AWS Parameter Store object/Vault secret structure:
+    Specify the Git provider token and Webhook secret in the AWS Parameter Store object.
+
+    :::note
+    It is also possible to specify tokens and webhook secrets for multiple providers in the same AWS Parameter Store object. The External Secrets Operator will automatically create the `atlantis-webhook` Kubernetes secret with the multiple fields based on the provided parameters.
+    :::
+
+    For Bitbucket:
 
     ```json
     {
+      "oauth2-proxy": {
+        "client-id": "",
+        "cookie-secret": ""
+      },
       "bitbucket_token": "<bitbucket_token>",
-      "bitbucket_secret": "<bitbucket_secret>"
+      "bitbucket_secret": "<bitbucket_secret>",
+      "username": "",
+      "password": "",
+      "clientSecret": ""
     }
     ```
+
+    The `bitbucket_token` is the generated [Access Token](https://www.runatlantis.io/docs/access-credentials.html#generating-an-access-token) for the Bitbucket user.
+
+    The `bitbucket_secret` is the generated [secret](https://www.runatlantis.io/docs/webhook-secrets.html) for the Bitbucket webhook.
+
+    For GitHub:
+
+    ```json
+    {
+      "oauth2-proxy": {
+        "client-id": "",
+        "cookie-secret": ""
+      },
+      "github_token": "<github_token>",
+      "github_secret": "<github_secret>",
+      "username": "",
+      "password": "",
+      "clientSecret": ""
+    }
+    ```
+
+    The `github_token` is the generated [Access Token](https://www.runatlantis.io/docs/access-credentials.html#generating-an-access-token) for the GitHub user.
+
+    The `github_secret` is the generated [secret](https://www.runatlantis.io/docs/webhook-secrets.html) for the GitHub webhook.
+
+    For GitLab:
+
+    ```json
+    {
+      "oauth2-proxy": {
+        "client-id": "",
+        "cookie-secret": ""
+      },
+      "gitlab_token": "<gitlab_token>",
+      "gitlab_secret": "<gitlab_secret>",
+      "username": "",
+      "password": "",
+      "clientSecret": ""
+    }
+    ```
+
+    The `gitlab_token` is the generated [Access Token](https://www.runatlantis.io/docs/access-credentials.html#generating-an-access-token) for the GitLab user.
+
+    The `gitlab_secret` is the generated [secret](https://www.runatlantis.io/docs/webhook-secrets.html) for the GitLab webhook.
 
     After configuring the ESO section, the External Secrets Operator will automatically create the Kubernetes secret `atlantis-webhook` during installation or upgrade of the Atlantis Helm chart.
 
     </details>
 
-2. Update the `values.yaml` file to enable the webhook secret by setting the `atlantis.webhookSecretName` field to the name of the secret created in the previous step. For example:
+2. Update the `values.yaml` file to enable the webhook secret by setting the `atlantis.vcsSecretName` field to the name of the secret created in the previous step. For example:
 
     ```yaml title="values.yaml"
     atlantis:
-      webhookSecretName: atlantis-webhook
+      vcsSecretName: atlantis-webhook
     ```
 
 3. Apply the changes by using the `helm upgrade` command or syncing the Argo CD application.
@@ -572,7 +605,7 @@ After configuring the AWS IAM Role, Atlantis will be able to assume the role and
 ### Using built-in Atlantis IAM Role
 
 :::note
-For more details about Atlantis IAM Role creation, refer to the [terraform-aws-platform](https://github.com/KubeRocketCI/terraform-aws-platform/tree/master/eks/irsa.tf) repository.
+For more details about Atlantis IAM Role creation, refer to the [terraform-aws-platform](https://github.com/KubeRocketCI/terraform-aws-platform/tree/master/eks/atlantis.tf) repository.
 :::
 
 In case of using the [terraform-aws-platform](https://github.com/KubeRocketCI/terraform-aws-platform) repository to manage the AWS infrastructure, Atlantis can use the built-in **Atlantis** IAM Role created by the repository. This IAM Role is automatically created and configured with the necessary permissions to assume the **KRCIDeployerRole** IAM Role for performing Terraform operations.
@@ -594,6 +627,54 @@ To use the built-in Atlantis IAM Role, follow the steps below:
 5. Apply the changes by using the `helm upgrade` command or syncing the Argo CD application.
 
 After configuring the AWS IAM Role, Atlantis will be able to assume the **KRCIDeployerRole** IAM Role and perform Terraform operations using the provided permissions.
+
+## Installing Atlantis
+
+There are two approaches to install Atlantis using [edp-cluster-add-ons](https://github.com/epam/edp-cluster-add-ons) repository:
+
+- **Using Argo CD**: This approach implies installing Atlantis as an Argo CD Application resource.
+- **Using Helm**: This approach involves installing Atlantis via common Helm commands.
+
+### Approach 1: Using Argo CD
+
+:::note
+For more information on configuring [edp-cluster-add-ons](https://github.com/epam/edp-cluster-add-ons) repository, refer to the [Install via Add-Ons](../add-ons-overview.md) page.
+:::
+
+The first approach is to deploy Atlantis using Argo CD. Follow the steps below to install Atlantis using Argo CD:
+
+1. Clone the forked [edp-cluster-add-ons](https://github.com/epam/edp-cluster-add-ons) repository.
+
+2. Navigate to the `clusters/core/addons/atlantis` directory and configure the `values.yaml` file with the necessary values for the Atlantis installation.
+
+3. After configuring the Atlantis Helm chart values, navigate to the `clusters/core/apps` directory. In the `values.yaml` file, update the `atlantis` section by specifying the `enable` field as `true` to enable Argo CD Application creation for the Atlantis. Modify the `createNamespace` and `namespace` fields as needed. For example:
+
+    ```yaml
+    atlantis:
+      createNamespace: true
+      enable: true
+      namespace: atlantis
+    ```
+
+4. Commit and push the changes to the remote repository. After the changes are pushed, navigate to the Argo CD and sync the Atlantis application. Verify that the Atlantis is successfully deployed:
+
+    ![Argo CD KrakenD](../../assets/operator-guide/infrastructure-providers/argo-cd-atlantis.png)
+
+### Approach 2: Deploy Using Helm
+
+The second approach is to deploy Atlantis using Helm. Follow the steps below to install Atlantis using Helm:
+
+1. Clone the forked [edp-cluster-add-ons](https://github.com/epam/edp-cluster-add-ons) repository.
+
+2. Navigate to the `clusters/core/addons/atlantis` directory and configure the `values.yaml` file with the necessary values for the Atlantis installation.
+
+3. After configuring the Atlantis Helm chart values, run the following command to deploy the Atlantis:
+
+    ```bash
+    helm upgrade --install atlantis . -n atlantis --create-namespace
+    ```
+
+4. Verify that the Atlantis is successfully deployed.
 
 ## Related Articles
 

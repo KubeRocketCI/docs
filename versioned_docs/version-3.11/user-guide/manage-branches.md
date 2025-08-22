@@ -108,7 +108,7 @@ Onboarding a branch that has already been created in Git to the platform follows
 
 To edit branch properties, follow the steps below:
 
-1. Navigate to the **Branches** block by clicking the library name link in the Libraries list.
+1. Navigate to the **Branches** block by clicking the component name link in the components list.
 
 2. Click the actions button and select **Edit**:
 
@@ -128,7 +128,7 @@ To edit branch properties, follow the steps below:
 
 In order to build branch from the latest commit, do the following:
 
-1. Navigate to the **Branches** block by clicking the library name link in the Libraries list.
+1. Navigate to the **Branches** tab by clicking the component name link in the components list.
 
 2. Click the **Build** button:
 
@@ -160,7 +160,7 @@ The tree diagram window is presented below:
 In order to delete the added branch with the corresponding record in the KubeRocketCI portal database, do the following:
 
 1. Navigate to the **Branches** block by clicking the component name link in the components list.
-2. Select the name related to the necessary branch and then click delete **Bucket** icon:
+2. On the branch block, click the actions button and select **Delete**:
 
   ![Delete branch](../assets/user-guide/components/branches/branches-delete-branch.png "Delete branch")
 

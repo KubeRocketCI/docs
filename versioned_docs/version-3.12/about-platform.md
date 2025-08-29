@@ -33,7 +33,7 @@ The platform consists of the following blocks:
 
   |Language|Framework|Build Tool|Application|Library|Autotest|
   |:-|:-:|:-:|:-:|:-:|:-:|
-  |Java|Java 17, Java 21|Gradle, Maven|:white_check_mark:|:white_check_mark:|:white_check_mark:|
+  |Java|Java 8, 11, 17, Java 21|Gradle, Maven|:white_check_mark:|:white_check_mark:|:white_check_mark:|
   |Python|Python 3.8, FastAPI, Flask|Python|:white_check_mark:|:white_check_mark:||
   |C#|.Net 3.1, .Net 6.0|.Net|:white_check_mark:|:white_check_mark:||
   |C|None|Make,CMake|:white_check_mark:|||
@@ -45,10 +45,6 @@ The platform consists of the following blocks:
   |Groovy|Codenarc|Codenarc||:white_check_mark:||
   |Rego|OPA|OPA||:white_check_mark:||
   |Container|Docker|Kaniko||:white_check_mark:||
-
-:::note
-As of KubeRocketCI version 3.12, Java 8 and Java 11 frameworks have been deprecated.
-:::
 
 - [Portal UI](./user-guide/index.md) as a single entry point
 - [Deployment Flows](./user-guide/add-cd-pipeline.md) for Microservice Deployment

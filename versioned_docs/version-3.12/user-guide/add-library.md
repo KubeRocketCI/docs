@@ -78,7 +78,7 @@ In our example, we will use the **Create from template** strategy:
 
     * **Library code language** - defines the code language with its supported frameworks:
 
-      * Java – selecting specific Java version (17 and 21 are available; Java 8 and 11 deprecated since v3.12).
+      * Java – selecting specific Java version (8, 11, 17, and 21 are available).
       * JavaScript - selecting JavaScript allows using the NPM tool.
       * Python - selecting Python allows using the Python v.3.8, FastAPI, Flask.
       * Groovy-pipeline - selecting Groovy-pipeline allows having the ability to customize a stages logic.

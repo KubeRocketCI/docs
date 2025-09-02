@@ -106,6 +106,7 @@ words:
   - gitfusion
   - GITFUSION
   - gitops
+  - Gitserver
   - GITTAG
   - GOPATH
   - GOROOT
@@ -192,6 +193,7 @@ words:
   - preconfigured
   - printenv
   - psql
+  - pullrequest
   - pwjps
   - Qualys
   - qualitygate

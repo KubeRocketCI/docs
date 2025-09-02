@@ -27,13 +27,13 @@ The platform consists of the following blocks:
 ## Features
 
 - Deployed and configured CI/CD toolset ([Tekton](https://tekton.dev/), [ArgoCD](https://argoproj.github.io/cd/), [Nexus Repository Manager](https://help.sonatype.com/en/sonatype-nexus-repository.html), [SonarQube](https://www.sonarsource.com/), [DefectDojo](https://www.defectdojo.org/), [Dependency-Track](https://dependencytrack.org/)).
-- [GitHub](https://about.gitlab.com/features/)(by default) or [GitLab](https://about.gitlab.com/features/).
+- [GitHub](https://about.gitlab.com/features/)(by default), [GitLab](https://about.gitlab.com/features/), [Bitbucket](https://www.atlassian.com/software/bitbucket/features/pipelines) or [Gerrit](https://gerrit-review.googlesource.com/Documentation/intro-quick.html).
 - [Tekton](./operator-guide/install-tekton.md) is a pipeline orchestrator.
 - [CI pipelines](./user-guide/index.md) for polyglot applications:
 
   |Language|Framework|Build Tool|Application|Library|Autotest|
   |:-|:-:|:-:|:-:|:-:|:-:|
-  |Java|Java 8, Java 11, Java 17, Java 21|Gradle, Maven|:white_check_mark:|:white_check_mark:|:white_check_mark:|
+  |Java|Java 17, Java 21|Gradle, Maven|:white_check_mark:|:white_check_mark:|:white_check_mark:|
   |Python|Python 3.8, FastAPI, Flask|Python|:white_check_mark:|:white_check_mark:||
   |C#|.Net 3.1, .Net 6.0|.Net|:white_check_mark:|:white_check_mark:||
   |C|None|Make,CMake|:white_check_mark:|||
@@ -45,6 +45,10 @@ The platform consists of the following blocks:
   |Groovy|Codenarc|Codenarc||:white_check_mark:||
   |Rego|OPA|OPA||:white_check_mark:||
   |Container|Docker|Kaniko||:white_check_mark:||
+
+:::note
+As of KubeRocketCI version 3.12, Java 8 and Java 11 frameworks have been deprecated.
+:::
 
 - [Portal UI](./user-guide/index.md) as a single entry point
 - [Deployment Flows](./user-guide/add-cd-pipeline.md) for Microservice Deployment

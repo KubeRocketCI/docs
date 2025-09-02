@@ -427,7 +427,7 @@ In version 3.12, the `docker.io/epamedp/tekton-cache` image has been [deprecated
 2. (Optional) Enable Repository Discovery
 
     :::warning
-    In case of using GitFusion with the Bitbucket Git provider, it is necessary to update the Bitbucket app password permissions to include the `account:read` scope. For more details on how to create a Bitbucket app password with the required permissions, refer to the [Add Git Server](../../user-guide/add-git-server.md) guide.
+    In case of using GitFusion with the Bitbucket Git provider, it is necessary to update the Bitbucket API token permissions to include the `read:account` scope. For more details on how to create a Bitbucket app password with the required permissions, refer to the [Add Git Server](../../user-guide/add-git-server.md) guide.
     :::
 
     :::note

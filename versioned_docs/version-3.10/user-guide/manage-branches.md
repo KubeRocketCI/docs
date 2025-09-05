@@ -74,7 +74,7 @@ When adding a component, the default branch is **main**. To add a new branch, fo
 
     ![Release branch](../assets/user-guide/components/branches/branches-release-branch.png "Release branch")
 
-    c. **Branch name** - type the branch name. Note that this field remains static if you create a release branch. For the **Clone** and **Import** strategies: if you want to use an existing branch, enter its name in this field.
+    c. **Branch name** - type the branch name. Note that this field remains static if you create a release branch. If you want to onboard an existing branch, enter the name of the existing branch in the **Branch name** field.
 
     d. **From commit hash** - paste the commit hash from which the branch will be created. For the **Clone** and **Import** strategies: Note that if the **From commit hash** field is empty, the latest commit from the branch name will be used.
 
@@ -102,13 +102,13 @@ When adding a component, the default branch is **main**. To add a new branch, fo
 
 ## Add Existing Branch
 
-Onboarding a branch that has already been created in Git to the platform follows the same steps as when you [add a new branch](../user-guide/manage-branches.md#add-new-branch).
+Onboarding a branch that has already been created in Git to the platform follows the same steps as when you [add a new branch](../user-guide/manage-branches.md#add-new-branch). When adding an existing branch, specify its name in the **Branch name** field.
 
 ## Edit Existing Branch
 
 To edit branch properties, follow the steps below:
 
-1. Navigate to the **Branches** block by clicking the library name link in the Libraries list.
+1. Navigate to the **Branches** block by clicking the component name link in the components list.
 
 2. Click the actions button and select **Edit**:
 
@@ -128,7 +128,7 @@ To edit branch properties, follow the steps below:
 
 In order to build branch from the latest commit, do the following:
 
-1. Navigate to the **Branches** block by clicking the library name link in the Libraries list.
+1. Navigate to the **Branches** tab by clicking the component name link in the components list.
 
 2. Click the **Build** button:
 
@@ -160,7 +160,7 @@ The tree diagram window is presented below:
 In order to delete the added branch with the corresponding record in the KubeRocketCI portal database, do the following:
 
 1. Navigate to the **Branches** block by clicking the component name link in the components list.
-2. Select the name related to the necessary branch and then click delete **Bucket** icon:
+2. On the branch block, click the actions button and select **Delete**:
 
   ![Delete branch](../assets/user-guide/components/branches/branches-delete-branch.png "Delete branch")
 

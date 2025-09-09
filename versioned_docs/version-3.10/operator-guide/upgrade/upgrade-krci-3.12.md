@@ -427,7 +427,7 @@ In version 3.12, the `docker.io/epamedp/tekton-cache` image has been [deprecated
 2. (Optional) Enable Repository Discovery
 
     :::warning
-    In case of using GitFusion with the Bitbucket Git provider, it is necessary to update the Bitbucket API token permissions to include the `account:read` scope. For more details on how to create a Bitbucket app password with the required permissions, refer to the [Add Git Server](../../user-guide/add-git-server.md) guide.
+    In case of using GitFusion with the Bitbucket Git provider, it is necessary to update the Bitbucket API token permissions to include the `read:account` scope. For more details on how to create a Bitbucket app password with the required permissions, refer to the [Add Git Server](../../user-guide/add-git-server.md) guide.
     :::
 
     :::note
@@ -801,7 +801,7 @@ In version 3.12, the `docker.io/epamedp/tekton-cache` image has been [deprecated
         3. Update the KrakenD secret with the GitFusion URL variable.
 
             :::note
-            The `GITFUSION_URL` variable should point to the GitFusion service URL, e.g., `http://gitfusion.<krci-namespace>:8080`.
+            The `GITFUSION_URL` variable should point to the GitFusion service URL, e.g., `http://gitfusion.krci:8080`.
             :::
 
             Update the `krakend` secret to include the `GITFUSION_URL` variable:
@@ -814,7 +814,7 @@ In version 3.12, the `docker.io/epamedp/tekton-cache` image has been [deprecated
               namespace: krakend
             data:
               ...
-              GITFUSION_URL: http://gitfusion.<krci-namespace>:8080
+              GITFUSION_URL: http://gitfusion.krci:8080
             type: Opaque
             ```
 
@@ -829,7 +829,7 @@ In version 3.12, the `docker.io/epamedp/tekton-cache` image has been [deprecated
               "JWK_URL": "https://keycloak.example.com/realms/<realmName>/protocol/openid-connect/certs",
               "OPENSEARCH_URL": "https://opensearch-cluster-master.logging:9200",
               "OPENSEARCH_CREDS": "opensearch-base64-encoded-credentials",
-              "GITFUSION_URL": "http://gitfusion.<krci-namespace>:8080"
+              "GITFUSION_URL": "http://gitfusion.krci:8080"
             }
             ```
 
@@ -841,7 +841,92 @@ In version 3.12, the `docker.io/epamedp/tekton-cache` image has been [deprecated
 
         ![GitFusion](../../assets/operator-guide/upgrade/gitfusion.png)
 
-3. To upgrade KubeRocketCI to the v3.12, run the following commands:
+3. (Optional) Align Remote Cluster Names
+
+    In case of using remote clusters in KubeRocketCI, it is necessary to update the remote cluster names in KubeRocketCI portal after upgrading to version 3.12.
+
+    After the upgrade, all remote cluster names will display as `default-cluster` in the KubeRocketCI portal. This happens because starting from version 3.12, the portal retrieves cluster names from the `kubeconfig` specification stored in the `<cluster-name>` Kubernetes secret, where `default-cluster` is the default name of the cluster in the `kubeconfig` specification.
+
+    ![Remote Clusters](../../assets/operator-guide/upgrade/remote-clusters.png)
+
+    There are two ways to align the remote cluster names in the KubeRocketCI portal:
+
+    1. Recreate the remote cluster integration in the KubeRocketCI portal.
+
+        1. Navigate to the **Configuration** -> **Deployment** -> **Clusters** section in the KubeRocketCI portal.
+
+        2. Click on the cluster integration that needs to be updated and delete it by clicking the **Delete** (trash can) icon.
+
+            ![Delete Cluster](../../assets/operator-guide/upgrade/delete-cluster.png)
+
+            Confirm the deletion in the pop-up window.
+
+        3. After the cluster integration is deleted, click the **Add Cluster** button to create a new cluster integration. Fill in the required fields and click the **Save** button to add the cluster.
+
+            ![Add Cluster](../../assets/operator-guide/upgrade/add-cluster.png)
+
+            After the new cluster integration is created, the correct cluster name will be displayed in the KubeRocketCI portal.
+
+    2. Update the `kubeconfig` specification in the `<cluster-name>` Kubernetes secret.
+
+        :::note
+        The `<cluster-name>` secret is created automatically when a new cluster integration is added in the KubeRocketCI portal. The secret contains the `kubeconfig` specification used to connect to the remote cluster.
+        :::
+
+        It is also possible to update the `kubeconfig` specification in the existing `<cluster-name>` secret to change the cluster name, instead of recreating the cluster integration in the KubeRocketCI portal.
+
+        1. Locate the `<cluster-name>` secret in the namespace where KubeRocketCI is installed (e.g., `krci` namespace).
+
+            ```bash
+            kubectl get secret <cluster-name> -n krci -o yaml
+            ```
+
+        2. Update the `kubeconfig` specification by changing the `clusters.name` and `contexts.context.cluster` fields to match the desired cluster name.
+
+            :::note
+            The `data.config` field in the secret is base64 encoded. To update the `kubeconfig` specification, decode the `data.config` field, make the necessary changes, and then encode it back to base64 before updating the secret.
+            :::
+
+            Example of the `kubeconfig` specification in the `<cluster-name>` secret:
+
+            ```yaml title="kubeconfig"
+            {
+              "apiVersion": "v1",
+              "kind": "Config",
+              "current-context": "...",
+              "preferences": {},
+              "clusters": [
+                {
+                  "cluster": {
+                    "server": "...",
+                    "certificate-authority-data": "..."
+                  },
+                  "name": "<cluster-name>" # Change this value to the desired cluster name
+                }
+              ],
+              "contexts": [
+                {
+                  "context": {
+                    "cluster": "<cluster-name>", # Change this value to the desired cluster name
+                    "user": "..."
+                  },
+                  "name": "..."
+                }
+              ],
+              "users": [
+                {
+                  "user": {
+                    "token": "..."
+                  },
+                  "name": "..."
+                }
+              ]
+            }
+            ```
+
+            After updating the `kubeconfig` specification in the secret, the correct cluster name will be displayed in the KubeRocketCI portal.
+
+4. To upgrade KubeRocketCI to the v3.12, run the following commands:
 
    :::note
    To verify the installation, it is possible to test the deployment before applying it to the cluster with the `--dry-run` key:

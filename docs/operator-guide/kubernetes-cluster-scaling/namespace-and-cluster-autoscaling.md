@@ -51,13 +51,13 @@ Karpenter needs specific IAM permissions to manage EC2 instances, including the 
 
 To simplify the setup, we recommend using the [terraform-aws-karpenter](https://registry.terraform.io/modules/terraform-aws-modules/eks/aws/latest/submodules/karpenter) module. This module automates the creation of the necessary IAM roles and policies for Karpenter.
 
-This setup assumes your cluster uses on-demand instances with 24/7 availability. If your cluster configuration differs, adjust the settings to match your needs. You can find Karpenter configuration parameters in the [terraform-aws-platform](https://github.com/KubeRocketCI/terraform-aws-platform/blob/master/eks/main.tf#L277) repository.
+This setup assumes your cluster uses on-demand instances with 24/7 availability. If your cluster configuration differs, adjust the settings to match your needs. You can find Karpenter configuration parameters in the [terraform-aws-platform](https://github.com/KubeRocketCI/terraform-aws-platform/blob/master/eks/irsa.tf#L345) repository.
 
 With this configuration, the following IAM roles will be created:
 
-- **KarpenterController**: This role also includes `system:nodes` access to the Kubernetes cluster and will be used by the [Karpenter controller](https://github.com/epam/edp-cluster-add-ons/blob/main/clusters/core/addons/karpenter/values.yaml#L33) deployed within the cluster. This role contains the `KarpenterController` custom policy.
+- **KarpenterControllerRole-\<ClusterName\>**: This role also includes `system:nodes` access to the Kubernetes cluster and will be used by the [Karpenter controller](https://github.com/epam/edp-cluster-add-ons/blob/main/clusters/core/addons/karpenter/values.yaml#L33) deployed within the cluster. This role contains the `KarpenterController` custom policy.
 
-- **Karpenter-\<CLUSTER_NAME\>**: This role will be used by Karpenter to manage EC2 instances. We will configure this role later in the Karpenter [Node Class setup](https://github.com/epam/edp-cluster-add-ons/blob/main/clusters/core/addons/karpenter-np/templates/node-class.yaml#L8). This role contains the following policies:
+- **KarpenterNodeRole-\<ClusterName\>**: This role will be used by Karpenter to manage EC2 instances. We will configure this role later in the Karpenter [Node Class setup](https://github.com/epam/edp-cluster-add-ons/blob/main/clusters/core/addons/karpenter-np/templates/node-class.yaml#L8). This role contains the following policies:
 
   - `AmazonEC2ContainerRegistryReadOnly`
   - `AmazonEKS_CNI_Policy`
@@ -73,7 +73,7 @@ Karpenter needs to know which subnets and security groups to use when provisioni
 To deploy Karpenter in your Kubernetes cluster, we recommend using the [add-ons approach](https://github.com/epam/edp-cluster-add-ons/tree/main/clusters/core/addons/karpenter).
 For best practices, Karpenter should be deployed on nodes that are not managed by Karpenter itself. This ensures that Karpenter can manage the cluster independently of its own scaling actions. To achieve this, you should use the affinity configuration in the values.yaml file.
 
-Additionally, Karpenter requires the `KarpenterController` IAM role to manage the cluster's nodes. This role must be specified in the Service Account configuration. The clusterName should also be set in the settings section. Here's an example of how to configure values.yaml before installation:
+Additionally, Karpenter requires the `KarpenterControllerRole-<ClusterName>` IAM role to manage the cluster's nodes. This role must be specified in the Service Account configuration. The clusterName should also be set in the settings section. Here's an example of how to configure values.yaml before installation:
 
 ```yaml title="values.yaml"
 karpenter:
@@ -87,10 +87,10 @@ karpenter:
   # -- Karpenter IAM role to manage cluster nodes
   serviceAccount:
     annotations:
-      eks.amazonaws.com/role-arn: arn:aws:iam::0123456789:role/KarpenterController
+      eks.amazonaws.com/role-arn: arn:aws:iam::0123456789:role/KarpenterControllerRole-<ClusterName>
   # -- EKS cluster name
   settings:
-    clusterName: <CLUSTER_NAME>
+    clusterName: <ClusterName>
 ```
 
 ### Deploy Karpenter Resources
@@ -103,7 +103,7 @@ karpenter:
 # -- AMI used by nodes in the EKS cluster
 amiID: ami-XXXXXXXXXXXXXXXXX
 # -- EKS cluster name (must match the Karpenter configuration)
-clusterName: "<CLUSTER_NAME>"
+clusterName: "<ClusterName>"
 # Instance type settings
 instanceType:
   category: ["m"]

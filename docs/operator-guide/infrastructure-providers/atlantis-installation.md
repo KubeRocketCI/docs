@@ -613,7 +613,7 @@ In case of using the [terraform-aws-platform](https://github.com/KubeRocketCI/te
 To use the built-in Atlantis IAM Role, follow the steps below:
 
 1. Navigate to the AWS Management Console and open the [IAM](https://aws.amazon.com/iam/) service.
-2. Under the **Access management** section, select **Roles**. Ensure that the **Atlantis** IAM Role is created. If not, create the role using the [Deploy AWS EKS Cluster](../deploy-aws-eks.md#deploy-aws-eks-cluster) guide.
+2. Under the **Access management** section, select **Roles**. Ensure that the **Atlantis** IAM Role is created. If not, create the role using the [Deploy AWS EKS Cluster](../deploy-aws-eks.md) guide.
 3. Navigate to the `clusters/core/addons/atlantis` directory of the forked [edp-cluster-add-ons](https://github.com/epam/edp-cluster-add-ons) repository.
 4. Open the `values.yaml` file and update the `atlantis.serviceAccount.annotations` field to include the ARN of the Atlantis IAM Role. For example:
 

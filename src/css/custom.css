@@ -35,7 +35,7 @@
   --ifm-code-font-size: 95%;
 }
 
-[data-theme='dark'] {
+:root[data-theme='dark'] {
   /* custom variables */
   --kuberocket-card-color: var(--kuberocket-color-primary-dark-secondary);
   --kuberocket-card-color-hover: var(--kuberocket-color-primary-dark-secondary);

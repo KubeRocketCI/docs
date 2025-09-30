@@ -1,6 +1,6 @@
 ---
 description: Activate Technical Writer role for specialized development assistance
-tools: ['changes', 'codebase', 'editFiles', 'fetch', 'findTestFiles', 'githubRepo', 'problems', 'runCommands', 'search', 'searchResults', 'terminalLastCommand', 'usages']
+tools: ['usages', 'problems', 'changes', 'fetch', 'githubRepo', 'edit/editFiles', 'search', 'runCommands', 'sequential-thinking/*', 'context7/*']
 ---
 
 # Technical Writer Agent Chat Mode

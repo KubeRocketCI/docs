@@ -930,10 +930,10 @@ In version 3.12, the `docker.io/epamedp/tekton-cache` image has been [deprecated
 
    :::note
    To verify the installation, it is possible to test the deployment before applying it to the cluster with the `--dry-run` key:
-   `helm upgrade krci epamedp/edp-install -n krci --values values.yaml --version=3.12.0 --dry-run`
+   `helm upgrade krci epamedp/edp-install -n krci --values values.yaml --version=3.12.2 --dry-run`
    :::
 
    ```bash
    helm repo update epamedp
-   helm upgrade krci epamedp/edp-install -n krci --values values.yaml --version=3.12.0
+   helm upgrade krci epamedp/edp-install -n krci --values values.yaml --version=3.12.2
    ```

@@ -171,7 +171,7 @@ To configure KrakenD as the API gateway for KubeRocketCI, follow the steps below
     ```
 
     :::note
-    This URL should point to the ingress URL of the KrakenD API Gateway. By default, this [value](https://github.com/epam/edp-install/blob/v3.12.2/deploy-templates/values.yaml#L16) is left empty, which means that the widgets are disabled by default.
+    This URL should point to the ingress URL of the KrakenD API Gateway. By default, this [value](https://github.com/epam/edp-install/blob/v3.12.3/deploy-templates/values.yaml#L16) is left empty, which means that the widgets are disabled by default.
     :::
 
 2. Define the KrakenD secret:

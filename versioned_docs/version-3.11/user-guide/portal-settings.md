@@ -32,10 +32,10 @@ Click the username to open the KubeRocketCI portal settings:
 
   ![Cluster tab](../assets/user-guide/portal/cluster-tab.png "Cluster tab")
 
-  In the **Cluster** tab, you can view the namespace accessibility configuration you are supposed to specify at your first login. Here you can also edit the default and allowed namespace:
+  In the **Cluster** tab, you can view the namespace accessibility configuration you are supposed to specify at your first login. Here you can also edit the default and allowed namespaces:
 
-  * **Default namespace** - when you create a resource within the portal, it will be deployed in this namespace. You can set only one default namespace.
-  * **Allowed namespace** - resources from these namespaces will be visible in the portal.
+  * **Default namespace** – when you create a resource within the portal, it will be deployed in this namespace. You can set only one default namespace. By default, the namespace where the KubeRocketCI instance is deployed will be set here.
+  * **Allowed namespace** – resources from these namespaces will be visible in the portal.
 
 :::note
   You can't view resources in the namespaces that you are not allowed to access according to your RBAC configuration. KubeRocketCI portal doesn't grant you extra access rights.

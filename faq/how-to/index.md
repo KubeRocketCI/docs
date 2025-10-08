@@ -35,6 +35,7 @@ There are three sections that contain answers to questions that are related to g
 - [How Can I Access Application Logs?](../how-to/developer/access-application-logs.md)
 - [How Can I Open the Application Terminal?](../how-to/developer/open-application-terminal.md)
 - [How Can I Access Pipeline Logs?](../how-to/developer/access-pipeline-logs.md)
+- [How to View the Platform resources?](../how-to/developer/how-to-view-cluster-resources.md)
 - [How to Check Codebase Quality and Vulnerability Metrics?](../how-to/developer/check-application-metrics.md)
 - [How to View Grafana Metrics for an Application?](../how-to/developer/access-grafana-dashboard.md)
 - [How to Troubleshoot Issues in the Create Resource Window?](../how-to/developer/unprocessable-entity-message.md)

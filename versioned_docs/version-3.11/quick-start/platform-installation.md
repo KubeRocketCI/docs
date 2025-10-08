@@ -70,11 +70,11 @@ To deploy the platform, follow the steps below:
 
 6. In the login menu, paste the generated token in the **ID token** field and click the **SIGN IN** button.
 
-7. Upon logging in, specify the namespace for KubeRocketCI where platform is deployed by clicking the **cluster settings** link in the bottom left corner of the UI:
+7. Upon logging in, open the account settings by clicking the **⋮** top right corner of the UI and selecting your account:
 
     ![Specify namespaces](../assets/quick-start/edp_portal_ui.png "Specify namespaces")
 
-8. In the **Cluster Settings** page, define the following for fields:
+8. Ensure the `krci` namespace is specified in the **cluster** tab of the account settings. If not, define them manually:
 
     * Default namespace: `krci`
     * Allowed namespaces: `krci`

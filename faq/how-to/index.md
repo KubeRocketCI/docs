@@ -35,6 +35,7 @@ There are three sections that contain answers to questions that are related to g
 - [How Can I Access Application Logs?](../how-to/developer/access-application-logs.md)
 - [How Can I Open the Application Terminal?](../how-to/developer/open-application-terminal.md)
 - [How Can I Access Pipeline Logs?](../how-to/developer/access-pipeline-logs.md)
+- [How to View the Platform resources?](../how-to/developer/how-to-view-cluster-resources.md)
 - [How to Check Codebase Quality and Vulnerability Metrics?](../how-to/developer/check-application-metrics.md)
 - [How to View Grafana Metrics for an Application?](../how-to/developer/access-grafana-dashboard.md)
 - [How to Troubleshoot Issues in the Create Resource Window?](../how-to/developer/unprocessable-entity-message.md)
@@ -47,3 +48,5 @@ There are three sections that contain answers to questions that are related to g
 - [How to Manage Access to KubeRocketCI/Kubernetes?](../how-to/devops/manage-access-kuberocketci-kubernetes.md)
 - [How to Manage Trigger Owner Verification in Tekton?](../how-to/devops/manage-trigger-owner-verification-tekton.md)
 - [How to Troubleshoot Git Server Connection?](../how-to/devops/troubleshoot-git-server-connection.md)
+- [How Does KubeRocketCI Determine the Default Namespace on First Login?](../how-to/devops/determine-default-namespace-first-login.md)
+- [How Can I Set Namespaces in KubeRocketCI?](../how-to/devops/set-namespaces-kuberocketci.md)

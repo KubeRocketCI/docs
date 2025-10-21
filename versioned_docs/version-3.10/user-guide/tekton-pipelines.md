@@ -22,7 +22,7 @@ Before executing pipelines, ensure that the project is onboarded to the KubeRock
 
 ## Pipeline Types in the Platform
 
-KubeRocketCI supports four main types of pipelines:
+KubeRocketCI supports seven main types of pipelines:
 
 * **Review Pipeline**: This pipeline is initiated when a pull request is created. It aims to check code quality and run tests before the code can be merged.
 

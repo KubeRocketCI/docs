@@ -89,6 +89,10 @@ Once the GitOps repository is added to the platform, you can set custom paramete
 
     ![GitOps Codebase](../assets/user-guide/values-override-deploy.png "GitOps Codebase")
 
+:::note
+  Ensure to add the [credentials template](https://argo-cd.readthedocs.io/en/latest/user-guide/private-repositories/#credential-templates) in the Argo CD settings to grant Argo CD access to both your GitOps and codebase repositories.
+:::
+
 ## Delete GitOps Repository
 
 In case you need to delete the GitOps repository, do the following:

@@ -64,7 +64,7 @@ When adding a component, the default branch is **main**. To add a new branch, fo
 
   ![New branch](../assets/user-guide/components/branches/branches-create-new-branch.png "New branch")
 
-    a. **Learn more** - opens a documentation page the explains how to [add new branch](../user-guide/manage-branches.md#add-new-branch).
+    a. **Learn more** - opens a documentation page the explains how to add a new branch.
 
     b. **Release branch** - select this option to make a release branch. Codebases from release branches are marked with a different tag.
 

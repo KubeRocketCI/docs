@@ -49,12 +49,18 @@ To install Argo CD, follow the steps below:
           # after domain creation update
           - "argocd-dev.example.com"
 
+        # Disabled for multitenancy env with single instance deployment
+      applicationSet:
+        allowAnyNamespace: true
+        serviceAccount:
+          # -- Annotations applied to created service account
+          annotations: {}
+        extraEnv:
+        - name: ARGOCD_APPLICATIONSET_CONTROLLER_ENABLE_SCM_PROVIDERS
+          value: 'false'
+
       # we use Keycloak so no DEX is required
     dex:
-      enabled: false
-
-      # Disabled for multitenancy env with single instance deployment
-    applicationSet:
       enabled: false
 
     configs:
@@ -66,8 +72,8 @@ To install Argo CD, follow the steps below:
 
       params:
         server.insecure: true
-        application.namespaces: >-
-          krci
+        applicationsetcontroller.namespaces: krci
+        application.namespaces: krci
     ```
 
     </details>
@@ -75,7 +81,7 @@ To install Argo CD, follow the steps below:
 3. Apply the argocd-values.yaml file using the `helm install` command:
 
     ```bash
-    helm install argo-cd argocd/argo-cd --values argocd-values.yaml --version 5.51.4 --create-namespace --atomic -n argocd
+    helm install argo-cd argocd/argo-cd --values argocd-values.yaml --version 8.5.6 --create-namespace --atomic -n argocd
     ```
 
 :::info

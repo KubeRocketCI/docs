@@ -282,6 +282,7 @@ words:
   - nodeclasses
   - fasapi
   - applicationset
+  - applicationsetcontroller
   - rolearn
   - eksadminrole
   - rolebinding

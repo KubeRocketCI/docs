@@ -132,7 +132,7 @@ export const redirectMaps: Record<string, string> = {
   'user-guide/ci-pipeline-details': 'https://docs.kuberocketci.io/docs/operator-guide/install-kuberocketci',
 
   'overview': 'https://docs.kuberocketci.io/docs/about-platform',
-  'pricing': 'https://docs.kuberocketci.io/pricing',
+  'pricing': 'https://kuberocketci.io/pricing',
 
   'quick-start/create-application': 'https://docs.kuberocketci.io/docs/quick-start/create-application',
   'quick-start/deploy-application': 'https://docs.kuberocketci.io/docs/quick-start/deploy-application',

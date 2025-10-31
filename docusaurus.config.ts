@@ -316,11 +316,6 @@ const config: Config = {
           label: 'FAQ',
           to: '/faq/general-questions',
         },
-        {
-          label: 'Pricing',
-          to: '/pricing/',
-          position: 'left',
-        },
         // { to: 'blog', label: 'Blog', position: 'left' },
         // Right
         {

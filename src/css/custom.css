@@ -76,3 +76,44 @@
     --ifm-menu-color: var(--ifm-color-white);
   }
 }
+
+.footer-container {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.footer-subfooter {
+  background-color: var(--kuberocket-color-primary-dark);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 1rem 0;
+}
+
+.footer-subfooter-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.footer-subfooter-link {
+  color: var(--ifm-color-white);
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: color 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.footer-subfooter-link:hover {
+  color: var(--kuberocket-color-primary-light);
+  text-decoration: none;
+}
+
+.footer-subfooter-icon {
+  font-size: 1rem;
+  transition: transform 0.2s ease;
+}
+
+.footer-subfooter-link:hover .footer-subfooter-icon {
+  transform: translateX(4px);
+}

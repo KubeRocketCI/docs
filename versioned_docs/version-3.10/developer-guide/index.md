@@ -63,6 +63,7 @@ Each platform component is available in its corresponding GitHub project:
 - [Gerrit Operator](https://github.com/epam/edp-gerrit-operator/releases)
 - [KubeRocketCI Portal](https://github.com/epam/edp-headlamp/releases)
 - [Tekton](https://github.com/epam/edp-tekton/releases)
+- [Tekton Custom Tasks](https://github.com/KubeRocketCI/tekton-custom-task)
 
 ### Optional Components
 

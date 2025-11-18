@@ -70,6 +70,9 @@ Each platform component is available in its corresponding GitHub project:
 - [Gerrit Operator](https://github.com/epam/edp-gerrit-operator/releases)
 - [KubeRocketCI Portal](https://github.com/epam/edp-headlamp/releases)
 - [Tekton](https://github.com/epam/edp-tekton/releases)
+- [GitFusion](https://github.com/KubeRocketCI/gitfusion)
+- [KubeRocketCI Cache](https://github.com/KubeRocketCI/krci-cache)
+- [Tekton Custom Tasks](https://github.com/KubeRocketCI/tekton-custom-task)
 
 ### Optional Components
 
@@ -112,6 +115,7 @@ Our DockerHub repository hosts Docker images for various platform components:
 - [Tekton](https://hub.docker.com/r/epamedp/edp-tekton/)
 - [Tekton Cache](https://hub.docker.com/r/epamedp/tekton-cache/)
 - [Tekton Custom Task](https://hub.docker.com/r/epamedp/tekton-custom-task/)
+- [GitFusion](https://hub.docker.com/r/epamedp/gitfusion)
 
 ## Social Media
 

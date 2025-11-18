@@ -15,6 +15,10 @@ description: "Explore the essentials of codebases and onboarding strategies in K
 
 In this section, we will introduce you to the different types of codebases and strategies for onboarding codebases onto the KubeRocketCI.
 
+<div style={{ display: 'flex', justifyContent: 'center' }}>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/uH2FVcEWtmg" title="KubeRocketCI: Deep Dive into Codebases" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen"></iframe>
+</div>
+
 ## Component and Codebase
 
 From a business perspective, `Components` represent the functional building blocks of software projects. They define the purpose and functionality of different parts of a business application, such as core applications, libraries, automated tests, and infrastructure settings. Components are about what software does and how it aligns with business goals.

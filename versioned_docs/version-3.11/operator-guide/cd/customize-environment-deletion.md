@@ -13,6 +13,10 @@ sidebar_label: "Customize Environment Cleanup"
 
 KubeRocketCI provides capabilities to fully operate the CI/CD flow, starting from building applications to deploying its new release. The operation flow is designed to be seamless for most of the users. However, there may be cases where more specialized actions are necessary. These might include custom procedures for managing the deletion of application resources.
 
+<div style={{ display: 'flex', justifyContent: 'center' }}>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/eCQYjBblz9o" title="KubeRocketCI: Creating User-Defined Deploy and Clean Pipelines" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen"></iframe>
+</div>
+
 ## Create Custom Clean Pipeline
 
 Delete pipeline is a typical Tekton pipeline but with its own instructions. The custom delete pipeline creation involves the following steps:

@@ -14,6 +14,10 @@ import TabItem from '@theme/TabItem';
 
 This section enables the creation of the necessary resources to configure access to a remote cluster using a static token.
 
+<div style={{ display: 'flex', justifyContent: 'center' }}>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/3Gm8YLj-0x4" title="Deploying Applications to Remote Kubernetes Clusters with KubeRocketCI and Argo CD" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen"></iframe>
+</div>
+
 ## Using Kubernetes RBAC
 
 To configure application deployment in remote cluster using Kubernetes RBAC, follow the steps below:

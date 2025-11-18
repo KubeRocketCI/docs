@@ -17,6 +17,10 @@ When deploying applications into environments, it's important to automate both `
 
 This page provides comprehensive guidelines on how to adjust the deployment logic to cater your needs.
 
+<div style={{ display: 'flex', justifyContent: 'center' }}>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/eCQYjBblz9o" title="KubeRocketCI: Creating User-Defined Deploy and Clean Pipelines" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen"></iframe>
+</div>
+
 ## Deploy Custom Pipeline
 
 Overall, the custom pipeline creation involves the following steps:

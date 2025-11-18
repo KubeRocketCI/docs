@@ -18,6 +18,10 @@ import TabItem from '@theme/TabItem';
 
 KubeRocketCI enables secure deployment of applications to remote AWS EKS clusters using IAM Roles for Service Accounts (IRSA). This guide explains how to configure cross-account access between Kubernetes clusters, allowing applications to be deployed from one AWS account to another without storing long-term credentials. IRSA provides temporary, scoped credentials by allowing Kubernetes service accounts to assume specific IAM roles with precisely defined permissions, enhancing both security and operational efficiency when working with multi-account AWS environments.
 
+<div style={{ display: 'flex', justifyContent: 'center' }}>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/3Gm8YLj-0x4" title="Deploying Applications to Remote Kubernetes Clusters with KubeRocketCI and Argo CD" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen"></iframe>
+</div>
+
 ## Prerequisites
 
 Before implementing IRSA for cross-account deployments, the following requirements must be met:

@@ -68,8 +68,12 @@ Each platform component is available in its corresponding GitHub project:
 - [EDP Gerrit](https://github.com/epam/edp-gerrit)
 - [EDP Install](https://github.com/epam/edp-install/releases)
 - [Gerrit Operator](https://github.com/epam/edp-gerrit-operator/releases)
-- [KubeRocketCI Portal](https://github.com/epam/edp-headlamp/releases)
+- [KubeRocketCI Portal (Stable UI)](https://github.com/epam/edp-headlamp/releases)
+- [KubeRocketCI Portal (Next-Gen UI - in progress)](https://github.com/KubeRocketCI/krci-portal)
 - [Tekton](https://github.com/epam/edp-tekton/releases)
+- [GitFusion](https://github.com/KubeRocketCI/gitfusion)
+- [KubeRocketCI Cache](https://github.com/KubeRocketCI/krci-cache)
+- [Tekton Custom Tasks](https://github.com/KubeRocketCI/tekton-custom-task)
 
 ### Optional Components
 

@@ -20,7 +20,7 @@ You can use the Velero tool to restore a platform tenant. Explore the main steps
 
     ![Remove keycloak realm](../../assets/operator-guide/delete-keycloak-realm.png "Remove keycloak realm")
 
-2. To restore KubeRocketCI, install and configure the Velero tool. Please refer to the [Install Velero](install-velero.md) documentation for details.
+2. To restore KubeRocketCI, install and configure the Velero tool. Please refer to the [Install Velero](install-velero-add-ons.md) documentation for details.
 
 3. Remove all locks for operators. Delete all config maps that have `<OPERATOR_NAME>-operator-lock` names. Then restart all pods with operators, or simply run the following command:
 

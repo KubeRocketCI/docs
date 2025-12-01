@@ -14,11 +14,6 @@ sidebar_label: "IAM Roles for Kaniko Service Accounts"
 </head>
 
 :::note
-  The information below is relevant in case ECR is used as Docker container registry.
-  Make sure that IRSA is enabled and [amazon-eks-pod-identity-webhook](https://github.com/aws/amazon-eks-pod-identity-webhook/tree/master) is deployed according to the [Associate IAM Roles With Service Accounts](enable-irsa.md) documentation.
-:::
-
-:::note
 Alternatively, the Kaniko IAM Role can also be created automatically during the cluster installation process.
 For more details, refer to the [Deploy AWS EKS Cluster](../../deploy-aws-eks.md) page.
 :::

@@ -24,6 +24,6 @@ The Operator guide is intended for DevOps and provides information on KubeRocket
 * **Continuous Integration (CI)** - Covers the setup and configuration of [Tekton](ci/tekton-overview.md).
 * **Continuous Deployment (CD)** - This section contains guidelines on how to integrate a mandatory component [Argo CD](cd/argocd-integration.md). Besides, it also contains information on creating [custom pipelines](cd/customize-deploy-pipeline.md), and [deploying RPM packages](cd/deploy-rpm.md).
 * **Infrastructure Providers** - Provides information on integrating with various infrastructure providers, including [AWS](deploy-aws-eks.md) and [OpenShift](infrastructure-providers/okd/deploy-okd-4.10.md).
-* **Disaster Recovery** - Explains the installation and configuration of [Velero](disaster-recovery/install-velero.md) as a solution for disaster recovery.
+* **Disaster Recovery** - Explains the installation and configuration of [Velero](disaster-recovery/install-velero-add-ons.md) as a solution for disaster recovery.
 * **Upgrade** - Provides guides on upgrading KubeRocketCI and related components, including historical versions.
 * **Troubleshooting** - Includes common troubleshooting guides for various issues that may occur during the setup and operation of KubeRocketCI.

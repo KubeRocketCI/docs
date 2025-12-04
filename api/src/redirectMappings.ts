@@ -71,6 +71,7 @@ export const redirectMaps: Record<string, string> = {
   'operator-guide/install-reportportal': 'https://docs.kuberocketci.io/docs/operator-guide/project-management-and-reporting/install-reportportal',
   'operator-guide/install-tekton': 'https://docs.kuberocketci.io/docs/operator-guide/install-tekton',
   'operator-guide/install-velero': 'https://docs.kuberocketci.io/docs/operator-guide/disaster-recovery/install-velero',
+  'operator-guide/install-velero-add-ons': 'https://docs.kuberocketci.io/docs/operator-guide/disaster-recovery/install-velero-add-ons',
   'operator-guide/install-via-civo': 'https://docs.kuberocketci.io/docs/operator-guide/install-via-civo',
   'operator-guide/installation-overview': 'https://docs.kuberocketci.io/docs/operator-guide/installation-overview',
   'operator-guide/jira-gerrit-integration': 'https://docs.kuberocketci.io/docs/about-platform',

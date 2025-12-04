@@ -214,3 +214,4 @@ The list of the available Add-Ons:
 |Tekton|A flexible and cloud-native framework for building, testing, and deploying applications using Kubernetes-native workflows.|false|
 |Tekton-cache||false|
 |Vault|An open-source secrets management solution that provides secure storage, encryption, and access control for sensitive data in Kubernetes clusters.|false|
+|Velero|An open source tool to safely backup and restore, perform disaster recovery, and migrate Kubernetes cluster resources and persistent volumes.|false|

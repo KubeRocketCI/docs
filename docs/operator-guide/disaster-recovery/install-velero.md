@@ -5,7 +5,7 @@ sidebar_label: "Install Velero"
 ---
 <!-- markdownlint-disable MD025 -->
 
-# Install Velero
+# Automated Kubernetes Backup and Restore Workflows With Velero
 
 <head>
   <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/disaster-recovery/install-velero" />

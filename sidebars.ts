@@ -339,8 +339,7 @@ const sidebars: SidebarsConfig = {
           type: 'category',
           label: 'Disaster Recovery',
           items: [
-            'operator-guide/disaster-recovery/install-velero',
-            'operator-guide/disaster-recovery/velero-irsa',
+            'operator-guide/disaster-recovery/install-velero-add-ons',
             'operator-guide/disaster-recovery/velero-restore-platform',
           ],
         },

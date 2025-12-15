@@ -77,7 +77,7 @@ Follow the instructions below to fill in the fields of the **Codebase Info** men
 
     * **Application Code Language** - defines the code language with its supported frameworks:
 
-      * Java – selecting a specific Java version (17 and 21 are available; Java 8 and 11 deprecated since v3.12).
+      * Java – selecting a specific Java version (17, 21, and 25 are available; Java 8 and 11 have been deprecated starting from KubeRocketCI version 3.12).
       * JavaScript - selecting JavaScript allows using React, Vue, Angular, Express, Next.js and Antora frameworks.
       * Python - selecting Python allows using the Python v.3.8, FastAPI, Flask frameworks.
       * Go - selecting Go allows using the Beego, Gin and Operator SDK frameworks.

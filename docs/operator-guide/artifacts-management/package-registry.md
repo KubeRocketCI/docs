@@ -26,7 +26,7 @@ The table below displays the supported registries and the languages they corresp
 
 |Language|Framework|Build Tool|Proxy Registry|Snapshots/Releases Registry|
 |------------|:-------------------------------------------------------:|:------------------:|:-----------------------------------------:|:-----------------------------------------:|
-| Java|Java 8<br />Java 11<br />Java 17|Maven| Nexus<br />Gitlab<br />GitHub<br />Azure DevOps | Nexus<br />Gitlab<br />GitHub<br />Azure DevOps|
+| Java|Java 17<br />Java 21<br />Java 25<br />|Maven| Nexus<br />Gitlab<br />GitHub<br />Azure DevOps | Nexus<br />Gitlab<br />GitHub<br />Azure DevOps|
 | Python|Python 3.8<br />FastAPI<br />Flask|Python|Nexus<br />Gitlab<br />Azure DevOps|Nexus<br />Gitlab<br />Azure DevOps|
 | C#|.Net 3.1<br />.Net 6.0|.Net|No proxy is used for this language.|Nexus<br />Gitlab<br />GitHub<br />Azure DevOps|
 | JavaScript | React<br />Vue<br />Angular<br />Express<br />Next.js<br />Antora |NPM| Nexus<br />Gitlab<br />GitHub<br />Azure DevOps | Nexus<br />Gitlab<br />GitHub<br />Azure DevOps |

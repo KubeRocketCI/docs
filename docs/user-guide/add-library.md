@@ -78,8 +78,8 @@ In our example, we will use the **Create from template** strategy:
 
     * **Library code language** - defines the code language with its supported frameworks:
 
-      * Java – selecting specific Java version (17 and 21 are available; Java 8 and 11 deprecated since v3.12).
-      * JavaScript - selecting JavaScript allows using the NPM tool.
+      * Java – selecting specific Java version (17, 21, and 25 are available; Java 8 and 11 deprecated since v3.12).
+      * JavaScript - selecting JavaScript allows using the React, Vue, Angular, Express, and Next.js frameworks.
       * Python - selecting Python allows using the Python v.3.8, FastAPI, Flask.
       * Groovy-pipeline - selecting Groovy-pipeline allows having the ability to customize a stages logic.
       * Terraform - selecting Terraform allows using the Terraform different versions via the **Terraform version manager** ([tfenv](https://github.com/tfutils/tfenv#usage)).

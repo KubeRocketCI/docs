@@ -33,7 +33,7 @@ The platform consists of the following blocks:
 
   |Language|Framework|Build Tool|Application|Library|Autotest|
   |:-|:-:|:-:|:-:|:-:|:-:|
-  |Java|Java 17, Java 21|Gradle, Maven|:white_check_mark:|:white_check_mark:|:white_check_mark:|
+  |Java|Java 17, Java 21, Java 25|Gradle, Maven|:white_check_mark:|:white_check_mark:|:white_check_mark:|
   |Python|Python 3.8, FastAPI, Flask|Python|:white_check_mark:|:white_check_mark:||
   |C#|.Net 3.1, .Net 6.0|.Net|:white_check_mark:|:white_check_mark:||
   |C|None|Make,CMake|:white_check_mark:|||

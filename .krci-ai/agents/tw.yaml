@@ -29,9 +29,12 @@ agent:
     doc-review: "Review and improve documentation pages"
     doc-build: "Run the documentation build process and spell check"
     doc-design: "Guide the user on how to contribute to KubeRocketCI documentation"
+    create-diagram: "Create a diagram for the documentation page"
     exit: "Exit Technical Writer persona and return to normal mode"
 
   tasks:
     - ./.krci-ai/tasks/doc-review.md
     - ./.krci-ai/tasks/doc-build.md
     - ./.krci-ai/tasks/doc-design.md
+    - ./.krci-ai/tasks/create-diagram.md
+    

@@ -27,7 +27,7 @@ facilitating enhanced code inspection and improvement practices within your deve
 
 Before proceeding, ensure the following prerequisites are in place:
 
-* Kubectl version 1.28.0+ is installed. Please refer to the [Kubernetes official website](https://kubernetes.io/releases/download/) for details.
+* Kubectl version 1.32.0+ is installed. Please refer to the [Kubernetes official website](https://kubernetes.io/releases/download/) for details.
 * [Helm](https://helm.sh) version 3.14.0+ is installed. Please refer to the [Helm page](https://github.com/helm/helm/releases) on GitHub for details.
 
 ## Installation

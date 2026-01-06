@@ -20,7 +20,7 @@ Review the necessary prerequisites and follow the steps to enable Argo CD within
 The following tools must be installed:
 
 * [KubeRocketCI](./install-kuberocketci.md)
-* [Kubectl version 1.28+](https://kubernetes.io/docs/tasks/tools/)
+* [Kubectl version 1.34+](https://kubernetes.io/docs/tasks/tools/)
 * [Helm version 3.10+](https://github.com/helm/helm/releases)
 * [Keycloak](./auth/keycloak.md) (optional)
 

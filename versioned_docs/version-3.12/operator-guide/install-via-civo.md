@@ -34,7 +34,7 @@ To succeed, follow the steps below:
     * **Select size**: Type: `Standard`, Size: `Medium`
     * **Network**: `Default`
     * **Firewall**: `Create a new firewall` with the `6443` and `443` ports opened
-    * **Advanced options**: Kubernetes version: latest (currently 1.28.2)
+    * **Advanced options**: Kubernetes version: latest (currently 1.32.0)
     * **Marketplace**: From the `CI/CD` selection choose `Argo CD` and `Tekton` for pre-installation.
 
 3. Wait till the cluster is created.

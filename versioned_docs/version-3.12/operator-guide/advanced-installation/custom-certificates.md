@@ -27,7 +27,7 @@ KubeRocketCI components that support custom certificates can be found in the tab
 ## Prerequisites
 
 * The certificate in the `*.crt` format is used;
-* Kubectl version 1.28.0+ is installed. Please refer to the [Kubernetes official website](https://kubernetes.io/releases/download/) for details.
+* Kubectl version 1.32.0+ is installed. Please refer to the [Kubernetes official website](https://kubernetes.io/releases/download/) for details.
 * [Helm](https://helm.sh) version 3.14.0+ is installed. Please refer to the [Helm page](https://github.com/helm/helm/releases) on GitHub for details.
 * [Java](https://www.oracle.com/in/java/technologies/downloads/) with the `keytool` command inside;
 * [jq](https://stedolan.github.io/jq/) is installed.

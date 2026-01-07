@@ -7,7 +7,7 @@
     <link rel="alternate" href="https://docs.kuberocketci.io/blog"/>
     <subtitle>KubeRocketCI Blog</subtitle>
     <icon>https://docs.kuberocketci.io/img/favicon.ico</icon>
-    <rights>Copyright © 2025 KubeRocketCI.</rights>
+    <rights>Copyright © 2026 KubeRocketCI.</rights>
     <entry>
         <title type="html"><![CDATA[Integrating OIDC Authentication with Microsoft Entra in AWS EKS]]></title>
         <id>https://docs.kuberocketci.io/blog/integrating-oidc-authentication-microsoft-entra-aws-eks</id>

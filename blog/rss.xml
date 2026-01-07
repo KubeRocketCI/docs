@@ -8,7 +8,7 @@
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en</language>
-        <copyright>Copyright © 2025 KubeRocketCI.</copyright>
+        <copyright>Copyright © 2026 KubeRocketCI.</copyright>
         <item>
             <title><![CDATA[Integrating OIDC Authentication with Microsoft Entra in AWS EKS]]></title>
             <link>https://docs.kuberocketci.io/blog/integrating-oidc-authentication-microsoft-entra-aws-eks</link>

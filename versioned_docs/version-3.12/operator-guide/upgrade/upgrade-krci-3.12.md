@@ -24,7 +24,17 @@ We suggest backing up the KubeRocketCI environment before starting the upgrade p
 In version 3.12, the `docker.io/epamedp/tekton-cache` image has been [deprecated](https://github.com/epam/edp-tekton/issues/511) and replaced with `ghcr.io/kuberocketci/krci-cache`. In case of using the [tekton-cache](https://github.com/epam/edp-tekton/tree/master/charts/tekton-cache) Helm chart, the image will be automatically updated during the upgrade process.
 :::
 
-1. (Optional) Update Tekton Custom Pipelines
+:::warning
+Since Kaniko Docker image build tool support has been discontinued, the [BuildKit](https://docs.docker.com/build/buildkit/) tool support has been introduced. Users now have a choice between two image build tools: Kaniko and BuildKit. For this reason, the `dockerbuild-verify` and `kaniko-build` Tekton Tasks no longer exist. Rename these Tasks by the following pattern if you leverage them in your custom pipelines:
+
+- `dockerbuild-verify` → `dockerbuild-verify-kaniko` or `dockerbuild-verify-buildkit`, depending on which build tool you are using.
+
+- `kaniko-build` → `container-build` (this task works with both Kaniko and BuildKit tools).
+
+Kaniko is still used by default. To switch between Kaniko and BuildKit, set the `tekton.containerBuildTool` parameter in the [pipelines-library values](https://github.com/epam/edp-tekton/blob/master/charts/pipelines-library/values.yaml#L230).
+:::
+
+1. (Optional) Update custom Tekton Pipelines:
 
     :::note
     For more information about using Tekton custom pipelines in KubeRocketCI, refer to the [Create and Use Custom Tekton Pipelines](../../use-cases/custom-pipelines-flow.md) use case.
@@ -32,7 +42,7 @@ In version 3.12, the `docker.io/epamedp/tekton-cache` image has been [deprecated
 
     In case of using Tekton custom pipelines, it is necessary to update them to ensure compatibility with the new version of KubeRocketCI.
 
-    1. Branch Name Validation Update
+    1. Update branch name validation:
 
         Starting from version 3.12, the KubeRocketCI portal [supports](https://github.com/epam/edp-headlamp/issues/753) adding branches with long names (more than 30 characters), including support for special characters and uppercase letters. Due to this change, it is necessary to update the passing parameters for the `update-cbis` task in the Tekton custom build pipelines to ensure compatibility with the new version of KubeRocketCI.
 
@@ -159,7 +169,7 @@ In version 3.12, the `docker.io/epamedp/tekton-cache` image has been [deprecated
         ```
         </details>
 
-    2. Build Pipeline Task Condition Update
+    2. Build Pipeline Task Condition Update:
 
         :::note
         This change is relevant only for build pipelines with `semver` versioning type.
@@ -236,7 +246,7 @@ In version 3.12, the `docker.io/epamedp/tekton-cache` image has been [deprecated
           </TabItem>
         </Tabs>
 
-    3. Deploy Pipeline Parameters Renaming
+    3. Deploy Pipeline Parameters Renaming:
 
         :::note
         For detailed information about parameter changes in Tekton tasks, refer to the [edp-tekton](https://github.com/epam/edp-tekton/tree/master/charts/pipelines-library/templates/tasks) repository.
@@ -424,7 +434,7 @@ In version 3.12, the `docker.io/epamedp/tekton-cache` image has been [deprecated
           </TabItem>
         </Tabs>
 
-2. (Optional) Enable Repository Discovery
+3. (Optional) Enable Repository Discovery:
 
     :::warning
     In case of using GitFusion with the Bitbucket Git provider, it is necessary to update the Bitbucket API token permissions to include the `read:account` scope. For more details on how to create a Bitbucket app password with the required permissions, refer to the [Add Git Server](../../user-guide/add-git-server.md) guide.
@@ -449,7 +459,7 @@ In version 3.12, the `docker.io/epamedp/tekton-cache` image has been [deprecated
           enabled: true
         ```
 
-    2. Update the KrakenD configuration to include the GitFusion API endpoints.
+    2. Update the KrakenD configuration to include the GitFusion API endpoints:
 
         :::note
         The latest KrakenD configuration can be found in the [edp-cluster-add-ons](https://github.com/epam/edp-cluster-add-ons/tree/main/clusters/core/addons/krakend) repository.
@@ -798,7 +808,7 @@ In version 3.12, the `docker.io/epamedp/tekton-cache` image has been [deprecated
             ```
             </details>
 
-        3. Update the KrakenD secret with the GitFusion URL variable.
+        3. Update the KrakenD secret with the GitFusion URL variable:
 
             :::note
             The `GITFUSION_URL` variable should point to the GitFusion service URL, e.g., `http://gitfusion.krci:8080`.
@@ -841,7 +851,7 @@ In version 3.12, the `docker.io/epamedp/tekton-cache` image has been [deprecated
 
         ![GitFusion](../../assets/operator-guide/upgrade/gitfusion.png)
 
-3. (Optional) Align Remote Cluster Names
+4. (Optional) Align Remote Cluster Names:
 
     In case of using remote clusters in KubeRocketCI, it is necessary to update the remote cluster names in KubeRocketCI portal after upgrading to version 3.12.
 
@@ -851,23 +861,23 @@ In version 3.12, the `docker.io/epamedp/tekton-cache` image has been [deprecated
 
     There are two ways to align the remote cluster names in the KubeRocketCI portal:
 
-    1. Recreate the remote cluster integration in the KubeRocketCI portal.
+    1. Recreate the remote cluster integration in the KubeRocketCI portal:
 
         1. Navigate to the **Configuration** -> **Deployment** -> **Clusters** section in the KubeRocketCI portal.
 
-        2. Click on the cluster integration that needs to be updated and delete it by clicking the **Delete** (trash can) icon.
+        2. Click on the cluster integration that needs to be updated and delete it by clicking the **Delete** (trash can) icon:
 
             ![Delete Cluster](../../assets/operator-guide/upgrade/delete-cluster.png)
 
             Confirm the deletion in the pop-up window.
 
-        3. After the cluster integration is deleted, click the **Add Cluster** button to create a new cluster integration. Fill in the required fields and click the **Save** button to add the cluster.
+        3. After the cluster integration is deleted, click the **Add Cluster** button to create a new cluster integration. Fill in the required fields and click the **Save** button to add the cluster:
 
             ![Add Cluster](../../assets/operator-guide/upgrade/add-cluster.png)
 
             After the new cluster integration is created, the correct cluster name will be displayed in the KubeRocketCI portal.
 
-    2. Update the `kubeconfig` specification in the `<cluster-name>` Kubernetes secret.
+    2. Update the `kubeconfig` specification in the `<cluster-name>` Kubernetes secret:
 
         :::note
         The `<cluster-name>` secret is created automatically when a new cluster integration is added in the KubeRocketCI portal. The secret contains the `kubeconfig` specification used to connect to the remote cluster.
@@ -875,13 +885,13 @@ In version 3.12, the `docker.io/epamedp/tekton-cache` image has been [deprecated
 
         It is also possible to update the `kubeconfig` specification in the existing `<cluster-name>` secret to change the cluster name, instead of recreating the cluster integration in the KubeRocketCI portal.
 
-        1. Locate the `<cluster-name>` secret in the namespace where KubeRocketCI is installed (e.g., `krci` namespace).
+        1. Locate the `<cluster-name>` secret in the namespace where KubeRocketCI is installed (e.g., `krci` namespace):
 
             ```bash
             kubectl get secret <cluster-name> -n krci -o yaml
             ```
 
-        2. Update the `kubeconfig` specification by changing the `clusters.name` and `contexts.context.cluster` fields to match the desired cluster name.
+        2. Update the `kubeconfig` specification by changing the `clusters.name` and `contexts.context.cluster` fields to match the desired cluster name:
 
             :::note
             The `data.config` field in the secret is base64 encoded. To update the `kubeconfig` specification, decode the `data.config` field, make the necessary changes, and then encode it back to base64 before updating the secret.
@@ -926,7 +936,7 @@ In version 3.12, the `docker.io/epamedp/tekton-cache` image has been [deprecated
 
             After updating the `kubeconfig` specification in the secret, the correct cluster name will be displayed in the KubeRocketCI portal.
 
-4. To upgrade KubeRocketCI to the v3.12, run the following commands:
+5. To upgrade KubeRocketCI to the v3.12, run the following commands:
 
    :::note
    To verify the installation, it is possible to test the deployment before applying it to the cluster with the `--dry-run` key:

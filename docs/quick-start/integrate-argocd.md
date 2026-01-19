@@ -81,7 +81,7 @@ To install Argo CD, follow the steps below:
 3. Apply the argocd-values.yaml file using the `helm install` command:
 
     ```bash
-    helm install argo-cd argocd/argo-cd --values argocd-values.yaml --version 8.5.6 --create-namespace --atomic -n argocd
+    helm install argo-cd argocd/argo-cd --values argocd-values.yaml --version 9.3.4 --create-namespace --atomic -n argocd
     ```
 
 :::info

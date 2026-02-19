@@ -244,7 +244,7 @@ Now that RBAC is configured properly, it is time to add external secrets templat
     2. `deploy-templates/templates/secret-store.yaml`:
 
         ```yaml
-        apiVersion: external-secrets.io/v1beta1
+        apiVersion: external-secrets.io/v1
         kind: SecretStore
         metadata:
           name: demo
@@ -266,7 +266,7 @@ Now that RBAC is configured properly, it is time to add external secrets templat
     3. `deploy-templates/templates/external-secret.yaml`:
 
         ```yaml
-        apiVersion: external-secrets.io/v1beta1
+        apiVersion: external-secrets.io/v1
         kind: ExternalSecret
         metadata:
           name: mongo                            # target secret name

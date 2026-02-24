@@ -218,6 +218,20 @@ const config: Config = {
         },
       },
     ],
+    [
+      'docusaurus-plugin-llms',
+      {
+        generateLLMsTxt: true, // the plugin generates llms.txt; manual backup is saved in llms-manual-backup.txt
+        generateLLMsFullTxt: true,
+        title: 'KubeRocketCI Documentation',
+        description:
+          'Explore KubeRocketCI Documentation for CI/CD, operator and user guides, quick start, and API. Learn how to enhance your DevOps practices with KubeRocketCI.',
+        includeBlog: false,
+        ignoreFiles: ['faq/**', 'api/**'], // api/ — custom CRs for operators, they bloat llms-full.txt
+        excludeImports: true,
+        removeDuplicateHeadings: true,
+      },
+    ],
   ],
 
   themeConfig: {

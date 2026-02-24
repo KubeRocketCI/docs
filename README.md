@@ -79,6 +79,10 @@ This is particularly useful if you're hosting the documentation on GitHub pages.
 
 This project is licensed under the Apache License - see the [LICENSE](LICENSE.txt) file for details.
 
+## LLMs.txt
+
+This repository includes an [llms.txt](https://llmstxt.org/) file at `/llms.txt`. It gives LLMs and documentation tools a structured index of the most important docs (Getting Started, Operator Guide, User Guide, upgrades, etc.).
+
 ## More Information
 
 For more information and resources, visit the [KubeRocketCI documentation site](https://docs.kuberocketci.io).

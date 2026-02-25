@@ -112,7 +112,7 @@ Follow the steps below to install Argo CD using Helm:
 3. Port-forward Argo CD service using kubectl:
 
     ```bash
-    kubectl port-forward svc/argo-argocd-server 8080:80 -n argocd
+    kubectl port-forward svc/argocd-server 8080:80 -n argocd
     ```
 
 4. Login to the Argo CD server in browser using login and password:

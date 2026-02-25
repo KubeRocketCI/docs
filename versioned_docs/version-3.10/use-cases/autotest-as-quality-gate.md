@@ -156,7 +156,7 @@ The steps below instruct how to create autotests in KubeRocketCI:
     - Component name: `demo-autotest-gradle`
     - Description: `demo-autotest-gradle`
     - Autotest code language: `Java`
-    - Language version/framework: `Java11`
+    - Language version/framework: `Java25`
     - Build tool: `Gradle`
     - Autotest report framework: `Allure`
 
@@ -177,7 +177,7 @@ The steps below instruct how to create autotests in KubeRocketCI:
     - Component name: `demo-autotest-maven`
     - Description: `demo-autotest-maven`
     - Autotest code language: `Java`
-    - Language version/framework: `Java11`
+    - Language version/framework: `Java25`
     - Build tool: `Maven`
     - Autotest report framework: `Allure`
     - Default branch: `main`
@@ -238,18 +238,47 @@ Now that applications and autotests are created, create pipeline for them by fol
     First Quality Gate:
 
     - Quality gate type: `Autotest`
-    - Step name: `Autotest`
+    - Step name: `autotest-step-1`
     - Autotest: `demo-autotest-gradle`
     - Autotest branch: `main`
 
     Second Quality Gate:
 
     - Quality gate type: `Autotest`
-    - Step name: `Autotest`
+    - Step name: `autotest-step-2`
+    - Autotest: `demo-autotest-gradle`
+    - Autotest branch: `main`
+
+    Third Quality Gate:
+
+    - Quality gate type: `Autotest`
+    - Step name: `autotest-step-3`
     - Autotest: `demo-autotest-maven`
     - Autotest branch: `main`
 
+    Fourth Quality Gate:
+
+    - Quality gate type: `Autotest`
+    - Step name: `autotest-step-4`
+    - Autotest: `demo-autotest-maven`
+    - Autotest branch: `main`
+
+
     ![Quality gates tab](../assets/use-cases/autotest-as-quality-gate/quality_gates_tab.png "Quality gates tab")
+
+    :::note
+        The same automated test can be executed multiple times within a single deployment pipeline using different step names. To achieve this, specify a unique step name as a parameter when triggering the Tekton automated test pipeline. Verify that the key names in demo-autotest-gradle/run.json and demo-autotest-maven/run.json comply with the required template and update them if necessary.
+
+         ```yaml title="demo-autotest-gradle/run.json"
+            {
+                "comment": "step-name: <deployment Flow>-<environment>-<autotest step name>",
+                "demo-pipeline-dev-autotest-step-1": "gradle -q hello",
+                "demo-pipeline-dev-autotest-step-2": "gradle -q hello",
+                "demo-pipeline-dev-autotest-step-3": "mvn antrun:run@hello -q",
+                "demo-pipeline-dev-autotest-step-4": "mvn antrun:run@hello -q"
+            }
+        ```
+    :::
 
 11. Repeat the steps 8-10 to create one more stage with the parameters below:
 

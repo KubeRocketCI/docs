@@ -189,6 +189,7 @@ words:
   - petclinic
   - pgcrypto
   - pgdb
+  - pgbackrest
   - PGPASSWORD
   - pipelinerun
   - pipelineruns

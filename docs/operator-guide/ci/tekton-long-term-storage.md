@@ -1,6 +1,6 @@
 ---
 title: "Tekton Long-Term Log Storage"
-description: "Learn how to configure and access long-term logs for Tekton pipelines in KubeRocketCI using OpenSearch, enhancing log management and observability."
+description: "Tekton Results helps you logically group CI/CD workload history and separate long-term result storage from the Pipeline controller: add custom Result metadata (e.g. post-run actions), group related TaskRuns and PipelineRuns, keep result history independent of the Pipeline CRD controller to free etcd resources, and store logs so completed Runs can be cleaned."
 sidebar_label: "Tekton Long-Term Log Storage"
 ---
 <!-- markdownlint-disable MD025 -->
@@ -14,151 +14,104 @@ import TabItem from '@theme/TabItem';
   <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/ci/tekton-long-term-storage" />
 </head>
 
-KubeRocketCI Portal provides the capability to view long-term logs for pipelines. The long-term logs are stored in the OpenSearch cluster and can be viewed in the KubeRocketCI Portal after pipeline cleanup or deletion. This guide describes how to configure and view long-term logs in the KubeRocketCI Portal.
+Tekton Results aims to help users logically group CI/CD workload history and separate out long term result storage away from the Pipeline controller. This allows you to:
+
+- Provide custom Results metadata about your CI/CD workflows not available in the Tekton TaskRun/PipelineRun CRDs (for example: post-run actions).
+- Group related workloads together (e.g. bundle related TaskRuns and PipelineRuns into a single unit).
+- Make long-term result history independent of the Pipeline CRD controller, letting you free up etcd resources for Run execution.
+- Store logs produced by the TaskRuns/PipelineRuns so that completed Runs can be cleaned to save resources.
 
 ## Long-Term Log Access Workflow
 
 The following diagram illustrates the workflow for accessing long-term logs for pipelines in the KubeRocketCI Portal:
+
 
 ```mermaid
 sequenceDiagram
     actor U as User
     participant KR as KubeRocketCI Portal
     participant PC as Pipeline Controller
-    participant RW as Fluent Bit Agent
-    participant KD as KrakenD API Gateway
-    participant RA as OpenSearch
+    participant RW as Result Watcher
+    participant RA as Result API
 
-    U->>KR: Trigger or create a pipeline
+    U->>KR: Trigger or create a PipelineRun/TaskRun
     KR->>PC: Start pipeline execution
-    RW-->>PC: Collect pipeline logs
-    RW->>RA: Send logs to OpenSearch
-    Note over KR,RA: Pipeline is deleted or cleaned up
+    RW-->>PC: Watch PipelineRun/TaskRun
+    Note over PC,RW: Wait for PipelineRun/TaskRun Completion
+    RW->>RA: Update results database
     U->>KR: View pipeline logs
-    KR-->>KD: Request long-term logs
-    KD-->>RA: Fetch long-term logs
+    KR-->>RA: Get long-term logs
     KR->>U: Return long-term logs
+    
 ```
+
+## Install Tekton Results
+
+Tekton Results is deployed as part of the Tekton Pipelines installation. For installing Tekton Pipelines, we recommend using the [add-ons approach](https://github.com/epam/edp-cluster-add-ons/blob/4456631feb6510ff875b5b839534968c3846da7a/clusters/core/apps/values.yaml#L286C1-L289C30). Here's an example of how to configure values.yaml before installation:
+
+    ```yaml
+    tekton:
+        createNamespace: true
+        enable: true
+        namespace: tekton-pipelines
+    ```
 
 ## Configuration
 
+:::note
+We use Postgres operator to connect to Tekton results, but you can use any other external databases supported. Please align configuration accordingly to Tekton result [documentation](https://github.com/tektoncd/results/blob/v0.18.0/docs/external-database.md).
+:::
+
 To configure long-term log storage for pipelines in the KubeRocketCI Portal, follow the steps below:
 
-1. Install and configure OpenSearch cluster:
+1. Storage sizes in the [results-pg.yaml](https://github.com/epam/edp-cluster-add-ons/blob/main/clusters/core/addons/tekton/results-pg.yaml) file define the allocated volumes for the Tekton Results PostgreSQL cluster:
 
-    :::note
-    To install OpenSearch cluster, we recommend to use the [edp-cluster-add-ons](https://github.com/epam/edp-cluster-add-ons/tree/main/clusters/core/addons/opensearch) repository, which contains already prepared configurations for OpenSearch installation.
-    :::
+   - **Database instance storage**
+     - Path: `spec.instances.dataVolumeClaimSpec.resources.requests.storage`
+     - Default: `2Gi`
+     - Description: Specifies the size of the main PostgreSQL data volume.
 
-    To install OpenSearch cluster using the add-ons repository, follow the steps below:
+   - **Backup repository storage**
+     - Path: `spec.backups.pgbackrest.repos.volume.volumeClaimSpec.resources.requests.storage`
+     - Default: `2Gi`
+     - Description: Specifies the size of the pgBackRest backup repository volume.
 
-    1. Clone the forked [edp-cluster-add-ons](https://github.com/epam/edp-cluster-add-ons/) repository.
+2. Storage and retention settings in the [results.yaml](https://github.com/epam/edp-cluster-add-ons/blob/main/clusters/core/addons/tekton/results.yaml) file define how Tekton Results result records are retained in the database and how related storage is configured:
 
-    2. Navigate to the `clusters/core/addons/opensearch` directory and configure the `values.yaml` file with the necessary values for OpenSearch cluster installation.
+   - **Log storage size**
+     - Path: `PersistentVolumeClaim.spec.resources.requests.storage`
+     - Default: `5Gi`
+     - Description: Specifies the allocated disk size for storing pipeline logs.
 
-        :::note
-        Ensure that [Fluent Bit](https://github.com/epam/edp-cluster-add-ons/blob/44ca88c079d464c826fcae38f3f03fe983d1f984/clusters/core/addons/opensearch/values.yaml#L391) is configured to send container logs to the `logstash-edp` index in the OpenSearch cluster, as the KubeRocketCI Portal uses this index to retrieve long-term logs.
-        :::
+   - **Retention period**
+     - Path: `ConfigMap.data.defaultRetention` in `tekton-results-config-results-retention-policy`
+     - Default: `"30"` days
+     - Description: Defines how long log files are retained before being automatically removed.
 
-    3. Install the OpenSearch cluster using Helm or [Argo CD](../add-ons-overview.md) methods.
+   - **Cleanup schedule**
+     - Path: `ConfigMap.data.runAt` in `tekton-results-config-results-retention-policy`
+     - Default: `"0 18 * * *0*"`
+     - Description: Specifies the cron expression that determines when automated log cleanup runs (daily at 6:00 PM UTC).
 
-2. Install and configure KrakenD API Gateway:
+:::warning
+The retention policy agent removes only database records from PostgreSQL. It does not delete associated log files stored on persistent volumes, S3, or GCS backends. As a result, log data may remain on disk and consume storage even after the corresponding records are expired.
+:::
 
-    :::note
-    To install KrakenD API Gateway with OpenSearch connection, we recommend to use the [edp-cluster-add-ons](https://github.com/epam/edp-cluster-add-ons/tree/main/clusters/core/addons/krakend) repository, which contains already prepared configurations for KrakenD installation.
-    For more details, refer to the [KrakenD Integration](../extensions/krakend.md) guide.
-    :::
+3. To remove physical log files from PVCs (not just database records), use the settings in the [results-clean-old-logs-cronjob.yaml](https://github.com/epam/edp-cluster-add-ons/blob/main/clusters/core/addons/tekton/results-clean-old-logs-cronjob.yaml) file:
 
-    To install KrakenD API Gateway with OpenSearch connection, follow the steps below:
+   - **Cleanup schedule**
+     - Path: `spec.schedule`
+     - Default: `"0 18 * * *"`
+     - Description: Specifies the cron expression that determines when the CronJob runs (daily at 6:00 PM UTC).
 
-    1. Clone the forked [edp-cluster-add-ons](https://github.com/epam/edp-cluster-add-ons/) repository.
+   - **Physical log retention (days)**
+     - Path: `spec.jobTemplate.spec.template.spec.containers.command` (the `-mtime +N` value in the `find` command)
+     - Default: `30` days
+     - Description: Physical log files in `/tekton-results/logs/` older than this many days are deleted from the PVC. The value is the number in `-mtime +N` (e.g. `+30` keeps files for 30 days).
 
-    2. Navigate to the `clusters/core/addons/krakend` directory and configure the `values.yaml` file with the necessary values for KrakenD installation.
-
-        :::note
-        Ensure that the KrakenD endpoint object for OpenSearch has the `/search/logs` endpoint name, as the KubeRocketCI Portal uses this endpoint to fetch long-term logs.
-        :::
-
-    3. Ensure that the KrakenD [configuration secret](https://github.com/epam/edp-cluster-add-ons/blob/main/clusters/core/addons/krakend/templates/external-secrets/krakend.yaml) contains the OpenSearch connection variables.
-
-        <Tabs
-          defaultValue="externalsecret"
-          values={[
-            {label: 'Manifests', value: 'manifests'},
-            {label: 'External Secrets Operator', value: 'externalsecret'},
-          ]}>
-
-          <TabItem value="manifests">
-
-          ```yaml
-          apiVersion: v1
-          kind: Secret
-          metadata:
-            name: krakend
-            namespace: krakend
-          type: Opaque
-          stringData:
-            OPENSEARCH_URL: https://opensearch-cluster-master.logging:9200
-            OPENSEARCH_CREDS: <base64-encoded-credentials>
-          ```
-
-          </TabItem>
-
-          <TabItem value="externalsecret">
-
-          ```json
-          {
-            "OPENSEARCH_URL": "https://opensearch-cluster-master.logging:9200",
-            "OPENSEARCH_CREDS": "<base64-encoded-credentials>"
-          }
-          ```
-          </TabItem>
-
-        </Tabs>
-
-    4. Install the KrakenD API Gateway using Helm or [Argo CD](../add-ons-overview.md) methods.
-
-## Viewing Long-Term Logs
-
-After configuring long-term log storage for Pipelines in the KubeRocketCI Portal, follow the steps below to view long-term logs:
-
-1. Navigate to the KubeRocketCI Portal and sign in with appropriate credentials.
-
-    ![KubeRocketCI Portal](../../assets/operator-guide/ci/kuberocketci-portal.png "KubeRocketCI Portal")
-
-2. In the **Components** section, navigate to the appropriate component (if component is not created yet, refer to the [Add Application](../../user-guide/add-application.md) guide to create a new one).
-
-    ![KubeRocketCI Portal Components](../../assets/operator-guide/ci/portal-components.png "KubeRocketCI Portal Components")
-
-3. In the component window, in the right upper corner, click the **GIT** button to navigate to the component repository (e.g., GitHub repository).
-
-    ![Component Git Repository](../../assets/operator-guide/ci/component-git-repository.png "Component Git Repository")
-
-4. In the component repository, create a Pull Request to trigger the review pipeline execution.
-
-    ![Create Pull Request](../../assets/operator-guide/ci/create-pull-request.png "Create Pull Request")
-
-5. In the Pull Request checks section, click the **Show all checks** button and navigate to the review pipeline in the KubeRocketCI Portal by clicking the **Details** button.
-
-    ![PR Checks](../../assets/operator-guide/ci/pr-checks.png "PR Checks")
-
-6. In the pipeline window, check the pipeline status. Ensure that the pipeline is successfully executed and the logs are available.
-
-    ![Pipeline Logs](../../assets/operator-guide/ci/pipeline-logs.png "Pipeline Logs")
-
-7. Navigate to the **Pipelines** section and find the executed review pipeline. Delete the pipeline by clicking the **Delete** button.
-
-    ![Delete Pipeline](../../assets/operator-guide/ci/delete-pipeline.png "Delete Pipeline")
-
-8. Return to the Pull Request and click the **Show all checks** button. Navigate to the review pipeline again by clicking the **Details** button.
-
-    ![PR Checks](../../assets/operator-guide/ci/pr-checks.png "PR Checks")
-
-9. After the pipeline deletion, the long-term logs are displayed in the pipeline window.
-
-    ![Long Term Logs](../../assets/operator-guide/ci/reserved-logs.png "Long Term Logs")
-
-This example demonstrates how to view long-term logs for review pipeline, but the same approach can be applied to other pipeline types.
+:::note
+In this example, the PGO (PostgreSQL Operator) is used for the Tekton Results database. 
+:::
 
 ## Related Articles
 

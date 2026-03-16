@@ -65,6 +65,7 @@ words:
   - Coverity
   - credrequests
   - creds
+  - crossplane
   - csanchez
   - daniilnedostup
   - dbchecker
@@ -118,6 +119,8 @@ words:
   - hostedzone
   - Hostnames
   - hyperthreading
+  - hotspots
+  - Hotspots
   - importcert
   - ingresscontroller
   - initdb
@@ -146,6 +149,7 @@ words:
   - krci
   - kubeadmin
   - kubeconfig
+  - kubeadm
   - kubelet
   - kubelogin
   - kuberocketci
@@ -166,6 +170,7 @@ words:
   - multitenant
   - multivalued
   - mutatingwebhook
+  - mutatingwebhookconfigurations
   - mykolamarusenko
   - mypipe
   - myuser
@@ -270,9 +275,11 @@ words:
   - userinfo
   - usermodel
   - vacuumdb
+  - validatingwebhookconfigurations
   - velero
   - Veracode
   - verion
+  - webhookconfigurations
   - wafv
   - waynesun
   - wildfly

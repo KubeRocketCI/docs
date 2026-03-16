@@ -16,56 +16,26 @@ This page describes all the general settings related to KubeRocketCI portal. It 
 
 ## Overview
 
-KubeRocketCI portal settings are located at the top right corner of the screen:
+KubeRocketCI portal has a number of settings that can help you define resource visibility and provide you with system information.
 
-  ![Portal settings button](../assets/user-guide/portal/portal-settings-button.png "Portal settings button")
+The cluster name is displayed in the top left corner of the screen. By clicking on the cluster name, you can set default and allowed namespaces or get the kubeconfig file.
 
-Once clicked, it shows a dropdown window that displays username, and logout button. Click the username to open the KubeRocketCI portal settings:
+You can also find helpful information in the **Quick Actions** section of the Main Menu, at the top right corner of the screen.
 
-  ![Click username](../assets/user-guide/portal/click-username.png "Click username")
+## Manage Namespaces
 
-Once clicked, it shows a dropdown window that displays username and logout button.
+In the **Manage Namespaces** window, you can view the namespace accessibility configuration you are supposed to specify at your first login. Here you can also edit the default and allowed namespaces:
 
-## Cluster
-
-Click the username to open the KubeRocketCI portal settings:
-
-  ![Cluster tab](../assets/user-guide/portal/cluster-tab.png "Cluster tab")
-
-  In the **Cluster** tab, you can view the namespace accessibility configuration you are supposed to specify at your first login. Here you can also edit the default and allowed namespaces:
-
-  * **Default namespace** – when you create a resource within the portal, it will be deployed in this namespace. You can set only one default namespace. By default, the namespace where the KubeRocketCI instance is deployed will be set here.
-  * **Allowed namespace** – resources from these namespaces will be visible in the portal.
+* **Default namespace** – when you create a resource within the portal, it will be deployed in this namespace. You can set only one default namespace. By default, the namespace where the KubeRocketCI instance is deployed will be set here.
+* **Allowed namespace** – resources from these namespaces will be visible in the portal.
 
 :::note
   You can't view resources in the namespaces that you are not allowed to access according to your RBAC configuration. KubeRocketCI portal doesn't grant you extra access rights.
 :::
 
-## General
+## Get Kubeconfig
 
-General settings allow for changing appearance:
-
-  ![General tab](../assets/user-guide/portal/general-tab.png "General tab")
-
-* **Language**: change the supported language;
-* **Numbers of rows for tables**: this setting allows for changing the number of object when you see tables of Codebases, Deployment Flows, PipelineRuns, and other.
-
-## User Info
-
-On the **User Info** tab, you can view your personal information:
-
-  ![User info tab](../assets/user-guide/portal/user-info-tab.png "User info tab")
-
-* **Avatar**: displays your user icon;
-* **Username**: displays your Keycloak username;
-* **Issuer**: displays the Keycloak realm you are member of;
-* **Groups**: displays your Keycloak group membership.
-
-## Kubeconfig
-
-On the **Kubeconfig** tab, you can see the kubeconfig file used by the portal:
-
-  ![User info tab](../assets/user-guide/portal/kubeconfig-tab.png "User info tab")
+You can see the kubeconfig file used by the portal by clicking the **Get Kubeconfig** button:
 
 Here you can view the current kubeconfig file and its expiry time. Additionally, you can also copy this kubeconfig file to use it locally. To access KubeRocketCI resources from your local machine, follow the steps below:
 
@@ -83,19 +53,30 @@ export KUBECONFIG=/Users/<username>/.ssh/<filename>
 
 5. Verify you can access KubeRocketCI resources.
 
-## Community Button
+## User Details
 
-Click the **Community** button to access helpful resources and support options:
+On the **User Details** window, you can view your personal information:
 
-  ![Community button](../assets/user-guide/portal/community-button.png "Community button")
+* **Name**: your Keycloak username;
+* **Email**: your Keycloak user email;
+* **Subject**: your Keycloak user ID;
+* **Issuer URL**: the URL of the Keycloak realm that handles authorization;
+* **Groups**: your Keycloak group membership.
+
+## User Profile
+
+Click the User profile button in the bottom left corner of the screen to access helpful resources and support options.
 
 When clicked, the following options are displayed:
 
-  ![Community options](../assets/user-guide/portal/community-options.png "Community options")
-
 * **Documentation**: opens the product documentation site;
 * **Join discussions**: opens the GitHub Discussions page for the product, where you can participate in community conversations;
-* **Open an issue/request**: Opens the GitHub page where you can create a new issue or feature request for the product.
+* **Open an issue/request**: Opens the GitHub page where you can create a new issue or feature request for the product;
+* **Log out**: terminates the session and redirects you to the login page.
+
+:::note
+  The profile picture is also pulled from Keycloak.
+:::
 
 ## Related Articles
 

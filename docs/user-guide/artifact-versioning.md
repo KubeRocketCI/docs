@@ -15,17 +15,11 @@ This page describes artifact versioning types in KubeRocketCI, outlining their d
 
 Artifact versioning in KubeRocketCI is designed to ensure each build and deployment can be uniquely identified, managed, and traced back to its source.
 
-Artifact versioning is defined for every codebase individually when creating a codebase:
+Artifact versioning is defined for every codebase individually when creating a codebase.
 
-  ![Select codebase versioning](../assets/user-guide/versioning/codebase_versioning.png "Select codebase versioning")
+A new application version appears when a build pipeline run completes successfully. A successfully built artifact is marked with the new version once the `git-tag`, `update-cbb`, and `update-cbis` steps complete successfully.
 
-A new application version appears when a build pipeline run completes successfully. A successfully built artifact is marked with the new version once the `git-tag`, `update-cbb`, and `update-cbis` steps complete successfully:
-
-  ![Git-tag step](../assets/user-guide/versioning/codebase_versioning.png "Git-tag step")
-
-Application version can also be seen in the pipeline that built the version:
-
-  ![Versions in pipelines](../assets/user-guide/versioning/versions_in_pipelines.png "Versions in pipelines")
+Application version can also be seen in the pipeline that built the version.
 
 ## Versioning Types
 
@@ -35,13 +29,17 @@ KubeRocketCI supports two versioning types: default and semver. They offer diffe
 
 Default versioning generates versions based on the branch name and datetime, e.g. (`BRANCH-DATETIME`):
 
-  ![Default versioning](../assets/user-guide/versioning/default_versioning.png "Default versioning")
+```bash
+0.0.1-20260304-145929
+```
 
 ### Semantic Versioning
 
 Semantic versioning (semver) structures versions as `MAJOR.MINOR.PATCH-BUILD_ID`, based on the [semantic versioning standards](https://semver.org/):
 
-  ![Semantic versioning](../assets/user-guide/versioning/semantic_versioning.png "Semantic versioning")
+```
+build/0.1.0-SNAPSHOT.1
+```
 
 Several other resources are also involved in managing semantic versioning.
 
@@ -50,13 +48,9 @@ The first resource is **CodebaseBranch**. It contains data major version and bui
 - **Version History**: A record of all versions generated from the branch.
 - **Build Information**: Details of the current and most recent successful builds, which may include version identifiers.
 
-**CodebaseBranch** data is displayed in the codebase details page:
+**CodebaseBranch** data is displayed in the codebase details page.
 
-  ![CodebaseBranch data](../assets/user-guide/versioning/codebasebranch_data.png "CodebaseBranch data")
-
-The second resource is **CodebaseImageStream**. It contains application container versions built for container registry. The available container versions are displayed in the environment details page when deploying an application:
-
-  ![CodebaseImageStream data](../assets/user-guide/versioning/codebaseimagestream_data.png "CodebaseImageStream data")
+The second resource is **CodebaseImageStream**. It contains application container versions built for container registry. The available container versions are displayed in the environment details page when deploying an application.
 
 ## Custom Versioning
 

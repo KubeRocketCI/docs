@@ -26,17 +26,11 @@ There are two methods to add Quick Links:
 
 To add a Quick Link via the KubeRocketCI portal, follow the steps below:
 
-1. Navigate to **Configuration** -> **Quick Access** -> **Links** and click the **+ Add Link** button:
+1. Navigate to **Configuration** -> **Quick Access** -> **Links** and click the **+ Add Link** button.
 
-    ![Links section](../assets/user-guide/links_section.png "Links section")
+2. In the appeared window, insert the link name, URL, and SVG icon in base 64 format.
 
-2. In the appeared window, insert the link name, URL, and SVG icon in base 64 format. Click the checkbox if it should be displayed on the **Overview** page:
-
-    ![Create reference menu](../assets/user-guide/create_link_menu.png "Create reference menu")
-
-3. If the **Show on Overview Page** option is selected, the link will be displayed on the **Overview** page:
-
-    ![Added link](../assets/user-guide/links_on_the_overview.png "Added link")
+3. If the **Show on Overview Page** option is selected, the link will be displayed on the **Overview** page.
 
 ### Add Quick Link via Helm Chart
 
@@ -110,13 +104,9 @@ After specifying the necessary Quick Links in the `values.yaml` file, the Quick 
 
 To edit a Quick Link, follow the steps below:
 
-1. Navigate to **Configuration** -> **Quick Access** -> **Links**. Click the three-dot menu and select **Edit**:
+1. Navigate to **Configuration** -> **Quick Access** -> **Links**. Click the Actions menu and select **Edit**.
 
-    ![Edit link button](../assets/user-guide/edit_link_button.png "Edit link button")
-
-2. Edit the necessary fields and click **Apply**:
-
-    ![Edit link menu](../assets/user-guide/edit_link_menu.png "Edit link menu")
+2. Edit the necessary fields and click **Apply**.
 
 ## Delete Quick Link
 
@@ -126,13 +116,9 @@ Quick Links of type **system** cannot be deleted as they are crucial for the pla
 
 To delete a Quick Link, follow the steps below:
 
-1. Navigate to **Configuration** -> **Quick Access** -> **Links**. Click the three-dot menu and select **Delete**:
+1. Navigate to **Configuration** -> **Quick Access** -> **Links**. Click the Actions menu and select **Delete**.
 
-    ![Delete link button](../assets/user-guide/delete_link_button.png "Delete link button")
-
-2. In the **Confirm deletion** window, enter the name of the link and click **Confirm**:
-
-    ![Delete link menu](../assets/user-guide/delete_link_menu.png "Delete link menu")
+2. In the **Confirm deletion** window, enter the name of the link and click **Confirm**.
 
 ## Related Articles
 

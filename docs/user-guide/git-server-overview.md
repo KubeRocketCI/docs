@@ -26,21 +26,20 @@ The Git Server is set via the **global.gitProviders** parameter of the [values.y
 
 To view the current Git Server, you can open Portal **Configuration** -> **Git Servers** and inspect the following properties:
 
-![Git Server menu](../assets/user-guide/krci-portal-git-server-overview.png "Git Server menu")
 
 * **Git Server status and name** - displays the Git Server status, which depends on the Git Server integration status (Success/Failed).
 * **Git Server properties** - displays the Git Server type, its host address, username, SSH/HTTPS port, public and private SSH keys.
-* **Open documentation** - opens the "Manage Git Servers" documentation page.
+* **Learn more** - opens the "Manage Git Servers" documentation page.
 * **Undo/Save changes** - these buttons apply or revert changes made to the Git Server.
-* **Add a new Git Server** - add a new blank to specify the new Git Server's parameters.
+* **+ Add Git Server** - add a new blank to specify the new Git Server's parameters.
 * **Delete a Git Server** - deletes the Git Server after confirmation.
 
 ## View Authentication Data
 
-To view authentication data that is used to connect to the Git server, use `kubectl describe` command as follows:
+To view authentication data that is used to connect to the Git server, click the **eye** icon in the corresponding field or use the `kubectl describe` command as follows:
 
   ```bash
-  kubectl describe GitServer git_server_name -n krci
+  kubectl get secret ci-<git_server_name> -n krci -o yaml
   ```
 
 ## Delete Git Server
@@ -60,13 +59,9 @@ There are two ways for deleting Git server: using KubeRocketCI portal or CLI.
 
           1. Navigate to **KubeRocketCI portal** -> **Configuration** -> **Version Control System**.
 
-          2. In the **Version Control System** tab, click the bin icon:
-
-          ![Delete Git server](../assets/user-guide/krci-portal-delete-git-server.png "Delete Git server")
+          2. In the **Version Control System** tab, click the bin icon.
 
           3. In the confirmation window, enter **confirm** and click **Delete**.
-
-          ![Confirm deletion](../assets/user-guide/git-server-confirm-deletion.png "Confirm deletion")
 
         </TabItem>
 

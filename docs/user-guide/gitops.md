@@ -30,9 +30,7 @@ The purpose of the `GitOps` section is to provide users with the ability to cust
 
 GitOps repository is added in two steps:
 
-1. Navigate to **Configuration** -> **Deployment**-> **GitOps** and click the **+ Add GitOps Repository** button:
-
-    ![Required fields](../assets/user-guide/gitops-section.png "GitOps section")
+1. Navigate to **Configuration** -> **Deployment**-> **GitOps** and click the **+ Add GitOps repository** button.
 
 2. Select the creation strategy, fill in the required fields, and click **Save**:
 
@@ -47,7 +45,6 @@ GitOps repository is added in two steps:
 
       The **Create** strategy allows you to create a new repository from scratch:
 
-        ![Create GitOps repository](../assets/user-guide/gitops-menu.png "Create GitOps repository")
 
         * **Git server**: Select the [added Git server](./add-git-server.md) where the GitOps repository will be created.
         * **Git repo relative path**: Enter your Git account.
@@ -59,7 +56,6 @@ GitOps repository is added in two steps:
 
       Select the **Import** strategy if you already have a repository that stores your application Helm charts' configurations:
 
-        ![Import GitOps repository](../assets/user-guide/gitops-menu-import.png "Import GitOps repository")
 
         * **Git server**: Select the [added Git server](./add-git-server.md) that has credentials to access the GitOps repository.
         * **Git repo relative path**: Enter your Git account.
@@ -71,11 +67,7 @@ GitOps repository is added in two steps:
 
 3. Check the GitOps repository connected to the platform:
 
-    ![System Codebase](../assets/user-guide/gitops-repo-added.png "System Codebase")
-
     As the result, the `Codebase` of `system` type will be added to the Codebase list of the **Components** section:
-
-    ![GitOps Codebase](../assets/user-guide/system-codebase.png "GitOps Codebase")
 
 :::warning
   The platform allows only one GitOps repository at a time.
@@ -91,7 +83,6 @@ Once the GitOps repository is added to the platform, you can set custom paramete
 
 3. Navigate to the **Environments** section. Open the created environment, open its stage and deploy it with the **Values override** checkbox selected as it is shown below:
 
-    ![GitOps Codebase](../assets/user-guide/values-override-deploy.png "GitOps Codebase")
 
 :::note
   Ensure to add the [credentials template](https://argo-cd.readthedocs.io/en/latest/user-guide/private-repositories/#credential-templates) in the Argo CD settings to grant Argo CD access to both your GitOps and codebase repositories.
@@ -124,7 +115,6 @@ In this example, the `line-length` and `document-start` rules are disabled. For 
 
 After creating the `.yamllint` file, commit it to the main branch of the GitOps repository. Once the changes are applied, the `yamllint` scan in review and build pipelines will use the custom rules defined in the `.yamllint` file.
 
-  ![Yamllint rules](../assets/user-guide/yamllint-rules.png "Yamllint rules")
 
 ## Delete GitOps Repository
 
@@ -135,7 +125,7 @@ In case you need to delete the GitOps repository, do the following:
 2. Delete the Codebase custom resource using the `kubectl delete` command:
 
     ```bash
-    kubectl delete Codebase krci-gitops -n krci
+    kubectl delete Codebase <gitops-repo-name> -n krci
     ```
 
 ## Related Articles

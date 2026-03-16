@@ -24,7 +24,6 @@ Every codebase has a branch that has its own codebase stream - a Docker containe
   For more information on the main terms used in KubeRocketCI, please refer to the [KubeRocketCI Glossary](../glossary.md)
 :::
 
-![KubeRocketCI CD pipeline](../assets/user-guide/edp-cd-pipeline.png "KubeRocketCI CD pipeline")
 
 Explore the details of the CD pipeline below.
 

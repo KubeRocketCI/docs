@@ -97,21 +97,13 @@ The TriggerTemplate defines parameters (e.g., service account name, timeout) and
 
 ### Security Pipeline
 
-Security pipeline conducts security scans and vulnerability assessments as a standalone process, decoupled from the build pipelines. Moving security checks into a separate pipeline enables more frequent, targeted scans, reduces build pipeline time, and allows to manage and evolve scanning logic independently of application delivery.
-
-  ![Security pipeline](../assets/user-guide/tekton-pipelines/security-pipeline.png "Security pipeline")
-
-The scan result summary can be found in the **Results** tab. It refers you to the DefectDojo tool:
-
-  ![Security pipeline results](../assets/user-guide/tekton-pipelines/security-pipeline-results.png "Security pipeline results")
+Security pipeline conducts security scans and vulnerability assessments as a standalone process, decoupled from the build pipelines. Moving security checks into a separate pipeline enables more frequent, targeted scans, reduces build pipeline time, and allows to manage and evolve scanning logic independently of application delivery. The scan result summary can be found in the **Results** tab. It refers you to the DefectDojo tool.
 
 ### Test Pipeline
 
 Test pipelines execute automated tests for environments independently of deployments. This allows teams to validate changes quickly without the overhead of full environment deployment.
 
 Previously, autotests could only be triggered after the application deploy pipeline, but with test pipelines, tests are now fully independent of deployment. This separation allows teams to validate application functionality on demand, run tests at any stage, and improve feedback cycles by decoupling testing from application delivery.
-
-  ![Test pipeline](../assets/user-guide/tekton-pipelines/test-pipelines.png "Test pipeline")
 
 ### Release Pipelines
 
@@ -120,8 +112,6 @@ Release pipeline orchestrates the approval and publishing workflow for new relea
 :::note
 KubeRocketCI does not offer pre-built release pipelines. You can create custom release pipelines tailored to your project's needs.
 :::
-
-  ![Release pipeline](../assets/user-guide/tekton-pipelines/release-pipeline.png "Release pipeline")
 
 ## Trigger Pipelines
 
@@ -135,9 +125,7 @@ Trigger a review pipeline using one of the four methods:
 
   ![Pull request in Bitbucket](../assets/user-guide/tekton-pipelines/bitbucket-pull-request.png "Pull request in Bitbucket")
 
-2. Use the **Run Again** button on the PipelineRun details page in the KubeRocketCI portal (if a PipelineRun exists):
-
-  ![Rerun review pipeline](../assets/user-guide/tekton-pipelines/review-pipeline-run-again.png "Rerun review pipeline")
+2. Use the **Run Again** button on the PipelineRun details page in the KubeRocketCI portal (if a PipelineRun exists).
 
 3. Use the **Rerun** button on the PipelineRun details page in the Tekton dashboard (if a PipelineRun exists):
 
@@ -157,25 +145,19 @@ Overall, there are four methods of triggering a build pipeline:
 
 1. Merge a pull request into a configured branch.
 
-2. Use the **Run Again** button in the KubeRocketCI portal (if a PipelineRun exists):
+2. Use the **Run Again** button in the KubeRocketCI portal (if a PipelineRun exists).
 
-  ![Rerun build pipeline](../assets/user-guide/tekton-pipelines/build-pipeline-run-again.png "Rerun build pipeline")
-
-3. Use the Rerun button in the Tekton dashboard (if a PipelineRun exists):
+3. Use the **Rerun** button in the Tekton dashboard (if a PipelineRun exists):
 
   ![Rerun build pipeline in Tekton](../assets/user-guide/tekton-pipelines/build-pipeline-tekton-dashboard-rerun.png "Rerun build pipeline in Tekton")
 
-4. Use the Trigger Build PipelineRun button in the KubeRocketCI portal within the branches section:
-
-  ![Manually trigger build pipeline](../assets/user-guide/tekton-pipelines/trigger-build-pipeline-run.png "Manually trigger build pipeline")
+4. Use the **Build** button in the KubeRocketCI portal within the branches section.
 
 ### Deploy Pipeline
 
 Deploy pipelines can be triggered manually or automatically. Automatic triggers are implemented using the **TriggerType** custom resource. There are three ways to trigger a deploy pipeline:
 
-1. Use **Configure Deploy** and **Start Deploy** buttons in the KubeRocketCI portal:
-
-  ![Delete branch](../assets/user-guide/tekton-pipelines/deploy-pipeline-configure-deploy.png "Delete branch")
+1. Use **Configure Deploy** and **Start Deploy** buttons in the KubeRocketCI portal.
 
 2. Configure the pipeline with the `Auto` TriggerType to deploy automatically after the build pipeline finishes and a new artifact version is created.
 
@@ -193,13 +175,9 @@ To trigger a security, test, and release pipeline, follow the steps below:
 
 2. Open the **Pipelines** tab.
 
-3. On the **Pipelines** tab, use the filter to select a security, test, or release pipeline:
+3. On the **Pipelines** tab, use the filter to select a security, test, or release pipeline.
 
-  ![Pipeline filters](../assets/user-guide/tekton-pipelines/pipeline-filters.png "Pipeline filters")
-
-4. In the pipelines list, click the actions button and select **Run with parameters**:
-
-  ![Run with parameters](../assets/user-guide/tekton-pipelines/run-with-parameters.png "Run with parameters")
+4. In the pipelines list, click the actions button and select **Run with parameters**.
 
 5. On the create resource window, specify the required parameters and click **Save & Apply**:
 
@@ -212,7 +190,15 @@ To trigger a security, test, and release pipeline, follow the steps below:
 
       <TabItem value="security">
 
-        ![Specify parameters](../assets/user-guide/tekton-pipelines/specify-parameters.png "Specify parameters")
+        ```bash
+        params:
+          - name: git-source-url
+            value: git@github.com:<username>/orders-processing.git
+          - name: git-source-revision
+            value: main
+          - name: CODEBASE_NAME
+            value: orders-processing
+        ```
 
         * **git-source-url**: Git or HTTPS address of the Git repository where the application code is stored.
         * **git-source-revision**: Git branch of the repository.
@@ -220,7 +206,17 @@ To trigger a security, test, and release pipeline, follow the steps below:
       </TabItem>
       <TabItem value="test">
 
-        ![Specify parameters](../assets/user-guide/tekton-pipelines/specify-parameters-test.png "Specify parameters")
+        ```bash
+        params:
+          - name: git-source-url
+            value: git@github.com:<username>/orders-processing.git
+          - name: git-source-revision
+            value: main
+          - name: makefile-target
+            value: dev
+          - name: base-image
+            value: epamedp/maven-java21-make:0.1.3
+        ```
 
         * **git-source-url**: Git or HTTPS address of the Git repository where the autotests are stored.
         * **git-source-revision**: Git branch of the repository.

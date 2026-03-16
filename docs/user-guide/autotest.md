@@ -1,9 +1,7 @@
 ---
-
 title: "Manage Autotests"
 sidebar_label: "Manage Autotests"
 description: "Guide to managing autotests in KubeRocketCI, including editing, integrating with Jira, and adding as quality gates in CI/CD workflows."
-
 ---
 <!-- markdownlint-disable MD025 -->
 
@@ -15,112 +13,89 @@ description: "Guide to managing autotests in KubeRocketCI, including editing, in
 
 This section describes the subsequent possible actions that can be performed with the newly added or existing autotests.
 
-## Check and Remove Autotest
+## Check Autotest
 
 As soon as the autotest is successfully provisioned, the following will be created:
 
-* An Autotest Codebase type will appear in the Codebase list of the Components section.
-* With the **Create** strategy, a new project will be generated on GitHub or another integrated VCS. When **Clone** is chosen, the repository will be forked from the original and copied to the KubeRocketCI-integrated repository. If **Import** is selected, the platform connects to the chosen repository.
+* An Autotest Codebase type will appear in the Projects list.
+* With the **Clone** or **Import** strategy, the repository will be copied or connected to the KubeRocketCI-integrated Version Control System. Autotests do not support the **Create** strategy.
+
+The added autotest will be listed in the Projects list allowing you to do the following:
+
+* Observe it in the Projects list;
+* Manage branches;
+* Run build/review pipelines;
+* View SonarQube/DefectDojo metrics;
+* View Merge Requests.
 
 :::info
-  To navigate quickly to Tekton, Version Control System, SonarQube, Nexus, and other resources, click the **Overview** section on the navigation bar and hit the necessary link.
+  Autotests cannot be deployed via Deployments; only applications can. You can use autotests as quality gates in Deployments—see [Add Autotest as a Quality Gate](#add-autotest-as-a-quality-gate).
 :::
 
-The added autotest will be listed in the Autotests list allowing you to do the following:
+The Projects list allows you to see the following information about your autotests:
 
-![Autotests page](../assets/user-guide/components/components-manage-components-menu.png "Autotests page")
-
-* **Open documentation** - Opens the autotest related documentation page.
-* **Create new component** - Opens the **Create new component** menu when clicking.
-* **Display settings** - This button allows to show/hide columns to display in the codebase list. By default, all the columns are shown.
-* **Actions menu** - Provides additional options for each individual autotest, such as **Edit** and **Delete**.
-* **Edit component** - Allows you to modify the autotest's settings. You can access this option by clicking the options icon (vertical ellipsis) next to the autotest's name in the list, and then selecting **Edit**. For more details, see the [Edit Existing Autotest](#edit-existing-autotest) section.
-* **Delete component** - Deletes the selected autotest.
-* **Component status** - displays the autotest status. Can be red or green depending on if the KubeRocketCI portal managed to connect to the Git Server with the specified credentials or not.
+* **Page guide** - Runs the tour that briefly explains the page.
 * **Component name (clickable)** - Displays the autotest name set during the autotest creation.
-
-  :::warning
-    The application that is used in a CD pipeline cannot be removed.
-  :::
+* **Actions menu** - Provides additional options for each individual autotest, such as **Edit** and **Delete**. An autotest that is used as a quality gate in a Deployment cannot be removed.
+* **Status** - Displays the autotest status. Can be red or green depending on if the KubeRocketCI portal managed to connect to the Git Server with the specified credentials or not.
 
 There are also options to sort the autotests:
 
-* **Pagination menu** - select a number of autotests displayed per page (15, 25 or 50 rows) and navigate between pages if the number of autotests exceeds the capacity of a single page.
-
 * **Filters** - Filter codebases by their name and type. Additionally, sort the existing autotests in a table by clicking the sorting icons in the table header. Sort the autotests alphabetically by their name, language, build tool, framework, and CI tool. You can also sort the autotests by their status: Created, Failed, or In progress.
-
 * **Selector** - Allows you to select multiple autotests for bulk delete.
-
 * **Columns (clickable)** - Sort the existing autotests in a list by clicking the sorting icons in the list header.
 
 ## Edit Existing Autotest
 
-KubeRocketCI portal provides the ability to enable, disable or edit the Jira Integration functionality for autotests.
+There are two options available to edit in the autotest after its creation:
 
-1. To edit an autotest directly from the Autotests overview page or when viewing the autotest data:
+* A pattern to validate a commit message;
+* Jira integration.
 
-      Select **Edit** in the options icon menu:
+You can edit an autotest directly from the Project overview page or in the Projects list using the **Actions** button.
 
-      ![Edit autotest on the autotests overview page](../assets/user-guide/components/autotests/autotests-manage-components-codebase-edit-1.png "Edit autotest on the autotests overview page")
+To enable Jira integration, in the **Edit Project** dialog do the following:
 
-      ![Edit autotest when viewing the autotest data](../assets/user-guide/components/autotests/autotests-manage-components-codebase-edit-2.png "Edit autotest when viewing the autotest data")
+  1. Mark the **Integrate with Jira server** check box and fill in the necessary fields. Please see steps d-h of the [Add Autotest](add-autotest.md) page.
 
-2. To enable Jira integration, on the **Edit Autotest** page do the following:
+  2. Select the **Apply** button to apply the changes.
 
-    ![Edit autotest](../assets/user-guide/components/autotests/autotests-manage-edit-codebase-autotests.png "Edit library")
+To disable Jira integration, in the **Edit Project** dialog do the following:
 
-    a. Mark the **Integrate with Jira server** check box and fill in the necessary fields. Please see steps d-h on the [Add Autotests](add-autotest.md) page.
+  1. Clear the **Integrate with Jira server** check box.
 
-    b. Click the **Apply** button to apply the changes.
+  2. Select the **Apply** button to apply the changes.
 
-    :::note
-      To adjust the Jira integration functionality, first apply the necessary changes described on the [Adjust Jira Integration](../operator-guide/project-management-and-reporting/jira-integration.md).
-    :::
-
-3. To disable Jira integration, in the **Edit Autotest** dialog do the following:
-
-    * Clear the **Integrate with Jira server** check box.
-
-    * Click the **Apply** button to apply the changes.
-
-4. To create, edit and delete autotest branches, please refer to the [Manage Branches](../user-guide/manage-branches.md) page.
+To create, edit and delete autotest branches, please refer to the [Manage Branches](manage-branches.md) page.
 
 ## Add Autotest as a Quality Gate
 
-In order to add an autotest as a quality gate to a newly added CD pipeline, do the following:
+In order to add an autotest as a quality gate to a Deployment, do the following:
 
-1. Create a CD pipeline with the necessary parameters. Please refer to the [Add CD Pipeline](add-cd-pipeline.md) section for the details.
-
-2. In the **Stages** menu, select the **Autotest** quality gate type. It means the promoting process should be confirmed by the successful passing of the autotests.
-
+1. Create a Deployment with the necessary parameters. Please refer to the [Add CD Pipeline](add-cd-pipeline.md) section for the details.
+2. In the **Stages** menu, select the **Autotest** quality gate type. The promoting process will then require the autotest to pass successfully.
 3. In the additional fields, select the previously created autotest name and specify its branch.
-
-4. After filling in all the necessary fields, click the Create button to start the provisioning of the pipeline. After the CD pipeline is added, the new namespace containing the stage name will be created in Kubernetes (in OpenShift, a new project will be created) with the following name pattern: _[cluster name]-[cd pipeline name]-[stage name]_.
+4. After filling in all the necessary fields, click **Create** to start the provisioning of the pipeline.
 
 ## Configure Autotest Launch at Specific Stage
 
-In order to configure the added autotest launch at the specific stage with necessary parameters, do the following:
+To configure the autotest to run at a specific stage with the necessary parameters:
 
-1. Add the necessary stage to the CD pipeline. Please refer to the [Add CD Pipeline](add-cd-pipeline.md) documentation for the details.
-
+1. Add the necessary stage to the Deployment. Please refer to the [Add CD Pipeline](add-cd-pipeline.md) documentation for the details.
 2. Navigate to the **run.json** file and add the stage name and the specific parameters.
 
 ## Launch Autotest Locally
 
-There is an ability to run the autotests locally using the IDEA (Integrated Development Environment Application, such as IntelliJ, NetBeans etc.). To launch the autotest project for the local verification, perform the following steps:
+You can run autotests locally using an IDE (such as IntelliJ or NetBeans). To run the autotest project for local verification:
 
-1. Clone the project to the local machine.
-
-2. Open the project in IDEA and find the **run.json** file to copy out the necessary command value.
-
+1. Clone the project to your local machine.
+2. Open the project in the IDE and find the **run.json** file to copy the necessary command value.
 3. Paste the copied command value into the Command line field and run it with the necessary values and namespace.
-
-4. As a result, all the launched tests will be executed.
+4. All the launched tests will be executed.
 
 ## Related Articles
 
-* [Add Application](add-application.md)
-* [Add Autotests](add-autotest.md)
+* [Add Autotest](add-autotest.md)
+* [Manage Branches](manage-branches.md)
 * [Add CD Pipeline](add-cd-pipeline.md)
 * [Adjust Jira Integration](../operator-guide/project-management-and-reporting/jira-integration.md)
-* [Manage Branches](../user-guide/manage-branches.md)

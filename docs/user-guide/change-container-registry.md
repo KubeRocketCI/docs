@@ -25,9 +25,8 @@ To reset container registry integration from the KubeRocketCI, follow the steps 
 
   1. In the KubeRocketCI main menu, navigate to **Configuration** -> **Artifacts storage** -> **Registry**.
 
-  2. Click the **Reset registry** button, type the `confirm` word and then click **Confirm**:
+  2. Click the **Reset registry** button, type the `confirm` word and then click **Confirm**.
 
-      ![Registry settings](../assets/operator-guide/container-registry-reset.png "Registry settings")
 
 ## Update Registry for the Existing Components and Environments
 

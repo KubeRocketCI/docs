@@ -17,9 +17,7 @@ This GitOps-aligned approach significantly enhances deployment control, minimizi
 
 ## Set Argo CD Diff Pipeline
 
-To leverage the **deploy-diff-approve** pipeline, select it when creating or editing an Environment:
-
-  ![Create/update environment](../assets/user-guide/argo-cd-preview/create-update-environment.png "Create/update environment")
+To leverage the **deploy-diff-approve** pipeline, select it when creating or editing an [Environment](./add-cd-pipeline.md#create-environment).
 
 For advanced use cases where you need to incorporate the Argo CD diff functionality into a custom deploy pipeline, please refer to the [Customize Deploy Pipeline](../operator-guide/cd/customize-deploy-pipeline.md) documentation. The [deploy-diff-approve](https://github.com/epam/edp-tekton/blob/master/charts/pipelines-library/templates/pipelines/cd/deploy-diff-approve.yaml) pipeline template provides a reference implementation that can be adapted to your specific requirements.
 
@@ -27,17 +25,13 @@ For advanced use cases where you need to incorporate the Argo CD diff functional
 
 To utilize the pipeline with Argo CD preview functionality, follow this sequence:
 
-1. Configure the **deploy-diff-approve** pipeline in your Environment as detailed in the [previous section](#set-argo-cd-diff-pipeline).
+1. Configure the **deploy-diff-approve** pipeline in your [Environment](./add-cd-pipeline.md#create-environment) as detailed in the [previous section](#set-argo-cd-diff-pipeline).
 
 2. Initiate the deployment of your application. For comprehensive deployment instructions, consult the [Deploy Application](../quick-start/deploy-application.md#application-deployment) documentation.
 
-3. Navigate to the Environment details page, select the **Pipelines** tab, and access the pipeline by selecting its name:
+3. Navigate to the Environment details page, select the **Pipelines** tab, and access the pipeline by clicking its name.
 
-  ![Click pipeline name](../assets/user-guide/argo-cd-preview/click-pipeline.png "Click pipeline name")
-
-4. Within the Pipeline details page, locate the **approve-diff** Step within the **preview-changes** Task. The Argo CD application link will be displayed in the logs. Select this link to open the corresponding Argo CD application:
-
-  ![Argo CD link](../assets/user-guide/argo-cd-preview/argo-cd-link.png "Argo CD link")
+4. Within the Pipeline details page, locate the **approve-diff** Step within the **preview-changes** Task. The Argo CD application link will be displayed in the logs. Select this link to open the corresponding Argo CD application.
 
 5. Authenticate with Argo CD if prompted.
 

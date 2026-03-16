@@ -2,7 +2,7 @@
 
 title: "Protect Resources From Deletion/Modification"
 sidebar_label: "Protect Resources From Deletion/Modification"
-description: "Learn how to use the protected label feature in KubeRocketCI to prevent accidental deletion or modification of resources such as codebases, environments, and deployment flows."
+description: "Learn how to use the protected label feature in KubeRocketCI to prevent accidental deletion or modification of resources such as codebases, environments, and deployments."
 
 ---
 <!-- markdownlint-disable MD025 -->
@@ -23,7 +23,7 @@ Protected labels support the following resources:
 
 * [Codebases](../api/codebase.md#codebase);
 * [Codebase branches](../api/codebase.md#codebasebranch);
-* [Deployment flows](../api/cd-pipeline.md#cdpipeline);
+* [Deployments](../api/cd-pipeline.md#cdpipeline);
 * [Environments](../api/cd-pipeline.md#stage).
 
 ## Protection Types
@@ -38,37 +38,25 @@ Protection label can optionally block specific operations over a resource:
 
 To apply the resource deletion and modification block, follow the steps below. We will use a codebase resource as an example, but the procedure applies to all the supported resources:
 
-1. Navigate to the KubeRocketCI portal.
+1. Open the terminal which has access to the cluster that runs KubeRocketCI.
 
-2. Switch the portal to the Kubernetes mode:
+2. Get the codebase list:
 
-  ![Kubernetes mode](../assets/user-guide/components/protected-label/kubernetes-mode.png "Kubernetes mode")
+  ```bash
+  kubectl get codebase -n krci
+  ```
 
-3. Navigate to **Cluster** -> **Custom resources**:
+3. Define the codebase you want to protect from accidental deletion and/or modification.
 
-  ![Custom resources tab](../assets/user-guide/components/protected-label/custom-resources.png "Custom resources tab")
+4. Enter the resource edit menu:
 
-4. In the custom resources list, enter **Codebase** in the filter field to find it and then select it in the list:
+  ```bash
+  kubectl edit codebase <codebase name> -n krci
+  ```
 
-  ![Codebase resource type](../assets/user-guide/components/protected-label/select-codebase.png "Codebase resource type")
+5. In the labels section of the codebase specifications, add the label from the [Protection Types](#protection-types) list.
 
-5. Enter the codebase you want to protect from accidental deletion and/or modification.
-
-6. On the resource details page, click the **Edit** button:
-
-  ![Edit button](../assets/user-guide/components/protected-label/edit-codebase.png "Edit button")
-
-7. In the edit resource window, add the label to the **labels** section and click **Save and apply**:
-
-  ![Add label](../assets/user-guide/components/protected-label/add-label.png "Add label")
-
-8. Make sure the label was applied:
-
-  ![Verify label](../assets/user-guide/components/protected-label/verify-label.png "Verify label")
-
-9. Switch back to the KubeRocketCI mode, navigate to the **Components** section and verify that you can't delete or edit the protected codebase:
-
-  ![Deletion/Modification is locked](../assets/user-guide/components/protected-label/deletion-locked.png "Deletion/Modification is locked")
+6. Save and quit the menu.
 
 ## Remove Protected Label
 
@@ -79,4 +67,4 @@ To remove a label, navigate back to the resource, edit the resource by removing 
 * [Manage Applications](../user-guide/application.md)
 * [Customize Deploy Pipeline](../operator-guide/cd/customize-deploy-pipeline.md)
 * [Add Deployment Flow](../user-guide/add-cd-pipeline.md)
-* [Manage Deployment Flows](../user-guide/manage-environments.md)
+* [Manage Deployments](../user-guide/manage-environments.md)

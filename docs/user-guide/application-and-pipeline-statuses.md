@@ -62,10 +62,6 @@ The pipeline status represents the current state of the pipeline. The following 
 |       Failed        | The pipeline has encountered an error, causing execution to stop before completion. Some tasks may have failed or been skipped. |
 |       Unknown       | The pipeline status cannot be determined. In most cases this status indicates some errors with starting pipeline.               |
 
-Example of pipeline status is provided below:
-
-![Pipeline Status](../assets/user-guide/application-statuses/pipeline-status.png "Pipeline Status")
-
 ### Application Status
 
 :::note
@@ -75,10 +71,6 @@ Pipeline status is not directly related to the application status. The applicati
 After the deployment of an application, KubeRocketCI provides an application status that indicates the current state of the application. These statuses are related to the Argo CD application health status and sync status.
 
 The application status can be found under the **Applications** tab for the appropriate environment. These statuses are updated in real-time and provide a quick overview of the application health and sync status regarding the Argo CD application.
-
-Example of application statuses is provided below:
-
-![Application Statuses](../assets/user-guide/application-statuses/application-statuses.png "Application Statuses")
 
 ## Use Cases
 
@@ -96,29 +88,19 @@ Suppose we have `fast-api` application to be deployed in the `demo-dev` environm
 
 1. Navigate to the KubeRocketCI portal.
 
-2. In the left sidebar, navigate to the **Deployment Flows** tab and select the **demo** (or any other appropriate) environment where the application should be deployed.
-
-    ![Select Environment](../assets/user-guide/application-statuses/select-environment.png "Select Environment")
+2. In the left sidebar, navigate to the **Deployments** tab and select the **demo** (or any other appropriate) environment where the application should be deployed.
 
 3. Select the **dev** environment and navigate to the **Applications** tab. Click on the **Configure Deploy** button to deploy the application.
 
-    ![Select Applications](../assets/user-guide/application-statuses/select-applications.png "Select Applications")
-
 4. Choose the appropriate application version and click on the **Start Deploy** button to deploy the application.
-
-    ![Start Deploy](../assets/user-guide/application-statuses/start-deploy.png "Start Deploy")
 
 5. After the deployment process is started, navigate to the **Pipelines** tab to monitor the pipeline status. Ensure that the pipeline status is `Succeeded`.
 
-    ![Pipeline Status](../assets/user-guide/application-statuses/pipeline-status.png "Pipeline Status")
+  This status indicates that the pipeline has completed successfully. All tasks have been executed without errors. Application is now deployed and synced.
 
-    This status indicates that the pipeline has completed successfully. All tasks have been executed without errors. Application is now deployed and synced.
+6. To ensure that the application is healthy and synced, navigate back to the **dev** environment of the **demo** deployment. Under the **Applications** tab, the application status should be `Healthy` and `Synced`.
 
-6. To ensure that the application is healthy and synced, navigate back to the **dev** environment of the **demo** deployment flow. Under the **Applications** tab, the application status should be `Healthy` and `Synced`.
-
-    ![Application Statuses](../assets/user-guide/application-statuses/application-status.png "Application Statuses")
-
-    These statuses indicate that the Argo CD application is healthy and all resources are successfully deployed and synced.
+  These statuses indicate that the Argo CD application is healthy and all resources are successfully deployed and synced.
 
 7. Also, to verify the application status in Argo CD, navigate to the Argo CD UI and check the application status. The application should be `Healthy` and `Synced`.
 
@@ -132,9 +114,7 @@ In this scenario, we will cover the status of an application that is out of sync
 
 Suppose we have successfully deployed the `fast-api` application in the `demo-dev` environment. Follow the steps below to make the application out of sync:
 
-1. In KubeRocketCI portal, navigate to the **Applications** tab under the **dev** environment of the **demo** deployment flow. Ensure that the application status is `Healthy` and `Synced`.
-
-    ![Application Statuses](../assets/user-guide/application-statuses/application-status.png "Application Statuses")
+1. In KubeRocketCI portal, navigate to the **Applications** tab under the **dev** environment of the **demo** deployment. Ensure that the application status is `Healthy` and `Synced`.
 
     Also, verify the application status in Argo CD. The application should be `Healthy` and `Synced`.
 
@@ -148,11 +128,7 @@ Suppose we have successfully deployed the `fast-api` application in the `demo-de
 
     For example, navigate to the Kubernetes section of the KubeRocketCI portal and scale the deployment of the `fast-api` application to 0 replicas.
 
-    ![Scale Deployment](../assets/user-guide/application-statuses/scale-deployment.png "Scale Deployment")
-
-3. After making the changes, navigate back to the **Applications** tab under the **dev** environment of the **demo** deployment flow. The application status should now be `Healthy`, but `OutOfSync`.
-
-    ![OutOfSync Application](../assets/user-guide/application-statuses/out-of-sync-application.png "OutOfSync Application")
+3. After making the changes, navigate back to the **Applications** tab under the **dev** environment of the **demo** deployment. The application status should now be `Healthy`, but `OutOfSync`.
 
     This status indicates that the application is healthy, but the resources in the cluster differ from the expected state in the Git repository.
 
@@ -172,9 +148,7 @@ In this scenario, we will cover the status of an application that has one or mor
 
 Suppose we have successfully deployed the `fast-api` application in the `demo-dev` environment. Follow the steps below to make the application degraded:
 
-1. In KubeRocketCI portal, navigate to the **Applications** tab under the **dev** environment of the **demo** deployment flow. Ensure that the application status is `Healthy` and `Synced`.
-
-    ![Application Statuses](../assets/user-guide/application-statuses/application-status.png "Application Statuses")
+1. In KubeRocketCI portal, navigate to the **Applications** tab under the **dev** environment of the **demo** deployment. Ensure that the application status is `Healthy` and `Synced`.
 
     Also, verify the application status in Argo CD. The application should be `Healthy` and `Synced`.
 
@@ -184,11 +158,7 @@ Suppose we have successfully deployed the `fast-api` application in the `demo-de
 
     For example, navigate to the Kubernetes section of the KubeRocketCI portal and edit the `fast-api` deployment with incorrect service account name (e.g., `fast-api-degraded`). Save the changes to apply the configuration.
 
-    ![Edit Deployment](../assets/user-guide/application-statuses/edit-deployment.png "Edit Deployment")
-
-3. After making the changes, navigate back to the **Applications** tab under the **dev** environment of the **demo** deployment flow. The application status should now be `Progressing` and `OutOfSync`.
-
-    ![Progressing Application](../assets/user-guide/application-statuses/progressing-application.png "Progressing Application")
+3. After making the changes, navigate back to the **Applications** tab under the **dev** environment of the **demo** deployment. The application status should now be `Progressing` and `OutOfSync`.
 
 4. Also, verify the application status in Argo CD. The application status should be `Progressing` and `OutOfSync`.
 
@@ -198,7 +168,6 @@ Suppose we have successfully deployed the `fast-api` application in the `demo-de
 
 5. After a few minutes, the application status should change to `Degraded`, indicating that one or more resources in the application have issues or failed to reach a healthy state.
 
-    ![Degraded Application](../assets/user-guide/application-statuses/degraded-application.png "Degraded Application")
 
     In the Argo CD, the application status will also change to `Degraded`. The resources that have issues will be highlighted in red.
 

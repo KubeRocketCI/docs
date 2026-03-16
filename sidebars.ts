@@ -401,10 +401,11 @@ const sidebars: SidebarsConfig = {
       collapsible: false,
       items: [
         'user-guide/index',
+        'user-guide/overview',
         'user-guide/portal-settings',
         {
           type: 'category',
-          label: 'Pipelines',
+          label: 'CI/CD Pipelines',
           collapsed: false,
           items: [
             'user-guide/pipelines',
@@ -413,16 +414,7 @@ const sidebars: SidebarsConfig = {
         },
         {
           type: 'category',
-          label: 'Marketplace',
-          collapsed: false,
-          items: [
-            'user-guide/marketplace',
-            'user-guide/add-marketplace',
-          ],
-        },
-        {
-          type: 'category',
-          label: 'Components',
+          label: 'Projects',
           collapsed: false,
           items: [
             'user-guide/components',
@@ -466,7 +458,7 @@ const sidebars: SidebarsConfig = {
         },
         {
           type: 'category',
-          label: 'Deployment Flows',
+          label: 'Deployments',
           collapsed: false,
           items: [
             'user-guide/add-cd-pipeline',
@@ -476,6 +468,62 @@ const sidebars: SidebarsConfig = {
             'user-guide/cd-pipeline-variables-injection',
             'user-guide/application-and-pipeline-statuses',
             'user-guide/argo-cd-preview',
+          ],
+        },
+        'user-guide/observability',
+        {
+          type: 'category',
+          label: 'Security',
+          collapsed: false,
+          items: [
+            {
+              type: 'category',
+              label: 'SCA',
+              items: [
+                'user-guide/security/sca-overview',
+                'user-guide/security/sca-projects',
+              ],
+            },
+            'user-guide/security/sca-sast',
+            {
+              type: 'category',
+              label: 'Container Scanning',
+              items: [
+                'user-guide/security/container-scanning-overview',
+                'user-guide/security/container-vulnerability-reports',
+                'user-guide/security/container-exposed-secrets',
+              ],
+            },
+            {
+              type: 'category',
+              label: 'Namespace Security',
+              items: [
+                'user-guide/security/namespace-configuration-audits',
+                'user-guide/security/namespace-rbac-assessments',
+                'user-guide/security/namespace-infrastructure-assessments',
+              ],
+            },
+            {
+              type: 'category',
+              label: 'Cluster Security',
+              items: [
+                'user-guide/security/cluster-compliance',
+                'user-guide/security/cluster-configuration-audits',
+                'user-guide/security/cluster-rbac-assessments',
+                'user-guide/security/cluster-infrastructure-assessments',
+                'user-guide/security/cluster-vulnerability-reports',
+              ],
+            },
+            {
+              type: 'category',
+              label: 'Compliance',
+              items: [
+                'user-guide/security/compliance-configuration-audits',
+                'user-guide/security/compliance-rbac-assessments',
+                'user-guide/security/compliance-infrastructure-assessments',
+                'user-guide/security/compliance-vulnerability-reports',
+              ],
+            },
           ],
         },
         {
@@ -514,13 +562,6 @@ const sidebars: SidebarsConfig = {
               items: [
                 'user-guide/manage-container-registries',
                 'user-guide/change-container-registry',
-              ],
-            },
-            {
-              type: 'category',
-              label: 'Gen AI',
-              items: [
-                'user-guide/add-ai-assistant',
               ],
             },
           ],

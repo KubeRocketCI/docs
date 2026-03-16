@@ -37,24 +37,16 @@ Additionally, customize your deploy pipeline to utilize parameters efficiently. 
 
 To add a key-value variable in deploy pipelines, follow the steps below:
 
-1. Navigate to the **KubeRocketCI portal** -> **Deployment Flows**:
+1. Navigate to the **KubeRocketCI portal** -> **Deployments**.
 
-  ![Deployment Flows section](../assets/user-guide/deployment-flows-page.png "Deployment Flows section")
+2. Enter your Deployment and then enter the Environment you need to add a variable to. In the environment details page, select the **Variables** tab. Click the **+** button to add a variable. If there are no variables yet, click the **Click here to add a new variable** message.
 
-2. Enter your deployment flow and then enter the environment you need to add a variable to. In the environment details page, select the **Variables** tab. Click the **+** button to add a variable:
+3. Specify the variables and click **Save**.
 
-  ![Variables tab](../assets/user-guide/variables-tab.png "Variables tab")
-
-3. Specify the variables and click **Save**:
-
-  ![Variables populated](../assets/user-guide/add-variables.png "Variables populated")
-
-4. Verify that the deploy pipeline uses your variables:
-
-  ![Variables demonstration](../assets/user-guide/variables.gif "Variables demonstration")
+4. Verify that the deploy pipeline uses your variables.
 
 ## Related Articles
 
 * [Customize Deploy Pipeline](../operator-guide/cd/customize-deploy-pipeline.md)
 * [Add Deployment Flow](../user-guide/add-cd-pipeline.md)
-* [Manage Deployment Flows](../user-guide/manage-environments.md)
+* [Manage Deployments](../user-guide/manage-environments.md)

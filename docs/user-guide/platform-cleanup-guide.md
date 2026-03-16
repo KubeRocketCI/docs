@@ -29,13 +29,13 @@ To follow the guidelines below, ensure you have:
 
 ## Platform Resource Cleanup
 
-This section covers platform resource removal, such as components, deployment flows, and pipeline runs.
+This section covers platform resource removal, such as components, deployments, and pipeline runs.
 
-### Delete Deployment Flows
+### Delete Deployments
 
-Platform cleanup starts with deleting [deployment flows](add-cd-pipeline.md), a core resource that allows the platform to build an automated workflow. Deleting a deployment flow will delete applications from its associated cluster.
+Platform cleanup starts with deleting [deployments](add-cd-pipeline.md), a core resource that allows the platform to build an automated workflow. Deleting a deployment will delete applications from its associated cluster.
 
-We recommend cleaning environments before deleting deployment flows to ensure graceful resource deletion and avoid potential issues.
+We recommend cleaning environments before deleting deployments to ensure graceful resource deletion and avoid potential issues.
 
 There are two strategies for cleaning environments:
 
@@ -45,56 +45,38 @@ There are two strategies for cleaning environments:
 To delete an environment using the **Delete** button, read the [Manage Environments](manage-environments.md#delete-environment) page.
 
 :::note
-  A deployment flow must include at least one environment.
+  A deployment must include at least one environment.
 :::
 
-Once the environments are deleted, proceed with deleting a deployment flow. To delete a [deployment flow](./manage-environments.md), follow these steps:
+Once the environments are deleted, proceed with deleting a deployment. To delete a [deployment](./manage-environments.md), follow these steps:
 
-1. Navigate to **KubeRocketCI portal** -> **Deployment flows**:
+1. Navigate to **KubeRocketCI portal** -> **Deployments**.
 
-  ![Deployment flows list](../assets/user-guide/deployment-flows.png "Deployment flows list")
+2. Choose a deployment to delete. Click the actions button and select **Delete**.
 
-2. Choose a deployment flow to delete. Click the actions button and select **Delete**:
-
-  ![Delete deployment flow](../assets/user-guide/delete-deployment-flow.png "Delete deployment flow")
-
-3. Enter the deployment flow name and click **Delete**:
-
-  ![Confirm deployment flow deletion](../assets/user-guide/confirm-deployment-flow-deletion.png "Confirm deployment flow deletion")
+3. Enter the deployment name and click **Delete**.
 
 ### Delete Codebases
 
-After deleting deployment flows, you can delete the associated resources they operate with. These resources, collectively referred to as codebases, include [applications](application.md), [libraries](library.md), [autotests](autotest.md), and [infrastructures](infrastructure.md).
+After deleting deployments, you can delete the associated resources they operate with. These resources, collectively referred to as codebases, include [applications](application.md), [libraries](library.md), [autotests](autotest.md), and [infrastructures](infrastructure.md).
 
 In this example, we will demonstrate how to delete an application. The same procedure applies to other types of codebases:
 
-1. Navigate to **KubeRocketCI portal** -> **Components**:
+1. Navigate to **KubeRocketCI portal** -> **Projects**.
 
-  ![Components list](../assets/user-guide/components-list.png "Components list")
+2. Choose an application to delete. Click the actions button and select **Delete**.
 
-2. Choose an application to delete. Click the actions button and select **Delete**:
-
-  ![Delete component](../assets/user-guide/delete-component.png "Delete component")
-
-3. Enter the application name and click **Delete**:
-
-  ![Confirm codebase deletion](../assets/user-guide/confirm-application-deletion.png "Confirm codebase deletion")
+3. Enter the application name and click **Delete**.
 
 ### Delete Pipeline Runs
 
 The last platform resource remaining is [pipeline runs](./pipelines.md). A pipeline run refers to an execution instance of a pipeline. Each time you trigger a build, review, deploy, or clean pipeline, a new pipeline run emerges. To delete pipeline runs, follow these steps:
 
-1. Navigate to **KubeRocketCI portal** -> **Pipelines**:
+1. Navigate to **KubeRocketCI portal** -> **CI/CD Pipelines**.
 
-  ![Pipelines list](../assets/user-guide/pipelines-list.png "Pipelines list")
+2. Choose pipeline runs and click **Delete**.
 
-2. Choose pipeline runs and click **Delete**:
-
-  ![Inspect application](../assets/user-guide/delete-pipeline-runs.png "Inspect application")
-
-3. On the confirmation window, enter **confirm** and click **Delete**:
-
-  ![Inspect application](../assets/user-guide/confirm-pipeline-runs-deletion.png "Inspect application")
+3. On the confirmation window, enter **confirm** and click **Delete**.
 
 ## Third-Party Resource Cleanup
 
@@ -186,7 +168,7 @@ To clean up unnecessary application binaries manually, follow these steps:
 
 ### Delete Container Images
 
-KubeRocketCI uses container images to deploy the applications to [deployment flows](../user-guide/add-cd-pipeline.md). To clean up a container registry, follow the corresponding guidelines:
+KubeRocketCI uses container images to deploy the applications to [deployments](../user-guide/add-cd-pipeline.md). To clean up a container registry, follow the corresponding guidelines:
 
   <Tabs
     defaultValue="ecr"
@@ -237,9 +219,7 @@ KubeRocketCI generates a SonarQube project for every new codebase. To clean up a
 
 KubeRocketCI supports various observability tools, including DefectDojo, Dependency-Track, Datadog, and more. While these tools don't directly impact the platform's core functionality, they can generate significant data during operation.
 
-Some tools, such as Dependency-Track and SonarQube, offer deep integration with KubeRocketCI through dedicated widgets. These widgets allow users to view code quality metrics and dependency scan results directly in the codebase details menu:
-
-![SonarQube and Dependency-Track widgets](../assets/user-guide/sonarqube-and-deptrack-widgets.png "SonarQube and Dependency-Track widgets")
+Some tools, such as Dependency-Track and SonarQube, offer deep integration with KubeRocketCI through dedicated widgets. These widgets allow users to view code quality metrics and dependency scan results directly in the codebase details menu.
 
 #### DefectDojo
 
@@ -284,4 +264,4 @@ To delete a Dependency-Track project, follow these steps:
 
 * [Manage Applications](./application.md)
 * [Add Application](./add-application.md)
-* [Manage Deployment Flows](./manage-environments.md)
+* [Manage Deployments](./manage-environments.md)

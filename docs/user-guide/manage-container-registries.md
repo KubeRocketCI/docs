@@ -34,9 +34,7 @@ The following table displays the registry services supported for both OpenShift 
 
 Follow a three-step process to integrate a container registry in KubeRocketCI:
 
-1. In the **Configuration** -> **Artifacts storage** -> **Registry** click the **+ Add Registry** button:
-
-    ![Registry settings](../assets/operator-guide/container-registry-list.png "Registry settings")
+1. In the **Configuration** -> **Artifacts storage** -> **Registry** click the **+ Add Registry** button.
 
 2. Select **Registry Provider** and enter the required details.
 
@@ -55,7 +53,6 @@ Follow a three-step process to integrate a container registry in KubeRocketCI:
       ]}>
 
         <TabItem value="ecr">
-          ![AWS ECR settings](../assets/operator-guide/container-registry-ecr.png "AWS ECR settings")
 
           |Fields|Description|
           |:-|:-|
@@ -66,7 +63,6 @@ Follow a three-step process to integrate a container registry in KubeRocketCI:
         </TabItem>
 
         <TabItem value="docker">
-          ![DockerHub settings](../assets/operator-guide/container-registry-dockerhub.png "DockerHub settings")
 
           |Fields|Description|
           |:-|:-|
@@ -77,7 +73,6 @@ Follow a three-step process to integrate a container registry in KubeRocketCI:
         </TabItem>
 
         <TabItem value="harbor">
-          ![Harbor settings](../assets/operator-guide/container-registry-harbor.png "Harbor settings")
 
           |Fields|Description|
           |:-|:-|
@@ -89,7 +84,6 @@ Follow a three-step process to integrate a container registry in KubeRocketCI:
         </TabItem>
 
         <TabItem value="nexus">
-          ![Nexus settings](../assets/operator-guide/container-registry-nexus.png "Nexus settings")
 
           |Fields|Description|
           |:-|:-|
@@ -100,7 +94,6 @@ Follow a three-step process to integrate a container registry in KubeRocketCI:
         </TabItem>
 
         <TabItem value="github">
-          ![GitHub container registry settings](../assets/operator-guide/container-registry-github.png "GitHub container registry settings")
 
           |Fields|Description|
           |:-|:-|
@@ -110,20 +103,6 @@ Follow a three-step process to integrate a container registry in KubeRocketCI:
           |Checkbox/Use the Push Account's credentials|Check this to use the same account for pulling and pushing operations. If unchecked, please enter the user account ID and Token for your GitHub account or community user account ID with pull permission.|
         </TabItem>
     </Tabs>
-
-## Remove Container Registry
-
-To remove container registry integration from KubeRocketCI, follow the steps below:
-
-:::warning
-    Proceed with caution, removing registry settings might disrupt your CI/CD process. All new components created after changing the registry such as Components and Environments will start working out of the box. To work with existing codebases and pipelines familiarize with the [change container registry guide](change-container-registry.md).
-:::
-
-  1. In the **Configuration** -> **Artifacts storage** -> **Registry**.
-
-  2. Click the **Reset registry** button, type the `confirm` word and then click **Confirm**:
-
-  ![Registry settings](../assets/operator-guide/container-registry-reset.png "Registry settings")
 
 ## Related Articles
 

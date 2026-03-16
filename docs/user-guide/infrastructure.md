@@ -1,9 +1,7 @@
 ---
-
 title: "Manage Infrastructures"
 sidebar_label: "Manage Infrastructures"
 description: "Guide to managing infrastructures in KubeRocketCI, including setup, modification, and integration with Jira for comprehensive development management."
-
 ---
 <!-- markdownlint-disable MD025 -->
 
@@ -15,71 +13,63 @@ description: "Guide to managing infrastructures in KubeRocketCI, including setup
 
 This section describes the subsequent possible actions that can be performed with the newly added or existing infrastructures.
 
-## Check and Remove Infrastructure
+## Check Infrastructure
 
 As soon as the infrastructure is successfully provisioned, the following will be created:
 
-* An Infrastructure Codebase type will appear in the Codebase list of the Components section.
+* An Infrastructure Codebase type will appear in the Projects list.
 * With the **Create** strategy, a new project will be generated on GitHub or another integrated VCS. When **Clone** is chosen, the repository will be forked from the original and copied to the KubeRocketCI-integrated repository. If **Import** is selected, the platform connects to the chosen repository.
 
-The added infrastructure will be listed in the infrastructure list allowing you to do the following:
+The added infrastructure will be listed in the Projects list allowing you to do the following:
 
-![Components menu](../assets/user-guide/components/components-manage-components-menu.png "Components menu")
+* Observe it in the Projects list;
+* Manage branches;
+* Run build/review pipelines;
+* View SonarQube/DefectDojo metrics;
+* View Merge Requests.
 
-* **Open documentation** - Opens the infrastructure related documentation page.
-* **Create new component** - Opens the **Create new component** menu when clicking.
-* **Display settings** - This button allows to show/hide columns to display in the codebase list. By default, all the columns are shown.
-* **Actions menu** - Provides additional options for each individual infrastructure, such as **Edit** and **Delete**.
-* **Edit component** - Allows you to modify the infrastructure's settings. You can access this option by clicking the options icon (vertical ellipsis) next to the infrastructure's name in the list, and then selecting **Edit**. For more details, see the [Edit Existing Infrastructure](#edit-existing-infrastructure) section.
-* **Delete component** - Deletes the selected infrastructure.
-* **Component status** - displays the infrastructure status. Can be red or green depending on if the KubeRocketCI portal managed to connect to the Git Server with the specified credentials or not.
+:::info
+  Infrastructures cannot be deployed via Deployments; only applications can. Infrastructure codebases are used to define and manage cloud or platform resources (e.g. via Terraform).
+:::
+
+The Projects list allows you to see the following information about your infrastructures:
+
+* **Page guide** - Runs the tour that briefly explains the page.
 * **Component name (clickable)** - Displays the infrastructure name set during the infrastructure creation.
-
-  :::warning
-    The application that is used in a CD pipeline cannot be removed.
-  :::
+* **Actions menu** - Provides additional options for each individual infrastructure, such as **Edit** and **Delete**.
+* **Status** - Displays the infrastructure status. Can be red or green depending on if the KubeRocketCI portal managed to connect to the Git Server with the specified credentials or not.
 
 There are also options to sort the infrastructures:
 
-* **Pagination menu** - select a number of infrastructures displayed per page (15, 25 or 50 rows) and navigate between pages if the number of infrastructures exceeds the capacity of a single page.
-
 * **Filters** - Filter codebases by their name and type. Additionally, sort the existing infrastructures in a table by clicking the sorting icons in the table header. Sort the infrastructures alphabetically by their name, language, build tool, framework, and CI tool. You can also sort the infrastructures by their status: Created, Failed, or In progress.
-
 * **Selector** - Allows you to select multiple infrastructures for bulk delete.
-
-* **Columns (clickable)** - Sort the existing infrastructures in a list by clicking the sorting icons in the list header.
+* **Columns (clickable)** - Select columns to display and sort the existing infrastructures in a list by clicking the sorting icons in the list header.
 
 ## Edit Existing Infrastructure
 
-KubeRocketCI portal provides the ability to enable, disable or edit the Jira Integration functionality for infrastructures.
+There are two options available to edit in the infrastructure after its creation:
 
-1. To edit an infrastructure directly from the infrastructures overview page or when viewing the infrastructure data:
+* A pattern to validate a commit message;
+* Jira integration.
 
-    * Select **Edit** in the options icon menu:
+You can edit an infrastructure directly from the Project overview page or in the Projects list using the **Actions** button.
 
-    ![Edit infrastructure on the Infrastructures overview page](../assets/user-guide/components/infrastructure/infrastructure-manage-components-edit-infrastructure-1.png "Edit infrastructure on the Infrastructures overview page")
+To enable Jira integration, in the **Edit Project** dialog do the following:
 
-    ![Edit infrastructure when viewing the infrastructure data](../assets/user-guide/components/infrastructure/infrastructure-manage-components-edit-infrastructure-2.png "Edit infrastructure when viewing the infrastructure data")
+  1. Mark the **Integrate with Jira server** check box and fill in the necessary fields. Please see steps d-h of the [Add Infrastructure](add-infrastructure.md) page.
 
-    * The **Edit Infrastructure** dialog opens.
+  2. Select the **Apply** button to apply the changes.
 
-2. To enable Jira integration, in the **Edit Infrastructure** dialog do the following:
+To disable Jira integration, in the **Edit Project** dialog do the following:
 
-    ![Edit infrastructure](../assets/user-guide/components/infrastructure/infrastructure-manage-edit-codebase-infrastructure.png "Edit infrastructure")
+  1. Clear the **Integrate with Jira server** check box.
 
-    a. Mark the **Integrate with Jira server** check box and fill in the necessary fields. Please see steps d-h on the [Add Infrastructure page](add-infrastructure.md).
+  2. Select the **Apply** button to apply the changes.
 
-    b. Select the **Apply** button to apply the changes.
-
-3. To disable Jira integration, in the **Edit Infrastructure** dialog do the following:
-
-    a. Clear the **Integrate with Jira server** check box.
-
-    b. Select the **Apply** button to apply the changes.
-
-4. To create, edit and delete infrastructure branches, please refer to the [Manage Branches](../user-guide/manage-branches.md) page.
+To create, edit and delete infrastructure branches, please refer to the [Manage Branches](manage-branches.md) page.
 
 ## Related Articles
 
 * [Add Infrastructure](add-infrastructure.md)
-* [Manage Branches](../user-guide/manage-branches.md)
+* [Manage Branches](manage-branches.md)
+* [Adjust Jira Integration](../operator-guide/project-management-and-reporting/jira-integration.md)

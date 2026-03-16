@@ -21,19 +21,21 @@ In KubeRocketCI, application deployment can be triggered once the new applicatio
 * **Auto-deploy**: Automatically triggers the deployment pipeline as soon as a new application version is built, all the applications will deployed with latest version available.
 * **Auto-stable**: This one is similar to **Auto-deploy** but features more complicated logic. In this trigger type, the newly released application version is deployed, whereas the rest of applications in the Environment will use the **Stable** image tag, even if they have an application image version marked as **Latest**. If there are no application images with the **Stable** tag available, the **Latest** application version will be used.
 
-The diagram below illustrates how the **Auto-deploy** trigger type works:
-
-  ![Auto-deploy trigger type](../assets/operator-guide/autodeploy-trigger-type-scheme.png "Auto-deploy trigger type")
+### Auto-Deploy
 
 As soon as a new application artifact is built, it is immediately deployed to the environment along with the rest of the applications using their latest versions.
 
 In this strategy, if several application versions were built in a short period of time, only the latest of them will be deployed.
 
-The diagram below illustrates how the **Auto-stable** trigger type works:
+  ![Auto-deploy trigger type](../assets/operator-guide/autodeploy-trigger-type-scheme.png "Auto-deploy trigger type")
+
+### Auto-Stable
+
+In contrast to the **Auto-deploy** trigger type, where deploy pipelines always deploy the latest application version, **Auto-stable** can safeguard application stability by preventing deployment of latest application version if this version wasn't unstable. If there are several build pipelines running at a time, they are placed in a queue and deployed consequently.
 
   ![Auto-stable trigger type](../assets/operator-guide/auto-stable-trigger-type-scheme.png "Auto-stable trigger type")
 
-In contrast to the **Auto-deploy** trigger type, where deploy pipelines always deploy the latest application version, **Auto-stable** can safeguard application stability by preventing deployment of latest application version if this version wasn't unstable. If there are several build pipelines running at a time, they are placed in a queue and deployed consequently.
+### Latest vs Stable Versions
 
 Understanding the difference between **Latest** and **Stable** tags is essential:
 
@@ -56,25 +58,17 @@ Before proceeding, ensure you already have at least two [applications](../user-g
 
 To enable the auto-stable deployment strategy, follow the steps below:
 
-1. When creating/editing Environment, set the **auto-stable** trigger type:
+1. When creating/editing Environment, set the **auto-stable** trigger type.
 
-  ![Auto-stable trigger type](../assets/operator-guide/auto-stable-trigger-type.png "Auto-stable trigger type")
+2. Make sure you have an application with both **latest** and **stable** image tags.
 
-2. Make sure you have an application with both **latest** and **stable** image tags:
+3. Build one of your application that are included in the Environment.
 
-  ![Stable and latest application tag](../assets/operator-guide/stable-and-latest.png "Stable and latest application tag")
-
-3. Build one of your application that are included in the Environment:
-
-  ![Application build](../assets/operator-guide/build_application.png "Application build")
-
-4. View the deploy pipeline details to see that it deploys only stable application version:
-
-  ![Applications image versions](../assets/operator-guide/pipeline-details.png "Applications image versions")
+4. View the deploy pipeline details to see that it deploys only stable application version.
 
   Note that **notifications-service** application, which has both both **Latest** and **Stable** images, was deployed with the stable version. While the application version 2 (latest) exists, it was deployed with the version 1 (stable).
 
 ## Related Articles
 
-* [Manage Deployment Flows](../user-guide/manage-environments.md)
+* [Manage Deployments](../user-guide/manage-environments.md)
 * [Add Application](../user-guide/add-application.md)

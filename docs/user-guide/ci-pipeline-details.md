@@ -16,7 +16,6 @@ There are three codebase types in KubeRocketCI:
   For more information on the above mentioned codebase types, please refer to the [Add Application](add-application.md), [Add Library](add-library.md), [Add Autotests](add-autotest.md) and [Autotest as Quality Gate](../use-cases/autotest-as-quality-gate.md) pages.
 :::
 
-![KubeRocketCI CI pipeline](../assets/user-guide/edp-ci-pipeline.png "KubeRocketCI CI pipeline")
 
 ## Related Articles
 

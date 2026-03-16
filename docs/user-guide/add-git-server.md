@@ -48,15 +48,11 @@ For [Bitbucket](https://support.atlassian.com/bitbucket-cloud/docs/create-an-api
       * Click the profile account and navigate to **Settings** -> **Developer Settings**.
       * Select *Personal access tokens (classic)* and generate a new token with the following parameters:
 
-        ![Repo permissions](../assets/operator-guide/github-scopes-1.png "Repo permissions")
 
       :::note
         The access below is required for the codebase operator to setup hooks.
       :::
 
-      ![Admin:repo permission](../assets/operator-guide/github-scopes-2.png "Admin:repo permission")
-      ![Admin:org permission](../assets/operator-guide/github-scopes-4.png "Admin:org permission")
-      ![User permission](../assets/operator-guide/github-scopes-3.png "User permission")
 
       :::warning
         Make sure to save a new personal access token because it won't be displayed later.
@@ -72,7 +68,6 @@ For [Bitbucket](https://support.atlassian.com/bitbucket-cloud/docs/create-an-api
       * Choose a name and an optional expiry date for the token.
       * In the **Scopes** block, select the **api** scope for the token.
 
-        ![Personal access tokens](../assets/operator-guide/scopes.png "Personal access tokens")
 
       * Click the **Create personal access token** button.
 
@@ -88,7 +83,6 @@ For [Bitbucket](https://support.atlassian.com/bitbucket-cloud/docs/create-an-api
       * Choose a role: *Owner* or *Maintainer*.
       * In the **Scopes** block, select the *api* scope for the token.
 
-        ![Project access tokens](../assets/operator-guide/scopes-project.png "Project access tokens")
 
       * Click the **Create project access token** button.
       </TabItem>
@@ -103,15 +97,12 @@ For [Bitbucket](https://support.atlassian.com/bitbucket-cloud/docs/create-an-api
       * In the **API tokens** section, click the **Create and manage API tokens** button.
       * In the opened **API tokens** page, click the **Create API token with scopes** button.
 
-        ![Create API token](../assets/operator-guide/git-servers/bitbucket-create-api-token.png "Create API token")
 
       * In the **Name and expiry** section, provide a name for the token and set the desired expiration period.
 
-        ![Name and expiry](../assets/operator-guide/git-servers/bitbucket-name-and-expiry.png "Name and expiry")
 
       * In the **Select app** section, choose the "Bitbucket" option as API token app.
 
-        ![Select app](../assets/operator-guide/git-servers/bitbucket-select-app.png "Select app")
 
       * In the **Select scopes** section, select the required scopes for the token. The following scopes are required for KubeRocketCI integration:
 
@@ -122,15 +113,12 @@ For [Bitbucket](https://support.atlassian.com/bitbucket-cloud/docs/create-an-api
         - `read:webhook:bitbucket` - to read webhook configurations.
         - `write:webhook:bitbucket` - to create and manage webhooks.
 
-        ![Select scopes](../assets/operator-guide/git-servers/bitbucket-select-scopes.png "Select scopes")
 
       * In the **Create token** section, verify the provided information and click the **Create token** button.
 
-        ![Create token](../assets/operator-guide/git-servers/bitbucket-create-token.png "Create token")
 
       * Copy the generated token and store it securely, as it will not be displayed again.
 
-        ![Copy token](../assets/operator-guide/git-servers/bitbucket-copy-token.png "Copy token")
 
       </TabItem>
     </Tabs>
@@ -147,11 +135,21 @@ For [Bitbucket](https://support.atlassian.com/bitbucket-cloud/docs/create-an-api
 
     To enable integration with the selected VCS, it is necessary to add a new Git Server in KubeRocketCI portal.
 
-    Navigate to the **Configuration** section and select the **Version Control System** tab in the left sidebar. Click the **Add Git Server** button and fill in the following fields in the opened dialog:
+    Navigate to the **Configuration** section and select the **Git Servers** under **Version Control System**. Click the **Add Git Server** button and fill in the following fields in the opened dialog:
 
-    ![VCS Integration in KubeRocketCI portal](../assets/operator-guide/github_integration.png "GitHub integration")
+    * **Git provider** – select the Git hosting service: GitHub, GitLab, or Bitbucket.
+    * **Name** – a unique name for this Git Server integration (e.g., `my-github` or `company-gitlab`). Used to identify the server when creating codebases.
+    * **Host** – the base URL of your Git server (e.g., `https://github.com`, `https://gitlab.com`, or your self-hosted GitLab/GitHub/Bitbucket URL).
+    * **User** – the username or account name used to access the Git server (e.g., your GitHub username or GitLab user name).
+    * **SSH port** – the port used for SSH connections to the Git server. Default is usually `22`; change only if your server uses a different SSH port.
+    * **HTTPS port** – the port used for HTTPS connections. Default is usually `443`; change only if your server uses a different HTTPS port.
+    * **Override WebHook URL** – (optional) a custom URL where the Git server will send webhook events. Leave empty to use the default KubeRocketCI webhook endpoint. See [Advanced Configuration: Using a Custom Webhook URL](#advanced-configuration-using-a-custom-webhook-url) for details.
+    * **Skip Webhook SSL Verification** – (optional) enable this to skip TLS/SSL verification for webhook requests (e.g., for self-signed certificates in development). Not recommended for production.
+    * **Disable Tekton Resources** – (optional) enable this to prevent KubeRocketCI from creating Tekton pipeline resources (e.g., Pipelines, Tasks) for this Git server. Use when you manage Tekton resources externally.
+    * **Private SSH Key** – the content of the private SSH key (the one that corresponds to the public key you added to GitHub/GitLab/Bitbucket). Paste the full key including the `-----BEGIN OPENSSH PRIVATE KEY-----` and `-----END OPENSSH PRIVATE KEY-----` lines.
+    * **Token** – the token you generated in step 2.
 
-As a result, you will be able to create codebases using an integrated Version Control System.
+    Click **Save** to create the Git Server. As a result, you will be able to create codebases using an integrated Version Control System.
 
 ## Bitbucket Default Branch Management
 
@@ -163,11 +161,9 @@ To change the default branch from `master` to desired branch in Bitbucket, follo
 * Navigate to the repository where the default branch needs to be changed.
 * In the left sidebar menu, select **Repository Settings**.
 
-  ![Repository Settings](../assets/operator-guide/git-servers/repository-settings.png "Repository settings")
 
 * Proceed to the **Advanced** section. Locate the **Main branch** field and select your desired branch to set it as the default.
 
-  ![Default branch](../assets/operator-guide/git-servers/default-branch.png "Default branch")
 
 * Click **Save changes** to apply your modifications.
 

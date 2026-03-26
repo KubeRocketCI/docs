@@ -22877,93 +22877,161 @@ This guide will walk you through the process of creating a Go application using 
 
 To create the first application, complete the instructions below:
 
-1. In the KubeRocketCI, navigate to **Marketplace**.
+1. In the KubeRocketCI, navigate to **Projects**.
 
-2. In the **Marketplace** section, select **Web Applications with Gin Framework**:
+2. In the top right corner of the screen, click **+ Create project**.
+
+3. In the **Select Ready Template** section, select **Web Applications with Gin Framework** and click **Continue ->**:
 
     ![Marketplace applications](../assets/quick-start/marketplace_application.png "Marketplace applications")
 
-3. On the application template details window, click **Proceed**:
+4. In the **Git and Project info** stage, define the following values and click **Continue**:
 
-    ![Marketplace applications](../assets/quick-start/marketplace-template-details.png "Marketplace applications")
-
-3. In the appeared window, define the following values and click **Apply**:
-
-    - Component name: `my-go-gin-app`
-    - Description: `My first application`
     - Git server: `github`
-    - Repository name: `<github_account_name>/my-go-gin-app`
+    - Owner: `<github_account_name>`
+    - Repository name: `my-go-gin-app`
+    - Default branch: `main`
+    - Project name: `my-go-gin-app`
+    - Description: `My first application`
+    - Private: `disabled`
+
+    ![Application blank](../assets/quick-start/git-project-info-stage.png "Application blank")
+
+5. In the **Build Config** stage, define the following values and click **Continue**:
+
     - Codebase versioning type: `semver`
     - Start version from: `0.1.0`
     - Suffix: `SNAPSHOT`
 
-    ![Application blank](../assets/quick-start/add_marketplace_app.png "Application blank")
+    ![Application blank](../assets/quick-start/build-config-stage.png "Application blank")
 
-4. As soon as the codebase is created, navigate to it via the notification at the bottom left corner or click the **Components** section:
+6. In the **Review** stage, verify the configuration and click **Create Project**:
 
-    ![Marketplace notification](../assets/quick-start/marketplace_notification.png "Marketplace notification")
+    ![Application blank](../assets/quick-start/review-stage.png "Application blank")
+
+7. As soon as the codebase is created, navigate to it via the notification at the bottom left corner or click the **Components** section:
+
+    ![Marketplace notification](../assets/quick-start/success_notification.png "Marketplace notification")
 
 ## Build Application
 
 Having created the Go application, proceed to build it by performing the following actions:
 
-1. In the [create project](https://sonarcloud.io/projects/create) page add new project to analyze it.
+1. Open SonarCloud page.
 
-    :::note
-      Project name in the Sonar cloud must be the same as codebase name.
-    :::
-
-    ![Add new project](../assets/quick-start/add_sonar_project.png "Add new project")
-
-    Set the Previous version option and click Create project.
-
-    ![Add new project](../assets/quick-start/add_sonar_project2.png "Add new project")
-
-2. On the project menu, navigate to **Branches** menu, select `master` branch and rename it to `main`.
-
-    ![Change default branch](../assets/quick-start/change_default_branch.png "Change default branch")
-
-3. On the [account settings](https://sonarcloud.io/account/organizations) copy the value of the SonarCloud organization name.
+2. On the [account settings](https://sonarcloud.io/account/organizations), copy your SonarCloud **organization key** (lowercase identifier used in API and properties):
 
     ![Organizations page](../assets/quick-start/sonar_org_page.png "Organizations page")
 
+3. In SonarCloud, open the project and go to **Project Information**. Copy the **Project key** exactly as shown (spelling and casing matter). For projects created from GitHub, it is often `<organization-name>_<codebase-name>` (for this guide the codebase name is `my-go-gin-app`):
+
+    ![Project information](../assets/quick-start/sonarcloud_project_information.png "Project information")
+
 4. In the component details page, expand the application and click the **GIT** button:
 
-    ![Marketplace notification](../assets/quick-start/go_to_source_code.png "Application details")
+    ![Open Git repo](../assets/quick-start/go_to_source_code.png "Open Git repo")
 
-5. In the opened Source Code. In the `main` branch in GitHub, open the `sonar-project.properties` file and include the `sonar.language=go`, and `sonar.organization` parameters where `sonar.organization` is equal to the value copied in the previous step, resulting in the following configuration:
+5. In the repository on the `main` branch, edit `sonar-project.properties`. Set `sonar.projectKey` to the **Project key** from the previous step, `sonar.organization` to your **organization key**, and keep the rest aligned with the codebase name `my-go-gin-app`:
 
     ```ini
-    sonar.projectKey=my-go-gin-app
+    sonar.projectKey=<organization-name>_my-go-gin-app
     sonar.projectName=my-go-gin-app
     sonar.go.coverage.reportPaths=coverage.out
+    sonar.branch.name=main
     sonar.test.inclusions=**/*_test.go
     sonar.exclusions=**/cmd/**,**/deploy/**,**/deploy-templates/**,**/*.groovy,**/config/**
     sonar.language=go
     sonar.organization=<organization-key>
     ```
 
-6. Commit the changes.
+    ![Sonar project properties](../assets/quick-start/sonar-project-properties.png "Sonar project properties")
 
-7. In the component details page, click the **Trigger build pipeline run** button:
+    :::note
+      Replace `<organization-key>` with your real organization key from SonarCloud. If SonarCloud shows a **Project key** that does not follow `<organization-key>_my-go-gin-app`, use the value from **Project Information** verbatim for `sonar.projectKey`.
+    :::
+
+6. Commit and push the `sonar-project.properties` changes to the main branch.
+
+7. Align the Tekton **Pipeline** with SonarCloud.
+
+    The `sonarqube-general` Task overwrites `sonar.projectKey` from the pipeline parameter `SONAR_PROJECT_KEY`. The build pipeline often sets `SONAR_PROJECT_KEY` to `$(params.CODEBASE_NAME)` only (for example `my-go-gin-app`). That value must match the **Project key** from SonarCloud **Project Information** (often `<organization-key>_my-go-gin-app`).
+
+    Navigate to **KubeRocketCI portal** -> **CI/CD Pipelines** -> **Pipelines**. Search the `github-go-gin-app-build-semver` Pipeline and click on its name. In the top-right corner of the screen, click **Actions** -> **Edit**. Find the task named `sonar` and set its parameters as follows.
+
+    Replace the `sonar` task parameter block (or the equivalent fragment) with:
+
+    ```yaml
+    - name: sonar
+      params:
+        - name: SONAR_PROJECT_KEY
+          value: "<organization-name>_my-go-gin-app"
+        - name: SONAR_PROJECT_NAME
+          value: $(params.CODEBASE_NAME)
+        - name: branch
+          value: $(params.git-source-revision)
+      runAfter:
+        - build
+      taskRef:
+        kind: Task
+        name: sonarqube-general
+      workspaces:
+        - name: source
+          subPath: source
+          workspace: shared-workspace
+    ```
+
+    Replace `"<organization-name>_my-go-gin-app"` with the **exact Project key** from SonarCloud (quotes keep YAML valid if the key contains characters such as `_`):
+
+        ![Sonar project properties](../assets/quick-start/edit-pipeline.png "Sonar project properties")
+
+    :::note
+      If this Pipeline is managed by Helm or Argo CD, apply the same change in the GitOps manifest or chart values so the cluster object is not reverted on sync.
+    :::
+
+    :::note
+      If you use a self-hosted SonarQube instance instead of SonarCloud, follow [SonarQube integration](../operator-guide/code-quality/sonarqube.md); project key rules may differ.
+    :::
+
+8. Update the `sonarqube-general` **Task** so the SonarCloud availability check does not treat HTTP **307** (redirect on the site root) as failure.
+
+    1. Navigate to **KubeRocketCI portal** -> **CI/CD Pipelines** -> **Tasks**. 
+    2. Search the `sonarqube-general` Task and click on its name. 
+    3. In the top-right corner of the screen, click **Actions** -> **Edit**. 
+    4. In the Tekton **Task** named `sonarqube-general`, open the step `prepare-project`.
+    5. Find the check that requests `${SONAR_HOST_URL}` with `curl` and **replace** the availability logic with a **GET** to `/api/system/status`, for example:
+
+    ```bash
+    SONAR_STATUS=$(curl -s -o /dev/null -w "%{http_code}" "${SONAR_HOST_URL}/api/system/status") || SONAR_STATUS="503"
+
+    if [[ "$SONAR_STATUS" != "200" ]]; then
+      echo -e "SonarQube is not available\nPlease check the connection to SonarQube"
+      exit 1
+    fi
+    ```
+
+    Remove or do not use a bare `HEAD`/`GET` against `${SONAR_HOST_URL}` alone without following redirects, as SonarCloud can respond with **307** and the step would exit incorrectly.
+
+    ![Successful pipelinerun](../assets/quick-start/sonarqube_general_task.png "Successful pipelinerun")
+
+    :::note
+      Cluster administrators usually patch this Task once per environment. If your platform already ships the `/api/system/status` check, you can skip this step.
+    :::
+
+9. Ensure **Automatic Analysis** is disabled for this project in SonarCloud when using CI scans (see [Integrate SonarQube](./integrate-sonarcloud.md)).
+
+10. In the Project details page, click **Build**:
 
     ![Triggering pipeline run](../assets/quick-start/trigger_pipeline_run.png "Triggering pipeline run")
 
-    :::note
-      After first project scan, sonar creates Quality Gate for this project, and scan will be failed, rerun pipeline to analyze project with new Quality Gates.
-    :::
-
-8. To check the status of the build pipeline, click on its name:
+11. Open the PipelineRun and wait until it finishes. Many small starter projects pass on the first run:
 
     ![Pipelinerun logs](../assets/quick-start/pipelinerun_status.png "Pipelinerun logs")
 
-9. Once the build fails, click the failed task name to open the Tekton pipeline run:
-
-    ![Failure details](../assets/quick-start/sonar_step_status.png "Failure details")
-
-10. In KubeRocketCI, initiate the build pipeline again and wait for its completion.
-
     ![Successful pipelinerun](../assets/quick-start/successful_pipeline.png "Successful pipelinerun")
+
+    :::note
+      After the first analysis, SonarCloud may adjust Quality Gate behavior for the project. If the `sonar` task fails with **Quality Gate failed** even though the scan completed, address the reported issues or review the Quality Gate, then **re-run** the build pipeline. A second run is not always required.
+    :::
 
 Build pipelines in KubeRocketCI are specifically designed to generate an executable image of an application. Once the build process is complete, the resulting image can be deployed and run in a target environment.
 
@@ -23003,72 +23071,73 @@ As a prerequisite, create a GitOps repository in your GitHub account. KubeRocket
 
 To create a deployment flow, follow the steps below:
 
-1. In the UI Portal, navigate to **Deployment Flows** and click the **+ Create deployment flow** button:
+1. In the KubeRocketCI portal, navigate to **Deployments** and click the **+ Create deployment** button:
 
     ![Deployment flows section](../assets/quick-start/create_environment.png "Deployment Flows section")
 
-2. In the **Create deployment flow** window, enter the pipeline name and click the **Next** button:
+2. In the **Applications** stage, select `my-go-gin-app` application, `main` branch, and click **Continue ->**:
 
-    ![Enter name tab](../assets/quick-start/pipelines_tab.png "Enter name tab")
+    ![Applications stage](../assets/quick-start/applications_stage.png "Applications stage")
 
-3. In the **Add applications** tab, select the my-go-gin-app application, main branch, and click **Create**:
+3. In the **Pipeline configuration** tab, fill in the required fields and click **Continue ->**:
 
-    ![Applications tab](../assets/quick-start/applications_tab.png "Applications tab")
+    ![Pipeline configuration](../assets/quick-start/pipeline_configuration.png "Pipeline configuration")
 
-4. Once the deployment flow is created, click the **Go to deployment flow** button on the congratulations window:
+4. In the **Review and create** tab, verify the Deployment configuration and click **Create Deployment**:
 
-    ![Congratulations window](../assets/quick-start/deployment-flow-congratulations-window.png "Congratulations window")
+    ![Review and create](../assets/quick-start/review_and_create.png "Review and create")
 
-5. In the **Deployment flows** section, click the **Create environment** button:
+5. Once the Deployment is created, click the **Go to Deployment** button on the congratulations window.
+
+6. In the **Deployment** details page, click the **Create environment** button:
 
     ![Create environment](../assets/quick-start/create-environment.png "Create environment")
 
-6. On the **Configure stages** tab, define the following values and click **Next**:
+7. On the **Basic configuration** stage, define the following values and click **Continue ->**:
 
     - Cluster: `in-cluster`
     - Environment name: `dev`
     - Namespace: `edp-my-go-gin-app-dev`
     - Description: `Development stage`
+
+    ![Basic configuration](../assets/quick-start/basic-configuration-stage.png "Basic configuration")
+
+8. On the **Pipeline configuration** stage, define the following values and click **Next**:
+
     - Trigger type: `Manual`
     - Deploy Pipeline template: `deploy`
     - Clean Pipeline template: `clean`
 
-    ![Create environment window](../assets/quick-start/stages_tab.png "Create environment window")
+    ![Pipeline configuration](../assets/quick-start/pipeline_configuration_stage.png "Pipeline configuration")
 
-7. On the **Add quality gates** tab, define the quality gates and click **Create**:
+9. On the **Add quality gates** tab, define the quality gates and click **Create**:
 
     - Quality gate type: `Manual`
     - Step name: `dev`
 
-    ![Define quality gates window](../assets/quick-start/define-quality-gates.png "Define quality gates window")
+    ![Add quality gates window](../assets/quick-start/define-quality-gates.png "Add quality gates window")
 
-8. On the congratulations window, click **Go to environment**:
+10. On the congratulations window, click **Open environment**:
 
-    ![Go to environment](../assets/quick-start/go-to-environment.png "Go to environment")
+    ![Open environment](../assets/quick-start/go-to-environment.png "Open environment")
 
    The created deployment flow will be added to the deployment flows list.
 
 ## Application Deployment
 
-To deploy application, follow the steps below:
+Once you enter the environment details page, proceed to deploy the application:
 
-1. In the deployment flows section, click the deployment flow name:
+1. Click the **Configure deploy** button.
 
-    ![Deployment flows list](../assets/quick-start/environment_list.png "Deployment flows list")
+2. Select the Image stream version.
 
-2. In the deployment flow details page, click the environment name to enter the environment details page:
-
-    ![Deployment flow details](../assets/quick-start/environment_details.png "Deployment flow details")
-
-3. Once you enter the environment details page, proceed to deploy the application:
-
-    a. Click the **Configure deploy** button;
-
-    b. Select the Image stream version;
-
-    c. Click the **Start deploy** button.
+3. Click the **Start deploy** button:
 
     ![Deploying application](../assets/quick-start/deploy_application.png "Deploying application")
+
+4. Watch the PipelineRun completion status by navigating to **Pipelines** tab and clicking the PipelineRun name:
+
+    ![Deploying application](../assets/quick-start/deploy_pipeline_status.png "Deploying application")
 
 Congratulations on completing the Quick Start guide! We hope you found this journey enjoyable.
 
@@ -23285,7 +23354,7 @@ To integrate KubeRocketCI with DockerHub, follow the steps below:
 
 2. In the DockerHub main page, click your user icon at the top right corner and select **Account Settings**.
 
-3. In the **Account Settings** page, select the **Security** tab and click **New Access Token**.
+3. In the **Account Settings** page, select **Settings** -> **Personal access tokens** and click **Generate new token**.
 
 4. Enter the token description, select the **Read, Write, Delete** permission and click **Generate**.
 
@@ -23409,14 +23478,14 @@ This guide will walk you through the configuration process of SonarCloud for you
 
 To integrate SonarCloud with the platform, follow the steps below:
 
-1. Sign up in the [SonarCloud](https://sonarcloud.io) with your GitHub account.
+1. Sign in to [SonarCloud](https://sonarcloud.io) with your GitHub account.
 
-2. Once you are logged in with GitHub, on [organization page](https://sonarcloud.io/create-organization) import a new one from GitHub:
+2. In the top right corner of the screen, click **+** and select [Create new organization](https://sonarcloud.io/create-organization), select **GitHub**, and continue with your GitHub account/organization:
 
-    ![Import organization](../assets/quick-start/import_from_github.png "Import organization")
+    ![Create organization (current UI)](../assets/quick-start/sonarcloud_step2_create_organization_current.png "Create organization (current UI)")
 
     :::note
-      It is crucial to have the organization created in SonarCloud. If you were signed up in SonarCloud using a GitHub account, SonarCloud will suggest you creating an organization with name that is equivalent to your GitHub account name.
+      SonarCloud UI has changed: the flow is now **Create organization** -> **GitHub** instead of the old "import from GitHub" screen.
     :::
 
 3. In the Create an organization menu, choose the free plan and click **Create organization**:
@@ -23425,14 +23494,47 @@ To integrate SonarCloud with the platform, follow the steps below:
       Organization key must be unique.
     :::
 
-    ![Create organization](../assets/quick-start/free_plan.png "Choose plan")
+    ![Choose plan](../assets/quick-start/free_plan.png "Choose plan")
 
-4. In your account menu, select the [**Security**](https://sonarcloud.io/account/security) tab and generate token:
+4. For each SonarCloud project that KubeRocketCI analyzes with Tekton (`sonar-scanner` in the build or review pipeline), turn off **Automatic Analysis** in SonarCloud so only CI runs the scan. If you have not created those projects yet, do this after you add each repository in SonarCloud (for example while following [Create Application](./create-application.md)):
 
-    ![Create organization](../assets/quick-start/generate_token.png "Generate token")
+    1. In SonarCloud, open the project.
+    2. Go to **Administration** -> **Analysis Method**.
+    3. Disable **Automatic Analysis**:
 
-5. In the UI Portal, navigate to **Configuration** -> **Code Quality**. Define the following values and click **Save**:
+      ![Disable automatic scans](../assets/quick-start/disable_autoscan.png "Disable automatic scans")
 
+    :::warning
+      If **Automatic Analysis** stays enabled while the pipeline runs `sonar-scanner`, SonarCloud returns an error such as *You are running manual analysis while Automatic Analysis is enabled* and the `sonar` task fails. KubeRocketCI expects a **single** analysis path: CI-driven scans with the token configured in the portal.
+    :::
+
+5. In the [create project](https://sonarcloud.io/projects/create) page on the SonarCloud site, add new project to analyze it:
+
+    :::note
+      Project name in the Sonar cloud must be the same as codebase name.
+    :::
+
+    ![Add new project](../assets/quick-start/add_sonar_project.png "Add new project")
+
+    Set the **Previous** version option and click **Create project**:
+
+    ![Add new project](../assets/quick-start/add_sonar_project2.png "Add new project")
+
+6. On the project menu, navigate to **Branches** menu, select `master` branch and rename it to `main`. You can skip this step if the default branch is already `main`:
+
+    ![Change default branch](../assets/quick-start/change_default_branch.png "Change default branch")
+
+7. Click your profile icon, open [**My account -> Security**](https://sonarcloud.io/account/security), enter a token name, and click **Generate Token**:
+
+    :::warning
+      Copy the generated token right away. SonarCloud shows token value only once.
+    :::
+
+    ![Generate token (current UI)](../assets/quick-start/sonarcloud_step4_generate_token_current.png "Generate token (current UI)")
+
+8. In the KubeRocketCI portal, navigate to **Configuration** -> **Code Quality** -> **SonarQube**. Define the following values and click **Save**:
+
+    * Quick Link URL: `https://sonarcloud.io`
     * URL: `https://sonarcloud.io`
     * Token: `account token generated in SonarCloud`
 
@@ -23487,10 +23589,10 @@ To deploy the platform, follow the steps below:
 3. Upon successful deployment of the KubeRocketCI Helm Chart, run the `kubectl port-forward` command:
 
     ```bash
-    kubectl port-forward service/portal 59480:80 -n krci
+    kubectl port-forward service/krci-portal 59480:80 -n krci
     ```
 
-4. Enter the localhost in your browser to access the login menu:
+4. Enter the localhost in your browser to access the login menu and click **Use Token**:
 
     ```bash
     localhost:59480
@@ -23506,13 +23608,13 @@ To deploy the platform, follow the steps below:
     kubectl create token edp-admin -n krci
     ```
 
-6. In the login menu, paste the generated token in the **ID token** field and click the **SIGN IN** button.
+6. In the login menu, paste the generated token in the **Access token** field and click the **Sign in** button.
 
-7. Upon logging in, open the account settings by clicking the **⋮** top right corner of the UI and selecting your account:
+7. Upon logging in, open the namespaces window by clicking the **Manage Namespaces** button in the top right corner of the UI:
 
     ![Specify namespaces](../assets/quick-start/edp_portal_ui.png "Specify namespaces")
 
-8. Ensure the `krci` namespace is specified in the **cluster** tab of the account settings. If not, define them manually:
+8. Ensure the `krci` namespace is specified in both default and allowed namespaces. If not, define them manually:
 
     * Default namespace: `krci`
     * Allowed namespaces: `krci`
@@ -23520,7 +23622,7 @@ To deploy the platform, follow the steps below:
     ![Cluster Settings menu](../assets/quick-start/cluster_settings.png "Cluster Settings menu")
 
     :::note
-      Remember to click the **+ ADD** icon when adding the allowed namespace.
+      Remember to press **Enter** to add the allowed namespace to the list.
     :::
 
 After completing these steps, you will gain access to KubeRocketCI components through the Portal UI. You can now proceed with the integration steps, starting with the [SonarQube](./integrate-sonarcloud.md) integration.

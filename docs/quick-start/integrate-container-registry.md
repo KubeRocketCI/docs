@@ -23,7 +23,7 @@ To integrate KubeRocketCI with DockerHub, follow the steps below:
 
 2. In the DockerHub main page, click your user icon at the top right corner and select **Account Settings**.
 
-3. In the **Account Settings** page, select the **Security** tab and click **New Access Token**.
+3. In the **Account Settings** page, select **Settings** -> **Personal access tokens** and click **Generate new token**.
 
 4. Enter the token description, select the **Read, Write, Delete** permission and click **Generate**.
 

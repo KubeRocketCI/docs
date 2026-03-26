@@ -48,10 +48,10 @@ To deploy the platform, follow the steps below:
 3. Upon successful deployment of the KubeRocketCI Helm Chart, run the `kubectl port-forward` command:
 
     ```bash
-    kubectl port-forward service/portal 59480:80 -n krci
+    kubectl port-forward service/krci-portal 59480:80 -n krci
     ```
 
-4. Enter the localhost in your browser to access the login menu:
+4. Enter the localhost in your browser to access the login menu and click **Use Token**:
 
     ```bash
     localhost:59480
@@ -67,13 +67,13 @@ To deploy the platform, follow the steps below:
     kubectl create token edp-admin -n krci
     ```
 
-6. In the login menu, paste the generated token in the **ID token** field and click the **SIGN IN** button.
+6. In the login menu, paste the generated token in the **Access token** field and click the **Sign in** button.
 
-7. Upon logging in, open the account settings by clicking the **⋮** top right corner of the UI and selecting your account:
+7. Upon logging in, open the namespaces window by clicking the **Manage Namespaces** button in the top right corner of the UI:
 
     ![Specify namespaces](../assets/quick-start/edp_portal_ui.png "Specify namespaces")
 
-8. Ensure the `krci` namespace is specified in the **cluster** tab of the account settings. If not, define them manually:
+8. Ensure the `krci` namespace is specified in both default and allowed namespaces. If not, define them manually:
 
     * Default namespace: `krci`
     * Allowed namespaces: `krci`
@@ -81,7 +81,7 @@ To deploy the platform, follow the steps below:
     ![Cluster Settings menu](../assets/quick-start/cluster_settings.png "Cluster Settings menu")
 
     :::note
-      Remember to click the **+ ADD** icon when adding the allowed namespace.
+      Remember to press **Enter** to add the allowed namespace to the list.
     :::
 
 After completing these steps, you will gain access to KubeRocketCI components through the Portal UI. You can now proceed with the integration steps, starting with the [SonarQube](./integrate-sonarcloud.md) integration.

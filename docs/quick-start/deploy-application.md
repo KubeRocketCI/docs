@@ -35,72 +35,73 @@ As a prerequisite, create a GitOps repository in your GitHub account. KubeRocket
 
 To create a deployment flow, follow the steps below:
 
-1. In the UI Portal, navigate to **Deployment Flows** and click the **+ Create deployment flow** button:
+1. In the KubeRocketCI portal, navigate to **Deployments** and click the **+ Create deployment** button:
 
     ![Deployment flows section](../assets/quick-start/create_environment.png "Deployment Flows section")
 
-2. In the **Create deployment flow** window, enter the pipeline name and click the **Next** button:
+2. In the **Applications** stage, select `my-go-gin-app` application, `main` branch, and click **Continue ->**:
 
-    ![Enter name tab](../assets/quick-start/pipelines_tab.png "Enter name tab")
+    ![Applications stage](../assets/quick-start/applications_stage.png "Applications stage")
 
-3. In the **Add applications** tab, select the my-go-gin-app application, main branch, and click **Create**:
+3. In the **Pipeline configuration** tab, fill in the required fields and click **Continue ->**:
 
-    ![Applications tab](../assets/quick-start/applications_tab.png "Applications tab")
+    ![Pipeline configuration](../assets/quick-start/pipeline_configuration.png "Pipeline configuration")
 
-4. Once the deployment flow is created, click the **Go to deployment flow** button on the congratulations window:
+4. In the **Review and create** tab, verify the Deployment configuration and click **Create Deployment**:
 
-    ![Congratulations window](../assets/quick-start/deployment-flow-congratulations-window.png "Congratulations window")
+    ![Review and create](../assets/quick-start/review_and_create.png "Review and create")
 
-5. In the **Deployment flows** section, click the **Create environment** button:
+5. Once the Deployment is created, click the **Go to Deployment** button on the congratulations window.
+
+6. In the **Deployment** details page, click the **Create environment** button:
 
     ![Create environment](../assets/quick-start/create-environment.png "Create environment")
 
-6. On the **Configure stages** tab, define the following values and click **Next**:
+7. On the **Basic configuration** stage, define the following values and click **Continue ->**:
 
     - Cluster: `in-cluster`
     - Environment name: `dev`
     - Namespace: `edp-my-go-gin-app-dev`
     - Description: `Development stage`
+
+    ![Basic configuration](../assets/quick-start/basic-configuration-stage.png "Basic configuration")
+
+8. On the **Pipeline configuration** stage, define the following values and click **Next**:
+
     - Trigger type: `Manual`
     - Deploy Pipeline template: `deploy`
     - Clean Pipeline template: `clean`
 
-    ![Create environment window](../assets/quick-start/stages_tab.png "Create environment window")
+    ![Pipeline configuration](../assets/quick-start/pipeline_configuration_stage.png "Pipeline configuration")
 
-7. On the **Add quality gates** tab, define the quality gates and click **Create**:
+9. On the **Add quality gates** tab, define the quality gates and click **Create**:
 
     - Quality gate type: `Manual`
     - Step name: `dev`
 
-    ![Define quality gates window](../assets/quick-start/define-quality-gates.png "Define quality gates window")
+    ![Add quality gates window](../assets/quick-start/define-quality-gates.png "Add quality gates window")
 
-8. On the congratulations window, click **Go to environment**:
+10. On the congratulations window, click **Open environment**:
 
-    ![Go to environment](../assets/quick-start/go-to-environment.png "Go to environment")
+    ![Open environment](../assets/quick-start/go-to-environment.png "Open environment")
 
    The created deployment flow will be added to the deployment flows list.
 
 ## Application Deployment
 
-To deploy application, follow the steps below:
+Once you enter the environment details page, proceed to deploy the application:
 
-1. In the deployment flows section, click the deployment flow name:
+1. Click the **Configure deploy** button.
 
-    ![Deployment flows list](../assets/quick-start/environment_list.png "Deployment flows list")
+2. Select the Image stream version.
 
-2. In the deployment flow details page, click the environment name to enter the environment details page:
-
-    ![Deployment flow details](../assets/quick-start/environment_details.png "Deployment flow details")
-
-3. Once you enter the environment details page, proceed to deploy the application:
-
-    a. Click the **Configure deploy** button;
-
-    b. Select the Image stream version;
-
-    c. Click the **Start deploy** button.
+3. Click the **Start deploy** button:
 
     ![Deploying application](../assets/quick-start/deploy_application.png "Deploying application")
+
+4. Watch the PipelineRun completion status by navigating to **Pipelines** tab and clicking the PipelineRun name:
+
+    ![Deploying application](../assets/quick-start/deploy_pipeline_status.png "Deploying application")
 
 Congratulations on completing the Quick Start guide! We hope you found this journey enjoyable.
 

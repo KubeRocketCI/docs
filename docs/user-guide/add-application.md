@@ -14,9 +14,11 @@ description: "Master application creation in KubeRocketCI, from cloning reposito
   <link rel="canonical" href="https://docs.kuberocketci.io/docs/user-guide/add-application" />
 </head>
 
-KubeRocketCI portal allows you to create an application, clone an existing repository with the application to your Version Control System (VCS), or using an external repository and importing an application to the environment. When an application is created or cloned, the system automatically generates a corresponding repository within the integrated Version Control System. You can create an Application [in YAML](#create-application-in-yaml) or [via the two-step menu](#create-application-via-ui) in the dialog.
+KubeRocketCI portal allows you to create an application, clone an existing repository with the application to your Version Control System (VCS), or using an external repository and importing an application to the environment. When an application is created or cloned, the system automatically generates a corresponding repository within the integrated Version Control System.
 
-The **Create Application** dialog contains four steps:
+Before following these guidelines, be sure to [add Git Server](./add-git-server.md) to the platform.
+
+The **Create Application** wizard contains four steps:
 
 * Initial Setup
 * Git & Project Info
@@ -28,14 +30,14 @@ To add an application, navigate to the **Projects** section on the navigation ba
 
 ## Initial Setup
 
-Once clicked, the **Create new project** dialog will appear. In this dialog, you can make a choice:
+Once clicked, the **Create new project** wizard will appear. In this dialog, you can make a choice:
 
 * **Select Ready Template** - this option allows you to select a preconfigured, ready-to-go application (e.g., Antora documentation or Echo server).
 * **Custom Configuration** - this option allows you create any of the supported Project type. In this case, you should select **Application**.
 
 Choose one of the strategies and click **Continue**:
 
-* **Create** – creates a project on the pattern in accordance with an application language, a build tool, and a framework. This strategy is recommended for projects that start developing their applications from scratch.
+* **Create** – creates a sample Project on the pattern in accordance with an application language, a build tool, and a framework. This strategy is recommended for projects that start developing their applications from scratch.
 
 * **Import** - allows using existing VCS repository to integrate with KubeRocketCI. While importing the existing repository, select the Git server from the drop-down list and define the relative path to the repository, such as `epmd-edp/python-python-flask`.
 
@@ -48,9 +50,10 @@ In our example, we will use the **Create** strategy:
 Select all the settings that define how the application will be added to Git server:
 
   * **Git server** - the pre-configured server where the component will be hosted. Select one from the drop-down list. Please refer to the [Manage Git Servers](git-server-overview.md) page to learn how to create the one.
-  * **Git URL Path** - the relative path to the Git repository where codebase will be created (e.g., `epmd-edp` or `my-github-username`).
-  * **Project name** - the name of the application. Must be at least two characters using the lower-case letters, numbers and inner dashes.
-  * **Default Branch** - the default branch the Project will be created with. The default branch cannot be deleted.
+  * **Owner** - the relative path to the Git repository where Project will be created (e.g., `MyGithubUsername123` or `my-github-username`).
+  * **Repository name** - the name of the repository that will store code for this Project. Must be at least two characters using the lower-case letters, numbers and inner dashes.
+  * **Default branch** - the default branch the Project will be created with. The default branch cannot be deleted.
+  * **Project name** - the name of the Project. Must be at least two characters using the lower-case letters, numbers and inner dashes.
   * **Description** - brief and concise description that explains the purpose of the application.
   * **Private** - by default, all the created Projects have private visibility settings in your Git account. Uncheck this option to create a public Git repository.
   * **Empty project** - check this box to create an application with an empty repository. The empty repository option is available only for the **Create** strategy.
@@ -94,10 +97,10 @@ Specify the application language and versioning properties:
 
 * **Codebase versioning type** - defines how will the application tag be changed once the new image version is built. There are two versioning types:
   * **default**: Using the `default` versioning type, in order to specify the version of the current artifacts, images, and tags in the Version Control System, a developer should navigate to the corresponding file and change the version **manually**.
-  * **semver**: Using the `semver` versioning type, a developer indicates the version number from which all the artifacts will be versioned and, as a result, **automatically** registered in the corresponding file (e.g. pom.xml). When selecting the `semver` versioning type, the extra fields will appear, type the version number from which you want the artifacts to be versioned:
+  * **semver**: Using the `semver` versioning type, a developer indicates the version number from which all the artifacts will be versioned and, as a result, **automatically** registered in the corresponding file (e.g. pom.xml). When selecting the `semver` versioning type, the extra fields will appear, type the version number from which you want the artifacts to be versioned. This versioning type is recommended and selected by default.
 
       :::note
-        The **Start Version From** field should be filled out in compliance with the semantic versioning rules, e.g. 1.2.3 or 10.10.10. Please refer to the [Semantic Versioning](https://semver.org/) page for details.
+        The **Start Version From** field should be filled out in compliance with the semantic versioning rules, e.g. 1.2.3 or 10.10.10 (0.1.0 by default). The **Suffix** field is also mandatory and has the **SNAPSHOT** value by default. Please refer to the [Semantic Versioning](https://semver.org/) page for details.
       :::
 
 * **Deployment Options** - select the deployment option available.

@@ -26100,9 +26100,11 @@ This chart will be using the core of `common-library` and `pipelines-library` an
   <link rel="canonical" href="https://docs.kuberocketci.io/docs/user-guide/add-application" />
 </head>
 
-KubeRocketCI portal allows you to create an application, clone an existing repository with the application to your Version Control System (VCS), or using an external repository and importing an application to the environment. When an application is created or cloned, the system automatically generates a corresponding repository within the integrated Version Control System. You can create an Application [in YAML](#create-application-in-yaml) or [via the two-step menu](#create-application-via-ui) in the dialog.
+KubeRocketCI portal allows you to create an application, clone an existing repository with the application to your Version Control System (VCS), or using an external repository and importing an application to the environment. When an application is created or cloned, the system automatically generates a corresponding repository within the integrated Version Control System.
 
-The **Create Application** dialog contains four steps:
+Before following these guidelines, be sure to [add Git Server](./add-git-server.md) to the platform.
+
+The **Create Application** wizard contains four steps:
 
 * Initial Setup
 * Git & Project Info
@@ -26113,14 +26115,14 @@ To add an application, navigate to the **Projects** section on the navigation ba
 
 ## Initial Setup
 
-Once clicked, the **Create new project** dialog will appear. In this dialog, you can make a choice:
+Once clicked, the **Create new project** wizard will appear. In this dialog, you can make a choice:
 
 * **Select Ready Template** - this option allows you to select a preconfigured, ready-to-go application (e.g., Antora documentation or Echo server).
 * **Custom Configuration** - this option allows you create any of the supported Project type. In this case, you should select **Application**.
 
 Choose one of the strategies and click **Continue**:
 
-* **Create** – creates a project on the pattern in accordance with an application language, a build tool, and a framework. This strategy is recommended for projects that start developing their applications from scratch.
+* **Create** – creates a sample Project on the pattern in accordance with an application language, a build tool, and a framework. This strategy is recommended for projects that start developing their applications from scratch.
 
 * **Import** - allows using existing VCS repository to integrate with KubeRocketCI. While importing the existing repository, select the Git server from the drop-down list and define the relative path to the repository, such as `epmd-edp/python-python-flask`.
 
@@ -26133,9 +26135,10 @@ In our example, we will use the **Create** strategy:
 Select all the settings that define how the application will be added to Git server:
 
   * **Git server** - the pre-configured server where the component will be hosted. Select one from the drop-down list. Please refer to the [Manage Git Servers](git-server-overview.md) page to learn how to create the one.
-  * **Git URL Path** - the relative path to the Git repository where codebase will be created (e.g., `epmd-edp` or `my-github-username`).
-  * **Project name** - the name of the application. Must be at least two characters using the lower-case letters, numbers and inner dashes.
-  * **Default Branch** - the default branch the Project will be created with. The default branch cannot be deleted.
+  * **Owner** - the relative path to the Git repository where Project will be created (e.g., `MyGithubUsername123` or `my-github-username`).
+  * **Repository name** - the name of the repository that will store code for this Project. Must be at least two characters using the lower-case letters, numbers and inner dashes.
+  * **Default branch** - the default branch the Project will be created with. The default branch cannot be deleted.
+  * **Project name** - the name of the Project. Must be at least two characters using the lower-case letters, numbers and inner dashes.
   * **Description** - brief and concise description that explains the purpose of the application.
   * **Private** - by default, all the created Projects have private visibility settings in your Git account. Uncheck this option to create a public Git repository.
   * **Empty project** - check this box to create an application with an empty repository. The empty repository option is available only for the **Create** strategy.
@@ -26178,10 +26181,10 @@ Specify the application language and versioning properties:
 
 * **Codebase versioning type** - defines how will the application tag be changed once the new image version is built. There are two versioning types:
   * **default**: Using the `default` versioning type, in order to specify the version of the current artifacts, images, and tags in the Version Control System, a developer should navigate to the corresponding file and change the version **manually**.
-  * **semver**: Using the `semver` versioning type, a developer indicates the version number from which all the artifacts will be versioned and, as a result, **automatically** registered in the corresponding file (e.g. pom.xml). When selecting the `semver` versioning type, the extra fields will appear, type the version number from which you want the artifacts to be versioned:
+  * **semver**: Using the `semver` versioning type, a developer indicates the version number from which all the artifacts will be versioned and, as a result, **automatically** registered in the corresponding file (e.g. pom.xml). When selecting the `semver` versioning type, the extra fields will appear, type the version number from which you want the artifacts to be versioned. This versioning type is recommended and selected by default.
 
       :::note
-        The **Start Version From** field should be filled out in compliance with the semantic versioning rules, e.g. 1.2.3 or 10.10.10. Please refer to the [Semantic Versioning](https://semver.org/) page for details.
+        The **Start Version From** field should be filled out in compliance with the semantic versioning rules, e.g. 1.2.3 or 10.10.10 (0.1.0 by default). The **Suffix** field is also mandatory and has the **SNAPSHOT** value by default. Please refer to the [Semantic Versioning](https://semver.org/) page for details.
       :::
 
 * **Deployment Options** - select the deployment option available.
@@ -26244,11 +26247,13 @@ The **Review an Create** window allows to ensure the application configuration s
   <link rel="canonical" href="https://docs.kuberocketci.io/docs/user-guide/add-autotest" />
 </head>
 
-KubeRocketCI portal allows you to clone an existing repository with the autotest to your Version Control System (VCS), or use an external repository and import an autotest to the environment for running in stages or using as quality gates for applications. When an autotest is cloned or imported, the system automatically generates a corresponding repository within the integrated Version Control System. You can create an Autotest [in YAML](#create-autotest-in-yaml) or [via the dialog](#create-autotest-via-ui).
+KubeRocketCI portal allows you to clone an existing repository with the autotest to your Version Control System (VCS), or use an external repository and import an autotest to the environment for running in stages or using as quality gates for applications. When an autotest is cloned or imported, the system automatically generates a corresponding repository within the integrated Version Control System.
+
+Before following these guidelines, be sure to [add Git Server](./add-git-server.md) to the platform.
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/ytaO-ZaQb0c" title="KubeRocketCI: Autotests Overview" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen"></iframe>
 
-The **Create Autotest** dialog contains four steps:
+The **Create Autotest** wizard contains four steps:
 
 * Initial Setup
 * Git & Project Info
@@ -26259,7 +26264,7 @@ To add an autotest, navigate to the **Projects** section on the navigation bar a
 
 ## Initial Setup
 
-Once clicked, the **Create new project** dialog will appear. In this dialog, you can make a choice:
+Once clicked, the **Create new project** wizard will appear. In this dialog, you can make a choice:
 
 * **Select Ready Template** – this option allows you to select a preconfigured, ready-to-go autotest template.
 * **Custom Configuration** – this option allows you to create any of the supported Project types. In this case, you should select **Autotest**.
@@ -26281,9 +26286,10 @@ In our example, we will use the **Import** strategy:
 Select all the settings that define how the autotest will be added to the Git server:
 
 * **Git server** – the pre-configured server where the component will be hosted. Select one from the drop-down list. Please refer to the [Manage Git Servers](git-server-overview.md) page to learn how to create one.
-* **Git URL Path** – the relative path to the Git repository where the codebase will be created (e.g., `epmd-edp` or `my-github-username`).
+* **Owner** - the relative path to the Git repository where Project will be created (e.g., `MyGithubUsername123` or `my-github-username`).
+* **Repository name** - the name of the repository that will store code for this project. Must be at least two characters using the lower-case letters, numbers and inner dashes.
+* **Default branch** – the default branch the Project will be created with. The default branch cannot be deleted.
 * **Project name** – the name of the autotest. Must be at least two characters using lower-case letters, numbers, and inner dashes.
-* **Default Branch** – the default branch the Project will be created with. The default branch cannot be deleted.
 * **Description** – brief and concise description that explains the purpose of the autotest.
 * **Private** – by default, all created Projects have private visibility settings in your Git account. Uncheck this option to create a public Git repository.
 
@@ -26292,16 +26298,16 @@ Select all the settings that define how the autotest will be added to the Git se
 Specify the autotest language and versioning properties:
 
 * **Code Language** – defines the code language with its supported frameworks. For autotests, **Other** is often used to extend the default code languages when using the Clone/Import strategy.
-* **Language version/framework** – defines the specific framework or language version of the autotest. The field depends on the selected code language. Specify Java 17, Java 21, or Java 25 to be used. Java 8 and 11 have been deprecated starting from KubeRocketCI version 3.12.
+* **Language version/framework** – defines the specific framework or language version of the autotest. The field depends on the selected code language. Specify Java 17, Java 21, or Java 25 to be used.
 * **Build Tool** – allows you to choose the build tool to use. For autotests, Gradle and Maven are available.
 * **Autotest report framework** – all autotest reports are created in the Allure framework by default.
 
 * **Codebase versioning type** – defines how the autotest tag will be changed once the new image version is built. There are two versioning types:
   * **default**: Using the `default` versioning type, to specify the version of the current artifacts, images, and tags in the Version Control System, a developer should navigate to the corresponding file and change the version **manually**.
-  * **semver**: Using the `semver` versioning type, a developer indicates the version number from which all artifacts will be versioned and, as a result, **automatically** registered in the corresponding file (e.g. pom.xml). When selecting the `semver` versioning type, extra fields will appear; type the version number from which you want the artifacts to be versioned.
+  * **semver**: Using the `semver` versioning type, a developer indicates the version number from which all artifacts will be versioned and, as a result, **automatically** registered in the corresponding file (e.g. pom.xml). When selecting the `semver` versioning type, extra fields will appear; type the version number from which you want the artifacts to be versioned. This versioning type is recommended and selected by default.
 
   :::note
-    The **Start Version From** field should be filled out in compliance with the semantic versioning rules, e.g. 1.2.3 or 10.10.10. Please refer to the [Semantic Versioning](https://semver.org/) page for details.
+    The **Start Version From** field should be filled out in compliance with the semantic versioning rules, e.g. 1.2.3 or 10.10.10 (0.1.0 by default). The **Suffix** field is also mandatory and has the **SNAPSHOT** value by default. Please refer to the [Semantic Versioning](https://semver.org/) page for details.
   :::
 
 * **Specify the pattern to validate a commit message** – the regular expression used to indicate the pattern that is followed on the project to validate a commit message in the code review pipeline. An example of the pattern: `^[PROJECT_NAME-d{4}]:.*$`.
@@ -26356,13 +26362,13 @@ After the complete adding of the autotest, inspect the [Manage Autotests](autote
   <link rel="canonical" href="https://docs.kuberocketci.io/docs/user-guide/add-cd-pipeline" />
 </head>
 
-In KubeRocketCI, deployments are managed through Deployments, a versatile mechanism that enables GitOps, automated deploy, promotion within pipelines, and multi-environment support.
+KubeRocketCI uses Deployments — a mechanism that enables GitOps, automated deployment, promotion within pipelines, and multi-environment support.
 
-The creation of the Deployment becomes available as soon as an application is created including its provisioning in a branch and the necessary entities for the Deployment. If you don't have the application yet, create by following the guidelines in the [Add Application](./add-application.md) page. Additionally, ensure to familiarize yourself with the [Manage GitOps](gitops.md) page as it is required to add a GitOps repository first before creating an Deployment.
+You can create a Deployment once you have at least one application with a provisioned branch. If you don't have one yet, follow the [Add Application](./add-application.md) guide. Additionally, ensure to familiarize yourself with the [Manage GitOps](gitops.md) page as it is required to add a GitOps repository before creating a Deployment.
 
 ## Create Deployment
 
-The **Create new deployment** dialog has three steps: **Applications** and **Pipeline Configuration**, and **Review**.
+The **Create new deployment** dialog has three steps: **Applications**, **Pipeline Configuration**, and **Review**.
 
 Navigate to the **Deployments** section on the navigation bar and click **+ Create deployment**. Once clicked, the **Create new deployment** dialog will appear.
 
@@ -26378,13 +26384,13 @@ In the **Applications** stage:
 
 ### Configure Pipeline Settings
 
-In the **Pipeline Configuration** stage, specify following configuration:
+In the **Pipeline Configuration** stage, specify the following configuration:
 
-1. Enter the deployment name that will be displayed in the Deployments list. Enter at least two characters, use the lower-case letters, numbers, and dashes.
+1. Enter the deployment name that will be displayed in the Deployments list. The name must be at least two characters long and may contain lowercase letters, numbers, and dashes.
 
-2. Enter informative but concise description.
+2. Enter an informative but concise description.
 
-3. Select the necessary application from the **Mapping field name** drop-down menu and click by it name.
+3. Select the necessary application from the **Mapping field name** drop-down menu and click on its name.
 
 4. Specify the application parameters:
 
@@ -26393,14 +26399,14 @@ In the **Pipeline Configuration** stage, specify following configuration:
   * **Promote applications** - When enabled, applications will be promoted through stages using the latest successful build from each previous stage. When disabled, all stages will deploy the same version that was initially selected for the pipeline, regardless of any newer builds.
 
     :::note
-      If there is another deployed environment stage with the respective codebase stream (equal image stream as an OpenShift term), the pattern combination will be as follows: `[pipeline name]-[stage name]-[application name]-[verified]`.
+      If there is another deployed environment stage with the respective codebase stream (equivalent to an image stream in OpenShift terminology), the pattern combination will be as follows: `[pipeline name]-[stage name]-[application name]-[verified]`.
     :::
 
 5. Click **Continue**.
 
 ### Review and Create
 
-Ensure you specified the Deployment configuration correctly and click the **Create** button to finish deployment configuration and proceed with configuring environment.
+Verify the Deployment configuration and click the **Create** button to finish the setup and proceed with configuring the environment.
 
   :::note
     The namespace created by the environment has the following pattern combination: **[KubeRocketCI namespace]-[environment name]-[stage name]**.
@@ -26409,7 +26415,7 @@ Ensure you specified the Deployment configuration correctly and click the **Crea
 
 ## Create Environment
 
-After creating a Deployment, select **Open Deployment** on the congratulations page. If you didn't, open the Deployment details page by clicking on its name.
+After creating a Deployment, select **Open Deployment** on the congratulations page. If you skipped this step, open the Deployment details page by clicking on its name.
 
 ### Basic Configuration
 
@@ -26417,7 +26423,7 @@ Environments are created the following way:
 
 1. On the **Deployment details** menu, click the **Create Environment** button.
 
-2. On the **Configure Stage** tab of the **Create Stage** menu, fill in the necessary fields in the corresponding window:
+2. On the **Configure Environment** tab of the **Create Environment** dialog, fill in the following fields:
 
   * **Cluster** - Choose the cluster to deploy the stage in;
   * **Environment name** - Enter the Environment name;
@@ -26428,19 +26434,23 @@ Environments are created the following way:
 
 ### Pipeline Configuration
 
-In this tab, you need to configure deployment approach:
+In this tab, you need to configure the deployment approach:
 
-  * **Trigger type** - Select the trigger type. The key benefit of the automatic deploy feature is to keep environments up-to-date. The available trigger types are _Manual_ and _Auto_. When the _Auto_ trigger type is chosen, the environment will initiate automatically once the image is built. _Manual_ implies that user has to perform deploy manually by clicking the **Deploy** button in the environment menu. Please refer to the [Architecture Scheme of CD Pipeline Operator](https://github.com/epam/edp-cd-pipeline-operator/blob/master/docs/arch.md) page for additional details.
-  * **Deploy pipeline template** - Choose a predefined blueprint outlining the deployment process for your application. While you have the option to incorporate custom deployment templates by generating a resource of the PipelineTemplate category, you can also opt for one of the preexisting options: with autotests or without.
-  * **Clean pipeline template** - Choose one of the pre-defined pipelines offered by KubeRocketCI to define the cleanup logic. In case if you have specific requirements to the environment cleanup procedure, you can make up your own cleanup pipeline to use, which will be added to the **Clean Pipeline template** drop-down list.
+  * **Trigger type** - Select the trigger type:
+    * _Auto_ - The environment will deploy automatically once the image is built. This keeps environments up-to-date without manual intervention.
+    * _Manual_ - The user has to trigger deployment manually by clicking the **Deploy** button in the environment menu.
+
+    Refer to the [Architecture Scheme of CD Pipeline Operator](https://github.com/epam/edp-cd-pipeline-operator/blob/master/docs/arch.md) for additional details.
+  * **Deploy pipeline template** - Choose a predefined template outlining the deployment process for your application. You can select one of the built-in options (with or without autotests), or create a custom PipelineTemplate resource to add your own.
+  * **Clean pipeline template** - Choose one of the pre-defined pipelines offered by KubeRocketCI to define the cleanup logic. If you have specific requirements for the environment cleanup procedure, you can create your own cleanup pipeline, which will be added to the **Clean Pipeline template** drop-down list.
 
 ### Quality Gates
 
 On the **Add quality gates** tab, you define the quality control for the Deployment:
 
   * **Quality gate type** - Select the quality gate type:
-    * Manual - The promoting process should be confirmed in Tekton manually;
-    * Autotests - The promoting process should be confirmed by the successful passing of the autotests;
+    * Manual - Promotion must be confirmed manually in Tekton;
+    * Autotests - Promotion proceeds automatically when the autotests pass successfully;
   * **Autotest** - Select the previously created [autotest](add-autotest.md) name;
   * **Autotest branch** - Specify a branch for the autotest;
   * **Step name** - Type the step name, which will be displayed in Tekton, for every quality gate.
@@ -26835,9 +26845,11 @@ For more information on setting up a Ingress and Tekton EventListener for custom
   <link rel="canonical" href="https://docs.kuberocketci.io/docs/user-guide/add-infrastructure" />
 </head>
 
-KubeRocketCI portal allows you to create an infrastructure project, clone an existing repository with the infrastructure to your Version Control System (VCS), or use an external repository and import an infrastructure to the environment. The Infrastructure codebase type is used to create and manage resources in a cloud provider. When an infrastructure project is created or cloned, the system automatically generates a corresponding repository within the integrated Version Control System. You can create an Infrastructure [in YAML](#create-infrastructure-in-yaml) or [via the dialog](#create-infrastructure-via-ui).
+KubeRocketCI portal allows you to create an infrastructure project, clone an existing repository with the infrastructure to your Version Control System (VCS), or use an external repository and import an infrastructure to the environment. The Infrastructure codebase type is used to create and manage resources in a cloud provider. When an infrastructure project is created or cloned, the system automatically generates a corresponding repository within the integrated Version Control System.
 
-The **Create Infrastructure** dialog contains four steps:
+Before following these guidelines, be sure to [add Git Server](./add-git-server.md) to the platform.
+
+The **Create Infrastructure** wizard contains four steps:
 
 * Initial Setup
 * Git & Project Info
@@ -26848,14 +26860,14 @@ To add an infrastructure, navigate to the **Projects** section on the navigation
 
 ## Initial Setup
 
-Once clicked, the **Create new project** dialog will appear. In this dialog, you can make a choice:
+Once clicked, the **Create new project** wizard will appear. In this dialog, you can make a choice:
 
 * **Select Ready Template** – this option allows you to select a preconfigured, ready-to-go infrastructure template (e.g., Terraform).
 * **Custom Configuration** – this option allows you to create any of the supported Project types. In this case, you should select **Infrastructure**.
 
 Choose one of the strategies and click **Continue**:
 
-* **Create** – creates a project on the pattern in accordance with an infrastructure language, a build tool, and a framework. This strategy is recommended for projects that start defining their infrastructure from scratch.
+* **Create** – creates a sample Project on the pattern in accordance with an infrastructure language, a build tool, and a framework. This strategy is recommended for projects that start defining their infrastructure from scratch.
 
 * **Import** – allows using an existing VCS repository to integrate with KubeRocketCI. While importing the existing repository, select the Git server from the drop-down list and define the relative path to the repository, such as `epmd-edp/terraform-aws-example`.
 
@@ -26868,9 +26880,10 @@ In our example, we will use the **Create** strategy:
 Select all the settings that define how the infrastructure will be added to the Git server:
 
 * **Git server** – the pre-configured server where the component will be hosted. Select one from the drop-down list. Please refer to the [Manage Git Servers](git-server-overview.md) page to learn how to create one.
-* **Git URL Path** – the relative path to the Git repository where the codebase will be created (e.g., `epmd-edp` or `my-github-username`).
+* **Owner** - the relative path to the Git repository where Project will be created (e.g., `MyGithubUsername123` or `my-github-username`).
+* **Repository name** - the name of the repository that will store code for this Project. Must be at least two characters using the lower-case letters, numbers and inner dashes.
+* **Default branch** – the default branch the Project will be created with. The default branch cannot be deleted.
 * **Project name** – the name of the infrastructure. Must be at least two characters using lower-case letters, numbers, and inner dashes.
-* **Default Branch** – the default branch the Project will be created with. The default branch cannot be deleted.
 * **Description** – brief and concise description that explains the purpose of the infrastructure.
 * **Private** – by default, all created Projects have private visibility settings in your Git account. Uncheck this option to create a public Git repository.
 * **Empty project** – check this box to create an infrastructure with an empty repository. The empty repository option is available only for the **Create** strategy.
@@ -26885,10 +26898,10 @@ Specify the infrastructure language and versioning properties:
 
 * **Codebase versioning type** – defines how the infrastructure tag will be changed once the new image version is built. There are two versioning types:
   * **default**: Using the `default` versioning type, to specify the version of the current artifacts, images, and tags in the Version Control System, a developer should navigate to the corresponding file and change the version **manually**.
-  * **semver**: Using the `semver` versioning type, a developer indicates the version number from which all artifacts will be versioned and, as a result, **automatically** registered in the corresponding file. When selecting the `semver` versioning type, extra fields will appear; type the version number from which you want the artifacts to be versioned.
+  * **semver**: Using the `semver` versioning type, a developer indicates the version number from which all artifacts will be versioned and, as a result, **automatically** registered in the corresponding file. When selecting the `semver` versioning type, extra fields will appear; type the version number from which you want the artifacts to be versioned. This versioning type is recommended and selected by default.
 
   :::note
-    The **Start Version From** field should be filled out in compliance with the semantic versioning rules, e.g. 1.2.3 or 10.10.10. Please refer to the [Semantic Versioning](https://semver.org/) page for details.
+    The **Start Version From** field should be filled out in compliance with the semantic versioning rules, e.g. 1.2.3 or 10.10.10 (0.1.0 by default). The **Suffix** field is also mandatory and has the **SNAPSHOT** value by default. Please refer to the [Semantic Versioning](https://semver.org/) page for details.
   :::
 
 * **Specify the pattern to validate a commit message** – the regular expression used to indicate the pattern that is followed on the project to validate a commit message in the code review pipeline. An example of the pattern: `^[PROJECT_NAME-d{4}]:.*$`.
@@ -26942,9 +26955,11 @@ After the complete adding of the infrastructure, inspect the [Manage Infrastruct
   <link rel="canonical" href="https://docs.kuberocketci.io/docs/user-guide/add-library" />
 </head>
 
-KubeRocketCI portal allows you to create a library, clone an existing repository with the library to your Version Control System (VCS), or use an external repository and import a library to the environment. When a library is created or cloned, the system automatically generates a corresponding repository within the integrated Version Control System. You can create a Library [in YAML](#create-library-in-yaml) or [via the dialog](#create-library-via-ui).
+KubeRocketCI portal allows you to create a library, clone an existing repository with the library to your Version Control System (VCS), or use an external repository and import a library to the environment. When a library is created or cloned, the system automatically generates a corresponding repository within the integrated Version Control System.
 
-The **Create Library** dialog contains four steps:
+Before following these guidelines, be sure to [add Git Server](./add-git-server.md) to the platform.
+
+The **Create Library** wizard contains four steps:
 
 * Initial Setup
 * Git & Project Info
@@ -26955,14 +26970,14 @@ To add a library, navigate to the **Projects** section on the navigation bar and
 
 ## Initial Setup
 
-Once clicked, the **Create new project** dialog will appear. In this dialog, you can make a choice:
+Once clicked, the **Create new project** wizard will appear. In this dialog, you can make a choice:
 
 * **Select Ready Template** – this option allows you to select a preconfigured, ready-to-go library (e.g., shared pipeline or Terraform module).
 * **Custom Configuration** – this option allows you to create any of the supported Project types. In this case, you should select **Library**.
 
 Choose one of the strategies and click **Continue**:
 
-* **Create** – creates a project on the pattern in accordance with a library language, a build tool, and a framework. This strategy is recommended for projects that start developing their libraries from scratch.
+* **Create** – creates a sample Project on the pattern in accordance with a library language, a build tool, and a framework. This strategy is recommended for projects that start developing their libraries from scratch.
 
 * **Import** – allows using an existing VCS repository to integrate with KubeRocketCI. While importing the existing repository, select the Git server from the drop-down list and define the relative path to the repository, such as `epmd-edp/python-python-flask`.
 
@@ -26975,9 +26990,10 @@ In our example, we will use the **Create** strategy:
 Select all the settings that define how the library will be added to the Git server:
 
 * **Git server** – the pre-configured server where the component will be hosted. Select one from the drop-down list. Please refer to the [Manage Git Servers](git-server-overview.md) page to learn how to create one.
-* **Git URL Path** – the relative path to the Git repository where the codebase will be created (e.g., `epmd-edp` or `my-github-username`).
+* **Owner** - the relative path to the Git repository where Project will be created (e.g., `MyGithubUsername123` or `my-github-username`).
+* **Repository name** - the name of the repository that will store code for this Project. Must be at least two characters using the lower-case letters, numbers and inner dashes.
+* **Default branch** – the default branch the Project will be created with. The default branch cannot be deleted.
 * **Project name** – the name of the library. Must be at least two characters using lower-case letters, numbers, and inner dashes.
-* **Default Branch** – the default branch the Project will be created with. The default branch cannot be deleted.
 * **Description** – brief and concise description that explains the purpose of the library.
 * **Private** – by default, all created Projects have private visibility settings in your Git account. Uncheck this option to create a public Git repository.
 * **Empty project** – check this box to create a library with an empty repository. The empty repository option is available only for the **Create** strategy.
@@ -27012,10 +27028,10 @@ Specify the library language and versioning properties:
 
 * **Codebase versioning type** – defines how the library tag will be changed once the new image version is built. There are two versioning types:
   * **default**: Using the `default` versioning type, to specify the version of the current artifacts, images, and tags in the Version Control System, a developer should navigate to the corresponding file and change the version **manually**.
-  * **semver**: Using the `semver` versioning type, a developer indicates the version number from which all artifacts will be versioned and, as a result, **automatically** registered in the corresponding file (e.g. pom.xml). When selecting the `semver` versioning type, extra fields will appear; type the version number from which you want the artifacts to be versioned.
+  * **semver**: Using the `semver` versioning type, a developer indicates the version number from which all artifacts will be versioned and, as a result, **automatically** registered in the corresponding file (e.g. pom.xml). When selecting the `semver` versioning type, extra fields will appear; type the version number from which you want the artifacts to be versioned. This versioning type is recommended and selected by default.
 
   :::note
-    The **Start Version From** field should be filled out in compliance with the semantic versioning rules, e.g. 1.2.3 or 10.10.10. Please refer to the [Semantic Versioning](https://semver.org/) page for details.
+    The **Start Version From** field should be filled out in compliance with the semantic versioning rules, e.g. 1.2.3 or 10.10.10 (0.1.0 by default). The **Suffix** field is also mandatory and has the **SNAPSHOT** value by default. Please refer to the [Semantic Versioning](https://semver.org/) page for details.
   :::
 
 * **Specify the pattern to validate a commit message** – the regular expression used to indicate the pattern that is followed on the project to validate a commit message in the code review pipeline. An example of the pattern: `^[PROJECT_NAME-d{4}]:.*$`.
@@ -30548,10 +30564,21 @@ Use **Columns** (e.g. "Columns 7") to customize the table. **Pagination** (e.g. 
   <link rel="canonical" href="https://docs.kuberocketci.io/docs/user-guide/security/compliance-configuration-audits" />
 </head>
 
-Under **Security > Compliance > Configuration Audits** you can view configuration audits in the context of compliance.
+**Security > Compliance > Configuration Audits** shows **Kubernetes configuration** findings **framed for compliance**: unsafe defaults, weak workload settings, missing hardening, and similar checks that map to **benchmarks or policies** your organization tracks (for example CIS-style controls, Pod Security expectations, or other bundled profiles—exact labels depend on your deployment).
+
+On this page you can expect:
+
+* **Resources or report rows** with **failed** or **passed** checks tied to compliance-relevant configuration.
+* **Severity** and **status** per check, plus **remediation** text you can hand to platform or application teams.
+* Optional **framework** or **policy** context (which standard or chapter the control belongs to), when the product surfaces it.
+
+This is the **Compliance** entry point for **configuration audit** detail. For a **cluster-wide summary** of benchmark pass rates (multiple standards in one list), see [Cluster Compliance](./cluster-compliance.md). For **namespace-scoped operational** configuration audits, see [Namespace Configuration Audits](./namespace-configuration-audits.md); for **cluster-wide operational** audits, see [Cluster Configuration Audits](./cluster-configuration-audits.md).
 
 ## Related Articles
 
+* [Cluster Compliance](./cluster-compliance.md)
+* [Namespace Configuration Audits](./namespace-configuration-audits.md)
+* [Cluster Configuration Audits](./cluster-configuration-audits.md)
 * [Compliance RBAC Assessments](./compliance-rbac-assessments.md)
 * [Compliance Infrastructure Assessments](./compliance-infrastructure-assessments.md)
 * [Compliance Vulnerability Reports](./compliance-vulnerability-reports.md)
@@ -30568,10 +30595,21 @@ Under **Security > Compliance > Configuration Audits** you can view configuratio
   <link rel="canonical" href="https://docs.kuberocketci.io/docs/user-guide/security/compliance-infrastructure-assessments" />
 </head>
 
-Under **Security > Compliance > Infrastructure Assessments** you can view infrastructure assessments in the context of compliance.
+**Security > Compliance > Infrastructure Assessments** covers **infrastructure-level** posture for **compliance**: nodes and cluster components, **kubelet**-related settings, file permissions, and other checks that belong in **hardening benchmarks** rather than only in “YAML for one namespace.”
+
+On this page you can see:
+
+* **Reports per node or per scope** (as your deployment defines), with **severity breakdowns** and **failed vs passed** checks.
+* **Drill-down** listing individual checks with **description**, **message**, and **remediation** that often points to **specific paths or configuration keys** on the node.
+
+Until infrastructure scanning has run and data is synced, the page may stay **empty** or show a **no reports** state.
+
+For the **operational** (non-Compliance menu) counterparts, see [Cluster Infrastructure Assessments](./cluster-infrastructure-assessments.md) and [Namespace Infrastructure Assessments](./namespace-infrastructure-assessments.md).
 
 ## Related Articles
 
+* [Cluster Infrastructure Assessments](./cluster-infrastructure-assessments.md)
+* [Namespace Infrastructure Assessments](./namespace-infrastructure-assessments.md)
 * [Compliance Configuration Audits](./compliance-configuration-audits.md)
 * [Compliance RBAC Assessments](./compliance-rbac-assessments.md)
 * [Compliance Vulnerability Reports](./compliance-vulnerability-reports.md)
@@ -30588,10 +30626,20 @@ Under **Security > Compliance > Infrastructure Assessments** you can view infras
   <link rel="canonical" href="https://docs.kuberocketci.io/docs/user-guide/security/compliance-rbac-assessments" />
 </head>
 
-Under **Security > Compliance > RBAC Assessments** you can view RBAC assessments in the context of compliance.
+**Security > Compliance > RBAC Assessments** presents **role-based access control** risk with **compliance and audit** in mind: least privilege, separation of duties, and evidence that dangerous **Roles** or **ClusterRoles** are flagged and tracked.
+
+On this page you can see:
+
+* **One row per assessed Role or ClusterRole** (or equivalent grouping), with **severity counts** and **total checks**.
+* **Assessment details** with a filterable list of checks: **ID**, **title**, **category**, **severity**, **status**.
+* **Expanded rows** show **why** the permission is problematic, a **concrete message** (which resource/verbs are involved), and **remediation** (narrow verbs, remove wildcards, split roles).
+
+The same class of RBAC findings may also appear under [Namespace RBAC Assessments](./namespace-rbac-assessments.md) or [Cluster RBAC Assessments](./cluster-rbac-assessments.md); **Compliance** here stresses **control-oriented** language and reporting for reviewers.
 
 ## Related Articles
 
+* [Namespace RBAC Assessments](./namespace-rbac-assessments.md)
+* [Cluster RBAC Assessments](./cluster-rbac-assessments.md)
 * [Compliance Configuration Audits](./compliance-configuration-audits.md)
 * [Compliance Infrastructure Assessments](./compliance-infrastructure-assessments.md)
 * [Compliance Vulnerability Reports](./compliance-vulnerability-reports.md)
@@ -30608,10 +30656,24 @@ Under **Security > Compliance > RBAC Assessments** you can view RBAC assessments
   <link rel="canonical" href="https://docs.kuberocketci.io/docs/user-guide/security/compliance-vulnerability-reports" />
 </head>
 
-Under **Security > Compliance > Vulnerability Reports** you can view vulnerability reports in the context of compliance.
+**Security > Compliance > Vulnerability Reports** is aimed at **compliance and audit** use cases: **CVE-style** findings on **container images** (packages and dependencies), with **severity**, **scores**, **affected component**, **installed** and **fixed** versions, and links to external advisory pages where the product provides them.
+
+On this page you can expect the same **shape of data** as in other vulnerability report screens — **CVE ID**, **severity**, **resource** (package), **installed version**, **fixed version**, **score**, **title** — with navigation and filters tuned for **evidence collection** and **remediation tracking** (which workload, which image, SLA by severity).
+
+This is how menu differs from others:
+
+| Location | Scope / use |
+|----------|-------------|
+| [Container Vulnerability Reports](./container-vulnerability-reports.md) | **Namespace** — images in use in a namespace. |
+| [Cluster Vulnerability Reports](./cluster-vulnerability-reports.md) | **Cluster** — cluster-scoped image or SBOM-style reports. |
+| **Compliance > Vulnerability Reports** (this page) | Same **CVE-oriented** findings, presented under **Compliance** for **policy and reporting** workflows. |
+
+Exact grouping depends on your product configuration; the **types of rows** (CVEs, severities, remediation) stay consistent across these views.
 
 ## Related Articles
 
+* [Container Vulnerability Reports](./container-vulnerability-reports.md)
+* [Cluster Vulnerability Reports](./cluster-vulnerability-reports.md)
 * [Compliance Configuration Audits](./compliance-configuration-audits.md)
 * [Compliance RBAC Assessments](./compliance-rbac-assessments.md)
 * [Compliance Infrastructure Assessments](./compliance-infrastructure-assessments.md)
@@ -30628,7 +30690,20 @@ Under **Security > Compliance > Vulnerability Reports** you can view vulnerabili
   <link rel="canonical" href="https://docs.kuberocketci.io/docs/user-guide/security/container-exposed-secrets" />
 </head>
 
-Under **Security > Container Scanning > Exposed Secrets** you can see secrets that were detected in container images or configurations and need to be remediated.
+**Security > Container Scanning > Exposed Secrets** lists **credentials and other sensitive material** found inside **container images** (or related artifacts the scanner inspects), such as API keys, tokens, passwords, or private keys embedded in layers or files. This is **separate from vulnerability (CVE) reporting**: an image can have no critical CVEs and still contain a leaked secret.
+
+Depending on how your environment is configured, you may get:
+
+* **Findings** tied to a scanned image or workload, with **severity** or risk indicators.
+* **Location hints** (path, layer, or context) so you can trace the issue back to a build step, copied config, or baked-in file.
+* Actions or links to **open details** and follow **remediation** guidance.
+
+Use this view to **rotate** any exposed credential and **change the build** so secrets are never committed into images (runtime `Secret` objects, external secrets, CI variables, `.dockerignore`, multi-stage builds without copying `.env`, etc.).
+
+This is how this fits Container Scanning:
+
+* [Container Scanning Overview](./container-scanning-overview.md) — high-level image risk for the namespace.
+* [Container Vulnerability Reports](./container-vulnerability-reports.md) — CVE-style drill-down per image.
 
 ## Related Articles
 
@@ -30862,14 +30937,28 @@ Use this view to understand each finding and apply the suggested remediation. **
   <link rel="canonical" href="https://docs.kuberocketci.io/docs/user-guide/security/namespace-infrastructure-assessments" />
 </head>
 
-**Infrastructure Assessment Reports** under **Security > Namespace Security > Infrastructure Assessments** show infrastructure security assessments for resources in the selected namespace. Reports are generated by **Trivy**.
+**Infrastructure Assessment Reports** under **Security > Namespace Security > Infrastructure Assessments** show **infrastructure-oriented security checks** for resources in the **selected namespace**. The focus is on **misconfigurations and hardening gaps** in how platform and supporting resources are set up—not on “CVE inside application package” style issues (those belong under container vulnerability flows).
 
-**Trivy** is an open-source security scanner that can assess infrastructure (e.g. Kubernetes manifests, Terraform, and other IaC). In this view, Trivy runs infrastructure checks; once resources in the namespace are scanned, assessment reports appear in the table. The table lists resources with columns such as Resource Name, Resource Kind, counts by severity (Critical, High, Medium, Low), Total Checks, and Last Updated. If no scans have run yet, the page shows a message that no infrastructure assessment reports were found and that Trivy reports will appear once resources are scanned.
+After scans have run, you typically see:
+
+* A **table** of assessed targets with: **severity counts** (Critical, High, Medium, Low), **total checks**, and **last updated** (when shown).
+* **Drill-down** into a row: **check ID**, **title**, **category**, **severity**, **status**, and expandable **description**, **message**, and **remediation** text.
+
+If nothing has been scanned yet, the page may show an **empty state** explaining that reports will appear once infrastructure assessment data is available for the namespace.
+
+## How this differs from sibling views
+
+| View | What it emphasizes |
+|------|---------------------|
+| [Namespace Configuration Audits](./namespace-configuration-audits.md) | **Workload-oriented** configuration (e.g. pod `securityContext`, read-only root filesystem, defaults). |
+| [Namespace RBAC Assessments](./namespace-rbac-assessments.md) | **RBAC**—Roles, risky verbs, overly broad grants. |
+| **Infrastructure Assessments** (this page) | **Infrastructure / platform wiring** in the namespace—controllers, configs, and related surfaces that are not purely “this pod’s securityContext” or “this Role’s verbs.” |
 
 ## Related Articles
 
 * [Namespace Configuration Audits](./namespace-configuration-audits.md)
 * [Namespace RBAC Assessments](./namespace-rbac-assessments.md)
+* [Cluster Infrastructure Assessments](./cluster-infrastructure-assessments.md)
 
 ---
 
@@ -30956,6 +31045,15 @@ Use this view to understand each RBAC finding and apply the suggested remediatio
 
 The Security section covers security settings, access control, secrets management, and protected resources. It is organized into the following sub-sections:
 
+:::note
+
+* The **Trivy** tool manages **scanning and hardening** views: **Container Scanning**, **Namespace Security**, **Cluster Security** (configuration audits, RBAC, infrastructure, cluster vulnerability reports, compliance benchmarks and related drill-downs), and the **Compliance** entries that mirror those scan types. If **Trivy** is not integrated and running against your cluster/namespaces, **those screens stay empty or without fresh data**.
+
+* **SCA** (this portfolio and [Projects](./sca-projects)) comes from **Dependency Track** (BOMs, component vulnerabilities, policies).
+
+* **SAST** ([SAST](./sca-sast)) comes from **SonarQube**.
+:::
+
 * **SCA** (Software Composition Analysis) — [Overview](./sca-overview), [Projects](./sca-projects)
 * **SAST** — [SAST](./sca-sast)
 * **Container Scanning** — [Overview](./container-scanning-overview), [Vulnerability Reports](./container-vulnerability-reports), [Exposed Secrets](./container-exposed-secrets)
@@ -30963,7 +31061,7 @@ The Security section covers security settings, access control, secrets managemen
 * **Cluster Security** — [Compliance](./cluster-compliance), [Configuration Audits](./cluster-configuration-audits), [RBAC Assessments](./cluster-rbac-assessments), [Infrastructure Assessments](./cluster-infrastructure-assessments), [Vulnerability Reports](./cluster-vulnerability-reports)
 * **Compliance** — [Configuration Audits](./compliance-configuration-audits), [RBAC Assessments](./compliance-rbac-assessments), [Infrastructure Assessments](./compliance-infrastructure-assessments), [Vulnerability Reports](./compliance-vulnerability-reports)
 
-The **Software Composition Analysis** portfolio dashboard (this page) shows portfolio-level vulnerability metrics and policy violations across all projects. Use it to track vulnerabilities, projects at risk, and policy compliance over time.
+The **Software Composition Analysis** portfolio dashboard shows portfolio-level vulnerability metrics and policy violations across all projects. Use it to track vulnerabilities, projects at risk, and policy compliance over time.
 
 ## Key Metrics
 

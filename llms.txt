@@ -195,15 +195,15 @@ This file contains links to documentation sections following the llmstxt.org sta
 - [Cluster Infrastructure Assessments](https://docs.kuberocketci.io/docs/user-guide/security/cluster-infrastructure-assessments): Cluster-wide infrastructure security assessments for cluster resources.
 - [Cluster RBAC Assessments](https://docs.kuberocketci.io/docs/user-guide/security/cluster-rbac-assessments): Cluster-wide RBAC policy security assessments for ClusterRoles.
 - [Cluster Vulnerability Reports](https://docs.kuberocketci.io/docs/user-guide/security/cluster-vulnerability-reports): Cluster-wide container image vulnerability reports and scan results.
-- [Compliance Configuration Audits](https://docs.kuberocketci.io/docs/user-guide/security/compliance-configuration-audits): Configuration audits in the Compliance section.
+- [Compliance Configuration Audits](https://docs.kuberocketci.io/docs/user-guide/security/compliance-configuration-audits): Configuration audit results in the Compliance area of Security.
 - [Compliance Infrastructure Assessments](https://docs.kuberocketci.io/docs/user-guide/security/compliance-infrastructure-assessments): Infrastructure assessments in the Compliance section.
-- [Compliance RBAC Assessments](https://docs.kuberocketci.io/docs/user-guide/security/compliance-rbac-assessments): RBAC assessments in the Compliance section.
-- [Compliance Vulnerability Reports](https://docs.kuberocketci.io/docs/user-guide/security/compliance-vulnerability-reports): Vulnerability reports in the Compliance section.
-- [Exposed Secrets](https://docs.kuberocketci.io/docs/user-guide/security/container-exposed-secrets): Detection and listing of exposed secrets in container scanning.
+- [Compliance RBAC Assessments](https://docs.kuberocketci.io/docs/user-guide/security/compliance-rbac-assessments): RBAC assessments under Security > Compliance.
+- [Compliance Vulnerability Reports](https://docs.kuberocketci.io/docs/user-guide/security/compliance-vulnerability-reports): Vulnerability reports for compliance workflows in Security > Compliance.
+- [Exposed Secrets](https://docs.kuberocketci.io/docs/user-guide/security/container-exposed-secrets): Detected secrets in container images and workloads in the portal.
 - [Container Scanning Overview](https://docs.kuberocketci.io/docs/user-guide/security/container-scanning-overview): Trivy security overview — container image vulnerabilities and severity breakdown.
 - [Container Vulnerability Reports](https://docs.kuberocketci.io/docs/user-guide/security/container-vulnerability-reports): Unique container images with vulnerabilities and detailed scan results.
 - [Namespace Configuration Audits](https://docs.kuberocketci.io/docs/user-guide/security/namespace-configuration-audits): Kubernetes resource misconfigurations in the namespace — audit reports and findings.
-- [Namespace Infrastructure Assessments](https://docs.kuberocketci.io/docs/user-guide/security/namespace-infrastructure-assessments): Infrastructure security assessments in the namespace via Trivy.
+- [Namespace Infrastructure Assessments](https://docs.kuberocketci.io/docs/user-guide/security/namespace-infrastructure-assessments): Infrastructure security assessment reports scoped to a namespace.
 - [Namespace RBAC Assessments](https://docs.kuberocketci.io/docs/user-guide/security/namespace-rbac-assessments): RBAC policy security assessments in the namespace — roles and findings.
 - [SCA Overview](https://docs.kuberocketci.io/docs/user-guide/security/sca-overview): Portfolio-level Software Composition Analysis metrics and policy violations.
 - [SCA Projects](https://docs.kuberocketci.io/docs/user-guide/security/sca-projects): Software composition analysis projects and their security metrics.

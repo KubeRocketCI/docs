@@ -11,13 +11,15 @@ description: "Learn how to add autotests in KubeRocketCI, integrating them into 
   <link rel="canonical" href="https://docs.kuberocketci.io/docs/user-guide/add-autotest" />
 </head>
 
-KubeRocketCI portal allows you to clone an existing repository with the autotest to your Version Control System (VCS), or use an external repository and import an autotest to the environment for running in stages or using as quality gates for applications. When an autotest is cloned or imported, the system automatically generates a corresponding repository within the integrated Version Control System. You can create an Autotest [in YAML](#create-autotest-in-yaml) or [via the dialog](#create-autotest-via-ui).
+KubeRocketCI portal allows you to clone an existing repository with the autotest to your Version Control System (VCS), or use an external repository and import an autotest to the environment for running in stages or using as quality gates for applications. When an autotest is cloned or imported, the system automatically generates a corresponding repository within the integrated Version Control System.
+
+Before following these guidelines, be sure to [add Git Server](./add-git-server.md) to the platform.
 
 <div style={{ display: 'flex', justifyContent: 'center' }}>
 <iframe width="560" height="315" src="https://www.youtube.com/embed/ytaO-ZaQb0c" title="KubeRocketCI: Autotests Overview" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen"></iframe>
 </div>
 
-The **Create Autotest** dialog contains four steps:
+The **Create Autotest** wizard contains four steps:
 
 * Initial Setup
 * Git & Project Info
@@ -28,7 +30,7 @@ To add an autotest, navigate to the **Projects** section on the navigation bar a
 
 ## Initial Setup
 
-Once clicked, the **Create new project** dialog will appear. In this dialog, you can make a choice:
+Once clicked, the **Create new project** wizard will appear. In this dialog, you can make a choice:
 
 * **Select Ready Template** – this option allows you to select a preconfigured, ready-to-go autotest template.
 * **Custom Configuration** – this option allows you to create any of the supported Project types. In this case, you should select **Autotest**.
@@ -50,9 +52,10 @@ In our example, we will use the **Import** strategy:
 Select all the settings that define how the autotest will be added to the Git server:
 
 * **Git server** – the pre-configured server where the component will be hosted. Select one from the drop-down list. Please refer to the [Manage Git Servers](git-server-overview.md) page to learn how to create one.
-* **Git URL Path** – the relative path to the Git repository where the codebase will be created (e.g., `epmd-edp` or `my-github-username`).
+* **Owner** - the relative path to the Git repository where Project will be created (e.g., `MyGithubUsername123` or `my-github-username`).
+* **Repository name** - the name of the repository that will store code for this project. Must be at least two characters using the lower-case letters, numbers and inner dashes.
+* **Default branch** – the default branch the Project will be created with. The default branch cannot be deleted.
 * **Project name** – the name of the autotest. Must be at least two characters using lower-case letters, numbers, and inner dashes.
-* **Default Branch** – the default branch the Project will be created with. The default branch cannot be deleted.
 * **Description** – brief and concise description that explains the purpose of the autotest.
 * **Private** – by default, all created Projects have private visibility settings in your Git account. Uncheck this option to create a public Git repository.
 
@@ -61,16 +64,16 @@ Select all the settings that define how the autotest will be added to the Git se
 Specify the autotest language and versioning properties:
 
 * **Code Language** – defines the code language with its supported frameworks. For autotests, **Other** is often used to extend the default code languages when using the Clone/Import strategy.
-* **Language version/framework** – defines the specific framework or language version of the autotest. The field depends on the selected code language. Specify Java 17, Java 21, or Java 25 to be used. Java 8 and 11 have been deprecated starting from KubeRocketCI version 3.12.
+* **Language version/framework** – defines the specific framework or language version of the autotest. The field depends on the selected code language. Specify Java 17, Java 21, or Java 25 to be used.
 * **Build Tool** – allows you to choose the build tool to use. For autotests, Gradle and Maven are available.
 * **Autotest report framework** – all autotest reports are created in the Allure framework by default.
 
 * **Codebase versioning type** – defines how the autotest tag will be changed once the new image version is built. There are two versioning types:
   * **default**: Using the `default` versioning type, to specify the version of the current artifacts, images, and tags in the Version Control System, a developer should navigate to the corresponding file and change the version **manually**.
-  * **semver**: Using the `semver` versioning type, a developer indicates the version number from which all artifacts will be versioned and, as a result, **automatically** registered in the corresponding file (e.g. pom.xml). When selecting the `semver` versioning type, extra fields will appear; type the version number from which you want the artifacts to be versioned.
+  * **semver**: Using the `semver` versioning type, a developer indicates the version number from which all artifacts will be versioned and, as a result, **automatically** registered in the corresponding file (e.g. pom.xml). When selecting the `semver` versioning type, extra fields will appear; type the version number from which you want the artifacts to be versioned. This versioning type is recommended and selected by default.
 
   :::note
-    The **Start Version From** field should be filled out in compliance with the semantic versioning rules, e.g. 1.2.3 or 10.10.10. Please refer to the [Semantic Versioning](https://semver.org/) page for details.
+    The **Start Version From** field should be filled out in compliance with the semantic versioning rules, e.g. 1.2.3 or 10.10.10 (0.1.0 by default). The **Suffix** field is also mandatory and has the **SNAPSHOT** value by default. Please refer to the [Semantic Versioning](https://semver.org/) page for details.
   :::
 
 * **Specify the pattern to validate a commit message** – the regular expression used to indicate the pattern that is followed on the project to validate a commit message in the code review pipeline. An example of the pattern: `^[PROJECT_NAME-d{4}]:.*$`.

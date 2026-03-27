@@ -13,13 +13,13 @@ description: "Learn how to establish Deployments in KubeRocketCI for streamlined
   <link rel="canonical" href="https://docs.kuberocketci.io/docs/user-guide/add-cd-pipeline" />
 </head>
 
-In KubeRocketCI, deployments are managed through Deployments, a versatile mechanism that enables GitOps, automated deploy, promotion within pipelines, and multi-environment support.
+KubeRocketCI uses Deployments — a mechanism that enables GitOps, automated deployment, promotion within pipelines, and multi-environment support.
 
-The creation of the Deployment becomes available as soon as an application is created including its provisioning in a branch and the necessary entities for the Deployment. If you don't have the application yet, create by following the guidelines in the [Add Application](./add-application.md) page. Additionally, ensure to familiarize yourself with the [Manage GitOps](gitops.md) page as it is required to add a GitOps repository first before creating an Deployment.
+You can create a Deployment once you have at least one application with a provisioned branch. If you don't have one yet, follow the [Add Application](./add-application.md) guide. Additionally, ensure to familiarize yourself with the [Manage GitOps](gitops.md) page as it is required to add a GitOps repository before creating a Deployment.
 
 ## Create Deployment
 
-The **Create new deployment** dialog has three steps: **Applications** and **Pipeline Configuration**, and **Review**.
+The **Create new deployment** dialog has three steps: **Applications**, **Pipeline Configuration**, and **Review**.
 
 Navigate to the **Deployments** section on the navigation bar and click **+ Create deployment**. Once clicked, the **Create new deployment** dialog will appear.
 
@@ -35,13 +35,13 @@ In the **Applications** stage:
 
 ### Configure Pipeline Settings
 
-In the **Pipeline Configuration** stage, specify following configuration:
+In the **Pipeline Configuration** stage, specify the following configuration:
 
-1. Enter the deployment name that will be displayed in the Deployments list. Enter at least two characters, use the lower-case letters, numbers, and dashes.
+1. Enter the deployment name that will be displayed in the Deployments list. The name must be at least two characters long and may contain lowercase letters, numbers, and dashes.
 
-2. Enter informative but concise description.
+2. Enter an informative but concise description.
 
-3. Select the necessary application from the **Mapping field name** drop-down menu and click by it name.
+3. Select the necessary application from the **Mapping field name** drop-down menu and click on its name.
 
 4. Specify the application parameters:
 
@@ -50,14 +50,14 @@ In the **Pipeline Configuration** stage, specify following configuration:
   * **Promote applications** - When enabled, applications will be promoted through stages using the latest successful build from each previous stage. When disabled, all stages will deploy the same version that was initially selected for the pipeline, regardless of any newer builds.
 
     :::note
-      If there is another deployed environment stage with the respective codebase stream (equal image stream as an OpenShift term), the pattern combination will be as follows: `[pipeline name]-[stage name]-[application name]-[verified]`.
+      If there is another deployed environment stage with the respective codebase stream (equivalent to an image stream in OpenShift terminology), the pattern combination will be as follows: `[pipeline name]-[stage name]-[application name]-[verified]`.
     :::
 
 5. Click **Continue**.
 
 ### Review and Create
 
-Ensure you specified the Deployment configuration correctly and click the **Create** button to finish deployment configuration and proceed with configuring environment.
+Verify the Deployment configuration and click the **Create** button to finish the setup and proceed with configuring the environment.
 
   :::note
     The namespace created by the environment has the following pattern combination: **[KubeRocketCI namespace]-[environment name]-[stage name]**.
@@ -66,7 +66,7 @@ Ensure you specified the Deployment configuration correctly and click the **Crea
 
 ## Create Environment
 
-After creating a Deployment, select **Open Deployment** on the congratulations page. If you didn't, open the Deployment details page by clicking on its name.
+After creating a Deployment, select **Open Deployment** on the congratulations page. If you skipped this step, open the Deployment details page by clicking on its name.
 
 ### Basic Configuration
 
@@ -74,7 +74,7 @@ Environments are created the following way:
 
 1. On the **Deployment details** menu, click the **Create Environment** button.
 
-2. On the **Configure Stage** tab of the **Create Stage** menu, fill in the necessary fields in the corresponding window:
+2. On the **Configure Environment** tab of the **Create Environment** dialog, fill in the following fields:
 
   * **Cluster** - Choose the cluster to deploy the stage in;
   * **Environment name** - Enter the Environment name;
@@ -85,19 +85,23 @@ Environments are created the following way:
 
 ### Pipeline Configuration
 
-In this tab, you need to configure deployment approach:
+In this tab, you need to configure the deployment approach:
 
-  * **Trigger type** - Select the trigger type. The key benefit of the automatic deploy feature is to keep environments up-to-date. The available trigger types are _Manual_ and _Auto_. When the _Auto_ trigger type is chosen, the environment will initiate automatically once the image is built. _Manual_ implies that user has to perform deploy manually by clicking the **Deploy** button in the environment menu. Please refer to the [Architecture Scheme of CD Pipeline Operator](https://github.com/epam/edp-cd-pipeline-operator/blob/master/docs/arch.md) page for additional details.
-  * **Deploy pipeline template** - Choose a predefined blueprint outlining the deployment process for your application. While you have the option to incorporate custom deployment templates by generating a resource of the PipelineTemplate category, you can also opt for one of the preexisting options: with autotests or without.
-  * **Clean pipeline template** - Choose one of the pre-defined pipelines offered by KubeRocketCI to define the cleanup logic. In case if you have specific requirements to the environment cleanup procedure, you can make up your own cleanup pipeline to use, which will be added to the **Clean Pipeline template** drop-down list.
+  * **Trigger type** - Select the trigger type:
+    * _Auto_ - The environment will deploy automatically once the image is built. This keeps environments up-to-date without manual intervention.
+    * _Manual_ - The user has to trigger deployment manually by clicking the **Deploy** button in the environment menu.
+
+    Refer to the [Architecture Scheme of CD Pipeline Operator](https://github.com/epam/edp-cd-pipeline-operator/blob/master/docs/arch.md) for additional details.
+  * **Deploy pipeline template** - Choose a predefined template outlining the deployment process for your application. You can select one of the built-in options (with or without autotests), or create a custom PipelineTemplate resource to add your own.
+  * **Clean pipeline template** - Choose one of the pre-defined pipelines offered by KubeRocketCI to define the cleanup logic. If you have specific requirements for the environment cleanup procedure, you can create your own cleanup pipeline, which will be added to the **Clean Pipeline template** drop-down list.
 
 ### Quality Gates
 
 On the **Add quality gates** tab, you define the quality control for the Deployment:
 
   * **Quality gate type** - Select the quality gate type:
-    * Manual - The promoting process should be confirmed in Tekton manually;
-    * Autotests - The promoting process should be confirmed by the successful passing of the autotests;
+    * Manual - Promotion must be confirmed manually in Tekton;
+    * Autotests - Promotion proceeds automatically when the autotests pass successfully;
   * **Autotest** - Select the previously created [autotest](add-autotest.md) name;
   * **Autotest branch** - Specify a branch for the autotest;
   * **Step name** - Type the step name, which will be displayed in Tekton, for every quality gate.

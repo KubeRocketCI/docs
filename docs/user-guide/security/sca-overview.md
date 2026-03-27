@@ -13,6 +13,15 @@ description: "Portfolio-level Software Composition Analysis metrics and policy v
 
 The Security section covers security settings, access control, secrets management, and protected resources. It is organized into the following sub-sections:
 
+:::note
+
+* The **Trivy** tool manages **scanning and hardening** views: **Container Scanning**, **Namespace Security**, **Cluster Security** (configuration audits, RBAC, infrastructure, cluster vulnerability reports, compliance benchmarks and related drill-downs), and the **Compliance** entries that mirror those scan types. If **Trivy** is not integrated and running against your cluster/namespaces, **those screens stay empty or without fresh data**.
+
+* **SCA** (this portfolio and [Projects](./sca-projects)) comes from **Dependency Track** (BOMs, component vulnerabilities, policies).
+
+* **SAST** ([SAST](./sca-sast)) comes from **SonarQube**.
+:::
+
 * **SCA** (Software Composition Analysis) — [Overview](./sca-overview), [Projects](./sca-projects)
 * **SAST** — [SAST](./sca-sast)
 * **Container Scanning** — [Overview](./container-scanning-overview), [Vulnerability Reports](./container-vulnerability-reports), [Exposed Secrets](./container-exposed-secrets)
@@ -20,7 +29,7 @@ The Security section covers security settings, access control, secrets managemen
 * **Cluster Security** — [Compliance](./cluster-compliance), [Configuration Audits](./cluster-configuration-audits), [RBAC Assessments](./cluster-rbac-assessments), [Infrastructure Assessments](./cluster-infrastructure-assessments), [Vulnerability Reports](./cluster-vulnerability-reports)
 * **Compliance** — [Configuration Audits](./compliance-configuration-audits), [RBAC Assessments](./compliance-rbac-assessments), [Infrastructure Assessments](./compliance-infrastructure-assessments), [Vulnerability Reports](./compliance-vulnerability-reports)
 
-The **Software Composition Analysis** portfolio dashboard (this page) shows portfolio-level vulnerability metrics and policy violations across all projects. Use it to track vulnerabilities, projects at risk, and policy compliance over time.
+The **Software Composition Analysis** portfolio dashboard shows portfolio-level vulnerability metrics and policy violations across all projects. Use it to track vulnerabilities, projects at risk, and policy compliance over time.
 
 ## Key Metrics
 

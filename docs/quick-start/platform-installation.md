@@ -23,9 +23,9 @@ KubeRocketCI relies on Tekton resources, including Tasks, Pipelines, Triggers, a
 To install Tekton, run the commands below:
 
   ```bash
-  kubectl apply -f https://storage.googleapis.com/tekton-releases/pipeline/previous/v1.0.0/release.yaml
-  kubectl apply -f https://storage.googleapis.com/tekton-releases/triggers/previous/v0.32.0/release.yaml
-  kubectl apply -f https://storage.googleapis.com/tekton-releases/triggers/previous/v0.32.0/interceptors.yaml
+  kubectl apply -f https://storage.googleapis.com/tekton-releases/pipeline/previous/v1.6.0/release.yaml
+  kubectl apply -f https://storage.googleapis.com/tekton-releases/triggers/previous/v0.34.0/release.yaml
+  kubectl apply -f https://storage.googleapis.com/tekton-releases/triggers/previous/v0.34.0/interceptors.yaml
   ```
 
 ## Install platform
@@ -42,7 +42,7 @@ To deploy the platform, follow the steps below:
 2. Deploy the platform using the `helm install` command:
 
     ```bash
-    helm install krci epamedp/edp-install --version 3.12.4 --create-namespace --atomic -n krci --set global.dnsWildCard=example.com
+    helm install krci epamedp/edp-install --version 3.13.0 --create-namespace --atomic -n krci --set global.dnsWildCard=example.com
     ```
 
 3. Upon successful deployment of the KubeRocketCI Helm Chart, run the `kubectl port-forward` command:

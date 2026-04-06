@@ -14,13 +14,15 @@ words:
   - apikey
   - apiserver
   - apiuser
+  - applicationset
+  - applicationsetcontroller
   - applicationsets
   - authc
   - auths
+  - Autodeploy
   - autoplay
   - Autotest
   - autotests
-  - Autodeploy
   - awsdns
   - AWSIRSA
   - azuread
@@ -31,8 +33,8 @@ words:
   - Bnow
   - boltdb
   - Bridgecrew
-  - buildtool
   - buildkit
+  - buildtool
   - cacerts
   - cbis
   - cbtype
@@ -56,16 +58,18 @@ words:
   - codebasebranches
   - codebaseimagestream
   - codecentric
+  - codemie
   - Codemie
   - Codenarc
-  - codemie
   - codeviewer
   - commentadded
   - configmap
+  - control
   - Coverity
   - credrequests
   - creds
   - crossplane
+  - crunchydata
   - csanchez
   - daniilnedostup
   - dbchecker
@@ -84,17 +88,19 @@ words:
   - dropdb
   - dumpall
   - EBSCSI
-  - Entra
   - edpcomponent
   - edpcomponents
+  - eksadminrole
   - emptydir
   - endpointshort
   - entra
+  - Entra
   - EPAM
   - epamedp
   - epmd
   - externalsecret
   - extrasecrets
+  - fasapi
   - fastapi
   - Filebeat
   - filesystems
@@ -106,9 +112,11 @@ words:
   - gantt
   - gcpsm
   - Gerrit
+  - gitcloneurl
   - gitfusion
   - GITFUSION
   - gitops
+  - gitrevision
   - Gitserver
   - GITTAG
   - GOPATH
@@ -118,9 +126,9 @@ words:
   - harborkeycloakclient
   - hostedzone
   - Hostnames
-  - hyperthreading
   - hotspots
   - Hotspots
+  - hyperthreading
   - importcert
   - ingresscontroller
   - initdb
@@ -128,6 +136,8 @@ words:
   - jobservice
   - junitxml
   - Kaniko
+  - karpenter
+  - Karpenter
   - keepalive
   - Keyacloak
   - Keycloak
@@ -147,9 +157,9 @@ words:
   - kibanauser
   - krakend
   - krci
+  - kubeadm
   - kubeadmin
   - kubeconfig
-  - kubeadm
   - kubelet
   - kubelogin
   - kuberocketci
@@ -171,6 +181,7 @@ words:
   - multivalued
   - mutatingwebhook
   - mutatingwebhookconfigurations
+  - myapp
   - mykolamarusenko
   - mypipe
   - myuser
@@ -178,6 +189,9 @@ words:
   - newcoming
   - nindent
   - Nlcg
+  - nodeclasses
+  - nodepool
+  - nodepools
   - noout
   - noprompt
   - nosniff
@@ -192,9 +206,9 @@ words:
   - persistentvolumeclaims
   - persistentvolumes
   - petclinic
+  - pgbackrest
   - pgcrypto
   - pgdb
-  - pgbackrest
   - PGPASSWORD
   - pipelinerun
   - pipelineruns
@@ -205,17 +219,20 @@ words:
   - psql
   - pullrequest
   - pwjps
-  - Qualys
   - qualitygate
+  - Qualys
   - Quarkus
   - rabbitmq
   - rabbitmqctl
   - regcred
   - Rego
   - rekor
+  - reponame
   - reportportal
   - resourcetemplates
   - restic
+  - rolearn
+  - rolebinding
   - rolebindings
   - rolesmapping
   - rpuser
@@ -264,10 +281,12 @@ words:
   - tfstate
   - tfvars
   - tolerations
+  - tomap
   - toolset
   - traefik
   - trgm
   - triggertemplate
+  - triggertemplates
   - trustcacerts
   - truststore
   - usedomainname
@@ -279,26 +298,13 @@ words:
   - velero
   - Veracode
   - verion
-  - webhookconfigurations
   - wafv
   - waynesun
+  - webhookconfigurations
   - wildfly
   - Wildfly
   - xlarge
   - zwpj
-  - Karpenter
-  - karpenter
-  - tomap
-  - nodepools
-  - nodepool
-  - nodeclasses
-  - fasapi
-  - applicationset
-  - applicationsetcontroller
-  - rolearn
-  - eksadminrole
-  - rolebinding
-  - сontrol
 enableFiletypes:
   - md
   - mdx

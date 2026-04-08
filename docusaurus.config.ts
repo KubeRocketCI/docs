@@ -153,7 +153,7 @@ const config: Config = {
           },
           versions: {
             current: {
-              label: '3.13-dev',
+              label: '3.14-dev',
               path: 'next',
             },
           },
@@ -185,7 +185,7 @@ const config: Config = {
           lastmod: 'date',
           changefreq: 'weekly',
           priority: 0.5,
-          ignorePatterns: ['/docs/next/**', '/docs/3.10/**', '/docs/3.11/**',  '/docs/3.12/**','/blog/tags/**'],
+          ignorePatterns: ['/docs/next/**', '/docs/3.11/**', '/docs/3.12/**', '/docs/3.13/**', '/blog/tags/**'],
           filename: 'sitemap.xml',
           createSitemapItems: async params => {
             const { defaultCreateSitemapItems, ...rest } = params;

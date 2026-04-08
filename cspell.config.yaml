@@ -9,6 +9,7 @@ words:
   - addopts
   - adoptopenjdk
   - alnum
+  - Anchore
   - Antora
   - antrun
   - apikey
@@ -82,6 +83,9 @@ words:
   - Djava
   - Djgroups
   - Dkeycloak
+  - Dskip
+  - DskipTests
+  - Dsonar
   - dockerbuild
   - dockerconfigjson
   - dockerhub
@@ -244,6 +248,7 @@ words:
   - securityhotspotadmin
   - selfsubjectrulesreviews
   - Semgrep
+  - semgrepignore
   - sergk
   - serviceaccount
   - serviceaccounts
@@ -258,6 +263,7 @@ words:
   - slsaprovenance
   - Snyk
   - sonarqube
+  - sonarscanner
   - sonarsource
   - Sonatype
   - sshkey
@@ -287,6 +293,7 @@ words:
   - trgm
   - triggertemplate
   - triggertemplates
+  - triaging
   - trustcacerts
   - truststore
   - usedomainname

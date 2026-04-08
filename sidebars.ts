@@ -239,6 +239,7 @@ const sidebars: SidebarsConfig = {
           label: 'Security and Compliance',
           items: [
             'operator-guide/devsecops/overview',
+            'operator-guide/devsecops/security-pipelines',
             'operator-guide/devsecops/dependency-track',
             'operator-guide/devsecops/defectdojo',
           ],

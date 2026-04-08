@@ -20,6 +20,10 @@ Inspect the main steps to perform for installing DefectDojo via Helm Chart.
   It is also possible to install DefectDojo using the add-ons approach. For details, please refer to the [KubeRocketCI addons approach](https://github.com/epam/edp-cluster-add-ons).
 :::
 
+:::note
+  For details on how KubeRocketCI pipelines report findings to DefectDojo, including the data model, engagement naming, and scan types, refer to [Security Scanning Pipelines](./security-pipelines.md).
+:::
+
 ## Prerequisites
 
 * Kubectl version 1.34.0+ is installed. Please refer to the [Kubernetes official website](https://kubernetes.io/releases/download/) for details.

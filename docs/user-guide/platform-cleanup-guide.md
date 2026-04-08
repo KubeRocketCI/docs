@@ -80,7 +80,7 @@ The last platform resource remaining is [pipeline runs](./pipelines.md). A pipel
 
 ## Third-Party Resource Cleanup
 
-KubeRocketCI supports integrations with a wide range of [third-party tools](../operator-guide/devsecops/overview.md#integrated-tools), many of which are involved in the codebase management process. Therefore, it is crucial to clean up resources associated with these integrations.
+KubeRocketCI supports integrations with a wide range of [third-party tools](../operator-guide/devsecops/overview.md#tool-descriptions), many of which are involved in the codebase management process. Therefore, it is crucial to clean up resources associated with these integrations.
 
 ### Version Control Systems
 

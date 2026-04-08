@@ -16,6 +16,10 @@ import TabItem from '@theme/TabItem';
 
 This documentation guide provides comprehensive instructions for installing and integrating Dependency-Track with the KubeRocketCI.
 
+:::note
+  For details on how KubeRocketCI pipelines generate SBOMs with cdxgen and upload them to Dependency-Track, refer to [Security Scanning Pipelines](./security-pipelines.md).
+:::
+
 ## Prerequisites
 
 * Kubectl version 1.34.0+ is installed. Please refer to the [Kubernetes official website](https://kubernetes.io/releases/download/) for details.

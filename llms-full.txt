@@ -23684,14 +23684,24 @@ http://tekton-results-api-service.tekton-pipelines:8080
 
 ### 6.1. Update OIDC Client Registration
 
-You can **reuse the existing OIDC client** registered for `edp-headlamp`. The client ID and client secret remain the same. Update only the redirect URIs to match the new portal paths:
+You can **reuse the existing OIDC client** registered for `edp-headlamp`. The client ID and client secret remain the same. Update the redirect URIs to match the new portal paths:
 
 | Setting                  | Old value (edp-headlamp)                        | New value (krci-portal)                         |
 |--------------------------|-------------------------------------------------|-------------------------------------------------|
-| Redirect URI             | `https://<PORTAL_URL>/oidc-callback`            | `https://<PORTAL_URL>/api/auth/callback`        |
+| Redirect URI             | `https://<PORTAL_URL>/oidc-callback`            | `https://<PORTAL_URL>/auth/callback`            |
 | Post-logout Redirect URI | `https://<PORTAL_URL>/`                         | `https://<PORTAL_URL>/login`                    |
-| PKCE                     | Not required                                    | Enable **S256**                                 |
+| PKCE                     | Not required                                    | Enable **S256** (see note below)                |
 | Scopes                   | `openid`, `profile`, `email`                    | `openid`, `profile`, `email` *(unchanged)*      |
+
+If the identity provider reports **invalid redirect URI** on login or logout, register additional valid redirect URIs as needed — for example `https://<PORTAL_URL>`, `https://<PORTAL_URL>/auth/callback`, and `https://<PORTAL_URL>/login`. As a single catch-all in Keycloak (and similar providers that allow wildcards), you can use `https://<PORTAL_URL>/*`.
+
+:::warning
+If the OIDC client is reconciled from Git by the Keycloak operator (for example via `kuberocketci-rbac` in [edp-cluster-add-ons](https://github.com/epam/edp-cluster-add-ons/blob/main/clusters/core/addons/kuberocketci-rbac/templates/kubernetes/keycloak-client.yaml)), manual edits in the Keycloak UI will be overwritten. Update `redirectUris` (and related fields) in that manifest — or your fork/overlay — so the desired URIs persist across reconciles.
+:::
+
+:::note
+**PKCE** (Proof Key for Code Exchange, RFC 7636) binds the authorization code to the client that started the login, which reduces risk if an authorization code is intercepted. The portal is configured with `OIDC_CODE_CHALLENGE_METHOD: S256` (SHA-256 code challenge). In your IdP, enable PKCE for this client and use the **S256** method where the UI offers it.
+:::
 
 :::note
 **Azure AD** users: the portal automatically normalizes Azure AD's array-of-JSON-strings groups format — no additional provider configuration is needed.
@@ -23713,18 +23723,18 @@ To also enable the SonarQube SAST and Dependency Track SCA pages, add their cred
 ```bash title="Create portal-secret with optional integrations"
 kubectl create secret generic portal-secret \
   --namespace <krci-namespace> \
-  --from-literal=serverSecret="$(openssl rand -base64 32)" \
+  --from-literal=SERVER_SECRET="$(openssl rand -base64 32)" \
   --from-literal=oidcClientSecret="<oidc-client-secret>" \
-  --from-literal=sonarToken="squ_xxxxxxxxxxxxxxxxxxxx" \
+  --from-literal=SONAR_TOKEN="squ_xxxxxxxxxxxxxxxxxxxx" \
   --from-literal=dependencyTrackApiKey="odt_xxxxxxxxxxxxxxxxxxxx"
 ```
 
-| Key                     | Purpose                                                                              | Required |
-|-------------------------|--------------------------------------------------------------------------------------|----------|
-| `serverSecret`          | Session cookie encryption (min 32 chars). Changing this invalidates active sessions. | Yes      |
-| `oidcClientSecret`      | OIDC client secret from your identity provider                                       | Yes      |
-| `sonarToken`            | SonarQube personal/analysis token (`Browse` + `View Issues` permissions sufficient)  | Optional |
-| `dependencyTrackApiKey` | From Dependency Track → Administration → API Keys                                    | Optional |
+| Key                       | Purpose                                                                              | Required |
+|---------------------------|--------------------------------------------------------------------------------------|----------|
+| `SERVER_SECRET`           | Session cookie encryption (min 32 chars). Changing this invalidates active sessions. | Yes      |
+| `OIDC_CLIENT_SECRET`      | OIDC client secret from your identity provider                                       | Yes      |
+| `SONAR_TOKEN`             | SonarQube personal/analysis token (`Browse` + `View Issues` permissions sufficient)  | Optional |
+| `DEPENDENCY_TRACK_API_KEY`| From Dependency Track → Administration → API Keys                                    | Optional |
 
 :::note
 If using the External Secrets Operator (`eso.enabled: true`), the chart creates an `ExternalSecret` instead of reading this Secret directly. Ensure the secret path `eso.secretPath` (default: `/infra/core/addons/krci-portal`) contains all required keys.

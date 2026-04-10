@@ -253,8 +253,8 @@ The portal requires a Kubernetes Secret named `portal-secret` to exist before th
 ```bash title="Create portal-secret"
 kubectl create secret generic portal-secret \
   --namespace <krci-namespace> \
-  --from-literal=serverSecret="$(openssl rand -base64 32)" \
-  --from-literal=oidcClientSecret="<client-secret-from-oidc-provider>"
+  --from-literal=SERVER_SECRET="$(openssl rand -base64 32)" \
+  --from-literal=OIDC_CLIENT_SECRET="<client-secret-from-oidc-provider>"
 ```
 
 To also enable the SonarQube SAST and Dependency Track SCA pages, add their credentials:
@@ -263,9 +263,9 @@ To also enable the SonarQube SAST and Dependency Track SCA pages, add their cred
 kubectl create secret generic portal-secret \
   --namespace <krci-namespace> \
   --from-literal=SERVER_SECRET="$(openssl rand -base64 32)" \
-  --from-literal=oidcClientSecret="<oidc-client-secret>" \
+  --from-literal=OIDC_CLIENT_SECRET="<oidc-client-secret>" \
   --from-literal=SONAR_TOKEN="squ_xxxxxxxxxxxxxxxxxxxx" \
-  --from-literal=dependencyTrackApiKey="odt_xxxxxxxxxxxxxxxxxxxx"
+  --from-literal=DEPENDENCY_TRACK_API_KEY="odt_xxxxxxxxxxxxxxxxxxxx"
 ```
 
 | Key                       | Purpose                                                                              | Required |

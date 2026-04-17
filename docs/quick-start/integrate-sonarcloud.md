@@ -67,7 +67,7 @@ To integrate SonarCloud with the platform, follow the steps below:
 
     Set the **Previous** version option and click **Create project**:
 
-    ![Add new project](../assets/quick-start/add_sonar_project2.png "Add new project")
+    ![Add new project](../assets/quick-start/previous-version.png "Add new project")
 
 6. On the project menu, navigate to **Branches** menu, select `master` branch and rename it to `main`. You can skip this step if the default branch is already `main`:
 

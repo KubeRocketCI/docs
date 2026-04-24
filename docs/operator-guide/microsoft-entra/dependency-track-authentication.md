@@ -177,4 +177,4 @@ After completing these steps, Dependency-Track is configured to use Microsoft En
 
 ## Related Articles
 
-- [OpenID Connect (OIDC) Authentication Overview](./oidc-authentication-overview.md)
+* [OpenID Connect (OIDC) Authentication Overview](./oidc-authentication-overview.md)

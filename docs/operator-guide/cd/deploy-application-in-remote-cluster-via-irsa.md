@@ -26,10 +26,10 @@ KubeRocketCI enables secure deployment of applications to remote AWS EKS cluster
 
 Before implementing IRSA for cross-account deployments, the following requirements must be met:
 
-- Configured two [AWS accounts](https://docs.aws.amazon.com/accounts/latest/reference/getting-started.html): Account A (where KubeRocketCI is deployed) and Account B (the target account for application deployment);
-- Administrative access to both AWS accounts;
-- Running [EKS cluster](https://docs.aws.amazon.com/eks/latest/userguide/create-cluster.html) in Account A with configured [OIDC Identity Provider](../auth/configure-keycloak-oidc-eks.md) authentication;
-- Running [EKS cluster](https://docs.aws.amazon.com/eks/latest/userguide/create-cluster.html) in Account B as the target cluster for application deployment;
+- Configured two [AWS accounts](https://docs.aws.amazon.com/accounts/latest/reference/getting-started.html): Account A (where KubeRocketCI is deployed) and Account B (the target account for application deployment)
+- Administrative access to both AWS accounts
+- Running [EKS cluster](https://docs.aws.amazon.com/eks/latest/userguide/create-cluster.html) in Account A with configured [OIDC Identity Provider](../auth/configure-keycloak-oidc-eks.md) authentication
+- Running [EKS cluster](https://docs.aws.amazon.com/eks/latest/userguide/create-cluster.html) in Account B as the target cluster for application deployment
 - Installed and configured [Argo CD](../install-argocd.md).
 
 ## Architecture and Working Principles

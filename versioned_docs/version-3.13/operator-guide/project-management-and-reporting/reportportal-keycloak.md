@@ -21,8 +21,8 @@ Follow the steps below to integrate the ReportPortal with Keycloak.
 
 ## Prerequisites
 
-* Keycloak is installed. For detailed instructions, please refer to the provided [documentation](../auth/keycloak.md).
-* ReportPortal is installed. To install it using the Helm Chart, please follow the instructions outlined in the corresponding [documentation](../project-management-and-reporting/install-reportportal.md).
+- Keycloak is installed. For detailed instructions, please refer to the provided [documentation](../auth/keycloak.md).
+- ReportPortal is installed. To install it using the Helm Chart, please follow the instructions outlined in the corresponding [documentation](../project-management-and-reporting/install-reportportal.md).
 
 ## Keycloak Configuration
 
@@ -35,19 +35,19 @@ To apply the Keycloak configuration, the Keycloak Operator is required. For inst
 
 2. Navigate to **Client Scopes** > **your_scope_name** > **Mappers** > **Configure a new mapper** > select the _User Attribute_ mapper type. Add three mappers for the email, first name, and last name by typing `lastName`, `firstName`, and `email` in the _User Attribute_ field:
 
-    * _Name_ is a display name in Keycloak.
-    * _User Attribute_ is a user property for mapping.
-    * _SAML Attribute Name_ is an attribute used for requesting information in the ReportPortal configuration.
-    * _SAML Attribute NameFormat_: `Basic`.
-    * _Aggregate attribute values_: `Off`.
+    - _Name_ is a display name in Keycloak.
+    - _User Attribute_ is a user property for mapping.
+    - _SAML Attribute Name_ is an attribute used for requesting information in the ReportPortal configuration.
+    - _SAML Attribute NameFormat_: `Basic`.
+    - _Aggregate attribute values_: `Off`.
 
     ![User mapper sample](../../assets/operator-guide/project-management-and-reporting/reportportal-keycloak-1.png "User mapper sample")
     ![Scope mappers](../../assets/operator-guide/project-management-and-reporting/reportportal-keycloak-2.png "Scope mappers")
 
 3. Navigate to **Clients** > **Create client** and fill in the following fields:
 
-    * _Client type_: `SAML`.
-    * _Client ID_: `report.portal.sp.id`.
+    - _Client type_: `SAML`.
+    - _Client ID_: `report.portal.sp.id`.
 
     :::warning
       The `report.portal.sp.id` Client ID is a constant value.
@@ -75,13 +75,13 @@ To apply the Keycloak configuration, the Keycloak Operator is required. For inst
 
     ![Add SAML configuration](../../assets/operator-guide/project-management-and-reporting/reportportal-keycloak-6.png "Add SAML configuration")
 
-    * _Provider name_ is the display name in the ReportPortal login page.
-    * _Metadata URL_ `https://<keycloak_url>/auth/realms/<realm>/protocol/saml/descriptor`.
-    * _Email_ is the value from the _SAML Attribute Name_ field in the Keycloak mapper.
-    * _RP callback URL_ `https://<report_portal_url>/uat`.
-    * _Name attributes mode_ is the first & last name (type based on your mapper).
-    * _First name_ is the value from the _SAML Attribute Name_ field in the Keycloak mapper.
-    * _Last name_ is the value from the _SAML Attribute Name_ field in the Keycloak mapper.
+    - _Provider name_ is the display name in the ReportPortal login page.
+    - _Metadata URL_ `https://<keycloak_url>/auth/realms/<realm>/protocol/saml/descriptor`.
+    - _Email_ is the value from the _SAML Attribute Name_ field in the Keycloak mapper.
+    - _RP callback URL_ `https://<report_portal_url>/uat`.
+    - _Name attributes mode_ is the first & last name (type based on your mapper).
+    - _First name_ is the value from the _SAML Attribute Name_ field in the Keycloak mapper.
+    - _Last name_ is the value from the _SAML Attribute Name_ field in the Keycloak mapper.
 
 4. Log in to the ReportPortal.
 

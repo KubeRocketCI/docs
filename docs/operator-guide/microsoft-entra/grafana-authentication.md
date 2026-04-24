@@ -206,4 +206,4 @@ After completing these steps, Grafana will be configured to use Microsoft Entra 
 
 ## Related Articles
 
-- [OpenID Connect (OIDC) Authentication Overview](./oidc-authentication-overview.md)
+* [OpenID Connect (OIDC) Authentication Overview](./oidc-authentication-overview.md)

@@ -165,4 +165,4 @@ After completing these steps, SonarQube will be configured with OIDC authenticat
 
 ## Related Articles
 
-- [OpenID Connect Authentication Overview](./oidc-authentication-overview.md)
+* [OpenID Connect Authentication Overview](./oidc-authentication-overview.md)

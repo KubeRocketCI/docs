@@ -20,8 +20,8 @@ Inspect the prerequisites and the main steps to perform for installing Keycloak.
 
 ## Prerequisites
 
-* Kubectl version 1.34.0+ is installed. Please refer to the [Kubernetes official website](https://kubernetes.io/releases/download/) for details.
-* [Helm](https://helm.sh) version 3.14.0+ is installed. Please refer to the [Helm page](https://github.com/helm/helm/releases) on GitHub for details.
+- Kubectl version 1.34.0+ is installed. Please refer to the [Kubernetes official website](https://kubernetes.io/releases/download/) for details.
+- [Helm](https://helm.sh) version 3.14.0+ is installed. Please refer to the [Helm page](https://github.com/helm/helm/releases) on GitHub for details.
 
 :::info
   Out team recommends a Keycloakx helm chart from the [codecentric](https://github.com/codecentric/helm-charts/tree/master/charts/keycloakx) repository, but other repositories can be used as well (e.g. [Bitnami](https://github.com/bitnami/charts/tree/master/bitnami/keycloak/)).
@@ -374,16 +374,16 @@ To create a Keycloak user in the Master realm who can manage other realms, follo
 
 2. In the `Role Mapping` tab, assign the proper roles to the user:
 
-    * Realm Roles:
-      * create-realm,
-      * offline_access,
-      * uma_authorization
+    - Realm Roles:
+      - create-realm,
+      - offline_access,
+      - uma_authorization
 
-    * Client Roles `openshift-realm`:
-      * impersonation,
-      * manage-authorization,
-      * manage-clients,
-      * manage-users
+    - Client Roles `openshift-realm`:
+      - impersonation,
+      - manage-authorization,
+      - manage-clients,
+      - manage-users
 
     ![Role mappings](../../assets/operator-guide/keycloak-roles.png "Role mappings")
 

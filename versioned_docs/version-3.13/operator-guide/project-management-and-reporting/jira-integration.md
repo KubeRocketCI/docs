@@ -16,7 +16,7 @@ import TabItem from '@theme/TabItem';
   <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/project-management-and-reporting/jira-integration" />
 </head>
 
-This documentation guide provides step-by-step instructions for enabling the Jira integration option in the Portal UI for KubeRocketCI. Jira integration allows including useful metadata in Jira tickets.
+This documentation guide provides step-by-step instructions for enabling the Jira integration option in the KubeRocketCI portal for KubeRocketCI. Jira integration allows including useful metadata in Jira tickets.
 
 ## Overview
 
@@ -26,9 +26,9 @@ By linking CI pipelines to Jira issues, teams can get a better understanding of 
 
 Enabling Jira integration allows for the automatic population of three fields in Jira tickets: Fix Versions, Components, and Labels. Each of these fields provides distinct benefits:
 
-* **Fix Versions**: helps track progress against release schedules;
-* **Components**: allows grouping related issues together;
-* **Labels**: enables identification of specific types of work.
+- **Fix Versions**: helps track progress against release schedules
+- **Components**: allows grouping related issues together
+- **Labels**: enables identification of specific types of work.
 
 Teams can utilize these fields to enhance their work prioritization, identify dependencies, improve collaboration, and ultimately achieve faster software delivery.
 
@@ -137,9 +137,9 @@ In order to adjust the Jira server integration, add the JiraServer CR by perform
 
 KubeRocketCI offers the capability to incorporate Jira integration as part of its deployment process. To follow this approach, please review the following parameters of the [values.yaml](https://github.com/epam/edp-install/blob/release/3.9/deploy-templates/values.yaml#L145) file. Enabling the `jira.integration` parameter creates the following custom resources:
 
-* QuickLink;
-* JiraServer;
-* External Secrets Operator (in case it is used).
+- QuickLink
+- JiraServer
+- External Secrets Operator (in case it is used)
 
 To set up Jira integration along with the platform, follow the steps below:
 
@@ -159,17 +159,17 @@ There are four predefined variables, each with specific values, that can be util
 
 When using the `semver versioning` scheme:
 
-* **EDP_COMPONENT** – yields the name of the application;
-* **EDP_VERSION** – produces either 0.0.0-SNAPSHOT or 0.0.0-RC as output;
-* **EDP_SEM_VERSION** – generates a semantic version, specifically 0.0.0;
-* **EDP_GITTAG** – returns a Git tag format such as build/0.0.0-SNAPSHOT.2 or build/0.0.0-RC.2
+- **EDP_COMPONENT** – yields the name of the application
+- **EDP_VERSION** – produces either 0.0.0-SNAPSHOT or 0.0.0-RC as output
+- **EDP_SEM_VERSION** – generates a semantic version, specifically 0.0.0
+- **EDP_GITTAG** – returns a Git tag format such as build/0.0.0-SNAPSHOT.2 or build/0.0.0-RC.2
 
 If the `default versioning` type is used:
 
-* **EDP_COMPONENT** – returns application-name;
-* **EDP_VERSION** – returns the date when the application was tagged. (Example: 20231023-131217);
-* **EDP_SEM_VERSION** – returns the date when the application was tagged. (Example: 20231023-131217);
-* **EDP_GITTAG** – returns the date when the application was tagged. (Example: 20231023-131217).
+- **EDP_COMPONENT** – returns application-name
+- **EDP_VERSION** – returns the date when the application was tagged. (Example: 20231023-131217)
+- **EDP_SEM_VERSION** – returns the date when the application was tagged. (Example: 20231023-131217)
+- **EDP_GITTAG** – returns the date when the application was tagged. (Example: 20231023-131217).
 
 :::note
   There are no character restrictions when combining the variables. You can concatenate them using the dash sign.
@@ -187,4 +187,4 @@ Should you encounter an issue where metadata is not appearing within a Jira tick
 
 ## Related Articles
 
-* [Add Application](../../user-guide/add-application.md)
+- [Add Application](../../user-guide/add-application.md)

@@ -17,8 +17,6 @@ This page provides a concise overview of the advanced components available in Ku
 
 Find below the list of the key components used by KubeRocketCI:
 
-Here's the table with the added 'Description' column containing a short description for each component:
-
 |Component|Requirement Level|Description|
 |:-|:-:|:-|
 |[Tekton](../install-tekton.md)|Mandatory|A cloud-native solution for building CI/CD pipelines.|

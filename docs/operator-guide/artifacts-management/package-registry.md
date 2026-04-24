@@ -17,19 +17,19 @@ This page describes the supported package registry providers and provides detail
 
 Currently, KubeRocketCI support the following package registries:
 
-* Sonatype Nexus Repository OSS;
-* GitLab;
-* GitHub;
-* Azure DevOps.
+- Sonatype Nexus Repository OSS
+- GitLab
+- GitHub
+- Azure DevOps
 
 The table below displays the supported registries and the languages they correspond to:
 
 |Language|Framework|Build Tool|Proxy Registry|Snapshots/Releases Registry|
 |------------|:-------------------------------------------------------:|:------------------:|:-----------------------------------------:|:-----------------------------------------:|
-| Java|Java 17<br />Java 21<br />Java 25<br />|Maven| Nexus<br />Gitlab<br />GitHub<br />Azure DevOps | Nexus<br />Gitlab<br />GitHub<br />Azure DevOps|
-| Python|Python 3.8<br />FastAPI<br />Flask|Python|Nexus<br />Gitlab<br />Azure DevOps|Nexus<br />Gitlab<br />Azure DevOps|
+| Java|Java 17<br />Java 21<br />Java 25<br />|Maven<br />Gradle| Nexus<br />Gitlab<br />GitHub<br />Azure DevOps | Nexus<br />Gitlab<br />GitHub<br />Azure DevOps|
+| Python|Python 3.11<br />FastAPI<br />Flask|Python|Nexus<br />Gitlab<br />Azure DevOps|Nexus<br />Gitlab<br />Azure DevOps|
 | C#|.Net 3.1<br />.Net 6.0|.Net|No proxy is used for this language.|Nexus<br />Gitlab<br />GitHub<br />Azure DevOps|
-| JavaScript | React<br />Vue<br />Angular<br />Express<br />Next.js<br />Antora |NPM| Nexus<br />Gitlab<br />GitHub<br />Azure DevOps | Nexus<br />Gitlab<br />GitHub<br />Azure DevOps |
+| JavaScript | React<br />Vue<br />Angular<br />Express<br />Next.js<br />Antora |NPM<br />PNPM| Nexus<br />Gitlab<br />GitHub<br />Azure DevOps | Nexus<br />Gitlab<br />GitHub<br />Azure DevOps |
 
 ## Proxy Package Registry Configuration
 
@@ -66,13 +66,13 @@ A new custom configuration map should contain the `settings.xml` file, which ove
 
 For example, the following configuration map contains the `settings.xml` file with the following settings:
 
-* **Proxy registry**: Nexus.
-* **Snapshots/Releases registry**: Azure DevOps registry.
-* **Authentication**:
-  * `CI_USERNAME` and `CI_PASSWORD` - these environment variables are used for authentication to Nexus.
-  * `CI_AZURE_DEVOPS_USERNAME` and `CI_AZURE_DEVOPS_PASSWORD` - these environment variables are used for authentication to Azure DevOps registry.
-* **Secrets**:
-  * `CI_AZURE_DEVOPS_USERNAME` and `CI_AZURE_DEVOPS_PASSWORD` - these environment variables are taken from the `package-registries-auth-secret` secret.
+- **Proxy registry**: Nexus.
+- **Snapshots/Releases registry**: Azure DevOps registry.
+- **Authentication**:
+  - `CI_USERNAME` and `CI_PASSWORD` - these environment variables are used for authentication to Nexus.
+  - `CI_AZURE_DEVOPS_USERNAME` and `CI_AZURE_DEVOPS_PASSWORD` - these environment variables are used for authentication to Azure DevOps registry.
+- **Secrets**:
+  - `CI_AZURE_DEVOPS_USERNAME` and `CI_AZURE_DEVOPS_PASSWORD` - these environment variables are taken from the `package-registries-auth-secret` secret.
 
 :::note Example: custom-maven-settings.yaml
 
@@ -157,13 +157,13 @@ which override the default npm configuration.
 For example, the following configuration map contains the `.npmrc-ci`, `.npmrc-publish-snapshots` and `.npmrc-publish-releases` files
 with the following settings:
 
-* **Proxy registry**: Nexus.
-* **Snapshots/Releases registry**: Azure DevOps registry.
-* **Authentication**:
-  * 'upBase64' (`"${CI_USERNAME}:${CI_PASSWORD}"` string in base64) - this environment variable is used for authentication to Nexus.
-  * `CI_AZURE_DEVOPS_USERNAME` and `CI_AZURE_DEVOPS_PASSWORD_IN_BASE64` - these environment variables are used for authentication to Azure DevOps registry.
-* **Secrets**:
-  * `CI_AZURE_DEVOPS_USERNAME` and `CI_AZURE_DEVOPS_PASSWORD_IN_BASE64` - these environment variables are taken from the `package-registries-auth-secret` secret.
+- **Proxy registry**: Nexus.
+- **Snapshots/Releases registry**: Azure DevOps registry.
+- **Authentication**:
+  - 'upBase64' (`"${CI_USERNAME}:${CI_PASSWORD}"` string in base64) - this environment variable is used for authentication to Nexus.
+  - `CI_AZURE_DEVOPS_USERNAME` and `CI_AZURE_DEVOPS_PASSWORD_IN_BASE64` - these environment variables are used for authentication to Azure DevOps registry.
+- **Secrets**:
+  - `CI_AZURE_DEVOPS_USERNAME` and `CI_AZURE_DEVOPS_PASSWORD_IN_BASE64` - these environment variables are taken from the `package-registries-auth-secret` secret.
 
 :::note Example: custom-npm-settings.yaml
 
@@ -200,10 +200,10 @@ This custom configuration map should contain the PIP_TRUSTED_HOST, PIP_INDEX, PI
 
 For example, the following configuration map contains the following settings:
 
-* **Proxy registry**: Azure DevOps registry.
-* **Snapshots/Releases registry**: Azure DevOps registry.
-* **Authentication**:
-  * 'upBase64' (`"${CI_USERNAME}:${CI_PASSWORD}"` string in base64) - this environment variable is used for authentication to Azure DevOps registry.
+- **Proxy registry**: Azure DevOps registry.
+- **Snapshots/Releases registry**: Azure DevOps registry.
+- **Authentication**:
+  - 'upBase64' (`"${CI_USERNAME}:${CI_PASSWORD}"` string in base64) - this environment variable is used for authentication to Azure DevOps registry.
 
 :::note Example: custom-python-settings.yaml
 
@@ -228,11 +228,11 @@ A new custom configuration map should contain the `nuget.config` file, which ove
 
 For example, the following configuration map contains the `nuget.config` file with the following settings:
 
-* **Snapshots/Releases registry**: Azure DevOps registry.
-* **Authentication**:
-  * `CI_AZURE_DEVOPS_USERNAME` and `CI_AZURE_DEVOPS_PASSWORD`  - these environment variables are used for authentication to Azure DevOps registry.
-* **Secrets**:
-  * `CI_AZURE_DEVOPS_USERNAME` and `CI_AZURE_DEVOPS_PASSWORD` - these environment variables are taken from the `package-registries-auth-secret` secret.
+- **Snapshots/Releases registry**: Azure DevOps registry.
+- **Authentication**:
+  - `CI_AZURE_DEVOPS_USERNAME` and `CI_AZURE_DEVOPS_PASSWORD`  - these environment variables are used for authentication to Azure DevOps registry.
+- **Secrets**:
+  - `CI_AZURE_DEVOPS_USERNAME` and `CI_AZURE_DEVOPS_PASSWORD` - these environment variables are taken from the `package-registries-auth-secret` secret.
 
 :::note Example: custom-nuget-settings.yaml
 

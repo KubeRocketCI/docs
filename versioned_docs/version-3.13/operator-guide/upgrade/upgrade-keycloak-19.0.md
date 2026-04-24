@@ -17,8 +17,8 @@ Starting from Keycloak v.18.x.x, the Keycloak server has been moved from the Wil
 
 There are two ways to upgrade Keycloak v.17.0.x-legacy to v.19.0.x on Kubernetes, please perform the steps described in the [Prerequisites](#prerequisites) section of this tutorial, and then select a suitable upgrade strategy for your environment:
 
-* [Upgrade Postgres database to a minor release v.11.17](#upgrade-postgres-database-to-a-minor-release-v1117)
-* [Migrate Postgres database from Postgres v.11.x to v.14.5](#migrate-postgres-database-from-postgres-v11x-to-v145)
+- [Upgrade Postgres database to a minor release v.11.17](#upgrade-postgres-database-to-a-minor-release-v1117)
+- [Migrate Postgres database from Postgres v.11.x to v.14.5](#migrate-postgres-database-from-postgres-v11x-to-v145)
 
 ## Prerequisites
 
@@ -26,19 +26,19 @@ Before upgrading Keycloak, please perform the steps below:
 
 1. Create a backup/snapshot of the Keycloak database volume. Locate the AWS `volumeID` and then create its [snapshot](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-creating-snapshot.html) on AWS:
 
-    * Find the `PVC` name attached to the Postgres pod. It can be similar to `data-keycloak-postgresql-0` if the Postgres `StatefulSet` name is `keycloak-postgresql`:
+    - Find the `PVC` name attached to the Postgres pod. It can be similar to `data-keycloak-postgresql-0` if the Postgres `StatefulSet` name is `keycloak-postgresql`:
 
       ```bash
       kubectl get pods keycloak-postgresql-0 -n security -o jsonpath='{.spec.volumes[*].persistentVolumeClaim.claimName}{"\n"}'
       ```
 
-    * Locate the `PV` `volumeName` in the `data-keycloak-postgresql-0` Persistent Volume Claim:
+    - Locate the `PV` `volumeName` in the `data-keycloak-postgresql-0` Persistent Volume Claim:
 
       ```bash
       kubectl get pvc data-keycloak-postgresql-0 -n security -o jsonpath='{.spec.volumeName}{"\n"}'
       ```
 
-    * Get `volumeID` in the Persistent Volume:
+    - Get `volumeID` in the Persistent Volume:
 
       ```bash
       kubectl get pv ${pv_name} -n security -o jsonpath='{.spec.awsElasticBlockStore.volumeID}{"\n"}'
@@ -47,8 +47,8 @@ Before upgrading Keycloak, please perform the steps below:
 2. Add two additional keys: `password` and `postgres-password`, to the `keycloak-postgresql` secret in the Keycloak namespace.
 
     :::note
-      * The `password` key must have the same value as the `postgresql-password` key.
-      * The `postgres-password` key must have the same value as the `postgresql-postgres-password` key.
+      - The `password` key must have the same value as the `postgresql-password` key.
+      - The `postgres-password` key must have the same value as the `postgresql-postgres-password` key.
     :::
 
     The latest chart for Keycloak.X does not have an option to override Postgres password and admin password keys in the secret, and it uses the Postgres [defaults](https://github.com/codecentric/helm-charts/blob/master/charts/keycloakx/values.yaml#L371), therefore, a new secret scheme must be implemented:
@@ -109,11 +109,11 @@ To upgrade Keycloak by upgrading [Postgres Database](https://www.postgresql.org/
     :::
 
     :::note
-      * `nameOverride: "keycloak"` sets the name of the Keycloak pod. It must be the same Keycloak name as in the previous `StatefulSet`.
-      * Change Ingress host name to the Keycloak host name.
-      * `hostname: keycloak-postgresql` is the hostname of the pod with the Postgres database that is the same as Postgres StatefulSet name, for example, `keycloak-postgresql`.
-      * `"/opt/keycloak/bin/kc.sh start --auto-build"` was used in the legacy Keycloak version. However, it is no longer required in the new Keycloak version since it is [deprecated](https://www.keycloak.org/docs/latest/upgrading/index.html#changes-to-the-server-configuration-and-startup) and used by default.
-      * Optionally, use the following command for applying the old Keycloak theme:
+      - `nameOverride: "keycloak"` sets the name of the Keycloak pod. It must be the same Keycloak name as in the previous `StatefulSet`.
+      - Change Ingress host name to the Keycloak host name.
+      - `hostname: keycloak-postgresql` is the hostname of the pod with the Postgres database that is the same as Postgres StatefulSet name, for example, `keycloak-postgresql`.
+      - `"/opt/keycloak/bin/kc.sh start --auto-build"` was used in the legacy Keycloak version. However, it is no longer required in the new Keycloak version since it is [deprecated](https://www.keycloak.org/docs/latest/upgrading/index.html#changes-to-the-server-configuration-and-startup) and used by default.
+      - Optionally, use the following command for applying the old Keycloak theme:
 
           ```bash
           bin/kc.sh start --features-disabled=admin2
@@ -236,8 +236,8 @@ To upgrade Keycloak by upgrading [Postgres Database](https://www.postgresql.org/
 3. Upgrade the Keycloak Helm chart:
 
     :::note
-      * The Helm chart is substituted with the new KeyacloakX instance.
-      * Change the namespace and the values file name if required.
+      - The Helm chart is substituted with the new KeyacloakX instance.
+      - Change the namespace and the values file name if required.
     :::
 
     ```bash
@@ -265,9 +265,9 @@ To upgrade Keycloak by upgrading [Postgres Database](https://www.postgresql.org/
 2. Create values for Postgres:
 
     :::note
-      * Postgres v.11 and Postgres v.14.5 are not compatible.
-      * Postgres image will be upgraded to a minor release v.11.17.
-      * `fullnameOverride: "keycloak-postgresql"` sets the name of the Postgres StatefulSet. It must be the same as in the previous `StatefulSet`.
+      - Postgres v.11 and Postgres v.14.5 are not compatible.
+      - Postgres image will be upgraded to a minor release v.11.17.
+      - `fullnameOverride: "keycloak-postgresql"` sets the name of the Postgres StatefulSet. It must be the same as in the previous `StatefulSet`.
     :::
 
     <details>
@@ -356,11 +356,11 @@ To upgrade Keycloak by migrating Postgres database from Postgres v.11.x to v.14.
 1. Log in to the current Keycloak Postgres pod and create a logical backup of all roles and databases using the [pg_dumpall](https://www.postgresql.org/docs/current/app-pg-dumpall.html) application. If there is no access to the Postgres Superuser, backup the Keycloak database with the [pg_dump](https://www.postgresql.org/docs/current/app-pgdump.html) application:
 
     :::note
-      * The secret key `postgresql-postgres-password` is for the `postgres` Superuser and `postgresql-password` is for `admin` user. The `admin` user is indicated by default in the Postgres Helm chart.<br />
+      - The secret key `postgresql-postgres-password` is for the `postgres` Superuser and `postgresql-password` is for `admin` user. The `admin` user is indicated by default in the Postgres Helm chart.<br />
       The `admin` user may not have enough permissions to dump all Postgres databases and roles, so the preferred option for exporting all objects is using the `pg_dumpall` tool with the `postgres` Superuser.<br />
-      * If the `PGPASSWORD` variable is not specified before using the `pg_dumpall` tool, you will be prompted to enter a password for each database during the export.
-      * If the `-l keycloak` parameter is specified, `pg_dumpall` will connect to the `keycloak` database for dumping global objects and discovering what other databases should be dumped. By default, `pg_dumpall` will try to connect to `postgres` or `template1` databases. This parameter is optional.
-      * The `pg_dumpall --clean` option adds SQL commands to the dumped file for dropping databases before recreating them during import, as well as `DROP` commands for roles and tablespaces (`pg_dump` also has this option). If the `--clean` parameter is specified, connect to the `postgres` database initially during import via `psql`. The `psql` script will attempt to drop other databases immediately, and that will fail for the database you are connected to. This flag is optional, and it is not included into this tutorial.
+      - If the `PGPASSWORD` variable is not specified before using the `pg_dumpall` tool, you will be prompted to enter a password for each database during the export.
+      - If the `-l keycloak` parameter is specified, `pg_dumpall` will connect to the `keycloak` database for dumping global objects and discovering what other databases should be dumped. By default, `pg_dumpall` will try to connect to `postgres` or `template1` databases. This parameter is optional.
+      - The `pg_dumpall --clean` option adds SQL commands to the dumped file for dropping databases before recreating them during import, as well as `DROP` commands for roles and tablespaces (`pg_dump` also has this option). If the `--clean` parameter is specified, connect to the `postgres` database initially during import via `psql`. The `psql` script will attempt to drop other databases immediately, and that will fail for the database you are connected to. This flag is optional, and it is not included into this tutorial.
     :::
 
     ```bash
@@ -517,13 +517,13 @@ To upgrade Keycloak by migrating Postgres database from Postgres v.11.x to v.14.
       Since the databases were exported in the `sql` format, the [psql](https://www.postgresql.org/docs/current/app-psql.html) tool will be used to restore (reload) them. [pg_restore](https://www.postgresql.org/docs/current/app-pgrestore.html) does not support this plain-text format.
     :::
 
-    * If the entire Postgres database cluster was migrated with the `postgres` Superuser using `pg_dumpall`, use the import command without indicating the database:
+    - If the entire Postgres database cluster was migrated with the `postgres` Superuser using `pg_dumpall`, use the import command without indicating the database:
 
       ```bash
       psql -U postgres -f /tmp/keycloak_wildfly_db_dump.sql
       ```
 
-    * If the database was migrated with the `admin` user using `pg_dump`, the `postgres` Superuser still can be used to restore it, but, in this case, a database must be indicated:
+    - If the database was migrated with the `admin` user using `pg_dump`, the `postgres` Superuser still can be used to restore it, but, in this case, a database must be indicated:
 
       :::warning
         If the database name was not indicated during the import for the file dumped with `pg_dump`, the `psql` tool will import this database to a default Postgres database called `postgres`.
@@ -533,7 +533,7 @@ To upgrade Keycloak by migrating Postgres database from Postgres v.11.x to v.14.
       psql -U postgres -d keycloak -f /tmp/keycloak_wildfly_db_dump.sql
       ```
 
-    * If the `postgres` Superuser is not accessible in the Postgres pod, run the command under the `admin` or any other user that has the database permissions. In this case, indicate the database as well:
+    - If the `postgres` Superuser is not accessible in the Postgres pod, run the command under the `admin` or any other user that has the database permissions. In this case, indicate the database as well:
 
         ```bash
         psql -U admin -d keycloak -f /tmp/keycloak_wildfly_db_dump.sql
@@ -567,11 +567,11 @@ To upgrade Keycloak by migrating Postgres database from Postgres v.11.x to v.14.
 2. Create Keycloak values:
 
     :::note
-      * `nameOverride: "keycloak"` sets the name of the Keycloak pod. It must be the same Keycloak name as in the previous `StatefulSet`.
-      * Change Ingress host name to the Keycloak host name.
-      * `hostname: keycloak-postgresql` is the hostname of the pod with the Postgres database that is the same as Postgres StatefulSet name, for example, `keycloak-postgresql`.
-      * `"/opt/keycloak/bin/kc.sh start --auto-build"` was used in the legacy Keycloak version. However, it is no longer required in the new Keycloak version since it is [deprecated](https://www.keycloak.org/docs/latest/upgrading/index.html#changes-to-the-server-configuration-and-startup) and used by default.
-      * Optionally, use the following command for applying the old Keycloak theme:
+      - `nameOverride: "keycloak"` sets the name of the Keycloak pod. It must be the same Keycloak name as in the previous `StatefulSet`.
+      - Change Ingress host name to the Keycloak host name.
+      - `hostname: keycloak-postgresql` is the hostname of the pod with the Postgres database that is the same as Postgres StatefulSet name, for example, `keycloak-postgresql`.
+      - `"/opt/keycloak/bin/kc.sh start --auto-build"` was used in the legacy Keycloak version. However, it is no longer required in the new Keycloak version since it is [deprecated](https://www.keycloak.org/docs/latest/upgrading/index.html#changes-to-the-server-configuration-and-startup) and used by default.
+      - Optionally, use the following command for applying the old Keycloak theme:
 
           ```bash
           bin/kc.sh start --features-disabled=admin2
@@ -729,14 +729,14 @@ PGPASSWORD="${postgresql_postgres-password}" vacuumdb --analyze --verbose --all 
 
 :::note
 
-  * The [`kubectl`](https://github.com/kubernetes/kubectl) tool is required for using this script.
-  * This script will likely work for any other Postgres database besides Keycloak after some adjustments. It queries the `pg_dump`, `pg_dumpall`, `psql`, and `vacuumdb` commands under the hood.
+  - The [`kubectl`](https://github.com/kubernetes/kubectl) tool is required for using this script.
+  - This script will likely work for any other Postgres database besides Keycloak after some adjustments. It queries the `pg_dump`, `pg_dumpall`, `psql`, and `vacuumdb` commands under the hood.
 
 :::
 
 The following script can be used for exporting and importing Postgres databases as well as optimizing them with the [vacuumdb](https://www.postgresql.org/docs/current/app-vacuumdb.html) application. Please examine the code and make the adjustments if required.
 
-* By default, the following command exports Keycloak Postgres databases from a Kubernetes pod to a local machine:
+- By default, the following command exports Keycloak Postgres databases from a Kubernetes pod to a local machine:
 
     ```bash
     ./script.sh
@@ -744,13 +744,13 @@ The following script can be used for exporting and importing Postgres databases 
 
   After running the command, please follow the prompt.
 
-* To import a database backup to a newly created Postgres Kubernetes pod, pass a database dump sql file to the script:
+- To import a database backup to a newly created Postgres Kubernetes pod, pass a database dump sql file to the script:
 
     ```bash
       ./script.sh path-to/db_dump.sql
     ```
 
-* The `-h` flag prints help, and `-c|-v` runs the `vacuumdb` garbage collector and analyzer.
+- The `-h` flag prints help, and `-c|-v` runs the `vacuumdb` garbage collector and analyzer.
 
 <details>
 <summary><b>View: keycloak_db_migration.sh</b></summary>

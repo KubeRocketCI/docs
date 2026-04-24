@@ -19,17 +19,17 @@ Review the necessary prerequisites and follow the steps to enable Argo CD within
 
 The following tools must be installed:
 
-* [KubeRocketCI](./install-kuberocketci.md)
-* [Kubectl version 1.34+](https://kubernetes.io/docs/tasks/tools/)
-* [Helm version 3.10+](https://github.com/helm/helm/releases)
-* [Keycloak](./auth/keycloak.md) (optional)
+- [KubeRocketCI](./install-kuberocketci.md)
+- [Kubectl version 1.34+](https://kubernetes.io/docs/tasks/tools/)
+- [Helm version 3.10+](https://github.com/helm/helm/releases)
+- [Keycloak](./auth/keycloak.md) (optional)
 
 ## Installation
 
 Enabling Argo CD on the platform involves two main steps:
 
-* Argo CD installation
-* Argo CD integration with Add-Ons
+- Argo CD installation
+- Argo CD integration with Add-Ons
 
 Argo CD can be installed in several ways, please follow the [official documentation](https://argo-cd.readthedocs.io/en/stable/operator-manual/installation/) for more details. It is also possible to install Argo CD using the [edp-cluster-add-ons](https://github.com/epam/edp-cluster-add-ons/tree/main/argo-cd).
 
@@ -143,7 +143,7 @@ Follow the steps below to install Argo CD using Helm:
 
     After completing the installation of these components, proceed with the configuration of Argo CD.
 
-6. Update Argo CD helm chart:
+6. Update Argo CD Helm chart:
 
     :::note
     After installing the necessary add-ons, such as the External Secrets Operator, it is recommended to add ESO components for all secrets that were manually created during the integration of [add-ons with Argo CD](add-ons-overview.md). An example can be found [here](https://github.com/epam/edp-cluster-add-ons/blob/main/argo-cd/templates/external-secrets/externalsecret-argocd-github.yaml).
@@ -157,7 +157,7 @@ Follow the steps below to install Argo CD using Helm:
           ```
     :::
 
-    To enable features such as ingress, login via oidc provider, provisioning secret using ESO need to update Argo CD with [values](https://github.com/epam/edp-cluster-add-ons/blob/main/argo-cd/values.yaml) below:
+    To enable features such as ingress, login via OIDC provider, provisioning secret using ESO need to update Argo CD with [values](https://github.com/epam/edp-cluster-add-ons/blob/main/argo-cd/values.yaml) below:
 
     ```yaml title=" kubernetes values.yaml"
     argo-cd:

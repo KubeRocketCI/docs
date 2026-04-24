@@ -29,13 +29,13 @@ To succeed, follow the steps below:
 
 2. Create a new Kubernetes cluster with the following parameters. Please refer to the [official guidelines](https://www.civo.com/docs/kubernetes/create-a-cluster) for more details:
 
-    * **Name**: `demo`
-    * **How many nodes**: `1`
-    * **Select size**: Type: `Standard`, Size: `Medium`
-    * **Network**: `Default`
-    * **Firewall**: `Create a new firewall` with the `6443` and `443` ports opened
-    * **Advanced options**: Kubernetes version: latest (currently 1.34.0)
-    * **Marketplace**: From the `CI/CD` selection choose `Argo CD` and `Tekton` for pre-installation.
+    - **Name**: `demo`
+    - **How many nodes**: `1`
+    - **Select size**: Type: `Standard`, Size: `Medium`
+    - **Network**: `Default`
+    - **Firewall**: `Create a new firewall` with the `6443` and `443` ports opened
+    - **Advanced options**: Kubernetes version: latest (currently 1.34.0)
+    - **Marketplace**: From the `CI/CD` selection choose `Argo CD` and `Tekton` for pre-installation.
 
 3. Wait till the cluster is created.
 
@@ -89,23 +89,39 @@ As soon as the cluster is deployed, it is time to install the KubeRocketCI appli
 
     ![Getting DNS](../assets/operator-guide/civo-get-dns.png "Getting DNS")
 
-6. In the new browser tab, access the Portal UI by typing the URL according to the `https://portal-edp.<DNS_name>` format.
-
-7. Accept the security warning and click the **service access token** link to open the [instructions](../quick-start/platform-installation.md) step 5 on how to get a token to log in to the Portal UI.
-
-8. As soon as the token is created, paste it in the **ID token** field and click the **Authenticate** button.
-
-9. Click the notification in the bottom right corner to open the Account settings menu:
-
-    ![Click notification](../assets/operator-guide/civo-cluster-settings.png "Click notification")
-
-10. In the Cluster Settings menu, enter **krci** in both default and allowed namespaces and click the **CLOSE** button:
+6. In the new browser tab, access the KubeRocketCI portal by typing the URL according to the `https://krci-portal.<DNS_name>` format.
 
     :::note
-      Don't forget to click the **+ ADD** button to add the allowed namespace.
+      You can find the exact portal URL in the krci-portal deployment details.
     :::
 
-    ![Account settings menu](../assets/operator-guide/civo-kuberocketci-portal-cluster-settings-menu.png "Account settings menu")
+7. Create the edp-admin service account and generate an access token to open the KubeRocketCI:
+
+    ```bash
+    kubectl -n krci create serviceaccount edp-admin
+    kubectl create clusterrolebinding edp-admin --serviceaccount=krci:edp-admin --clusterrole=cluster-admin
+    kubectl create token edp-admin -n krci
+    ```
+
+8. In the login menu, paste the generated token in the **Access token** field and click the **Sign in** button.
+
+    ![Portal login menu](../assets/quick-start/edp_portal_login_menu.png "Portal login menu")
+
+
+9. Upon logging in, open the namespaces window by clicking the **Manage Namespaces** button in the top right corner of the UI:
+
+    ![Specify namespaces](../assets/quick-start/edp_portal_ui.png "Specify namespaces")
+
+10. Ensure the `krci` namespace is specified in both default and allowed namespaces. If not, define them manually:
+
+    - Default namespace: `krci`
+    - Allowed namespaces: `krci`
+
+    ![Cluster Settings menu](../assets/quick-start/cluster_settings.png "Cluster Settings menu")
+
+    :::note
+      Remember to press **Enter** to add the allowed namespace to the list.
+    :::
 
 Well done! You've successfully installed the KubeRocketCI platform on the Civo cluster. You're now set to integrate KubeRocketCI with the necessary third-party tools.
 Proceed to the [SonarQube Integration](../quick-start/integrate-sonarcloud.md) page.

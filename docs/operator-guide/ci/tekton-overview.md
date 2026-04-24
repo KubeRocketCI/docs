@@ -26,16 +26,16 @@ Tekton logic is decoupled into separate components:
 
 The diagram above describes the following:
 
-* `Common-library` is the Helm chart of Library type which stores the common logic shareable across all Tekton pipelines.
+- `Common-library` is the Helm chart of Library type which stores the common logic shareable across all Tekton pipelines.
 This library contains Helm templates that generate common Tekton resources.
 
-* `Pipelines-library` is the Helm chart of the Application type which stores the core logic for the KubeRocketCI pipelines.
+- `Pipelines-library` is the Helm chart of the Application type which stores the core logic for the KubeRocketCI pipelines.
 Tekton CRs like Pipelines, Tasks, EventListeners, Triggers, TriggerTemplates, and other resources are delivered with
 this chart.
 
-* `EDP Interceptor` is the custom `Tekton Interceptor` which enriches the payload from the VCSs events with the KubeRocketCI data from the `Codebase` Custom Resource (CR) specification. These data are used to define the Pipeline logic.
+- `EDP Interceptor` is the custom `Tekton Interceptor` which enriches the payload from the VCSs events with the KubeRocketCI data from the `Codebase` Custom Resource (CR) specification. These data are used to define the Pipeline logic.
 
-* `Custom-pipelines` is the Helm chart of the Application type which implements custom logic running
+- `Custom-pipelines` is the Helm chart of the Application type which implements custom logic running
 specifically for internal platform development, for example, CI and Release.
 It also demonstrates the customization flow on the platform.
 
@@ -72,4 +72,4 @@ in the Pipeline.
 Also, Tasks can have a different number of steps that are executed as a Container in Pod.
 
 9. The Kubernetes native approach allows the creation of PipelineRun either with the kubectl tool or
-using the [Portal UI](../../user-guide/application.md).
+using the [KubeRocketCI portal](../../user-guide/application.md).

@@ -24,17 +24,17 @@ To initiate the installation process, navigate to our dedicated [AWS Marketplace
 ## Prerequisites
 
 :::note
-  * A basic understanding of AWS services and navigation is preferred to facilitate smoother setup and deployment processes. If you are new to AWS, please refer to the [AWS Documentation](https://docs.aws.amazon.com/index.html) for detailed information on the services and their usage.
-  * Understanding of Kubernetes: Knowledge of Kubernetes concepts and architecture is recommended for effective management and operation of clusters.
+  - A basic understanding of AWS services and navigation is preferred to facilitate smoother setup and deployment processes. If you are new to AWS, please refer to the [AWS Documentation](https://docs.aws.amazon.com/index.html) for detailed information on the services and their usage.
+  - Understanding of Kubernetes: Knowledge of Kubernetes concepts and architecture is recommended for effective management and operation of clusters.
 :::
 
 Please ensure that you review the [Prerequisites](prerequisites.md) page before proceeding with the deployment of the product. To perform a minimal installation, please ensure that you meet the following requirements:
 
-* You have an available AWS Elastic Kubernetes Service (EKS) cluster for deployment. For detailed instructions on creating a new cluster, please refer to the [AWS EKS Cluster Creation Guide](https://docs.aws.amazon.com/eks/latest/userguide/create-cluster.html). Additionally, you can consult our [EKS Deployment Guide](deploy-aws-eks.md) for step-by-step instructions tailored to your specific needs.
-* You have a domain name available and associated with the ingress object in the cluster.
-* You have cluster administrator access.
-* The [Tekton](install-tekton.md) resources are deployed.
-* You have access to the cluster via a Service Account token.
+- You have an available AWS Elastic Kubernetes Service (EKS) cluster for deployment. For detailed instructions on creating a new cluster, please refer to the [AWS EKS Cluster Creation Guide](https://docs.aws.amazon.com/eks/latest/userguide/create-cluster.html). Additionally, you can consult our [EKS Deployment Guide](deploy-aws-eks.md) for step-by-step instructions tailored to your specific needs.
+- You have a domain name available and associated with the ingress object in the cluster.
+- You have cluster administrator access.
+- The [Tekton](install-tekton.md) resources are deployed.
+- You have access to the cluster via a Service Account token.
 
 ## Deploy KubeRocketCI Platform
 
@@ -92,7 +92,27 @@ To deploy the platform, follow the steps below:
     kubectl get secrets -o jsonpath="{.items[?(@.metadata.annotations['kubernetes\.io/service-account\.name']=='edp-admin')].data.token}" -n krci|base64 --decode; echo
     ```
 
-As a result, you will get access to KubeRocketCI components via KubeRocketCI Portal UI. Navigate to our [Use Cases](../use-cases/index.md) to try out KubeRocketCI functionality. Visit other subsections of the [Operator Guide](../operator-guide/index.md) to figure out how to configure KubeRocketCI and integrate it with various tools.
+7. In the login menu, paste the generated token in the **Access token** field and click the **Sign in** button.
+
+    ![Portal login menu](../assets/quick-start/edp_portal_login_menu.png "Portal login menu")
+
+
+8. Upon logging in, open the namespaces window by clicking the **Manage Namespaces** button in the top right corner of the UI:
+
+    ![Specify namespaces](../assets/quick-start/edp_portal_ui.png "Specify namespaces")
+
+9. Ensure the `krci` namespace is specified in both default and allowed namespaces. If not, define them manually:
+
+    - Default namespace: `krci`
+    - Allowed namespaces: `krci`
+
+    ![Cluster Settings menu](../assets/quick-start/cluster_settings.png "Cluster Settings menu")
+
+    :::note
+      Remember to press **Enter** to add the allowed namespace to the list.
+    :::
+
+As a result, you will get access to KubeRocketCI components via KubeRocketCI portal. Navigate to our [Use Cases](../use-cases/index.md) to try out KubeRocketCI functionality. Visit other subsections of the [Operator Guide](../operator-guide/index.md) to figure out how to configure KubeRocketCI and integrate it with various tools.
 
 ## Related Articles
 

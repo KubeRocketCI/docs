@@ -21,7 +21,7 @@ The [cd-pipeline-operator](https://github.com/epam/edp-cd-pipeline-operator) sho
 ## Disable Automatic Namespace Creation
 
 In certain scenarios, the automatic generation of namespaces might be restricted. For instance, project-specific security protocols might necessitate disabling this feature. This can be achieved by adjusting the `manageNamespace` parameter within the [values.yaml](https://github.com/epam/edp-cd-pipeline-operator/blob/release/2.20/deploy-templates/values.yaml#L96) file.
-By default, `manageNamespace` is enabled (true), but it can be toggled off (false). Consequently, users might encounter issues when attempting to deploy applications through the KubeRocketCI Portal UI due to permission constraints:
+By default, `manageNamespace` is enabled (true), but it can be toggled off (false). Consequently, users might encounter issues when attempting to deploy applications through the KubeRocketCI portal due to permission constraints:
 
   ![Namespace creation error](../../assets/operator-guide/failed_cd_pipeline_creation.png)
 

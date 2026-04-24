@@ -189,7 +189,7 @@ The list of the available Add-Ons:
 |Capsule|A multi-tenancy solution for Kubernetes clusters that provides each tenant with a dedicated namespace where they can freely run their workloads with resource quotas.|false|
 |Capsule tenant|A specific tenant within the Capsule multi-tenancy solution. Each tenant has its own isolated environment within the Kubernetes cluster.|false|
 |DefectDojo|A security vulnerability management tool that allows tracking and managing security findings in applications.|false|
-|DependencyTrack|A Software Composition Analysis (SCA) platform that helps identify and manage open-source dependencies and their associated vulnerabilities.|false|
+|Dependency-Track|A Software Composition Analysis (SCA) platform that helps identify and manage open-source dependencies and their associated vulnerabilities.|false|
 |KubeRocketCI(EDP)|An internal platform created by EPAM to enhance software delivery processes using DevOps principles and tools.|false|
 |Extensions OIDC|KubeRocketCI Helm chart to provision OIDC clients for different Add-Ons using EDP Keycloak Operator.|false|
 |External Secrets|A Kubernetes Operator that fetches secrets from external secret management systems and injects them as Kubernetes Secrets.|false|

@@ -33,7 +33,7 @@ To integrate KrakenD with KubeRocketCI, ensure the following prerequisites are m
 
 ## Installation
 
-There are two approaches to install KrakenD using [edp-cluster-add-ons](https://github.com/epam/edp-cluster-add-ons) repository:
+There are two approaches to install KrakenD using [edp-cluster-add-ons](https://github.com/epam/edp-cluster-add-ons) repository: using Argo CD and using Helm.
 
 ### Approach 1: Deploy Using Argo CD
 
@@ -178,9 +178,9 @@ To configure KrakenD as the API gateway for KubeRocketCI, follow the steps below
 
     To allow KrakenD to connect to the services, it is necessary to create a secret with the required credentials and URLs. The secret should contain the following fields:
 
-    * **SONARQUBE_URL**: The URL of the SonarQube instance. For example: `http://sonar.sonar:9000`
+    - **SONARQUBE_URL**: The URL of the SonarQube instance. For example: `http://sonar.sonar:9000`
 
-    * **SONARQUBE_TOKEN**: The access token, generated during the [SonarQube Access Token creation](#sonarqube) step. The token should be encoded in base64 format. To encode the token into Base64, execute the following command:
+    - **SONARQUBE_TOKEN**: The access token, generated during the [SonarQube Access Token creation](#sonarqube) step. The token should be encoded in base64 format. To encode the token into Base64, execute the following command:
 
         :::warning
         It is necessary to add a colon `:` at the end of the token before encoding it.
@@ -191,25 +191,25 @@ To configure KrakenD as the API gateway for KubeRocketCI, follow the steps below
         echo -n "${sonarqube_user_token}:" | base64
         ```
 
-    * **DEPTRACK_URL**: The API Server URL of the Dependency-Track instance. For example: `http://dependency-track-api-server.dependency-track:8080`
+    - **DEPTRACK_URL**: The API Server URL of the Dependency-Track instance. For example: `http://dependency-track-api-server.dependency-track:8080`
 
-    * **DEPTRACK_TOKEN**: The API key, generated during the [Dependency-Track Access Token creation](#dependency-track) step. Not required to encode in base64 format.
+    - **DEPTRACK_TOKEN**: The API key, generated during the [Dependency-Track Access Token creation](#dependency-track) step. Not required to encode in base64 format.
 
-    * **OPENSEARCH_URL**: The URL of the OpenSearch instance. For example: `https://opensearch-cluster-master.logging:9200`
+    - **OPENSEARCH_URL**: The URL of the OpenSearch instance. For example: `https://opensearch-cluster-master.logging:9200`
 
-    * **OPENSEARCH_CREDS**: The user credentials, created during the [OpenSearch User creation](#opensearch) step. The credentials should be encoded in base64 format. To encode the credentials into Base64, execute the following command:
+    - **OPENSEARCH_CREDS**: The user credentials, created during the [OpenSearch User creation](#opensearch) step. The credentials should be encoded in base64 format. To encode the credentials into Base64, execute the following command:
 
         ```bash
         echo -n "admin:MySecurePass123" | base64
         ```
 
-    * **GITFUSION_URL**: The URL of the [GitFusion](https://github.com/KubeRocketCI/gitfusion) instance. For example: `http://gitfusion.<krci-namespace>:8080`
+    - **GITFUSION_URL**: The URL of the [GitFusion](https://github.com/KubeRocketCI/gitfusion) instance. For example: `http://gitfusion.<krci-namespace>:8080`
 
         :::note
         The `<krci-namespace>` should be replaced with the actual namespace where GitFusion is deployed.
         :::
 
-    * **JWK_URL**: The URL of the Identity Provider (Keycloak or Microsoft Entra ID) to fetch the JSON Web Key (JWK) set.
+    - **JWK_URL**: The URL of the Identity Provider (Keycloak or Microsoft Entra ID) to fetch the JSON Web Key (JWK) set.
 
         - For Keycloak, the URL should be in the following format: `https://keycloak.example.com/auth/realms/<realmName>/protocol/openid-connect/certs`.
         - For Microsoft Entra ID, the URL should be in the following format: `https://login.microsoftonline.com/common/discovery/v2.0/keys`.
@@ -276,6 +276,6 @@ To configure KrakenD as the API gateway for KubeRocketCI, follow the steps below
 * [Install KubeRocketCI With Values File](../install-kuberocketci.md)
 * [Install via Add-Ons](../add-ons-overview.md)
 * [SonarQube Integration](../code-quality/sonarqube.md)
-* [Integrate DependencyTrack](../devsecops/dependency-track.md)
+* [Integrate Dependency-Track](../devsecops/dependency-track.md)
 * [Install Keycloak](../auth/keycloak.md)
 * [Install NGINX Ingress Controller](../install-ingress-nginx.md)

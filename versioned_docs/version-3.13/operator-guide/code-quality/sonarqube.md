@@ -27,8 +27,8 @@ facilitating enhanced code inspection and improvement practices within your deve
 
 Before proceeding, ensure the following prerequisites are in place:
 
-* Kubectl version 1.34.0+ is installed. Please refer to the [Kubernetes official website](https://kubernetes.io/releases/download/) for details.
-* [Helm](https://helm.sh) version 3.14.0+ is installed. Please refer to the [Helm page](https://github.com/helm/helm/releases) on GitHub for details.
+- Kubectl version 1.34.0+ is installed. Please refer to the [Kubernetes official website](https://kubernetes.io/releases/download/) for details.
+- [Helm](https://helm.sh) version 3.14.0+ is installed. Please refer to the [Helm page](https://github.com/helm/helm/releases) on GitHub for details.
 
 ## Installation
 
@@ -142,10 +142,10 @@ The SonarQube instance includes pre-installed plugins to meet common project nee
 
 Access control in SonarQube is organized through predefined groups:
 
-* **sonar-administrators:** System administrators with full access to manage the instance.
-* **sonar-developers:** Developers who can view and edit project settings (managed by the Sonar Operator).
-* **sonar-users:** Default group for all authenticated users with basic project viewing rights.
-* **view-group:** Grants browsing access for users requiring read-only permissions.
+- **sonar-administrators:** System administrators with full access to manage the instance.
+- **sonar-developers:** Developers who can view and edit project settings (managed by the Sonar Operator).
+- **sonar-users:** Default group for all authenticated users with basic project viewing rights.
+- **view-group:** Grants browsing access for users requiring read-only permissions.
 
     ![sonarqube kuberocketci permission template](../../assets/operator-guide/code-quality/sonarqube-kuberocketci-permission-template.png "sonarqube kuberocketci permission template")
 
@@ -153,21 +153,21 @@ Access control in SonarQube is organized through predefined groups:
 
 Permissions in SonarQube are associated with projects through permission templates:
 
-* **edp-default:** The default template applied to all projects, ensuring consistent group-level access management across the platform.
+- **edp-default:** The default template applied to all projects, ensuring consistent group-level access management across the platform.
 
 ### Quality Gates
 
 Quality Gates are used to ensure that code quality standards are met before further development or deployment proceeds:
 
-* **KubeRocketCI way (default):** KuberocketCI quality gates are defined in the SonarQube instance, specifically tailored for the KubeRocketCI project.
-* **Sonar way (built-in):** These are predefined quality gates available directly in SonarQube, not customized for any specific project but rather standardized for general use.
+- **KubeRocketCI way (default):** KuberocketCI quality gates are defined in the SonarQube instance, specifically tailored for the KubeRocketCI project.
+- **Sonar way (built-in):** These are predefined quality gates available directly in SonarQube, not customized for any specific project but rather standardized for general use.
 
     ![sonarqube kuberocketci quality gate](../../assets/operator-guide/code-quality/sonarqube-kuberocketci-qualitygate.png "sonarqube kuberocketci quality gate")
 
 ### Quality Profiles
 
 Quality Profiles define the rules used during code analysis. The Sonar Operator manages quality profiles with the following default setup:
-* **KubeRocketCI way (default):** A Java quality profile based on KubeRocketCI best practices, offering tailored rule sets.
+- **KubeRocketCI way (default):** A Java quality profile based on KubeRocketCI best practices, offering tailored rule sets.
 
 ## Configuration SonarQube ci-user without sonar-operator
 
@@ -185,7 +185,7 @@ To establish robust authentication and precise access control, generating a Sona
 
     ![SonarQube token](../../assets/operator-guide/code-quality/sonar-copy-token.png "SonarQube token")
 
-## Integration SonarQube with KubeRocketCI
+## Integrate SonarQube With KubeRocketCI
 
 For provision secret using manifest, KubeRocketCI portal or with the externalSecrets operator:
 
@@ -198,7 +198,7 @@ For provision secret using manifest, KubeRocketCI portal or with the externalSec
   ]}>
 
   <TabItem value="kuberocketci">
-  Go to the **Portal** open **Configuration** -> **CODE QUALITY** -> **SONARQUBE**. Update or click **+ ADD INTEGRATION** fill in the `URL` and `Token` fields and click the `Save` button:
+  Go to the **Portal** open **Configuration** -> **Code Quality** -> **SonarQube**. Update or click **+ Add integration** fill in the `URL` and `Token` fields and click the `Save` button:
 
   ![SonarQube update manual secret](../../assets/operator-guide/code-quality/sonar-secret-password.png "SonarQube update manual secret")
   </TabItem>
@@ -232,7 +232,7 @@ For provision secret using manifest, KubeRocketCI portal or with the externalSec
   },
   ```
 
-  Go to the **Portal** open **Configuration** -> **CODE QUALITY** -> **SONARQUBE** and see the `Managed by External Secret` message:
+  Go to the **Portal** open **Configuration** -> **Code Quality** -> **SonarQube** and see the `Managed by External Secret` message:
 
   ![SonarQube managed by external secret operator](../../assets/operator-guide/code-quality/sonar-externalsecret-password.png "SonarQube managed by external secret operator")
 
@@ -245,8 +245,8 @@ For provision secret using manifest, KubeRocketCI portal or with the externalSec
 
 1. SonarQube analysis is seamlessly integrated into KubeRocketCI pipelines, triggered during both review and build pipelines:
 
-* **Review Pipeline:** Analyzes only the changes made in a pull request.
-* **Build Pipeline:** Analyzes the main branch codebase to ensure overall project quality.
+- **Review Pipeline:** Analyzes only the changes made in a pull request.
+- **Build Pipeline:** Analyzes the main branch codebase to ensure overall project quality.
 
 2. SonarQube projects are named based on the corresponding KubeRocketCI project names, making it easy to navigate analysis results in the SonarQube UI mode details how to configure repo [project-project.settings](../../user-guide/application-sonarqube-project-properties.md):
 

@@ -25,25 +25,25 @@ Before the OKD cluster deployment and configuration, make sure to check the prer
 
 1. Install the following tools listed below:
 
-   * [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html)
-   * [OpenShift CLI](https://docs.openshift.com/container-platform/4.10/cli_reference/openshift_cli/getting-started-cli.html)
+   - [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html)
+   - [OpenShift CLI](https://docs.openshift.com/container-platform/4.10/cli_reference/openshift_cli/getting-started-cli.html)
 
 2. Create the AWS IAM user with [the required permissions](https://docs.okd.io/4.9/installing/installing_aws/installing-aws-account.html#installation-aws-permissions_installing-aws-account). Make sure the AWS account is active, and the user doesn't have a permission boundary. Remove any Service Control Policy (SCP) restrictions from the AWS account.
 
 3. Generate a key pair for cluster node SSH access. Please perform the steps below:
-   * Generate the SSH key. Specify the path and file name, such as ~/.ssh/id_ed25519, of the new SSH key. If there is an existing key pair, ensure that the public key is in the ~/.ssh directory.
+   - Generate the SSH key. Specify the path and file name, such as ~/.ssh/id_ed25519, of the new SSH key. If there is an existing key pair, ensure that the public key is in the ~/.ssh directory.
 
       ```bash
       ssh-keygen -t ed25519 -N '' -f <path>/<file_name>
       ```
 
-   * Add the SSH private key identity to the SSH agent for a local user if it has not already been added.
+   - Add the SSH private key identity to the SSH agent for a local user if it has not already been added.
 
       ```bash
       eval "$(ssh-agent -s)"
       ```
 
-   * Add the SSH private key to the ssh-agent:
+   - Add the SSH private key to the ssh-agent:
 
       ```bash
       ssh-add <path>/<file_name>
@@ -51,13 +51,13 @@ Before the OKD cluster deployment and configuration, make sure to check the prer
 
 4. Build the `ccoctl` tool:
 
-   * Clone the `cloud-credential-operator` repository.
+   - Clone the `cloud-credential-operator` repository.
 
       ```bash
       git clone https://github.com/openshift/cloud-credential-operator.git
       ```
 
-   * Move to the `cloud-credential-operator` folder and build the `ccoctl` tool.
+   - Move to the `cloud-credential-operator` folder and build the `ccoctl` tool.
 
       ```bash
       cd cloud-credential-operator && git checkout release-4.10
@@ -89,12 +89,12 @@ Create the AWS resources with the Cloud Credential Operator utility (the `ccoctl
     ```
 
     where:
-    * NAME - is the name used to tag any cloud resources created for tracking,
-    * AWS_REGION - is the AWS region in which cloud resources will be created.
+    - NAME - is the name used to tag any cloud resources created for tracking,
+    - AWS_REGION - is the AWS region in which cloud resources will be created.
 
 3. Create the IAM roles for each component in the cluster:
 
-    * Extract the list of the `CredentialsRequest` objects from the OpenShift Container Platform release image:
+    - Extract the list of the `CredentialsRequest` objects from the OpenShift Container Platform release image:
 
       ```bash
       oc adm release extract \
@@ -108,7 +108,7 @@ Create the AWS resources with the Cloud Credential Operator utility (the `ccoctl
         A version of the openshift-release-dev docker image can be found in the [Quay registry](https://quay.io/repository/openshift-release-dev/ocp-release?tab=tags).
       :::
 
-    * Use the `ccoctl` tool to process all `CredentialsRequest` objects in the `credrequests` directory:
+    - Use the `ccoctl` tool to process all `CredentialsRequest` objects in the `credrequests` directory:
 
       ```bash
       ccoctl aws create-iam-roles \
@@ -209,9 +209,9 @@ Before deploying the OKD cluster, please perform the steps below:
     </details>
 
     where:
-    * YOUR_DOMAIN - is a base domain,
-    * PULL_SECRET - is a created pull secret for a private registry,
-    * SSH_KEY - is a created SSH key.
+    - YOUR_DOMAIN - is a base domain,
+    - PULL_SECRET - is a created pull secret for a private registry,
+    - SSH_KEY - is a created SSH key.
 
 5. Create the required OpenShift Container Platform installation manifests:
 

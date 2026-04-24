@@ -26,8 +26,8 @@ Inspect the main steps to perform for installing DefectDojo via Helm Chart.
 
 ## Prerequisites
 
-* Kubectl version 1.34.0+ is installed. Please refer to the [Kubernetes official website](https://kubernetes.io/releases/download/) for details.
-* [Helm](https://helm.sh) version 3.14.0+ is installed. Please refer to the [Helm page](https://github.com/helm/helm/releases) on GitHub for details.
+- Kubectl version 1.34.0+ is installed. Please refer to the [Kubernetes official website](https://kubernetes.io/releases/download/) for details.
+- [Helm](https://helm.sh) version 3.14.0+ is installed. Please refer to the [Helm page](https://github.com/helm/helm/releases) on GitHub for details.
 
 ## Installation
 
@@ -247,7 +247,7 @@ To prepare DefectDojo for integration with KubeRocketCI, follow the steps below:
 
 1. Create ci user in DefectDojo UI:
 
-    * Login to DefectDojo UI using `admin` credentials:
+    - Login to DefectDojo UI using `admin` credentials:
 
       ```bash
       echo "DefectDojo admin password: $(kubectl \
@@ -257,30 +257,30 @@ To prepare DefectDojo for integration with KubeRocketCI, follow the steps below:
       | base64 --decode)"
       ```
 
-    * Go to User section
+    - Go to User section
 
-    * Create new user Global role `Maintainer` permission:
+    - Create new user Global role `Maintainer` permission:
 
       ![DefectDojo update manual secret](../../assets/operator-guide/devsecops/defectdojo-createuser.png "DefectDojo set user permission")
 
 2. Get a token of the DefectDojo user:
 
-    * Login to the DefectDojo UI using the credentials from previous steps.
+    - Login to the DefectDojo UI using the credentials from previous steps.
 
-    * Click on profile button select the `API v2 key`.
+    - Click on profile button select the `API v2 key`.
 
-    * Copy the API key.
+    - Copy the API key.
 
       ![DefectDojo api key](../../assets/operator-guide/devsecops/defectdojo-api-key.png "DefectDojo api-key")
 
 ## Integration DefectDojo with KubeRocketCI
 
-Provision the secret using `Portal UI`, `Manifest` or with the `externalSecrets` operator:
+Provision the secret using `KubeRocketCI portal`, `Manifest` or with the `externalSecrets` operator:
 
     <Tabs
       defaultValue="portal"
       values={[
-        {label: 'Portal UI', value: 'portal'},
+        {label: 'KubeRocketCI portal', value: 'portal'},
         {label: 'Manifest', value: 'manifest'},
         {label: 'External Secrets Operator', value: 'eso'}
       ]}>

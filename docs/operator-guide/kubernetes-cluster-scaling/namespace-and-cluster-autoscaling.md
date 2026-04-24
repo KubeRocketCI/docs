@@ -258,5 +258,5 @@ This approach helps maintain **high performance**, **cost efficiency**, and **au
 
 ## Related Articles
 
-- [Kubernetes Cluster Scaling](./overview.md)
-- [AWS Infrastructure Cost Estimation](../../developer-guide/aws-infrastructure-cost-estimation.md)
+* [Kubernetes Cluster Scaling](./overview.md)
+* [AWS Infrastructure Cost Estimation](../../developer-guide/aws-infrastructure-cost-estimation.md)

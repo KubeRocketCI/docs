@@ -15,8 +15,8 @@ KubeRocketCI can use two types of deployment packages: Helm chart and RPM packag
 
 In KubeRocketCI, RPM support allows to collect applications, store them as Nexus artifacts, and deploy them using the [Ansible](https://docs.ansible.com/ansible/latest/index.html) tool. KubeRocketCI is support two approach to work with RPM packages:
 
- * **Default approach**: This approach involves configuring deployments using a GitOps repository and Kubernetes secrets.
- * **AWX approach**: This approach involves deploying applications using the [AWX](https://ansible.readthedocs.io/projects/awx/en/latest/) tool.
+ - **Default approach**: This approach involves configuring deployments using a GitOps repository and Kubernetes secrets.
+ - **AWX approach**: This approach involves deploying applications using the [AWX](https://ansible.readthedocs.io/projects/awx/en/latest/) tool.
 
 ### Features of Each Approach
 
@@ -184,9 +184,9 @@ The rest of the files are example of deployment configurations. The KubeRocketCI
 
 For example, the **web/qa/nano/01_copy-file.yml** file related to:
 
-  * Application: **nano**
-  * Deployment Flow: **web**
-  * Environment: **qa**
+  - Application: **nano**
+  - Deployment Flow: **web**
+  - Environment: **qa**
 
 The file name must begin with its serial number (e.g., 01, 02, 03, ...), followed by an underscore.
 
@@ -246,11 +246,11 @@ To set up RPM integration using AWX tool, follow the steps below. Completing the
 
     Here is a breakdown of the scheme above:
 
-    * **package-install.yaml**: This is the main file that refers to playbooks located in the **roles** directory.
-    * **roles**: This directory contains all the Ansible roles that will be executed in deploy pipeline.
-    * **pre-deploy**: This is the first role the **package-install.yaml** file refers to. It connects to Nexus storage to interact with the application. Need to specify the required parameters in the **\<repo-name\>/roles/pre-deploy/files/nexus.repo** file.
-    * **package-install**: This role contains the playbooks that install all the dependencies to AWS EC2 instances.
-    * **test-app-dev-web**: This role contains the application playbooks, named according to the **\<codebase-name\>-\<deployment-flow-name\>-\<environment-name\>** convention. It will be executed only if the **Values override** parameter is set to **true** in the Deployment Flow during the component deployment process.
+    - **package-install.yaml**: This is the main file that refers to playbooks located in the **roles** directory.
+    - **roles**: This directory contains all the Ansible roles that will be executed in deploy pipeline.
+    - **pre-deploy**: This is the first role the **package-install.yaml** file refers to. It connects to Nexus storage to interact with the application. Need to specify the required parameters in the **\<repo-name\>/roles/pre-deploy/files/nexus.repo** file.
+    - **package-install**: This role contains the playbooks that install all the dependencies to AWS EC2 instances.
+    - **test-app-dev-web**: This role contains the application playbooks, named according to the **\<codebase-name\>-\<deployment-flow-name\>-\<environment-name\>** convention. It will be executed only if the **Values override** parameter is set to **true** in the Deployment Flow during the component deployment process.
 
 2. Install AWX via [cluster add-ons](https://github.com/epam/edp-cluster-add-ons):
 
@@ -276,9 +276,9 @@ To set up RPM integration using AWX tool, follow the steps below. Completing the
 
     b. (Optional) Configure OIDC. Navigate to **Settings** -> **Generic OIDC settings** and specify the required fields:
 
-    * **OIDC Key**: Enter **awx**;
-    * **OIDC Secret**: This is the client secret data;
-    * **URL**: Specify the Keycloak realm URL.
+    - **OIDC Key**: Enter **awx**
+    - **OIDC Secret**: This is the client secret data
+    - **URL**: Specify the Keycloak realm URL.
 
       ![Generic OIDC settings](../../assets/operator-guide/rpm/awx-oidc-settings.png "Generic OIDC settings")
 

@@ -195,4 +195,4 @@ After completing these steps, the Argo CD will be configured to use Microsoft En
 
 ## Related Articles
 
-- [OpenID Connect Authentication Overview](./oidc-authentication-overview.md)
+* [OpenID Connect Authentication Overview](./oidc-authentication-overview.md)

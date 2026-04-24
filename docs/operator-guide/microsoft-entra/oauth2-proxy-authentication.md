@@ -216,4 +216,4 @@ After completing these steps, the Tekton Dashboard will be configured to use OAu
 
 ## Related Articles
 
-- [OpenID Connect (OIDC) Authentication Overview](./oidc-authentication-overview.md)
+* [OpenID Connect (OIDC) Authentication Overview](./oidc-authentication-overview.md)

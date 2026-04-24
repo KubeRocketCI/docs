@@ -69,7 +69,7 @@ To deploy the platform, follow the steps below:
 
 6. In the login menu, paste the generated token in the **Access token** field and click the **Sign in** button.
 
-7. Upon logging in, open the namespaces window by clicking the **Manage Namespaces** button in the top right corner of the UI:
+7. Upon logging in, open the namespaces window by clicking the **Manage Namespaces** button in the top right corner of the page:
 
     ![Specify namespaces](../assets/quick-start/edp_portal_ui.png "Specify namespaces")
 
@@ -84,4 +84,4 @@ To deploy the platform, follow the steps below:
       Remember to press **Enter** to add the allowed namespace to the list.
     :::
 
-After completing these steps, you will gain access to KubeRocketCI components through the Portal UI. You can now proceed with the integration steps, starting with the [SonarQube](./integrate-sonarcloud.md) integration.
+After completing these steps, you will gain access to KubeRocketCI components through the KubeRocketCI portal. You can now proceed with the integration steps, starting with the [SonarQube](./integrate-sonarcloud.md) integration.

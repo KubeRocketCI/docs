@@ -18,8 +18,8 @@ import TabItem from '@theme/TabItem';
 
 ## Prerequisites
 
-* [Keycloak](keycloak.md) with OIDC authentication is installed.
-* [Keycloak operator](../add-ons-overview.md) is installed.
+- [Keycloak](keycloak.md) with OIDC authentication is installed.
+- [Keycloak operator](../add-ons-overview.md) is installed.
 
 ## Integration OAuth2-Proxy
 

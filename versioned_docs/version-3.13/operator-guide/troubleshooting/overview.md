@@ -17,9 +17,9 @@ Welcome to the Troubleshooting Guide for the KubeRocketCI. Here, we offer essent
 
 Currently, this section covers the following issues:
 
-* [Container Registry Error](container-registry-error.md)
-* [Sync and Health Status Unknown](sync-health-status-unknown.md)
-* [Codebase Creation Issues](codebase-creation-issues.md)
-* [Forbidden Messages on the Overview Page](forbidden-messages.md)
-* [Review Pipeline is Failed](review-pipeline-is-failed.md)
-* [Modify GitOps Repository Path](modify-gitops-repo-path.md)
+- [Container Registry Error](container-registry-error.md)
+- [Sync and Health Status Unknown](sync-health-status-unknown.md)
+- [Codebase Creation Issues](codebase-creation-issues.md)
+- [Forbidden Messages on the Overview Page](forbidden-messages.md)
+- [Review Pipeline is Failed](review-pipeline-is-failed.md)
+- [Modify GitOps Repository Path](modify-gitops-repo-path.md)

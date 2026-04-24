@@ -13,10 +13,10 @@ sidebar_label: "v2.12 to 3.0"
 
 :::warning
   Please read carefully the following notes before upgrading EDP to 3.0:
-    * Before starting the upgrade procedure, please make the necessary backups.
-    * Kiosk integration is disabled by default. With EDP below v.3.0.x, define the `global.kioskEnabled` parameter in the [values.yaml](https://github.cm/epam/edp-install/blob/release/3.0/deploy-templates/values.yaml) file.
-    * The `gerrit-ssh-port` parameter is moved from the `gerrit-operator.gerrit.sshport` to `global.gerritSSHPort` [values.yaml](https://github.com/epam/edp-install/blob/master/deploy-templates/values.yaml#L30) file.
-    * In edp-gerrit-operator, the `gitServer.user` value is changed from the `jenkins` to `edp-ci`[values.yaml](https://github.com/epam/edp-gerrit-operator/blob/release/2.13/deploy-templates/values.yaml#L96) file.
+    - Before starting the upgrade procedure, please make the necessary backups.
+    - Kiosk integration is disabled by default. With EDP below v.3.0.x, define the `global.kioskEnabled` parameter in the [values.yaml](https://github.cm/epam/edp-install/blob/release/3.0/deploy-templates/values.yaml) file.
+    - The `gerrit-ssh-port` parameter is moved from the `gerrit-operator.gerrit.sshport` to `global.gerritSSHPort` [values.yaml](https://github.com/epam/edp-install/blob/master/deploy-templates/values.yaml#L30) file.
+    - In edp-gerrit-operator, the `gitServer.user` value is changed from the `jenkins` to `edp-ci`[values.yaml](https://github.com/epam/edp-gerrit-operator/blob/release/2.13/deploy-templates/values.yaml#L96) file.
 :::
 
 This section provides the details on upgrading EDP to 3.0. Explore the actions and requirements below.
@@ -91,7 +91,7 @@ This section provides the details on upgrading EDP to 3.0. Explore the actions a
       kubectl edit configmap jenkins-slaves -n <edp-namespace>
     ```
 
-    * The versions of the images must be the following:
+    - The versions of the images must be the following:
 
       ```bash
       epamedp/edp-jenkins-codenarc-agent:3.0.10
@@ -110,9 +110,9 @@ This section provides the details on upgrading EDP to 3.0. Explore the actions a
       epamedp/edp-jenkins-terraform-agent:3.0.9
       ```
 
-    * Remove the `edp-jenkins-dotnet-21-agent` agent manifest.
+    - Remove the `edp-jenkins-dotnet-21-agent` agent manifest.
 
-    * Restart the Jenkins pod.
+    - Restart the Jenkins pod.
 
 6. Attach the `id_rsa.pub` SSH public key from the `gerrit-ciuser-sshkey` secret to the `edp-ci` Gerrit user in the `gerrit` pod:
 
@@ -121,8 +121,8 @@ This section provides the details on upgrading EDP to 3.0. Explore the actions a
     ```
 
     :::note
-      * For this operation, use the `gerrit-admin` SSH key from secrets.
-      * `<host>` is admin@localhost or any other user with permissions.
+      - For this operation, use the `gerrit-admin` SSH key from secrets.
+      - `<host>` is admin@localhost or any other user with permissions.
     :::
 
 7. Change the username from `jenkins` to `edp-ci` in the `gerrit-ciuser-sshkey` secret:

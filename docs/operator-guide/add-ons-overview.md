@@ -21,7 +21,7 @@ KubeRocketCI Add-Ons is essentially a Kubernetes-based deployment pattern that a
 
 Add-Ons have been introduced into KubeRocketCI starting from version 3.4.0. They empower users to seamlessly integrate the platform with various additional components, such as SonarQube, Nexus, Keycloak, Jira, and more. This eliminates the need for manual installations, as described in the [Install KubeRocketCI](../operator-guide/install-kuberocketci.md) page.
 
-In a nutshell, Add-Ons are separate Helm Charts that can be installed with just one click using the Argo CD tool.
+In a nutshell, Add-Ons are separate Helm charts that can be installed with just one click using the Argo CD tool.
 
 ## Add-Ons Repository Structure
 
@@ -68,15 +68,15 @@ All the Add-Ons for KubeRocketCI are stored in our [GitHub repository](https://g
     ```
     </details>
 
-* **argo-cd** - The directory containing the Helm chart for deploying the main Argo CD instance and prepared project templates.
+- **argo-cd** - The directory containing the Helm chart for deploying the main Argo CD instance and prepared project templates.
 
-* **clusters** - A directory for organizing configurations and Helm charts specific to individual clusters. Each subdirectory corresponds to a particular cluster environment (e.g., core, prod, or dev).
+- **clusters** - A directory for organizing configurations and Helm charts specific to individual clusters. Each subdirectory corresponds to a particular cluster environment (e.g., core, prod, or dev).
 
-* **addons** - The directory containing subdirectories with Helm charts for applications to install, such as Nexus, SonarQube, Keycloak, etc. See the full add-ons list [below](#available-add-ons-list).
+- **addons** - The directory containing subdirectories with Helm charts for applications to install, such as Nexus, SonarQube, Keycloak, etc. See the full add-ons list [below](#available-add-ons-list).
 
-* **apps** - Contains application `templates` directory used to create Argo CD application. The deployment of these applications is managed by modifying the `apps/values.yaml` file, where you can enable or disable specific applications.
+- **apps** - Contains application `templates` directory used to create Argo CD application. The deployment of these applications is managed by modifying the `apps/values.yaml` file, where you can enable or disable specific applications.
 
-* **bootstrap-addons.yaml** - The manifest file defining the app of apps application responsible for deploying all enabled application to the cluster. This manifest is applied manually.
+- **bootstrap-addons.yaml** - The manifest file defining the app of apps application responsible for deploying all enabled application to the cluster. This manifest is applied manually.
 
 ## Enable KubeRocketCI Add-Ons
 
@@ -106,10 +106,10 @@ This will forward the Argo CD service to `http://localhost:65080` on your local 
 
 6. In the appeared window, fill in the following fields and click the **CONNECT** button:
 
-    * Choose your connection method - `VIA SSH`;
-    * Name - `addons-demo` (optional);
-    * Project - select project;
-    * Repository URL - enter the `SSH URL` of your forked repository (ssh://git@github.com:22/`<github_account_name>`/edp-cluster-add-ons.git);
+    - Choose your connection method - `VIA SSH`
+    - Name - `addons-demo` (optional)
+    - Project - select project
+    - Repository URL - enter the `SSH URL` of your forked repository (ssh://git@github.com:22/`<github_account_name>`/edp-cluster-add-ons.git)
 
     ![Repository parameters](../assets/operator-guide/addons-overview/argo_cd_repo_fields.png "Repository parameters")
 
@@ -189,7 +189,7 @@ The list of the available Add-Ons:
 |Capsule|A multi-tenancy solution for Kubernetes clusters that provides each tenant with a dedicated namespace where they can freely run their workloads with resource quotas.|false|
 |Capsule tenant|A specific tenant within the Capsule multi-tenancy solution. Each tenant has its own isolated environment within the Kubernetes cluster.|false|
 |DefectDojo|A security vulnerability management tool that allows tracking and managing security findings in applications.|false|
-|DependencyTrack|A Software Composition Analysis (SCA) platform that helps identify and manage open-source dependencies and their associated vulnerabilities.|false|
+|Dependency-Track|A Software Composition Analysis (SCA) platform that helps identify and manage open-source dependencies and their associated vulnerabilities.|false|
 |KubeRocketCI(EDP)|An internal platform created by EPAM to enhance software delivery processes using DevOps principles and tools.|false|
 |Extensions OIDC|KubeRocketCI Helm chart to provision OIDC clients for different Add-Ons using EDP Keycloak Operator.|false|
 |External Secrets|A Kubernetes Operator that fetches secrets from external secret management systems and injects them as Kubernetes Secrets.|false|

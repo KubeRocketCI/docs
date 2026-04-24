@@ -17,8 +17,8 @@ sidebar_label: "External Secrets Operator Integration"
 
 There are [multiple Secrets Providers](https://external-secrets.io/latest/introduction/stability-support) that can be used within ESO. On this page, we detail the integration of KubeRocketCI with the two foremost providers:
 
-* [Kubernetes Secrets](https://kubernetes.io/docs/concepts/configuration/secret/)
-* [AWS Systems Manager Parameter Store](https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-parameter-store.html)
+- [Kubernetes Secrets](https://kubernetes.io/docs/concepts/configuration/secret/)
+- [AWS Systems Manager Parameter Store](https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-parameter-store.html)
 
 KubeRocketCI leverages a variety of secrets to facilitate the integration of different solutions. This document provides a comprehensive overview of the secrets utilized within the KubeRocketCI platform, along with their respective descriptions. Please note that all secrets are encoded in Base64 format.
 
@@ -43,9 +43,9 @@ KubeRocketCI leverages a variety of secrets to facilitate the integration of dif
 
 The list below represents the baseline required for full operation within platform core components:
 
-* kaniko-docker-config: Used for pushing container images to a specific registry.
-* ci-sonarqube: Used in the CI process for SonarQube integration.
-* ci-nexus: Used for pushing artifacts to the Nexus storage.
+- kaniko-docker-config: Used for pushing container images to a specific registry.
+- ci-sonarqube: Used in the CI process for SonarQube integration.
+- ci-nexus: Used for pushing artifacts to the Nexus storage.
 
 :::warning
   These secrets are mandatory for Tekton pipelines to work properly.
@@ -55,9 +55,9 @@ The list below represents the baseline required for full operation within platfo
 
 All secrets are stored in Kubernetes in pre-defined namespaces. Platform suggests using the following approach for secrets management:
 
-* `KRCI_NAMESPACE-vault`, where `KRCI_NAMESPACE` is a name of the namespace where KubeRocketCI is deployed, such as `krci-vault`. This namespace is used by the platform. Access to secrets in the `krci-vault` is granted only for `Administrators`.
+- `KRCI_NAMESPACE-vault`, where `KRCI_NAMESPACE` is a name of the namespace where KubeRocketCI is deployed, such as `krci-vault`. This namespace is used by the platform. Access to secrets in the `krci-vault` is granted only for `Administrators`.
 
-* `KRCI_NAMESPACE-cicd-vault`, where `KRCI_NAMESPACE` is a name of the namespace where KubeRocketCI is deployed, such as `krci-cicd-vault`. Development team uses secrets in the `krci-cicd-vault` for microservices development.
+- `KRCI_NAMESPACE-cicd-vault`, where `KRCI_NAMESPACE` is a name of the namespace where KubeRocketCI is deployed, such as `krci-cicd-vault`. Development team uses secrets in the `krci-cicd-vault` for microservices development.
 
 See a diagram below for more details:
 

@@ -230,4 +230,4 @@ After completing these steps, Nexus will be configured with OIDC authentication 
 
 ## Related Articles
 
-- [OpenID Connect (OIDC) Authentication Overview](./oidc-authentication-overview.md)
+* [OpenID Connect (OIDC) Authentication Overview](./oidc-authentication-overview.md)

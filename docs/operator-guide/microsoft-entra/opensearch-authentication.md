@@ -249,4 +249,4 @@ After completing these steps, OpenSearch will be configured with OIDC authentica
 
 ## Related Articles
 
-- [OpenID Connect Authentication Overview](./oidc-authentication-overview.md)
+* [OpenID Connect Authentication Overview](./oidc-authentication-overview.md)

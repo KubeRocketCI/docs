@@ -26,11 +26,11 @@ KubeRocketCI components that support custom certificates can be found in the tab
 
 ## Prerequisites
 
-* The certificate in the `*.crt` format is used;
-* Kubectl version 1.34.0+ is installed. Please refer to the [Kubernetes official website](https://kubernetes.io/releases/download/) for details.
-* [Helm](https://helm.sh) version 3.14.0+ is installed. Please refer to the [Helm page](https://github.com/helm/helm/releases) on GitHub for details.
-* [Java](https://www.oracle.com/in/java/technologies/downloads/) with the `keytool` command inside;
-* [jq](https://stedolan.github.io/jq/) is installed.
+- The certificate in the `*.crt` format is used
+- Kubectl version 1.34.0+ is installed. Please refer to the [Kubernetes official website](https://kubernetes.io/releases/download/) for details.
+- [Helm](https://helm.sh) version 3.14.0+ is installed. Please refer to the [Helm page](https://github.com/helm/helm/releases) on GitHub for details.
+- [Java](https://www.oracle.com/in/java/technologies/downloads/) with the `keytool` command inside
+- [jq](https://stedolan.github.io/jq/) is installed.
 
 ## Enable the SPI Truststore of Keycloak
 
@@ -162,8 +162,8 @@ This section describes how to add custom certificates to Jenkins agents to use t
 
 Jenkins agents keep keystore files in two places:
 
-* `/etc/ssl/certs/java` folder with the `cacerts` file;
-* `/opt/java/openjdk/lib/security` folder with the `blocked.certs`, `cacerts`, `default.policy` and `public_suffix_list.dat` files.
+- `/etc/ssl/certs/java` folder with the `cacerts` file
+- `/opt/java/openjdk/lib/security` folder with the `blocked.certs`, `cacerts`, `default.policy` and `public_suffix_list.dat` files.
 
 1. Copy the files in `/etc/ssl/certs/java` and `/opt/java/openjdk/lib/security` directories from Jenkins agent pod to the local `tmp` folder.<br />
 There is a `copy_certs.sh` script below that can manage this. It copies the files in `/etc/ssl/certs/java` and `/opt/java/openjdk/lib/security` directories from Jenkins agent pod to the local `tmp` folder
@@ -216,11 +216,11 @@ Also, the `jenkins-agent-opt-java-openjdk-lib-security-cacerts` secret contains 
 
     Before using the `copy_certs.sh` script, keep in mind the following:
 
-    * assign actual values to the variables `ns` and `ca_file`;
-    * the script collects all the images from the `jenkins-slaves` ConfigMap and uses the image of
+    - assign actual values to the variables `ns` and `ca_file`
+    - the script collects all the images from the `jenkins-slaves` ConfigMap and uses the image of
       the `maven-java8` agent as the base image of the temporary pod to get the keystore files;
-    * custom certificate is imported using the `keytool` application;
-    * the `jenkins-agent-opt-java-openjdk-lib-security-cacerts` and `jenkins-agent-etc-ssl-certs-java-cacerts` secrets will be created in the `krci` namespace.
+    - custom certificate is imported using the `keytool` application
+    - the `jenkins-agent-opt-java-openjdk-lib-security-cacerts` and `jenkins-agent-etc-ssl-certs-java-cacerts` secrets will be created in the `krci` namespace.
 
 2. Run the `copy_certs.sh` script from the previous point after the requirements are met.
 

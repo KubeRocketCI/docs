@@ -17,8 +17,8 @@ Inspect the prerequisites and the main steps to perform for installing ReportPor
 
 ## Prerequisites
 
-* Kubectl version 1.34.0+ is installed. Please refer to the [Kubernetes official website](https://kubernetes.io/releases/download/) for details.
-* [Helm](https://helm.sh) version 3.14.0+ is installed. Please refer to the [Helm page](https://github.com/helm/helm/releases) on GitHub for details.
+- Kubectl version 1.34.0+ is installed. Please refer to the [Kubernetes official website](https://kubernetes.io/releases/download/) for details.
+- [Helm](https://helm.sh) version 3.14.0+ is installed. Please refer to the [Helm page](https://github.com/helm/helm/releases) on GitHub for details.
 
 :::info
   Please refer to the [ReportPortal Helm Chart](https://github.com/reportportal/kubernetes/tree/develop/reportportal) section for details.

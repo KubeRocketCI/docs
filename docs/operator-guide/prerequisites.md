@@ -15,10 +15,10 @@ sidebar_label: "Prerequisites Overview"
 
 Before installing KubeRocketCI via Helm Chart, make sure to complete the following steps:
 
-* Install and configure [Kubernetes](kubernetes-cluster-settings.md) or [OpenShift](openshift-cluster-settings.md) cluster;
-* Install the [Nginx ingress controller](install-ingress-nginx.md);
-* Install [Tekton](install-tekton.md);
-* Install [Argo CD](install-argocd.md).
+- Install and configure [Kubernetes](kubernetes-cluster-settings.md) or [OpenShift](openshift-cluster-settings.md) cluster
+- Install the [Nginx ingress controller](install-ingress-nginx.md)
+- Install [Tekton](install-tekton.md)
+- Install [Argo CD](install-argocd.md)
 
 :::note
   Alternatively, use the [cluster add-ons](add-ons-overview.md) approach to install the platform components.

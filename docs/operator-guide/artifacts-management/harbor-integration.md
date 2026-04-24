@@ -53,10 +53,10 @@ To facilitate seamless interaction between KubeRocketCI and a Harbor project, it
 
 2. In the pop-up window, fill in the fields as follows:
 
-    * **Name** - `edp-push`;
-    * **Expiration time** -  set the value which is aligned with your organization policy;
-    * **Description** - `read/write permissions`;
-    * **Permissions** - `Pull Repository` and `Push Repository`.
+    - **Name** - `edp-push`
+    - **Expiration time** -  set the value which is aligned with your organization policy
+    - **Description** - `read/write permissions`
+    - **Permissions** - `Pull Repository` and `Push Repository`.
 
     To proceed, click the **ADD** button:
 
@@ -83,7 +83,7 @@ To facilitate seamless interaction between KubeRocketCI and a Harbor project, it
       ]}>
 
       <TabItem value="portal">
-      Navigate to **Portal** -> **Configuration** -> **ARTIFACTS STORAGE** -> **Registry**. Update or click **+ ADD INTEGRATION** fill in the required fields and click `Save`.
+      Navigate to **Portal** -> **Configuration** -> **Artifacts storage** -> **Registry**. Update or click **+ Add registry** fill in the required fields and click `Save`.
 
       ![Registry update manual secret](../../assets/operator-guide/artifacts-management/regcred-secret.png "Registry update manual secret")
       </TabItem>
@@ -126,7 +126,7 @@ To facilitate seamless interaction between KubeRocketCI and a Harbor project, it
         }
       ```
 
-      Navigate to **Portal** -> **Configuration** -> **ARTIFACTS STORAGE** -> **Registry**. Here, you will observe the `Managed by ExternalSecret` message:
+      Navigate to **Portal** -> **Configuration** -> **Artifacts storage** -> **Registry**. Here, you will observe the `Managed by ExternalSecret` message:
 
       ![Registry managed by external secret operator](../../assets/operator-guide/artifacts-management/kaniko-secret.png "Registry managed by external secret operator")
 
@@ -139,10 +139,10 @@ To facilitate seamless interaction between KubeRocketCI and a Harbor project, it
 
 5. Repeat steps 2-3 with values below:
 
-    * **Name** - `edp-pull`;
-    * **Expiration time** -  set the value which is aligned with your organization policy;
-    * **Description** - `read-only permissions`;
-    * **Permissions** - `Pull Repository`.
+    - **Name** - `edp-pull`
+    - **Expiration time** -  set the value which is aligned with your organization policy
+    - **Description** - `read-only permissions`
+    - **Permissions** - `Pull Repository`.
 
 6. Provision the **regcred** secrets using kubectl, KubeRocketCI portal or with the externalSecrets operator:
 
@@ -161,7 +161,7 @@ To facilitate seamless interaction between KubeRocketCI and a Harbor project, it
       ]}>
 
       <TabItem value="portal">
-      Navigate to **Portal** -> **Configuration** -> **ARTIFACTS STORAGE** -> **Registry**. Update or click **+ ADD INTEGRATION** fill in the required fields and click `Save`.
+      Navigate to **Portal** -> **Configuration** -> **Artifacts storage** -> **Registry**. Update or click **+ Add registry** fill in the required fields and click `Save`.
 
       ![Registry update manual secret](../../assets/operator-guide/artifacts-management/regcred-externalsecret.png "Registry update manual secret")
       </TabItem>
@@ -204,7 +204,7 @@ To facilitate seamless interaction between KubeRocketCI and a Harbor project, it
         }
       ```
 
-      Navigate to **Portal** -> **Configuration** -> **ARTIFACTS STORAGE** -> **Registry**. Here, you will observe the `Managed by ExternalSecret` message:
+      Navigate to **Portal** -> **Configuration** -> **Artifacts storage** -> **Registry**. Here, you will observe the `Managed by ExternalSecret` message:
 
       ![Registry managed by external secret operator](../../assets/operator-guide/artifacts-management/kaniko-externalsecret.png "Registry managed by external secret operator")
 

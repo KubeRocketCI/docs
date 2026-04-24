@@ -15,9 +15,9 @@ This page serves as a comprehensive guide on integrating Keycloak with the [edp-
 
 ## Prerequisites
 
-* [EKS Configuration](./configure-keycloak-oidc-eks.md) is performed;
-* [Helm v3.10.0](https://github.com/helm/helm/releases/tag/v3.10.0) is installed;
-* [Keycloak](../../operator-guide/auth/keycloak.md) is installed.
+- [EKS Configuration](./configure-keycloak-oidc-eks.md) is performed
+- [Helm v3.10.0](https://github.com/helm/helm/releases/tag/v3.10.0) is installed
+- [Keycloak](../../operator-guide/auth/keycloak.md) is installed
 
 ## Install Keycloak Operator
 
@@ -84,7 +84,7 @@ The next stage after installing Keycloak is to integrate it with the Keycloak op
 
 4. Create the `KeycloakRealmGroup` Custom Resource for both administrators and developers:
 
-    * administrators:
+    - administrators:
 
       ```yaml
       apiVersion: v1.edp.epam.com/v1
@@ -97,7 +97,7 @@ The next stage after installing Keycloak is to integrate it with the Keycloak op
         name: eks-oidc-administrator
       ```
 
-    * developers:
+    - developers:
 
       ```yaml
       apiVersion: v1.edp.epam.com/v1
@@ -156,7 +156,7 @@ The next stage after installing Keycloak is to integrate it with the Keycloak op
 
 7. Create the KeycloakRealmUser Custom Resource for both administrator and developer roles:
 
-    * administrator:
+    - administrator:
 
       ``` yaml
       apiVersion: v1.edp.epam.com/v1
@@ -180,7 +180,7 @@ The next stage after installing Keycloak is to integrate it with the Keycloak op
           - eks-oidc-administrator
       ```
 
-    * developer:
+    - developer:
 
       ``` yaml
       apiVersion: v1.edp.epam.com/v1

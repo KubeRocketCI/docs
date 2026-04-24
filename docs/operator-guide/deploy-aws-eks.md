@@ -15,11 +15,11 @@ sidebar_label: "Deploy AWS EKS Cluster"
 
 This instruction offers a comprehensive guide on deploying an Amazon Elastic Kubernetes Service (EKS) cluster, ensuring a scalable and secure Kubernetes environment on AWS. For those looking to optimize their EKS cluster configurations, it is highly recommended to consult the [AWS EKS Best Practices](https://aws.github.io/aws-eks-best-practices/) guide. This resource covers a wide range of topics crucial for the successful deployment and operation of your EKS clusters, including:
 
-* **Security**: Best practices for securing your EKS clusters, including IAM roles, network policies, and secrets management.
-* **Networking**: Guidance on setting up VPCs, subnets, and load balancers to ensure efficient and secure network traffic.
-* **Monitoring and Logging**: Strategies for implementing comprehensive monitoring and logging solutions using AWS CloudWatch and other tools to maintain visibility into cluster performance and operational health.
-* **Performance**: Tips for optimizing cluster performance through the proper selection of EC2 instances, efficient load balancing, and autoscaling configurations.
-* **Cost Optimization**: Techniques for managing and reducing costs associated with running EKS clusters, including instance selection and resource allocation strategies.
+- **Security**: Best practices for securing your EKS clusters, including IAM roles, network policies, and secrets management.
+- **Networking**: Guidance on setting up VPCs, subnets, and load balancers to ensure efficient and secure network traffic.
+- **Monitoring and Logging**: Strategies for implementing comprehensive monitoring and logging solutions using AWS CloudWatch and other tools to maintain visibility into cluster performance and operational health.
+- **Performance**: Tips for optimizing cluster performance through the proper selection of EC2 instances, efficient load balancing, and autoscaling configurations.
+- **Cost Optimization**: Techniques for managing and reducing costs associated with running EKS clusters, including instance selection and resource allocation strategies.
 
 By adhering to these best practices, developers and system administrators can ensure that their AWS EKS clusters are robust, secure, and cost-effective, facilitating a smooth and efficient CI/CD pipeline for software development.
 
@@ -31,10 +31,10 @@ By adhering to these best practices, developers and system administrators can en
 
 Before the EKS cluster deployment and configuration, make sure to check the prerequisites. Install the required tools listed below:
 
-* [Git](https://git-scm.com/book/en/v2)
-* [Terraform](https://www.terraform.io/)
-* [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html)
-* [tfenv](https://github.com/tfutils/tfenv)
+- [Git](https://git-scm.com/book/en/v2)
+- [Terraform](https://www.terraform.io/)
+- [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html)
+- [tfenv](https://github.com/tfutils/tfenv)
 
 To check the correct tools installation, run the following commands:
 
@@ -53,8 +53,8 @@ tfenv --version
 
 This step covers the following topics:
 
-* Create S3 bucket with policy to store terraform states
-* Create DynamoDB to support state locking and consistency checking
+- Create S3 bucket with policy to store terraform states
+- Create DynamoDB to support state locking and consistency checking
 
 To create the required resources, follow the steps below:
 
@@ -148,9 +148,9 @@ Find the detailed description of the variables in the [iam/variables.tf](https:/
 
 This step will cover the following topics:
 
-* Create the AWS VPC
-* Create the AWS VPC Subnets for instances and AWS ALB
-* Create the AWS VPC Routing
+- Create the AWS VPC
+- Create the AWS VPC Subnets for instances and AWS ALB
+- Create the AWS VPC Routing
 
 To accomplish the tasks outlined above, follow these steps:
 
@@ -233,11 +233,11 @@ Please find the detailed description of the variables in the [vpc/variables.tf](
 
 This step will cover the following topics:
 
-* Create the EKS Cluster
-* Create the AWS ASGs for the EKS Cluster
-* Create the AWS ALB
-* (Optional) Create the Kaniko AWS IAM Role
-* (Optional) Create the Atlantis AWS IAM Role
+- Create the EKS Cluster
+- Create the AWS ASGs for the EKS Cluster
+- Create the AWS ALB
+- (Optional) Create the Kaniko AWS IAM Role
+- (Optional) Create the Atlantis AWS IAM Role
 
 To accomplish the tasks outlined above, follow these steps:
 
@@ -335,8 +335,8 @@ Please find the detailed description of the variables in the [eks/variables.tf](
 
 This section covers configuring Argo CD for further integrating with an external EKS cluster. This integration necessitates creating two AWS IAM roles:
 
-* `AWSIRSA_Test_ArgoCDMaster` AWS IAM role - for setting up IRSA annotations for the Argo CD application;
-* `EDPArgoCDClusterAdmin` AWS IAM role - for working with external EKS clusters and further adding them (please refer to the [Add Cluster](../user-guide/add-cluster.md) page for details).
+- `AWSIRSA_Test_ArgoCDMaster` AWS IAM role - for setting up IRSA annotations for the Argo CD application
+- `EDPArgoCDClusterAdmin` AWS IAM role - for working with external EKS clusters and further adding them (please refer to the [Add Cluster](../user-guide/add-cluster.md) page for details).
 
 ### Argo CD IAM Role for Shared EKS Cluster
 

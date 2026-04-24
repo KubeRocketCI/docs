@@ -45,16 +45,16 @@ graph TD;
         Nexus["<b>Nexus</b><br> --- <br> Keycloak Client"]
         OpenSearch["<b>OpenSearch</b><br> --- <br> Keycloak Client <br> Keycloak Client Scope"]
         Prometheus-operator["<b>Prometheus-operator</b><br> --- <br> Keycloak Client (Grafana)"]
-        DependencyTrack["<b>Dependency Track</b><br> --- <br> Keycloak Client"]
+        Dependency-Track["<b>Dependency-Track</b><br> --- <br> Keycloak Client"]
         DefectDojo["<b>DefectDojo</b><br> --- <br> Keycloak Client"]
 
-        Portal["<b>Portal UI</b><br> --- <br> KeycloakClient <br> Keycloak Client Secret"]
+        Portal["<b>KubeRocketCI portal</b><br> --- <br> KeycloakClient <br> Keycloak Client Secret"]
 
         %% Define the new 4x4 grid layout
         Report-Portal ~~~ Nexus ~~~ EKS ~~~ Portal
         Sonar ~~~ Harbor ~~~ OpenSearch ~~~ ArgoCD
         Vault-kms ~~~ Harbor-ha ~~~ Prometheus-operator ~~~ AWX-operator
-        Vault-okd ~~~ Harbor-ha-okd ~~~ DependencyTrack ~~~ DefectDojo
+        Vault-okd ~~~ Harbor-ha-okd ~~~ Dependency-Track ~~~ DefectDojo
     end
     subgraph broker_realm ["<b>broker realm</b>"]
      shared["<b>shared</b><br> --- <br> Keycloak Client"]
@@ -85,7 +85,7 @@ graph TD;
 
     subgraph keycloak_roles_components [" "]
         direction TB
-        DependencyTrack["<b>Dependency Track</b><br> --- <br> administrator <br> developer"]
+        Dependency-Track["<b>Dependency-Track</b><br> --- <br> administrator <br> developer"]
         Harbor["<b>Harbor</b><br> --- <br> administrator"]
         TektonDashboard["<b>Tekton Dashboard</b><br> --- <br> administrator <br> developer"]
 
@@ -102,7 +102,7 @@ graph TD;
 
         Vault["<b>Vault</b><br> --- <br> Role 'reader' by default"]
 
-        DependencyTrack ~~~ OpenSearch ~~~ Sonar ~~~ DefectDojo
+        Dependency-Track ~~~ OpenSearch ~~~ Sonar ~~~ DefectDojo
         Harbor ~~~ Grafana ~~~ ReportPortal ~~~ Vault
         TektonDashboard ~~~ Nexus ~~~ AWX-operator ~~~ mock_object[" "]
     end
@@ -110,7 +110,7 @@ graph TD;
     subgraph keycloak_groups_components [" "]
         direction TB
         ArgoCD["<b>Argo CD</b><br> --- <br> ArgoCDAdmins <br> ArgoCDDevelopers"]
-        PortalUI["<b>Portal UI</b><br> --- <br> ${platform}-oidc-admins <br> ${platform}-oidc-developers <br> ${platform}-oidc-viewers"]
+        PortalUI["<b>KubeRocketCI portal</b><br> --- <br> ${platform}-oidc-admins <br> ${platform}-oidc-developers <br> ${platform}-oidc-viewers"]
 
         Gerrit["<b>Gerrit</b><br> --- <br> Specific roles are assigned through <br> the CR GerritGroupMember"]
         ArgoCD ~~~ Gerrit
@@ -144,15 +144,15 @@ For detailed instructions on setting up OIDC integration for various components,
 
 The `shared` Keycloak realm defines two composite roles:
 
-* **Administrator Role**:
-  * Designed for users who need administrative access to the tools used on the platform.
-  * This composite role includes the `administrator` and `sonar-administrators` roles.
-  * Users assigned the `administrator` composite role will inherit both roles.
+- **Administrator Role**:
+  - Designed for users who need administrative access to the tools used on the platform.
+  - This composite role includes the `administrator` and `sonar-administrators` roles.
+  - Users assigned the `administrator` composite role will inherit both roles.
 
-* **Developer Role**:
-  * Designed for users who need access to the development tools used on the platform.
-  * This composite role includes the `developer` and `sonar-developers` roles.
-  * Users assigned the `developer` composite role will inherit both roles.
+- **Developer Role**:
+  - Designed for users who need access to the development tools used on the platform.
+  - This composite role includes the `developer` and `sonar-developers` roles.
+  - Users assigned the `developer` composite role will inherit both roles.
 
 These composite roles simplify the assignment of administrative and development permissions within the KubeRocketCI.
 
@@ -188,8 +188,8 @@ Access to SonarQube is managed through configurations in Keycloak (Keycloak Oper
 
 SonarQube access is managed using Keycloak roles within the `shared` realm:
 
-* **sonar-developers**: Grants developer access to SonarQube.
-* **sonar-administrators**: Grants administrative access to SonarQube.
+- **sonar-developers**: Grants developer access to SonarQube.
+- **sonar-administrators**: Grants administrative access to SonarQube.
 
 To grant access, the appropriate role must be assigned to the user in Keycloak.
 
@@ -234,9 +234,9 @@ The template is stored in the SonarQube [custom resource](https://github.com/epa
 
 The SonarQube Permission Template defines three groups: `view-group`, `sonar-administrators`, and `sonar-developers`:
 
-* **view-group**: Users who have read-only access to the project. They can view project's data and metrics but cannot modify or interact with it.
-* **sonar-administrators**: Users with full control over the SonarQube project. They can create, modify, delete projects, manage user access, and configure SonarQube settings.
-* **sonar-developers**: Users actively working on the SonarQube project. They have read and write access, can modify project data and metrics, and configure project-specific settings.
+- **view-group**: Users who have read-only access to the project. They can view project's data and metrics but cannot modify or interact with it.
+- **sonar-administrators**: Users with full control over the SonarQube project. They can create, modify, delete projects, manage user access, and configure SonarQube settings.
+- **sonar-developers**: Users actively working on the SonarQube project. They have read and write access, can modify project data and metrics, and configure project-specific settings.
 
 These groups provide different levels of access based on the user's role and responsibilities.
 
@@ -341,11 +341,11 @@ Each Keycloak group corresponds to a specific level of access within the Kuberne
 
 In the KubeRocketCI portal, the following **View** permissions are granted to users based on their group membership:
 
-| Group Name                    |  View Components   |   View Branches    |   View Pipelines   | View Deployment Flows | View Environments  |    View Widgets    |
-|-------------------------------|:------------------:|:------------------:|:------------------:|:---------------------:|:------------------:|:------------------:|
-| `${platform}-oidc-admins`     | :white_check_mark: | :white_check_mark: | :white_check_mark: |  :white_check_mark:   | :white_check_mark: | :white_check_mark: |
-| `${platform}-oidc-developers` | :white_check_mark: | :white_check_mark: | :white_check_mark: |  :white_check_mark:   | :white_check_mark: | :white_check_mark: |
-| `${platform}-oidc-viewers`    | :white_check_mark: | :white_check_mark: | :white_check_mark: |  :white_check_mark:   | :white_check_mark: | :white_check_mark: |
+| Group Name                    |   View Projects    |   View Branches    |   View Pipelines   |  View Deployments  | View Environments  |    View Widgets    |   View Security    | View Observability |
+|-------------------------------|:------------------:|:------------------:|:------------------:|:------------------:|:------------------:|:------------------:|:------------------:|:------------------:|
+| `${platform}-oidc-admins`     | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |
+| `${platform}-oidc-developers` | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |
+| `${platform}-oidc-viewers`    | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |
 
 #### Permissions for the Configuration sections and Kubernetes resources
 
@@ -369,7 +369,7 @@ Permissions for the most common Kubernetes resources:
 
 The following **Build** permissions are granted to users based on their group membership:
 
-| Group Name                    |  Create Component  |   Edit Component   |  Delete Component  |   Create Branch    |    Edit Branch     |   Delete Branch    |  Build Component   |
+| Group Name                    |   Create Project   |    Edit Project    |   Delete Project   |   Create Branch    |    Edit Branch     |   Delete Branch    |    Build Project   |
 |-------------------------------|:------------------:|:------------------:|:------------------:|:------------------:|:------------------:|:------------------:|:------------------:|
 | `${platform}-oidc-admins`     | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |
 | `${platform}-oidc-developers` |        :x:         |        :x:         |        :x:         | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |

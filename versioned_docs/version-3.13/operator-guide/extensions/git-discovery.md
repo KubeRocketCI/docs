@@ -118,6 +118,6 @@ Once GitFusion deployment is complete, validate the integration functionality th
 
 ## Related Articles
 
-- [Add Application](../../user-guide/add-application.md)
-- [Manage Branches](../../user-guide/manage-branches.md)
-- [KrakenD Integration](./krakend.md)
+* [Add Application](../../user-guide/add-application.md)
+* [Manage Branches](../../user-guide/manage-branches.md)
+* [KrakenD Integration](./krakend.md)

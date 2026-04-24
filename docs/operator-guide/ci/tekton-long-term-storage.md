@@ -115,7 +115,7 @@ In this example, the PGO (PostgreSQL Operator) is used for the Tekton Results da
 
 ## Related Articles
 
-- [Add Application](../../user-guide/add-application.md)
-- [Install Tekton](../install-tekton.md)
-- [Install KubeRocketCI](../install-kuberocketci.md)
-- [KrakenD API Gateway](../extensions/krakend.md)
+* [Add Application](../../user-guide/add-application.md)
+* [Install Tekton](../install-tekton.md)
+* [Install KubeRocketCI](../install-kuberocketci.md)
+* [KrakenD API Gateway](../extensions/krakend.md)

@@ -22,8 +22,8 @@ required RBAC capabilities.
 
 Argo CD can be installed using [two different approaches](https://argo-cd.readthedocs.io/en/stable/operator-manual/installation):
 
-* Cluster-wide scope with the cluster-admin access
-* Namespaced scope with the single namespace access
+- Cluster-wide scope with the cluster-admin access
+- Namespaced scope with the single namespace access
 
 Both approaches can be deployed with High Availability (HA) or Non High Availability (non HA) installation manifests.
 
@@ -36,11 +36,11 @@ See a diagram below for the details:
 
 ![edp-argocd](../../assets/operator-guide/edp-argocd.png "Argo CD Diagram")
 
-* Argo CD is deployed in a separate `argocd` namespace.
-* Argo CD uses a `cluster-admin` role for managing cluster-scope resources.
-* The `control-plane` application is created using the App of Apps approach, and its code is managed by the `control-plane` members.
-* The `control-plane` is used to onboard new Argo CD Tenants (Argo CD Projects - AppProject).
-* The `KubeRocketCI Tenant Member` manages `Argo CD Applications` using `kind: Application` in the `krciTenant` namespace.
+- Argo CD is deployed in a separate `argocd` namespace.
+- Argo CD uses a `cluster-admin` role for managing cluster-scope resources.
+- The `control-plane` application is created using the App of Apps approach, and its code is managed by the `control-plane` members.
+- The `control-plane` is used to onboard new Argo CD Tenants (Argo CD Projects - AppProject).
+- The `KubeRocketCI Tenant Member` manages `Argo CD Applications` using `kind: Application` in the `krciTenant` namespace.
 
 The [App Of Apps approach](https://argo-cd.readthedocs.io/en/stable/operator-manual/cluster-bootstrapping/) is used to
 manage the `KubeRocketCI Tenants`. Inspect the [edp-grub](https://github.com/SergK/edp-grub) repository structure that is used to
@@ -296,8 +296,8 @@ for GitHub, GitLab, Bitbucket, or Gerrit integrations. The credential template m
 
         7. On the appeared window, scroll down to the **JWT Tokens** section, specify the required fields and click **Create**:
 
-          * **Token ID**: Token name.
-          * **Expires in**: Defines the period for which the token is considered valid. Must be in the "[0-9]+[s,m,h,d]" format. For example, "12h", "7d".
+          - **Token ID**: Token name.
+          - **Expires in**: Defines the period for which the token is considered valid. Must be in the "[0-9]+[s,m,h,d]" format. For example, "12h", "7d".
 
           ![Create JWT token](../../assets/operator-guide/cd/argo-cd-project-create-token.png "Create JWT token")
 
@@ -315,9 +315,9 @@ for GitHub, GitLab, Bitbucket, or Gerrit integrations. The credential template m
 
         11. In the integration window, specify the required fields and click **Save**:
 
-          * **Quick Link URL**: Enter the URL of your Argo CD instance (e.g., https://argocd.example.com). A quick link will be added to the Overview section for quick access to Argo CD from the KubeRocketCI portal.
-          * **URL**:  Enter the URL of your Argo CD instance (e.g., https://argocd.example.com).
-          * **Token**: Paste the JWT token data copied earlier.
+          - **Quick Link URL**: Enter the URL of your Argo CD instance (e.g., https://argocd.example.com). A quick link will be added to the Overview section for quick access to Argo CD from the KubeRocketCI portal.
+          - **URL**:  Enter the URL of your Argo CD instance (e.g., https://argocd.example.com).
+          - **Token**: Paste the JWT token data copied earlier.
 
           ![Specify required fields](../../assets/operator-guide/cd/argo-cd-project-integration-portal.png "Specify required fields")
 

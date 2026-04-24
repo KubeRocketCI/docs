@@ -111,7 +111,7 @@ The [KubeRocketCI RBAC add-on](https://github.com/epam/edp-cluster-add-ons/tree/
 
 ## AWS Configuration
 
-Configure Identity provider in kubernetes cluster
+Below are the guidelines for configuring identity provider in Kubernetes cluster:
 
     <Tabs
       defaultValue="terraform"
@@ -232,21 +232,21 @@ KubeRocketCI follows the same approach for managing access to its resources. For
 
 Follow the steps below to test the configuration:
 
-* Run kubectl command, it is important to specify the correct kubeconfig:
+- Run kubectl command, it is important to specify the correct kubeconfig:
 
   ```bash
   KUBECONFIG=<path_to_oidc_kubeconfig> kubectl get ingresses -n <namespace_name>
   ```
 
-* After the first run and redirection to the Keycloak login page, log in using credentials (login:password) or using SSO Provider.
+- After the first run and redirection to the Keycloak login page, log in using credentials (login:password) or using SSO Provider.
 In case of the successful login, you will receive the following notification that can be closed:
 
   ![OIDC Successful Login](../../assets/operator-guide/oidc-success-login.png)
 
-* As the result, a respective response from the Kubernetes will appear in the console
+- As the result, a respective response from the Kubernetes will appear in the console
 in case a user is configured correctly and is a member of the correct group and Roles/RoleBindings.
 
-* If something is not set up correctly, the following output error will be displayed:
+- If something is not set up correctly, the following output error will be displayed:
 
   ```bash
   Error from server (Forbidden): ingresses.networking.k8s.io is forbidden:
@@ -267,9 +267,9 @@ rm -rf ~/.kube/cache
 
 To access the Kubernetes cluster via [Lens](https://k8slens.dev/), follow the steps below to configure it:
 
-* Add a new kubeconfig to the location where Lens has access. The default location of the kubeconfig is **~/.kube/config** but it can be changed by navigating to **File** -> **Preferences** -> **Kubernetes** -> **Kubeconfig Syncs**;
-* (Optional) Using Windows, it is recommended to reboot the system after adding a new kubeconfig;
-* Authenticate on the Keycloak login page to be able to access the cluster.
+- Add a new kubeconfig to the location where Lens has access. The default location of the kubeconfig is **~/.kube/config** but it can be changed by navigating to **File** -> **Preferences** -> **Kubernetes** -> **Kubeconfig Syncs**.
+- (Optional) Using Windows, it is recommended to reboot the system after adding a new kubeconfig.
+- Authenticate on the Keycloak login page to be able to access the cluster.
 
 :::note
   Lens does not add namespaces of the project automatically, so it is necessary to add them manually, simply go to **Settings** -> **Namespaces** and add the namespaces of a project.

@@ -169,7 +169,7 @@ Follow the steps below to configure the default namespace extension attribute in
 
 11. After configuring the `default_namespace` extension attribute, the account settings, such as the **Default namespace** and **Allowed namespaces**, will be automatically configured during login to the KubeRocketCI Portal:
 
-    ![Portal user default namespace](../../assets/operator-guide/keycloak-user-attributes/portal-user-default-namespace.png "Portal user default namespace")
+    ![Portal user default namespace](../../assets/operator-guide/krci-portal-ui.png "Portal user default namespace")
 
 ## Configure User Profile Picture
 
@@ -418,4 +418,4 @@ Follow the steps below to configure and assign a custom Token Lifetime Policy to
 
 ## Related Articles
 
-- [OpenID Connect (OIDC) Authentication Overview](./oidc-authentication-overview.md)
+* [OpenID Connect (OIDC) Authentication Overview](./oidc-authentication-overview.md)

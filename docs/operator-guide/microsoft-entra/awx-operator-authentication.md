@@ -88,4 +88,4 @@ After completing these steps, the Ansible AWX will be configured to use OIDC aut
 
 ## Related Articles
 
-- [OpenID Connect (OIDC) Authentication Overview](./oidc-authentication-overview.md)
+* [OpenID Connect (OIDC) Authentication Overview](./oidc-authentication-overview.md)

@@ -21,10 +21,10 @@ The **ELK** (Elasticsearch, Logstash, and Kibana) stack is renowned for its capa
 
 Below is an overview of the default components within the ELK stack:
 
-* **Beats family** - A suite of log shippers that transport logs from their sources to the stack, including Filebeat, Metricbeat, Packetbeat, among others. Beats can either replace Logstash or complement it.
-* **Logstash** - A robust log processing framework that collects, processes, stores, and searches logs.
-* **Elasticsearch** - A highly scalable search and analytics engine built on the [Lucene](https://lucene.apache.org/) Java library.
-* **Kibana** - A powerful visualization tool that queries data from Elasticsearch, enabling insightful data analysis.
+- **Beats family** - A suite of log shippers that transport logs from their sources to the stack, including Filebeat, Metricbeat, Packetbeat, among others. Beats can either replace Logstash or complement it.
+- **Logstash** - A robust log processing framework that collects, processes, stores, and searches logs.
+- **Elasticsearch** - A highly scalable search and analytics engine built on the [Lucene](https://lucene.apache.org/) Java library.
+- **Kibana** - A powerful visualization tool that queries data from Elasticsearch, enabling insightful data analysis.
 
 ![Overview of ELK Stack Components](../../assets/drawio-diagrams/elk_stack01.drawio.png "ELK Stack")
 
@@ -130,11 +130,11 @@ They are going to be created them using Kibana Dev Tools.
    </details>
 
     :::note
-      * `index.lifecycle.rollover_alias` is required when using a policy containing the rollover action and specifies which alias to rollover on behalf of this index. The intention here is that the rollover [alias](https://www.elastic.co/guide/en/elasticsearch/reference/8.6/aliases.html) is also defined on the index.
+      - `index.lifecycle.rollover_alias` is required when using a policy containing the rollover action and specifies which alias to rollover on behalf of this index. The intention here is that the rollover [alias](https://www.elastic.co/guide/en/elasticsearch/reference/8.6/aliases.html) is also defined on the index.
 
-      * `number_of_shards` is the quantity of the primary shards. Elasticsearch index is really just a logical grouping of one or more physical shards, where each shard is actually a self-contained index. By distributing the documents in an index across multiple shards and distributing those shards across multiple nodes, Elasticsearch can ensure redundancy, which both protects against hardware failures and increases query capacity as nodes are added to a cluster. As the cluster grows (or shrinks), Elasticsearch automatically migrates shards to re-balance the cluster. Please refer to the official documentation [here](https://www.elastic.co/guide/en/elasticsearch/reference/current/scalability.html).
+      - `number_of_shards` is the quantity of the primary shards. Elasticsearch index is really just a logical grouping of one or more physical shards, where each shard is actually a self-contained index. By distributing the documents in an index across multiple shards and distributing those shards across multiple nodes, Elasticsearch can ensure redundancy, which both protects against hardware failures and increases query capacity as nodes are added to a cluster. As the cluster grows (or shrinks), Elasticsearch automatically migrates shards to re-balance the cluster. Please refer to the official documentation [here](https://www.elastic.co/guide/en/elasticsearch/reference/current/scalability.html).
 
-      * `number_of_replicas` is the number of replica shards. A replica shard is a copy of a primary shard. Elasticsearch will never assign a replica to the same node as the primary shard, so make sure you have more than one node in your Elasticsearch cluster if you need to use replica shards. The Elasticsearch cluster details and the quantity of nodes can be checked with:
+      - `number_of_replicas` is the number of replica shards. A replica shard is a copy of a primary shard. Elasticsearch will never assign a replica to the same node as the primary shard, so make sure you have more than one node in your Elasticsearch cluster if you need to use replica shards. The Elasticsearch cluster details and the quantity of nodes can be checked with:
 
             ```bash
             GET _cluster/health

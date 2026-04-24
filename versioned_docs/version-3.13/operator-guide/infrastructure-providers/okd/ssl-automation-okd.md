@@ -21,11 +21,11 @@ Below is an instruction on how to automatically issue and install wildcard certi
 
 ## Prerequisites
 
-* The cert-manager;
-* OpenShift v4.7 - v4.11;
-* Connection to the OpenShift Cluster;
-* Enabled AWS IRSA;
-* The latest [`oc` utility](https://github.com/openshift/okd/releases). The `kubectl` tool can also be used for most of the commands.
+- The cert-manager
+- OpenShift v4.7 - v4.11
+- Connection to the OpenShift Cluster
+- Enabled AWS IRSA
+- The latest [`oc` utility](https://github.com/openshift/okd/releases). The `kubectl` tool can also be used for most of the commands.
 
 ### Install Cert-Manager Operator
 
@@ -87,14 +87,14 @@ The `cert-manager` should be configured to validate Wildcard certificates using 
 
 3. Create an AWS Role with **Custom trust policy** for the `cert-manager` service account to use the [AWS IRSA](https://cert-manager.io/docs/configuration/acme/dns01/route53/#eks-iam-role-for-service-accounts-irsa) feature and then attach the created policy. Replace the following:
 
-    * `${aws-account-id}` with the AWS account ID of the EKS cluster.
-    * `${aws-region}` with the region where the EKS cluster is located.
-    * `${eks-hash}` with the hash in the EKS API URL; this will be a random 32 character hex string, for example, 45DABD88EEE3A227AF0FA468BE4EF0B5.
-    * `${namespace}` with the namespace where cert-manager is running.
-    * `${service-account-name}` with the name of the ServiceAccount object created by cert-manager.
-    * By default, it is *"system:serviceaccount:openshift-operators:cert-manager"* if `cert-manager` is installed via OperatorHub.
-    * Attach the created **Permission policy** for Route53 to the Role.
-    * Optionally, add **Permissions boundary** to the Role.
+    - `${aws-account-id}` with the AWS account ID of the EKS cluster.
+    - `${aws-region}` with the region where the EKS cluster is located.
+    - `${eks-hash}` with the hash in the EKS API URL; this will be a random 32 character hex string, for example, 45DABD88EEE3A227AF0FA468BE4EF0B5.
+    - `${namespace}` with the namespace where cert-manager is running.
+    - `${service-account-name}` with the name of the ServiceAccount object created by cert-manager.
+    - By default, it is *"system:serviceaccount:openshift-operators:cert-manager"* if `cert-manager` is installed via OperatorHub.
+    - Attach the created **Permission policy** for Route53 to the Role.
+    - Optionally, add **Permissions boundary** to the Role.
 
     ```json
     {
@@ -236,7 +236,7 @@ The `cert-manager` should be configured to validate Wildcard certificates using 
       The OpenShift `ClusterServiceVersion` OLM resource includes several Deployments, and the ARGs must be modified only for the `cert-manager` controller.
     :::
 
-    * Save the resource. After that, OLM will try to reload the resource automatically and save it to the YAML file. If OLM resets the config file, double-check the entered values.
+    - Save the resource. After that, OLM will try to reload the resource automatically and save it to the YAML file. If OLM resets the config file, double-check the entered values.
 
     ![Cert-Manager Nameservers](../../../assets/operator-guide/ssl-okd-config-06.png "Cert-Manager Nameservers")
 
@@ -250,10 +250,10 @@ The `cert-manager` should be configured to validate Wildcard certificates using 
       Let's Encrypt has a [limit](https://letsencrypt.org/docs/rate-limits/) of duplicate certificates in the Prod environment. Therefore, a `ClusterIssuer` has been created for [Let's Encrypt Staging](https://letsencrypt.org/docs/staging-environment/) environment. By default, Let's Encrypt Staging certificates will not be trusted in your browser. The certificate validation cannot be tested in the Let's Encrypt Staging environment.
     :::
 
-    * Change `user@example.com` with your contact email.
-    * Replace `hostedZoneID` XXXXXXXXXXX with the DNS **Hosted zone ID** in AWS for your domain.
-    * Replace the region value `${region}`.
-    * The secret under `privateKeySecretRef` will be created automatically by the `cert-manager` operator.
+    - Change `user@example.com` with your contact email.
+    - Replace `hostedZoneID` XXXXXXXXXXX with the DNS **Hosted zone ID** in AWS for your domain.
+    - Replace the region value `${region}`.
+    - The secret under `privateKeySecretRef` will be created automatically by the `cert-manager` operator.
 
     ```yaml
     apiVersion: cert-manager.io/v1
@@ -313,8 +313,8 @@ The `cert-manager` should be configured to validate Wildcard certificates using 
 
 1. In two different namespaces, create a [Certificate](https://cert-manager.io/docs/usage/certificate/) resource for the OpenShift Router (Ingress controller for OpenShift) and for the OpenShift APIServer.
 
-    * OpenShift Router supports a single wildcard certificate for Ingress/Route resources in different namespaces (so called, [default SSL certificate](https://cert-manager.io/docs/faq/sync-secrets/#serving-a-wildcard-to-ingress-resources-in-different-namespaces-default-ssl-certificate)). The Ingress controller expects the certificates in a `Secret` to be created in the `openshift-ingress` namespace; the API Server, in the `openshift-config` namespace. The `cert-manager` operator will automatically create these secrets from the `Certificate` resource.
-    * Replace `${DOMAIN}` with your domain name. It can be checked with `oc whoami --show-server`. Put domain names in quotes.
+    - OpenShift Router supports a single wildcard certificate for Ingress/Route resources in different namespaces (so called, [default SSL certificate](https://cert-manager.io/docs/faq/sync-secrets/#serving-a-wildcard-to-ingress-resources-in-different-namespaces-default-ssl-certificate)). The Ingress controller expects the certificates in a `Secret` to be created in the `openshift-ingress` namespace; the API Server, in the `openshift-config` namespace. The `cert-manager` operator will automatically create these secrets from the `Certificate` resource.
+    - Replace `${DOMAIN}` with your domain name. It can be checked with `oc whoami --show-server`. Put domain names in quotes.
 
     <details>
     <summary><b>The certificate for OpenShift Router in the `openshift-ingress` namespace</b></summary>
@@ -393,7 +393,7 @@ The `cert-manager` should be configured to validate Wildcard certificates using 
     </details>
 
     :::info
-      * `cert-manager` supports [ECDSA](https://cert-manager.io/docs/faq/#is-ecc-elliptic-curve-cryptography-supported) key pairs in the `Certificate` resource. To use it, change RSA `privateKey` to ECDSA:
+      - `cert-manager` supports [ECDSA](https://cert-manager.io/docs/faq/#is-ecc-elliptic-curve-cryptography-supported) key pairs in the `Certificate` resource. To use it, change RSA `privateKey` to ECDSA:
 
           ```yaml
           privateKey:
@@ -403,8 +403,8 @@ The `cert-manager` should be configured to validate Wildcard certificates using 
             rotationPolicy: Always
           ```
 
-      * `rotationPolicy: Always` is highly recommended since `cert-manager` does not [rotate private keys](https://cert-manager.io/docs/usage/certificate/#the-rotationpolicy-setting) by default.
-      * Full `Certificate` spec is described in the `cert-manager` [API documentation](https://cert-manager.io/docs/reference/api-docs/#cert-manager.io/v1.CertificateSpec).
+      - `rotationPolicy: Always` is highly recommended since `cert-manager` does not [rotate private keys](https://cert-manager.io/docs/usage/certificate/#the-rotationpolicy-setting) by default.
+      - Full `Certificate` spec is described in the `cert-manager` [API documentation](https://cert-manager.io/docs/reference/api-docs/#cert-manager.io/v1.CertificateSpec).
     :::
 
 2. Check that the certificates in the namespaces are ready:
@@ -448,13 +448,13 @@ The `cert-manager` should be configured to validate Wildcard certificates using 
 
 2. Update the Custom Resource for the OpenShift API Server:
 
-    * Export the name of `APIServer`:
+    - Export the name of `APIServer`:
 
       ```bash
       export OKD_API=$(oc whoami --show-server --insecure-skip-tls-verify | cut -f 2 -d ':' | cut -f 3 -d '/' | sed 's/-api././')
       ```
 
-    * Patch the `servingCertificate` object value with `{ "name": "api-certs" }`:
+    - Patch the `servingCertificate` object value with `{ "name": "api-certs" }`:
 
       ```bash
       oc patch apiserver cluster --type merge --patch="{\"spec\": {\"servingCerts\": {\"namedCertificates\": [ { \"names\": [  \"$OKD_API\"  ], \"servingCertificate\": {\"name\": \"api-certs\" }}]}}}" --insecure-skip-tls-verify
@@ -544,20 +544,20 @@ As soon as the domain ownership has been verified, any `cert-manager` affected v
 
 Please find below the issues that may occur and their troubleshooting:
 
-* When certificates are not issued for a long time, or a `cert-manager` resource is not in a Ready state, [describing](https://cert-manager.io/docs/faq/troubleshooting/) a resource may show the reason for the error.
+- When certificates are not issued for a long time, or a `cert-manager` resource is not in a Ready state, [describing](https://cert-manager.io/docs/faq/troubleshooting/) a resource may show the reason for the error.
 
-* Basically, the `cert-manager` creates the following resources during a `Certificate` issuance: `CertificateRequest`, `Order`, and `Challenge`. [Investigate](https://cert-manager.io/docs/faq/acme/) each of them in case of errors.
+- Basically, the `cert-manager` creates the following resources during a `Certificate` issuance: `CertificateRequest`, `Order`, and `Challenge`. [Investigate](https://cert-manager.io/docs/faq/acme/) each of them in case of errors.
 
-* Use the [cmctl](https://cert-manager.io/docs/usage/cmctl/) tool to show the state of a `Certificate` and its associated resources.
+- Use the [cmctl](https://cert-manager.io/docs/usage/cmctl/) tool to show the state of a `Certificate` and its associated resources.
 
-* Check the `cert-manager` controller pod logs:
+- Check the `cert-manager` controller pod logs:
 
   ```bash
   oc get pod -n openshift-operators | grep 'cert-manager'
   oc logs -f cert-manager-${replica_set}-${random_string} -n openshift-operators
   ```
 
-* Certificate error debugging:
+- Certificate error debugging:
   a. Decode certificate chain located in the secrets:
 
     ```bash

@@ -19,9 +19,9 @@ import TabItem from '@theme/TabItem';
 Inspect the main steps to install KubeRocketCI. Please check the [Prerequisites Overview](prerequisites.md) page before starting the installation. Also, to authenticate each of the release artifacts, please refer to the [Verification of KubeRocketCI Artifacts](../developer-guide/artifacts-verification.md) guide.
 There are multiple ways to deploy KubeRocketCI:
 
-* Using Helm (see below);
-* Using [Argo CD GitOps approach](./add-ons-overview.md);
-* Using [AWS Marketplace](./aws-marketplace-install.md).
+- Using Helm (see below)
+- Using [Argo CD GitOps approach](./add-ons-overview.md)
+- Using [AWS Marketplace](./aws-marketplace-install.md)
 
 :::note
   The installation process below is given for a Kubernetes cluster. The steps that differ for an OpenShift cluster are indicated in the notes.
@@ -46,7 +46,7 @@ There are multiple ways to deploy KubeRocketCI:
     ```bash
     helm search repo epamedp/edp-install
     NAME                    CHART VERSION   APP VERSION     DESCRIPTION
-    epamedp/edp-install     3.13.0          3.13.0           A Helm chart for KubeRocketCI Platform
+    epamedp/edp-install     3.13.3          3.13.3           A Helm chart for KubeRocketCI Platform
     ```
 
     :::note
@@ -55,9 +55,9 @@ There are multiple ways to deploy KubeRocketCI:
 
 5. KubeRocketCI can be integrated with the following version control systems:
 
-    * [GitHub](https://docs.github.com/en) (by default)
-    * [GitLab](https://docs.gitlab.com/)
-    * [Gerrit](https://gerrit-review.googlesource.com/Documentation/)
+    - [GitHub](https://docs.github.com/en) (by default)
+    - [GitLab](https://docs.gitlab.com/)
+    - [Gerrit](https://gerrit-review.googlesource.com/Documentation/)
 
     This integration implies in what system the development of the application will be or is already being carried out. The `global.gitProviders` flag in the edp-install controls this integration:
 
@@ -213,11 +213,11 @@ There are multiple ways to deploy KubeRocketCI:
 
 7. Install platform in the **krci** namespace with the Helm tool:
 
-    Check the parameters in the installation chart [values.yaml](https://github.com/epam/edp-install/blob/v3.13.0/deploy-templates/values.yaml) file.
+    Check the parameters in the installation chart [values.yaml](https://github.com/epam/edp-install/blob/v3.13.3/deploy-templates/values.yaml) file.
 
     ```bash
     helm install krci epamedp/edp-install --wait --timeout=900s \
-    --version 3.13.0 \
+    --version 3.13.3 \
     --values values.yaml \
     --namespace krci \
     --create-namespace
@@ -274,10 +274,9 @@ There are multiple ways to deploy KubeRocketCI:
             ingress:
               enabled: true
 
-    edp-headlamp:
-      config:
-        oidc:
-          enabled: false
+  krci-portal:
+    ingress:
+      enabled: true
     ```
 
     :::note
@@ -294,7 +293,7 @@ There are multiple ways to deploy KubeRocketCI:
     helm status krci -n krci
     ```
 
-    You can also check ingress endpoints to get the Portal endpoint to enter Portal UI:
+    You can also check ingress endpoints to get the Portal endpoint to enter KubeRocketCI portal:
 
     ```bash
     kubectl get ingress portal -n krci

@@ -15,11 +15,11 @@ sidebar_label: "Migrate Jenkins to Tekton"
 
 To migrate the CI pipelines for a codebase from Jenkins to Tekton, follow the steps below:
 
-* Migrate CI Pipelines From Jenkins to Tekton
-* [Deploy a Custom EDP Scenario With Tekton and Jenkins CI Tools](#deploy-a-custom-edp-scenario-with-tekton-and-jenkins-ci-tools)
-* [Disable Jenkins Triggers](#disable-jenkins-triggers)
-* [Manage Tekton Triggers the Codebase(s)](#manage-tekton-triggers-the-codebases)
-* [Switch CI Tool for Codebase(s)](#switch-ci-tool-for-codebases)
+- Migrate CI Pipelines From Jenkins to Tekton
+- [Deploy a Custom EDP Scenario With Tekton and Jenkins CI Tools](#deploy-a-custom-edp-scenario-with-tekton-and-jenkins-ci-tools)
+- [Disable Jenkins Triggers](#disable-jenkins-triggers)
+- [Manage Tekton Triggers the Codebase(s)](#manage-tekton-triggers-the-codebases)
+- [Switch CI Tool for Codebase(s)](#switch-ci-tool-for-codebases)
 
 ## Deploy a Custom EDP Scenario With Tekton and Jenkins CI Tools
 
@@ -56,10 +56,10 @@ if (!tektonCodebaseList.contains(codebaseName.toString())){
   The sample above shows the usage of Gerrit VCS where the `<codebase_name>` value is your codebase name.
 :::
 
-* If using GitHub or GitLab, additionally remove the webhook from the relevant repository.
-* If webhooks generation for new codebase(s) is not required, correct the code above so that it creates a webhook in the job-provisioner.
-* To recreate the pipeline in Jenkins, trigger the job-provisioner.
-* Check that the new pipeline is created without triggering Gerrit events.
+- If using GitHub or GitLab, additionally remove the webhook from the relevant repository.
+- If webhooks generation for new codebase(s) is not required, correct the code above so that it creates a webhook in the job-provisioner.
+- To recreate the pipeline in Jenkins, trigger the job-provisioner.
+- Check that the new pipeline is created without triggering Gerrit events.
 
 ## Manage Tekton Triggers the Codebase(s)
 

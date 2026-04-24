@@ -79,8 +79,8 @@ flowchart LR
 
 The pipeline returns two result URLs visible in the portal:
 
-* `SCAN_REPORT_URL` — DefectDojo link to code security findings (Semgrep + Gitleaks)
-* `IMAGE_SCAN_REPORT_URL` — DefectDojo link to container image findings (Trivy + Grype)
+- `SCAN_REPORT_URL` — DefectDojo link to code security findings (Semgrep + Gitleaks)
+- `IMAGE_SCAN_REPORT_URL` — DefectDojo link to container image findings (Trivy + Grype)
 
 ### Image-Scan-Remote Pipeline
 
@@ -130,11 +130,11 @@ semgrep --jobs 1 --config=auto . --json \
 
 Key behaviors:
 
-* Uses `--config=auto` which downloads community and recommended rules from the Semgrep registry, selecting rules based on detected languages and frameworks.
-* Runs single-threaded (`--jobs 1`) for stability in container environments.
-* Excludes `.docker/config.json` via a `.semgrepignore` file created at scan time.
-* Produces a JSON report consumed by the DefectDojo upload step.
-* Does **not** fail the pipeline on findings — results go to DefectDojo for triage.
+- Uses `--config=auto` which downloads community and recommended rules from the Semgrep registry, selecting rules based on detected languages and frameworks.
+- Runs single-threaded (`--jobs 1`) for stability in container environments.
+- Excludes `.docker/config.json` via a `.semgrepignore` file created at scan time.
+- Produces a JSON report consumed by the DefectDojo upload step.
+- Does **not** fail the pipeline on findings — results go to DefectDojo for triage.
 
 **DefectDojo mapping:** scan type = `Semgrep JSON Report`, engagement = `code-security-{branch}`.
 
@@ -152,9 +152,9 @@ gitleaks detect --source . --report-format=json \
 
 Key behaviors:
 
-* `--no-git` scans file content only (not git history), which is faster and avoids needing a full git clone.
-* `--exit-code=0` ensures the pipeline does not fail on findings — all results are sent to DefectDojo.
-* Uses a custom `gitleaks.toml` config that excludes the `.docker/` directory.
+- `--no-git` scans file content only (not git history), which is faster and avoids needing a full git clone.
+- `--exit-code=0` ensures the pipeline does not fail on findings — all results are sent to DefectDojo.
+- Uses a custom `gitleaks.toml` config that excludes the `.docker/` directory.
 
 **DefectDojo mapping:** scan type = `Gitleaks Scan`, engagement = `code-security-{branch}`.
 
@@ -175,20 +175,20 @@ Key behaviors:
 
 Key behaviors:
 
-* Automatically detects the project type (Maven, npm, pip, Go, etc.) and generates an appropriate SBOM.
-* Uploads the SBOM directly to Dependency-Track via its API (not through DefectDojo).
-* `--project-name` maps to the KubeRocketCI Codebase name (e.g., `my-java-app`).
-* `--project-version` maps to the git branch being scanned (e.g., `main`, `release/1.0`).
-* If the `ci-dependency-track` secret is missing or empty, the step is skipped gracefully.
+- Automatically detects the project type (Maven, npm, pip, Go, etc.) and generates an appropriate SBOM.
+- Uploads the SBOM directly to Dependency-Track via its API (not through DefectDojo).
+- `--project-name` maps to the KubeRocketCI Codebase name (e.g., `my-java-app`).
+- `--project-version` maps to the git branch being scanned (e.g., `main`, `release/1.0`).
+- If the `ci-dependency-track` secret is missing or empty, the step is skipped gracefully.
 
 After upload, Dependency-Track provides:
 
-* Full dependency tree visualization
-* Known vulnerability (CVE) matching against NVD and other feeds
-* License risk analysis (GPL, Apache, MIT compliance)
-* Policy evaluation (banned components, outdated versions)
-* Audit workflow for triaging findings
-* Project-level risk scoring
+- Full dependency tree visualization
+- Known vulnerability (CVE) matching against NVD and other feeds
+- License risk analysis (GPL, Apache, MIT compliance)
+- Policy evaluation (banned components, outdated versions)
+- Audit workflow for triaging findings
+- Project-level risk scoring
 
 #### SonarQube (Code Quality and Security)
 
@@ -235,12 +235,12 @@ This is the primary approach, used in all security-scan pipelines. It renders th
 
 Key details:
 
-* **CodebaseImageStream lookup** normalizes the branch name (lowercase, non-alphanumeric characters replaced with `-`) to locate the correct resource.
-* **Helm template** uses `--set image.repository` and `--set image.tag` overrides so rendered manifests contain real production image references.
-* If no Helm chart exists at `deploy-templates/`, the scan is skipped gracefully.
-* **Trivy** runs in client/server mode by default (server at `http://trivy-service.trivy-system:4954`) for performance. It falls back to standalone mode if no server is configured.
-* **Grype** always runs standalone (no server mode).
-* Both scanners use **soft failure** — a scan error on one image does not block other images from being scanned. Upload errors **do** fail the task.
+- **CodebaseImageStream lookup** normalizes the branch name (lowercase, non-alphanumeric characters replaced with `-`) to locate the correct resource.
+- **Helm template** uses `--set image.repository` and `--set image.tag` overrides so rendered manifests contain real production image references.
+- If no Helm chart exists at `deploy-templates/`, the scan is skipped gracefully.
+- **Trivy** runs in client/server mode by default (server at `http://trivy-service.trivy-system:4954`) for performance. It falls back to standalone mode if no server is configured.
+- **Grype** always runs standalone (no server mode).
+- Both scanners use **soft failure** — a scan error on one image does not block other images from being scanned. Upload errors **do** fail the task.
 
 #### Remote Registry Scanning (image-scan-remote)
 
@@ -264,8 +264,8 @@ Results are printed to the pipeline log. No DefectDojo integration.
 
 These tools run during review pipelines to catch issues before merge:
 
-* **Hadolint** — validates Dockerfile best practices: pinned base images, proper instruction ordering, and shell best practices.
-* **Helm chart-testing** — validates Helm chart structure, values schema, and template rendering using `ct lint`.
+- **Hadolint** — validates Dockerfile best practices: pinned base images, proper instruction ordering, and shell best practices.
+- **Helm chart-testing** — validates Helm chart structure, values schema, and template rendering using `ct lint`.
 
 Both tools block the review pipeline on failure.
 
@@ -295,10 +295,10 @@ Product Type: "KubeRocketCI"
             └─ Test: "Anchore Grype"
 ```
 
-* **Product Type** — `KubeRocketCI` (configurable via `DD_PRODUCT_TYPE_NAME`). Groups all platform codebases.
-* **Product** — one per KubeRocketCI Codebase. Named after the Codebase (e.g., `my-java-app`).
-* **Engagement** — groups related scans. Naming depends on the scan source (see table below).
-* **Test** — one per scanner execution. Holds the actual findings.
+- **Product Type** — `KubeRocketCI` (configurable via `DD_PRODUCT_TYPE_NAME`). Groups all platform codebases.
+- **Product** — one per KubeRocketCI Codebase. Named after the Codebase (e.g., `my-java-app`).
+- **Engagement** — groups related scans. Naming depends on the scan source (see table below).
+- **Test** — one per scanner execution. Holds the actual findings.
 
 ### Engagement Naming Strategy
 
@@ -337,8 +337,8 @@ Standard parameters sent with every upload:
 
 After upload, pipeline tasks return clickable DefectDojo URLs as results:
 
-* **Single image scanned:** `{DD_HOST_URL}/engagement/{ENGAGEMENT_ID}`
-* **Multiple images scanned:** `{DD_HOST_URL}/product/{PRODUCT_ID}` (shows all engagements)
+- **Single image scanned:** `{DD_HOST_URL}/engagement/{ENGAGEMENT_ID}`
+- **Multiple images scanned:** `{DD_HOST_URL}/product/{PRODUCT_ID}` (shows all engagements)
 
 These URLs appear in the KubeRocketCI portal pipeline run details.
 
@@ -359,9 +359,9 @@ These URLs appear in the KubeRocketCI portal pipeline run details.
 
 For secret provisioning instructions, refer to:
 
-* [Integrate DefectDojo](./defectdojo.md)
-* [Integrate Dependency-Track](./dependency-track.md)
-* [SonarQube Integration](../code-quality/sonarqube.md)
+- [Integrate DefectDojo](./defectdojo.md)
+- [Integrate Dependency-Track](./dependency-track.md)
+- [SonarQube Integration](../code-quality/sonarqube.md)
 
 ### Helm Chart Settings
 
@@ -405,11 +405,11 @@ This section walks through the complete security scanning lifecycle of a Java Ma
 
 **Setup:**
 
-* **Codebase:** `payment-service` (registered in KubeRocketCI)
-* **Git provider:** GitHub
-* **Branch:** `main`
-* **Container image:** `registry.example.com/payment-service:0.1.0-SNAPSHOT.42`
-* **Helm chart:** `deploy-templates/` with `image.repository` and `image.tag` values
+- **Codebase:** `payment-service` (registered in KubeRocketCI)
+- **Git provider:** GitHub
+- **Branch:** `main`
+- **Container image:** `registry.example.com/payment-service:0.1.0-SNAPSHOT.42`
+- **Helm chart:** `deploy-templates/` with `image.repository` and `image.tag` values
 
 ### Phase 1: Developer Opens a Pull Request
 

@@ -29,7 +29,7 @@ helm repo add external-secrets https://charts.external-secrets.io
 
 helm install external-secrets \
    external-secrets/external-secrets \
-    --version 0.9.9 \
+    --version 0.18.2 \
     -n external-secrets \
     --create-namespace
 ```

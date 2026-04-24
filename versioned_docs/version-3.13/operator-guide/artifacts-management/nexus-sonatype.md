@@ -24,8 +24,8 @@ This documentation guide provides comprehensive instructions for integrating Son
 
 Before proceeding, ensure the following prerequisites are met:
 
-* Kubectl version 1.34.0+ is installed. Please refer to the [Kubernetes official website](https://kubernetes.io/releases/download/) for details.
-* [Helm](https://helm.sh) version 3.14.0+ is installed. Please refer to the [Helm page](https://github.com/helm/helm/releases) on GitHub for details.
+- Kubectl version 1.34.0+ is installed. Please refer to the [Kubernetes official website](https://kubernetes.io/releases/download/) for details.
+- [Helm](https://helm.sh) version 3.14.0+ is installed. Please refer to the [Helm page](https://github.com/helm/helm/releases) on GitHub for details.
 
 ## Installation
 
@@ -167,24 +167,24 @@ Without using the **nexus-operator**, manual updates are required for the Helm c
       ]}>
 
       <TabItem value="java">
-        * **Type**: `File`
-        * **Name**: `krci-maven`
+        - **Type**: `File`
+        - **Name**: `krci-maven`
       </TabItem>
       <TabItem value="javascript">
-        * **Type**: `File`
-        * **Name**: `krci-npm`
+        - **Type**: `File`
+        - **Name**: `krci-npm`
       </TabItem>
       <TabItem value="dotnet">
-        * **Type**: `File`
-        * **Name**: `krci-dotnet`
+        - **Type**: `File`
+        - **Name**: `krci-dotnet`
       </TabItem>
       <TabItem value="python">
-        * **Type**: `File`
-        * **Name**: `krci-python`
+        - **Type**: `File`
+        - **Name**: `krci-python`
       </TabItem>
       <TabItem value="rpm">
-        * **Type**: `File`
-        * **Name**: `krci-yum`
+        - **Type**: `File`
+        - **Name**: `krci-yum`
       </TabItem>
     </Tabs>
 
@@ -204,128 +204,128 @@ Without using the **nexus-operator**, manual updates are required for the Helm c
 
       <TabItem value="java">
         a) Click Create a repository by selecting `maven2(proxy)` fill the following fields and click **Create repository**:
-        * **Name** `krci-maven-proxy`
-        * **Remote storage URL** `https://repo1.maven.org/maven2/`
-        * **Blob store** `krci-maven`
-        * **HTTP request settings** `check`
-        * **Use-agent customization** `user-agent-suffix`
-        * **Connection retries** `10`
-        * **Connection timeout** `1440`
+        - **Name** `krci-maven-proxy`
+        - **Remote storage URL** `https://repo1.maven.org/maven2/`
+        - **Blob store** `krci-maven`
+        - **HTTP request settings** `check`
+        - **Use-agent customization** `user-agent-suffix`
+        - **Connection retries** `10`
+        - **Connection timeout** `1440`
         <br/>
         b) Click Create a repository by selecting `maven2(hosted)` fill the following fields  and click **Create repository**:
-        * **Name** `krci-maven-snapshots`
-        * **Version policy** `snapshots`
-        * **Blob store** `krci-maven`
+        - **Name** `krci-maven-snapshots`
+        - **Version policy** `snapshots`
+        - **Blob store** `krci-maven`
         <br/>
         c) Click Create a repository by selecting `maven2(hosted)` fill the following fields and click **Create repository**:
-        * **Name** `krci-maven-releases`
-        * **Version policy** `release`
-        * **Blob store** `krci-maven`
+        - **Name** `krci-maven-releases`
+        - **Version policy** `release`
+        - **Blob store** `krci-maven`
         <br/>
         d) Click Create a repository by selecting `maven2(group)` fill the following fields and click **Create repository**:
-        * **Name** `krci-maven-group`
-        * **Version policy** `release`
-        * **Member repositories** `krci-maven-proxy`, `krci-maven-snapshots`, `krci-maven-releases`
+        - **Name** `krci-maven-group`
+        - **Version policy** `release`
+        - **Member repositories** `krci-maven-proxy`, `krci-maven-snapshots`, `krci-maven-releases`
       </TabItem>
 
       <TabItem value="javascript">
         a) Click Create a repository by selecting `npm(proxy)` fill the following fields **Create repository**:
-        * **Name** `krci-npm-proxy`
-        * **Remote storage URL** `https://registry.npmjs.org`
-        * **Blob store** `krci-npm`
-        * **HTTP request settings** `check`
-        * **Use-agent customization** `user-agent-suffix`
-        * **Connection retries** `10`
-        * **Connection timeout** `1440`
+        - **Name** `krci-npm-proxy`
+        - **Remote storage URL** `https://registry.npmjs.org`
+        - **Blob store** `krci-npm`
+        - **HTTP request settings** `check`
+        - **Use-agent customization** `user-agent-suffix`
+        - **Connection retries** `10`
+        - **Connection timeout** `1440`
         <br/>
         b) Click Create a repository by selecting `npm(hosted)` fill the following fields and click **Create repository**:
-        * **Name** `krci-npm-snapshots`
-        * **Blob store** `krci-npm`
+        - **Name** `krci-npm-snapshots`
+        - **Blob store** `krci-npm`
         <br/>
         c) Click Create a repository by selecting `npm(hosted)` fill the following fields and click **Create repository**:
-        * **Name** `krci-npm-releases`
-        * **Blob store** `krci-npm`
+        - **Name** `krci-npm-releases`
+        - **Blob store** `krci-npm`
         <br/>
         d) Click Create a repository by selecting `npm(hosted)` fill the following fields and click **Create repository**:
-        * **Name** `krci-npm-hosted`
-        * **Blob store** `krci-npm`
+        - **Name** `krci-npm-hosted`
+        - **Blob store** `krci-npm`
         <br/>
         e) Click Create a repository by selecting `npm(group)` fill the following fields and click **Create repository**:
-        * **Name** `krci-npm-group`
-        * **Member repositories** `krci-npm-proxy`, `krci-npm-snapshots`, `krci-npm-releases`, `krci-npm-hosted`
+        - **Name** `krci-npm-group`
+        - **Member repositories** `krci-npm-proxy`, `krci-npm-snapshots`, `krci-npm-releases`, `krci-npm-hosted`
       </TabItem>
 
       <TabItem value="dotnet">
         a) Click Create a repository by selecting `nuget(proxy)` fill the following fields and click **Create repository**:
-        * **Name** `krci-dotnet-proxy`
-        * **Protocol version NuGet V3** `check`
-        * **Remote storage URL** `https://api.nuget.org/v3/index.json`
-        * **Blob store** `krci-dotnet`
-        * **HTTP request settings** `check`
-        * **Use-agent customization** `user-agent-suffix`
-        * **Connection retries** `10`
-        * **Connection timeout** `1440`
+        - **Name** `krci-dotnet-proxy`
+        - **Protocol version NuGet V3** `check`
+        - **Remote storage URL** `https://api.nuget.org/v3/index.json`
+        - **Blob store** `krci-dotnet`
+        - **HTTP request settings** `check`
+        - **Use-agent customization** `user-agent-suffix`
+        - **Connection retries** `10`
+        - **Connection timeout** `1440`
         <br/>
         b) Click Create a repository by selecting `nuget(hosted)` fill the following fields and click **Create repository**:
-        * **Name** `krci-dotnet-snapshots`
-        * **Blob store** `krci-dotnet`
+        - **Name** `krci-dotnet-snapshots`
+        - **Blob store** `krci-dotnet`
         <br/>
         c) Click Create a repository by selecting `nuget(hosted)` fill the following fields and click **Create repository**:
-        * **Name** `krci-dotnet-releases`
-        * **Blob store** `krci-dotnet`
+        - **Name** `krci-dotnet-releases`
+        - **Blob store** `krci-dotnet`
         <br/>
         d) Click Create a repository by selecting `nuget(hosted)` fill the following fields and click **Create repository**:
-        * **Name** `krci-dotnet-hosted`
-        * **Blob store** `krci-dotnet`
+        - **Name** `krci-dotnet-hosted`
+        - **Blob store** `krci-dotnet`
         <br/>
         e) Click Create a repository by selecting `nuget(group)` fill the following fields and click **Create repository**:
-        * **Name** `krci-dotnet-group`
-        * **Member repositories** `krci-dotnet-proxy`, `krci-dotnet-snapshots`, `krci-dotnet-releases`, `krci-dotnet-hosted`
+        - **Name** `krci-dotnet-group`
+        - **Member repositories** `krci-dotnet-proxy`, `krci-dotnet-snapshots`, `krci-dotnet-releases`, `krci-dotnet-hosted`
       </TabItem>
 
       <TabItem value="python">
         a) Click Create a repository by selecting `pypi(proxy)` fill the following fields and click **Create repository**:
-        * **Name** `krci-python-proxy`
-        * **Remote storage URL** `https://pypi.org`
-        * **Blob store** `krci-python`
-        * **HTTP request settings** `check`
-        * **Use-agent customization** `user-agent-suffix`
-        * **Connection retries** `10`
-        * **Connection timeout** `1440`
+        - **Name** `krci-python-proxy`
+        - **Remote storage URL** `https://pypi.org`
+        - **Blob store** `krci-python`
+        - **HTTP request settings** `check`
+        - **Use-agent customization** `user-agent-suffix`
+        - **Connection retries** `10`
+        - **Connection timeout** `1440`
         <br/>
         b) Click Create a repository by selecting `pypi(hosted)` fill the following fields and click **Create repository**:
-        * **Name** `krci-python-snapshots`
-        * **Blob store** `krci-python`
+        - **Name** `krci-python-snapshots`
+        - **Blob store** `krci-python`
         <br/>
         c) Click Create a repository by selecting `pypi(hosted)` fill the following fields and click **Create repository**:
-        * **Name** `krci-python-releases`
-        * **Blob store** `krci-python`
+        - **Name** `krci-python-releases`
+        - **Blob store** `krci-python`
         <br/>
         d) Click Create a repository by selecting `pypi(group)` fill the following fields and click **Create repository**:
-        * **Name** `krci-python-group`
-        * **Member repositories** `krci-python-proxy`, `krci-python-snapshots`, `krci-python-releases`
+        - **Name** `krci-python-group`
+        - **Member repositories** `krci-python-proxy`, `krci-python-snapshots`, `krci-python-releases`
         <br/>
       </TabItem>
 
       <TabItem value="rpm">
         a) Click Create a repository by selecting `yum(proxy)` fill the following fields and click **Create repository**:
-        * **Name** `krci-yum-proxy`
-        * **Remote storage URL** `http://fedora.ip-connect.info/linux/development/rawhide/Everything/x86_64/os/`
-        * **Blob store** `krci-yum`
-        * **HTTP request settings** `check`
-        * **Use-agent customization** `user-agent-suffix`
-        * **Connection retries** `10`
-        * **Connection timeout** `1440`
+        - **Name** `krci-yum-proxy`
+        - **Remote storage URL** `http://fedora.ip-connect.info/linux/development/rawhide/Everything/x86_64/os/`
+        - **Blob store** `krci-yum`
+        - **HTTP request settings** `check`
+        - **Use-agent customization** `user-agent-suffix`
+        - **Connection retries** `10`
+        - **Connection timeout** `1440`
         <br/>
         b) Click Create a repository by selecting `yum(hosted)` fill the following fields and click **Create repository**:
-        * **Name** `krci-yum-snapshots`
-        * **Repo data Depth** `3`
-        * **Blob store** `krci-yum`
+        - **Name** `krci-yum-snapshots`
+        - **Repo data Depth** `3`
+        - **Blob store** `krci-yum`
         <br/>
         c) Click Create a repository by selecting `yum(hosted)` fill the following fields and click **Create repository**:
-        * **Name** `krci-yum-releases`
-        * **Repo data Depth** `3`
-        * **Blob store** `krci-yum`
+        - **Name** `krci-yum-releases`
+        - **Repo data Depth** `3`
+        - **Blob store** `krci-yum`
         <br/>
       </TabItem>
 
@@ -333,11 +333,11 @@ Without using the **nexus-operator**, manual updates are required for the Helm c
 
 3. Open the Nexus UI and navigate to **Server administration and configuration** -> **Security** -> **Roles**. Click the **Create Role** button, fill the following fields and click **Save** button:
 
-    * **Type**: `Nexus role`
-    * **Role ID**: `krci-admin`
-    * **Role Name**: `krci-admin`
-    * **Role Descriptions**: `Read and write access to all repos and scripts`
-    * **Applied Privileges**: `nx-apikey-all`, `nx-repository-view-*-*-add`, `nx-repository-view-*-*-browse`,`nx-repository-view-*-*-edit`, `nx-repository-view-*-*-read`, `nx-script-*-add`, `nx-script-*-delete`, `nx-script-*-read`, `nx-script-*-run`
+    - **Type**: `Nexus role`
+    - **Role ID**: `krci-admin`
+    - **Role Name**: `krci-admin`
+    - **Role Descriptions**: `Read and write access to all repos and scripts`
+    - **Applied Privileges**: `nx-apikey-all`, `nx-repository-view-*-*-add`, `nx-repository-view-*-*-browse`,`nx-repository-view-*-*-edit`, `nx-repository-view-*-*-read`, `nx-script-*-add`, `nx-script-*-delete`, `nx-script-*-read`, `nx-script-*-run`
 
     ![Roles settings](../../assets/operator-guide/artifacts-management/nexus-artifact-create-roles.png "Roles settings")
 
@@ -347,13 +347,13 @@ Without using the **nexus-operator**, manual updates are required for the Helm c
 
 5. Type the `ci.user` username, fill the following fields and click the **Create local user** button to create the ***Service Account**, fill the following fields and click **Save** button::
 
-    * **ID**: `ci.user`
-    * **First name**: `ci.user`
-    * **Last name**: `CI`
-    * **Email**: `ci.user@krci.com`
-    * **Password**: `<nexus-user-password>`
-    * **Status**: `Active`
-    * **Roles**: `krci-admin`
+    - **ID**: `ci.user`
+    - **First name**: `ci.user`
+    - **Last name**: `CI`
+    - **Email**: `ci.user@krci.com`
+    - **Password**: `<nexus-user-password>`
+    - **Status**: `Active`
+    - **Roles**: `krci-admin`
 
     ![Nexus create user](../../assets/operator-guide/artifacts-management/nexus-artifact-create-user.png "Nexus create user")
 
@@ -369,11 +369,11 @@ For provision secret using manifest, KubeRocketCI portal or with the externalSec
       {label: 'External Secrets Operator', value: 'externalsecret'},
     ]}>
     <TabItem value="kuberocketci">
-      Go to **Portal** -> **Configuration** -> **ARTIFACTS STORAGE** -> **NEXUS**. Update or click **+ ADD INTEGRATION** fill the following fields and click the `SAVE` button:
-      * **Quick link URL** `https://nexus.example.com`
-      * **URL** `http://nexus.nexus:8081`
-      * **User** `nexus-user-id`
-      * **Password** `nexus-user-password`
+      Go to **Portal** -> **Configuration** -> **Artifacts storage** -> **Nexus**. Update or click **+ Add integration**. Fill the following fields and click the `Save` button:
+      - **Quick link URL** `https://nexus.example.com`
+      - **URL** `http://nexus.nexus:8081`
+      - **User** `nexus-user-id`
+      - **Password** `nexus-user-password`
 
       ![Nexus update manual secret](../../assets/operator-guide/artifacts-management/nexus-secret-password.png "Nexus update manual secret")
     </TabItem>
@@ -404,7 +404,7 @@ For provision secret using manifest, KubeRocketCI portal or with the externalSec
       },
       ```
 
-      Go to **Portal** -> **Configuration** -> **ARTIFACTS STORAGE** -> **NEXUS** and see `Managed by External Secret` message:
+      Go to **KubeRocketCI Portal** -> **Configuration** -> **Artifacts storage** -> **Nexus** and see `Managed by External Secret` message:
 
       ![Nexus managed by external secret operator](../../assets/operator-guide/artifacts-management/nexus-externalsecret-password.png "Nexus managed by external secret operator")
 

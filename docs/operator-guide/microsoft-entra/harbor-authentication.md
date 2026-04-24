@@ -125,4 +125,4 @@ After completing these steps, Harbor is configured to use Microsoft Entra as the
 
 ## Related Articles
 
-- [OpenID Connect (OIDC) Authentication Overview](./oidc-authentication-overview.md)
+* [OpenID Connect (OIDC) Authentication Overview](./oidc-authentication-overview.md)

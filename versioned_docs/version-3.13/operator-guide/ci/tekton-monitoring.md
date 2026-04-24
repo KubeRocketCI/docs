@@ -17,15 +17,15 @@ This documentation describes how to integrate tekton-pipelines metrics with Prom
 
 Ensure the following requirements are met first before moving ahead:
 
-* [Kube prometheus stack](https://prometheus-community.github.io/helm-charts) is installed;
-* [Tekton pipeline](https://github.com/tektoncd/pipeline/releases) is installed.
+- [Kube prometheus stack](https://prometheus-community.github.io/helm-charts) is installed
+- [Tekton pipeline](https://github.com/tektoncd/pipeline/releases) is installed
 
 ## Integration Overview
 
 Currently, there are two methods for integrating tekton-pipelines metrics with the Prometheus and Grafana monitoring stack.
 
-* [Integration via Service Monitor](#integration-via-service-monitor)
-* [Integration via edp-install Helm Chart](#integration-via-edp-install-helm-chart)
+- [Integration via Service Monitor](#integration-via-service-monitor)
+- [Integration via edp-install Helm Chart](#integration-via-edp-install-helm-chart)
 
 ## Integration via Service Monitor
 
@@ -63,21 +63,21 @@ To implement Pipeline Monitoring using the Service Monitor resource, follow the 
 
 3. Download the [KubeRocketCi](https://grafana.com/grafana/dashboards/18321) dashboard:
 
-    a. Click on the dashboard menu;
+    a. Click on the dashboard menu.
 
-    b. In the upper right corner, click on the `New` button. In the dropdown menu, click the `Import`;
+    b. In the upper right corner, click on the `New` button. In the dropdown menu, click the `Import`:
 
     ![Import dashboard grafana](../../assets/operator-guide/grafana-tekton-dasboard-import.png "Import Grafana dashboard")
 
-    c. Select the downloaded `18321_rev*.json` file;
+    c. Select the downloaded `18321_rev*.json` file:
 
     ![Import dashboard grafana options](../../assets/operator-guide/grafana-tekton-dasboard-import-options.png "Import Grafana dashboard: Options")
 
-    d. Type the name of the dashboard;
+    d. Type the name of the dashboard.
 
-    e. Select the folder for the dashboard;
+    e. Select the folder for the dashboard.
 
-    f. Change the UID if necessary;
+    f. Change the UID if necessary.
 
     g. Click the `Import` button.
 

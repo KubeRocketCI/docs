@@ -346,18 +346,18 @@ For each supported VCS, follow the steps below to configure the webhook:
       <TabItem value="github">
       To configure the Atlantis webhook in GitHub, follow these steps:
 
-      * In the GitHub repository, navigate to **Settings** -> **Webhooks**.
-      * Click **Add webhook**.
-      * Set the **Payload URL** to `http://<atlantis-url>/events` or `https://<atlantis-url>/events` (if using SSL).
-      * Set the **Content type** to `application/json`.
-      * In the **Secret** field, provide the [secret](https://www.runatlantis.io/docs/webhook-secrets.html) generated for the webhook.
-      * Select **Let me select individual events** and choose the events you want to trigger the webhook, such as:
+      - In the GitHub repository, navigate to **Settings** -> **Webhooks**.
+      - Click **Add webhook**.
+      - Set the **Payload URL** to `http://<atlantis-url>/events` or `https://<atlantis-url>/events` (if using SSL).
+      - Set the **Content type** to `application/json`.
+      - In the **Secret** field, provide the [secret](https://www.runatlantis.io/docs/webhook-secrets.html) generated for the webhook.
+      - Select **Let me select individual events** and choose the events you want to trigger the webhook, such as:
         - **Pull request reviews**
         - **Pushes**
         - **Issue comments**
         - **Pull requests**
-      * Leave the **Active** option enabled.
-      * Click **Add webhook** to save the configuration.
+      - Leave the **Active** option enabled.
+      - Click **Add webhook** to save the configuration.
 
       ![GitHub Webhook](../../assets/operator-guide/infrastructure-providers/github-webhook.png "GitHub Webhook")
       </TabItem>
@@ -365,16 +365,16 @@ For each supported VCS, follow the steps below to configure the webhook:
       <TabItem value="gitlab">
       To configure the Atlantis webhook in GitLab, follow these steps:
 
-      * In the GitLab repository, navigate to **Settings** -> **Webhooks**.
-      * Click **Add new webhook**.
-      * Set the **Name** to `atlantis`.
-      * Set the **URL** to `http://<atlantis-url>/events` or `https://<atlantis-url>/events` (if using SSL).
-      * In the **Secret token** field, provide the [secret](https://www.runatlantis.io/docs/webhook-secrets.html) generated for the webhook.
-      * Select the events you want to trigger the webhook, such as:
+      - In the GitLab repository, navigate to **Settings** -> **Webhooks**.
+      - Click **Add new webhook**.
+      - Set the **Name** to `atlantis`.
+      - Set the **URL** to `http://<atlantis-url>/events` or `https://<atlantis-url>/events` (if using SSL).
+      - In the **Secret token** field, provide the [secret](https://www.runatlantis.io/docs/webhook-secrets.html) generated for the webhook.
+      - Select the events you want to trigger the webhook, such as:
         - **Push events**
         - **Comments**
         - **Merge Request events**
-      * Click **Add webhook** to save the configuration.
+      - Click **Add webhook** to save the configuration.
 
       ![GitLab Webhook](../../assets/operator-guide/infrastructure-providers/gitlab-webhook.png "GitLab Webhook")
       </TabItem>
@@ -382,18 +382,18 @@ For each supported VCS, follow the steps below to configure the webhook:
       <TabItem value="bitbucket">
       To configure the Atlantis webhook in Bitbucket, follow these steps:
 
-      * In the Bitbucket repository, navigate to **Repository Settings**. Under the **Workflow** section, select **Webhooks**.
-      * Click **Add webhook**.
-      * Set the **Title** to `atlantis`.
-      * Set the **URL** to `http://<atlantis-url>/events` or `https://<atlantis-url>/events` (if using SSL).
-      * In the **Secret** field, provide the [secret](https://www.runatlantis.io/docs/webhook-secrets.html) generated for the webhook.
-      * In the **Triggers** section, uncheck all options for **Repository** and **Issue** events. For **Pull Request** events, select the following:
+      - In the Bitbucket repository, navigate to **Repository Settings**. Under the **Workflow** section, select **Webhooks**.
+      - Click **Add webhook**.
+      - Set the **Title** to `atlantis`.
+      - Set the **URL** to `http://<atlantis-url>/events` or `https://<atlantis-url>/events` (if using SSL).
+      - In the **Secret** field, provide the [secret](https://www.runatlantis.io/docs/webhook-secrets.html) generated for the webhook.
+      - In the **Triggers** section, uncheck all options for **Repository** and **Issue** events. For **Pull Request** events, select the following:
         - **Created**
         - **Updated**
         - **Merged**
         - **Declined**
         - **Comment**
-      * Click **Save** to save the configuration.
+      - Click **Save** to save the configuration.
 
       ![Bitbucket Webhook](../../assets/operator-guide/infrastructure-providers/bitbucket-webhook.png "Bitbucket Webhook")
       </TabItem>
@@ -678,6 +678,6 @@ The second approach is to deploy Atlantis using Helm. Follow the steps below to 
 
 ## Related Articles
 
-- [Install via Add-Ons](../add-ons-overview.md)
-- [Install Keycloak](../auth/keycloak.md)
-- [Install Argo CD](../install-argocd.md)
+* [Install via Add-Ons](../add-ons-overview.md)
+* [Install Keycloak](../auth/keycloak.md)
+* [Install Argo CD](../install-argocd.md)

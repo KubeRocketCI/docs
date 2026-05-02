@@ -11,7 +11,7 @@ sidebar_label: "CI Pipeline for Terraform"
   <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/ci/ci-pipeline-terraform" />
 </head>
 
-KubeRocketCI ensures the implemented Terraform support by adding a separate component type called **Infrastructure**. The **Infrastructure** codebase type allows to work with Terraform code that is processed by means of stages in the **Code-Review** and **Build** pipelines.
+KubeRocketCI ensures the implemented Terraform support by adding a separate component type called **Infrastructure**. The [Infrastructure](../../user-guide/components.md#types) codebase type allows to work with Terraform code that is processed by means of stages in the **Code-Review** and **Build** pipelines.
 
 ## Pipeline Stages for Terraform
 
@@ -34,6 +34,8 @@ Under the hood, Infrastructure codebase type, namely Terraform, looks quite simi
 :::note
   The commands and their attributes are displayed in the [**.pre-commit-config.yaml**](https://github.com/epmd-edp/hcl-terraform-terraform/blob/master/.pre-commit-config.yaml) file.
 :::
+
+To learn more about how to operate with **Infrastructure** codebase type, read the [Add Infrastructure](../../user-guide/add-infrastructure.md) and [Manage Infrastructures](../../user-guide/infrastructure.md) pages.
 
 ## Related Articles
 

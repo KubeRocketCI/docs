@@ -26,7 +26,7 @@ To configure the multitenant logging, it is necessary to deploy the following co
 - [Loki](https://grafana.com/oss/loki/)
 - [Logging-operator](https://kube-logging.dev/docs/)
 
-In Grafana, every tenant represents an organization, i.e. it is necessary to create an organization for every namespace in the cluster. To get more details regarding the architecture of the Logging Operator, review the Diagram below.
+In Grafana, every tenant represents an organization, i.e. it is necessary to create an organization for every namespace in the cluster. To get more details regarding the architecture of the Logging Operator, review the diagram below:
 
   ![Logging operator scheme](../../assets/operator-guide/logging-operator-architecture.png "Logging operator scheme")
 

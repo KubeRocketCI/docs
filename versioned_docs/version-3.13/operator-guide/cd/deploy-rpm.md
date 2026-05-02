@@ -59,13 +59,9 @@ By completing these steps, will be able to add, build, and deploy RPM applicatio
 
 To set up RPM integration, follow the steps below:
 
-1. Open the KubeRocketCI portal. Navigate to **Configuration** -> **Deployment** -> **GitOps**:
+1. Open the KubeRocketCI portal. Navigate to **Configuration** -> **Deployment** -> **GitOps**.
 
-  ![GitOps tab](../../assets/operator-guide/rpm/ansible-add-gitops.png "GitOps tab")
-
-2. Specify the GitOps repository in the `username/repository_name` format:
-
-  ![Add GitOps repository](../../assets/operator-guide/rpm/ansible-gitops.png "Add GitOps repository")
+2. Specify the GitOps repository in the `username/repository_name` format.
 
 3. Create and apply the secret for the GitOps repository by running the command below. Specify SSH key path, Git account, and repository name:
 
@@ -100,7 +96,7 @@ EOF
 
 5. When [creating codebases](../../user-guide/add-application.md), in the **Deployment option** field, select the **rpm-package** option:
 
-  ![Create RPM application](../../assets/operator-guide/rpm/rpm.gif "Create RPM application")
+  ![Create RPM application](../../assets/operator-guide/rpm/rpm.png "Create RPM application")
 
 6. When [creating](../../user-guide/manage-environments.md#add-a-new-environment) or [editing](../../user-guide/manage-environments.md#edit-environment) environments, in the **Deploy pipeline template** field, select **deploy-ansible**:
 
@@ -314,7 +310,7 @@ To set up RPM integration using AWX tool, follow the steps below. Completing the
 
 4. Create application with the **rpm-package** deployment option. Refer to the [Add Application](../../user-guide/add-application.md) page for more details:
 
-  ![Create RPM application](../../assets/operator-guide/rpm/rpm.gif "Create RPM application")
+  ![Create RPM application](../../assets/operator-guide/rpm/rpm.png "Create RPM application")
 
 5. When [creating environments](../../user-guide/manage-environments.md#add-a-new-environment), in the **Deploy pipeline template** field, select **deploy-ansible-awx**:
 

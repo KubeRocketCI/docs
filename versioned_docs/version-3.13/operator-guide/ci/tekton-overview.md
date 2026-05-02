@@ -73,3 +73,11 @@ Also, Tasks can have a different number of steps that are executed as a Containe
 
 9. The Kubernetes native approach allows the creation of PipelineRun either with the kubectl tool or
 using the [KubeRocketCI portal](../../user-guide/application.md).
+
+To learn more about Tekton Pipelines and their types in KubeRocketCI, you can read the [KubeRocketCI: Tekton Overview](../../user-guide/tekton-pipelines.md) page. The [Pipelines Overview](../../user-guide/pipelines.md) page describes how to operate with Tekton Pipelines in the KubeRocketCI portal. To create user-defined pipelines, refer to the following guides:
+
+- [Create and Use Custom Tekton Pipelines](../../use-cases/custom-pipelines-flow.md)
+- [Customize Deploy Pipeline](../cd/customize-deploy-pipeline.md)
+- [Customize Environment Cleanup](../cd/customize-environment-deletion.md)
+
+All of these guides have step-by-step video tutorials.

@@ -32,7 +32,7 @@ To configure application deployment in remote cluster using Kubernetes RBAC, fol
       namespace: <deploy_namespace>
     ```
 
-2. Bind the ServiceAccount to the cluster-admin role using ClusterRoleBinding
+2. Bind the ServiceAccount to the cluster-admin role using ClusterRoleBinding:
 
     ```yaml
     apiVersion: rbac.authorization.k8s.io/v1
@@ -49,7 +49,7 @@ To configure application deployment in remote cluster using Kubernetes RBAC, fol
       apiGroup: rbac.authorization.k8s.io
     ```
 
-3. Create a Secret with a token for the ServiceAccount
+3. Create a Secret with a token for the ServiceAccount:
 
     ```yaml
     apiVersion: v1
@@ -66,7 +66,7 @@ To configure application deployment in remote cluster using Kubernetes RBAC, fol
 
 To configure application deployment in remote cluster using the Capsule tool, follow the steps below:
 
-1. Create a ServiceAccount for deployment
+1. Create a ServiceAccount for deployment:
 
     ```yaml
     apiVersion: v1
@@ -76,7 +76,7 @@ To configure application deployment in remote cluster using the Capsule tool, fo
       namespace: <deploy_namespace>
     ```
 
-2. Create a Secret with a token for the ServiceAccount
+2. Create a Secret with a token for the ServiceAccount:
 
     ```yaml
     apiVersion: v1
@@ -89,7 +89,7 @@ To configure application deployment in remote cluster using the Capsule tool, fo
     type: kubernetes.io/service-account-token
     ```
 
-3. Configure Capsule to recognize the ServiceAccount’s group
+3. Configure Capsule to recognize the ServiceAccount’s group:
 
     ```yaml
     apiVersion: capsule.clastix.io/v1beta2
@@ -102,7 +102,7 @@ To configure application deployment in remote cluster using the Capsule tool, fo
         - system:serviceaccounts:<deploy_namespace>
     ```
 
-4. Create a Tenant and assign ownership to the ServiceAccount through Capsule
+4. Create a Tenant and assign ownership to the ServiceAccount through Capsule:
 
     ```yaml
     apiVersion: capsule.clastix.io/v1beta2

@@ -23,7 +23,7 @@ This documentation guide provides comprehensive instructions for installing and 
 ## Prerequisites
 
 - Kubectl version 1.34.0+ is installed. Please refer to the [Kubernetes official website](https://kubernetes.io/releases/download/) for details.
-- [Helm](https://helm.sh) version 3.14.0+ is installed. Please refer to the [Helm page](https://github.com/helm/helm/releases) on GitHub for details.
+- [Helm](https://helm.sh) version 3.19.0+ is installed. Please refer to the [Helm page](https://github.com/helm/helm/releases) on GitHub for details.
 
 ## Installation
 
@@ -91,7 +91,7 @@ To install Dependency-Track use [KubeRocketCI addons](../add-ons-overview.md) ap
   }
   ```
 
-  Go to the **Portal** open **Configuration** -> **SECURITY** -> **DEPENDENCYTRACK** see the secret managed by the `Managed by External Secret`.
+  Go to the **KubeRocketCI Portal** -> **Configuration** -> **Security** -> **DependencyTrack** see the secret managed by the `Managed by External Secret`:
 
   ![Dependency-Track managed by external secret operator](../../assets/operator-guide/devsecops/defectdojo-external-secret.png "Dependency-Track managed by external secret operator")
 

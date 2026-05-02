@@ -486,7 +486,7 @@ Please find the detailed description of the variables in the [argo-cd/variables.
 
 ## Next Step
 
-  - Install [Argo CD](install-argocd.md) and integrate it with [edp-cluster-add-ons](https://github.com/epam/edp-cluster-add-ons) components
+After the AWS EKS cluster is installed and configured, you can proceed with installing prerequisites for KubeRocketCI, such as [Tekton](../operator-guide/install-tekton.md) and [Argo CD](install-argocd.md).
 
 ## Related Articles
 

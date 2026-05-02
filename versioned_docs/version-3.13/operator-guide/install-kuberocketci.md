@@ -274,9 +274,15 @@ There are multiple ways to deploy KubeRocketCI:
             ingress:
               enabled: true
 
-  krci-portal:
-    ingress:
-      enabled: true
+    krci-portal:
+      ingress:
+        enabled: true
+
+    configEnv:
+      PORTAL_URL: https://krci-portal.example.com
+      GITFUSION_URL: http://gitfusion.<namespace>:8080
+      DEFAULT_CLUSTER_NAMESPACE: <namespace>
+      DEFAULT_CLUSTER_NAME: core
     ```
 
     :::note

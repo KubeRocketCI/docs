@@ -47,9 +47,7 @@ Clean pipeline consists of **Trigger Template**, **Pipeline**, and **Task** cust
   ...
   ```
 
-2. Create and apply the **Pipeline** custom resource. Refer to the example [Pipeline](https://github.com/epam/edp-tekton/blob/master/charts/pipelines-library/templates/pipelines/cd/clean.yaml). Ensure to set the concrete task to trigger:
-
-  Additionally, set the concrete task to run:
+2. Create and apply the **Pipeline** custom resource. Refer to the example [Pipeline](https://github.com/epam/edp-tekton/blob/master/charts/pipelines-library/templates/pipelines/cd/clean.yaml). Additionally, set the concrete task to run:
 
   ```bash
   tasks:

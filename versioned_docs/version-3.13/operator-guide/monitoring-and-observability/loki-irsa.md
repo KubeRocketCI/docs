@@ -13,7 +13,7 @@ sidebar_label: "Loki IAM Roles"
   <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/monitoring-and-observability/loki-irsa" />
 </head>
 
-It is possible to use Amazon Simple Storage Service [Amazon S3](https://aws.amazon.com/s3/) as object storage for Loki.
+Loki supports Amazon Simple Storage Service [Amazon S3](https://aws.amazon.com/s3/) as an object storage solution.
 In this case [Loki](https://grafana.com/docs/loki/latest/configure/examples/configuration-examples/) requires access to AWS resources. Follow the steps below to create a required role:
 
 1. Create AWS IAM Policy `AWSIRSA<CLUSTER_NAME><LOKI_NAMESPACE>Loki_policy`:

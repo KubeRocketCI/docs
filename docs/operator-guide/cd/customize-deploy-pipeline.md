@@ -51,7 +51,7 @@ To customize your deployment pipeline, follow the steps below:
 
 3. Apply the created manifest files in the platform namespace (e.g., `krci`).
 
-4. On the `Create stage` step on the KubeRocketCI portal, select the added trigger template in the `Pipeline template` section:
+4. On the `Pipeline Configuration` step on the KubeRocketCI portal, select the added trigger template in the `Deploy Pipeline Template` section:
 
     ![Select trigger template](../../assets/operator-guide/select_trigger_template.png "Select trigger template")
 

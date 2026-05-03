@@ -29,7 +29,7 @@ We suggest backing up the KubeRocketCI environment before starting the upgrade p
 :::
 
 :::warning
-All Tekton resources (Tasks, Pipelines, TriggerTemplates) have been migrated from `tekton.dev/v1beta1` to `tekton.dev/v1`. Clusters running Tekton Pipelines older than **v0.44** cannot apply these manifests — the upgrade will fail. Verify your Tekton Pipelines version before proceeding (see [Step 1](#step-1-verify-tekton-pipelines-version)).
+All Tekton resources (Tasks, Pipelines, TriggerTemplates) have been migrated from `tekton.dev/v1beta1` to `tekton.dev/v1`. Clusters running Tekton Pipelines older than **v0.44** cannot apply these manifests — the upgrade will fail. Verify your Tekton Pipelines version before proceeding (see [Step 1](#step-1-required-verify-tekton-pipelines-version)).
 :::
 
 :::warning

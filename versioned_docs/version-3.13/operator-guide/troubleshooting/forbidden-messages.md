@@ -31,7 +31,7 @@ Solution can vary depending on the way users log into the platform, whether it i
 
 This solution suits those who to log into the KubeRocketCI portal Keycloak.
 
-To fix the problem, check both default and allowed namespace by navigating to the **KubeRocketCI** portal -> **Account Settings** -> **Cluster**. Refer to the [KubeRocketCI portal](../../user-guide/portal-settings.md#cluster) page for more details.
+To fix the problem, check both default and allowed namespace by navigating to the **KubeRocketCI** portal -> **Account Settings** -> **Cluster**. Refer to the [KubeRocketCI portal](../../user-guide/portal-settings.md#manage-namespaces) page for more details.
 
 ### Solution 2 (Service Account Token)
 

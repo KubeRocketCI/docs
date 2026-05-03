@@ -182,7 +182,7 @@ The [three primary types](#what-is-a-pipeline-in-kuberocketci) of pipelines in K
     ```
     </details>
 
-- **Deploy Pipeline (in case of [auto deploy](/docs/user-guide/add-cd-pipeline#the-environments-menu))**:
+- **Deploy Pipeline (in case of [auto deploy](/docs/user-guide/add-cd-pipeline))**:
   - Triggered when a new tag is added to a `codebaseimagestream`, upon successful completion of the `build pipeline`.
   - This pipeline is designed to automatically deploy the newly built images to the appropriate environments.
 

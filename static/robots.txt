@@ -1,4 +1,53 @@
 User-agent: *
 Allow: /
 
+# AI / LLM crawlers — explicit policy.
+# Allow training/retrieval crawlers that respect robots.txt; the public
+# documentation is intended to be discoverable by AI search and assistants.
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: Amazonbot
+Allow: /
+
+User-agent: FacebookBot
+Allow: /
+
+User-agent: Meta-ExternalAgent
+Allow: /
+
+# Block known abusive/non-respectful scrapers.
+User-agent: Bytespider
+Disallow: /
+
 Sitemap: https://docs.kuberocketci.io/sitemap.xml

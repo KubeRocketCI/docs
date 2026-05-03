@@ -19,10 +19,10 @@ const siteStructuredData = {
       ],
 
       copyrightHolder: {
-        '@id': 'https://docs.kuberocketci.io/docs/about-platform/',
+        '@id': 'https://docs.kuberocketci.io/#organization',
       },
       publisher: {
-        '@id': 'https://docs.kuberocketci.io/docs/about-platform/',
+        '@id': 'https://docs.kuberocketci.io/#organization',
       },
 
       potentialAction: {
@@ -33,7 +33,20 @@ const siteStructuredData = {
         },
         'query-input': 'required name=search_term_string',
       },
-      inLanguage: 'en-UK',
+      inLanguage: 'en-GB',
+    },
+    {
+      '@id': 'https://docs.kuberocketci.io/#organization',
+      '@type': 'Organization',
+      name: 'KubeRocketCI',
+      url: 'https://kuberocketci.io',
+      logo: 'https://docs.kuberocketci.io/img/logo.svg',
+      sameAs: [
+        'https://github.com/KubeRocketCI/docs',
+        'https://medium.com/kuberocketci',
+        'https://www.youtube.com/@theplatformteam',
+        'https://hub.docker.com/u/epamedp',
+      ],
     },
   ],
 };
@@ -185,12 +198,39 @@ const config: Config = {
           lastmod: 'date',
           changefreq: 'weekly',
           priority: 0.5,
-          ignorePatterns: ['/docs/next/**', '/docs/3.11/**', '/docs/3.12/**', '/docs/3.13/**', '/blog/tags/**'],
+          ignorePatterns: [
+            '/docs/next/**',
+            '/docs/3.11/**',
+            '/docs/3.12/**',
+            '/blog/tags/**',
+            '/blog/authors/**',
+            '/search',
+          ],
           filename: 'sitemap.xml',
           createSitemapItems: async params => {
             const { defaultCreateSitemapItems, ...rest } = params;
             const items = await defaultCreateSitemapItems(rest);
-            return items.filter(item => !item.url.includes('/page/'));
+            return items
+              .filter(item => !item.url.includes('/page/'))
+              .map(item => {
+                if (item.url === 'https://docs.kuberocketci.io/') {
+                  return { ...item, priority: 1.0, changefreq: 'weekly' };
+                }
+                if (
+                  /\/docs\/(about-platform|quick-start|user-guide|operator-guide|developer-guide|use-cases|api)$/.test(
+                    item.url
+                  )
+                ) {
+                  return { ...item, priority: 0.8 };
+                }
+                if (item.url.includes('/blog/')) {
+                  return { ...item, priority: 0.7, changefreq: 'monthly' };
+                }
+                if (item.url.includes('/faq/')) {
+                  return { ...item, priority: 0.6, changefreq: 'monthly' };
+                }
+                return item;
+              });
           },
         },
       } satisfies Preset.Options,
@@ -241,29 +281,17 @@ const config: Config = {
         content:
           'KubeRocketCI, CI/CD, DevOps, Kubernetes, Tekton, Helm Charts, AWS, Argo CD, Add-Ons, Installation Guide, User Guide, Developer Guide, Operator Guide',
       },
-      {
-        name: 'description',
-        content:
-          'Explore KubeRocketCI Documentation for detailed guides, tutorials, and insights into KubeRocketCI CI/CD flow, platform components, and add-ons. Learn how to enhance your DevOps practices with KubeRocketCI.',
-      },
       { name: 'author', content: 'KubeRocketCI Team' },
-      { name: 'og:type', content: 'website' },
-      { name: 'og:url', content: 'https://docs.kuberocketci.io' },
-      { name: 'og:title', content: 'KubeRocketCI Documentation | Comprehensive Guide and Tutorials' },
-      {
-        name: 'og:description',
-        content:
-          'Explore KubeRocketCI Documentation for detailed guides, tutorials, and insights into KubeRocketCI CI/CD flow, platform components, and add-ons. Learn how to enhance your DevOps practices with KubeRocketCI.',
-      },
-      { name: 'og:image', content: 'https://docs.kuberocketci.io/img/kuberocketci-social-card.png' },
+      // Open Graph (use `property=` per the OG spec). Per-page `og:title`,
+      // `og:description`, `og:url`, `og:locale` are emitted automatically by
+      // Docusaurus's <Layout> — only declare the globals here.
+      { property: 'og:type', content: 'website' },
+      { property: 'og:site_name', content: 'KubeRocketCI Documentation' },
+      { property: 'og:image', content: 'https://docs.kuberocketci.io/img/kuberocketci-social-card.png' },
+      { property: 'og:image:width', content: '1200' },
+      { property: 'og:image:height', content: '630' },
+      // Twitter Cards still use `name=`.
       { name: 'twitter:card', content: 'summary_large_image' },
-      { name: 'twitter:url', content: 'https://docs.kuberocketci.io' },
-      { name: 'twitter:title', content: 'KubeRocketCI Documentation | Comprehensive Guide and Tutorials' },
-      {
-        name: 'twitter:description',
-        content:
-          'Explore KubeRocketCI Documentation for detailed guides, tutorials, and insights into KubeRocketCI CI/CD flow, platform components, and add-ons. Learn how to enhance your DevOps practices with KubeRocketCI.',
-      },
       { name: 'twitter:image', content: 'https://docs.kuberocketci.io/img/kuberocketci-social-card.png' },
     ],
     description:
@@ -420,10 +448,6 @@ const config: Config = {
             {
               label: 'Docker Hub',
               href: 'https://hub.docker.com/u/epamedp',
-            },
-            {
-              label: 'Blog categories',
-              href: '/blog/tags/',
             },
             {
               label: 'RSS feed',

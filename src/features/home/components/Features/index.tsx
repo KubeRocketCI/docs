@@ -8,6 +8,9 @@ export const Features = () => {
   return (
     <main className={styles.sectionWrapper}>
       <div className="container">
+        <Heading as="h2" className={styles.sectionHeading}>
+          Platform Capabilities
+        </Heading>
         <div className="row">
           {featuresList.map(({ link, title, description, Svg }, idx) => (
             <div key={`feature:${idx}`} className={clsx('col col--4', styles.gridItem)}>

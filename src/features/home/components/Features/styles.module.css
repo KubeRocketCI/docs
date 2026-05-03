@@ -2,6 +2,13 @@
   padding: 1.5rem 0;
 }
 
+.sectionHeading {
+  text-align: center;
+  margin: 1.5rem 0;
+  font-size: 1.75rem;
+  font-weight: 600;
+}
+
 .gridItem {
   padding: 0.75rem;
 }

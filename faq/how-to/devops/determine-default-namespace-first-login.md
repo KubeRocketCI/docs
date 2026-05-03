@@ -32,5 +32,5 @@ When the `DEFAULT_NAMESPACE` parameter is not empty, you are expected to see the
 
 ## 3. Manual Setting
 
-If both deployment and Keycloak configuration are empty or missing, there will be no namespace specified in the portal. The only available option left is to set namespaces manually. Refer to the [Portal Settings](/docs/user-guide/portal-settings#cluster) page for more details on cluster settings.
+If both deployment and Keycloak configuration are empty or missing, there will be no namespace specified in the portal. The only available option left is to set namespaces manually. Refer to the [Portal Settings](/docs/user-guide/portal-settings#manage-namespaces) page for more details on cluster settings.
 

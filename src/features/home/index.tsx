@@ -1,15 +1,17 @@
-import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
+import Head from '@docusaurus/Head';
 import Layout from '@theme/Layout';
 import { Hero } from './components/Hero';
 import { Features } from './components/Features';
 
 export const Home = () => {
-  const { siteConfig } = useDocusaurusContext();
   return (
     <Layout
-      title={`Welcome to ${siteConfig.title}`}
-      description="Experience seamless software delivery with KubeRocketCI, your go-to cloud-native solution. Leverage our Kubernetes Native approach for efficient creation, management, and deployment of applications <head />"
+      title="KubeRocketCI Documentation: Cloud-Native CI/CD on Kubernetes"
+      description="Documentation for KubeRocketCI — an open-source CI/CD platform on Kubernetes. Quick-start, operator and user guides, and references for Tekton, Argo CD and DevSecOps."
     >
+      <Head>
+        <link rel="canonical" href="https://docs.kuberocketci.io" />
+      </Head>
       <Hero />
       <Features />
     </Layout>

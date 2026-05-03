@@ -19,10 +19,13 @@ export const Hero = () => {
           <source src={heroVideo} />
         </video>
         <div className={styles.heroBannerContent}>
-          <div className="margin-bottom--md">
+          <div className="margin-bottom--md" aria-hidden="true">
             <Lottie
               height={101}
               width={101}
+              ariaRole="presentation"
+              ariaLabel="KubeRocketCI animated logo"
+              isClickToPauseDisabled={true}
               options={{
                 animationData: logoAnimation,
                 rendererSettings: {
@@ -33,10 +36,10 @@ export const Hero = () => {
           </div>
           <div className="margin-bottom--lg">
             <div className="margin-bottom--md">
-              <h1 className={styles.heroBannerTitle}>{siteConfig.title}</h1>
-              <div className={styles.heroBannerSubtitle}>{siteConfig.tagline}</div>
+              <h1 className={styles.heroBannerTitle}>{siteConfig.title} Documentation</h1>
+              <p className={styles.heroBannerSubtitle}>{siteConfig.tagline}</p>
             </div>
-            <div className={styles.heroBannerDescription}>{siteConfig.themeConfig.description as string}</div>
+            <p className={styles.heroBannerDescription}>{siteConfig.themeConfig.description as string}</p>
           </div>
           <div className={clsx('row', styles.heroBannerButtons)}>
             <div className="margin--sm">

@@ -39,7 +39,14 @@ export const Hero = () => {
               <h1 className={styles.heroBannerTitle}>{siteConfig.title} Documentation</h1>
               <p className={styles.heroBannerSubtitle}>{siteConfig.tagline}</p>
             </div>
-            <p className={styles.heroBannerDescription}>{siteConfig.themeConfig.description as string}</p>
+            <p className={styles.heroBannerDescription}>
+              KubeRocketCI is an open-source CI/CD platform for Kubernetes teams.
+              It gives you a full delivery pipeline — from code commit to live deploy.
+            </p>
+            <p className={styles.heroBannerDescription}>
+              Get Tekton builds, Argo CD GitOps, and security scans ready to use.
+              Browse the Quick&nbsp;Start guide or dive into the Operator and User guides.
+            </p>
           </div>
           <div className={clsx('row', styles.heroBannerButtons)}>
             <div className="margin--sm">

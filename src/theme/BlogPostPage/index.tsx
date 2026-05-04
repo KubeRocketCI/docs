@@ -66,12 +66,53 @@ export default function BlogPostPageWrapper(props) {
 
   const breadcrumbStructuredData = [archiveBreadcrumbStructuredData, ...tagsBreadcrumbStructuredData];
 
+  // https://developers.google.com/search/docs/appearance/structured-data/article#json-ld
+  const dateModified = blogMetaData.lastUpdatedAt
+    ? new Date(blogMetaData.lastUpdatedAt * 1000).toISOString()
+    : blogMetaData.date;
+
+  const blogPostingStructuredData = {
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    headline: blogMetaData.title,
+    description: blogMetaData.description,
+    datePublished: blogMetaData.date,
+    dateModified,
+    url: `${siteConfig.url}${blogMetaData.permalink}`,
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': `${siteConfig.url}${blogMetaData.permalink}`,
+    },
+    ...(blogMetaData.frontMatter?.image && { image: blogMetaData.frontMatter.image }),
+    ...(blogMetaData.frontMatter?.keywords && {
+      keywords: Array.isArray(blogMetaData.frontMatter.keywords)
+        ? blogMetaData.frontMatter.keywords.join(', ')
+        : blogMetaData.frontMatter.keywords,
+    }),
+    author: blogMetaData.authors.map(author => ({
+      '@type': 'Person',
+      name: author.name,
+      ...(author.url && { url: author.url }),
+    })),
+    publisher: {
+      '@type': 'Organization',
+      name: siteConfig.title,
+      url: siteConfig.url,
+    },
+  };
+
   return (
     <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(breadcrumbStructuredData),
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(blogPostingStructuredData),
         }}
       />
       <BlogPostPage {...props} />

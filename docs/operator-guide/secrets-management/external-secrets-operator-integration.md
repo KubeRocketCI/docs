@@ -344,3 +344,4 @@ In order to [Install KubeRocketCI](../install-kuberocketci.md), a list of passwo
 ## Related Articles
 
 * [Install External Secrets Operator](install-external-secrets-operator.md)
+* [Secured Secrets for Application Deployment](../../use-cases/external-secrets.md)

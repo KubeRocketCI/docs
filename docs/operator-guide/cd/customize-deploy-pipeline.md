@@ -69,3 +69,4 @@ To customize your deployment pipeline, follow the steps below:
 * [Add Cluster](../../user-guide/add-cluster.md)
 * [Deploy Application With Custom Build Tool/Framework](../../use-cases/tekton-custom-pipelines.md)
 * [Add Environment](../../user-guide/add-cd-pipeline.md)
+* [Customize Environment Cleanup](./customize-environment-deletion.md)

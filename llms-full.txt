@@ -18923,7 +18923,7 @@ Solution can vary depending on the way users log into the platform, whether it i
 
 This solution suits those who to log into the KubeRocketCI portal Keycloak.
 
-To fix the problem, check both default and allowed namespace by navigating to the **KubeRocketCI** portal -> **Account Settings** -> **Cluster**. Refer to the [KubeRocketCI portal](../../user-guide/portal-settings.md#cluster) page for more details.
+To fix the problem, check both default and allowed namespace by navigating to the **KubeRocketCI** portal -> **Account Settings** -> **Cluster**. Refer to the [KubeRocketCI portal](../../user-guide/portal-settings.md#manage-namespaces) page for more details.
 
 ### Solution 2 (Service Account Token)
 
@@ -23521,7 +23521,7 @@ We suggest backing up the KubeRocketCI environment before starting the upgrade p
 :::
 
 :::warning
-All Tekton resources (Tasks, Pipelines, TriggerTemplates) have been migrated from `tekton.dev/v1beta1` to `tekton.dev/v1`. Clusters running Tekton Pipelines older than **v0.44** cannot apply these manifests — the upgrade will fail. Verify your Tekton Pipelines version before proceeding (see [Step 1](#step-1-verify-tekton-pipelines-version)).
+All Tekton resources (Tasks, Pipelines, TriggerTemplates) have been migrated from `tekton.dev/v1beta1` to `tekton.dev/v1`. Clusters running Tekton Pipelines older than **v0.44** cannot apply these manifests — the upgrade will fail. Verify your Tekton Pipelines version before proceeding (see [Step 1](#step-1-required-verify-tekton-pipelines-version)).
 :::
 
 :::warning
@@ -30335,7 +30335,7 @@ There are two buttons on the environment page that can be utilized to delete app
 
 The **Delete** button is optimized for applications based on a single, simple helm chart that can be deployed independently without any specific dependencies.
 
-The **Clean** button activates a deletion process (triggers a delete pipeline) that includes any custom logic you have defined. It runs the Clean Pipeline template you chose when [adding a Deployment](./add-cd-pipeline.md#add-deployment). This option is most suitable for applications that require complex configurations to function properly. It ensures that any associated resources with the same lifecycle are deleted when the application is no longer needed.
+The **Clean** button activates a deletion process (triggers a delete pipeline) that includes any custom logic you have defined. It runs the Clean Pipeline template you chose when [adding a Deployment](./add-cd-pipeline.md). This option is most suitable for applications that require complex configurations to function properly. It ensures that any associated resources with the same lifecycle are deleted when the application is no longer needed.
 
 KubeRocketCI provides an intuitive and streamlined pipeline by default. Initially, there is no distinction between the **Delete** and **Clean** buttons, as both perform identical actions. This default behavior encompasses the straightforward deletion of applications, which involves the uninstallation of the associated Helm chart. However, this functionality evolves once a custom delete pipeline is established, enabling manual configuration of the logic behind the **Clean** button. This customization allows for a more tailored approach to managing application lifecycles within KubeRocketCI.
 

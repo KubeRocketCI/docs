@@ -24,7 +24,9 @@ This documentation provides a concise introduction to the KubeRocketCI installat
 ## Related Articles
 
 * [Quick Start Guide](../quick-start/platform-installation.md)
+* [Quick Start Overview](../quick-start/quick-start-overview.md)
 * [Install KubeRocketCI](install-kuberocketci.md)
 * [Install via Add-Ons](add-ons-overview.md)
 * [Install via AWS Marketplace](aws-marketplace-install.md)
 * [Install via Civo Marketplace](install-via-civo.md)
+* [Deploy AWS EKS Cluster](deploy-aws-eks.md)

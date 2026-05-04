@@ -125,3 +125,8 @@ To maintain an active presence on social media channels and share valuable conte
 - [SolutionsHub](https://solutionshub.epam.com/solution/kuberocketci)
 - [Medium](https://medium.com/kuberocketci)
 - [YouTube](https://www.youtube.com/@theplatformteam)
+
+
+## Related Guides
+
+* [Kubernetes Deployment](./kubernetes-deployment.md)

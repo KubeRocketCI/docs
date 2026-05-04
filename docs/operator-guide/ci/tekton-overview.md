@@ -81,3 +81,8 @@ To learn more about Tekton Pipelines and their types in KubeRocketCI, you can re
 - [Customize Environment Cleanup](../cd/customize-environment-deletion.md)
 
 All of these guides have step-by-step video tutorials.
+
+
+## Related Articles
+
+* [Install Tekton](../install-tekton.md)

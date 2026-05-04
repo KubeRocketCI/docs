@@ -33,3 +33,8 @@ The KubeRocketCI portal is a central management tool in the KubeRocketCI ecosyst
 Choose a platform section below to open its overview and related documentation:
 
 <UserGuideCards />
+
+
+## Related Articles
+
+* [Security Overview (SCA, SAST, Container Scanning)](./security/sca-overview.md)

@@ -66,3 +66,8 @@ KubeRocketCI harnesses the robust capabilities of Kubernetes in conjunction with
 KubeRocketCI integrates with GitLab, GitHub, Bitbucket, and Gerrit for version control. These systems are foundational components enabling efficient source code management, collaboration, and code review processes.
 
 Platform ensures robust security measures by leveraging OpenID Connect (OIDC) for authentication and authorization across all platform tools and Kubernetes clusters. By employing OIDC, KubeRocketCI establishes a unified and secure authentication mechanism, enabling seamless access control and user authentication for all tools integrated into the platform. This standardized approach ensures stringent security protocols, maintaining authentication consistency and authorization policies across the platform ecosystem.
+
+
+## Related Articles
+
+* [Reference CI/CD Pipeline](./reference-cicd-pipeline.md)

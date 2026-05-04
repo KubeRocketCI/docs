@@ -9,7 +9,7 @@
     <icon>https://docs.kuberocketci.io/img/favicon.ico</icon>
     <rights>Copyright © 2026 KubeRocketCI.</rights>
     <entry>
-        <title type="html"><![CDATA[Kubernetes-Native CI/CD with Tekton | KubeRocketCI]]></title>
+        <title type="html"><![CDATA[Kubernetes-Native CI/CD with Tekton]]></title>
         <id>https://docs.kuberocketci.io/blog/kubernetes-native-cicd-tekton-kuberocketci</id>
         <link href="https://docs.kuberocketci.io/blog/kubernetes-native-cicd-tekton-kuberocketci"/>
         <updated>2026-05-04T00:00:00.000Z</updated>

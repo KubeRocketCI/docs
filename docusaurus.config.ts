@@ -295,7 +295,7 @@ const config: Config = {
       { name: 'twitter:image', content: 'https://docs.kuberocketci.io/img/kuberocketci-social-card.png' },
     ],
     description:
-      'Boost your delivery with the development culture based on the modern CI/CD stack, golden path and self-service capabilities of the KubeRocketCI.',
+      'KubeRocketCI is an open-source CI/CD platform for Kubernetes teams. It gives you a full delivery pipeline — from code commit to live deploy. Get Tekton builds, Argo CD GitOps, and security scans ready to use out of the box.',
     videoTeaser: 'https://www.youtube.com/embed/wiAaAHu17mw',
     mailTo: 'mailto:SupportEPMD-EDP@epam.com?subject=KubeRocketCI Demo Request',
     announcementBar: {

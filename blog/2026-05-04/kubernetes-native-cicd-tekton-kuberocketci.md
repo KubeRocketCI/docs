@@ -1,5 +1,5 @@
 ---
-title: "Kubernetes-Native CI/CD with Tekton | KubeRocketCI"
+title: "Kubernetes-Native CI/CD with Tekton"
 description: "Learn how KubeRocketCI builds Kubernetes-native CI/CD on Tekton - covering pipeline task sequences, webhook trigger chain, and how to author custom pipelines."
 slug: kubernetes-native-cicd-tekton-kuberocketci
 tags: [KubeRocketCI, Tekton, Kubernetes, CI/CD, DevOps, Platform Engineering, GitOps]

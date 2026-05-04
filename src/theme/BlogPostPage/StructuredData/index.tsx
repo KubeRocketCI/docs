@@ -10,7 +10,7 @@ export default function BlogPostPageStructuredData(): React.JSX.Element {
   const enhancedStructuredData = {
     ...defaultStructuredData,
     publisher: { '@id': `${siteConfig.url}/#organization` },
-    inLanguage: 'en-GB',
+    inLanguage: 'en',
   };
 
   return (

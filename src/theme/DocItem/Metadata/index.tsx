@@ -28,7 +28,7 @@ export default function MetadataWrapper(props) {
     author: { '@type': 'Organization', name: 'KubeRocketCI Team' },
     publisher: { '@id': `${siteConfig.url}/#organization` },
     image: `${siteConfig.url}/img/kuberocketci-social-card.jpg`,
-    inLanguage: 'en-GB',
+    inLanguage: 'en',
     mainEntityOfPage: {
       '@type': 'WebPage',
       '@id': canonical,

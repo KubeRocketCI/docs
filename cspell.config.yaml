@@ -89,6 +89,7 @@ words:
   - dockerbuild
   - dockerconfigjson
   - dockerhub
+  - dogfooding
   - dropdb
   - dumpall
   - EBSCSI
@@ -122,6 +123,7 @@ words:
   - gitops
   - gitrevision
   - Gitserver
+  - gitsha
   - GITTAG
   - GOPATH
   - GOROOT

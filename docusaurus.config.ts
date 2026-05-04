@@ -287,12 +287,12 @@ const config: Config = {
       // Docusaurus's <Layout> — only declare the globals here.
       { property: 'og:type', content: 'website' },
       { property: 'og:site_name', content: 'KubeRocketCI Documentation' },
-      { property: 'og:image', content: 'https://docs.kuberocketci.io/img/kuberocketci-social-card.png' },
-      { property: 'og:image:width', content: '1200' },
-      { property: 'og:image:height', content: '630' },
+      { property: 'og:image', content: 'https://docs.kuberocketci.io/img/kuberocketci-social-card.jpg' },
+      { property: 'og:image:width', content: '1020' },
+      { property: 'og:image:height', content: '615' },
       // Twitter Cards still use `name=`.
       { name: 'twitter:card', content: 'summary_large_image' },
-      { name: 'twitter:image', content: 'https://docs.kuberocketci.io/img/kuberocketci-social-card.png' },
+      { name: 'twitter:image', content: 'https://docs.kuberocketci.io/img/kuberocketci-social-card.jpg' },
     ],
     description:
       'KubeRocketCI is an open-source CI/CD platform for Kubernetes teams. It gives you a full delivery pipeline — from code commit to live deploy. Get Tekton builds, Argo CD GitOps, and security scans ready to use out of the box.',

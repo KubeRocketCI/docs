@@ -27,7 +27,7 @@ export default function MetadataWrapper(props) {
     ...(dateModified ? { dateModified } : {}),
     author: { '@type': 'Organization', name: 'KubeRocketCI Team' },
     publisher: { '@id': `${siteConfig.url}/#organization` },
-    image: `${siteConfig.url}/img/kuberocketci-social-card.png`,
+    image: `${siteConfig.url}/img/kuberocketci-social-card.jpg`,
     inLanguage: 'en-GB',
     mainEntityOfPage: {
       '@type': 'WebPage',

@@ -7,17 +7,41 @@ import Lottie from 'react-lottie';
 import logoAnimation from '../../assets/logo-animation.json';
 import clsx from 'clsx';
 import YouTubeIcon from '@mui/icons-material/YouTube';
+import PlayArrowIcon from '@mui/icons-material/PlayArrow';
+import PauseIcon from '@mui/icons-material/Pause';
+import { useRef, useState } from 'react';
 
 export const Hero = () => {
   const { siteConfig } = useDocusaurusContext();
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [isPlaying, setIsPlaying] = useState(false);
+
+  const toggleVideo = () => {
+    const video = videoRef.current;
+    if (!video) return;
+    if (isPlaying) {
+      video.pause();
+      setIsPlaying(false);
+    } else {
+      video.play();
+      setIsPlaying(true);
+    }
+  };
 
   return (
     <header>
       <div className={styles.heroBanner}>
         <div className={styles.heroBannerOverlay}></div>
-        <video className={styles.heroBannerVideo} autoPlay loop muted poster={heroImage}>
+        <video ref={videoRef} className={styles.heroBannerVideo} loop muted playsInline poster={heroImage}>
           <source src={heroVideo} />
         </video>
+        <button
+          className={styles.heroBannerVideoToggle}
+          onClick={toggleVideo}
+          aria-label={isPlaying ? 'Pause background video' : 'Play background video'}
+        >
+          {isPlaying ? <PauseIcon fontSize="small" /> : <PlayArrowIcon fontSize="small" />}
+        </button>
         <div className={styles.heroBannerContent}>
           <div className="margin-bottom--md" aria-hidden="true">
             <Lottie

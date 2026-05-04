@@ -296,7 +296,7 @@ const config: Config = {
     ],
     description:
       'KubeRocketCI is an open-source CI/CD platform for Kubernetes teams. It gives you a full delivery pipeline — from code commit to live deploy. Get Tekton builds, Argo CD GitOps, and security scans ready to use out of the box.',
-    videoTeaser: 'https://www.youtube.com/embed/wiAaAHu17mw',
+    videoTeaser: 'https://www.youtube.com/watch?v=wiAaAHu17mw',
     mailTo: 'mailto:SupportEPMD-EDP@epam.com?subject=KubeRocketCI Demo Request',
     announcementBar: {
       id: 'announcement', // Increment on change

@@ -32,7 +32,7 @@ export const Hero = () => {
     <header>
       <div className={styles.heroBanner}>
         <div className={styles.heroBannerOverlay}></div>
-        <video ref={videoRef} className={styles.heroBannerVideo} loop muted playsInline poster={heroImage}>
+        <video ref={videoRef} className={styles.heroBannerVideo} loop muted playsInline preload="none" poster={heroImage}>
           <source src={heroVideo} />
         </video>
         <button

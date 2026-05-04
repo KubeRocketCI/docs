@@ -2,7 +2,7 @@ sergk:
   name: Sergiy Kulanov
   title: Systems Architect and DevOps Advocate, Open Source Enthusiast and Contributor
   url: https://github.com/sergk
-  image_url: https://docs.kuberocketci.io/img/profile_sergk.png
+  image_url: https://docs.kuberocketci.io/img/profile_sergk.webp
   page: true
   socials:
     x: sergiy_kulanov
@@ -13,7 +13,7 @@ mykolamarusenko:
   name: Mykola Marusenko
   title: Co-creator of KubeRocketCI
   url: https://github.com/mykolamarusenko
-  image_url: https://docs.kuberocketci.io/img/profile_mykolamarusenko.png
+  image_url: https://docs.kuberocketci.io/img/profile_mykolamarusenko.webp
   page: true
   socials:
     linkedin: mykola-marusenko
@@ -23,7 +23,7 @@ daniilnedostup:
   name: Daniil Nedostup
   title: Systems Engineer
   url: https://github.com/daniil-nedostup
-  image_url: https://docs.kuberocketci.io/img/profile_daniilnedostup.png
+  image_url: https://docs.kuberocketci.io/img/profile_daniilnedostup.webp
   page: true
   socials:
     linkedin: daniil-nedostup

@@ -33,7 +33,7 @@ const siteStructuredData = {
         },
         'query-input': 'required name=search_term_string',
       },
-      inLanguage: 'en-GB',
+      inLanguage: 'en',
     },
     {
       '@id': 'https://docs.kuberocketci.io/#organization',

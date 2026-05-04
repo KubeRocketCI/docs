@@ -1111,6 +1111,10 @@ To maintain an active presence on social media channels and share valuable conte
 - [Medium](https://medium.com/kuberocketci)
 - [YouTube](https://www.youtube.com/@theplatformteam)
 
+## Related Guides
+
+* [Kubernetes Deployment](./kubernetes-deployment.md)
+
 ---
 
 ## Kubernetes Deployment
@@ -1346,6 +1350,10 @@ KubeRocketCI harnesses the robust capabilities of Kubernetes in conjunction with
 KubeRocketCI integrates with GitLab, GitHub, Bitbucket, and Gerrit for version control. These systems are foundational components enabling efficient source code management, collaboration, and code review processes.
 
 Platform ensures robust security measures by leveraging OpenID Connect (OIDC) for authentication and authorization across all platform tools and Kubernetes clusters. By employing OIDC, KubeRocketCI establishes a unified and secure authentication mechanism, enabling seamless access control and user authentication for all tools integrated into the platform. This standardized approach ensures stringent security protocols, maintaining authentication consistency and authorization policies across the platform ecosystem.
+
+## Related Articles
+
+* [Reference CI/CD Pipeline](./reference-cicd-pipeline.md)
 
 ---
 
@@ -6245,6 +6253,7 @@ To customize your deployment pipeline, follow the steps below:
 * [Add Cluster](../../user-guide/add-cluster.md)
 * [Deploy Application With Custom Build Tool/Framework](../../use-cases/tekton-custom-pipelines.md)
 * [Add Environment](../../user-guide/add-cd-pipeline.md)
+* [Customize Environment Cleanup](./customize-environment-deletion.md)
 
 ---
 
@@ -7873,6 +7882,10 @@ To learn more about Tekton Pipelines and their types in KubeRocketCI, you can re
 - [Customize Environment Cleanup](../cd/customize-environment-deletion.md)
 
 All of these guides have step-by-step video tutorials.
+
+## Related Articles
+
+* [Install Tekton](../install-tekton.md)
 
 ---
 
@@ -13713,10 +13726,12 @@ This documentation provides a concise introduction to the KubeRocketCI installat
 ## Related Articles
 
 * [Quick Start Guide](../quick-start/platform-installation.md)
+* [Quick Start Overview](../quick-start/quick-start-overview.md)
 * [Install KubeRocketCI](install-kuberocketci.md)
 * [Install via Add-Ons](add-ons-overview.md)
 * [Install via AWS Marketplace](aws-marketplace-install.md)
 * [Install via Civo Marketplace](install-via-civo.md)
+* [Deploy AWS EKS Cluster](deploy-aws-eks.md)
 
 ---
 
@@ -18719,6 +18734,7 @@ In order to [Install KubeRocketCI](../install-kuberocketci.md), a list of passwo
 ## Related Articles
 
 * [Install External Secrets Operator](install-external-secrets-operator.md)
+* [Secured Secrets for Application Deployment](../../use-cases/external-secrets.md)
 
 ---
 
@@ -26733,6 +26749,16 @@ custom resources. Get acquainted with the description of technical scenarios and
 
 <UseCases />
 
+## All Use Cases
+
+* [Scaffold and Deploy FastAPI Application](./application-scaffolding.md)
+* [Autotest as a Quality Gate](./autotest-as-quality-gate.md)
+* [Test Environment Using Environment Variables](./cd-autotests-run-with-env-variables.md)
+* [Create and Use Custom Tekton Pipelines](./custom-pipelines-flow.md)
+* [Deploy Application From a Feature Branch](./deploy-application-from-feature-branch.md)
+* [Secured Secrets for Application Deployment](./external-secrets.md)
+* [Application With Custom Build Tool/Framework](./tekton-custom-pipelines.md)
+
 ---
 
 ## Application With Custom Build Tool/Framework
@@ -29741,6 +29767,10 @@ The KubeRocketCI portal is a central management tool in the KubeRocketCI ecosyst
 Choose a platform section below to open its overview and related documentation:
 
 <UserGuideCards />
+
+## Related Articles
+
+* [Security Overview (SCA, SAST, Container Scanning)](./security/sca-overview.md)
 
 ---
 

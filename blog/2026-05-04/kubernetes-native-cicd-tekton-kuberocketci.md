@@ -174,7 +174,7 @@ The KubeRocketCI portal ships a dedicated `tekton` module with full pipeline man
 
 **DAG visualization.** The pipeline details page renders the task graph using React Flow - nodes for each task, directed edges from `runAfter` dependencies, isolated tasks shown separately. Colors map to live status: blue (running), green (succeeded), red (failed), amber (pending). Finally-tasks are distinguished visually from the main execution chain.
 
-![KubeRocketCI portal DAG view of a review pipeline - tasks for sonar, helm-lint, dockerfile-lint, and GitHub status reporting](./dag-pipeline-visualization.png)
+![KubeRocketCI portal DAG view of a review pipeline - tasks for sonar, helm-lint, dockerfile-lint, and GitHub status reporting](../assets/dag-pipeline-visualization.png)
 
 **Live logs and history.** The PipelineRun details page streams live container logs while a run is active. After completion, logs are served from Tekton Results - the same view, no separate log aggregation setup needed.
 
@@ -221,7 +221,7 @@ Once the platform is running, every onboarded application has:
 
 This is what our own dogfooding instance looks like - we run KubeRocketCI on KubeRocketCI itself. Over 90 days, the `krci` namespace logged **18,397 pipeline runs** (~200/day across build, review, and deploy types), with build pipelines hitting a **93% success rate** at an average duration of **14 minutes 38 seconds**. No external CI server involved.
 
-![KubeRocketCI Pipeline Metrics: 18,397 runs over 90 days, 74% success rate, 93% build success rate, 14m 38s average duration](./pipeline-metrics.png)
+![KubeRocketCI Pipeline Metrics: 18,397 runs over 90 days, 74% success rate, 93% build success rate, 14m 38s average duration](../assets/pipeline-metrics.png)
 
 The entire path - review pipeline on PR open, build pipeline on merge, artifact versioning, image push, and Argo CD sync - runs without the developer writing a single line of Jenkins Groovy or pipeline YAML. The only required input is declaring the tech stack at onboarding time.
 

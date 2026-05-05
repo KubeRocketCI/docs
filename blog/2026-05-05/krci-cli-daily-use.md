@@ -1,5 +1,5 @@
 ---
-title: "krci CLI: Daily Platform Ops from Terminal to AI Agents"
+title: "krci CLI: From Terminal to AI Agents"
 description: "How I use the krci CLI as a tool surface for Claude Code and other AI assistants to answer day-to-day platform questions in plain language."
 slug: krci-cli-daily-use
 tags: [KubeRocketCI, CLI, AI Agents, DevOps, SCA, Claude Code, Platform Engineering, Dependency-Track]
@@ -24,7 +24,7 @@ KubeRocketCI is built so the platform's primitives are reachable from every runt
 - **Pipelines.** A `krci` invocation that answers a question in my terminal runs unchanged inside a Tekton task or a GitLab CI job. Quality gates and release governance read live platform state without bespoke API clients.
 - **Schedulers.** A short bash wrapper in cron, or a Kubernetes CronJob produces a daily report on a hands-off cadence - same command, same output, same trust boundary.
 - **Chat and webhooks.** JSON output drops straight into Slack, Teams, or PagerDuty without a translation layer.
-- **AI agents in the SDLC.** AI coding agents - [Claude Code](https://docs.claude.com/claude-code), Cursor, the Anthropic and OpenAI SDKs - read terminal output natively. Giving an agent shell access to `krci` turns the platform into a tool surface it can call: list codebases, inspect SBOMs, compare branches, summarize changes since the previous run. No MCP server to write, no proprietary protocol to learn, no stale API client to maintain.
+- **AI agents in the SDLC.** AI coding agents - [Claude Code](https://code.claude.com/docs), Cursor, the Anthropic and OpenAI SDKs - read terminal output natively. Giving an agent shell access to `krci` turns the platform into a tool surface it can call: list codebases, inspect SBOMs, compare branches, summarize changes since the previous run. No MCP server to write, no proprietary protocol to learn, no stale API client to maintain.
 
 The portal and the CLI are peers: the portal is the right interface for browsing, comparing, and approving; the CLI is the right interface for composing, scheduling, and handing off to agents. Both are first-class products and ship in lockstep.
 
@@ -47,9 +47,9 @@ Available Commands:
 
 When you run any of these commands - say, `krci deployment list` to inspect CD pipelines across your environments-the output follows the same disciplined structure. Columns are consistent, status values are predictable, and the table is human-readable *and* machine-parseable without any translation. Here's what that looks like in practice:
 
-<img alt="Example of krci deployment list command output showing a table with deployment status, environment, sync state, and other metadata. The table displays three deployments: krci-gitfusion with healthy status in dev, and two tekton instances in dev and qa environments with varying sync states." src="krci-deployment-example.png" />
+![Example of krci deployment list command output showing a table with deployment status, environment, sync state, and other metadata. The table displays three deployments: krci-gitfusion with healthy status in dev, and two tekton instances in dev and qa environments with varying sync states.](../assets/krci-deployment-example.png)
 
-This table shows exactly what's deployed where. The `VERSION` column tracks the build artifact (`0.5.0-SNAPSHOT.4`), the `ENV` column shows which environment it's in, and the `STATUS` column tells you health at a glance -`healthy` or `missing`. The `SYNC` column flags when an environment has drifted (`outofsynced`) from what GitOps expects. In seconds, you can answer: *"What's actually running in qa? Is it in sync? What version?"* The agent can answer it too, and answer the next question - *"Show me all deployments older than 30 days"* - without any special prompting.
+This table shows exactly what's deployed where. The `VERSION` column tracks the build artifact (`0.5.0-SNAPSHOT.4`), the `ENV` column shows which environment it's in, and the `STATUS` column tells you health at a glance -`healthy` or `missing`. The `SYNC` column flags when an environment has drifted (`OutOfSync`) from what GitOps expects. In seconds, you can answer: *"What's actually running in qa? Is it in sync? What version?"* The agent can answer it too, and answer the next question - *"Show me all deployments older than 30 days"* - without any special prompting.
 
 Every group follows the same shape - `list`, `get`, sometimes a third verb - and the flags repeat (`--branch`, `--severity`, `-o json|table`). Predictability is the point: an agent can reason about the next command from the previous one, and so can I. Authentication is OIDC against the same Keycloak the portal uses; the agent inherits the existing session, so there is no long-lived API key embedded in any prompt.
 
@@ -173,6 +173,6 @@ That's the entire loop: ask in language, get an answer the CLI can verify, sched
 - [krci CLI on GitHub](https://github.com/KubeRocketCI/cli) - command reference, authentication setup, and release binaries.
 - [SCA with Dependency-Track](/docs/operator-guide/devsecops/dependency-track) - how SBOMs reach the platform.
 - [Kubernetes-Native CI/CD with Tekton](/blog/kubernetes-native-cicd-tekton-kuberocketci) - the pipeline layer that produces those SBOMs.
-- [CycloneDX SBOM](https://cyclonedx.org/), [Dependency-Track](https://dependencytrack.org/), and [Claude Code](https://docs.claude.com/claude-code) - the upstream tools used in this post.
+- [CycloneDX SBOM](https://cyclonedx.org/), [Dependency-Track](https://dependencytrack.org/), and [Claude Code](https://code.claude.com/docs) - the upstream tools used in this post.
 
 The krci CLI is open-source under Apache License 2.0. Source, issues, and release binaries live on [GitHub](https://github.com/KubeRocketCI/cli).

@@ -47,54 +47,56 @@ To scaffold and deploy FastAPI Application, follow the steps below.
 
 1. Log in to the KubeRocketCI portal:
 
-    ![Logging Page](../assets/use-cases/general/login.png "Logging screen")
+    ![Logging Page](../assets/use-cases/general/login-1.png "Logging screen")
 
-2. Navigate to the user's **Account settings** tab:
+2. On the main menu, click the **Manage Namespaces** button:
 
-    ![Settings](../assets/use-cases/general/settings.png "Settings button")
+    ![Manage Namespaces](../assets/use-cases/general/settings-1.png "Manage Namespaces button")
 
 3. Ensure the `Namespace` value points to the namespace with the KubeRocketCI installation:
 
     ![Default and allowed namespaces](../assets/use-cases/fastapi-scaffolding/default-allowed-namespace.png "Default and allowed namespaces")
 
     :::note
-    Don't forget to click the **+ Add** button to add the namespace to the allowed namespaces list.
+    Don't forget to press Enter to add the namespace to the allowed namespaces list.
     :::
 
-4. Create a new Codebase with the `Application` type using the `Create from template` strategy. Select the **Components** section and click **+ Create component**:
+4. Create a new Project with the `Application` type using the `Create` strategy. Select the **Projects** section and click **+ Create project**:
 
-    ![Components Overview](../assets/use-cases/general/components.png "Components tab")
+    ![Components Overview](../assets/use-cases/general/components-1.png "Components tab")
 
-5. Choose the `Application` Codebase type as we intend to deliver our application as a container and deploy it within the Kubernetes cluster. Click the **Next** button:
+5. Select the **Custom configuration** option, choose the `Application` Codebase type as we intend to deliver our application as a container and deploy it within the Kubernetes cluster. Select the **Create** strategy to scaffold our application from the template provided by the KubeRocketCI and click **Continue**:
 
-    ![Codebase Type](../assets/use-cases/general/component-type.png "Step codebase type")
+    ![Initial setup](../assets/use-cases/general/component-type-1.png "Initial setup")
 
-6. Opt for the **Create from template** strategy to scaffold our application from the template provided by the KubeRocketCI and click **Create**:
-
-    ![Codebase Strategy](../assets/use-cases/general/component-strategy.png "Step codebase strategy")
-
-7. On the **Add component info** tab, define the following values and click **Next**:
+6. On the **Git & project info** tab, define the following values and click **Continue**:
 
     - Git server: `github`
-    - Repository name: `{github_account_name}/fastapi-demo`
-    - Component name: `fastapi-demo`
-    - Description: `fastapi-demo`
-    - Application code language: `Python`
+    - Owner: `github_account_name`
+    - Repository name: `fastapi-demo`
+    - Default branch: `main`
+    - Project name: `fastapi-demo`
+    - Description: `FastAPI application for demo purposes`
+
+    ![Application info](../assets/use-cases/fastapi-scaffolding/create-application.png "Application info")
+
+7. On the **Build config** tab, define the values and click **Continue**:
+
+    - Code language: `Python`
     - Language version/framework: `FastAPI`
     - Build tool: `Python`
+    - Deployment options: `helm-chart`
+    - Codebase versioning type: `semver`
+    - Start version from: `0.1.0` 
+    - Suffix: `SNAPSHOT`
 
-    ![Application Info](../assets/use-cases/fastapi-scaffolding/create-application.png "Application info")
+    ![Build config](../assets/use-cases/fastapi-scaffolding/create-application-advance.png "Build config")
 
-8. On the **Specify advanced settings** tab, define the values and click **Create**:
+8. On the **Review** tab, verify the project configuration and click **Create project**:
 
-    - Default branch: `main`
-    - Deployment Options: `helm-chart`
-    - Codebase versioning type: `edp`
-    - Start version from: `0.1.0` and `SNAPSHOT`
+    ![Review and create](../assets/use-cases/fastapi-scaffolding/review-and-create.png "Review and create")
 
-    ![Advanced Settings](../assets/use-cases/fastapi-scaffolding/create-application-advance.png "Advanced settings")
-
-9. Check the application status. It should be green:
+9. On the congratulations menu, click **Open project**:
 
     ![Components overview page](../assets/use-cases/fastapi-scaffolding/ready-component.png "Application status")
 
@@ -110,87 +112,122 @@ This section outlines the approach for deploying the application from the latest
 
 To succeed with the steps above, follow the instructions below:
 
-1. Build Container from the latest branch commit. To build the initial version of the application's `main` branch, go to the **Components** -> **fastapi-demo** -> **Branches** -> **main** and click the **Build** button:
+1. Build Container from the latest branch commit. To build the initial version of the application's `main` branch, go to the **Branches** -> **main** and click the **Build** button:
 
     ![Build Main Branch](../assets/use-cases/fastapi-scaffolding/build-application.png "Application building")
 
-2. Build pipeline for the `fastapi-demo` application starts:
+2. Build pipeline for the `fastapi-demo` application starts. Track Pipeline's status by clicking the **build-fastapi-demo-main-xxxx** pipeline link or **Go to page**:
 
     ![Branch Build Pipeline](../assets/use-cases/fastapi-scaffolding/build-in-process.png "Pipeline building")
 
-3. Track Pipeline's status by clicking the **build-fastapi-demo-main-6ef1** pipeline link.
+3. Observe the build pipeline details:
 
-    ![Pipeline details](../assets/use-cases/fastapi-scaffolding/build_details.png "Pipeline details")
+    ![Pipeline details](../assets/use-cases/fastapi-scaffolding/build-details.png "Pipeline details")
 
-4. Ensure that Build Pipeline was successfully completed.
+4. Ensure that build pipeline was successfully completed.
 
-5. To enable application deployment create a Deployment Flow with a single environment - Development (with the name `dev`).
+5. To enable application deployment, create a Deployment with a single environment - Development (with the name `dev`).
 
     :::note
     To utilize and manage various environments through the KubeRocketCI platform, the initial step is to onboard a new GitOps repository.
     :::
 
-6. Navigate to the **Deployment Flows** tab and click the corresponding button to create new GitOps repository:
+6. Navigate to the **Deployments** tab and click the corresponding button to create new GitOps repository:
 
-    ![Deployment flow tab](../assets/use-cases/fastapi-scaffolding/add_gitops_repo.png "Deployment flow tab")
+    ![Deployment flow tab](../assets/use-cases/fastapi-scaffolding/add-gitops-repo.png "Deployment flow tab")
 
 7. Click to the **+ Add GitOps repository**:
 
-    ![Onboard gitops repository](../assets/use-cases/fastapi-scaffolding/add_gitops_button.png "Onboard GitOps repository")
+    ![Onboard gitops repository](../assets/use-cases/fastapi-scaffolding/add-gitops-button.png "Onboard GitOps repository")
 
 8. Select the `Create` strategy and `github` server, enter GitHub account name and click **Save**:
 
-    ![Configure gitops repository](../assets/use-cases/fastapi-scaffolding/create_gitops.png "Configure gitops repository")
+    ![Configure gitops repository](../assets/use-cases/fastapi-scaffolding/create-gitops.png "Configure gitops repository")
 
-9. In the KubeRocketCI portal, navigate to **Deployment FLows** tab and click the **+ Create deployment flow** button to create pipeline:
+9. In the KubeRocketCI portal, navigate to **Deployments** tab and click the **+ Create deployment** button:
 
-    ![Create deployment flow](../assets/use-cases/general/create-cd-pipeline.png "Create deployment flow")
+    ![Create deployment](../assets/use-cases/general/create-cd-pipeline-1.png "Create deployment")
 
-10. In the **Create deployment flow** dialog, fill in the required fields:
+10. In the **Create new deployment** dialog, fill in the required fields:
 
-    - **Enter name**:
-
-      - Pipeline name: `mypipe`
-      - Description: `Deployment flow for fasapi application`
-
-      ![Deployment flow tab with parameters](../assets/use-cases/fastapi-scaffolding/create-cd-pipeline-window.png "Deployment flow tab with parameters")
-
-    - **Add applications**:
+    - **Applications**:
 
       - Applications: Add `fastapi-demo` application
       - Branch: Select `main` branch
+
+      ![Applications step](../assets/use-cases/fastapi-scaffolding/create-deployment-applications.png "Applications step")
+
+    - **Add applications**:
+
+      - Pipeline name: `mypipe`
+      - Description: `Deployment for FastAPI application`
+      - Deployment type: Select `Container`
       - Promote applications: Leave unchecked
 
-      ![Deployment flow tab with parameters](../assets/use-cases/fastapi-scaffolding/create-cd-pipeline-window-2.png "Deployment flow tab with parameters")
+      ![Pipeline configuration step](../assets/use-cases/fastapi-scaffolding/create-deployment-pipeline-configuration.png "Pipeline configuration step")
 
-11. Now click the `Go to deployment flow` button to continue creating the environment:
+    - **Review**:
 
-    ![Deployment flow created](../assets/use-cases/fastapi-scaffolding/flow-created.png "Deployment flow created")
+      Verify the Deployment configuration and click **Create deployment**:
 
-12. In the Deployment Flow details page, click the **+ Create environment** button to create new environment and fill in the required fields:
+      ![Review step](../assets/use-cases/fastapi-scaffolding/create-deployment-review.png "Review step")
+
+
+11. Now click the `Open deployment` button to continue creating the environment:
+
+    ![Deployment created](../assets/use-cases/fastapi-scaffolding/deployment-created.png "Deployment created")
+
+12. In the Deployment details page, click the **+ Create environment** button to create new environment and fill in the required fields:
 
     ![Create environment](../assets/use-cases/fastapi-scaffolding/add-environment.png "Create environment")
 
+    - **Basic configuration**:
+
       - Cluster: `in-cluster`
       - Environment name: `dev`
+      - Deploy namespace: `krci-mypipe-dev`
       - Description: `Development Environment`
+
+      ![Basic configuration step](../assets/use-cases/fastapi-scaffolding/create-environment-basic-configuration.png "Basic configuration step")
+
+
       - Trigger type: `Manual`
       - Deploy Pipeline template: `deploy`
       - Clean Pipeline template: `clean`
-      - Quality gate type: `Manual`
 
-      ![Environment tab with parameters](../assets/use-cases/fastapi-scaffolding/create-stage.png "Environment tab with parameters")
+      ![Pipeline configuration step](../assets/use-cases/fastapi-scaffolding/create-environment-pipeline-configuration.png "Pipeline configuration step")
 
-      As soon as the values is defined, click the **Create** button.
+    - **Quality Gates**:
 
-13. Deploy the initial version of the application to the development environment:
+      Leave everything as is:
 
-    - Open deployment flow with the name `mypipe`.
-    - Select the `dev` environment from the **Environment** tab.
+      ![Quality gates step](../assets/use-cases/fastapi-scaffolding/create-environment-quality-gates.png "Quality gates step")
+
+    - **Review**:
+
+      Review the specified values and click the **Create environment** button:
+
+      ![Review step](../assets/use-cases/fastapi-scaffolding/create-environment-review.png "Review step")
+
+13. As soon as the Environment is created, click **Open environment**:
+
+    ![Open environment](../assets/use-cases/fastapi-scaffolding/open-environment.png "Open environment")
+
+14. Deploy the initial version of the application to the development environment:
+
+    - Select **Applications** tab.
     - Click the **Configure deploy** button.
     - In the **Select image tag** field select version `0.1.0-SNAPSHOT.1` and click the **Start deploy** button.
 
     ![CD Pipeline Deploy initial version](../assets/use-cases/fastapi-scaffolding/start-deploy.png "CD Pipeline deploy")
+
+15. Navigate to the **Pipelines** tab and click the pipeline name to view its details:
+
+    ![Deploy pipeline (clickable)](../assets/use-cases/fastapi-scaffolding/deploy-pipeline-clickable.png "Deploy pipeline (clickable)")
+
+16. View the Pipeline details until it finishes:
+
+    ![Deploy pipeline details](../assets/use-cases/fastapi-scaffolding/deploy-pipeline-details.png "Deploy pipeline details")
 
 ### Check the Application Status
 
@@ -198,7 +235,7 @@ To ensure the application is deployed successfully, follow the steps below:
 
 1. Ensure application status is `Healthy` and `Synced`, and the `Deployed version` points to `0.1.0-SNAPSHOT.1`:
 
-    ![CD Pipeline health status](../assets/use-cases/fastapi-scaffolding/deploy-is-healthy.png "Pipeline health status")
+    ![Deployment health status](../assets/use-cases/fastapi-scaffolding/deploy-is-healthy.png "Deployment health status")
 
 2. Check that the selected version of the container is deployed on the `dev` environment. `${KRCI_ENV}` - is the KRCI namespace name:
 
@@ -235,7 +272,7 @@ Within the [GitOps](../user-guide/gitops.md) repository, follow the naming conve
 
     To ensure our application recognizes the changes in the GitOps repository related to enabling the creation of the `Ingress` resource, we need to set the **Override values** checkbox to `true` before deploying.
 
-    - Go to the **Environments** section of the KubeRocketCI portal, select `mypipe` and choose **dev** stage.
+    - Go to the **Deployments** section of the KubeRocketCI portal, select `mypipe` and choose the **dev** Environment.
     - In the **Select image tag** section select the version `0.1.0-SNAPSHOT.1`.
     - Set the **Values override** checkbox to `true` and click the **Start deploy** button.
     - Check that the application is deployed and application status is `Healthy` and `Synced`.

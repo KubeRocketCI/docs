@@ -2,14 +2,17 @@ name: Test
 
 permissions:
   contents: read
+  pull-requests: write
 
 on:
   pull_request:
+    types: [opened, synchronize, reopened, closed]
     branches:
       - main
 
 jobs:
   check-commit-message:
+    if: github.event.action != 'closed'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -37,14 +40,18 @@ jobs:
           checkAllCommitMessages: 'true'
           accessToken: ${{ secrets.GITHUB_TOKEN }}
 
-  test:
-    name: Test
+  test-and-deploy-preview:
+    name: Test and Deploy PR Preview
+    if: github.event.action != 'closed'
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with:
+          submodules: true
+          lfs: false
           fetch-depth: 0
-      - uses: actions/setup-node@v4
+
+      - uses: actions/setup-node@v6
         with:
           node-version: 20
           cache: npm
@@ -60,3 +67,39 @@ jobs:
 
       - name: Run tsc
         run: npm run typecheck
+
+      - name: Copy Azure config
+        run: cp staticwebapp.config.json build/staticwebapp.config.json
+
+      - name: Install and build API 🔧
+        run: |
+          cd api
+          npm ci
+          npm run build
+          npm prune --production
+
+      - name: Deploy App
+        id: builddeploy
+        uses: Azure/static-web-apps-deploy@v1
+        with:
+          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_GENTLE_PEBBLE_0839AF61E }}
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          action: "upload"
+          skip_app_build: true
+          skip_api_build: true
+          app_location: "/build"
+          api_location: "/api"
+          skip_deploy_on_missing_secrets: true
+
+  close-preview:
+    name: Close PR Preview
+    if: github.event.action == 'closed'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Close Pull Request
+        id: closepullrequest
+        uses: Azure/static-web-apps-deploy@v1
+        with:
+          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_GENTLE_PEBBLE_0839AF61E }}
+          action: "close"
+          skip_deploy_on_missing_secrets: true

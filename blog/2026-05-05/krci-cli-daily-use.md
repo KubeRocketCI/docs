@@ -13,7 +13,7 @@ last_update:
 
 # krci CLI: Daily Platform Ops from Terminal to AI Agents | KubeRocketCI
 
-Most of my day-to-day platform work happens in a conversation. I sit in a Claude Code session - or any AI assistant with shell access - and ask plain-language questions about the state of our delivery cluster: *what's failing, what's drifting, what's vulnerable, what's stale.* The agent answers by calling the [krci CLI](https://github.com/KubeRocketCI/cli), the predictable, JSON-emitting client over the [KubeRocketCI Portal's tRPC API](/docs/developer-guide/architecture-scheme). I read the answer, decide what to do, and when a question turns into a routine I drop the underlying invocation into a script and let it run on cron or `/loop`. This post is a snapshot of that workflow with one running example - operator vulnerability status - and a tour of the other questions the same pattern answers.
+Most of my day-to-day platform work happens in a conversation. I sit in a Claude Code session - or any AI assistant with shell access - and ask plain-language questions about the state of our delivery cluster: *what's failing, what's drifting, what's vulnerable, what's stale.* The agent answers by calling the [krci CLI](https://github.com/KubeRocketCI/cli), the predictable, JSON-emitting client over the [KubeRocketCI Portal's tRPC API](/docs/developer-guide/reference-architecture). I read the answer, decide what to do, and when a question turns into a routine I drop the underlying invocation into a script and let it run on cron or `/loop`. This post is a snapshot of that workflow with one running example - operator vulnerability status - and a tour of the other questions the same pattern answers.
 
 <!--truncate-->
 
@@ -170,10 +170,9 @@ That's the entire loop: ask in language, get an answer the CLI can verify, sched
 
 ## Further Reading
 
-- [krci CLI user guide](/docs/user-guide/krci-cli) - command reference and authentication setup.
-- [SCA with Dependency-Track](/docs/user-guide/dependency-track) - how SBOMs reach the platform.
+- [krci CLI on GitHub](https://github.com/KubeRocketCI/cli) - command reference, authentication setup, and release binaries.
+- [SCA with Dependency-Track](/docs/operator-guide/devsecops/dependency-track) - how SBOMs reach the platform.
 - [Kubernetes-Native CI/CD with Tekton](/blog/kubernetes-native-cicd-tekton-kuberocketci) - the pipeline layer that produces those SBOMs.
-- [AI-assisted development on KubeRocketCI](/docs/use-cases/ai-coding-assistant) - the broader story of agents on the platform.
 - [CycloneDX SBOM](https://cyclonedx.org/), [Dependency-Track](https://dependencytrack.org/), and [Claude Code](https://docs.claude.com/claude-code) - the upstream tools used in this post.
 
 The krci CLI is open-source under Apache License 2.0. Source, issues, and release binaries live on [GitHub](https://github.com/KubeRocketCI/cli).

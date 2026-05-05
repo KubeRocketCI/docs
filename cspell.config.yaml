@@ -136,6 +136,7 @@ words:
   - Hotspots
   - hyperthreading
   - importcert
+  - inspectable
   - ingresscontroller
   - initdb
   - issueadmin
@@ -282,6 +283,7 @@ words:
   - tanzu
   - Taskrun
   - tekton
+  - tektoncd
   - tfenv
   - tflint
   - Tflint
@@ -298,6 +300,7 @@ words:
   - triggertemplates
   - triaging
   - trustcacerts
+  - VULNS
   - truststore
   - usedomainname
   - USEDOMAINNAME

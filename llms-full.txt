@@ -11158,11 +11158,11 @@ To add an Amazon EBS CSI add-on, please follow the steps below:
       --assume-role-policy-document file://"aws-ebs-csi-driver-trust-policy.json"
     ```
 
-4. Attach the required AWS Managed Policy `AmazonEBSCSIDriverPolicy` to the role with the following command:
+4. Attach the required AWS Managed Policy `AmazonEBSCSIDriverPolicyV2` to the role with the following command:
 
     ```bash
     aws iam attach-role-policy \
-      --policy-arn arn:aws:iam::aws:policy/service-role/AmazonEBSCSIDriverPolicy \
+      --policy-arn arn:aws:iam::aws:policy/AmazonEBSCSIDriverPolicyV2 \
       --role-name AmazonEKS_EBS_CSI_DriverRole
     ```
 

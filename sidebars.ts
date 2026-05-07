@@ -136,6 +136,7 @@ const sidebars: SidebarsConfig = {
             'operator-guide/auth/keycloak',
             'operator-guide/auth/ui-portal-oidc',
             'operator-guide/auth/configure-keycloak-oidc-eks',
+            'operator-guide/auth/krci-cli-client-for-keycloak',
             'operator-guide/auth/oauth2-proxy',
             'operator-guide/auth/namespace-management',
             {

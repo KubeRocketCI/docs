@@ -14,16 +14,16 @@ sidebar_label: "Secured Secrets Management for Application Deployment"
 </head>
 
 This use case demonstrates the secure management of sensitive data, such as passwords, API keys, and other credentials used by an application during development or production runtime.
-The process involves storing sensitive data in an external secret store within a `demo-vault` namespace. The confidential information is then transmitted from the `demo-vault` namespace to the namespace where the application is deployed. This ensures that the application can utilize these credentials to establish a secure connection to the database.
+The process involves storing sensitive data in an external secret store within a `krci-vault` namespace. The confidential information is then transmitted from the `krci-vault` namespace to the namespace where the application is deployed. This ensures that the application can utilize these credentials to establish a secure connection to the database.
 In this scenario, the KubeRocketCI platform leverages capabilities of the `External Secret Operator`. Developers can use another external secret store (Hashicorp Vault, AWS Secret Store, or another provider) to ensure that confidential information is securely stored and accessed only when necessary.
 
 To follow this approach, the next steps are involved:
 
 1. Configure the KubeRocketCI platform with the external secret store provider, [namespace will be used](../operator-guide/secrets-management/external-secrets-operator-integration.md#kubernetes-provider) for the below scenario.
 
-2. Create a separate namespace, with the name `demo-vault`, to store the sensitive data.
+2. Create a separate namespace, with the name `krci-vault`, to store the sensitive data.
 
-3. Keep sensitive data, such as passwords, API keys, and credentials, in the `demo-vault` namespace.
+3. Keep sensitive data, such as passwords, API keys, and credentials, in the `krci-vault` namespace.
 
 4. Establish a connection between the deployed namespace and the vault namespace to securely access the sensitive data when required.
 
@@ -35,11 +35,11 @@ This documentation is tailored for the Platform Team, Developers and Team Leads.
 
 ## Goals
 
-- Ensure secure handling of confidential information within the deployment environment.
+- Ensure secure handling of confidential information within the Deployment Environment.
 
 ## Preconditions
 
-- KubeRocketCI instance is [configured](../operator-guide/prerequisites.md) with [GitOps](../user-guide/gitops.md) repo (to be able to create components);
+- KubeRocketCI instance is [configured](../operator-guide/prerequisites.md) with [GitOps](../user-guide/gitops.md) repo (to be able to create Projects);
 - External Secrets Operator is [installed](../operator-guide/secrets-management/install-external-secrets-operator.md);
 - Developer has access to the KubeRocketCI instances using the Single-Sign-On approach;
 - Developer has merge permissions in the one of the [Git Server](../user-guide/git-server-overview.md) repository, e.g. GitHub;
@@ -53,55 +53,68 @@ To utilize External Secrets in the KubeRocketCI platform, follow the steps outli
 
 To begin, you will need an application first. Here are the steps to create it:
 
-1. Open the UI Portal. Use the **Sign In** option:
+1. Log in to the KubeRocketCI portal:
 
-    ![Logging Page](../assets/use-cases/general/login.png "Logging screen")
+    ![Logging Page](../assets/use-cases/general/login-1.png "Logging screen")
 
-2. In the top right corner, enter the **Account settings** and ensure that both `Default namespace` and `Allowed namespaces` are set:
+2. On the main menu, click the **Manage Namespaces** button:
 
-    ![Settings](../assets/use-cases/general/settings.png "Cluster settings")
+    ![Manage Namespaces](../assets/use-cases/general/settings-1.png "Manage Namespaces button")
 
-3. Create the new component with the `Application` type using the `Create from template` strategy. Select the **Components** section and press the **Create component** button:
+3. Ensure the `Namespace` value points to the namespace with the KubeRocketCI installation:
 
-    ![Cluster Overview](../assets/use-cases/general/components.png "Cluster components")
+    ![Default and allowed namespaces](../assets/use-cases/fastapi-scaffolding/default-allowed-namespace.png "Default and allowed namespaces")
 
-4. Choose the **Application** component type. Click the **Next** button:
+    :::note
+    Don't forget to press Enter to add the namespace to the allowed namespaces list.
+    :::
 
-    ![Component Type](../assets/use-cases/general/component-type.png "Component type")
+4. Create a new Project with the `Application` type using the `Create` strategy. Select the **Projects** section and click **+ Create project**:
 
-5. Opt for the **Create from template** strategy to scaffold our application from the template provided by the KubeRocketCI and press the **Create** button:
+    ![Projects overview](../assets/use-cases/general/components-1.png "Projects overview")
 
-    ![Component Strategy](../assets/use-cases/general/component-strategy.png "Step component strategy")
+5. Select the **Custom configuration** option, choose the `Application` Codebase type as we intend to deliver our application as a container and deploy it within the Kubernetes cluster. Select the **Create** strategy to scaffold our application from the template provided by the KubeRocketCI and click **Continue**:
 
-6. On the **Add component info** tab, define the following values and press the **Next** button:
+    ![Initial setup](../assets/use-cases/general/component-type-1.png "Initial setup")
+
+6. On the **Git & project info** tab, define the following values and click **Continue**:
 
     - Git server: `github`
-    - Repository name: `{github_account_name}/es-usage`
-    - Component name: `es-usage`
-    - Description: `external-secrets usage`
-    - Application code language: `Java`
+    - Owner: `github_account_name`
+    - Repository name: `es-usage`
+    - Default branch: `main`
+    - Project name: `es-usage`
+    - Description: `External-secrets usage`
+
+    ![Application Info](../assets/use-cases/external-secrets/create-application.png "Step application info")
+
+7. On the **Build config** tab, define the values and click **Continue**:
+
+    - Code language: `Java`
     - Language version/framework: `Java 17`
     - Build tool: `Maven`
+    - Codebase versioning type: `semver`
+    - Start version from: `0.1.0`
+    - Suffix: `SNAPSHOT`
+    - Deployment options: `helm-chart`
 
-    ![Application Info](../assets/use-cases/external-secrets/application-info.png "Step application info")
 
-7. On the **Specify advanced settings** tab, define the below values and push the **Create** button:
+    ![Advanced Settings](../assets/use-cases/external-secrets/create-application-advance.png "Step advanced settings")
 
-    - Default branch: `main`
-    - Codebase versioning type: `default`
+8. On the **Review** tab, verify the project configuration and click **Create project**:
 
-    ![Advanced Settings](../assets/use-cases/external-secrets/advanced-settings.png "Step advanced settings")
+    ![Review and create](../assets/use-cases/external-secrets/review-and-create.png "Review and create")
 
-8. Check the application status. It should be green:
+9. Check the application status. It should be green:
 
     ![Application Status](../assets/use-cases/external-secrets/application-status.png "Application status")
 
-### Create CD Pipeline
+### Create Deployment
 
 This section outlines the process of establishing a CD pipeline within UI Portal. There are two fundamental steps in this procedure:
 
-- Create a `CD pipeline`;
-- Configure the CD pipeline `stage`.
+- Create a `Deployment`;
+- Within the `Deployment`, configure the `Environment`.
 
 :::note
   Ensure [GitOps repository](../user-guide/gitops.md) is connected to the KubeRocketCI instance.
@@ -109,60 +122,97 @@ This section outlines the process of establishing a CD pipeline within UI Portal
 
 Follow the instructions below to complete the process successfully:
 
-1. In the UI Portal, navigate to **Environments** tab and push the **Create environment** button to create pipeline:
+1. In the KubeRocketCI portal, navigate to **Deployments** tab and push the **Create deployment** button to create pipeline:
 
-    ![CD-Pipeline Overview](../assets/use-cases/general/create-cd-pipeline.png "CD-Pipeline tab")
+    ![Deployment overview](../assets/use-cases/general/create-cd-pipeline-1.png "Deployment overview")
 
-2. In the **Create environment** dialog, define the below values:
+2. In the **Create Deployment** dialog, define the below values:
 
-    - **Enter name**:
+    - **Applications**:
+
+      - Applications: Add `es-usage` application
+      - Branch: Select the `main` branch
+
+        ![Applications tab](../assets/use-cases/external-secrets/create-deployment-applications.png "Applications tab")
+
+    - **Pipeline configuration**: 
 
       - Pipeline name: `deploy`
+      - Description: `Deployment for application that uses External Secrets Operator`
+      - Deployment type: Select `Container`
+      - Promote applications: Leave unchecked
 
-        ![CD Pipeline name](../assets/use-cases/external-secrets/create-cd-pipeline-window.png "Pipeline tab with parameters")
+      ![Pipeline configurations tab](../assets/use-cases/external-secrets/create-deployment-pipeline-configuration.png "Pipeline configurations tab")
 
-    - **Add components**. Add `es-usage` application, select `main` branch, and leave `Promote in pipeline` unchecked. Click the **Create** button:
+    - **Review**: 
 
-      ![CD Pipeline Add Application](../assets/use-cases/external-secrets/create-cd-pipeline-window-2.png "Applications tab with parameters")
+      Verify the Deployment configuration and click **Create deployment**:
+    
+      ![Pipeline configurations tab](../assets/use-cases/external-secrets/create-deployment-review.png "Pipeline configurations tab")
 
-3. Navigate to the created `deploy` CD pipeline and click the **Create Stage** button.
+3. Click the `Open deployment` button to continue creating the environment:
 
-    ![Create Stage Button](../assets/use-cases/external-secrets/create-stage-button.png "Create stage button")
+    ![Deployment created](../assets/use-cases/fastapi-scaffolding/deployment-created.png "Deployment created")
 
-4. In the **Create stage** dialog add the `sit` stage with the values below:
+4. Click the **+ Create environment** button:
 
-    - **Configure stage**:
+    ![Create Stage Button](../assets/use-cases/external-secrets/create-environment-button.png "Create stage button")
 
-      - Cluster: `in cluster`
-      - Stage name: `sit`
+5. In the **Create new environment** dialog add the **sit** environment with the values below:
+
+    - **Basic configuration**:
+
+      - Cluster: `in-cluster`
+      - Environment name: `sit`
+      - Deploy namespace: `krci-deploy-sit`
       - Description: `System integration testing`
+
+      ![Pipeline tab](../assets/use-cases/external-secrets/create-environment-basic-configuration.png "Pipeline tab with parameters")
+
+    - **Pipeline configuration**:
+
       - Trigger type: `Manual`
-      - Pipeline template: `deploy`
+      - Deploy Pipeline template: `deploy`
+      - Clean Pipeline template: `clean`
 
-      ![Pipeline tab](../assets/use-cases/external-secrets/create-cd-pipeline-stage-window.png "Pipeline tab with parameters")
+      ![Pipeline tab](../assets/use-cases/external-secrets/create-environment-pipeline-configuration.png "Pipeline tab with parameters")
 
-    - **Add quality gates**:
+    - **Quality Gates**:
 
-      - Quality gate type: `Manual`
-      - Step name: `approve`
+      Leave everything as is:
+    
+      ![Quality gates step](../assets/use-cases/external-secrets/create-environment-quality-gates.png "Quality gates step")
 
-      ![Pipeline tab](../assets/use-cases/external-secrets/create-cd-pipeline-stage-window-2.png "Pipeline tab with parameters")
+    - **Review**:
+
+      Review the specified values and click the **Create environment** button:
+
+      ![Review step](../assets/use-cases/external-secrets/create-environment-review.png "Review step")
+
+6. As soon as the Environment is created, click **Open environment**:
+
+    ![Open environment](../assets/use-cases/external-secrets/open-environment.png "Open environment")
 
 ### Configure RBAC for External Secret Store
 
 :::note
-  In this scenario, three namespaces are used:
-    - `demo`, the namespace where KubeRocketCI is deployed,
-    - `demo-vault`, the vault namespace, where sensitive data is stored, and
-    - `demo-<cd_pipeline_name>-<stage_name>`, the namespace used for deploying the application (`demo-deploy-sit` for this scenario).
+
+  Three namespaces are used:
+
+    - `krci`, the namespace where KubeRocketCI is deployed;
+    - `krci-vault`, the vault namespace where sensitive data is stored;
+    - `krci-deploy-sit`, the **Deploy namespace** for the application (same value as in **Create environment** → **Basic configuration** → **Deploy namespace**).
+
+  The application deploy namespace is not arbitrary: the UI suggests a name derived from the KubeRocketCI installation namespace, environment name, and stage name (see [Create Environment](../user-guide/add-cd-pipeline.md#create-environment)). In this guide the platform namespace is **`krci`**, the Deployment is named **`deploy`**, the Environment name is **`sit`**, and the deploy target is **`krci-deploy-sit`** — use the same string everywhere below (RoleBinding subject namespace, Helm templates, `kubectl -n`, and allowed namespaces in the portal).
+
 :::
 
 To ensure the proper functioning of the system, it is crucial to create the following resources:
 
-1. Create namespace `demo-vault` to store secrets:
+1. Create namespace `krci-vault` to store secrets:
 
     ```bash
-    kubectl create namespace demo-vault
+    kubectl create namespace krci-vault
     ```
 
 2. Create Secret:
@@ -172,20 +222,20 @@ To ensure the proper functioning of the system, it is crucial to create the foll
     kind: Secret
     metadata:
       name: mongo
-      namespace: demo-vault
+      namespace: krci-vault
     stringData:
       password: pass
       username: user
     type: Opaque
     ```
 
-3. Create Role to access the secret:
+3. Create Role to access the Secret:
 
     ```yaml
     apiVersion: rbac.authorization.k8s.io/v1
     kind: Role
     metadata:
-      namespace: demo-vault
+      namespace: krci-vault
       name: external-secret-store
     rules:
     - apiGroups: [""]
@@ -210,11 +260,11 @@ To ensure the proper functioning of the system, it is crucial to create the foll
     kind: RoleBinding
     metadata:
       name: eso-from-krci
-      namespace: demo-vault
+      namespace: krci-vault
     subjects:
       - kind: ServiceAccount
         name: secret-manager
-        namespace: demo-deploy-sit
+        namespace: krci-deploy-sit
     roleRef:
       apiGroup: rbac.authorization.k8s.io
       kind: Role
@@ -229,7 +279,7 @@ Now that RBAC is configured properly, it is time to add external secrets templat
 
     ![Github Repository](../assets/use-cases/external-secrets/github_repo.png "Github repository")
 
-2. Create a commit in the `es-usage` repository and add the following configuration files to the helm chart:
+2. Create a commit in the `es-usage` repository and add the following configuration files to the Helm chart:
 
     1. `deploy-templates/templates/sa.yaml`:
 
@@ -238,7 +288,7 @@ Now that RBAC is configured properly, it is time to add external secrets templat
         kind: ServiceAccount
         metadata:
           name: secret-manager
-          namespace: demo-deploy-sit
+          namespace: krci-deploy-sit
         ```
 
     2. `deploy-templates/templates/secret-store.yaml`:
@@ -247,12 +297,12 @@ Now that RBAC is configured properly, it is time to add external secrets templat
         apiVersion: external-secrets.io/v1
         kind: SecretStore
         metadata:
-          name: demo
-          namespace: demo-deploy-sit
+          name: krci-vault-store
+          namespace: krci-deploy-sit
         spec:
           provider:
             kubernetes:
-              remoteNamespace: demo-vault
+              remoteNamespace: krci-vault
               auth:
                 serviceAccount:
                   name: secret-manager
@@ -270,12 +320,12 @@ Now that RBAC is configured properly, it is time to add external secrets templat
         kind: ExternalSecret
         metadata:
           name: mongo                            # target secret name
-          namespace: demo-deploy-sit             # target namespace
+          namespace: krci-deploy-sit         # target namespace
         spec:
           refreshInterval: 1h
           secretStoreRef:
             kind: SecretStore
-            name: demo
+            name: krci-vault-store
           data:
           - secretKey: username                   # target value property
             remoteRef:
@@ -309,19 +359,19 @@ Now that RBAC is configured properly, it is time to add external secrets templat
 
 Deploy the application by following the steps below:
 
-1. Build Container from the latest branch commit. To build the initial version of the application's `main` branch, go to the **Components** -> **es-usage** -> **Branches** -> **main** and press the **Trigger build pipeline run** button.
+1. Build Container from the latest branch commit. To build the initial version of the application's `main` branch, go to the **Projects** -> **es-usage** -> **Branches** -> **main** and press the **Trigger build pipeline run** button:
 
-    ![Build Pipeline](../assets/use-cases/external-secrets/component_build.png "Build pipeline")
+    ![Build Pipeline](../assets/use-cases/external-secrets/project_build.png "Build pipeline")
 
-2. Build pipeline for the `es-usage` application starts.
+2. Build pipeline for the `es-usage` application starts:
 
     ![Build Status](../assets/use-cases/external-secrets/build_status.png "Build status")
 
-3. Once the build pipeline has successfully completed, navigate to the **Environments** tab and select the `deploy` pipeline. Choose the **SIT** stage and click on the **Configure deploy** button:
+3. Once the build pipeline has successfully completed, navigate to the **Deployments** tab and select the `deploy` pipeline: Choose the **sit** environment and click on the **Configure deploy** button:
 
     ![Configure Deploy](../assets/use-cases/external-secrets/configure_deploy.png "Configure deploy")
 
-4. In the `Image stream version`, select latest version and push the **Start deploy** button.
+4. In the `Image stream version`, select latest version and push the **Start deploy** button:
 
     ![Start Deploy](../assets/use-cases/external-secrets/start_deploy.png "Start deploy")
 
@@ -331,31 +381,74 @@ Deploy the application by following the steps below:
 
 ### Check Application Status
 
-To ensure the application is deployed successfully, do the following:
+To ensure the application is deployed successfully, use `kubectl` with a context that can read the deploy namespace (replace `krci-deploy-sit` if your **Deploy namespace** differs).
 
-1. Check that the resources are deployed:
+1. Check that External Secrets resources are reconciled:
 
     ```bash
-    kubectl get secretstore -n demo-deploy-sit
-    NAME   AGE     STATUS   CAPABILITIES   READY
-    demo   4m38s   Valid    ReadWrite      True
+    kubectl get secretstore -n krci-deploy-sit
+    NAME               AGE     STATUS   CAPABILITIES   READY
+    krci-vault-store   4m38s   Valid    ReadWrite      True
     ```
 
     ```bash
-    kubectl get externalsecret -n demo-deploy-sit
-    NAME    STORE   REFRESH INTERVAL   STATUS         READY
-    mongo   demo    1h                 SecretSynced   True
+    kubectl get externalsecret -n krci-deploy-sit
+    NAME    STORE               REFRESH INTERVAL   STATUS         READY
+    mongo   krci-vault-store    1h                 SecretSynced   True
     ```
 
-2. In the top right corner, enter the `Account settings` and add `demo-deploy-sit` to the `Allowed namespaces`.
+    If `READY` is not `True`, inspect events:
 
-3. Navigate to the **Kubernetes** tab in the bottom left corner, then go to **Configuration** -> **Secrets** and ensure that the `mongo` secret has been successfully created:
+    ```bash
+    kubectl describe externalsecret mongo -n krci-deploy-sit
+    kubectl describe secretstore krci-vault-store -n krci-deploy-sit
+    ```
+
+2. Confirm the Kubernetes `Secret` named `mongo` exists in the deploy namespace (created by ESO from the vault):
+
+    ```bash
+    kubectl get secret mongo -n krci-deploy-sit
+    ```
+
+    Confirm keys exist (values stay hidden in this output):
+
+    ```bash
+    kubectl describe secret mongo -n krci-deploy-sit
+    ```
+
+    Under **Data**, expect keys `username` and `password`.
 
     ![Secrets](../assets/use-cases/external-secrets/secret_list.png "Secrets")
 
-4. Navigate to **Workloads** -> **Pods** and access the pod for the `es-usage` application, e.g. `es-usage-7fdb577994-pwjps`. Ensure that the environment variables for `mongo` have been successfully applied:
+3. See which **Secrets** the workload is wired to (desired state from the `Deployment`; values are never printed here):
 
-    ![Pod information](../assets/use-cases/external-secrets/env_vars.png "Pod information")
+    `kubectl get deployment` only shows high-level fields (replicas, image, etc.), not secret references. Use **`describe`** or **`get -o yaml`** on the `Deployment` to inspect the Pod template.
+
+    ```bash
+    kubectl get deployment -n krci-deploy-sit -l app.kubernetes.io/name=es-usage
+    kubectl describe deployment -n krci-deploy-sit -l app.kubernetes.io/name=es-usage
+    ```
+
+    ```text
+    Environment:
+      MONGO_USERNAME:  <set to the key 'username' in secret 'mongo'>  Optional: false
+      MONGO_PASSWORD:  <set to the key 'password' in secret 'mongo'>  Optional: false
+    ```
+
+    That output means the Deployment injects those keys from the `mongo` Secret into every Pod it creates.
+
+    Optional — compact list of env vars that use `secretKeyRef` (requires a single Deployment in the selector result):
+
+    ```bash
+    kubectl get deployment -n krci-deploy-sit -l app.kubernetes.io/name=es-usage \
+      -o jsonpath='{range .items[0].spec.template.spec.containers[0].env[*]}{.name}{"\t"}{.valueFrom.secretKeyRef.name}{"\t"}{.valueFrom.secretKeyRef.key}{"\n"}{end}'
+    ```
+
+    Each line is: `VARIABLE_NAME`, Secret name, Secret key. Empty lines can appear for env entries that are not backed by a Secret (ignore them).
+
+:::note
+The steps above confirm External Secrets, the synced `mongo` Secret, and the **desired** Pod template on the `Deployment`. If the application misbehaves or Pods are not healthy anyway, inspect **runtime** state with `kubectl describe pod` (and Pod events) in the deploy namespace, and review the **Argo CD Application** resource that owns this release (sync status, rendered manifests, and events in the Argo CD UI or via `kubectl get application -n <argocd-namespace>` / `kubectl describe application` as appropriate for your installation).
+:::
 
 ## Related Articles
 

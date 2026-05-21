@@ -14,9 +14,9 @@ sidebar_label: "Autotest as a Quality Gate"
   <link rel="canonical" href="https://docs.kuberocketci.io/docs/use-cases/autotest-as-quality-gate" />
 </head>
 
-This use case outlines the process of integrating an autotest as a quality gate into a newly created CD pipeline. The CD pipeline includes a selected build version of an application that needs to be promoted. The purpose of incorporating autotests is to ensure that the application meets predefined criteria for stability and functionality, guaranteeing that only reliable versions are promoted. By implementing this feature, users can perform comprehensive testing, thereby enhancing the overall stability of the application.
+This use case outlines the process of integrating an autotest as a quality gate into a newly created Deployment. The Deployment includes a selected build version of an application that needs to be promoted. The purpose of incorporating autotests is to ensure that the application meets predefined criteria for stability and functionality, guaranteeing that only reliable versions are promoted. By implementing this feature, users can perform comprehensive testing, thereby enhancing the overall stability of the application.
 
-In the KubeRocketCI platform, users can seamlessly add autotests as quality gates to their CD pipelines, enabling them to validate the application's stability and functionality before promoting it to the next stage. This ensures that only reliable versions of the application are deployed, improving the overall quality and reliability of the software.
+In KubeRocketCI, users can seamlessly add autotests as quality gates to their Deployment, enabling them to validate the application's stability and functionality before promoting it to the next stage. This ensures that only reliable versions of the application are deployed, improving the overall quality and reliability of the software.
 
 <div style={{ display: 'flex', justifyContent: 'center' }}>
 <iframe width="560" height="315" src="https://www.youtube.com/embed/ytaO-ZaQb0c" title="KubeRocketCI: Autotests Overview" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen"></iframe>
@@ -28,8 +28,8 @@ This documentation is tailored for the Developers and Quality Assurance speciali
 
 ## Goals
 
-- Create several applications and autotests quickly.
-- Create a pipeline for Continuous Deployment.
+- Create several applications and autotests.
+- Create a Deployment.
 - Perform testing.
 - Update delivery by deploying the new version.
 
@@ -43,100 +43,117 @@ This documentation is tailored for the Developers and Quality Assurance speciali
 
 To implement autotests as Quality Gates, follow the steps below:
 
-1. Ensure the namespace is specified in the cluster settings. Click the **Settings** icon in the top right corner and select **Cluster settings**:
+1. Log in to the KubeRocketCI portal:
 
-    ![Cluster settings](../assets/use-cases/autotest-as-quality-gate/kuberocketci_cluster_settings.png "Cluster settings")
+    ![Logging Page](../assets/use-cases/general/login-1.png "Logging screen")
 
-2. Enter the name of the default namespace, then enter your default namespace in the **Allowed namespaces** field and click the **+ ADD** button. You can also add other namespaces to the **Allowed namespaces**:
+2. On the main menu, click the **Manage Namespaces** button:
 
-    ![Specify namespace](../assets/use-cases/autotest-as-quality-gate/kuberocketci_set_namespace.png "Specify namespace")
+    ![Manage Namespaces](../assets/use-cases/general/settings-1.png "Manage Namespaces button")
 
-3. Create several applications using the **Create** strategy. Navigate to the **Components** tab and click the **+ CREATE COMPONENT** button:
+3. Ensure the `Namespace` value points to the namespace with the KubeRocketCI installation:
 
-    ![Add application](../assets/use-cases/autotest-as-quality-gate/add_application.png "Add application")
-
-4. Select **Application** and click **Next**:
-
-    ![Application create](../assets/use-cases/autotest-as-quality-gate/application_create.png "Application create")
-
-5. Select **Create from template** and click **Create**:
-
-    ![Create new component menu](../assets/use-cases/autotest-as-quality-gate/create_new_component.png "Create new component menu")
+    ![Default and allowed namespaces](../assets/use-cases/fastapi-scaffolding/default-allowed-namespace.png "Default and allowed namespaces")
 
     :::note
-      Please refer to the [Add Application](../user-guide/add-application.md) section for details.
+    Don't forget to press Enter to add the namespace to the allowed namespaces list.
     :::
 
-6. On the **Codebase info** tab, define the following values and press the **Next** button:
+4. Create a new Project with the `Application` type using the `Create` strategy. Select the **Projects** section and click **+ Create project**:
+
+    ![Components Overview](../assets/use-cases/general/components-1.png "Components tab")
+
+5. Select the **Custom configuration** option, choose the `Application` Codebase type as we intend to deliver our application as a container and deploy it within the Kubernetes cluster. Select the **Create** strategy to scaffold our application from the template provided by the KubeRocketCI and click **Continue**:
+
+    ![Initial setup](../assets/use-cases/general/component-type-1.png "Initial setup")
+
+6. On the **Git & project info** tab, define the following values and click **Continue**:
 
     - Git server: `github`
-    - Repository name: `<github_account_name>/js-application`
-    - Component name: `js-application`
-    - Description: `js application`
+    - Owner: `github_account_name`
+    - Repository name: `js-application`
+    - Default branch: `main`
+    - Project name: `js-application`
+    - Description: `JavaScript application`
+    - Private: `enabled`
+
+    ![Codebase info tab](../assets/use-cases/autotest-as-quality-gate/git-and-project-info.png "Codebase info tab")
+
+7. On the **Build config** tab, define the values and click **Continue**:
+
     - Application code language: `JavaScript`
     - Language version/Provider: `Vue`
     - Build tool: `NPM`
-
-    ![Codebase info tab](../assets/use-cases/autotest-as-quality-gate/codebase_info_menu.png "Codebase info tab")
-
-7. On the **Advanced settings** tab, define the below values and push the **Create** button:
-
-    - Default branch: `main`
+    - Deployment options: `helm-chart`
     - Codebase versioning type: `semver`
+    - Start version from: `0.1.0` 
+    - Suffix: `SNAPSHOT`
 
-    ![Advanced settings tab](../assets/use-cases/autotest-as-quality-gate/advanced_settings.png "Advanced settings tab")
+    ![Advanced settings tab](../assets/use-cases/autotest-as-quality-gate/build-config.png "Advanced settings tab")
 
-8. Repeat the procedure twice to create the **go-application** and **python-application** applications. These applications will have the following parameters:
+8. On the **Review** tab, verify the project configuration and click **Create project**:
+
+    ![Review and create](../assets/use-cases/autotest-as-quality-gate/review-and-create.png "Review and create")
+
+9. On the congratulations menu, click **View all projects**:
+
+    ![View all projects](../assets/use-cases/autotest-as-quality-gate/ready-component.png "View all projects")
+
+10. Repeat the procedure twice to create the **go-application** and **python-application** applications. These applications will have the following parameters:
 
     go-application:
     - Git server: `github`
-    - Repository name: `<github_account_name>/go-application`
-    - Component name: `go-application`
-    - Description: `go application`
+    - Owner: `github_account_name`
+    - Repository name: `go-application`
+    - Project name: `go-application`
+    - Description: `Go application`
     - Application code language: `Go`
     - Language version/Provider: `Gin`
     - Build tool: `Go`
     - Default branch: `main`
     - Codebase versioning type: `semver`
+    - Start version from: `0.1.0` 
+    - Suffix: `SNAPSHOT`
 
     python-application:
     - Git server: `github`
-    - Repository name: `<github_account_name>/python-application`
-    - Component name: `python-application`
-    - Description: `python application`
+    - Owner: `github_account_name`
+    - Repository name: `python-application`
+    - Project name: `python-application`
+    - Description: `Python application`
     - Application code language: `Python`
     - Language version/Provider: `FastAPI`
     - Build tool: `Python`
     - Default branch: `main`
     - Codebase versioning type: `semver`
+    - Start version from: `0.1.0` 
+    - Suffix: `SNAPSHOT`
 
-9. In the **Components** tab, click one of the applications name to enter the application menu:
+11. In the **Projects** tab, click one of the applications name to enter the application menu:
 
-    ![Components list](../assets/use-cases/autotest-as-quality-gate/3-apps.png "Components list")
+    ![Projects list](../assets/use-cases/autotest-as-quality-gate/3-apps.png "Projects list")
 
-10. Click the **Trigger build pipeline run** button:
+12. Select the **Branches** tab and click the **Build** button:
 
     ![Build Application](../assets/use-cases/autotest-as-quality-gate/build_application.png "Build Application")
 
-11. Click the application run name to watch the building logs:
+13. Click the PipelineRun name to watch the building logs:
 
     ![Application building](../assets/use-cases/autotest-as-quality-gate/app_built.png "Application building")
 
-12. On the pipeline details page, you can find information about each step, pipeline status, view logs.
+14. On the pipeline details page, you can find information about each step, pipeline status, and view logs:
 
     ![KubeRocketCI pipeline run](../assets/use-cases/autotest-as-quality-gate/kuberocketci_pipeline.png "KubeRocketCI pipeline run")
 
-13. Wait till the build is successful:
+15. Wait till the build is successful.
 
-    ![Successful build](../assets/use-cases/autotest-as-quality-gate/wait_application.png "Successful build")
-
-14. Repeat steps 9-13 for the rest of the applications.
+16. Repeat steps 11-15 for the rest of the applications.
 
 ### Create Autotests
 
 The steps below instruct how to create autotests in KubeRocketCI:
 
-1. Create a couple of autotests using the **Clone** strategy. Navigate to the **Components** tab, click on the **+CREATE COMPONENT** button. Select **Autotest** and click **Next**:
+1. Create a couple of autotests using the **Clone** strategy. Navigate to the **Projects** tab, click on the **+ Create project** button. Select **Autotest**, **Clone** and click **Next**:
 
     ![Add autotest](../assets/use-cases/autotest-as-quality-gate/add_autotest.png "Add autotest")
 
@@ -144,44 +161,49 @@ The steps below instruct how to create autotests in KubeRocketCI:
       Please refer to the [Add Autotest](../user-guide/add-autotest.md) section for details.
     :::
 
-2. Select **Clone project** and click **Create**:
+2. On the **Git & project info** tab, define the following values and click **Continue**:
 
-    ![Add autotest](../assets/use-cases/autotest-as-quality-gate/clone_project.png "Add autotest")
-
-3. On the **Codebase info** tab, define the following values and press the **Proceed** button:
-
-    - Repository URL: `https://github.com/SergK/autotests.git`
+    - Repository URL: `https://github.com/Oleksandr123234/autotests.git`
     - Git server: `github`
-    - Repository name: `<github_account_name>/demo-autotest-gradle`
-    - Component name: `demo-autotest-gradle`
-    - Description: `demo-autotest-gradle`
+    - Owner: `github_account_name`
+    - Repository name: `demo-autotest-gradle`
+    - Default branch: `main`
+    - Project name: `demo-autotest-gradle`
+    - Description: `Gradle demo autotests`
+
+    ![Git & project info info tab for autotests](../assets/use-cases/autotest-as-quality-gate/demo_autotest_gradle.png "Git & project info info tab for autotests")
+
+3. On the **Build config** tab, define the values and click **Continue**:
+
     - Autotest code language: `Java`
     - Language version/framework: `Java25`
     - Build tool: `Gradle`
     - Autotest report framework: `Allure`
-
-    ![Codebase info tab for autotests](../assets/use-cases/autotest-as-quality-gate/demo_autotest_gradle.png "Codebase info tab for autotests")
-
-4. On the **Advanced settings** tab define the below values and push the **Create** button:
-
-    - Default branch: `main`
     - Codebase versioning type: `semver`
+    - Start version from: `0.1.0` 
+    - Suffix: `SNAPSHOT`
 
-    ![Advanced settings tab for autotests](../assets/use-cases/autotest-as-quality-gate/autotest_advanced_settings.png "Advanced settings tab for autotests")
+    ![Build config tab](../assets/use-cases/autotest-as-quality-gate/autotest_advanced_settings.png "Build config tab")
+
+4. On the **Review** tab, verify the autotest configuration and click **Create project**:
+
+    ![Review and create](../assets/use-cases/autotest-as-quality-gate/autotest_review_tab.png "Review and create")
 
 5. Repeat the steps 1-4 to create one more autotest with the parameters below:
 
-    - Repository URL: `https://github.com/Rolika4/autotests.git`
+    - Repository URL: `https://github.com/Oleksandr123234/autotests.git`
     - Git server: `github`
-    - Repository name: `<github_account_name>/demo-autotest-maven`
-    - Component name: `demo-autotest-maven`
-    - Description: `demo-autotest-maven`
+    - Repository name: `demo-autotest-maven`
+    - Project name: `demo-autotest-maven`
+    - Description: `Maven demo autotest`
     - Autotest code language: `Java`
     - Language version/framework: `Java25`
     - Build tool: `Maven`
     - Autotest report framework: `Allure`
     - Default branch: `main`
     - Codebase versioning type: `semver`
+    - Start version from: `0.1.0` 
+    - Suffix: `SNAPSHOT`
 
 ### Create CD Pipeline
 
@@ -191,49 +213,60 @@ Now that applications and autotests are created, create pipeline for them by fol
   To utilize and manage various environments through the KubeRocketCI platform, the initial step is to onboard a new GitOps repository.
 :::
 
-1. Navigate to the **Environments** tab and click the corresponding button to create new GitOps repository:
+1. Navigate to the **Deployments** section and click the corresponding button to create new GitOps repository:
 
-    ![CD pipelines tab](../assets/use-cases/autotest-as-quality-gate/create_cd_pipeline.png "CD pipelines tab")
+    ![Deployments tab](../assets/use-cases/autotest-as-quality-gate/create_cd_pipeline.png "Deployments tab")
 
-2. Click to the **ADD GITOPS REPOSITORY**:
+2. Click to the **+ Add GitOps repository**:
 
     ![Onboard gitops repository](../assets/use-cases/autotest-as-quality-gate/onboard_gitops.png "Onboard GitOps repository")
 
-3. Select the `github` server, enter GitHub account name and click **SAVE**:
+3. Select the `github` server, enter GitHub account name and click **Save**:
 
     ![Configure gitops repository](../assets/use-cases/autotest-as-quality-gate/add_gitops_repository.png "Configure gitops repository")
 
-4. Return to the **Environments** tab and click **CREATE ENVIRONMENT** button:
+4. Return to the **Deployments** tab and click **+ Create deployment** button:
 
-    ![Create new environment](../assets/use-cases/autotest-as-quality-gate/create_new_environment.png "Create new environment")
+    ![Create new environment](../assets/use-cases/autotest-as-quality-gate/create_new_deployment.png "Create new environment")
 
-5. Enter `demo-pipeline` and click the **NEXT** button:
+5.  On the **Applications** tab, add all the three applications, specify the **main** branch for all for them and click the **Continue** button:
 
-    ![Pipeline tab](../assets/use-cases/autotest-as-quality-gate/pipeline_tab.png "Pipeline tab")
+    ![Pipeline tab](../assets/use-cases/autotest-as-quality-gate/applications-tab.png "Pipeline tab")
 
-6. On the **Applications** tab, add all the three applications, specify the **main** branch for all for them and check **Promote in pipeline**:
+6. Enter `demo-deploy` name, specify description, enable the "Promote applications" option and click **Continue**:
 
-    ![Applications tab](../assets/use-cases/autotest-as-quality-gate/applications_tab.png "Applications tab")
+    ![Applications tab](../assets/use-cases/autotest-as-quality-gate/pipeline-configuration-tab.png "Applications tab")
 
-7. Once all the steps have been completed, you may begin creating stages.
+7. Review the Deployment configuration and click **Continue**:
 
-    ![Environment created](../assets/use-cases/autotest-as-quality-gate/environment_created.png "Environment created")
+    ![Deployment review](../assets/use-cases/autotest-as-quality-gate/deployment-review-tab.png "Deployment review")
 
-8. On the **Stages** menu click to the **CREATE STAGE** button:
+7. Once all the steps have been completed, you may begin creating Environments:
 
-    ![Add new stage](../assets/use-cases/autotest-as-quality-gate/add_new_stage.png "Add new stage")
+    ![Deployment created](../assets/use-cases/autotest-as-quality-gate/deployment_created.png "Deployment created")
 
-9. In the **Create stage** menu, define the following values and click **NEXT**:
+8. On the Deployment details page, click the **+ Create environment** button:
 
-    - Cluster: `In cluster`
+    ![Add new Environment](../assets/use-cases/autotest-as-quality-gate/add-new-env.png "Add new Environment")
+
+9. On the **Basic configuration** step, define the following values and click **Continue**:
+
+    - Cluster: `in-cluster`
     - Stage name: `dev`
-    - Description: `dev`
+    - Description: `Development Environment`
+
+    ![Configure stage](../assets/use-cases/autotest-as-quality-gate/configure-environment.png "Configure stage")
+
+
+10. On the **Pipeline configuration** step, define the following values and click **Continue**:
+
     - Trigger type: `Manual`
-    - Pipeline template: `deploy-with-autotests`
+    - Deploy pipeline template: `deploy-with-autotests`
+    - Clean pipeline template: `clean`
 
-    ![Configure stage](../assets/use-cases/autotest-as-quality-gate/configure_stage.png "Configure stage")
+    ![Pipeline configuration tab](../assets/use-cases/autotest-as-quality-gate/pipeline-configuration.png "Pipeline configuration tab")
 
-10. In the **Add quality gates** menu click **+** button. Specify the following parameters and click **Create**:
+11. In the **Quality gates** menu click **+** button. Specify the following parameters and click **Continue**:
 
     First Quality Gate:
 
@@ -263,7 +296,6 @@ Now that applications and autotests are created, create pipeline for them by fol
     - Autotest: `demo-autotest-maven`
     - Autotest branch: `main`
 
-
     ![Quality gates tab](../assets/use-cases/autotest-as-quality-gate/quality_gates_tab.png "Quality gates tab")
 
     :::note
@@ -272,40 +304,61 @@ Now that applications and autotests are created, create pipeline for them by fol
          ```yaml title="demo-autotest-gradle/run.json"
             {
                 "comment": "step-name: <deployment Flow>-<environment>-<autotest step name>",
-                "demo-pipeline-dev-autotest-step-1": "gradle -q hello",
-                "demo-pipeline-dev-autotest-step-2": "gradle -q hello",
-                "demo-pipeline-dev-autotest-step-3": "mvn antrun:run@hello -q",
-                "demo-pipeline-dev-autotest-step-4": "mvn antrun:run@hello -q"
+                "demo-deploy-dev-autotest-step-1": "gradle -q hello",
+                "demo-deploy-dev-autotest-step-2": "gradle -q hello",
+                "demo-deploy-dev-autotest-step-3": "mvn antrun:run@hello -q",
+                "demo-deploy-dev-autotest-step-4": "mvn antrun:run@hello -q"
             }
         ```
     :::
 
-11. Repeat the steps 8-10 to create one more stage with the parameters below:
+12. Review the changes and click **Create environment**:
 
-    - Cluster: `In cluster`
+    ![Review environment](../assets/use-cases/autotest-as-quality-gate/review-environment.png "Review environment")
+
+13. Repeat the steps 8-10 to create one more stage with the parameters below:
+
+    - Cluster: `in-cluster`
     - Stage name: `sit`
-    - Description: `sit`
+    - Description: `System integration testing`
     - Trigger type: `manual`
-    - Pipeline template: `deploy`
+    - Deploy pipeline template: `deploy`
+    - Clean pipeline template: `clean`
     - Quality gate type: `Manual`
 
 ### Run Autotests
 
-After the CD pipeline is created, deploy applications and run autotests by following the steps below:
+After the Deployment is created, deploy applications and run autotests by following the steps below:
 
-1. Click the **dev** stage name to expand its details:
+1. Open the **sit** Environment name by clicking on its name:
+
+    ![Sit environment](../assets/use-cases/autotest-as-quality-gate/deploy_applications_sit.png "Sit environment")
+
+2. Select the **Applications** tab and click **Configure deploy**. Hover your cursor over the application versions to see the image that blocks you from running a deployment:
+
+    ![Deployment blocked](../assets/use-cases/autotest-as-quality-gate/deployment_blocked.png "Deployment blocked")
+
+3. Get back to the Deployment details page. Click the **dev** stage name to expand its details:
 
     ![Deploy applications](../assets/use-cases/autotest-as-quality-gate/deploy_applications.png "Deploy applications")
 
-2. Navigate **Applications** and click **CONFIGURE DEPLOY**. Then select latest versions of all applications and click **START DEPLOY**.
+4. Select the **Applications** tab and click **Configure deploy**. Then select latest versions of all the applications and click **Start deploy**:
 
     ![Run deploy pipeline](../assets/use-cases/autotest-as-quality-gate/run_deploy_pipeline.png "Run deploy pipeline")
 
-3. To find information about running deploy pipeline navigate **PIPELINES** and click on pipeline name:
+5. To find information about the running deploy pipeline, navigate to the **Pipelines** tab and click on the pipeline name:
 
     ![Deploy pipeline information](../assets/use-cases/autotest-as-quality-gate/deploy_pipeline.png "Deploy pipeline information")
 
-4. Once promotion procedure is finished, the promoted applications will become available in the **Sit** stage. You will be able to select image stream versions for the promoted applications:
+6. View the pipeline details. Pay attention that the **deploy-with-autotest** pipeline features the **wait-for-autotests** task:
+
+    ![Wait for autotests](../assets/use-cases/autotest-as-quality-gate/wait-for-autotests.png "Wait for autotests")
+
+7. Wait until the deploy pipeline completes. The application statuses should be **Healthy** and **Synced**:
+
+    ![Successful deployment](../assets/use-cases/autotest-as-quality-gate/successful-deployment.png "Successful deployment")
+
+8. Once promotion procedure is finished, the promoted applications will become available in the **Sit** stage. You will be able to select image stream versions for the promoted applications:
 
     ![Sit stage](../assets/use-cases/autotest-as-quality-gate/deploy_promoted_stage.png "Sit stage")
 

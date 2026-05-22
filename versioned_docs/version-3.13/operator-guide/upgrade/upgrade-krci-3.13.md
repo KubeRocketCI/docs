@@ -369,11 +369,11 @@ If you have DefectDojo dashboards or reports referencing the old engagement name
   ```yaml title="clusters/core/addons/kuberocketci/Chart.yaml"
   apiVersion: v2
   name: edp-install
-  version: 3.13.1
-  appVersion: 3.13.1
+  version: 3.13.5
+  appVersion: 3.13.5
   dependencies:
     - name: edp-install
-      version: 3.13.1
+      version: 3.13.5
       repository: https://epam.github.io/edp-helm-charts/stable
   ```
 
@@ -392,17 +392,17 @@ If you have DefectDojo dashboards or reports referencing the old engagement name
   helm repo update
 
   # Confirm the target chart version is available
-  helm search repo epamedp/edp-install --versions | grep 3.13.1
+  helm search repo epamedp/edp-install --versions | grep 3.13.5
 
   # Preview changes against your values
   helm diff upgrade <release-name> epamedp/edp-install \
-    --version 3.13.1 \
+    --version 3.13.5 \
     -f values.yaml \
     -n <namespace>
 
   # Run the upgrade
   helm upgrade --install <release-name> epamedp/edp-install \
-    --version 3.13.1 \
+    --version 3.13.5 \
     -f values.yaml \
     -n <namespace> \
     --timeout 10m \

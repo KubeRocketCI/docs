@@ -14,7 +14,7 @@ sidebar_label: "Create and Use Custom Tekton Pipelines"
   <link rel="canonical" href="https://docs.kuberocketci.io/docs/use-cases/custom-pipelines-flow" />
 </head>
 
-This use case explains how to create and use custom Tekton pipelines on the KubeRocketCI Platform. While KubeRocketCI offers pre-configured Tekton pipelines for common use cases, custom pipelines allow you to adapt workflows to meet unique project requirements.
+This use case explains how to create and use personalized Tekton pipelines in KubeRocketCI. While KubeRocketCI offers pre-configured Tekton pipelines for common use cases, custom pipelines allow you to adapt workflows to meet unique project requirements.
 It also provides guidance on integrating and using these custom Tekton pipelines within your development processes.
 
 <div style={{ display: 'flex', justifyContent: 'center' }}>
@@ -24,7 +24,7 @@ It also provides guidance on integrating and using these custom Tekton pipelines
 ## Goals
 
 - Provide a clear method for creating and configuring custom Tekton tasks and pipelines for build, review, deployment, and clean processes within KubeRocketCI.
-- Offer a detailed guide on integrating custom pipelines with the KubeRocketCI platform, ensuring seamless connection and functionality.
+- Offer a detailed guide on integrating custom pipelines with KubeRocketCI, ensuring seamless connection and functionality.
 - Clarify the process for replacing existing build, review, deployment, and clean pipelines with custom pipelines, highlighting necessary steps and considerations.
 - Demonstrate the benefits of using custom Tekton pipelines in KubeRocketCI, such as improved flexibility, scalability, and efficiency in development workflows.
 
@@ -32,7 +32,7 @@ It also provides guidance on integrating and using these custom Tekton pipelines
 
 Before proceeding with this use case, ensure the following prerequisites are met:
 
-- Access to a KubeRocketCI instance with permissions to create and edit **Components** and **Environments**.
+- Access to a KubeRocketCI instance with permissions to create and edit **Projects** and **Environments**.
 - A configured KubeRocketCI instance with at least one active [Git Server](../user-guide/add-git-server.md) (e.g., GitHub, GitLab or Bitbucket).
 - Configured Argo CD instance with the [Add-ons repository](../operator-guide/add-ons-overview.md) added.
 
@@ -40,7 +40,7 @@ Before proceeding with this use case, ensure the following prerequisites are met
 
 - Create a Tekton library in KubeRocketCI for storing and managing custom Tekton resources.
 - Define custom Tekton pipelines for build, review, deployment, or clean processes based on specific project requirements.
-- Integrate custom Tekton pipelines with the KubeRocketCI platform to automate build, review, and deployment workflows using Argo CD and the add-ons repository.
+- Integrate custom Tekton pipelines with KubeRocketCI to automate build, review, and deployment workflows using Argo CD and the add-ons repository.
 - Replace existing build, review, deploy, or clean pipelines with custom pipelines.
 
 ### Creating a Tekton Library for Custom Pipelines
@@ -53,42 +53,61 @@ The Tekton library template can be found in the [helm-helm-pipeline](https://git
 
 To create a Tekton library, follow these steps:
 
-1. Open the KubeRocketCI portal. Use the **Sign-In** option:
+1. Log in to the KubeRocketCI portal:
 
-    ![Logging Page](../assets/use-cases/general/login.png "Logging screen")
+    ![Logging Page](../assets/use-cases/general/login-1.png "Logging screen")
 
-2. In the top-right corner, click the three dots (**⋮**) menu. From the dropdown, select your profile name to access additional options:
+2. On the main menu, click the **Manage Namespaces** button:
 
-    ![Settings](../assets/use-cases/general/settings.png "Settings button")
+    ![Manage Namespaces](../assets/use-cases/general/settings-1.png "Manage Namespaces button")
 
-3. Ensure that both `Default namespace` and `Allowed namespaces` are set to the same namespace where you want to create the Tekton library:
+3. Ensure the `Namespace` value points to the namespace with the KubeRocketCI installation:
 
-    ![Namespace](../assets/use-cases/general/account-settings.png "Namespace settings")
+    ![Default and allowed namespaces](../assets/use-cases/fastapi-scaffolding/default-allowed-namespace.png "Default and allowed namespaces")
 
-4. Click the `Components` tab in the left-hand navigation menu. Then, click the `Create Component` button. Choose the **Component type** as `Library`:
+    :::note
+    Don't forget to press Enter to add the namespace to the allowed namespaces list.
+    :::
 
-    ![Create Component](../assets/use-cases/custom-tekton-pipelines/component-type.png "Component type")
+4. Create a new Project with the `Application` type using the `Create` strategy. Select the **Projects** section and click **+ Create project**:
 
-5. Select the **Strategy type** as `Create from template`:
+    ![Components Overview](../assets/use-cases/general/components-1.png "Components tab")
+
+5. Select **Custom configuration** -> **Library** -> **Create** and click **Continue**:
 
     ![Strategy type](../assets/use-cases/custom-tekton-pipelines/strategy-type.png "Strategy type")
 
-6. In the **Create Library** window, enter the following values:
+6. On the **Git & project info** tab, define the following values and click **Continue**:
 
-    - **Repository Name**: `<git-account-name>/tekton-custom-pipelines`
-    - **Component name**: `tekton-custom-pipelines`
-    - **Description**: `Repository for storing and managing custom Tekton resources`
-    - **Library code language**: `Helm`
-    - **Language version/framework**: `Pipeline`
-    - **Build tool**: `Helm`
+    - Git server: `github`
+    - Owner: `github_account_name`
+    - Repository name: `tekton-custom-pipelines`
+    - Default branch: `main`
+    - Project name: `tekton-custom-pipelines`
+    - Description: `Repository for storing and managing custom Tekton resources`
 
     ![Component Info](../assets/use-cases/custom-tekton-pipelines/component-info.png "Component Info")
 
-7. In the `Specify Advanced Settings` section, you can leave all fields at their default values. Click the `Create` button to create the Tekton library:
+7. On the **Build config** tab, define the values and click **Continue**:
 
-    ![Advanced Settings](../assets/use-cases/custom-tekton-pipelines/advanced-settings.png "Advanced Settings")
+    - Library code language `Helm`
+    - Language version/framework: `Pipeline`
+    - Build tool: `Helm`
+    - Codebase versioning type: `semver`
+    - Start version from: `0.1.0`
+    - Suffix: `SNAPSHOT`
 
-8. Once the library is created, you can start adding custom Tekton tasks, pipelines, and trigger templates to the library.
+    ![Advanced Settings](../assets/use-cases/custom-tekton-pipelines/build-config.png "Advanced Settings")
+
+8. On the **Review** tab, verify the project configuration and click **Create project**:
+
+    ![Advanced Settings](../assets/use-cases/custom-tekton-pipelines/library-review-and-create.png "Advanced Settings")
+
+9. On the congratulations page, click **Open project**:
+
+    ![Open project](../assets/use-cases/custom-tekton-pipelines/library-congratulations.png "Open project")
+
+  Once the library is created, you can start adding custom Tekton tasks, pipelines, and trigger templates to the library.
 
 ### Defining Custom Tekton Pipelines
 
@@ -96,15 +115,11 @@ After creating the Tekton library, the next step is to define custom Tekton pipe
 
 To define custom Tekton pipelines, follow these steps:
 
-1. In the KubeRocketCI portal, navigate to the `Components` tab and select the newly created `tekton-custom-pipelines` library:
-
-    ![Tekton Library](../assets/use-cases/custom-tekton-pipelines/tekton-library.png "Tekton Library")
-
-2. In the top-right corner, click the **Git** button to open the Git repository for the `tekton-custom-pipelines` library:
+1. In the top-right corner of the Project details page, click the **Git** button to open the Git repository for the `tekton-custom-pipelines` library:
 
     ![Git Repository](../assets/use-cases/custom-tekton-pipelines/git-repository.png "Git Repository")
 
-3. Clone the repository to your local machine:
+2. Clone the repository to your local machine:
 
     ![Clone Repository](../assets/use-cases/custom-tekton-pipelines/clone-repository.png "Clone Repository")
 
@@ -114,7 +129,7 @@ To define custom Tekton pipelines, follow these steps:
     git clone <git-repo-url>
     ```
 
-4. Examine the repository structure.
+3. Examine the repository structure.
 
     By default, the repository structure looks as follows:
 
@@ -174,7 +189,7 @@ To define custom Tekton pipelines, follow these steps:
     - The `templates/triggers` directory contains Tekton trigger templates for triggering the deployment or clean processes.
     - The `templates/resources` directory is intended for various templates, such as config maps and secrets, which can be mounted into custom Tekton tasks as needed.
 
-5. Modify the existing pipeline and task templates or create new ones based on your project requirements.
+4. Modify the existing pipeline and task templates or create new ones based on your project requirements.
 
     **Result**: This step will demonstrate an example of creating custom Tekton resources. After completing this step, you will have a custom Tekton task, pipeline, and trigger template.
 
@@ -316,7 +331,7 @@ To define custom Tekton pipelines, follow these steps:
         dnsWildCard: "example.com"
         ```
 
-6. Commit and push the changes to the Git repository.
+5. Commit and push the changes to the Git repository.
 
     After modifying the pipeline and task templates, commit and push the changes to the Git repository. Use the following commands to commit and push the changes:
 
@@ -356,19 +371,19 @@ To deliver custom Tekton pipelines to the cluster, follow these steps:
     git push origin main
     ```
 
-3. After pushing the changes, access **Argo CD**, navigate to the Application that corresponds to the repository with the **add-ons**, and initiate the `Sync` process. This will apply the `tekton-custom-pipelines` Helm Chart to the cluster within the specified namespace.
+3. After pushing the changes, access **Argo CD**, navigate to the Application that corresponds to the repository with the **add-ons**, and initiate the `Sync` process. This will apply the `tekton-custom-pipelines` Helm Chart to the cluster within the specified namespace:
 
     ![Argo CD Sync](../assets/use-cases/custom-tekton-pipelines/argocd-sync.png "Argo CD Sync")
 
-### Replace Existing Pipelines for Components With Custom Pipelines
+### Replace Pipelines With Personalized Versions
 
-This section demonstrates how to replace existing build, review, deploy, and clean pipelines with custom pipelines in KubeRocketCI. Two cases are covered: replacing build and review pipelines for a created component, and replacing deploy and clean pipelines for an existing deployment flow.
+This section demonstrates how to replace existing build, review, deploy, and clean pipelines with custom pipelines in KubeRocketCI. Two cases are covered: replacing build and review pipelines for a created component, and replacing deploy and clean pipelines for an existing deployment.
 
 1. To replace existing review or build pipelines for a component with custom pipelines, follow these steps:
 
-    1. Open the KubeRocketCI portal. Navigate to the **Components** tab and select the component for which you want to replace the build or review pipeline:
+    1. Open the KubeRocketCI portal. Navigate to the **Projects** tab and select the component for which you want to replace the build or review pipeline:
 
-        ![Component](../assets/use-cases/custom-tekton-pipelines/java-app-component.png "Component")
+        ![Component](../assets/use-cases/custom-tekton-pipelines/java-app-project.png "Component")
 
     2. In the **Branches** tab, select the branch for which you want to replace the pipeline. Click the three dots (**⋮**) menu and click **Edit**:
 
@@ -378,19 +393,19 @@ This section demonstrates how to replace existing build, review, deploy, and cle
 
         ![Select Pipeline](../assets/use-cases/custom-tekton-pipelines/select-pipeline.png "Select Pipeline")
 
-2. To replace existing deploy or clean pipelines for a deployment flow with custom pipelines, follow these steps:
+2. To replace existing deploy or clean pipelines for a deployment with custom pipelines, follow these steps:
 
-    1. Open the KubeRocketCI portal. Navigate to the **Deployment Flows** tab and select the deployment flow for which you want to replace the deploy or clean pipeline:
+    1. Open the KubeRocketCI portal. Navigate to the **Deployments** tab and select the deployment for which you want to replace the deploy or clean pipeline:
 
-        ![Deployment Flow](../assets/use-cases/custom-tekton-pipelines/deployment-flow.png "Deployment Flow")
+        ![Deployment](../assets/use-cases/custom-tekton-pipelines/deployment.png "Deployment")
 
-    2. Click the **Edit** button to edit the Environment:
-
-        ![Deployment Flow](../assets/use-cases/custom-tekton-pipelines/edit-environment.png "Deployment Flow")
-
-    3. Choose the required Environment:
+    2. Choose the required Environment:
 
         ![Environment](../assets/use-cases/custom-tekton-pipelines/environment.png "Environment")
+
+    3. Click the **Edit** button to edit the Environment:
+
+        ![Edit button](../assets/use-cases/custom-tekton-pipelines/edit-environment.png "Edit button")
 
     4. In the **Edit Environment** dialog, select the required deploy or clean pipeline from the dropdown list:
 
@@ -399,7 +414,7 @@ This section demonstrates how to replace existing build, review, deploy, and cle
 ## Related Articles
 
 - [Tekton Overview](../operator-guide/ci/tekton-overview.md)
-- [Add Application using KubeRocketCI Portal](../user-guide/add-application.md)
-- [Add Deployment Flow using KubeRocketCI Portal](../user-guide/add-cd-pipeline.md)
+- [Add Application](../user-guide/add-application.md)
+- [Add Deployment](../user-guide/add-cd-pipeline.md)
 - [Argo CD Overview](../quick-start/integrate-argocd.md)
 - [Cluster Add-Ons Overview](../operator-guide/add-ons-overview.md)

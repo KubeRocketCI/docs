@@ -17,10 +17,6 @@ This page describes installation of the [GitFusion](https://github.com/KubeRocke
 
 GitFusion enhances the developer experience by facilitating automated discovery of Git repositories, remote branches, and organizational structures across multiple Git providers. The service operates as an intermediary layer, securing communication between the KubeRocketCI portal and Git infrastructure while enabling rich repository browsing capabilities.
 
-## Prerequisites
-
-To install GitFusion, ensure that a [KrakenD](./krakend.md) instance is installed and configured using [edp-cluster-add-ons](https://github.com/epam/edp-cluster-add-ons/tree/main/clusters/core/addons/krakend).
-
 ## Installation
 
 :::warning
@@ -35,58 +31,6 @@ To enable the GitFusion integration in KubeRocketCI, follow the steps below:
     gitfusion:
       enable: true
     ```
-
-2. Configure the KrakenD API Gateway to expose GitFusion endpoints by modifying its routing configuration.
-
-    :::note
-    Reference KrakenD configurations in the [edp-cluster-add-ons](https://github.com/epam/edp-cluster-add-ons/tree/main/clusters/core/addons/krakend) repository.
-    For more information on how to work with edp-cluster-add-ons, please refer to the [Install via Add-Ons](../add-ons-overview.md) page.
-    :::
-
-    1. Clone your forked copy of the [edp-cluster-add-ons](https://github.com/epam/edp-cluster-add-ons) repository.
-
-    2. Verify that KrakenD configuration includes the GitFusion API endpoints. If missing, add them in two steps:
-        1. Navigate to the KrakenD configuration directory at `clusters/<cluster-name>/addons/krakend`.
-        2. Update the [values.yaml](https://github.com/epam/edp-cluster-add-ons/blob/main/clusters/core/addons/krakend/values.yaml#L202-#L346) file to include the necessary GitFusion API endpoint definitions.
-
-    3. Configure the KrakenD secret to include GitFusion service connectivity details.
-
-        :::note
-        The `GITFUSION_URL` variable should point to the GitFusion service URL, e.g., `http://gitfusion.krci:8080`.
-        :::
-
-        Modify the `krakend` secret configuration to include the `GITFUSION_URL` environment variable:
-
-        ```yaml title="KrakenD secret"
-        kind: Secret
-        apiVersion: v1
-        metadata:
-          name: krakend
-          namespace: krakend
-        data:
-          ...
-          GITFUSION_URL: http://gitfusion.krci:8080
-        type: Opaque
-        ```
-
-        For environments utilizing External Secrets Operator with AWS Parameter Store, add the `GITFUSION_URL` variable to Parameter Store configuration:
-
-        ```yaml title="AWS Parameter Store"
-        {
-          "SONARQUBE_URL": "http://sonar.sonar:9000",
-          "SONARQUBE_TOKEN": "<sonarqube-token>",
-          "DEPTRACK_URL": "http://dependency-track-api-server.dependency-track:8080",
-          "DEPTRACK_TOKEN": "<dependency-track-token>",
-          "JWK_URL": "https://keycloak.example.com/realms/<realmName>/protocol/openid-connect/certs",
-          "OPENSEARCH_URL": "https://opensearch-cluster-master.logging:9200",
-          "OPENSEARCH_CREDS": "<opensearch-base64-encoded-credentials>",
-          "GITFUSION_URL": "http://gitfusion.krci:8080"
-        }
-        ```
-
-    4. Save modifications by committing and pushing the updated files to the `edp-cluster-add-ons` repository.
-
-    5. Apply the configuration changes by accessing Argo CD and synchronizing the KrakenD application deployment.
 
 ## Verification
 
@@ -120,4 +64,3 @@ Once GitFusion deployment is complete, validate the integration functionality th
 
 * [Add Application](../../user-guide/add-application.md)
 * [Manage Branches](../../user-guide/manage-branches.md)
-* [KrakenD Integration](./krakend.md)

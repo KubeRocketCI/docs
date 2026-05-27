@@ -658,7 +658,7 @@ The first approach is to deploy Atlantis using Argo CD. Follow the steps below t
 
 4. Commit and push the changes to the remote repository. After the changes are pushed, navigate to the Argo CD and sync the Atlantis application. Verify that the Atlantis is successfully deployed:
 
-    ![Argo CD KrakenD](../../assets/operator-guide/infrastructure-providers/argo-cd-atlantis.png)
+    ![Argo CD Atlantis](../../assets/operator-guide/infrastructure-providers/argo-cd-atlantis.png)
 
 ### Approach 2: Deploy Using Helm
 

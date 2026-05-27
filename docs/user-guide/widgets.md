@@ -63,14 +63,13 @@ KubeRocketCI also offers widgets to track codebases' code quality directly from 
 To enable these widgets, you need to pass the following steps:
 
 1. Integrate platform with [SonarQube](../operator-guide/code-quality/sonarqube.md) and/or [Dependency-Track](../operator-guide/devsecops/dependency-track.md).
-2. Install and configure the [KrakenD](../operator-guide/extensions/krakend.md) tool.
-3. Trigger the review pipeline in a codebase, allowing SonarQube and Dependency-Track to scan your code.
+2. Trigger the review pipeline in a codebase, allowing SonarQube and Dependency-Track to scan your code.
 
 :::note
 At least one build pipeline must be run for the codebase to activate the widgets.
 :::
 
-4. Verify the widgets started working for the codebase.
+3. Verify the widgets started working for the codebase.
 
 :::note
 The SonarQube and Dependency-Track widgets only track the default branch.
@@ -88,4 +87,3 @@ To enable the widget, you need to deploy KubeRocketCI in a [Capsule](../operator
 
 * [SonarQube Integration](../operator-guide/code-quality/sonarqube.md)
 * [Integrate Dependency-Track](../operator-guide/devsecops/dependency-track.md)
-* [KrakenD Integration](../operator-guide/extensions/krakend.md)

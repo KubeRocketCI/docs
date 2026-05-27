@@ -121,7 +121,6 @@ const sidebars: SidebarsConfig = {
               'type': 'category',
               'label': 'Extensions',
               'items': [
-                'operator-guide/extensions/krakend',
                 'operator-guide/extensions/git-discovery'
               ]
             },

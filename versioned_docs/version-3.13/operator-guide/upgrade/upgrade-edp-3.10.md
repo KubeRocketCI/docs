@@ -245,7 +245,7 @@ Starting from version 3.10, the Tekton Dashboard is no longer installed with Kub
 
     By default, in version 3.10, Code Quality widgets are disabled. To enable them, follow these steps:
 
-    1. **Install KrakenD**: For detailed installation instructions, refer to the [KrakenD installation guide](../extensions/krakend.md).
+    1. **Install KrakenD**: For detailed installation instructions, refer to the [KrakenD documentation](https://www.krakend.io/docs/).
     2. **Configure the `values.yaml` file**: In the **edp-install** chart, set the `apiGatewayUrl` key to specify the API URL of KrakenD as configured during its installation.
 
         ```yaml title="values.yaml"

@@ -445,7 +445,7 @@ Kaniko is still used by default. To switch between Kaniko and BuildKit, set the 
     :::
 
     :::note
-    For more details about KrakenD integration with KubeRocketCI, refer to the [KrakenD installation](../extensions/krakend.md) guide.
+    For more details about KrakenD integration with KubeRocketCI, refer to the [KrakenD documentation](https://www.krakend.io/docs/) guide.
     :::
 
     Starting from version 3.12, KubeRocketCI supports integration with the [GitFusion](https://github.com/KubeRocketCI/gitfusion) microservice. This integration enables automatic discovery of repositories, branches, and organizations from various Git providers during the component or branch creation process in the KubeRocketCI portal. GitFusion act as a bridge between the KubeRocketCI portal and the Git provider, allowing the portal to access repository-related information without requiring direct access to the Git provider.

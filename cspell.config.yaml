@@ -56,6 +56,7 @@ words:
   - clusterrole
   - clusterrolebinding
   - cmctl
+  - CNOE
   - codebasebranch
   - codebasebranches
   - codebaseimagestream
@@ -119,6 +120,7 @@ words:
   - gcpsm
   - Gerrit
   - gitcloneurl
+  - Gitea
   - gitfusion
   - GITFUSION
   - gitops
@@ -136,6 +138,7 @@ words:
   - hotspots
   - Hotspots
   - hyperthreading
+  - idpbuilder
   - importcert
   - inspectable
   - ingresscontroller
@@ -171,6 +174,8 @@ words:
   - kubelet
   - kubelogin
   - kuberocketci
+  - kubri
+  - kubrix
   - ldflags
   - lifecycles
   - lintconf

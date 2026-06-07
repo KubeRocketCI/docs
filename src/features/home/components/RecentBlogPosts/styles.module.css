@@ -1,5 +1,5 @@
 .sectionWrapper {
-  padding: 3.5rem 0 2rem;
+  padding: 2rem 0 4rem;
 }
 
 .sectionHeading {
@@ -17,14 +17,11 @@
   font-size: 1rem;
 }
 
-/* Bento grid: mobile-first single column, then a 2x2 hero spotlight on desktop. */
-.bento {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 1rem;
+.gridItem {
+  padding: 0.6rem;
 }
 
-.tile {
+.card {
   position: relative;
   display: flex;
   flex-direction: column;
@@ -39,10 +36,9 @@
     background-color 0.2s ease;
 }
 
-/* Terminal "focus reticle": two L-shaped corner brackets that lock onto the
-   card corners on hover/focus. Flat, in-plane — no lift, no shadow, no scale. */
-.tile::before,
-.tile::after {
+/* Terminal "focus reticle" corner brackets — flat, no lift/shadow. */
+.card::before,
+.card::after {
   content: '';
   position: absolute;
   width: 15px;
@@ -58,22 +54,22 @@
     bottom 0.2s ease;
 }
 
-.tile::before {
+.card::before {
   top: 12px;
   left: 12px;
   border-right: none;
   border-bottom: none;
 }
 
-.tile::after {
+.card::after {
   bottom: 12px;
   right: 12px;
   border-left: none;
   border-top: none;
 }
 
-.tile:hover,
-.tile:focus-visible {
+.card:hover,
+.card:focus-visible {
   text-decoration: none;
   color: var(--ifm-color-emphasis);
   border-color: rgba(0, 148, 255, 0.45);
@@ -81,60 +77,45 @@
   outline: none;
 }
 
-.tile:hover::before,
-.tile:focus-visible::before {
+.card:hover::before,
+.card:focus-visible::before {
   opacity: 0.9;
   top: 7px;
   left: 7px;
 }
 
-.tile:hover::after,
-.tile:focus-visible::after {
+.card:hover::after,
+.card:focus-visible::after {
   opacity: 0.9;
   bottom: 7px;
   right: 7px;
 }
 
-.tileHeader {
+.article {
   display: flex;
-  gap: 0.75rem;
-  align-items: center;
-  margin-bottom: 0.85rem;
+  flex-direction: column;
+  height: 100%;
 }
 
-.iconWrap {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 2.5rem;
-  height: 2.5rem;
-  flex-shrink: 0;
-  border-radius: 8px;
-  background: rgba(0, 148, 255, 0.1);
-  color: var(--kuberocket-color-primary-light);
-  transition: background-color 0.2s ease;
-}
-
-.tile:hover .iconWrap,
-.tile:focus-visible .iconWrap {
-  background: rgba(0, 148, 255, 0.18);
-}
-
-.icon {
-  width: 1.4rem;
-  height: 1.4rem;
-  fill: currentColor;
+.date {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
   color: var(--kuberocket-color-primary-light);
 }
 
 .title {
-  margin: 0;
-  font-size: 1.15rem;
+  margin: 0 0 0.75rem;
+  font-size: 1.2rem;
   font-weight: 600;
-  line-height: 1.25;
+  line-height: 1.3;
 }
 
 .description {
+  margin: 0;
   font-size: 0.85rem;
   line-height: 1.55;
   color: var(--ifm-color-emphasis-700);
@@ -175,13 +156,13 @@
   transition: opacity 0.15s ease;
 }
 
-.tile:hover .cmd,
-.tile:focus-visible .cmd {
+.card:hover .cmd,
+.card:focus-visible .cmd {
   color: var(--kuberocket-color-primary-light);
 }
 
-.tile:hover .caret,
-.tile:focus-visible .caret {
+.card:hover .caret,
+.card:focus-visible .caret {
   opacity: 1;
   animation: blink 1.1s steps(1) infinite;
 }
@@ -192,76 +173,42 @@
   }
 }
 
-/* Hero spotlight tile: engineering "blueprint" dot-grid + corner glow. */
-.tileHero {
-  background-image:
-    radial-gradient(rgba(0, 148, 255, 0.13) 1px, transparent 1.3px),
-    radial-gradient(120% 120% at 0% 0%, rgba(0, 148, 255, 0.1) 0%, rgba(0, 148, 255, 0) 55%);
-  background-size:
-    18px 18px,
-    100% 100%;
+.viewAll {
+  text-align: center;
+  margin-top: 2rem;
 }
 
-.tileHero .iconWrap {
-  width: 3rem;
-  height: 3rem;
-}
-
-.tileHero .icon {
-  width: 1.7rem;
-  height: 1.7rem;
-}
-
-.tileHero .title {
-  font-size: 1.55rem;
-}
-
-.tileHero .description {
-  font-size: 1rem;
-  -webkit-line-clamp: unset;
-  line-clamp: unset;
-}
-
-.tileHero .cmd {
-  font-size: 0.85rem;
+/* Aligned to the hero outlined button, theme-adapted to the light section.
+   Colors are fully specified (not left to Infima's button--outline) so the
+   hover state reliably fills blue with white text. */
+.viewBtn {
+  padding: 0.5rem 1.375rem;
+  font-weight: 500;
+  font-size: 0.83rem;
+  text-transform: uppercase;
   color: var(--kuberocket-color-primary-light);
+  border: 1px solid var(--kuberocket-color-primary-light);
+  background-color: transparent;
 }
 
-@media (min-width: 768px) {
-  .bento {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .tileHero {
-    grid-column: span 2;
-  }
-}
-
-@media (min-width: 997px) {
-  .bento {
-    grid-template-columns: repeat(3, 1fr);
-    grid-auto-rows: minmax(195px, 1fr);
-    grid-auto-flow: row dense;
-  }
-
-  .tileHero {
-    grid-column: span 2;
-    grid-row: span 2;
-  }
+.viewBtn:hover {
+  background-color: var(--kuberocket-color-primary-light);
+  border-color: var(--kuberocket-color-primary-light);
+  color: var(--ifm-color-white);
+  text-decoration: none;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .tile,
-  .tile::before,
-  .tile::after,
-  .iconWrap,
+  .card,
+  .card::before,
+  .card::after,
   .cmd,
   .caret {
     transition: none;
   }
 
-  .tile:hover .caret,
-  .tile:focus-visible .caret {
+  .card:hover .caret,
+  .card:focus-visible .caret {
     animation: none;
   }
 }

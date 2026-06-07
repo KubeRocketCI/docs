@@ -8,21 +8,13 @@ import SyncIcon from '@mui/icons-material/Sync';
 import RecommendIcon from '@mui/icons-material/Recommend';
 import { FeatureItem } from './types';
 
+// Order matters: the bento grid flows these tiles around the 'hero' (2x2)
+// spotlight, so this sequence is tuned to fill the grid without gaps.
 export const featuresList: FeatureItem[] = [
-  {
-    title: 'Application Scaffolding',
-    Svg: HandymanIcon,
-    description: (
-      <>
-        Accelerate your delivery process with our versatile Application templates. Expand your possibilities by
-        extending our comprehensive library with your personalized templates.
-      </>
-    ),
-    link: 'docs/user-guide/add-application',
-  },
   {
     title: 'CI/CD Pipelines',
     Svg: RocketLaunchIcon,
+    size: 'hero',
     description: (
       <>
         Leverage the power of Kubernetes native pipelines for seamless application management with the comprehensive
@@ -41,6 +33,28 @@ export const featuresList: FeatureItem[] = [
       </>
     ),
     link: 'docs/user-guide/add-cd-pipeline',
+  },
+  {
+    title: 'Advanced Security Analysis',
+    Svg: TroubleshootIcon,
+    description: (
+      <>
+        Achieve excellence in DevSecOps with our platform. We prioritize security, making it a mandatory quality gate
+        for all operations. Experience enhanced protection and peace of mind.
+      </>
+    ),
+    link: 'docs/operator-guide/devsecops/overview',
+  },
+  {
+    title: 'Application Scaffolding',
+    Svg: HandymanIcon,
+    description: (
+      <>
+        Accelerate your delivery process with our versatile Application templates. Expand your possibilities by
+        extending our comprehensive library with your personalized templates.
+      </>
+    ),
+    link: 'docs/user-guide/add-application',
   },
   {
     title: 'Single Sign-On',
@@ -64,17 +78,6 @@ export const featuresList: FeatureItem[] = [
       </>
     ),
     link: 'docs/operator-guide/install-kuberocketci',
-  },
-  {
-    title: 'Advanced Security Analysis',
-    Svg: TroubleshootIcon,
-    description: (
-      <>
-        Achieve excellence in DevSecOps with our platform. We prioritize security, making it a mandatory quality gate
-        for all operations. Experience enhanced protection and peace of mind.
-      </>
-    ),
-    link: 'docs/operator-guide/devsecops/overview',
   },
   {
     title: 'Automated Test Analysis',

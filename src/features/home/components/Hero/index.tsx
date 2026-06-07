@@ -72,37 +72,16 @@ export const Hero = () => {
               Browse the Quick&nbsp;Start guide or dive into the Operator and User guides.
             </p>
           </div>
-          <div className={clsx('row', styles.heroBannerButtons)}>
-            <div className="margin--sm">
-              <Link
-                className={clsx('button button--outline button--lg', [
-                  styles.heroBannerBtn,
-                  styles.heroBannerBtnOutlined,
-                ])}
-                to="/docs/about-platform"
-              >
-                Getting Started
-              </Link>
-            </div>
-            <div className="margin--sm">
-              <Link
-                className={clsx('button  button--lg', [styles.heroBannerBtn, styles.heroBannerBtnContained])}
-                to={siteConfig.themeConfig.mailTo as string}
-              >
-                Request Demo
-              </Link>
-            </div>
-            <div className="margin--sm">
-              <Link
-                className={clsx('button button--outline button--lg', [
-                  styles.heroBannerBtn,
-                  styles.heroBannerBtnWithIcon,
-                ])}
-                to={siteConfig.themeConfig.videoTeaser as string}
-              >
-                Watch teaser <YouTubeIcon />
-              </Link>
-            </div>
+          <div className={styles.heroBannerButtons}>
+            <Link
+              className={clsx('button button--lg', [styles.heroBannerBtn, styles.heroBannerBtnContained])}
+              to={siteConfig.themeConfig.mailTo as string}
+            >
+              Request Demo
+            </Link>
+            <Link className={styles.heroBannerLink} to={siteConfig.themeConfig.videoTeaser as string}>
+              Watch teaser <YouTubeIcon fontSize="small" />
+            </Link>
           </div>
         </div>
       </div>

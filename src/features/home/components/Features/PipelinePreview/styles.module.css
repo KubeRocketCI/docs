@@ -1,0 +1,141 @@
+/* Fills the leftover vertical space of the CI/CD hero tile and centers itself. */
+.preview {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1.5rem;
+  margin: 1.5rem 0 0.5rem;
+}
+
+/* Pipeline rail with stage nodes and a traveling "run" spark. */
+.pipeline {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.rail {
+  position: absolute;
+  top: 1.1rem;
+  left: 0.6rem;
+  right: 0.6rem;
+  height: 2px;
+  background: linear-gradient(90deg, rgba(0, 148, 255, 0.15), rgba(0, 148, 255, 0.5), rgba(0, 148, 255, 0.15));
+}
+
+.spark {
+  position: absolute;
+  top: 1.1rem;
+  left: 0.6rem;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--kuberocket-color-primary-light);
+  box-shadow:
+    0 0 0 3px rgba(0, 148, 255, 0.25),
+    0 0 12px 2px rgba(0, 148, 255, 0.6);
+  transform: translate(-50%, -50%);
+  animation: travel 4s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+@keyframes travel {
+  0% {
+    left: 0.6rem;
+    opacity: 0;
+  }
+  8% {
+    opacity: 1;
+  }
+  92% {
+    opacity: 1;
+  }
+  100% {
+    left: calc(100% - 0.6rem);
+    opacity: 0;
+  }
+}
+
+.node {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  flex: 1;
+}
+
+.nodeIcon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.2rem;
+  height: 2.2rem;
+  border-radius: 50%;
+  background: var(--kuberocket-card-color);
+  border: 1px solid rgba(0, 148, 255, 0.35);
+  color: var(--kuberocket-color-primary-light);
+}
+
+.icon {
+  width: 1.1rem;
+  height: 1.1rem;
+  fill: currentColor;
+}
+
+.nodeLabel {
+  font-family: var(--ifm-font-family-monospace);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--ifm-color-emphasis-600);
+  text-align: center;
+}
+
+/* "Built on" toolchain chips. */
+.tools {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.toolsLabel {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--ifm-color-emphasis-500);
+  margin-right: 0.15rem;
+}
+
+.toolChip {
+  font-family: var(--ifm-font-family-monospace);
+  font-size: 0.72rem;
+  font-weight: 500;
+  padding: 0.2rem 0.6rem;
+  border-radius: 4px;
+  color: var(--ifm-color-emphasis-800);
+  background: rgba(0, 148, 255, 0.08);
+  border: 1px solid rgba(0, 148, 255, 0.2);
+}
+
+@media (max-width: 480px) {
+  .nodeIcon {
+    width: 1.9rem;
+    height: 1.9rem;
+  }
+
+  .nodeLabel {
+    font-size: 0.6rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .spark {
+    animation: none;
+    opacity: 0;
+  }
+}

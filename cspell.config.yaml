@@ -36,6 +36,7 @@ words:
   - Bridgecrew
   - buildkit
   - buildtool
+  - Bunnyshell
   - cacerts
   - cbis
   - cbtype
@@ -111,6 +112,7 @@ words:
   - fastapi
   - Filebeat
   - filesystems
+  - Flexera
   - finalizer
   - finalizers
   - fluentbit
@@ -210,6 +212,7 @@ words:
   - nosniff
   - nslookup
   - ojson
+  - Okteto
   - opensearch
   - Packetbeat
   - parameterstore
@@ -235,6 +238,7 @@ words:
   - qualitygate
   - Qualys
   - Quarkus
+  - Qovery
   - rabbitmq
   - rabbitmqctl
   - regcred
@@ -308,6 +312,7 @@ words:
   - trustcacerts
   - VULNS
   - truststore
+  - Uffizzi
   - usedomainname
   - USEDOMAINNAME
   - userinfo

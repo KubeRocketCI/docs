@@ -17,6 +17,8 @@ Deploying feature branches is crucial for testing activities, including manual t
 
 The KubeRocketCI platform enables the deployment of feature environments straight from feature branches. This guide offers comprehensive instructions for managing and deploying these branches.
 
+For a hands-on, end-to-end walkthrough on a local cluster — covering auto-triggered deployments, proof of namespace isolation, per-environment GitOps values override, and one-click teardown — see the [Ephemeral Environments on Kubernetes: Feature Branch Preview Walkthrough](/blog/ephemeral-preview-environments-kubernetes-feature-branch) blog post.
+
 <div style={{ display: 'flex', justifyContent: 'center' }}>
 <iframe width="560" height="315" src="https://www.youtube.com/embed/V_xPrSgbMRg" title="KubeRocketCI: Testing Changes With Feature Branch" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen"></iframe>
 </div>

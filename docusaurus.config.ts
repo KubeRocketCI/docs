@@ -238,6 +238,10 @@ const config: Config = {
   ],
 
   plugins: [
+    // Exposes the 3 most recent blog posts as global data for the landing-page
+    // "From the Blog" section. Self-updates on every publish (reads frontmatter
+    // at build time) — see src/plugins/recent-blog-posts.
+    ['./src/plugins/recent-blog-posts', { limit: 3 }],
     [
       '@docusaurus/plugin-content-docs',
       {
@@ -263,10 +267,12 @@ const config: Config = {
       {
         generateLLMsTxt: true, // the plugin generates llms.txt; manual backup is saved in llms-manual-backup.txt
         generateLLMsFullTxt: true,
+        // v0.4.0 appends `.md` to links by default, but no .md files are emitted, so they 404.
+        addMdExtension: false,
         title: 'KubeRocketCI Documentation',
         description:
           'Explore KubeRocketCI Documentation for CI/CD, operator and user guides, quick start, and API. Learn how to enhance your DevOps practices with KubeRocketCI.',
-        includeBlog: false,
+        includeBlog: true,
         ignoreFiles: ['faq/**', 'api/**'], // api/ — custom CRs for operators, they bloat llms-full.txt
         excludeImports: true,
         removeDuplicateHeadings: true,
@@ -358,7 +364,7 @@ const config: Config = {
           label: 'FAQ',
           to: '/faq/general-questions',
         },
-        // { to: 'blog', label: 'Blog', position: 'left' },
+        { to: '/blog', label: 'Blog', position: 'left' },
         // Right
         {
           type: 'docSidebar',

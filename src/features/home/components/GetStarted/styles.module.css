@@ -1,0 +1,198 @@
+.band {
+  background: var(--kuberocket-color-primary-dark);
+  background-image:
+    radial-gradient(120% 120% at 100% 0%, rgba(0, 148, 255, 0.18) 0%, rgba(0, 148, 255, 0) 55%),
+    radial-gradient(80% 90% at 0% 100%, rgba(0, 148, 255, 0.1) 0%, rgba(0, 148, 255, 0) 60%);
+  padding: 3.5rem 0;
+  color: var(--ifm-color-white);
+}
+
+.inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 2.5rem;
+}
+
+.copyColumn {
+  display: flex;
+  flex-direction: column;
+}
+
+.eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--kuberocket-color-primary-light);
+  margin-bottom: 0.75rem;
+}
+
+.heading {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--ifm-color-white);
+  margin: 0 0 0.75rem;
+}
+
+.lead {
+  font-size: 1.05rem;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.75);
+  margin: 0 0 1.75rem;
+  max-width: 32rem;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+
+/* Plain links, not buttons — Request Demo in the hero is the page's only CTA. */
+.actionLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--ifm-color-white);
+}
+
+.actionLink:hover {
+  color: var(--kuberocket-color-primary-light);
+  text-decoration: none;
+}
+
+.actionLink svg {
+  transition: transform 0.2s ease;
+}
+
+.actionLink:hover svg {
+  transform: translateX(3px);
+}
+
+/* Terminal card */
+.terminal {
+  border-radius: 10px;
+  overflow: hidden;
+  background: #0a1020;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 24px 60px -24px rgba(0, 0, 0, 0.7);
+}
+
+.terminalBar {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 0.85rem;
+  background: rgba(255, 255, 255, 0.04);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.dot {
+  width: 0.7rem;
+  height: 0.7rem;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.dot[data-variant='red'] {
+  background: #ff5f56;
+}
+.dot[data-variant='amber'] {
+  background: #ffbd2e;
+}
+.dot[data-variant='green'] {
+  background: #27c93f;
+}
+
+.terminalTitle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  margin-left: 0.5rem;
+  font-size: 0.78rem;
+  font-family: var(--ifm-font-family-monospace);
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.terminalTitleIcon {
+  font-size: 0.95rem !important;
+}
+
+.copyBtn {
+  margin-left: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.25rem 0.6rem;
+  border-radius: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: transparent;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.copyBtn:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--ifm-color-white);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.copyIcon {
+  font-size: 0.9rem !important;
+}
+
+.terminalBody {
+  margin: 0;
+  padding: 1.1rem 1.1rem 1.25rem;
+  background: #0a1020;
+  font-family: var(--ifm-font-family-monospace);
+  font-size: 0.85rem;
+  line-height: 1.7;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  overflow-x: auto;
+}
+
+.line,
+.comment {
+  display: block;
+  background: transparent;
+  border: none;
+  padding: 0;
+  font-size: inherit;
+}
+
+.line {
+  color: rgba(255, 255, 255, 0.92);
+}
+
+.prompt {
+  color: var(--kuberocket-color-primary-light);
+  user-select: none;
+  font-weight: 700;
+}
+
+.comment {
+  margin-top: 0.4rem;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+@media screen and (max-width: 996px) {
+  .inner {
+    grid-template-columns: 1fr;
+    gap: 1.75rem;
+  }
+
+  .heading {
+    font-size: 1.6rem;
+  }
+}

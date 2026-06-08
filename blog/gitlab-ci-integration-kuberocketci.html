@@ -25,7 +25,7 @@
 <script src="https://www.googletagmanager.com/gtm.js?id=GTM-527T2HLF" async="true"></script>
 <script>window.dataLayer=window.dataLayer||[]</script>
 <script>!function(e,t,a,n){e[n]=e[n]||[],e[n].push({"gtm.start":(new Date).getTime(),event:"gtm.js"});var g=t.getElementsByTagName(a)[0],m=t.createElement(a);m.async=!0,m.src="https://www.googletagmanager.com/gtm.js?id=GTM-527T2HLF",g.parentNode.insertBefore(m,g)}(window,document,"script","dataLayer")</script><link rel="stylesheet" href="/assets/css/styles.ab490f31.css">
-<script src="/assets/js/runtime~main.08988668.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.c0aabec3.js" defer="defer"></script>
 <script src="/assets/js/main.2a7ae02c.js" defer="defer"></script>
 </head>
 <body>
@@ -113,7 +113,7 @@
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="summary">Summary<a href="#summary" class="hash-link" aria-label="Direct link to Summary" title="Direct link to Summary" translate="no">​</a></h2>
 <p>GitLab CI integration in KubeRocketCI lets a Codebase run its pipeline in <strong>GitLab CI instead of Tekton</strong> by setting <code>spec.ciTool: gitlab</code>. KubeRocketCI then <strong>generates a <code>.gitlab-ci.yml</code></strong> that pulls in reusable GitLab CI/CD components, gated so that a merge request runs a review pipeline and a merge runs a build pipeline. There is no webhook and no Tekton in the path - the proof is <strong>zero <code>PipelineRun</code>s</strong> for the Codebase.</p>
 <p>Before you enable it, set up three things: a <strong>GitLab Runner</strong> (KubeRocketCI does not bundle one), the <strong>onboarded CI/CD components</strong> in your own instance (they only resolve on the same GitLab), and the <strong>template ConfigMap</strong> KubeRocketCI injects. Complete these once, and subsequent GitLab-CI Codebases require no additional setup.</p>
-<p>I ran the full flow on June 8, 2026 on the local <a class="" href="/blog/try-kuberocketci-locally">try-kuberocketci</a> testbed: review pipeline green in 91s (10 jobs), build pipeline green in 100s (12 jobs), image pushed to GitLab&#x27;s Container Registry, release tags created, and zero Tekton PipelineRuns - every command and result above is from that run.</p>
+<p>I ran the full flow on the local <a class="" href="/blog/try-kuberocketci-locally">try-kuberocketci</a> testbed: review pipeline green in 91s (10 jobs), build pipeline green in 100s (12 jobs), image pushed to GitLab&#x27;s Container Registry, release tags created, and zero Tekton PipelineRuns - every command and result above is from that run.</p>
 <p>The most useful next steps from here:</p>
 <ul>
 <li class="">Spin up the testbed with <a class="" href="/blog/try-kuberocketci-locally">Try KubeRocketCI Locally</a>, then run <code>make gitlab-ci</code> and <code>make e2e-gitlabci</code> to reproduce this flow.</li>

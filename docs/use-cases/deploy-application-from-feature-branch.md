@@ -15,7 +15,7 @@ sidebar_label: "Deploy Application From a Feature Branch"
 
 Deploying feature branches is crucial for testing activities, including manual testing of the product's functionality, running quality gates, and verifying dependencies or integrations with other components.
 
-The KubeRocketCI platform enables the deployment of feature environments straight from feature branches. This guide offers comprehensive instructions for managing and deploying these branches.
+KubeRocketCI enables the deployment of feature environments straight from feature branches. This guide offers comprehensive instructions for managing and deploying these branches.
 
 For a hands-on, end-to-end walkthrough on a local cluster — covering auto-triggered deployments, proof of namespace isolation, per-environment GitOps values override, and one-click teardown — see the [Ephemeral Environments on Kubernetes: Feature Branch Preview Walkthrough](/blog/ephemeral-preview-environments-kubernetes-feature-branch) blog post.
 
@@ -25,28 +25,28 @@ For a hands-on, end-to-end walkthrough on a local cluster — covering auto-trig
 
 ### Preconditions
 
-Before you start passing the use case, ensure to meet the following requirements:
+Before you start the use case, ensure to meet the following requirements:
 
 - KubeRocketCI instance is [configured](../operator-guide/prerequisites.md) with [GitOps](../user-guide/gitops.md) repository.
-- Developer has access to the KubeRocketCI instances using the [Single-Sign-On](../operator-guide/auth/platform-auth-model.md) approach or via token.
+- Developer has access to the KubeRocketCI instance using the [Single-Sign-On](../operator-guide/auth/platform-auth-model.md) approach or via token.
 - Developer has access to the KubeRocketCI platform under the [Developer](../operator-guide/auth/platform-auth-model.md#keycloak-groups) role.
-- Developer has merge permissions in [Bitbucket](../user-guide/gitops.md).
-- Application you want to add a branch to is onboarded in KubeRocketCI.
+- Application you want to add a branch to is [onboarded](../user-guide/add-application.md) in KubeRocketCI.
+
 
 ### Goals
 
 Below are the goals to complete in the use case:
 
 - Onboard a feature branch for the application.
-- Configure GitOps approach for the environment by adding a values.yaml file with application parameters within it.
-- Deploy application with redefined parameters.
+- Configure the GitOps approach for the Environment by adding a values.yaml file with application parameters within it.
+- Deploy application with overridden parameters.
 
 ## Scenario
 
 The use case scenario contains the following stages:
 
 - **Create a feature branch**: Create a feature branch and build artifact for it.
-- **Create a deployment flow**: Create a deployment flow that contains an environment and deploy application within the environment.
+- **Create a Deployment**: Create a Deployment that contains an Environment and deploy application within the Environment.
 - **Configure application parameters**: Adjust a GitOps repository by adding custom application configuration into it.
 - **Apply custom settings for application**: Deploy application with custom parameters.
 
@@ -54,22 +54,26 @@ The use case scenario contains the following stages:
 
 There are two approaches to onboard a feature branch:
 
-1. **Create a Feature Branch via KubeRocketCI**: KubeRocketCI creates a new branch in Bitbucket.
-2. **Onboard an Existing Branch in KubeRocketCI**: Manually [create the branch in Bitbucket](https://support.atlassian.com/bitbucket-cloud/docs/branch-a-repository/) using the correct naming convention and then onboard it into KubeRocketCI.
+1. **Create a Feature Branch via KubeRocketCI**: KubeRocketCI creates a new branch in GitHub.
+2. **Onboard an Existing Branch in KubeRocketCI**: Manually [create the branch in GitHub](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-and-deleting-branches-within-your-repository) using the correct naming convention and then onboard it into KubeRocketCI.
 
 In this use case, we will follow the first approach to add a branch.
 
 When creating a feature branch, ensure the branch name is lowercase to meet Kubernetes restrictions. As an example, we will use the `feature/<jira-ticket>` pattern as a naming convention for feature branches.
 
-To create a feature branch via KubeRocketCI. Follow these steps:
+To create a feature branch via KubeRocketCI, follow these steps:
 
 1. Open the KubeRocketCI portal and log into the platform:
 
-  ![Login page](../assets/use-cases/deploy-application-from-feature-branch/kuberocketci-login-page.png "Login page")
+  ![Login page](../assets/use-cases/general/login-1.png "Login page")
 
-2. Navigate to the **Components** section and select the desired component by clicking its name.
+2. Navigate to the **Projects** section and select the desired Project.
 
-3. Click the **Create branch** button and fill in the form:
+3. Select the **Branches** tab and click the **Create branch** button:
+
+  ![Create branch](../assets/use-cases/deploy-application-from-feature-branch/create-branch-button.png "Create branch")
+
+4. Click the **Create branch** button and fill in the form:
 
   * **Branch Name**: Specify the name (e.g., `feature/tt-000`).
   * **From Commit Hash**: Specify the commit hash or leave it empty for the latest commit.
@@ -77,21 +81,21 @@ To create a feature branch via KubeRocketCI. Follow these steps:
   * **Review Pipeline**: Leave the default pipeline.
   * **Build Pipeline**: Leave the default pipeline.
 
-  ![Create branch button](../assets/use-cases/deploy-application-from-feature-branch/create-branch-button.png "Create branch button")
+  ![Create branch button](../assets/use-cases/deploy-application-from-feature-branch/create-branch-window.png "Create branch button")
 
-4. Click **Create** to finalize the branch creation.
+5. Click **Create** to finalize the branch creation.
 
-5. The branch will also be created in Bitbucket. Verify its creation in the repository:
+6. The branch will also be created in GitHub. Verify its creation in the repository:
 
-  ![Codebase branches in Bitbucket](../assets/use-cases/deploy-application-from-feature-branch/bitbucket-codebase-branches.png "Codebase branches in Bitbucket")
+  ![Codebase branches in GitHub](../assets/use-cases/deploy-application-from-feature-branch/github-codebase-branches.png "Codebase branches in GitHub")
 
-  Since we don't create merge request to merge our feature with the main branch, we need to manually trigger the build pipeline in KubeRocketCI portal.
+  Since we don't create a pull request to merge our feature with the main branch, we need to manually trigger the build pipeline in the KubeRocketCI portal.
 
-6. Build the application using the **Build** button:
+7. Build the application using the **Build** button:
 
   ![Build button](../assets/use-cases/deploy-application-from-feature-branch/build-application.png "Build button")
 
-7. View the build pipeline run details by clicking the pipeline run name:
+8. View the build pipeline run details by selecting the PipelineRun name:
 
   ![Build pipeline details](../assets/use-cases/deploy-application-from-feature-branch/build-pipeline-details.png "Build pipeline details")
 
@@ -99,51 +103,92 @@ To create a feature branch via KubeRocketCI. Follow these steps:
 
 Once you have completed the onboarding process for the feature branch, you can deploy its artifacts to a dedicated feature environment.
 
-#### Create Deployment Flow
+#### Create Deployment
 
-We recommend using initials to name the deployment flow. For example, a user with the email `firstname_lastname@example.com` should use `fl` as the identifier.
+We recommend using initials to name the Deployment. For example, a user with the email `firstname_lastname@example.com` should use `fl` as the identifier.
 
 To create a feature environment, follow the steps below:
 
-1. Open the **Deployment Flows** section and click **Create Deployment Flow**:
+1. Open the **Deployments** section and click **Create Deployment**:
 
-  ![Create deployment flow button](../assets/use-cases/deploy-application-from-feature-branch/create-deployment-flow-enter-name.png "Create deployment flow button")
+  ![Create deployment button](../assets/use-cases/general/create-cd-pipeline-1.png "Create deployment button")
 
-2. Select components and branches for the deployment flow. Disable the **Promote Applications** switcher for environments without Quality Gate promotion and click **Create**:
+2. In the **Create new deployment** dialog, fill in the required fields:
 
-  ![Enter name window](../assets/use-cases/deploy-application-from-feature-branch/create-deployment-flow-add-application.png "Enter name window")
+    - **Applications**:
+
+      - Applications: Add `inventory-service` application
+      - Branch: Select `feature/tt-000` branch
+
+      ![Applications step](../assets/use-cases/deploy-application-from-feature-branch/create-deployment-applications.png "Applications step")
+
+    - **Pipeline configuration**:
+
+      - Pipeline name: `fl`
+      - Description: `Deploy the "inventory-service" application for the "Firstname Lastname" user`
+      - Deployment type: Select `Container`
+      - Promote applications: Leave unchecked
+
+      ![Pipeline configuration step](../assets/use-cases/deploy-application-from-feature-branch/create-deployment-pipeline-configuration.png "Pipeline configuration step")
+
+    - **Review**:
+
+      Verify the Deployment configuration and click **Create deployment**:
+
+      ![Review step](../assets/use-cases/deploy-application-from-feature-branch/create-deployment-review.png "Review step")
+
+3. In the congratulations window, click **Open deployment**:
+
+    ![Deployment created](../assets/use-cases/deploy-application-from-feature-branch/deployment-created.png "Deployment created")
 
 #### Create Environment
 
-The next step is to create an environment:
+The next step is to create an Environment:
 
-1. Select the deployment flow from the **Deployment Flows** section.
+1. On the Deployment details page, click the **Create Environment** button:
 
-2. Click the **Create Environment** button and fill in the form:
+    ![Create environment](../assets/use-cases/deploy-application-from-feature-branch/add-environment.png "Create environment")
 
-  * **Cluster**: Choose the target cluster.
-  * **Environment Name**: Specify the name (`dev`).
-  * **Description**: Specify the description for the environment.
-  * **Deploy Pipeline Template**: Select the deployment pipeline (`deploy`).
-  * **Namespace**: Use the pre-defined namespace without modifications.
-  * **Trigger Type**: Select `Manual`.
-  * **Clean Pipeline Template**: Choose the clean pipeline (`clean`)
+2. Fill in the required fields:
 
-![Create environment menu](../assets/use-cases/deploy-application-from-feature-branch/create-environment-configure-stage.png "Create environment menu")
+    - **Basic configuration**:
 
-3. Set Manual as the Quality Gate type and click **Create**:
+      - Cluster: `in-cluster`
+      - Environment name: `dev`
+      - Deploy namespace: `krci-fl-dev`
+      - Description: `Personal environment for Firstname Lastname user`
 
-![Add quality gates menu](../assets/use-cases/deploy-application-from-feature-branch/create-environment-add-qg.png "Add quality gates menu")
+      ![Basic configuration step](../assets/use-cases/deploy-application-from-feature-branch/create-environment-basic-configuration.png "Basic configuration step")
 
-4. On the congratulations window, click **Go to environment**.
+    - **Pipeline configuration**:
 
-The feature environment is now ready for deployment.
+      - Trigger type: `Manual`
+      - Deploy Pipeline template: `deploy`
+      - Clean Pipeline template: `clean`
+
+      ![Pipeline configuration step](../assets/use-cases/deploy-application-from-feature-branch/create-environment-pipeline-configuration.png "Pipeline configuration step")
+
+    - **Quality Gates**:
+
+      Leave everything as is:
+
+      ![Quality gates step](../assets/use-cases/deploy-application-from-feature-branch/create-environment-quality-gates.png "Quality gates step")
+
+    - **Review**:
+
+      Review the specified values and click the **Create environment** button:
+
+      ![Review step](../assets/use-cases/deploy-application-from-feature-branch/create-environment-review.png "Review step")
+
+3. In the congratulations window, click **Go to environment**.
+
+The feature Environment is now ready for deployment.
 
 #### Deploy Application
 
 To deploy an application, follow the steps below:
 
-1. Click **Configure Deploy**, select the image tag to be deployed, and proceed with the **Start Deploy** button:
+1. Click **Configure deploy**, select the image tag to be deployed, and proceed with the **Start deploy** button:
 
   ![Application deployment](../assets/use-cases/deploy-application-from-feature-branch/deploy-application.png "Application deployment")
 
@@ -155,7 +200,7 @@ To deploy an application, follow the steps below:
 
   ![View deploy pipeline details](../assets/use-cases/deploy-application-from-feature-branch/deploy-pipeline-details.png "View deploy pipeline details")
 
-4. Open application in Argo CD by clicking the **Argo CD** button:
+4. Open the application in Argo CD using the **Argo CD** button:
 
   ![Check deploy pipeline run](../assets/use-cases/deploy-application-from-feature-branch/open-in-argo-cd.png "Check deploy pipeline run")
 
@@ -165,19 +210,19 @@ To deploy an application, follow the steps below:
 
 ### Deploy With Custom Parameters
 
-The platform utilizes a Helm chart found in the **deploy-templates** folder of each component repository. To deploy a feature branch with custom variables, select the **Values override** option on the environment page. The **Values override** option allows to redefine default parameters in the **deploy-templates** folder of the Helm chart.
+The platform utilizes a Helm chart found in the **deploy-templates** folder of each Project repository. To deploy a feature branch with custom variables, select the **Values override** option on the Environment page. The **Values override** option allows you to override default parameters in the **deploy-templates** folder of the Helm chart.
 
 :::note
 Before enabling this option, you must provide custom parameters for the application. To do this, please add the required values to the `values.yaml` file in the GitOps repository, ensuring you follow the expected structure.
 :::
 
-For the `inventory-service` application, no Helm chart variables are defined yet. So, we will modify the Helm chart to add a parameter. If your Helm chart already has variables to redefine, you can proceed to step 4.
+For the `inventory-service` application, no Helm chart variables are defined yet. So, we will modify the Helm chart to add a parameter. If your Helm chart already has variables to override, you can proceed to step 4.
 
 1. In KubeRocketCI, navigate back to the application and open the branch source code:
 
   ![Open application source code](../assets/use-cases/deploy-application-from-feature-branch/application-source-code.png "Open application source code")
 
-2. Clone the application repository to the local machine. Checkout to the feature branch and paste the contents below to the `deploy-templates/templates/deployment.yaml` and `deploy-templates/values.yaml` files:
+2. Clone the application repository to the local machine. Check out the feature branch and paste the contents below to the `deploy-templates/templates/deployment.yaml` and `deploy-templates/values.yaml` files:
 
 ```yaml title="values.yaml"
 
@@ -207,15 +252,15 @@ The resulting difference should look this way:
 
   ![Open application source code](../assets/use-cases/deploy-application-from-feature-branch/application-diff.png "Open application source code")
 
-3. Commit your changes and push your branch to the origin.
+3. Commit your changes, push your branch to the remote repository, and build the application (feature branch) once again. 
 
-4. Open the GitOps repository by clicking the **Go to the source code** button:
+4. Open the GitOps repository using the **Go to the source code** button:
 
   ![Go to the source code button](../assets/use-cases/deploy-application-from-feature-branch/go-to-the-source-code.png "Go to the source code button")
 
-5. Clone the GitOps repository to the local machine. Checkout to another branch and create a file by the `<deployment-flow-name>/<environment-name>/<application-name>-values.yaml` pattern (in our case, `fl/dev/notifications-service-values.yaml`).
+5. Clone the GitOps repository to the local machine. Check out another branch and create a file by the `<deployment-name>/<environment-name>/<application-name>-values.yaml` pattern (in our case, `fl/dev/inventory-service-values.yaml`).
 
-6. Open the `<deployment-flow-name>/<environment-name>/<application-name>-values.yaml` file and paste the contents below:
+6. Open the `<deployment-name>/<environment-name>/<application-name>-values.yaml` file and paste the contents below:
 
 ```yaml title="values.yaml"
 
@@ -225,19 +270,19 @@ extraEnv:
 
 ```
 
-7. Commit your changes, push your branch to the origin and create a pull request:
+7. Commit your changes, push your branch to the remote repository and create a pull request:
 
   ![Pull request details](../assets/use-cases/deploy-application-from-feature-branch/gitops-difference.png "Pull request details")
 
 8. Merge the pull request.
 
-9. On the environment page, click the **Configure Deploy** button. When deploying an application, enable the **Values Override** option in the environment settings:
+9. On the Environment page, click the **Configure deploy** button. When deploying an application, enable the **Values override** option in the Environment settings:
 
   ![Enable values override option](../assets/use-cases/deploy-application-from-feature-branch/enable-values-override.png "Enable values override option")
 
-  When the **Values Override** option is enabled, the platform navigates to the GitOps repository to pull the parameters from the `<application-name>-values.yaml` file and then redefines them in an Argo CD application accordingly.
+  When the **Values override** option is enabled, the platform navigates to the GitOps repository to pull the parameters from the `<application-name>-values.yaml` file and then overrides them in an Argo CD application accordingly.
 
-10. If the application is deployed in the "in-cluster", open the pod terminal using a dedicated button in the environment details page:
+10. If the application is deployed in the "in-cluster", open the pod terminal using a dedicated button on the Environment details page:
 
   ![Show logs button](../assets/use-cases/deploy-application-from-feature-branch/show-terminal-button.png "Show logs button")
 
@@ -249,7 +294,7 @@ env | grep NAME
 
   ![Show logs button](../assets/use-cases/deploy-application-from-feature-branch/application-terminal-krci.png "Show logs button")
 
-12. (Optional) If you deploy the application in the [remote cluster](../user-guide/add-cluster.md), you can open the deployed application in Argo CD and click the pod block:
+12. (Optional) If you deploy the application in the [remote cluster](../user-guide/add-cluster.md), you can open the deployed application in Argo CD and select the pod block:
 
   ![Enable values override option](../assets/use-cases/deploy-application-from-feature-branch/application-pod.png "Enable values override option")
 
@@ -259,44 +304,44 @@ env | grep NAME
 env | grep NAME
 ```
 
-  ![Application terminal (Argo CD)](../assets/use-cases/deploy-application-from-feature-branch/application-terminal-krci.png "Application terminal (Argo CD)")
+  ![Application terminal (Argo CD)](../assets/use-cases/deploy-application-from-feature-branch/application-terminal-argo-cd.png "Application terminal (Argo CD)")
 
 ### Cleanup
 
-After merging the feature branch, please delete the branch and environment.
+After merging the feature branch, please delete the branch and Environment.
 
 #### Delete Feature Environment
 
-1. In the KubeRocketCI portal, return to the environment.
+1. In the KubeRocketCI portal, return to the Environment.
 
-2. Select application from the **Applications** tab and click the **Delete** button to remove the application from the environment:
+2. Select the application from the **Applications** tab and click the **Delete** button to remove the application from the Environment:
 
   ![Delete application from environment](../assets/use-cases/deploy-application-from-feature-branch/delete-application.png "Delete application from environment")
 
-3. Navigate to the **Deployment Flows** section. Click the actions button and select **Delete**:
+3. Navigate to the **Deployments** section. Click the actions button and select **Delete**:
 
-  ![Delete deployment flow](../assets/use-cases/deploy-application-from-feature-branch/delete-deployment-flow.png "Delete deployment flow")
+  ![Delete deployment](../assets/use-cases/deploy-application-from-feature-branch/delete-deployment.png "Delete deployment")
 
 #### Delete Feature Branch
 
 The last step is to delete a feature branch for the application:
 
-1. Navigate to the **Components** section.
+1. Navigate to the **Projects** section.
 
-2. Open to the component where you want to delete the feature branch.
+2. Open the Project that contains the feature branch.
 
 3. Delete the branch from the **Branches** tab:
 
   ![Delete branch in KubeRocketCI](../assets/use-cases/deploy-application-from-feature-branch/delete-feature-branch-portal.png "Delete branch in KubeRocketCI")
 
-4. Delete the feature branch from Bitbucket:
+4. Delete the feature branch from GitHub:
 
-  ![Delete branch in Bitbucket](../assets/use-cases/deploy-application-from-feature-branch/delete-feature-branch-bitbucket.png "Delete branch in Bitbucket")
+  ![Delete branch in GitHub](../assets/use-cases/deploy-application-from-feature-branch/delete-feature-branch-github.png "Delete branch in GitHub")
 
 ## Related Articles
 
 - [Use Cases](./index.md)
 - [Add Application](../user-guide/add-application.md)
-- [Add Deployment Flow](../user-guide/add-cd-pipeline.md)
-- [Manage Deployment Flows](../user-guide/manage-environments.md)
+- [Add Deployment](../user-guide/add-cd-pipeline.md)
+- [Manage Deployments](../user-guide/manage-environments.md)
 - [Manage GitOps](../user-guide/gitops.md)

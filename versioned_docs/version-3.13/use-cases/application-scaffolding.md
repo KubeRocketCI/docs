@@ -157,7 +157,7 @@ To succeed with the steps above, follow the instructions below:
 
       ![Applications step](../assets/use-cases/fastapi-scaffolding/create-deployment-applications.png "Applications step")
 
-    - **Add applications**:
+    - **Pipeline configuration**:
 
       - Pipeline name: `mypipe`
       - Description: `Deployment for FastAPI application`

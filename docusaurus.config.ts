@@ -176,6 +176,9 @@ const config: Config = {
           blogTitle: 'Blog: CI/CD Insights, DevOps and Kubernetes Guides',
           blogDescription:
             'Explore KubeRocketCI Blog for the latest insights, tutorials, and guides on CI/CD practices, DevOps culture, and Kubernetes technologies.',
+          // Recent posts shown in the blog sidebar (default is 5). 'ALL' lists every
+          // post; replace with a number (e.g. 20) to cap it as the blog grows.
+          blogSidebarCount: 'ALL',
           feedOptions: {
             type: 'all',
             copyright: `Copyright © ${new Date().getFullYear()} KubeRocketCI.`,

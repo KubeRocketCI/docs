@@ -299,7 +299,7 @@ GitLab CI integration in KubeRocketCI lets a Codebase run its pipeline in **GitL
 
 Before you enable it, set up three things: a **GitLab Runner** (KubeRocketCI does not bundle one), the **onboarded CI/CD components** in your own instance (they only resolve on the same GitLab), and the **template ConfigMap** KubeRocketCI injects. Complete these once, and subsequent GitLab-CI Codebases require no additional setup.
 
-I ran the full flow on June 8, 2026 on the local [try-kuberocketci](/blog/try-kuberocketci-locally) testbed: review pipeline green in 91s (10 jobs), build pipeline green in 100s (12 jobs), image pushed to GitLab's Container Registry, release tags created, and zero Tekton PipelineRuns - every command and result above is from that run.
+I ran the full flow on the local [try-kuberocketci](/blog/try-kuberocketci-locally) testbed: review pipeline green in 91s (10 jobs), build pipeline green in 100s (12 jobs), image pushed to GitLab's Container Registry, release tags created, and zero Tekton PipelineRuns - every command and result above is from that run.
 
 The most useful next steps from here:
 

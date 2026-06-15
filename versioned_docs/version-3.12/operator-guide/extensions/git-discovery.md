@@ -24,7 +24,7 @@ To install GitFusion, ensure that a [KrakenD](./krakend.md) instance is installe
 ## Installation
 
 :::warning
-When integrating GitFusion with Bitbucket repositories, ensure your Bitbucket app password includes the `account:read` permission scope. Detailed instructions for configuring Bitbucket app passwords with appropriate permissions are available in the [Add Git Server](../../user-guide/add-git-server.md) documentation.
+When integrating GitFusion with Bitbucket repositories, ensure your Bitbucket API token includes the `account:read` permission scope. Detailed instructions for configuring Bitbucket API tokens with appropriate permissions are available in the [Add Git Server](../../user-guide/add-git-server.md) documentation.
 :::
 
 To enable the GitFusion integration in KubeRocketCI, follow the steps below:

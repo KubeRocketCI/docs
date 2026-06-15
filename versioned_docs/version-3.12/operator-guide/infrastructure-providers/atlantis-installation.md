@@ -420,7 +420,7 @@ After configuring the webhook, it is necessary to create the Atlantis webhook Ku
       --from-literal=bitbucket_secret=<bitbucket_secret>
     ```
 
-    The `bitbucket_token` is the generated [Access Token](https://www.runatlantis.io/docs/access-credentials.html#generating-an-access-token) for the Bitbucket user.
+    The `bitbucket_token` is the generated [API Token](https://support.atlassian.com/bitbucket-cloud/docs/using-api-tokens/) for the Bitbucket user.
 
     The `bitbucket_secret` is the generated [secret](https://www.runatlantis.io/docs/webhook-secrets.html) for the Bitbucket webhook.
 
@@ -492,7 +492,7 @@ After configuring the webhook, it is necessary to create the Atlantis webhook Ku
     }
     ```
 
-    The `bitbucket_token` is the generated [Access Token](https://www.runatlantis.io/docs/access-credentials.html#generating-an-access-token) for the Bitbucket user.
+    The `bitbucket_token` is the generated [API Token](https://support.atlassian.com/bitbucket-cloud/docs/using-api-tokens/) for the Bitbucket user.
 
     The `bitbucket_secret` is the generated [secret](https://www.runatlantis.io/docs/webhook-secrets.html) for the Bitbucket webhook.
 

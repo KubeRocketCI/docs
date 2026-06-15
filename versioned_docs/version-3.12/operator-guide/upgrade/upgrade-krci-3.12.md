@@ -437,7 +437,7 @@ Kaniko is still used by default. To switch between Kaniko and BuildKit, set the 
 3. (Optional) Enable Repository Discovery:
 
     :::warning
-    In case of using GitFusion with the Bitbucket Git provider, it is necessary to update the Bitbucket API token permissions to include the `read:account` scope. For more details on how to create a Bitbucket app password with the required permissions, refer to the [Add Git Server](../../user-guide/add-git-server.md) guide.
+    In case of using GitFusion with the Bitbucket Git provider, it is necessary to update the Bitbucket API token permissions to include the `read:account` scope. For more details on how to create a Bitbucket API token with the required permissions, refer to the [Add Git Server](../../user-guide/add-git-server.md) guide.
     :::
 
     :::note

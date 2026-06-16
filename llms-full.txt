@@ -28027,6 +28027,7 @@ For [Bitbucket](https://support.atlassian.com/bitbucket-cloud/docs/create-an-api
         - `read:account` - to read user account information.
         - `admin:repository:bitbucket` - to manage repositories.
         - `read:repository:bitbucket` - to read repository data.
+        - `write:repository:bitbucket` - to write repository data, including commit build statuses.
         - `read:pullrequest:bitbucket` - to read pull request information.
         - `read:webhook:bitbucket` - to read webhook configurations.
         - `write:webhook:bitbucket` - to create and manage webhooks.
@@ -28041,10 +28042,13 @@ For [Bitbucket](https://support.atlassian.com/bitbucket-cloud/docs/create-an-api
 3. Enable integration in KubeRocketCI:
 
     :::warning
-    For integration with **Bitbucket**, the **token** field should be in the format `username:APItoken` and must be base64 encoded. To encode the token, use the following command:
+    For integration with **Bitbucket**, the **token** field must contain the base64-encoded string `<atlassian-account-email>:<api-token>`. Note the following:
+
+    * Use your **Atlassian account email** as the username part (not your Bitbucket nickname). A wrong identifier results in a silent `401 Unauthorized`.
+    * Encode the value with the `-n` flag — it is **mandatory**. A trailing newline makes the credential invalid and produces an `Invalid Authorization header` error.
 
     ```bash
-    echo -n "username:APItoken" | base64
+    echo -n "jane.doe@example.com:ATATT3xFf...your-api-token" | base64
     ```
     :::
 

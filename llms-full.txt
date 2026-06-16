@@ -10194,7 +10194,7 @@ GitFusion enhances the developer experience by facilitating automated discovery 
 ## Installation
 
 :::warning
-When integrating GitFusion with Bitbucket repositories, ensure your Bitbucket app password includes the `account:read` permission scope. Detailed instructions for configuring Bitbucket app passwords with appropriate permissions are available in the [Add Git Server](../../user-guide/add-git-server.md) documentation.
+When integrating GitFusion with Bitbucket repositories, ensure your Bitbucket API token includes the `account:read` permission scope. Detailed instructions for configuring Bitbucket API tokens with appropriate permissions are available in the [Add Git Server](../../user-guide/add-git-server.md) documentation.
 :::
 
 To enable the GitFusion integration in KubeRocketCI, follow the steps below:
@@ -10691,7 +10691,7 @@ After configuring the webhook, it is necessary to create the Atlantis webhook Ku
       --from-literal=bitbucket_secret=<bitbucket_secret>
     ```
 
-    The `bitbucket_token` is the generated [Access Token](https://www.runatlantis.io/docs/access-credentials.html#generating-an-access-token) for the Bitbucket user.
+    The `bitbucket_token` is the generated [API Token](https://support.atlassian.com/bitbucket-cloud/docs/using-api-tokens/) for the Bitbucket user.
 
     The `bitbucket_secret` is the generated [secret](https://www.runatlantis.io/docs/webhook-secrets.html) for the Bitbucket webhook.
 
@@ -10763,7 +10763,7 @@ After configuring the webhook, it is necessary to create the Atlantis webhook Ku
     }
     ```
 
-    The `bitbucket_token` is the generated [Access Token](https://www.runatlantis.io/docs/access-credentials.html#generating-an-access-token) for the Bitbucket user.
+    The `bitbucket_token` is the generated [API Token](https://support.atlassian.com/bitbucket-cloud/docs/using-api-tokens/) for the Bitbucket user.
 
     The `bitbucket_secret` is the generated [secret](https://www.runatlantis.io/docs/webhook-secrets.html) for the Bitbucket webhook.
 
@@ -22866,7 +22866,7 @@ Kaniko is still used by default. To switch between Kaniko and BuildKit, set the 
 3. (Optional) Enable Repository Discovery:
 
     :::warning
-    In case of using GitFusion with the Bitbucket Git provider, it is necessary to update the Bitbucket API token permissions to include the `read:account` scope. For more details on how to create a Bitbucket app password with the required permissions, refer to the [Add Git Server](../../user-guide/add-git-server.md) guide.
+    In case of using GitFusion with the Bitbucket Git provider, it is necessary to update the Bitbucket API token permissions to include the `read:account` scope. For more details on how to create a Bitbucket API token with the required permissions, refer to the [Add Git Server](../../user-guide/add-git-server.md) guide.
     :::
 
     :::note

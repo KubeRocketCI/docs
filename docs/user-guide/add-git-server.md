@@ -48,11 +48,15 @@ For [Bitbucket](https://support.atlassian.com/bitbucket-cloud/docs/create-an-api
       * Click the profile account and navigate to **Settings** -> **Developer Settings**.
       * Select *Personal access tokens (classic)* and generate a new token with the following parameters:
 
+        ![Repo permissions](../assets/operator-guide/github-scopes-1.png "Repo permissions")
 
       :::note
         The access below is required for the codebase operator to setup hooks.
       :::
 
+      ![Admin:repo permission](../assets/operator-guide/github-scopes-2.png "Admin:repo permission")
+      ![Admin:org permission](../assets/operator-guide/github-scopes-4.png "Admin:org permission")
+      ![User permission](../assets/operator-guide/github-scopes-3.png "User permission")
 
       :::warning
         Make sure to save a new personal access token because it won't be displayed later.
@@ -68,6 +72,7 @@ For [Bitbucket](https://support.atlassian.com/bitbucket-cloud/docs/create-an-api
       * Choose a name and an optional expiry date for the token.
       * In the **Scopes** block, select the **api** scope for the token.
 
+        ![Personal access tokens](../assets/operator-guide/scopes.png "Personal access tokens")
 
       * Click the **Create personal access token** button.
 
@@ -83,6 +88,7 @@ For [Bitbucket](https://support.atlassian.com/bitbucket-cloud/docs/create-an-api
       * Choose a role: *Owner* or *Maintainer*.
       * In the **Scopes** block, select the *api* scope for the token.
 
+        ![Project access tokens](../assets/operator-guide/scopes-project.png "Project access tokens")
 
       * Click the **Create project access token** button.
       </TabItem>
@@ -97,12 +103,15 @@ For [Bitbucket](https://support.atlassian.com/bitbucket-cloud/docs/create-an-api
       * In the **API tokens** section, click the **Create and manage API tokens** button.
       * In the opened **API tokens** page, click the **Create API token with scopes** button.
 
+        ![Create API token](../assets/operator-guide/git-servers/bitbucket-create-api-token.png "Create API token")
 
       * In the **Name and expiry** section, provide a name for the token and set the desired expiration period.
 
+        ![Name and expiry](../assets/operator-guide/git-servers/bitbucket-name-and-expiry.png "Name and expiry")
 
       * In the **Select app** section, choose the "Bitbucket" option as API token app.
 
+        ![Select app](../assets/operator-guide/git-servers/bitbucket-select-app.png "Select app")
 
       * In the **Select scopes** section, select the required scopes for the token. The following scopes are required for KubeRocketCI integration:
 
@@ -114,12 +123,15 @@ For [Bitbucket](https://support.atlassian.com/bitbucket-cloud/docs/create-an-api
         - `read:webhook:bitbucket` - to read webhook configurations.
         - `write:webhook:bitbucket` - to create and manage webhooks.
 
+        ![Select scopes](../assets/operator-guide/git-servers/bitbucket-select-scopes.png "Select scopes")
 
       * In the **Create token** section, verify the provided information and click the **Create token** button.
 
+        ![Create token](../assets/operator-guide/git-servers/bitbucket-create-token.png "Create token")
 
       * Copy the generated token and store it securely, as it will not be displayed again.
 
+        ![Copy token](../assets/operator-guide/git-servers/bitbucket-copy-token.png "Copy token")
 
       </TabItem>
     </Tabs>

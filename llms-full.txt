@@ -4735,11 +4735,50 @@ The [KubeRocketCI CLI](https://github.com/KubeRocketCI/cli) authenticates users 
   Create the client only in the **Platform realm** you identified above. Application clients belong there, not in Keycloak’s built-in administrative realms.
 :::
 
-## Select Realm
+## Configure via KeycloakClient (GitOps)
+
+If your cluster is managed with [edp-cluster-add-ons](https://github.com/epam/edp-cluster-add-ons) and the **Keycloak Operator** is installed, you can provision the `krci-cli` client as a `KeycloakClient` custom resource instead of using the Admin Console.
+
+The reference manifest ships with the `kuberocketci-rbac` add-on:
+
+[`clusters/core/addons/kuberocketci-rbac/templates/broker/keycloak-client-krci-cli.yaml`](https://github.com/epam/edp-cluster-add-ons/blob/main/clusters/core/addons/kuberocketci-rbac/templates/broker/keycloak-client-krci-cli.yaml)
+
+It creates a public OpenID Connect client in the Platform **broker** realm (`realmRef.kind: KeycloakRealm`). This matches the realm the Portal typically uses (confirm via `GET /rest/v1/config/oidc` on your Portal URL).
+
+The manifest configures:
+
+- **Client ID**: `krci-cli`
+- **Redirect URIs**: `http://127.0.0.1/*`, `http://localhost/*`
+- **Default scopes**: `profile`, `email`, `roles`, `groups`
+- **Audience mapper**: `kubernetes` (for clusters with an OIDC-enabled API server)
+
+:::note
+  Other Keycloak clients in add-ons may reference `ClusterKeycloakRealm` (for example realm `main` / `shared`). The CLI client is intentionally created in the **broker** realm, alongside the Portal OIDC issuer.
+:::
+
+Enable the add-on in your fork, sync the Argo CD application, then verify reconciliation:
+
+```bash
+kubectl get keycloakclient krci-cli -n security
+```
+
+Expected status: `OK`.
+
+:::warning
+  When the client is reconciled from Git by the Keycloak Operator, changes made in the Keycloak Admin Console may be overwritten. Update the manifest in your add-ons repository to persist configuration changes.
+:::
+
+If add-ons are not used, or you manage a standalone Keycloak instance, follow the manual steps below in the same realm your Portal uses.
+
+## Configure Manually in Keycloak Admin Console
+
+For a manual setup, use the Keycloak Admin Console to select the same realm as the Portal, create the public `krci-cli` client, review client scopes and token settings, add the Kubernetes audience mapper, and then verify login from your workstation.
+
+### Select Realm
 
 In the Keycloak Admin Console, use the realm drop-down in the top-left corner and select the realm your Portal uses.
 
-## Create Client
+### Create Client
 
 The next step is to create a Keycloak client itself:
 
@@ -4791,7 +4830,7 @@ The screenshots below illustrate **Access settings** (client ID, redirect URIs, 
 
 ![Keycloak client capability and login settings](../../assets/operator-guide/krci-cli-client-for-keycloak/krci-cli-keycloak-capability-login-settings.png)
 
-## Enforce PKCE (S256)
+### Enforce PKCE (S256)
 
 To enforce PKCE, do these steps:
 
@@ -4801,13 +4840,13 @@ To enforce PKCE, do these steps:
 
 This ensures Keycloak only accepts logins that send a PKCE code challenge, which matches how the CLI performs authorization.
 
-## Configure Token Lifetimes
+### Configure Token Lifetimes
 
 On the client **Advanced** tab, you can leave **Access Token Lifespan** and session timeouts **inherited from the realm** (for example five to fifteen minutes for access tokens), or set client-specific values.
 
 At realm level (**Realm settings** → **Tokens**), confirm **OAuth 2.0 Refresh Token Rotation** matches your security policy. The CLI refreshes tokens using the standard OAuth2 token endpoint.
 
-## Configure Client Scopes
+### Configure Client Scopes
 
 To configure client scopes (openid, profile, email, roles, groups), follow the steps below:
 
@@ -4829,7 +4868,7 @@ If the realm has no suitable groups scope yet:
 
 ![Keycloak client scopes assigned to krci-cli](../../assets/operator-guide/krci-cli-client-for-keycloak/krci-cli-keycloak-client-scopes.png)
 
-## Configure Audience Mapper for Kubernetes API
+### Configure Audience Mapper for Kubernetes API
 
 The same ID token can be validated by the Kubernetes API server (when OIDC is enabled on the cluster). Add an **Audience** mapper on the **dedicated** client scope Keycloak creates for this client (name pattern `krci-cli-dedicated`):
 

@@ -3928,14 +3928,18 @@ Below are the guidelines for configuring identity provider in Kubernetes cluster
         # OIDC Identity provider configuration
         cluster_identity_providers = {
           keycloak = {
-            client_id = "eks"
-            issuer_url = "https://example.com/auth/realms/shared"
-            groups_claim = "groups"
+            client_id       = "eks"
+            issuer_url      = "https://example.com/auth/realms/shared"
+            groups_claim    = "groups"
+            username_claim  = "preferred_username"
+            username_prefix = "-"
           }
         }
         ```
 
         This configuration snippet specifies the Keycloak as the OIDC Identity Provider for your EKS cluster. It includes the client ID (`eks`), the issuer URL (pointing to the Keycloak realm), and the claim used for groups (`groups`). This setup ensures that authentication and authorization mechanisms for accessing the EKS cluster are correctly configured to use Keycloak as the identity provider.
+
+        `username_claim` and `username_prefix` control how the authenticated user shows up as a Kubernetes username (in RBAC, `kubectl` output, and audit logs). Leaving them unset makes Kubernetes fall back to the `sub` claim (an opaque Keycloak user ID) prefixed with the issuer URL — see the [Access Validation](#access-validation) section below. Setting `username_claim` to `preferred_username` (or `email`) yields a human-readable username instead. Prefer `preferred_username` over `email`: Kubernetes' OIDC authenticator rejects tokens with `email_verified: false`, which is common for users brokered from a SAML upstream IdP (e.g. Azure AD) since SAML has no `email_verified` equivalent. `username_prefix = "-"` disables prefixing entirely; RBAC in this setup is unaffected either way, since group membership (not username) drives authorization.
 
       </TabItem>
 
@@ -3954,6 +3958,8 @@ Below are the guidelines for configuring identity provider in Kubernetes cluster
         Issuer URL: https://example.com/auth/realms/shared
         Client ID: eks
         Groups Claim: groups
+        Username Claim: preferred_username
+        Username Prefix: -
         ```
       </TabItem>
     </Tabs>
@@ -4051,9 +4057,13 @@ in case a user is configured correctly and is a member of the correct group and 
 
   ```bash
   Error from server (Forbidden): ingresses.networking.k8s.io is forbidden:
-  User "https://<keycloak_url>/auth/realms/shared#<keycloak_user_id>"
+  User "<keycloak_user_email>"
   cannot list resource "ingresses" in API group "networking.k8s.io" in the namespace "<namespace_name>"
   ```
+
+  :::note
+  The `User` field reflects whatever `username_claim`/`username_prefix` are configured in [AWS Configuration](#aws-configuration) above. Without `username_claim` set, it instead shows `https://<keycloak_url>/auth/realms/shared#<keycloak_user_id>` (the `sub` claim prefixed with the issuer URL) — harder to attribute to a real user in `kubectl` output and audit logs.
+  :::
 
 ## Session Update
 
@@ -33103,6 +33113,10 @@ To manage user access to the AWS EKS cluster, you need to assign users to specif
 
 ## Configuring Keycloak as an Identity Provider in AWS EKS
 
+:::note Updated (2026-07-05)
+This section now also sets **Username Claim**/`username_claim` to `preferred_username` and **Username Prefix**/`username_prefix` to `-`. Without a username claim, Kubernetes falls back to the `sub` claim prefixed with the issuer URL (e.g. `https://<keycloak_url>/auth/realms/shared#<keycloak_user_id>`), which is hard to attribute to a real user in `kubectl` output and audit logs. `preferred_username` is recommended over `email`, since Kubernetes' OIDC authenticator rejects tokens where `email_verified` is `false` — common for users brokered from a SAML upstream IdP (e.g. Azure AD), which has no `email_verified` equivalent to assert. RBAC is unaffected either way, since this setup authorizes by group membership, not username.
+:::
+
 There are two methods to configure Keycloak as an identity provider in AWS EKS: using the AWS Management Console or Terraform.
 
 ### Method 1: Using the AWS Management Console
@@ -33121,6 +33135,8 @@ There are two methods to configure Keycloak as an identity provider in AWS EKS: 
     - **Issuer URL**: `https://<keycloak_url>/auth/realms/shared`, where `<keycloak_url>` is the URL of your Keycloak instance.
     - **Client ID**: `eks`.
     - **Groups Claim**: `groups`.
+    - **Username Claim**: `preferred_username`.
+    - **Username Prefix**: `-`.
 
       ![Identity Provider Details](../assets/aws-eks-microsoft-entra-oidc-integration/identity-provider-details.png)
 
@@ -33145,9 +33161,11 @@ To configure Keycloak as an Identity Provider in AWS EKS cluster using Terraform
     ```hcl
     cluster_identity_providers = {
       keycloak = {
-        client_id    = "eks"
-        issuer_url   = "https://<keycloak_url>/auth/realms/shared"
-        groups_claim = "groups"
+        client_id       = "eks"
+        issuer_url      = "https://<keycloak_url>/auth/realms/shared"
+        groups_claim    = "groups"
+        username_claim  = "preferred_username"
+        username_prefix = "-"
       }
     }
     ```

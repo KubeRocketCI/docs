@@ -127,14 +127,18 @@ Below are the guidelines for configuring identity provider in Kubernetes cluster
         # OIDC Identity provider configuration
         cluster_identity_providers = {
           keycloak = {
-            client_id = "eks"
-            issuer_url = "https://example.com/auth/realms/shared"
-            groups_claim = "groups"
+            client_id       = "eks"
+            issuer_url      = "https://example.com/auth/realms/shared"
+            groups_claim    = "groups"
+            username_claim  = "preferred_username"
+            username_prefix = "-"
           }
         }
         ```
 
         This configuration snippet specifies the Keycloak as the OIDC Identity Provider for your EKS cluster. It includes the client ID (`eks`), the issuer URL (pointing to the Keycloak realm), and the claim used for groups (`groups`). This setup ensures that authentication and authorization mechanisms for accessing the EKS cluster are correctly configured to use Keycloak as the identity provider.
+
+        `username_claim` and `username_prefix` control how the authenticated user shows up as a Kubernetes username (in RBAC, `kubectl` output, and audit logs). Leaving them unset makes Kubernetes fall back to the `sub` claim (an opaque Keycloak user ID) prefixed with the issuer URL — see the [Access Validation](#access-validation) section below. Setting `username_claim` to `preferred_username` (or `email`) yields a human-readable username instead. Prefer `preferred_username` over `email`: Kubernetes' OIDC authenticator rejects tokens with `email_verified: false`, which is common for users brokered from a SAML upstream IdP (e.g. Azure AD) since SAML has no `email_verified` equivalent. `username_prefix = "-"` disables prefixing entirely; RBAC in this setup is unaffected either way, since group membership (not username) drives authorization.
 
       </TabItem>
 
@@ -153,6 +157,8 @@ Below are the guidelines for configuring identity provider in Kubernetes cluster
         Issuer URL: https://example.com/auth/realms/shared
         Client ID: eks
         Groups Claim: groups
+        Username Claim: preferred_username
+        Username Prefix: -
         ```
       </TabItem>
     </Tabs>
@@ -250,9 +256,13 @@ in case a user is configured correctly and is a member of the correct group and 
 
   ```bash
   Error from server (Forbidden): ingresses.networking.k8s.io is forbidden:
-  User "https://<keycloak_url>/auth/realms/shared#<keycloak_user_id>"
+  User "<keycloak_user_email>"
   cannot list resource "ingresses" in API group "networking.k8s.io" in the namespace "<namespace_name>"
   ```
+
+  :::note
+  The `User` field reflects whatever `username_claim`/`username_prefix` are configured in [AWS Configuration](#aws-configuration) above. Without `username_claim` set, it instead shows `https://<keycloak_url>/auth/realms/shared#<keycloak_user_id>` (the `sub` claim prefixed with the issuer URL) — harder to attribute to a real user in `kubectl` output and audit logs.
+  :::
 
 ## Session Update
 

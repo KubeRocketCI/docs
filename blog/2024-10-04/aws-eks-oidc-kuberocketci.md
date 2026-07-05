@@ -187,6 +187,10 @@ To manage user access to the AWS EKS cluster, you need to assign users to specif
 
 ## Configuring Keycloak as an Identity Provider in AWS EKS
 
+:::note Updated (2026-07-05)
+This section now also sets **Username Claim**/`username_claim` to `preferred_username` and **Username Prefix**/`username_prefix` to `-`. Without a username claim, Kubernetes falls back to the `sub` claim prefixed with the issuer URL (e.g. `https://<keycloak_url>/auth/realms/shared#<keycloak_user_id>`), which is hard to attribute to a real user in `kubectl` output and audit logs. `preferred_username` is recommended over `email`, since Kubernetes' OIDC authenticator rejects tokens where `email_verified` is `false` — common for users brokered from a SAML upstream IdP (e.g. Azure AD), which has no `email_verified` equivalent to assert. RBAC is unaffected either way, since this setup authorizes by group membership, not username.
+:::
+
 There are two methods to configure Keycloak as an identity provider in AWS EKS: using the AWS Management Console or Terraform.
 
 ### Method 1: Using the AWS Management Console
@@ -205,6 +209,8 @@ There are two methods to configure Keycloak as an identity provider in AWS EKS: 
     - **Issuer URL**: `https://<keycloak_url>/auth/realms/shared`, where `<keycloak_url>` is the URL of your Keycloak instance.
     - **Client ID**: `eks`.
     - **Groups Claim**: `groups`.
+    - **Username Claim**: `preferred_username`.
+    - **Username Prefix**: `-`.
 
       ![Identity Provider Details](../assets/aws-eks-microsoft-entra-oidc-integration/identity-provider-details.png)
 
@@ -229,9 +235,11 @@ To configure Keycloak as an Identity Provider in AWS EKS cluster using Terraform
     ```hcl
     cluster_identity_providers = {
       keycloak = {
-        client_id    = "eks"
-        issuer_url   = "https://<keycloak_url>/auth/realms/shared"
-        groups_claim = "groups"
+        client_id       = "eks"
+        issuer_url      = "https://<keycloak_url>/auth/realms/shared"
+        groups_claim    = "groups"
+        username_claim  = "preferred_username"
+        username_prefix = "-"
       }
     }
     ```

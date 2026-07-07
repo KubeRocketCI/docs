@@ -450,3 +450,4 @@ Once the `GerritGroupMember` resource is created, the user will inherit the perm
 * [KubeRocketCI Portal Overview](../../user-guide/index.md)
 * [EKS OIDC With Keycloak](configure-keycloak-oidc-eks.md)
 * [Argo CD Integration](../cd/argocd-integration.md)
+* [Audit Trails Setup](../monitoring-and-observability/audit-trails-setup.md)

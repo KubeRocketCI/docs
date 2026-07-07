@@ -160,7 +160,7 @@ Define a custom pipeline once with a naming pattern, and every project matching 
 
 ### Branch-Specific Pipelines
 
-When different branches need different logic - `main` with full integration tests, `release` with image signing - pipelines are defined explicitly per branch. See the [custom pipelines flow guide](/docs/use-cases/custom-pipelines-flow#replace-existing-pipelines-for-components-with-custom-pipelines).
+When different branches need different logic - `main` with full integration tests, `release` with image signing - pipelines are defined explicitly per branch. See the [custom pipelines flow guide](/docs/use-cases/custom-pipelines-flow#replace-pipelines-with-personalized-versions).
 
 Both approaches follow the same Git-first workflow: write Tekton YAML, apply to the cluster to verify, commit, and let Argo CD synchronize the authoritative state.
 

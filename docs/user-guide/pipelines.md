@@ -19,9 +19,11 @@ Pipelines are an integral part of any CI/CD. They are involved in code build, re
 
 To see the CI/CD Pipelines section, open the KubeRocketCI portal and select the **CI/CD Pipelines** section:
 
-* **PipelineRuns** - Shows the recent PipelineRuns. You can filter PipelineRuns by status, type, and Codebase it launched for;
+* **PipelineRuns** - Shows the recent PipelineRuns. You can search PipelineRuns and filter them by status, type, and Codebase they launched for;
 * **Pipelines** - This tab allows to view and edit all the Tekton Pipelines created in the platform;
 * **Tasks** - This tab allows to view and edit all the Tekton Tasks created in the platform.
+
+![PipelineRuns list](../assets/user-guide/pipelines/pipelineruns-list.png "PipelineRuns list")
 
 ## Pipeline Overview
 
@@ -29,8 +31,12 @@ To inspect pipeline details, click the PipelineRun name:
 
 * The **Details** tab displays the PipelineRun status and logs;
 * The **View YAML** tab displays the YAML configuration of your pipeline. It also allows to view the general information and resources that the pipeline is connected with;
-The **Diagram** tab displays the pipeline's real-time status. Click the task name to navigate to the corresponding task in the **Details** tab;
+* The **Diagram** tab displays the pipeline's real-time status. Click the task name to navigate to the corresponding task in the **Details** tab;
 * The **Results** tab shows the resulting artifact that was built in the pipeline. Note that this tab is accessible only in Build Pipelines that produce artifacts.
+
+![KubeRocketCI PipelineRun details page showing the Triggered By field](../assets/user-guide/pipelines/pipelinerun-details.png "PipelineRun details showing the Triggered By field")
+
+The PipelineRun header also shows the **Triggered By** field — the identity that started the run. For runs launched by automation (for example, a Git webhook or a scheduled build) this is the service account that created the run; for runs started from the portal it is the corresponding user. The field is resolved from the [platform audit trail](../operator-guide/monitoring-and-observability/audit-trails-setup.md) and is distinct from the **Author** field, which shows the Git commit author. When the initiator cannot be resolved — for example, historical runs created before audit capture was enabled — the field shows **N/A**.
 
 You can also view the build pipeline results from the codebase details page and the Pipelines section.
 

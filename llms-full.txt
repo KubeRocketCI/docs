@@ -1778,6 +1778,7 @@ The list of the available Add-Ons:
 |Jaeger Operator|An operator for deploying and managing Jaeger, an end-to-end distributed tracing system, in Kubernetes clusters.|false|
 |Keycloak|An open-source Identity and Access Management (IAM) solution that enables authentication, authorization, and user management in Kubernetes clusters.|false|
 |Keycloak PostgreSQL|A PostgreSQL database operator that simplifies the deployment and management of PostgreSQL instances in Kubernetes clusters.|false|
+|krci-audit|An append-only admission audit trail (capture, store, and read API) recording who created, updated, or deleted KubeRocketCI resources.|false|
 |MinIO Operator|An operator that simplifies the deployment and management of MinIO, a high-performance object storage server compatible with Amazon S3, in Kubernetes clusters.|false|
 |Nexus|Serves as a repository manager, enabling the proxying, aggregation, and management of dependencies, as well as the storage of artifacts.|false|
 |Nexus Operator|A tool designed to streamline the handling of Nexus resources and configurations, facilitating the proxying, collection, and management of dependencies within a repository manager.|false|
@@ -5550,6 +5551,7 @@ Once the `GerritGroupMember` resource is created, the user will inherit the perm
 * [KubeRocketCI Portal Overview](../../user-guide/index.md)
 * [EKS OIDC With Keycloak](configure-keycloak-oidc-eks.md)
 * [Argo CD Integration](../cd/argocd-integration.md)
+* [Audit Trails Setup](../monitoring-and-observability/audit-trails-setup.md)
 
 ---
 
@@ -16317,6 +16319,129 @@ After completing these steps, SonarQube will be configured with OIDC authenticat
 ## Related Articles
 
 * [OpenID Connect Authentication Overview](./oidc-authentication-overview.md)
+
+---
+
+## Kubernetes Audit Trails Setup
+
+<!-- markdownlint-disable MD025 -->
+
+# Audit Trails Setup
+
+<head>
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/monitoring-and-observability/audit-trails-setup" />
+</head>
+
+The **krci-audit** add-on records an append-only audit trail of admission changes to the Kubernetes resources managed by KubeRocketCI — who created, updated, or deleted an object, and when. It is self-contained and never blocks platform operations: if auditing is unavailable, the change still proceeds.
+
+## Architecture
+
+krci-audit is composed of three parts and a read API:
+
+* **Capture** — a `ValidatingWebhookConfiguration` (the native Kubernetes admission-control mechanism, backed by [kube-audit-rest](https://github.com/RichardoC/kube-audit-rest)) receives the `AdmissionReview` for each matching change. Its `failurePolicy` is `Ignore` with a short timeout, so platform mutations are never blocked.
+* **Ship** — a [Vector](https://vector.dev/) sidecar tails the capture log, keeps only the events selected by the store filter, and writes them to PostgreSQL.
+* **Store** — a dedicated PostgreSQL database holds the events in a monthly-partitioned, append-only table. Writes use a least-privilege role that cannot update or delete existing records.
+* **Read API** — a separate, read-only service exposes initiator lookup (who created a resource) and an audit-events query. It connects to PostgreSQL as a SELECT-only role, so the read path can never modify the trail.
+
+Data flows one way:
+
+```mermaid
+flowchart LR
+    A[Resource change] --> B[Capture webhook]
+    B --> C[Vector]
+    C --> D[(PostgreSQL)]
+    D --> E[Read API]
+    E --> F[Consumers]
+```
+
+A Kubernetes resource change triggers the capture webhook, which Vector ships to PostgreSQL; the read API then serves that stored data to consumers.
+
+## Installation
+
+krci-audit is delivered as a KubeRocketCI [add-on](../add-ons-overview.md). It is disabled by default.
+
+**Prerequisites:** [cert-manager](https://cert-manager.io/) (bundled with KubeRocketCI) issues the webhook's serving certificate. For `pgo` database mode you also need the Crunchydata PostgreSQL operator; to deliver credentials through the [External Secrets Operator](../secrets-management/install-external-secrets-operator.md), install that add-on first.
+
+1. Provide the database credentials Secret. The chart never generates credentials — it only reads a Secret you supply, in every database mode. Create it in the `krci-audit` namespace (or populate it with the [External Secrets Operator](../secrets-management/install-external-secrets-operator.md)):
+
+    ```bash
+    kubectl -n krci-audit create secret generic krci-audit-db-access \
+      --from-literal=db-owner-username=krci-audit \
+      --from-literal=db-owner-password="$(openssl rand -base64 24)" \
+      --from-literal=writer-password="$(openssl rand -base64 24)" \
+      --from-literal=reader-password="$(openssl rand -base64 24)"
+    ```
+
+    The `db-owner-*` keys are required for `simple` mode; `writer-password` is always required; `reader-password` is required when the read API is enabled.
+
+2. Enable the add-on in `clusters/core/apps/values.yaml`:
+
+    ```yaml
+    krci-audit:
+      enable: true
+    ```
+
+3. Sync the add-on in Argo CD. The chart applies the schema migration, provisions PostgreSQL (for `simple`/`pgo` modes), and starts the capture and read API workloads.
+
+## Configuration
+
+The add-on wrapper overrides only `db.mode`; the full configuration surface lives in the component chart's `values.yaml`. The most common settings:
+
+| Setting | Default | Purpose |
+|---------|---------|---------|
+| `capture.rules` | `v2.edp.epam.com/*`, `tekton.dev/pipelineruns` | Which admissions the API server sends to the webhook. |
+| `capture.filter` | KubeRocketCI groups + Tekton PipelineRuns | Which received events are actually stored (change any time with `helm upgrade`, no rebuild). |
+| `capture.namespaces` | `[]` (all) | Restrict auditing to named namespaces. |
+| `capture.level` | `metadata` | Object body captured: `metadata` (bounds size and PII) or `full`. |
+| `db.mode` | `simple` (add-on) | PostgreSQL provisioning: `external` (bring your own), `pgo` (Crunchydata operator), or `simple` (in-cluster Postgres for dev/small installs). |
+| `retention.months` | `12` | Months of history to keep (see [Retention](#retention)). |
+
+### Retention
+
+A scheduled CronJob (nightly at `02:00` by default) drops audit history older than `retention.months`. Retention is **month-granular**: expired data is removed a whole monthly partition at a time, so the smallest effective window is about one month — sub-monthly windows (for example, three weeks) are not supported. The job only drops whole partitions and never deletes individual rows, preserving append-only integrity.
+
+## Access control
+
+The read API is exposed only inside the cluster (a `ClusterIP` Service, no Ingress); consumers reach it by in-cluster DNS. It connects to the database as a SELECT-only role, so it cannot alter the trail. Network exposure is the interim access boundary; API authentication and authorization are planned.
+
+## Querying the audit trail
+
+The read API is reachable in-cluster at `<release>-api.<namespace>:8080`. To query it from your workstation, port-forward the Service:
+
+```bash
+kubectl -n krci-audit port-forward svc/krci-audit-api 18080:8080
+```
+
+Look up who created a resource (initiator lookup) by `kind`, `namespace`, and `name`:
+
+```bash
+curl "http://localhost:18080/api/v1/audit/initiator?kind=PipelineRun&namespace=krci&name=build-test-go-app-main-8a2c"
+```
+
+```json
+{
+  "actor": "system:serviceaccount:krci:krci-admin",
+  "operation": "CREATE",
+  "found": true,
+  "timestamp": "2026-07-07T12:41:00Z"
+}
+```
+
+Query the recorded events (filterable by `kind`, `operation`, `actor`, and paginated):
+
+```bash
+curl "http://localhost:18080/api/v1/audit/events?kind=PipelineRun&operation=UPDATE&limit=20"
+```
+
+## Compliance usage
+
+The audit trail provides evidence for compliance frameworks such as **SOC 2**, **ISO 27001**, **GDPR**, and **PCI DSS**: an immutable, time-stamped record of who changed which resources. Auditors retrieve evidence through the read API — initiator lookup ("who created this resource") and the filterable audit-events query — without direct database access.
+
+## Related Articles
+
+* [Install via Add-Ons](../add-ons-overview.md)
+* [Authentication and Authorization](../auth/platform-auth-model.md)
+* [Pipelines Overview](../../user-guide/pipelines.md)
 
 ---
 
@@ -30958,9 +31083,11 @@ Pipelines are an integral part of any CI/CD. They are involved in code build, re
 
 To see the CI/CD Pipelines section, open the KubeRocketCI portal and select the **CI/CD Pipelines** section:
 
-* **PipelineRuns** - Shows the recent PipelineRuns. You can filter PipelineRuns by status, type, and Codebase it launched for;
+* **PipelineRuns** - Shows the recent PipelineRuns. You can search PipelineRuns and filter them by status, type, and Codebase they launched for;
 * **Pipelines** - This tab allows to view and edit all the Tekton Pipelines created in the platform;
 * **Tasks** - This tab allows to view and edit all the Tekton Tasks created in the platform.
+
+![PipelineRuns list](../assets/user-guide/pipelines/pipelineruns-list.png "PipelineRuns list")
 
 ## Pipeline Overview
 
@@ -30968,8 +31095,12 @@ To inspect pipeline details, click the PipelineRun name:
 
 * The **Details** tab displays the PipelineRun status and logs;
 * The **View YAML** tab displays the YAML configuration of your pipeline. It also allows to view the general information and resources that the pipeline is connected with;
-The **Diagram** tab displays the pipeline's real-time status. Click the task name to navigate to the corresponding task in the **Details** tab;
+* The **Diagram** tab displays the pipeline's real-time status. Click the task name to navigate to the corresponding task in the **Details** tab;
 * The **Results** tab shows the resulting artifact that was built in the pipeline. Note that this tab is accessible only in Build Pipelines that produce artifacts.
+
+![KubeRocketCI PipelineRun details page showing the Triggered By field](../assets/user-guide/pipelines/pipelinerun-details.png "PipelineRun details showing the Triggered By field")
+
+The PipelineRun header also shows the **Triggered By** field — the identity that started the run. For runs launched by automation (for example, a Git webhook or a scheduled build) this is the service account that created the run; for runs started from the portal it is the corresponding user. The field is resolved from the [platform audit trail](../operator-guide/monitoring-and-observability/audit-trails-setup.md) and is distinct from the **Author** field, which shows the Git commit author. When the initiator cannot be resolved — for example, historical runs created before audit capture was enabled — the field shows **N/A**.
 
 You can also view the build pipeline results from the codebase details page and the Pipelines section.
 
@@ -32693,7 +32824,7 @@ Two approaches are available for defining review and build pipelines:
 * Useful for onboarding multiple projects with the same pipeline structure.
 * Pipelines follow a naming pattern and are mapped to projects via project settings.
 
-2. [Branch-Specific Pipelines](/docs/use-cases/custom-pipelines-flow#replace-existing-pipelines-for-components-with-custom-pipelines):
+2. [Branch-Specific Pipelines](/docs/use-cases/custom-pipelines-flow#replace-pipelines-with-personalized-versions):
 
 * Ideal for enabling different pipelines for different branches of a project.
 * Pipelines are explicitly defined for specific branches.
@@ -33801,7 +33932,7 @@ Define a custom pipeline once with a naming pattern, and every project matching 
 
 ### Branch-Specific Pipelines
 
-When different branches need different logic - `main` with full integration tests, `release` with image signing - pipelines are defined explicitly per branch. See the [custom pipelines flow guide](/docs/use-cases/custom-pipelines-flow#replace-existing-pipelines-for-components-with-custom-pipelines).
+When different branches need different logic - `main` with full integration tests, `release` with image signing - pipelines are defined explicitly per branch. See the [custom pipelines flow guide](/docs/use-cases/custom-pipelines-flow#replace-pipelines-with-personalized-versions).
 
 Both approaches follow the same Git-first workflow: write Tekton YAML, apply to the cluster to verify, commit, and let Argo CD synchronize the authoritative state.
 

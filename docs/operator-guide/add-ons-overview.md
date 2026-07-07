@@ -199,6 +199,7 @@ The list of the available Add-Ons:
 |Jaeger Operator|An operator for deploying and managing Jaeger, an end-to-end distributed tracing system, in Kubernetes clusters.|false|
 |Keycloak|An open-source Identity and Access Management (IAM) solution that enables authentication, authorization, and user management in Kubernetes clusters.|false|
 |Keycloak PostgreSQL|A PostgreSQL database operator that simplifies the deployment and management of PostgreSQL instances in Kubernetes clusters.|false|
+|krci-audit|An append-only admission audit trail (capture, store, and read API) recording who created, updated, or deleted KubeRocketCI resources.|false|
 |MinIO Operator|An operator that simplifies the deployment and management of MinIO, a high-performance object storage server compatible with Amazon S3, in Kubernetes clusters.|false|
 |Nexus|Serves as a repository manager, enabling the proxying, aggregation, and management of dependencies, as well as the storage of artifacts.|false|
 |Nexus Operator|A tool designed to streamline the handling of Nexus resources and configurations, facilitating the proxying, collection, and management of dependencies within a repository manager.|false|

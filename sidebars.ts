@@ -264,6 +264,7 @@ const sidebars: SidebarsConfig = {
                 'operator-guide/monitoring-and-observability/kibana-ilm-rollover',
               ],
             },
+            'operator-guide/monitoring-and-observability/audit-trails-setup',
           ],
         },
         // {

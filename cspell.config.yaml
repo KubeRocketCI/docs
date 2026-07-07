@@ -228,6 +228,7 @@ words:
   - pgbackrest
   - pgcrypto
   - pgdb
+  - pgo
   - PGPASSWORD
   - pipelinerun
   - pipelineruns

@@ -77,12 +77,14 @@ words:
   - crunchydata
   - csanchez
   - daniilnedostup
+  - Cowork
   - dbchecker
   - dbcleaner
   - deepcopy
   - defectdojo
   - dependencytrack
   - deployers
+  - drillable
   - DEPTRACK
   - Djava
   - Djgroups
@@ -96,6 +98,7 @@ words:
   - dogfooding
   - dropdb
   - dumpall
+  - EPMDEDP
   - EBSCSI
   - edpcomponent
   - edpcomponents
@@ -128,6 +131,7 @@ words:
   - gitfusion
   - GITFUSION
   - gitops
+  - godev
   - gitrevision
   - Gitserver
   - gitsha
@@ -298,6 +302,7 @@ words:
   - Taskrun
   - tekton
   - tektoncd
+  - tokenomics
   - tfenv
   - tflint
   - Tflint

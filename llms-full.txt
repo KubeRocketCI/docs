@@ -28146,12 +28146,17 @@ For [Bitbucket](https://support.atlassian.com/bitbucket-cloud/docs/create-an-api
 
       * Log in to GitHub.
       * Click the profile account and navigate to **Settings** -> **Developer Settings**.
-      * Select *Personal access tokens (classic)* and generate a new token with the following parameters:
+      * Select *Personal access tokens (classic)* and generate a new token with the following scopes:
+
+        - `repo` - full control of private repositories, including cloning, commit statuses, and posting pipeline result comments on pull requests.
+        - `admin:repo_hook` - to create and manage repository webhooks.
+        - `admin:org_hook` - to create and manage organization webhooks.
+        - `user` - to read user account and email information (Pull Request author details).
 
         ![Repo permissions](../assets/operator-guide/github-scopes-1.png "Repo permissions")
 
       :::note
-        The access below is required for the codebase operator to setup hooks.
+        The access above is required for the codebase operator to setup hooks. The `repo` scope also lets KubeRocketCI post pipeline result comments on pull requests, so no additional scope is needed for that feature.
       :::
 
       ![Admin:repo permission](../assets/operator-guide/github-scopes-2.png "Admin:repo permission")
@@ -28171,6 +28176,10 @@ For [Bitbucket](https://support.atlassian.com/bitbucket-cloud/docs/create-an-api
       * On the **User Settings** menu, select **Access Tokens**.
       * Choose a name and an optional expiry date for the token.
       * In the **Scopes** block, select the **api** scope for the token.
+
+      :::note
+        The `api` scope grants full API access, which also lets KubeRocketCI post pipeline result comments as merge request notes. No additional scope is needed for that feature.
+      :::
 
         ![Personal access tokens](../assets/operator-guide/scopes.png "Personal access tokens")
 
@@ -28220,6 +28229,7 @@ For [Bitbucket](https://support.atlassian.com/bitbucket-cloud/docs/create-an-api
         - `read:repository:bitbucket` - to read repository data.
         - `write:repository:bitbucket` - to write repository data, including commit build statuses.
         - `read:pullrequest:bitbucket` - to read pull request information.
+        - `write:pullrequest:bitbucket` - to post pipeline result comments on pull requests.
         - `read:webhook:bitbucket` - to read webhook configurations.
         - `write:webhook:bitbucket` - to create and manage webhooks.
 

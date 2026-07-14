@@ -63,7 +63,7 @@ The fastest way to try KubeRocketCI locally is two commands on Docker Desktop. T
 | 7    | Run storage    | Tekton Results                                    | v0.17.2                                       | tekton-pipelines |
 | 8    | Code quality   | SonarQube Community + sonar-operator 3.3.0        | 2025.3.1 (chart) / 25.5-community             | sonar            |
 | 9    | SCM + Registry | GitLab CE + bundled Container Registry            | 17.5.1-ce                                     | gitlab           |
-| 10   | Platform       | KubeRocketCI (edp-install)                        | **3.13.5**                                    | krci             |
+| 10   | Platform       | KubeRocketCI (edp-install)                        | **3.14.0**                                    | krci             |
 
 **Why is KubeRocketCI installed last?** The edp-install chart renders provider resources - the GitServer CRD, EventListener, Ingress rules - at install time. If GitLab or Argo CD is not already running when the chart applies, the operator's SSH connection check fails and the platform never reaches a healthy state. Installing KubeRocketCI last, after every dependency is ready, is what makes the chart wire itself correctly on first reconcile.
 
@@ -95,7 +95,7 @@ flowchart TD
     F --> G[Tekton Results]
     G --> H[SonarQube]
     H --> I[gitlab-up: GitLab CE + creds + CoreDNS]
-    I --> J[krci: edp-install 3.13.5 - installed LAST]
+    I --> J[krci: edp-install 3.14.0 - installed LAST]
     J --> K[gitlab-integrate: CA trust + task patches + GitOps repo]
     J --> L[argocd-integrate: repo creds + deploy patch]
     J --> M[sonar-integrate: token + ci-sonarqube secret]
@@ -366,7 +366,7 @@ Yes. Apple Silicon (M1/M2/M3) is fully supported: Docker Desktop's Rosetta 2 emu
 
 ### What components does `make testbed` install?
 
-In dependency order: a single-node kind cluster, ingress-nginx, cert-manager, Tekton Pipelines/Triggers, Argo CD, Prometheus and Grafana, Tekton Results, SonarQube Community, self-hosted GitLab CE (with bundled container registry), and KubeRocketCI edp-install 3.13.5 - 10 components in a defined sequence, with KubeRocketCI installed last so the chart can wire itself to every running dependency on first reconcile.
+In dependency order: a single-node kind cluster, ingress-nginx, cert-manager, Tekton Pipelines/Triggers, Argo CD, Prometheus and Grafana, Tekton Results, SonarQube Community, self-hosted GitLab CE (with bundled container registry), and KubeRocketCI edp-install 3.14.0 - 10 components in a defined sequence, with KubeRocketCI installed last so the chart can wire itself to every running dependency on first reconcile.
 
 ### How do I run an end-to-end CI/CD pipeline locally with KubeRocketCI?
 

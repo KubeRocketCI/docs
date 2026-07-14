@@ -22,16 +22,19 @@ gantt
     title Release Schedule and Lifecycle
 
     section (Under Development)
-    KubeRocketCI 3.14 SNAPSHOT: crit, r44, 2026-03-27, 2026-07-27
+    KubeRocketCI 3.15 SNAPSHOT: crit, r45, 2026-07-14, 2026-12-14
 
     section (Supported)
-    KubeRocketCI 3.13 Release: active, r43, 2026-03-27, 2026-07-27
+    KubeRocketCI 3.14 Release: active, r44, 2026-07-14, 2026-12-14
 
     section (Supported)
-    KubeRocketCI 3.12 Release: active, r42, 2025-07-22, 2026-07-27
+    KubeRocketCI 3.13 Release: active, r43, 2026-03-27, 2026-12-14
 
     section (Supported)
-    KubeRocketCI 3.11 Release: active, r41, 2025-03-21, 2026-07-27
+    KubeRocketCI 3.12 Release: active, r42, 2025-07-22, 2026-12-14
+
+    section (Unsupported)
+    KubeRocketCI 3.11 Release: active, r41, 2025-03-21, 2026-07-14
 
     section (Unsupported)
     KubeRocketCI 3.10 Release: active, r40, 2024-10-18, 2026-03-27
@@ -42,8 +45,6 @@ gantt
     section (Unsupported)
     KubeRocketCI 3.8 Release: r38, 2024-03-12, 2025-03-21
 
-    section (Unsupported)
-    EDP 3.7 Release: r37, 2023-12-15, 2024-10-18
 ```
 
 By concentrating our support on the last three versions, we prioritize staying current with evolving technology landscapes. This enables us to swiftly adapt to advancements in Kubernetes and OpenShift environments, incorporating the latest enhancements, fixes, and optimizations into our platform.
@@ -58,7 +59,7 @@ Get acquainted with the list of the latest releases and component versions on wh
 
 |[Release Version](https://github.com/epam/edp-install/blob/master/RELEASES.md)|Release Date|[EKS Version](https://aws.amazon.com/eks/)|[OpenShift Version](https://github.com/okd-project/okd/releases)|
 |:-:|:-:|:-:|:-:|
-|3.14 |N/A|1.34+|N/A|
+|3.14 |Jul 14, 2026|1.34+|N/A|
 |3.13 |Mar 27, 2026|1.34+|N/A|
 |3.12 |Jul 22, 2025|1.32+|N/A|
 |3.11 |Mar 21, 2025|1.29+|N/A|

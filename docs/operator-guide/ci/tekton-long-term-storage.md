@@ -59,7 +59,7 @@ Tekton Results is deployed as part of the Tekton Pipelines installation. For ins
 ## Configuration
 
 :::note
-We use Postgres operator to connect to Tekton results, but you can use any other external databases supported. Please align configuration accordingly to Tekton result [documentation](https://github.com/tektoncd/results/blob/v0.18.0/docs/external-database.md).
+We use Postgres operator to connect to Tekton results, but you can use any other external databases supported. Please align configuration accordingly to Tekton result [documentation](https://github.com/tektoncd/results/blob/v0.19.0/docs/external-database.md).
 :::
 
 To configure long-term log storage for pipelines in the KubeRocketCI Portal, follow the steps below:

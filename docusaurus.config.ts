@@ -166,7 +166,7 @@ const config: Config = {
           },
           versions: {
             current: {
-              label: '3.14-dev',
+              label: '3.15-dev',
               path: 'next',
             },
           },

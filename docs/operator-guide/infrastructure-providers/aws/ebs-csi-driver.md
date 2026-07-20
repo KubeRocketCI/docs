@@ -1,7 +1,7 @@
 ---
 
-title: "Amazon EBS CSI Driver"
-description: "Enable Amazon EKS clusters to manage Amazon EBS volumes with the EBS CSI driver, covering prerequisites, IAM setup, and add-on installation."
+title: "AWS EBS CSI Driver Setup for EKS"
+description: "Step-by-step guide to setting up the AWS EBS CSI driver on Amazon EKS: IAM OIDC prerequisites, trust policy, IAM role, and add-on install."
 sidebar_label: "Amazon EBS CSI Driver"
 
 ---
@@ -13,7 +13,7 @@ sidebar_label: "Amazon EBS CSI Driver"
   <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/infrastructure-providers/aws/ebs-csi-driver" />
 </head>
 
-The Amazon Elastic Block Store (Amazon EBS) Container Storage Interface (CSI) driver allows Amazon Elastic Kubernetes Service (Amazon EKS) clusters to manage the lifecycle of Amazon EBS volumes for Kubernetes Persistent Volumes.
+This guide shows how to install the AWS EBS CSI driver on an Amazon EKS cluster, step by step: creating the IAM OIDC trust policy, attaching the AWS-managed IAM policy, and deploying the driver as an EKS add-on so Kubernetes can manage Amazon EBS-backed Persistent Volumes.
 
 ## Prerequisites
 

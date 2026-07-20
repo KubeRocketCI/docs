@@ -1,6 +1,6 @@
 ---
-title: "Ephemeral Environments on Kubernetes: Feature Branch Preview Walkthrough"
-description: "Spin up isolated ephemeral preview environments on Kubernetes from a feature branch with KubeRocketCI, Tekton, and Argo CD. Open source, no SaaS bill."
+title: "Ephemeral Preview Environments on Kubernetes"
+description: "Spin up per-feature-branch preview environments on Kubernetes with KubeRocketCI, Tekton, and Argo CD — isolated namespaces, auto-cleanup, no SaaS bill."
 slug: ephemeral-preview-environments-kubernetes-feature-branch
 tags: [KubeRocketCI, Preview Environments, Ephemeral Environments, GitOps, Argo CD, Tekton, Kubernetes, Feature Branch, CD, Platform Engineering, CI/CD, Open Source]
 keywords: [ephemeral environments kubernetes, preview environments kubernetes, feature branch deployment kubernetes, self-hosted preview environments kubernetes, open source preview environments kubernetes, pull request preview environment kubernetes, per-PR environments kubernetes, dynamic environments kubernetes, on-demand environments kubernetes, GitOps preview environments Argo CD, Tekton Argo CD preview environment, kubernetes namespace isolation per feature branch, per environment values override gitops helm, internal developer platform preview environments, destroy kubernetes namespace zero residual cost, open source alternative okteto uffizzi bunnyshell]
@@ -11,7 +11,7 @@ last_update:
   date: 2026-06-07
 ---
 
-# Ephemeral Environments on Kubernetes: Feature Branch Preview Walkthrough
+# Ephemeral Preview Environments on Kubernetes
 
 An ephemeral preview environment is an isolated, temporary Kubernetes deployment created from a single feature branch and torn down when the work is done. Every branch gets its own namespace, its own image, its own URL - and zero of it lingers afterward. Ephemeral environments on Kubernetes make this pattern available on your own cluster - but a hands-on, open-source, portal-native version - feature branch to isolated namespace to one-click destroy, backed by real Tekton CI and Argo CD GitOps - is conspicuously missing from the public record.
 

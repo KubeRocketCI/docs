@@ -1,6 +1,6 @@
 ---
 title: "Integrating OIDC Authentication with Microsoft Entra in AWS EKS"
-description: "Learn how to implement Single Sign-On (SSO) using OpenID Connect (OIDC) and Microsoft Entra to enhance security and streamline authentication processes in Amazon Elastic Kubernetes Service (AWS EKS)."
+description: "Microsoft Entra OIDC integration secures AWS EKS with Single Sign-On: configure OIDC, RBAC, and KubeRocketCI Portal login step by step."
 slug: integrating-oidc-authentication-microsoft-entra-aws-eks
 tags: [KubeRocketCI, AWS EKS, SSO, Microsoft Entra, OIDC, Kubernetes, Security]
 keywords: [KubeRocketCI, Microsoft Entra, AWS EKS, Kubernetes, AWS, EKS, IAM, OpenID Connect, Single Sign-On, Security, Authentication, Authorization]
@@ -15,15 +15,21 @@ In modern cloud environments, secure and efficient access management is essentia
 
 <!--truncate-->
 
+:::info
+**Updated: July 2026** — Links verified and integration steps re-checked against the current Microsoft Entra admin center.
+:::
+
 ## Prerequisites
 
 Before you begin, ensure you have the following:
 
-- Access to the [Microsoft Entra Admin Center](https://entra.microsoft.com/?feature.msaljs=true#home) with administrative privileges.
+- Access to the [Microsoft Entra Admin Center](https://entra.microsoft.com/) with administrative privileges.
 - A running [AWS EKS](https://docs.aws.amazon.com/eks/latest/userguide/create-cluster.html) cluster with the necessary permissions for access and management.
 - The [kubelogin](https://github.com/int128/kubelogin) plugin installed for authenticating to the EKS cluster using OIDC.
 - The [kubectl](https://kubernetes.io/docs/tasks/tools/#kubectl) CLI tool installed.
 - The [aws cli](https://aws.amazon.com/cli/) tool installed.
+
+If you use Keycloak instead of Microsoft Entra, see [Keycloak OIDC for EKS](/docs/operator-guide/auth/configure-keycloak-oidc-eks).
 
 ## Understanding SSO, OIDC, and Microsoft Entra
 
@@ -45,7 +51,7 @@ Microsoft Entra, formerly known as Azure Active Directory (Azure AD), is a moder
 
 To get started with Microsoft Entra, you need to create a new tenant in the Microsoft Entra Admin Center. Follow these steps:
 
-1. Log in to the [Microsoft Entra Admin Center](https://entra.microsoft.com/?feature.msaljs=true#home) using your Microsoft account.
+1. Log in to the [Microsoft Entra Admin Center](https://entra.microsoft.com/) using your Microsoft account.
 
     ![Microsoft Entra Admin Center](../assets/aws-eks-microsoft-entra-oidc-integration/microsoft-entra-admin-center.png)
 
@@ -184,7 +190,7 @@ The Application data, such as **Directory (tenant) ID**, **Application (client) 
 
 ### Method 1: Using the AWS Management Console
 
-1. Log in to the [AWS Management Console](https://aws.amazon.com/console/) and navigate to the [Amazon EKS console](https://console.aws.amazon.com/eks/). Select the EKS cluster you want to configure and click on the **Access** tab.
+1. Log in to the [AWS Management Console](https://aws.amazon.com/console/) and navigate to the [Amazon EKS console](https://console.aws.amazon.com/eks). Select the EKS cluster you want to configure and click on the **Access** tab.
 
     ![EKS Cluster Access Tab](../assets/aws-eks-microsoft-entra-oidc-integration/eks-cluster-access-tab.png)
 
@@ -242,6 +248,10 @@ To configure Microsoft Entra as an Identity Provider in AWS EKS using Terraform,
       cluster_identity_providers = var.cluster_identity_providers
     }
     ```
+
+:::note
+You may notice the issuer URL format differs between methods: the AWS Console example above uses `https://login.microsoftonline.com/<Tenant-ID>/` (Entra v2), while this Terraform example uses `https://sts.windows.net/<Tenant ID>/` (the legacy Entra v1 format). Both are valid, but the issuer you configure must match the `iss` claim of the tokens your app registration actually issues, so check the app's manifest `accessTokenAcceptedVersion` setting before choosing one.
+:::
 
 After applying the Terraform configuration, the Microsoft Entra OIDC identity provider will be associated with the AWS EKS cluster.
 
@@ -361,6 +371,14 @@ To authenticate to the AWS EKS cluster using Microsoft Entra, you can use the `k
 
     ![Sign In](../assets/aws-eks-microsoft-entra-oidc-integration/sign-in.png)
 
+If the Portal sits behind an OAuth2 proxy, see [OAuth2 Proxy](/docs/operator-guide/auth/oauth2-proxy) for the general setup and [Microsoft Entra OAuth2 Proxy Authentication](/docs/operator-guide/microsoft-entra/oauth2-proxy-authentication) for the Entra-specific configuration.
+
 ## Conclusion
 
 Integrating OpenID Connect (OIDC) authentication with Microsoft Entra in AWS EKS is a powerful way to enhance security and streamline user access management. By leveraging the capabilities of SSO, OIDC, and Microsoft Entra, organizations can simplify authentication processes, enforce access controls, and ensure secure navigation across cloud-native environments. Whether you're managing user identities, enhancing compliance, or improving user experience, this integration provides a robust solution to meet your identity and access management needs. By following the steps outlined in this guide, you can configure Microsoft Entra as an Identity Provider in AWS EKS, authenticate users using OIDC, and secure access to your EKS clusters and KubeRocketCI Portal effectively.
+
+**Related reading:**
+
+- [Advanced AWS EKS Management: Implementing SSO via OIDC and Keycloak](/blog/advanced-aws-eks-management-oidc-keycloak) - the same OIDC pattern for AWS EKS, using Keycloak as the identity provider instead of Microsoft Entra.
+- [Keycloak OIDC for EKS](/docs/operator-guide/auth/configure-keycloak-oidc-eks) - the docs reference for the Keycloak-based setup.
+- [OAuth2 Proxy](/docs/operator-guide/auth/oauth2-proxy) and [Microsoft Entra OAuth2 Proxy Authentication](/docs/operator-guide/microsoft-entra/oauth2-proxy-authentication) - securing the KubeRocketCI Portal behind an OAuth2 proxy.

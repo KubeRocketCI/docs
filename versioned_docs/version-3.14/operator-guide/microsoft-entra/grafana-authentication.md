@@ -1,7 +1,7 @@
 ---
 
-title: "Guide: Microsoft Entra SSO Integration With Grafana"
-description: "Step-by-step guide on configuring Grafana with OpenID Connect authentication using Microsoft Entra as the Identity Provider for enhanced access management."
+title: "Grafana Microsoft Entra OIDC SSO Setup"
+description: "Set up Grafana SSO with Microsoft Entra OIDC: step-by-step app registration and Helm chart configuration guide."
 sidebar_label: "Grafana"
 
 ---
@@ -13,9 +13,9 @@ sidebar_label: "Grafana"
   <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/microsoft-entra/grafana-authentication" />
 </head>
 
-This guide provides instructions on configuring OpenID Connect (OIDC) authentication with Microsoft Entra for Grafana.
+Set up Grafana single sign-on with Microsoft Entra as the OIDC identity provider. This guide covers registering the Microsoft Entra application, mapping Entra groups to Grafana roles, and updating the Grafana Helm chart — the same Microsoft Entra pattern used across [Nexus](./nexus-authentication.md), [DefectDojo](./defectdojo-oidc-authentication.md), and other KubeRocketCI add-ons.
 
-## Prerequisites
+## Prerequisites for Grafana SSO with Microsoft Entra
 
 Before you begin, make sure the following prerequisites are met:
 
@@ -25,7 +25,7 @@ Before you begin, make sure the following prerequisites are met:
 - A forked copy of the [edp-cluster-add-ons](https://github.com/epam/edp-cluster-add-ons) repository is created.
 - (Optional) [External Secrets Operator](../secrets-management/install-external-secrets-operator.md) is installed.
 
-## Configuring Microsoft Entra Application
+## Registering the Grafana Application in Microsoft Entra
 
 To configure Microsoft Entra as the Identity Provider for Grafana, it is necessary to create and configure an Application in the Microsoft Entra Admin Center:
 
@@ -97,7 +97,7 @@ To manage access to Grafana, it is necessary to create the groups in Microsoft E
 
 3. After adding the necessary members, review the group settings and click **Create** to save the group. Repeat this process for each required group.
 
-## Configuring Grafana Helm chart
+## Configuring the Grafana Helm Chart for OIDC
 
 To integrate Grafana with configured Microsoft Entra Application, it is necessary to configure the Grafana Helm chart. In this example, we will use the [edp-cluster-add-ons](https://github.com/epam/edp-cluster-add-ons) repository and the **prometheus-operator** Helm chart to deploy Grafana to the Kubernetes (e.g. AWS EKS) cluster.
 
@@ -206,4 +206,6 @@ After completing these steps, Grafana will be configured to use Microsoft Entra 
 
 ## Related Articles
 
+* [Nexus SSO with Microsoft Entra OIDC](./nexus-authentication.md)
+* [DefectDojo Microsoft Entra OIDC SSO Setup](./defectdojo-oidc-authentication.md)
 * [OpenID Connect (OIDC) Authentication Overview](./oidc-authentication-overview.md)

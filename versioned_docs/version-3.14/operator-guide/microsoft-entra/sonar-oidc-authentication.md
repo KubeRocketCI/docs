@@ -1,7 +1,7 @@
 ---
 
-title: "Guide: Microsoft Entra SSO Integration With SonarQube"
-description: "Learn how to configure SonarQube with OIDC authentication using Microsoft Entra as the Identity Provider for secure and centralized access management."
+title: "SonarQube Microsoft Entra OIDC SSO Setup"
+description: "Configure SonarQube SSO with Microsoft Entra OIDC: app registration, group sync, and Sonar-Operator Helm chart configuration guide."
 sidebar_label: "SonarQube"
 
 ---
@@ -13,9 +13,9 @@ sidebar_label: "SonarQube"
   <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/microsoft-entra/sonar-oidc-authentication" />
 </head>
 
-This guide provides instructions on how to configure SonarQube with OpenID Connect (OIDC) authentication using Microsoft Entra as the Identity Provider (IdP).
+Configure SonarQube single sign-on using Microsoft Entra as the OIDC identity provider. This guide covers registering the Microsoft Entra application, syncing Entra groups into SonarQube by Object ID, and configuring OIDC through the [edp-sonar-operator](https://github.com/epam/edp-sonar-operator) Helm chart — a quality-gate setup that fits alongside [DefectDojo](./defectdojo-oidc-authentication.md) and [Dependency-Track](./dependency-track-authentication.md) in a DevSecOps pipeline.
 
-## Prerequisites
+## Prerequisites for SonarQube SSO with Microsoft Entra
 
 Before you begin, make sure the following prerequisites are met:
 
@@ -24,7 +24,7 @@ Before you begin, make sure the following prerequisites are met:
 - [SonarQube](../code-quality/sonarqube.md) is installed.
 - A forked copy of the [edp-cluster-add-ons](https://github.com/epam/edp-cluster-add-ons) repository is created.
 
-## Configuring Microsoft Entra Application
+## Registering the SonarQube Application in Microsoft Entra
 
 To configure Microsoft Entra as the Identity Provider for SonarQube, it is necessary to create and configure an Application in the Microsoft Entra Admin Center:
 
@@ -163,6 +163,17 @@ In this section, we will demonstrate how to set up OIDC authentication for Sonar
 
 After completing these steps, SonarQube will be configured with OIDC authentication using Microsoft Entra as the Identity Provider. Users will be able to log in to SonarQube using their Microsoft Entra credentials.
 
+## Troubleshooting SonarQube SSO with Microsoft Entra
+
+If the login flow fails after completing the steps above, check the following common causes:
+
+- **Error `AADSTS50011` (redirect URI mismatch) after clicking Log in with OpenID Connect.** The Redirect URI registered in the Microsoft Entra Application must exactly match the format shown in the registration step above, including the scheme and callback path. Update the application registration and retry.
+- **Login succeeds, but the user has no expected permissions.** Group synchronization did not match. Verify that the **groups claim** is added in the **Token configuration** section with the **Group ID** type, that the SonarQube group corresponds to the value emitted in the token as described in the groups section above, and that the user is a member of the Microsoft Entra group.
+- **Authentication fails immediately after redirect back to SonarQube.** The client secret has expired or the secret **Secret ID** was copied instead of the secret **Value**. Generate a new client secret in **Certificates & secrets** and update the SonarQube configuration.
+- **The Log in with OpenID Connect button is missing.** The OIDC configuration was not applied. Confirm the updated values were committed and deployed, and that the SonarQube pod restarted after the change.
+
 ## Related Articles
 
+* [DefectDojo Microsoft Entra OIDC SSO Setup](./defectdojo-oidc-authentication.md)
+* [Dependency-Track Microsoft Entra OIDC SSO](./dependency-track-authentication.md)
 * [OpenID Connect Authentication Overview](./oidc-authentication-overview.md)

@@ -1,7 +1,7 @@
 ---
 
-title: "Guide: Microsoft Entra SSO Integration With AWS EKS & KubeRocketCI Portal"
-description: "Comprehensive instructions on configuring OIDC authentication for AWS EKS and KubeRocketCI Portal using Microsoft Entra, including default namespace and user picture configuration."
+title: "AWS EKS & Portal Microsoft Entra OIDC SSO"
+description: "Configure Microsoft Entra OIDC for AWS EKS and the KubeRocketCI Portal: default namespace and profile picture via Entra extension attributes."
 sidebar_label: "AWS EKS & KubeRocketCI Portal"
 
 ---
@@ -13,9 +13,9 @@ sidebar_label: "AWS EKS & KubeRocketCI Portal"
   <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/microsoft-entra/aws-eks-portal-authentication" />
 </head>
 
-This guide provides instructions on how to configure OpenID Connect (OIDC) authentication for the AWS EKS cluster and the KubeRocketCI Portal using Microsoft Entra as the Identity Provider (IdP), as well as how to configure the default namespace and user picture in the KubeRocketCI Portal using Microsoft Entra extension attributes.
+Configure Microsoft Entra as the OIDC identity provider for both the AWS EKS cluster and the KubeRocketCI Portal, then use Entra extension attributes to auto-populate each user's default namespace and profile picture on login. This platform-access setup pairs naturally with [Argo CD Microsoft Entra SSO](./argo-cd-authentication.md) for a single sign-on experience across the deployment stack.
 
-## Prerequisites
+## Prerequisites for AWS EKS & Portal SSO with Microsoft Entra
 
 Before you begin, make sure the following prerequisites are met:
 
@@ -418,4 +418,5 @@ Follow the steps below to configure and assign a custom Token Lifetime Policy to
 
 ## Related Articles
 
+* [Argo CD Microsoft Entra OIDC SSO Setup](./argo-cd-authentication.md)
 * [OpenID Connect (OIDC) Authentication Overview](./oidc-authentication-overview.md)

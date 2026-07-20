@@ -129,13 +129,6 @@ const config: Config = {
           {
             tagName: 'script',
             attributes: {
-              src: 'https://www.googletagmanager.com/gtm.js?id=GTM-527T2HLF',
-              async: 'true',
-            },
-          },
-          {
-            tagName: 'script',
-            attributes: {
               type: 'text/javascript',
             },
             innerHTML: 'window.dataLayer=window.dataLayer||[]',
@@ -201,20 +194,18 @@ const config: Config = {
           lastmod: 'date',
           changefreq: 'weekly',
           priority: 0.5,
-          ignorePatterns: [
-            '/docs/next/**',
-            '/docs/3.11/**',
-            '/docs/3.12/**',
-            '/blog/tags/**',
-            '/blog/authors/**',
-            '/search',
-          ],
+          ignorePatterns: ['/blog/tags/**', '/blog/authors/**', '/search'],
           filename: 'sitemap.xml',
           createSitemapItems: async params => {
             const { defaultCreateSitemapItems, ...rest } = params;
             const items = await defaultCreateSitemapItems(rest);
             return items
               .filter(item => !item.url.includes('/page/'))
+              // Versioned/next docs (e.g. /docs/3.13/..., /docs/next/...) always
+              // canonicalize to the unversioned latest URL, so they must never
+              // ship in the sitemap. Version-agnostic so this never drifts again
+              // when a new version is cut or an old one is dropped.
+              .filter(item => !/\/docs\/(next|\d+\.\d+)\//.test(item.url))
               .map(item => {
                 if (item.url === 'https://docs.kuberocketci.io/') {
                   return { ...item, priority: 1.0, changefreq: 'weekly' };
@@ -395,6 +386,11 @@ const config: Config = {
           label: 'GitHub',
           position: 'right',
         },
+        {
+          href: 'https://kuberocketci.io',
+          label: 'Main Site',
+          position: 'right',
+        },
       ],
     },
 
@@ -423,6 +419,19 @@ const config: Config = {
             {
               label: 'API Reference: Use KubeRocketCI To Build Your Solutions',
               to: '/docs/api/overview',
+            },
+          ],
+        },
+        {
+          title: 'Get Started',
+          items: [
+            {
+              label: 'Main Site',
+              href: 'https://kuberocketci.io',
+            },
+            {
+              label: 'Pricing',
+              href: 'https://kuberocketci.io/pricing',
             },
           ],
         },

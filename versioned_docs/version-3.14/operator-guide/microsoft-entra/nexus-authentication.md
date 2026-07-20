@@ -1,7 +1,7 @@
 ---
 
-title: "Guide: Microsoft Entra SSO Integration With Nexus"
-description: "Instructions on configuring Nexus with OIDC authentication using Microsoft Entra as the Identity Provider, including OAuth2-proxy setup for secure access."
+title: "Nexus SSO With Microsoft Entra OIDC"
+description: "Configure Nexus Repository SSO via Microsoft Entra OIDC and OAuth2-Proxy: app registration, groups, and Helm chart setup guide."
 sidebar_label: "Nexus"
 
 ---
@@ -13,9 +13,9 @@ sidebar_label: "Nexus"
   <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/microsoft-entra/nexus-authentication" />
 </head>
 
-This guide provides instructions on how to configure Nexus with OpenID Connect (OIDC) authentication using Microsoft Entra as the Identity Provider (IdP) and OAuth2-proxy as an authentication proxy.
+Configure single sign-on for Nexus Repository using Microsoft Entra as the OIDC provider and [OAuth2-Proxy](./oauth2-proxy-authentication.md) as the authentication front end. This guide covers Microsoft Entra app registration, Entra group mapping, and the combined Nexus + OAuth2-Proxy Helm chart configuration, followed by user provisioning through the Nexus Operator.
 
-## Prerequisites
+## Prerequisites for Nexus SSO with Microsoft Entra
 
 Before you begin, make sure the following prerequisites are met:
 
@@ -26,7 +26,7 @@ Before you begin, make sure the following prerequisites are met:
 - A forked copy of the [edp-cluster-add-ons](https://github.com/epam/edp-cluster-add-ons) repository is created.
 - (Optional) [External Secrets Operator](../secrets-management/install-external-secrets-operator.md) is installed.
 
-## Configuring Microsoft Entra Application
+## Registering the Nexus Application in Microsoft Entra
 
 To configure Microsoft Entra as the Identity Provider for Nexus, it is necessary to create and configure an Application in the Microsoft Entra Admin Center:
 
@@ -92,7 +92,7 @@ To manage access to Nexus using OAuth2-proxy, it is necessary to create groups i
 
 3. After adding the necessary members, review the group settings and click **Create** to save the group. Repeat this process for each required group.
 
-## Configuring Nexus and OAuth2-proxy Helm charts
+## Configuring Nexus and OAuth2-Proxy Helm Charts
 
 To integrate Nexus with the configured Microsoft Entra Application, it is necessary to configure the Nexus and OAuth2-proxy Helm charts. In this example, we will use the [edp-cluster-add-ons](https://github.com/epam/edp-cluster-add-ons) repository to deploy Nexus and OAuth2-proxy to the Kubernetes (e.g. AWS EKS) cluster.
 
@@ -183,7 +183,7 @@ To integrate Nexus with the configured Microsoft Entra Application, it is necess
 
 3. After updating the `values.yaml` file and creating the `oauth2-proxy` secret, commit the changes to the repository and apply the changes with Helm or Argo CD.
 
-## Creating the Nexus users with Nexus Operator
+## Creating Nexus Users with the Nexus Operator
 
 :::note
 Nexus users can also be created directly from the Nexus UI instead of using the Nexus Operator Helm chart.
@@ -230,4 +230,5 @@ After completing these steps, Nexus will be configured with OIDC authentication 
 
 ## Related Articles
 
+* [OAuth2-Proxy configuration for Microsoft Entra SSO](./oauth2-proxy-authentication.md)
 * [OpenID Connect (OIDC) Authentication Overview](./oidc-authentication-overview.md)

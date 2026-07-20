@@ -1,7 +1,7 @@
 ---
 
-title: "Guide: Microsoft Entra SSO Integration With DefectDojo"
-description: "Comprehensive guide on configuring DefectDojo with OIDC authentication using Microsoft Entra as the Identity Provider for secure access management."
+title: "DefectDojo Microsoft Entra OIDC SSO Setup"
+description: "Set up DefectDojo SSO with Microsoft Entra OIDC: app registration and Helm chart configuration for secure DevSecOps platform access."
 sidebar_label: "DefectDojo"
 
 ---
@@ -13,9 +13,9 @@ sidebar_label: "DefectDojo"
   <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/microsoft-entra/defectdojo-oidc-authentication" />
 </head>
 
-This guide provides instructions on how to configure DefectDojo with OpenID Connect (OIDC) authentication using Microsoft Entra as the Identity Provider (IdP).
+Set up DefectDojo single sign-on using Microsoft Entra as the OIDC identity provider. This guide walks through registering the Microsoft Entra application, configuring redirect URIs, and updating the DefectDojo Helm chart so vulnerability-management access is centrally managed alongside the rest of your DevSecOps stack, including [Dependency-Track](./dependency-track-authentication.md).
 
-## Prerequisites
+## Prerequisites for DefectDojo SSO with Microsoft Entra
 
 Before you begin, make sure the following prerequisites are met:
 
@@ -25,7 +25,7 @@ Before you begin, make sure the following prerequisites are met:
 - A forked copy of the [edp-cluster-add-ons](https://github.com/epam/edp-cluster-add-ons) repository is created.
 - (Optional) [External Secrets Operator](../secrets-management/install-external-secrets-operator.md) is installed.
 
-## Configuring Microsoft Entra Application
+## Registering the DefectDojo Application in Microsoft Entra
 
 To configure Microsoft Entra as the Identity Provider for DefectDojo, it is necessary to create and configure an Application in the Microsoft Entra Admin Center.
 
@@ -61,7 +61,7 @@ To configure Microsoft Entra as the Identity Provider for DefectDojo, it is nece
 
     ![API permissions](../../assets/operator-guide/microsoft-entra-auth/defectdojo-api-permissions.png)
 
-## Configuring DefectDojo Helm chart
+## Configuring the DefectDojo Helm Chart for OIDC
 
 To integrate DefectDojo with configured Microsoft Entra Application, it is necessary to configure the DefectDojo Helm chart.
 In this example, we will use the [edp-cluster-add-ons](https://github.com/epam/edp-cluster-add-ons) repository to deploy DefectDojo to the Kubernetes (e.g. AWS EKS) cluster.
@@ -153,6 +153,7 @@ The Application data, such as **Application (client) ID** and **Directory (tenan
 
 6. After successfully verifying the login, you can proceed with configuring specific permissions for each logged-in user directly within the DefectDojo application.
 
-## Related articles
+## Related Articles
 
+- [Dependency-Track Microsoft Entra OIDC SSO](./dependency-track-authentication.md)
 - [OpenID Connect Authentication Overview](./oidc-authentication-overview.md)

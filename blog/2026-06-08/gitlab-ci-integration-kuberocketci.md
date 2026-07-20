@@ -3,7 +3,7 @@ title: "GitLab CI Integration in KubeRocketCI"
 description: "How KubeRocketCI runs CI in GitLab CI instead of Tekton: onboard the CI/CD components, create the ConfigMap, add a Runner. A hands-on multi-CI walkthrough."
 slug: gitlab-ci-integration-kuberocketci
 tags: [KubeRocketCI, GitLab CI, CI/CD, Tekton, Kubernetes, GitLab Runner, Multi-CI, GitOps, Platform Engineering, DevOps, Open Source]
-keywords: [gitlab ci integration, gitlab ci kubernetes, kuberocketci gitlab ci, gitlab ci instead of tekton, multi-ci kubernetes platform, ciTool gitlab, gitlab ci/cd components kubernetes, gitlab runner kubernetes executor, self-hosted gitlab ci kubernetes, tekton vs gitlab ci, internal developer platform gitlab ci, gitlab ci configmap template, codebase-operator gitlab-ci.yml injection, gitlab ci component mirror, gitlab container registry buildkit, gitlab merge request pipeline kubernetes, how gitlab ci integration works]
+keywords: [gitlab ci integration, gitlab ci kubernetes, kuberocketci gitlab ci, gitlab ci instead of tekton, multi-ci kubernetes platform, ciTool gitlab, gitlab ci/cd components kubernetes, gitlab runner kubernetes executor, self-hosted gitlab ci kubernetes, internal developer platform gitlab ci, gitlab ci configmap template, codebase-operator gitlab-ci.yml injection, gitlab ci component mirror, gitlab container registry buildkit, gitlab merge request pipeline kubernetes, how gitlab ci integration works]
 image: https://docs.kuberocketci.io/img/kuberocketci-social-card.jpg
 authors: [sergk]
 hide_table_of_contents: false

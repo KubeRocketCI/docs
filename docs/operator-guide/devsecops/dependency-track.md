@@ -107,3 +107,4 @@ After following the instructions provided, you should be able to integrate your 
 * [Install External Secrets Operator](../secrets-management/install-external-secrets-operator.md)
 * [External Secrets Operator Integration](../secrets-management/external-secrets-operator-integration.md)
 * [Cluster Add-Ons Overview](../add-ons-overview.md)
+* [Dependency-Track Microsoft Entra OIDC SSO](../microsoft-entra/dependency-track-authentication.md)

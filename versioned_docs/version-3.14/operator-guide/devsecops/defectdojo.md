@@ -1,6 +1,6 @@
 ---
-title: "Integrate DefectDojo"
-description: "Guide on integrating DefectDojo with KubeRocketCI for vulnerability management, including installation steps and configuring DefectDojo for CI/CD integration."
+title: "Install and Integrate DefectDojo"
+description: "Install DefectDojo on Kubernetes with Helm and integrate it with KubeRocketCI pipelines: step-by-step setup for CI/CD vulnerability management."
 sidebar_label: "Integrate DefectDojo"
 ---
 <!-- markdownlint-disable MD025 -->
@@ -14,7 +14,7 @@ import TabItem from '@theme/TabItem';
   <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/devsecops/defectdojo" />
 </head>
 
-Inspect the main steps to perform for installing DefectDojo via Helm Chart.
+Install DefectDojo on Kubernetes with Helm and integrate it into KubeRocketCI pipelines for vulnerability management. Once installed, you can enable single sign-on by following the [DefectDojo Microsoft Entra OIDC SSO Setup](../microsoft-entra/defectdojo-oidc-authentication.md) guide.
 
 :::info
   It is also possible to install DefectDojo using the add-ons approach. For details, please refer to the [KubeRocketCI addons approach](https://github.com/epam/edp-cluster-add-ons).
@@ -332,3 +332,4 @@ After following the instructions provided, you should be able to integrate your 
 * [Install External Secrets Operator](../secrets-management/install-external-secrets-operator.md)
 * [External Secrets Operator Integration](../secrets-management/external-secrets-operator-integration.md)
 * [Install Harbor](../artifacts-management/harbor-installation.md)
+* [DefectDojo Microsoft Entra OIDC SSO Setup](../microsoft-entra/defectdojo-oidc-authentication.md)

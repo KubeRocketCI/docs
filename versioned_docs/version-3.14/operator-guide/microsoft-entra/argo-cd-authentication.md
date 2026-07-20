@@ -1,7 +1,7 @@
 ---
 
-title: "Guide: Microsoft Entra SSO Integration With Argo CD"
-description: "Learn how to configure OIDC authentication for Argo CD using Microsoft Entra as the Identity Provider, ensuring secure and efficient access management."
+title: "Argo CD Microsoft Entra OIDC SSO Setup"
+description: "Configure Argo CD SSO with Microsoft Entra OIDC: app registration, group-to-role mapping, and Helm chart configuration guide."
 sidebar_label: "Argo CD"
 
 ---
@@ -13,9 +13,9 @@ sidebar_label: "Argo CD"
   <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/microsoft-entra/argo-cd-authentication" />
 </head>
 
-This guide provides instructions on how to configure OIDC authentication for the Argo CD using Microsoft Entra as the Identity Provider.
+Configure Argo CD single sign-on using Microsoft Entra as the OIDC identity provider. This guide covers registering the Microsoft Entra application, mapping Entra groups to Argo CD RBAC roles, and updating the Argo CD Helm chart — the same platform-access pattern used for the [AWS EKS cluster and KubeRocketCI Portal](./aws-eks-portal-authentication.md).
 
-## Prerequisites
+## Prerequisites for Argo CD SSO with Microsoft Entra
 
 Before you begin, make sure the following prerequisites are met:
 
@@ -25,7 +25,7 @@ Before you begin, make sure the following prerequisites are met:
 - A forked copy of the [edp-cluster-add-ons](https://github.com/epam/edp-cluster-add-ons) repository is created.
 - (Optional) [External Secrets Operator](../secrets-management/install-external-secrets-operator.md) is installed.
 
-## Configuring Microsoft Entra Application
+## Registering the Argo CD Application in Microsoft Entra
 
 To configure Microsoft Entra as the Identity Provider for the Argo CD, it is necessary to create and configure an Application in the Microsoft Entra Admin Center:
 
@@ -94,7 +94,7 @@ To manage access to the Argo CD, it is necessary to create groups in the Microso
 
 3. Click on the **Create** button and repeat this process for each required group.
 
-## Configuring Argo CD Helm chart
+## Configuring the Argo CD Helm Chart for OIDC
 
 To integrate Argo CD with configured Microsoft Entra Application, it is necessary to configure the Argo CD Helm chart. In this example, we will use the [edp-cluster-add-ons](https://github.com/epam/edp-cluster-add-ons) repository to deploy Argo CD to the Kubernetes (e.g. AWS EKS) cluster.
 
@@ -193,6 +193,19 @@ The **Object ID** can be found in the **Overview** section of the group in the M
 
 After completing these steps, the Argo CD will be configured to use Microsoft Entra as the Identity Provider for authentication. Users will be able to log in to the Argo CD using their Microsoft Entra credentials.
 
+## Troubleshooting Argo CD SSO with Microsoft Entra
+
+If the login flow fails after completing the steps above, check the following common causes:
+
+- **Error `AADSTS50011` (redirect URI mismatch) after clicking Log in via Entra.** The Redirect URI registered in the **Authentication** section of the Microsoft Entra Application must exactly match `https://<Argo CD URL>/auth/callback`, including the scheme and any trailing path. Update the application registration and retry.
+- **Login succeeds, but the user sees no applications or projects.** Argo CD RBAC did not match any group. Verify that the **groups claim** is added in the **Token configuration** section with the **Group ID** type, that the group **Object ID** used in the Argo CD RBAC policy matches the group in Microsoft Entra, and that `scopes` in the Helm values includes `groups`.
+- **`invalid client credentials` or an endless login loop.** The client secret has expired or the secret **Secret ID** was copied instead of the secret **Value**. Generate a new client secret in **Certificates & secrets** and update the secret referenced by the Argo CD Helm chart.
+- **The groups claim is missing for some users.** When a user belongs to a large number of groups, Microsoft Entra replaces the group list in the token with an overage claim, and Argo CD cannot evaluate it. Use dedicated, smaller groups for Argo CD access.
+
+To inspect the exact OIDC error, check the `argocd-server` pod logs while reproducing the login attempt.
+
 ## Related Articles
 
+* [AWS EKS & KubeRocketCI Portal Microsoft Entra OIDC SSO](./aws-eks-portal-authentication.md)
+* [Grafana Microsoft Entra OIDC SSO Setup](./grafana-authentication.md)
 * [OpenID Connect Authentication Overview](./oidc-authentication-overview.md)

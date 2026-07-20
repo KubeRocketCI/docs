@@ -1,7 +1,7 @@
 ---
 
-title: "Guide: Microsoft Entra SSO Integration With OpenSearch"
-description: "Step-by-step guide on configuring OpenSearch with OIDC authentication using Microsoft Entra as the Identity Provider for enhanced security."
+title: "OpenSearch Microsoft Entra OIDC SSO Setup"
+description: "Configure OpenSearch SSO with Microsoft Entra OIDC: app registration, group-to-role mapping, and Helm chart setup for dashboards and cluster access."
 sidebar_label: "OpenSearch"
 
 ---
@@ -13,9 +13,9 @@ sidebar_label: "OpenSearch"
   <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/microsoft-entra/opensearch-authentication" />
 </head>
 
-This guide provides instructions on how to configure OpenSearch with OpenID Connect (OIDC) authentication using Microsoft Entra as the Identity Provider (IdP).
+Configure OpenSearch single sign-on using Microsoft Entra as the OIDC identity provider. This guide covers registering the Microsoft Entra application, mapping Entra groups to OpenSearch security roles, and updating the OpenSearch and OpenSearch Dashboards Helm chart values — an observability-stack setup that pairs naturally with [Grafana Microsoft Entra OIDC SSO](./grafana-authentication.md).
 
-## Prerequisites
+## Prerequisites for OpenSearch SSO with Microsoft Entra
 
 Before you begin, make sure the following prerequisites are met:
 
@@ -25,7 +25,7 @@ Before you begin, make sure the following prerequisites are met:
 - A forked copy of the [edp-cluster-add-ons](https://github.com/epam/edp-cluster-add-ons) repository is created.
 - (Optional) [External Secrets Operator](../secrets-management/install-external-secrets-operator.md) is installed.
 
-## Configuring Microsoft Entra Application
+## Registering the OpenSearch Application in Microsoft Entra
 
 To configure Microsoft Entra as the Identity Provider for OpenSearch, it is necessary to create and configure an Application in the Microsoft Entra Admin Center:
 
@@ -92,7 +92,7 @@ To manage access to OpenSearch, it is necessary to create the groups in Microsof
 
 3. After adding the necessary members, review the group settings and click **Create** to save the group. Repeat this process for each required group.
 
-## Configuring OpenSearch Helm chart
+## Configuring the OpenSearch Helm Chart for OIDC
 
 To integrate OpenSearch with configured Microsoft Entra Application, it is necessary to configure the OpenSearch Helm chart. In this example, we will use the [edp-cluster-add-ons](https://github.com/epam/edp-cluster-add-ons) repository to deploy OpenSearch to the Kubernetes (e.g. AWS EKS) cluster.
 
@@ -249,4 +249,6 @@ After completing these steps, OpenSearch will be configured with OIDC authentica
 
 ## Related Articles
 
+* [Grafana Microsoft Entra OIDC SSO Setup](./grafana-authentication.md)
+* [Ansible AWX Microsoft Entra OIDC SSO](./awx-operator-authentication.md)
 * [OpenID Connect Authentication Overview](./oidc-authentication-overview.md)

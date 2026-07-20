@@ -1,7 +1,7 @@
 ---
 
-title: "Guide: Microsoft Entra SSO Integration With OAuth2-proxy (Tekton Dashboard)"
-description: "Instructions on configuring OAuth2-proxy for Tekton Dashboard with OIDC authentication using Microsoft Entra as the Identity Provider."
+title: "OAuth2-Proxy Microsoft Entra OIDC SSO Setup"
+description: "Configure OAuth2-Proxy for Tekton Dashboard with Microsoft Entra OIDC SSO: app registration, group mapping, and Helm chart setup steps."
 sidebar_label: "OAuth2-proxy (Tekton Dashboard)"
 
 ---
@@ -13,9 +13,9 @@ sidebar_label: "OAuth2-proxy (Tekton Dashboard)"
   <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/microsoft-entra/oauth2-proxy-authentication" />
 </head>
 
-This guide provides instructions on how to configure OAuth2-proxy for the Tekton Dashboard with OIDC authentication using Microsoft Entra as the Identity Provider.
+Configure OAuth2-Proxy to enforce Microsoft Entra OIDC single sign-on for the Tekton Dashboard. This guide covers registering the app in Microsoft Entra, mapping Entra groups to dashboard access, and deploying the OAuth2-Proxy Helm chart. It also applies if you're securing Nexus, which uses OAuth2-Proxy as its authentication front end — see the [Nexus SSO guide](./nexus-authentication.md).
 
-## Prerequisites
+## Prerequisites for OAuth2-Proxy SSO with Microsoft Entra
 
 Before you begin, make sure the following prerequisites are met:
 
@@ -26,7 +26,7 @@ Before you begin, make sure the following prerequisites are met:
 - A forked copy of the [edp-cluster-add-ons](https://github.com/epam/edp-cluster-add-ons) repository is created.
 - (Optional) [External Secrets Operator](../secrets-management/install-external-secrets-operator.md) is installed.
 
-## Configuring Microsoft Entra Application
+## Registering the OAuth2-Proxy Application in Microsoft Entra
 
 To configure Microsoft Entra as the Identity Provider for the OAuth2-proxy, it is necessary to create and configure an Application in the Microsoft Entra Admin Center:
 
@@ -75,7 +75,7 @@ To configure Microsoft Entra as the Identity Provider for the OAuth2-proxy, it i
 
 After the application is configured, you can proceed with the OAuth2-proxy Helm chart configuration.
 
-## Creating the Groups
+## Mapping Microsoft Entra Groups to OAuth2-Proxy Access
 
 To manage access to the Tekton Dashboard (or any other application with OAuth2-proxy), it is necessary to create groups in the Microsoft Entra Admin Center and assign users to it.
 
@@ -89,7 +89,7 @@ To manage access to the Tekton Dashboard (or any other application with OAuth2-p
 
 3. After adding the necessary members, review the group settings and click **Create** to save the group. Repeat this process for each required group.
 
-## Configuring OAuth2-proxy Helm chart
+## Deploying the OAuth2-Proxy Helm Chart for Tekton Dashboard
 
 To integrate OAuth2-proxy with the configured Microsoft Entra Application, it is necessary to configure the OAuth2-proxy Helm chart.
 
@@ -216,4 +216,5 @@ After completing these steps, the Tekton Dashboard will be configured to use OAu
 
 ## Related Articles
 
+* [Nexus SSO with Microsoft Entra OIDC](./nexus-authentication.md)
 * [OpenID Connect (OIDC) Authentication Overview](./oidc-authentication-overview.md)

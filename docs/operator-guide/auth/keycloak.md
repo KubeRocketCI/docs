@@ -1,6 +1,6 @@
 ---
 title: "Install Keycloak"
-description: "Comprehensive guide on installing Keycloak within KubeRocketCI for robust identity and access management, including prerequisites and configuration steps."
+description: "Install Keycloak on Kubernetes and configure it with the EDP Keycloak Operator: PostgreSQL setup, Helm installation, and operator-managed realms."
 sidebar_label: "Install Keycloak"
 ---
 <!-- markdownlint-disable MD025 -->
@@ -356,7 +356,7 @@ To install Keycloak, follow the steps below:
 
     </details>
 
-## Configuration
+## Configure Keycloak with the EDP Keycloak Operator {#configuration}
 
 For configuring Keycloak within your environment, it's recommended to utilize the [edp-keycloak-operator](https://github.com/epam/edp-keycloak-operator).
 This operator simplifies the integration process by automating the deployment and management of Keycloak instances.

@@ -1,7 +1,7 @@
 ---
 
-title: "Integrating ReportPortal with Keycloak: A Step-by-Step Guide"
-description: "Comprehensive guide on integrating ReportPortal with Keycloak for SAML-based authentication, including detailed steps for Keycloak configuration and ReportPortal setup."
+title: "ReportPortal SSO with Keycloak (SAML)"
+description: "Configure ReportPortal single sign-on with Keycloak via SAML: Keycloak client setup and ReportPortal authentication configuration, step by step."
 sidebar_label: "ReportPortal Keycloak Integration"
 
 ---
@@ -13,7 +13,7 @@ sidebar_label: "ReportPortal Keycloak Integration"
   <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/project-management-and-reporting/reportportal-keycloak" />
 </head>
 
-Follow the steps below to integrate the ReportPortal with Keycloak.
+Configure single sign-on for ReportPortal using Keycloak as the SAML identity provider. This guide covers creating the Keycloak SAML client and enabling the integration on the ReportPortal side.
 
 :::info
   It is also possible to install ReportPortal using the cluster add-ons. For details, please refer to the [Install via Add-Ons](../add-ons-overview.md) page.
@@ -95,3 +95,4 @@ To apply the Keycloak configuration, the Keycloak Operator is required. For inst
 
 * [Install ReportPortal](../project-management-and-reporting/install-reportportal.md)
 * [Integration With Tekton](reportportal-tekton.md)
+* [Install Keycloak](../auth/keycloak.md)

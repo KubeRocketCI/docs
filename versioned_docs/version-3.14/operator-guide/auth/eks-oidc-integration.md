@@ -1,6 +1,6 @@
 ---
-title: "AWS EKS OIDC Integration"
-description: "Comprehensive guide on integrating Keycloak with AWS EKS for OIDC authentication, enhancing security with Single Sign-On capabilities."
+title: "Provision Keycloak Resources for EKS OIDC"
+description: "Provision Keycloak realm, client, and group resources for AWS EKS OIDC through the edp-keycloak-operator Custom Resources, installed via Helm."
 sidebar_label: "AWS EKS OIDC Integration"
 ---
 <!-- markdownlint-disable MD025 -->
@@ -11,12 +11,12 @@ sidebar_label: "AWS EKS OIDC Integration"
   <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/auth/eks-oidc-integration" />
 </head>
 
-This page serves as a comprehensive guide on integrating Keycloak with the [edp-keycloak-operator](https://github.com/epam/edp-keycloak-operator) to act as an identity provider for AWS Elastic Kubernetes Service (EKS). It provides detailed step-by-step instructions for creating the necessary realms, users, roles, and client configurations to seamlessly collaborate between Keycloak and EKS. Additionally, it includes instructions on installing the edp-keycloak-operator using Helm charts.
+This page shows how to provision the Keycloak realm, client, group, and user resources needed for EKS OIDC by installing the [edp-keycloak-operator](https://github.com/epam/edp-keycloak-operator) via Helm and applying its Custom Resources — `Keycloak`, `KeycloakRealm`, `KeycloakRealmGroup`, `KeycloakClientScope`, `KeycloakClient`, and `KeycloakRealmUser`. It covers only the Keycloak-side resource provisioning; for the end-to-end setup of EKS cluster access — associating Keycloak as the EKS OIDC provider and mapping groups to Kubernetes RBAC roles — see [Keycloak as OIDC Provider for AWS EKS](./configure-keycloak-oidc-eks.md).
 
 ## Prerequisites
 
 - [EKS Configuration](./configure-keycloak-oidc-eks.md) is performed
-- [Helm v3.10.0](https://github.com/helm/helm/releases/tag/v3.10.0) is installed
+- A recent Helm 3.x release is installed
 - [Keycloak](../../operator-guide/auth/keycloak.md) is installed
 
 ## Install Keycloak Operator

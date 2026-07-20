@@ -1,7 +1,7 @@
 ---
 
-title: "Guide: Microsoft Entra SSO Integration With Dependency-Track"
-description: "Learn how to configure Dependency-Track with OIDC authentication using Microsoft Entra as the Identity Provider for secure and efficient access management."
+title: "Dependency-Track Microsoft Entra OIDC SSO"
+description: "Configure Dependency-Track SSO with Microsoft Entra OIDC: app registration and Helm chart setup for secure vulnerability-management access."
 sidebar_label: "Dependency-Track"
 
 ---
@@ -13,9 +13,9 @@ sidebar_label: "Dependency-Track"
   <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/microsoft-entra/dependency-track-authentication" />
 </head>
 
-This guide provides instructions on how to configure Dependency-Track with OpenID Connect (OIDC) authentication using Microsoft Entra as the Identity Provider (IdP).
+Configure Dependency-Track single sign-on using Microsoft Entra as the OIDC identity provider. This guide covers registering the Microsoft Entra application, mapping access groups, and updating the Dependency-Track Helm chart — pairing naturally with [DefectDojo SSO](./defectdojo-oidc-authentication.md) if you run both scanners in your DevSecOps pipeline.
 
-## Prerequisites
+## Prerequisites for Dependency-Track SSO with Microsoft Entra
 
 Before you begin, make sure the following prerequisites are met:
 
@@ -25,7 +25,7 @@ Before you begin, make sure the following prerequisites are met:
 - [Crunchy PostgreSQL Operator](https://github.com/CrunchyData/postgres-operator) is installed.
 - A forked copy of the [edp-cluster-add-ons](https://github.com/epam/edp-cluster-add-ons) repository is created.
 
-## Configuring Microsoft Entra Application
+## Registering the Dependency-Track Application in Microsoft Entra
 
 To configure Microsoft Entra as the Identity Provider for Dependency-Track, it is necessary to create and configure an Application in the Microsoft Entra Admin Center:
 
@@ -86,7 +86,7 @@ To manage access to Dependency-Track, it is necessary to create the groups in Mi
 
 3. After adding the necessary members, review the group settings and click **Create** to save the group. Repeat this process for each required group.
 
-## Configuring Dependency-Track Helm chart
+## Configuring the Dependency-Track Helm Chart for OIDC
 
 To integrate Dependency-Track with configured Microsoft Entra Application, it is necessary to configure the Dependency-Track Helm chart. In this example, we will use the [edp-cluster-add-ons](https://github.com/epam/edp-cluster-add-ons) repository to deploy Dependency-Track to the Kubernetes (e.g. AWS EKS) cluster.
 
@@ -177,4 +177,5 @@ After completing these steps, Dependency-Track is configured to use Microsoft En
 
 ## Related Articles
 
+* [DefectDojo SSO guide](./defectdojo-oidc-authentication.md)
 * [OpenID Connect (OIDC) Authentication Overview](./oidc-authentication-overview.md)

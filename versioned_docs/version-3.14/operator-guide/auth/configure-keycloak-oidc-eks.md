@@ -1,6 +1,6 @@
 ---
-title: "EKS OIDC With Keycloak"
-description: "Step-by-step guide on configuring Keycloak as OIDC Identity Provider for EKS, enabling Single Sign-On capabilities for enhanced security."
+title: "Keycloak as OIDC Provider for AWS EKS"
+description: "Configure Keycloak as the OIDC provider for AWS EKS: create clients and groups, associate the provider, and map RBAC roles for SSO kubectl access."
 sidebar_label: "EKS OIDC With Keycloak"
 ---
 <!-- markdownlint-disable MD025 -->
@@ -14,26 +14,31 @@ import TabItem from '@theme/TabItem';
   <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/auth/configure-keycloak-oidc-eks" />
 </head>
 
-This article provides the instruction of configuring Keycloak as [OIDC Identity Provider](https://aws.amazon.com/blogs/containers/introducing-oidc-identity-provider-authentication-amazon-eks/) for EKS.
-The example is implemented following the KubeRocketCI add-ons approach.
+Configure Keycloak as the OIDC identity provider for an AWS EKS cluster so users can log in to `kubectl` with their existing Keycloak/SSO credentials instead of static IAM users. This guide walks through creating the Keycloak client and groups, associating Keycloak as an EKS OIDC provider (via Terraform or the AWS Console), and mapping Keycloak groups to Kubernetes RBAC roles — following the KubeRocketCI add-ons approach.
+
+For provisioning the underlying Keycloak realm/client/group resources through the Keycloak operator's Custom Resources, see [Provision Keycloak Resources for EKS OIDC](eks-oidc-integration.md).
 
 ## Prerequisites
 
-To follow the instruction, check the following prerequisites:
+### Required
 
-1. (Optional) Terraform version 1.5.7
-2. Kubelogin version >= v1.25.1
-3. (Optional) [EDP Cluster Add-ons](../add-ons-overview.md) Solution is applied
-4. (Optional) [External Secrets Operator](https://github.com/epam/edp-cluster-add-ons/tree/main/clusters/core/addons/external-secrets)
-5. A running [Keycloak instance](https://github.com/epam/edp-cluster-add-ons/tree/main/clusters/core/addons/keycloak)
-6. The [Keycloak operator](https://github.com/epam/edp-cluster-add-ons/tree/main/clusters/core/addons/keycloak-operator) is deployed
-7. The Keycloak Realm's OIDC discovery URL and jwks_uri endpoints are publicly accessible
+1. The [kubelogin](https://github.com/int128/kubelogin) plugin, installed and configured to connect OIDC with a cluster. For Windows, it is recommended to download the kubelogin as a binary and add it to your PATH. Use the [latest kubelogin release](https://github.com/int128/kubelogin/releases).
+2. A running [Keycloak instance](https://github.com/epam/edp-cluster-add-ons/tree/main/clusters/core/addons/keycloak).
+3. The [Keycloak operator](https://github.com/epam/edp-cluster-add-ons/tree/main/clusters/core/addons/keycloak-operator) is deployed.
+4. The Keycloak Realm's OIDC discovery URL and jwks_uri endpoints are publicly accessible.
 
-:::note
-  To connect OIDC with a cluster, install and configure the [kubelogin](https://github.com/int128/kubelogin) plugin. For Windows, it is recommended to download the kubelogin as a binary and add it to your PATH.
-:::
+<details>
+<summary>Optional prerequisites</summary>
+
+- A recent Terraform 1.x release, if associating the EKS OIDC provider via Terraform instead of the AWS Console.
+- [EDP Cluster Add-ons](../add-ons-overview.md) Solution is applied.
+- [External Secrets Operator](https://github.com/epam/edp-cluster-add-ons/tree/main/clusters/core/addons/external-secrets), if managing Keycloak credentials as synced secrets rather than manually.
+
+</details>
 
 ## Solution Overview
+
+By the end of this guide, Keycloak groups will be mapped to Kubernetes RBAC roles, letting users authenticate to the EKS cluster with `kubectl` using their Keycloak credentials instead of static IAM users.
 
 This architecture encompasses three primary resource types: AWS (EKS), Keycloak, and Kubernetes.
 Within this setup, the Keycloak resources, once established, remain static, facilitating the assignment of claims based on user group memberships. This stability contrasts with the dynamic nature of other resources, which may be created, modified, or deleted as necessary.
@@ -105,7 +110,7 @@ The initial step involves setting up the Keycloak operator (configure connection
     ```
 
 
-This add-ons facilitates sets up a broker realm to manage traffic redirection between external Identity Providers (IdP) and internal clients. Additionally, it creates a shared realm that encompasses all clients, including to EKS, Sonar, Nexus, and Portal.
+This add-on sets up a broker realm to manage traffic redirection between external Identity Providers (IdP) and internal clients. Additionally, it creates a shared realm that encompasses all clients, including EKS, Sonar, Nexus, and Portal.
 
 The [KubeRocketCI RBAC add-on](https://github.com/epam/edp-cluster-add-ons/tree/main/clusters/core/addons/kuberocketci-rbac) creates Keycloak groups that are used in the KubeRocketCI platform to manage access to resources. For more details refer to the [KubeRocketCI Groups](platform-auth-model.md#groups) documentation.
 
@@ -289,6 +294,9 @@ To access the Kubernetes cluster via [Lens](https://k8slens.dev/), follow the st
 
 By default, the Keycloak token has a lifespan of 5 minutes. To modify this duration refer to the guidelines outlined in this [document](ui-portal-oidc.md#changing-the-lifespan-of-an-access-token).
 
+For application-level OIDC via OAuth2-Proxy rather than cluster `kubectl` access, see [Tekton Dashboard Authentication](./oauth2-proxy.md). Using Microsoft Entra instead of Keycloak? See [AWS EKS OIDC With Microsoft Entra](../microsoft-entra/aws-eks-portal-authentication.md).
+
 ## Related Articles
 
 * [Headlamp OIDC Configuration](ui-portal-oidc.md)
+* [Provision Keycloak Resources for EKS OIDC](eks-oidc-integration.md)

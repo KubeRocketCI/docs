@@ -1,7 +1,7 @@
 ---
 
-title: "Guide: Microsoft Entra SSO Integration With Ansible AWX"
-description: "Step-by-step instructions on configuring Ansible AWX with OIDC authentication using Microsoft Entra as the Identity Provider for enhanced security."
+title: "Ansible AWX Microsoft Entra OIDC SSO"
+description: "Configure Ansible AWX SSO with Microsoft Entra OIDC: app registration, client secret, and Azure AD authentication settings guide."
 sidebar_label: "Ansible AWX"
 
 ---
@@ -13,9 +13,9 @@ sidebar_label: "Ansible AWX"
   <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/microsoft-entra/awx-operator-authentication" />
 </head>
 
-This guide provides instructions on how to configure Ansible AWX with OpenID Connect (OIDC) authentication using Microsoft Entra as the Identity Provider (IdP).
+Configure Ansible AWX single sign-on using Microsoft Entra as the OIDC identity provider. This guide covers registering the Microsoft Entra application and entering the resulting client credentials into the AWX Azure AD authentication settings — see the [Microsoft Entra OIDC overview](./oidc-authentication-overview.md) for the full list of KubeRocketCI add-ons that follow this same pattern.
 
-## Prerequisites
+## Prerequisites for Ansible AWX SSO with Microsoft Entra
 
 Before you begin, make sure the following prerequisites are met:
 
@@ -23,7 +23,7 @@ Before you begin, make sure the following prerequisites are met:
 - [Microsoft Entra](https://learn.microsoft.com/en-us/entra/fundamentals/create-new-tenant) Tenant is created.
 - Ansible AWX is installed using the [AWX Operator](https://github.com/ansible-community/awx-operator-helm).
 
-## Configuring Microsoft Entra Application
+## Registering the Ansible AWX Application in Microsoft Entra
 
 To configure Microsoft Entra as the Identity Provider for the Ansible AWX, it is necessary to create and configure an Application in the Microsoft Entra Admin Center:
 
@@ -88,4 +88,5 @@ After completing these steps, the Ansible AWX will be configured to use OIDC aut
 
 ## Related Articles
 
+* [OpenSearch Microsoft Entra OIDC SSO Setup](./opensearch-authentication.md)
 * [OpenID Connect (OIDC) Authentication Overview](./oidc-authentication-overview.md)

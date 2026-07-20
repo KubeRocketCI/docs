@@ -1,7 +1,7 @@
 ---
 
-title: "Guide: Microsoft Entra SSO Integration With Harbor"
-description: "Step-by-step guide on configuring Harbor with OIDC authentication using Microsoft Entra as the Identity Provider for secure and streamlined access."
+title: "Harbor Microsoft Entra OIDC SSO Setup"
+description: "Configure Harbor registry SSO with Microsoft Entra OIDC: app registration and Helm chart configuration for secure container registry access."
 sidebar_label: "Harbor"
 
 ---
@@ -13,9 +13,9 @@ sidebar_label: "Harbor"
   <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/microsoft-entra/harbor-authentication" />
 </head>
 
-This guide provides instructions on how to configure Harbor with OpenID Connect (OIDC) authentication using Microsoft Entra as the Identity Provider (IdP).
+Configure Harbor single sign-on using Microsoft Entra as the OIDC identity provider. This guide covers registering the Microsoft Entra application, mapping an Entra group to the Harbor OIDC Admin Group, and entering the resulting OIDC parameters directly in the Harbor UI — the same registry-access pattern used for [Nexus SSO with Microsoft Entra OIDC](./nexus-authentication.md).
 
-## Prerequisites
+## Prerequisites for Harbor SSO with Microsoft Entra
 
 Before you begin, make sure the following prerequisites are met:
 
@@ -23,7 +23,7 @@ Before you begin, make sure the following prerequisites are met:
 - [Microsoft Entra](https://learn.microsoft.com/en-us/entra/fundamentals/create-new-tenant) Tenant is created.
 - [Harbor](../artifacts-management/harbor-installation.md) is installed.
 
-## Configuring Microsoft Entra Application
+## Registering the Harbor Application in Microsoft Entra
 
 To configure Microsoft Entra as the Identity Provider for Harbor, it is necessary to create and configure an Application in the Microsoft Entra Admin Center:
 
@@ -125,4 +125,5 @@ After completing these steps, Harbor is configured to use Microsoft Entra as the
 
 ## Related Articles
 
+* [Nexus SSO with Microsoft Entra OIDC](./nexus-authentication.md)
 * [OpenID Connect (OIDC) Authentication Overview](./oidc-authentication-overview.md)

@@ -3807,7 +3807,7 @@ For example, the following configuration map contains the `nuget.config` file wi
 
 ---
 
-## EKS OIDC With Keycloak
+## Keycloak as OIDC Provider for AWS EKS
 
 <!-- markdownlint-disable MD025 -->
 
@@ -3817,26 +3817,31 @@ For example, the following configuration map contains the `nuget.config` file wi
   <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/auth/configure-keycloak-oidc-eks" />
 </head>
 
-This article provides the instruction of configuring Keycloak as [OIDC Identity Provider](https://aws.amazon.com/blogs/containers/introducing-oidc-identity-provider-authentication-amazon-eks/) for EKS.
-The example is implemented following the KubeRocketCI add-ons approach.
+Configure Keycloak as the OIDC identity provider for an AWS EKS cluster so users can log in to `kubectl` with their existing Keycloak/SSO credentials instead of static IAM users. This guide walks through creating the Keycloak client and groups, associating Keycloak as an EKS OIDC provider (via Terraform or the AWS Console), and mapping Keycloak groups to Kubernetes RBAC roles — following the KubeRocketCI add-ons approach.
+
+For provisioning the underlying Keycloak realm/client/group resources through the Keycloak operator's Custom Resources, see [Provision Keycloak Resources for EKS OIDC](eks-oidc-integration.md).
 
 ## Prerequisites
 
-To follow the instruction, check the following prerequisites:
+### Required
 
-1. (Optional) Terraform version 1.5.7
-2. Kubelogin version >= v1.25.1
-3. (Optional) [EDP Cluster Add-ons](../add-ons-overview.md) Solution is applied
-4. (Optional) [External Secrets Operator](https://github.com/epam/edp-cluster-add-ons/tree/main/clusters/core/addons/external-secrets)
-5. A running [Keycloak instance](https://github.com/epam/edp-cluster-add-ons/tree/main/clusters/core/addons/keycloak)
-6. The [Keycloak operator](https://github.com/epam/edp-cluster-add-ons/tree/main/clusters/core/addons/keycloak-operator) is deployed
-7. The Keycloak Realm's OIDC discovery URL and jwks_uri endpoints are publicly accessible
+1. The [kubelogin](https://github.com/int128/kubelogin) plugin, installed and configured to connect OIDC with a cluster. For Windows, it is recommended to download the kubelogin as a binary and add it to your PATH. Use the [latest kubelogin release](https://github.com/int128/kubelogin/releases).
+2. A running [Keycloak instance](https://github.com/epam/edp-cluster-add-ons/tree/main/clusters/core/addons/keycloak).
+3. The [Keycloak operator](https://github.com/epam/edp-cluster-add-ons/tree/main/clusters/core/addons/keycloak-operator) is deployed.
+4. The Keycloak Realm's OIDC discovery URL and jwks_uri endpoints are publicly accessible.
 
-:::note
-  To connect OIDC with a cluster, install and configure the [kubelogin](https://github.com/int128/kubelogin) plugin. For Windows, it is recommended to download the kubelogin as a binary and add it to your PATH.
-:::
+<details>
+<summary>Optional prerequisites</summary>
+
+- A recent Terraform 1.x release, if associating the EKS OIDC provider via Terraform instead of the AWS Console.
+- [EDP Cluster Add-ons](../add-ons-overview.md) Solution is applied.
+- [External Secrets Operator](https://github.com/epam/edp-cluster-add-ons/tree/main/clusters/core/addons/external-secrets), if managing Keycloak credentials as synced secrets rather than manually.
+
+</details>
 
 ## Solution Overview
+
+By the end of this guide, Keycloak groups will be mapped to Kubernetes RBAC roles, letting users authenticate to the EKS cluster with `kubectl` using their Keycloak credentials instead of static IAM users.
 
 This architecture encompasses three primary resource types: AWS (EKS), Keycloak, and Kubernetes.
 Within this setup, the Keycloak resources, once established, remain static, facilitating the assignment of claims based on user group memberships. This stability contrasts with the dynamic nature of other resources, which may be created, modified, or deleted as necessary.
@@ -3907,7 +3912,7 @@ The initial step involves setting up the Keycloak operator (configure connection
       enable: true
     ```
 
-This add-ons facilitates sets up a broker realm to manage traffic redirection between external Identity Providers (IdP) and internal clients. Additionally, it creates a shared realm that encompasses all clients, including to EKS, Sonar, Nexus, and Portal.
+This add-on sets up a broker realm to manage traffic redirection between external Identity Providers (IdP) and internal clients. Additionally, it creates a shared realm that encompasses all clients, including EKS, Sonar, Nexus, and Portal.
 
 The [KubeRocketCI RBAC add-on](https://github.com/epam/edp-cluster-add-ons/tree/main/clusters/core/addons/kuberocketci-rbac) creates Keycloak groups that are used in the KubeRocketCI platform to manage access to resources. For more details refer to the [KubeRocketCI Groups](platform-auth-model.md#groups) documentation.
 
@@ -4091,13 +4096,16 @@ To access the Kubernetes cluster via [Lens](https://k8slens.dev/), follow the st
 
 By default, the Keycloak token has a lifespan of 5 minutes. To modify this duration refer to the guidelines outlined in this [document](ui-portal-oidc.md#changing-the-lifespan-of-an-access-token).
 
+For application-level OIDC via OAuth2-Proxy rather than cluster `kubectl` access, see [Tekton Dashboard Authentication](./oauth2-proxy.md). Using Microsoft Entra instead of Keycloak? See [AWS EKS OIDC With Microsoft Entra](../microsoft-entra/aws-eks-portal-authentication.md).
+
 ## Related Articles
 
 * [Headlamp OIDC Configuration](ui-portal-oidc.md)
+* [Provision Keycloak Resources for EKS OIDC](eks-oidc-integration.md)
 
 ---
 
-## AWS EKS OIDC Integration
+## Provision Keycloak Resources for EKS OIDC
 
 <!-- markdownlint-disable MD025 -->
 
@@ -4107,12 +4115,12 @@ By default, the Keycloak token has a lifespan of 5 minutes. To modify this durat
   <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/auth/eks-oidc-integration" />
 </head>
 
-This page serves as a comprehensive guide on integrating Keycloak with the [edp-keycloak-operator](https://github.com/epam/edp-keycloak-operator) to act as an identity provider for AWS Elastic Kubernetes Service (EKS). It provides detailed step-by-step instructions for creating the necessary realms, users, roles, and client configurations to seamlessly collaborate between Keycloak and EKS. Additionally, it includes instructions on installing the edp-keycloak-operator using Helm charts.
+This page shows how to provision the Keycloak realm, client, group, and user resources needed for EKS OIDC by installing the [edp-keycloak-operator](https://github.com/epam/edp-keycloak-operator) via Helm and applying its Custom Resources — `Keycloak`, `KeycloakRealm`, `KeycloakRealmGroup`, `KeycloakClientScope`, `KeycloakClient`, and `KeycloakRealmUser`. It covers only the Keycloak-side resource provisioning; for the end-to-end setup of EKS cluster access — associating Keycloak as the EKS OIDC provider and mapping groups to Kubernetes RBAC roles — see [Keycloak as OIDC Provider for AWS EKS](./configure-keycloak-oidc-eks.md).
 
 ## Prerequisites
 
 - [EKS Configuration](./configure-keycloak-oidc-eks.md) is performed
-- [Helm v3.10.0](https://github.com/helm/helm/releases/tag/v3.10.0) is installed
+- A recent Helm 3.x release is installed
 - [Keycloak](../../operator-guide/auth/keycloak.md) is installed
 
 ## Install Keycloak Operator
@@ -4681,7 +4689,7 @@ To install Keycloak, follow the steps below:
 
     </details>
 
-## Configuration
+## Configure Keycloak with the EDP Keycloak Operator {#configuration}
 
 For configuring Keycloak within your environment, it's recommended to utilize the [edp-keycloak-operator](https://github.com/epam/edp-keycloak-operator).
 This operator simplifies the integration process by automating the deployment and management of Keycloak instances.
@@ -8942,7 +8950,7 @@ After the AWS EKS cluster is installed and configured, you can proceed with inst
 
 ---
 
-## Integrate DefectDojo
+## Install and Integrate DefectDojo
 
 <!-- markdownlint-disable MD025 -->
 
@@ -8952,7 +8960,7 @@ After the AWS EKS cluster is installed and configured, you can proceed with inst
   <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/devsecops/defectdojo" />
 </head>
 
-Inspect the main steps to perform for installing DefectDojo via Helm Chart.
+Install DefectDojo on Kubernetes with Helm and integrate it into KubeRocketCI pipelines for vulnerability management. Once installed, you can enable single sign-on by following the [DefectDojo Microsoft Entra OIDC SSO Setup](../microsoft-entra/defectdojo-oidc-authentication.md) guide.
 
 :::info
   It is also possible to install DefectDojo using the add-ons approach. For details, please refer to the [KubeRocketCI addons approach](https://github.com/epam/edp-cluster-add-ons).
@@ -9270,6 +9278,7 @@ After following the instructions provided, you should be able to integrate your 
 * [Install External Secrets Operator](../secrets-management/install-external-secrets-operator.md)
 * [External Secrets Operator Integration](../secrets-management/external-secrets-operator-integration.md)
 * [Install Harbor](../artifacts-management/harbor-installation.md)
+* [DefectDojo Microsoft Entra OIDC SSO Setup](../microsoft-entra/defectdojo-oidc-authentication.md)
 
 ---
 
@@ -9376,6 +9385,7 @@ After following the instructions provided, you should be able to integrate your 
 * [Install External Secrets Operator](../secrets-management/install-external-secrets-operator.md)
 * [External Secrets Operator Integration](../secrets-management/external-secrets-operator-integration.md)
 * [Cluster Add-Ons Overview](../add-ons-overview.md)
+* [Dependency-Track Microsoft Entra OIDC SSO](../microsoft-entra/dependency-track-authentication.md)
 
 ---
 
@@ -11006,7 +11016,7 @@ The second approach is to deploy Atlantis using Helm. Follow the steps below to 
 
 ---
 
-## Amazon EBS CSI Driver
+## AWS EBS CSI Driver Setup for EKS
 
 <!-- markdownlint-disable MD025 -->
 
@@ -11016,7 +11026,7 @@ The second approach is to deploy Atlantis using Helm. Follow the steps below to 
   <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/infrastructure-providers/aws/ebs-csi-driver" />
 </head>
 
-The Amazon Elastic Block Store (Amazon EBS) Container Storage Interface (CSI) driver allows Amazon Elastic Kubernetes Service (Amazon EKS) clusters to manage the lifecycle of Amazon EBS volumes for Kubernetes Persistent Volumes.
+This guide shows how to install the AWS EBS CSI driver on an Amazon EKS cluster, step by step: creating the IAM OIDC trust policy, attaching the AWS-managed IAM policy, and deploying the driver as an EKS add-on so Kubernetes can manage Amazon EBS-backed Persistent Volumes.
 
 ## Prerequisites
 
@@ -14053,7 +14063,7 @@ Make sure the cluster meets the following conditions:
 
 ---
 
-## Guide: Microsoft Entra SSO Integration With Argo CD
+## Argo CD Microsoft Entra OIDC SSO Setup
 
 <!-- markdownlint-disable MD025 -->
 
@@ -14063,9 +14073,9 @@ Make sure the cluster meets the following conditions:
   <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/microsoft-entra/argo-cd-authentication" />
 </head>
 
-This guide provides instructions on how to configure OIDC authentication for the Argo CD using Microsoft Entra as the Identity Provider.
+Configure Argo CD single sign-on using Microsoft Entra as the OIDC identity provider. This guide covers registering the Microsoft Entra application, mapping Entra groups to Argo CD RBAC roles, and updating the Argo CD Helm chart — the same platform-access pattern used for the [AWS EKS cluster and KubeRocketCI Portal](./aws-eks-portal-authentication.md).
 
-## Prerequisites
+## Prerequisites for Argo CD SSO with Microsoft Entra
 
 Before you begin, make sure the following prerequisites are met:
 
@@ -14075,7 +14085,7 @@ Before you begin, make sure the following prerequisites are met:
 - A forked copy of the [edp-cluster-add-ons](https://github.com/epam/edp-cluster-add-ons) repository is created.
 - (Optional) [External Secrets Operator](../secrets-management/install-external-secrets-operator.md) is installed.
 
-## Configuring Microsoft Entra Application
+## Registering the Argo CD Application in Microsoft Entra
 
 To configure Microsoft Entra as the Identity Provider for the Argo CD, it is necessary to create and configure an Application in the Microsoft Entra Admin Center:
 
@@ -14144,7 +14154,7 @@ To manage access to the Argo CD, it is necessary to create groups in the Microso
 
 3. Click on the **Create** button and repeat this process for each required group.
 
-## Configuring Argo CD Helm chart
+## Configuring the Argo CD Helm Chart for OIDC
 
 To integrate Argo CD with configured Microsoft Entra Application, it is necessary to configure the Argo CD Helm chart. In this example, we will use the [edp-cluster-add-ons](https://github.com/epam/edp-cluster-add-ons) repository to deploy Argo CD to the Kubernetes (e.g. AWS EKS) cluster.
 
@@ -14243,13 +14253,26 @@ The **Object ID** can be found in the **Overview** section of the group in the M
 
 After completing these steps, the Argo CD will be configured to use Microsoft Entra as the Identity Provider for authentication. Users will be able to log in to the Argo CD using their Microsoft Entra credentials.
 
+## Troubleshooting Argo CD SSO with Microsoft Entra
+
+If the login flow fails after completing the steps above, check the following common causes:
+
+- **Error `AADSTS50011` (redirect URI mismatch) after clicking Log in via Entra.** The Redirect URI registered in the **Authentication** section of the Microsoft Entra Application must exactly match `https://<Argo CD URL>/auth/callback`, including the scheme and any trailing path. Update the application registration and retry.
+- **Login succeeds, but the user sees no applications or projects.** Argo CD RBAC did not match any group. Verify that the **groups claim** is added in the **Token configuration** section with the **Group ID** type, that the group **Object ID** used in the Argo CD RBAC policy matches the group in Microsoft Entra, and that `scopes` in the Helm values includes `groups`.
+- **`invalid client credentials` or an endless login loop.** The client secret has expired or the secret **Secret ID** was copied instead of the secret **Value**. Generate a new client secret in **Certificates & secrets** and update the secret referenced by the Argo CD Helm chart.
+- **The groups claim is missing for some users.** When a user belongs to a large number of groups, Microsoft Entra replaces the group list in the token with an overage claim, and Argo CD cannot evaluate it. Use dedicated, smaller groups for Argo CD access.
+
+To inspect the exact OIDC error, check the `argocd-server` pod logs while reproducing the login attempt.
+
 ## Related Articles
 
+* [AWS EKS & KubeRocketCI Portal Microsoft Entra OIDC SSO](./aws-eks-portal-authentication.md)
+* [Grafana Microsoft Entra OIDC SSO Setup](./grafana-authentication.md)
 * [OpenID Connect Authentication Overview](./oidc-authentication-overview.md)
 
 ---
 
-## Guide: Microsoft Entra SSO Integration With AWS EKS & KubeRocketCI Portal
+## AWS EKS & Portal Microsoft Entra OIDC SSO
 
 <!-- markdownlint-disable MD025 -->
 
@@ -14259,9 +14282,9 @@ After completing these steps, the Argo CD will be configured to use Microsoft En
   <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/microsoft-entra/aws-eks-portal-authentication" />
 </head>
 
-This guide provides instructions on how to configure OpenID Connect (OIDC) authentication for the AWS EKS cluster and the KubeRocketCI Portal using Microsoft Entra as the Identity Provider (IdP), as well as how to configure the default namespace and user picture in the KubeRocketCI Portal using Microsoft Entra extension attributes.
+Configure Microsoft Entra as the OIDC identity provider for both the AWS EKS cluster and the KubeRocketCI Portal, then use Entra extension attributes to auto-populate each user's default namespace and profile picture on login. This platform-access setup pairs naturally with [Argo CD Microsoft Entra SSO](./argo-cd-authentication.md) for a single sign-on experience across the deployment stack.
 
-## Prerequisites
+## Prerequisites for AWS EKS & Portal SSO with Microsoft Entra
 
 Before you begin, make sure the following prerequisites are met:
 
@@ -14664,11 +14687,12 @@ Follow the steps below to configure and assign a custom Token Lifetime Policy to
 
 ## Related Articles
 
+* [Argo CD Microsoft Entra OIDC SSO Setup](./argo-cd-authentication.md)
 * [OpenID Connect (OIDC) Authentication Overview](./oidc-authentication-overview.md)
 
 ---
 
-## Guide: Microsoft Entra SSO Integration With Ansible AWX
+## Ansible AWX Microsoft Entra OIDC SSO
 
 <!-- markdownlint-disable MD025 -->
 
@@ -14678,9 +14702,9 @@ Follow the steps below to configure and assign a custom Token Lifetime Policy to
   <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/microsoft-entra/awx-operator-authentication" />
 </head>
 
-This guide provides instructions on how to configure Ansible AWX with OpenID Connect (OIDC) authentication using Microsoft Entra as the Identity Provider (IdP).
+Configure Ansible AWX single sign-on using Microsoft Entra as the OIDC identity provider. This guide covers registering the Microsoft Entra application and entering the resulting client credentials into the AWX Azure AD authentication settings — see the [Microsoft Entra OIDC overview](./oidc-authentication-overview.md) for the full list of KubeRocketCI add-ons that follow this same pattern.
 
-## Prerequisites
+## Prerequisites for Ansible AWX SSO with Microsoft Entra
 
 Before you begin, make sure the following prerequisites are met:
 
@@ -14688,7 +14712,7 @@ Before you begin, make sure the following prerequisites are met:
 - [Microsoft Entra](https://learn.microsoft.com/en-us/entra/fundamentals/create-new-tenant) Tenant is created.
 - Ansible AWX is installed using the [AWX Operator](https://github.com/ansible-community/awx-operator-helm).
 
-## Configuring Microsoft Entra Application
+## Registering the Ansible AWX Application in Microsoft Entra
 
 To configure Microsoft Entra as the Identity Provider for the Ansible AWX, it is necessary to create and configure an Application in the Microsoft Entra Admin Center:
 
@@ -14753,11 +14777,12 @@ After completing these steps, the Ansible AWX will be configured to use OIDC aut
 
 ## Related Articles
 
+* [OpenSearch Microsoft Entra OIDC SSO Setup](./opensearch-authentication.md)
 * [OpenID Connect (OIDC) Authentication Overview](./oidc-authentication-overview.md)
 
 ---
 
-## Guide: Microsoft Entra SSO Integration With DefectDojo
+## DefectDojo Microsoft Entra OIDC SSO Setup
 
 <!-- markdownlint-disable MD025 -->
 
@@ -14767,9 +14792,9 @@ After completing these steps, the Ansible AWX will be configured to use OIDC aut
   <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/microsoft-entra/defectdojo-oidc-authentication" />
 </head>
 
-This guide provides instructions on how to configure DefectDojo with OpenID Connect (OIDC) authentication using Microsoft Entra as the Identity Provider (IdP).
+Set up DefectDojo single sign-on using Microsoft Entra as the OIDC identity provider. This guide walks through registering the Microsoft Entra application, configuring redirect URIs, and updating the DefectDojo Helm chart so vulnerability-management access is centrally managed alongside the rest of your DevSecOps stack, including [Dependency-Track](./dependency-track-authentication.md).
 
-## Prerequisites
+## Prerequisites for DefectDojo SSO with Microsoft Entra
 
 Before you begin, make sure the following prerequisites are met:
 
@@ -14779,7 +14804,7 @@ Before you begin, make sure the following prerequisites are met:
 - A forked copy of the [edp-cluster-add-ons](https://github.com/epam/edp-cluster-add-ons) repository is created.
 - (Optional) [External Secrets Operator](../secrets-management/install-external-secrets-operator.md) is installed.
 
-## Configuring Microsoft Entra Application
+## Registering the DefectDojo Application in Microsoft Entra
 
 To configure Microsoft Entra as the Identity Provider for DefectDojo, it is necessary to create and configure an Application in the Microsoft Entra Admin Center.
 
@@ -14815,7 +14840,7 @@ To configure Microsoft Entra as the Identity Provider for DefectDojo, it is nece
 
     ![API permissions](../../assets/operator-guide/microsoft-entra-auth/defectdojo-api-permissions.png)
 
-## Configuring DefectDojo Helm chart
+## Configuring the DefectDojo Helm Chart for OIDC
 
 To integrate DefectDojo with configured Microsoft Entra Application, it is necessary to configure the DefectDojo Helm chart.
 In this example, we will use the [edp-cluster-add-ons](https://github.com/epam/edp-cluster-add-ons) repository to deploy DefectDojo to the Kubernetes (e.g. AWS EKS) cluster.
@@ -14907,13 +14932,14 @@ The Application data, such as **Application (client) ID** and **Directory (tenan
 
 6. After successfully verifying the login, you can proceed with configuring specific permissions for each logged-in user directly within the DefectDojo application.
 
-## Related articles
+## Related Articles
 
+- [Dependency-Track Microsoft Entra OIDC SSO](./dependency-track-authentication.md)
 - [OpenID Connect Authentication Overview](./oidc-authentication-overview.md)
 
 ---
 
-## Guide: Microsoft Entra SSO Integration With Dependency-Track
+## Dependency-Track Microsoft Entra OIDC SSO
 
 <!-- markdownlint-disable MD025 -->
 
@@ -14923,9 +14949,9 @@ The Application data, such as **Application (client) ID** and **Directory (tenan
   <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/microsoft-entra/dependency-track-authentication" />
 </head>
 
-This guide provides instructions on how to configure Dependency-Track with OpenID Connect (OIDC) authentication using Microsoft Entra as the Identity Provider (IdP).
+Configure Dependency-Track single sign-on using Microsoft Entra as the OIDC identity provider. This guide covers registering the Microsoft Entra application, mapping access groups, and updating the Dependency-Track Helm chart — pairing naturally with [DefectDojo SSO](./defectdojo-oidc-authentication.md) if you run both scanners in your DevSecOps pipeline.
 
-## Prerequisites
+## Prerequisites for Dependency-Track SSO with Microsoft Entra
 
 Before you begin, make sure the following prerequisites are met:
 
@@ -14935,7 +14961,7 @@ Before you begin, make sure the following prerequisites are met:
 - [Crunchy PostgreSQL Operator](https://github.com/CrunchyData/postgres-operator) is installed.
 - A forked copy of the [edp-cluster-add-ons](https://github.com/epam/edp-cluster-add-ons) repository is created.
 
-## Configuring Microsoft Entra Application
+## Registering the Dependency-Track Application in Microsoft Entra
 
 To configure Microsoft Entra as the Identity Provider for Dependency-Track, it is necessary to create and configure an Application in the Microsoft Entra Admin Center:
 
@@ -14996,7 +15022,7 @@ To manage access to Dependency-Track, it is necessary to create the groups in Mi
 
 3. After adding the necessary members, review the group settings and click **Create** to save the group. Repeat this process for each required group.
 
-## Configuring Dependency-Track Helm chart
+## Configuring the Dependency-Track Helm Chart for OIDC
 
 To integrate Dependency-Track with configured Microsoft Entra Application, it is necessary to configure the Dependency-Track Helm chart. In this example, we will use the [edp-cluster-add-ons](https://github.com/epam/edp-cluster-add-ons) repository to deploy Dependency-Track to the Kubernetes (e.g. AWS EKS) cluster.
 
@@ -15087,11 +15113,12 @@ After completing these steps, Dependency-Track is configured to use Microsoft En
 
 ## Related Articles
 
+* [DefectDojo SSO guide](./defectdojo-oidc-authentication.md)
 * [OpenID Connect (OIDC) Authentication Overview](./oidc-authentication-overview.md)
 
 ---
 
-## Guide: Microsoft Entra SSO Integration With Grafana
+## Grafana Microsoft Entra OIDC SSO Setup
 
 <!-- markdownlint-disable MD025 -->
 
@@ -15101,9 +15128,9 @@ After completing these steps, Dependency-Track is configured to use Microsoft En
   <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/microsoft-entra/grafana-authentication" />
 </head>
 
-This guide provides instructions on configuring OpenID Connect (OIDC) authentication with Microsoft Entra for Grafana.
+Set up Grafana single sign-on with Microsoft Entra as the OIDC identity provider. This guide covers registering the Microsoft Entra application, mapping Entra groups to Grafana roles, and updating the Grafana Helm chart — the same Microsoft Entra pattern used across [Nexus](./nexus-authentication.md), [DefectDojo](./defectdojo-oidc-authentication.md), and other KubeRocketCI add-ons.
 
-## Prerequisites
+## Prerequisites for Grafana SSO with Microsoft Entra
 
 Before you begin, make sure the following prerequisites are met:
 
@@ -15113,7 +15140,7 @@ Before you begin, make sure the following prerequisites are met:
 - A forked copy of the [edp-cluster-add-ons](https://github.com/epam/edp-cluster-add-ons) repository is created.
 - (Optional) [External Secrets Operator](../secrets-management/install-external-secrets-operator.md) is installed.
 
-## Configuring Microsoft Entra Application
+## Registering the Grafana Application in Microsoft Entra
 
 To configure Microsoft Entra as the Identity Provider for Grafana, it is necessary to create and configure an Application in the Microsoft Entra Admin Center:
 
@@ -15185,7 +15212,7 @@ To manage access to Grafana, it is necessary to create the groups in Microsoft E
 
 3. After adding the necessary members, review the group settings and click **Create** to save the group. Repeat this process for each required group.
 
-## Configuring Grafana Helm chart
+## Configuring the Grafana Helm Chart for OIDC
 
 To integrate Grafana with configured Microsoft Entra Application, it is necessary to configure the Grafana Helm chart. In this example, we will use the [edp-cluster-add-ons](https://github.com/epam/edp-cluster-add-ons) repository and the **prometheus-operator** Helm chart to deploy Grafana to the Kubernetes (e.g. AWS EKS) cluster.
 
@@ -15294,11 +15321,13 @@ After completing these steps, Grafana will be configured to use Microsoft Entra 
 
 ## Related Articles
 
+* [Nexus SSO with Microsoft Entra OIDC](./nexus-authentication.md)
+* [DefectDojo Microsoft Entra OIDC SSO Setup](./defectdojo-oidc-authentication.md)
 * [OpenID Connect (OIDC) Authentication Overview](./oidc-authentication-overview.md)
 
 ---
 
-## Guide: Microsoft Entra SSO Integration With Harbor
+## Harbor Microsoft Entra OIDC SSO Setup
 
 <!-- markdownlint-disable MD025 -->
 
@@ -15308,9 +15337,9 @@ After completing these steps, Grafana will be configured to use Microsoft Entra 
   <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/microsoft-entra/harbor-authentication" />
 </head>
 
-This guide provides instructions on how to configure Harbor with OpenID Connect (OIDC) authentication using Microsoft Entra as the Identity Provider (IdP).
+Configure Harbor single sign-on using Microsoft Entra as the OIDC identity provider. This guide covers registering the Microsoft Entra application, mapping an Entra group to the Harbor OIDC Admin Group, and entering the resulting OIDC parameters directly in the Harbor UI — the same registry-access pattern used for [Nexus SSO with Microsoft Entra OIDC](./nexus-authentication.md).
 
-## Prerequisites
+## Prerequisites for Harbor SSO with Microsoft Entra
 
 Before you begin, make sure the following prerequisites are met:
 
@@ -15318,7 +15347,7 @@ Before you begin, make sure the following prerequisites are met:
 - [Microsoft Entra](https://learn.microsoft.com/en-us/entra/fundamentals/create-new-tenant) Tenant is created.
 - [Harbor](../artifacts-management/harbor-installation.md) is installed.
 
-## Configuring Microsoft Entra Application
+## Registering the Harbor Application in Microsoft Entra
 
 To configure Microsoft Entra as the Identity Provider for Harbor, it is necessary to create and configure an Application in the Microsoft Entra Admin Center:
 
@@ -15420,11 +15449,12 @@ After completing these steps, Harbor is configured to use Microsoft Entra as the
 
 ## Related Articles
 
+* [Nexus SSO with Microsoft Entra OIDC](./nexus-authentication.md)
 * [OpenID Connect (OIDC) Authentication Overview](./oidc-authentication-overview.md)
 
 ---
 
-## Guide: Microsoft Entra SSO Integration With Nexus
+## Nexus SSO With Microsoft Entra OIDC
 
 <!-- markdownlint-disable MD025 -->
 
@@ -15434,9 +15464,9 @@ After completing these steps, Harbor is configured to use Microsoft Entra as the
   <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/microsoft-entra/nexus-authentication" />
 </head>
 
-This guide provides instructions on how to configure Nexus with OpenID Connect (OIDC) authentication using Microsoft Entra as the Identity Provider (IdP) and OAuth2-proxy as an authentication proxy.
+Configure single sign-on for Nexus Repository using Microsoft Entra as the OIDC provider and [OAuth2-Proxy](./oauth2-proxy-authentication.md) as the authentication front end. This guide covers Microsoft Entra app registration, Entra group mapping, and the combined Nexus + OAuth2-Proxy Helm chart configuration, followed by user provisioning through the Nexus Operator.
 
-## Prerequisites
+## Prerequisites for Nexus SSO with Microsoft Entra
 
 Before you begin, make sure the following prerequisites are met:
 
@@ -15447,7 +15477,7 @@ Before you begin, make sure the following prerequisites are met:
 - A forked copy of the [edp-cluster-add-ons](https://github.com/epam/edp-cluster-add-ons) repository is created.
 - (Optional) [External Secrets Operator](../secrets-management/install-external-secrets-operator.md) is installed.
 
-## Configuring Microsoft Entra Application
+## Registering the Nexus Application in Microsoft Entra
 
 To configure Microsoft Entra as the Identity Provider for Nexus, it is necessary to create and configure an Application in the Microsoft Entra Admin Center:
 
@@ -15513,7 +15543,7 @@ To manage access to Nexus using OAuth2-proxy, it is necessary to create groups i
 
 3. After adding the necessary members, review the group settings and click **Create** to save the group. Repeat this process for each required group.
 
-## Configuring Nexus and OAuth2-proxy Helm charts
+## Configuring Nexus and OAuth2-Proxy Helm Charts
 
 To integrate Nexus with the configured Microsoft Entra Application, it is necessary to configure the Nexus and OAuth2-proxy Helm charts. In this example, we will use the [edp-cluster-add-ons](https://github.com/epam/edp-cluster-add-ons) repository to deploy Nexus and OAuth2-proxy to the Kubernetes (e.g. AWS EKS) cluster.
 
@@ -15604,7 +15634,7 @@ To integrate Nexus with the configured Microsoft Entra Application, it is necess
 
 3. After updating the `values.yaml` file and creating the `oauth2-proxy` secret, commit the changes to the repository and apply the changes with Helm or Argo CD.
 
-## Creating the Nexus users with Nexus Operator
+## Creating Nexus Users with the Nexus Operator
 
 :::note
 Nexus users can also be created directly from the Nexus UI instead of using the Nexus Operator Helm chart.
@@ -15651,11 +15681,12 @@ After completing these steps, Nexus will be configured with OIDC authentication 
 
 ## Related Articles
 
+* [OAuth2-Proxy configuration for Microsoft Entra SSO](./oauth2-proxy-authentication.md)
 * [OpenID Connect (OIDC) Authentication Overview](./oidc-authentication-overview.md)
 
 ---
 
-## Guide: Microsoft Entra SSO Integration With OAuth2-proxy (Tekton Dashboard)
+## OAuth2-Proxy Microsoft Entra OIDC SSO Setup
 
 <!-- markdownlint-disable MD025 -->
 
@@ -15665,9 +15696,9 @@ After completing these steps, Nexus will be configured with OIDC authentication 
   <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/microsoft-entra/oauth2-proxy-authentication" />
 </head>
 
-This guide provides instructions on how to configure OAuth2-proxy for the Tekton Dashboard with OIDC authentication using Microsoft Entra as the Identity Provider.
+Configure OAuth2-Proxy to enforce Microsoft Entra OIDC single sign-on for the Tekton Dashboard. This guide covers registering the app in Microsoft Entra, mapping Entra groups to dashboard access, and deploying the OAuth2-Proxy Helm chart. It also applies if you're securing Nexus, which uses OAuth2-Proxy as its authentication front end — see the [Nexus SSO guide](./nexus-authentication.md).
 
-## Prerequisites
+## Prerequisites for OAuth2-Proxy SSO with Microsoft Entra
 
 Before you begin, make sure the following prerequisites are met:
 
@@ -15678,7 +15709,7 @@ Before you begin, make sure the following prerequisites are met:
 - A forked copy of the [edp-cluster-add-ons](https://github.com/epam/edp-cluster-add-ons) repository is created.
 - (Optional) [External Secrets Operator](../secrets-management/install-external-secrets-operator.md) is installed.
 
-## Configuring Microsoft Entra Application
+## Registering the OAuth2-Proxy Application in Microsoft Entra
 
 To configure Microsoft Entra as the Identity Provider for the OAuth2-proxy, it is necessary to create and configure an Application in the Microsoft Entra Admin Center:
 
@@ -15727,7 +15758,7 @@ To configure Microsoft Entra as the Identity Provider for the OAuth2-proxy, it i
 
 After the application is configured, you can proceed with the OAuth2-proxy Helm chart configuration.
 
-## Creating the Groups
+## Mapping Microsoft Entra Groups to OAuth2-Proxy Access
 
 To manage access to the Tekton Dashboard (or any other application with OAuth2-proxy), it is necessary to create groups in the Microsoft Entra Admin Center and assign users to it.
 
@@ -15741,7 +15772,7 @@ To manage access to the Tekton Dashboard (or any other application with OAuth2-p
 
 3. After adding the necessary members, review the group settings and click **Create** to save the group. Repeat this process for each required group.
 
-## Configuring OAuth2-proxy Helm chart
+## Deploying the OAuth2-Proxy Helm Chart for Tekton Dashboard
 
 To integrate OAuth2-proxy with the configured Microsoft Entra Application, it is necessary to configure the OAuth2-proxy Helm chart.
 
@@ -15868,11 +15899,12 @@ After completing these steps, the Tekton Dashboard will be configured to use OAu
 
 ## Related Articles
 
+* [Nexus SSO with Microsoft Entra OIDC](./nexus-authentication.md)
 * [OpenID Connect (OIDC) Authentication Overview](./oidc-authentication-overview.md)
 
 ---
 
-## Microsoft Entra OIDC Authentication: Overview
+## Microsoft Entra OIDC SSO Guides
 
 <!-- markdownlint-disable MD025 -->
 
@@ -15890,23 +15922,37 @@ Configuring OIDC authentication with Microsoft Entra brings significant benefits
 
 ## Supported Components
 
-Below is the list of components with OIDC integration instructions:
+Below is the list of components with OIDC integration instructions, grouped by function.
 
-- [Ansible AWX](awx-operator-authentication.md)
-- [Argo CD](argo-cd-authentication.md)
-- [AWS EKS and KubeRocketCI Portal](aws-eks-portal-authentication.md)
-- [Dependency-Track](./dependency-track-authentication.md)
+### Security & DevSecOps Tools
+
+Secure vulnerability-management and code-quality platforms with centralized Microsoft Entra sign-in.
+
 - [DefectDojo](defectdojo-oidc-authentication.md)
-- [Grafana](grafana-authentication.md)
-- [Harbor](harbor-authentication.md)
-- [Nexus](./nexus-authentication.md)
-- [OAuth2-proxy](oauth2-proxy-authentication.md)
-- [OpenSearch](opensearch-authentication.md)
+- [Dependency-Track](./dependency-track-authentication.md)
 - [SonarQube](./sonar-oidc-authentication.md)
+
+### Artifact & Registry Tools
+
+Control access to artifact repositories and image registries through Microsoft Entra groups.
+
+- [Nexus](./nexus-authentication.md)
+- [Harbor](harbor-authentication.md)
+
+### Platform & Observability Tools
+
+Bring platform, deployment, and monitoring tools under the same Microsoft Entra identity provider.
+
+- [Argo CD](argo-cd-authentication.md)
+- [Grafana](grafana-authentication.md)
+- [OpenSearch](opensearch-authentication.md)
+- [Ansible AWX](awx-operator-authentication.md)
+- [OAuth2-proxy](oauth2-proxy-authentication.md)
+- [AWS EKS and KubeRocketCI Portal](aws-eks-portal-authentication.md)
 
 ---
 
-## Guide: Microsoft Entra SSO Integration With OpenSearch
+## OpenSearch Microsoft Entra OIDC SSO Setup
 
 <!-- markdownlint-disable MD025 -->
 
@@ -15916,9 +15962,9 @@ Below is the list of components with OIDC integration instructions:
   <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/microsoft-entra/opensearch-authentication" />
 </head>
 
-This guide provides instructions on how to configure OpenSearch with OpenID Connect (OIDC) authentication using Microsoft Entra as the Identity Provider (IdP).
+Configure OpenSearch single sign-on using Microsoft Entra as the OIDC identity provider. This guide covers registering the Microsoft Entra application, mapping Entra groups to OpenSearch security roles, and updating the OpenSearch and OpenSearch Dashboards Helm chart values — an observability-stack setup that pairs naturally with [Grafana Microsoft Entra OIDC SSO](./grafana-authentication.md).
 
-## Prerequisites
+## Prerequisites for OpenSearch SSO with Microsoft Entra
 
 Before you begin, make sure the following prerequisites are met:
 
@@ -15928,7 +15974,7 @@ Before you begin, make sure the following prerequisites are met:
 - A forked copy of the [edp-cluster-add-ons](https://github.com/epam/edp-cluster-add-ons) repository is created.
 - (Optional) [External Secrets Operator](../secrets-management/install-external-secrets-operator.md) is installed.
 
-## Configuring Microsoft Entra Application
+## Registering the OpenSearch Application in Microsoft Entra
 
 To configure Microsoft Entra as the Identity Provider for OpenSearch, it is necessary to create and configure an Application in the Microsoft Entra Admin Center:
 
@@ -15995,7 +16041,7 @@ To manage access to OpenSearch, it is necessary to create the groups in Microsof
 
 3. After adding the necessary members, review the group settings and click **Create** to save the group. Repeat this process for each required group.
 
-## Configuring OpenSearch Helm chart
+## Configuring the OpenSearch Helm Chart for OIDC
 
 To integrate OpenSearch with configured Microsoft Entra Application, it is necessary to configure the OpenSearch Helm chart. In this example, we will use the [edp-cluster-add-ons](https://github.com/epam/edp-cluster-add-ons) repository to deploy OpenSearch to the Kubernetes (e.g. AWS EKS) cluster.
 
@@ -16152,11 +16198,13 @@ After completing these steps, OpenSearch will be configured with OIDC authentica
 
 ## Related Articles
 
+* [Grafana Microsoft Entra OIDC SSO Setup](./grafana-authentication.md)
+* [Ansible AWX Microsoft Entra OIDC SSO](./awx-operator-authentication.md)
 * [OpenID Connect Authentication Overview](./oidc-authentication-overview.md)
 
 ---
 
-## Guide: Microsoft Entra SSO Integration With SonarQube
+## SonarQube Microsoft Entra OIDC SSO Setup
 
 <!-- markdownlint-disable MD025 -->
 
@@ -16166,9 +16214,9 @@ After completing these steps, OpenSearch will be configured with OIDC authentica
   <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/microsoft-entra/sonar-oidc-authentication" />
 </head>
 
-This guide provides instructions on how to configure SonarQube with OpenID Connect (OIDC) authentication using Microsoft Entra as the Identity Provider (IdP).
+Configure SonarQube single sign-on using Microsoft Entra as the OIDC identity provider. This guide covers registering the Microsoft Entra application, syncing Entra groups into SonarQube by Object ID, and configuring OIDC through the [edp-sonar-operator](https://github.com/epam/edp-sonar-operator) Helm chart — a quality-gate setup that fits alongside [DefectDojo](./defectdojo-oidc-authentication.md) and [Dependency-Track](./dependency-track-authentication.md) in a DevSecOps pipeline.
 
-## Prerequisites
+## Prerequisites for SonarQube SSO with Microsoft Entra
 
 Before you begin, make sure the following prerequisites are met:
 
@@ -16177,7 +16225,7 @@ Before you begin, make sure the following prerequisites are met:
 - [SonarQube](../code-quality/sonarqube.md) is installed.
 - A forked copy of the [edp-cluster-add-ons](https://github.com/epam/edp-cluster-add-ons) repository is created.
 
-## Configuring Microsoft Entra Application
+## Registering the SonarQube Application in Microsoft Entra
 
 To configure Microsoft Entra as the Identity Provider for SonarQube, it is necessary to create and configure an Application in the Microsoft Entra Admin Center:
 
@@ -16316,8 +16364,19 @@ In this section, we will demonstrate how to set up OIDC authentication for Sonar
 
 After completing these steps, SonarQube will be configured with OIDC authentication using Microsoft Entra as the Identity Provider. Users will be able to log in to SonarQube using their Microsoft Entra credentials.
 
+## Troubleshooting SonarQube SSO with Microsoft Entra
+
+If the login flow fails after completing the steps above, check the following common causes:
+
+- **Error `AADSTS50011` (redirect URI mismatch) after clicking Log in with OpenID Connect.** The Redirect URI registered in the Microsoft Entra Application must exactly match the format shown in the registration step above, including the scheme and callback path. Update the application registration and retry.
+- **Login succeeds, but the user has no expected permissions.** Group synchronization did not match. Verify that the **groups claim** is added in the **Token configuration** section with the **Group ID** type, that the SonarQube group corresponds to the value emitted in the token as described in the groups section above, and that the user is a member of the Microsoft Entra group.
+- **Authentication fails immediately after redirect back to SonarQube.** The client secret has expired or the secret **Secret ID** was copied instead of the secret **Value**. Generate a new client secret in **Certificates & secrets** and update the SonarQube configuration.
+- **The Log in with OpenID Connect button is missing.** The OIDC configuration was not applied. Confirm the updated values were committed and deployed, and that the SonarQube pod restarted after the change.
+
 ## Related Articles
 
+* [DefectDojo Microsoft Entra OIDC SSO Setup](./defectdojo-oidc-authentication.md)
+* [Dependency-Track Microsoft Entra OIDC SSO](./dependency-track-authentication.md)
 * [OpenID Connect Authentication Overview](./oidc-authentication-overview.md)
 
 ---
@@ -18182,7 +18241,7 @@ Should you encounter an issue where metadata is not appearing within a Jira tick
 
 ---
 
-## Integrating ReportPortal with Keycloak: A Step-by-Step Guide
+## ReportPortal SSO with Keycloak (SAML)
 
 <!-- markdownlint-disable MD025 -->
 
@@ -18192,7 +18251,7 @@ Should you encounter an issue where metadata is not appearing within a Jira tick
   <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/project-management-and-reporting/reportportal-keycloak" />
 </head>
 
-Follow the steps below to integrate the ReportPortal with Keycloak.
+Configure single sign-on for ReportPortal using Keycloak as the SAML identity provider. This guide covers creating the Keycloak SAML client and enabling the integration on the ReportPortal side.
 
 :::info
   It is also possible to install ReportPortal using the cluster add-ons. For details, please refer to the [Install via Add-Ons](../add-ons-overview.md) page.
@@ -18274,6 +18333,7 @@ To apply the Keycloak configuration, the Keycloak Operator is required. For inst
 
 * [Install ReportPortal](../project-management-and-reporting/install-reportportal.md)
 * [Integration With Tekton](reportportal-tekton.md)
+* [Install Keycloak](../auth/keycloak.md)
 
 ---
 
@@ -33659,15 +33719,21 @@ In modern cloud environments, secure and efficient access management is essentia
 
 <!--truncate-->
 
+:::info
+**Updated: July 2026** — Links verified and integration steps re-checked against the current Microsoft Entra admin center.
+:::
+
 ## Prerequisites
 
 Before you begin, ensure you have the following:
 
-- Access to the [Microsoft Entra Admin Center](https://entra.microsoft.com/?feature.msaljs=true#home) with administrative privileges.
+- Access to the [Microsoft Entra Admin Center](https://entra.microsoft.com/) with administrative privileges.
 - A running [AWS EKS](https://docs.aws.amazon.com/eks/latest/userguide/create-cluster.html) cluster with the necessary permissions for access and management.
 - The [kubelogin](https://github.com/int128/kubelogin) plugin installed for authenticating to the EKS cluster using OIDC.
 - The [kubectl](https://kubernetes.io/docs/tasks/tools/#kubectl) CLI tool installed.
 - The [aws cli](https://aws.amazon.com/cli/) tool installed.
+
+If you use Keycloak instead of Microsoft Entra, see [Keycloak OIDC for EKS](/docs/operator-guide/auth/configure-keycloak-oidc-eks).
 
 ## Understanding SSO, OIDC, and Microsoft Entra
 
@@ -33689,7 +33755,7 @@ Microsoft Entra, formerly known as Azure Active Directory (Azure AD), is a moder
 
 To get started with Microsoft Entra, you need to create a new tenant in the Microsoft Entra Admin Center. Follow these steps:
 
-1. Log in to the [Microsoft Entra Admin Center](https://entra.microsoft.com/?feature.msaljs=true#home) using your Microsoft account.
+1. Log in to the [Microsoft Entra Admin Center](https://entra.microsoft.com/) using your Microsoft account.
 
     ![Microsoft Entra Admin Center](../assets/aws-eks-microsoft-entra-oidc-integration/microsoft-entra-admin-center.png)
 
@@ -33828,7 +33894,7 @@ The Application data, such as **Directory (tenant) ID**, **Application (client) 
 
 ### Method 1: Using the AWS Management Console
 
-1. Log in to the [AWS Management Console](https://aws.amazon.com/console/) and navigate to the [Amazon EKS console](https://console.aws.amazon.com/eks/). Select the EKS cluster you want to configure and click on the **Access** tab.
+1. Log in to the [AWS Management Console](https://aws.amazon.com/console/) and navigate to the [Amazon EKS console](https://console.aws.amazon.com/eks). Select the EKS cluster you want to configure and click on the **Access** tab.
 
     ![EKS Cluster Access Tab](../assets/aws-eks-microsoft-entra-oidc-integration/eks-cluster-access-tab.png)
 
@@ -33886,6 +33952,10 @@ To configure Microsoft Entra as an Identity Provider in AWS EKS using Terraform,
       cluster_identity_providers = var.cluster_identity_providers
     }
     ```
+
+:::note
+You may notice the issuer URL format differs between methods: the AWS Console example above uses `https://login.microsoftonline.com/<Tenant-ID>/` (Entra v2), while this Terraform example uses `https://sts.windows.net/<Tenant ID>/` (the legacy Entra v1 format). Both are valid, but the issuer you configure must match the `iss` claim of the tokens your app registration actually issues, so check the app's manifest `accessTokenAcceptedVersion` setting before choosing one.
+:::
 
 After applying the Terraform configuration, the Microsoft Entra OIDC identity provider will be associated with the AWS EKS cluster.
 
@@ -34005,9 +34075,17 @@ To authenticate to the AWS EKS cluster using Microsoft Entra, you can use the `k
 
     ![Sign In](../assets/aws-eks-microsoft-entra-oidc-integration/sign-in.png)
 
+If the Portal sits behind an OAuth2 proxy, see [OAuth2 Proxy](/docs/operator-guide/auth/oauth2-proxy) for the general setup and [Microsoft Entra OAuth2 Proxy Authentication](/docs/operator-guide/microsoft-entra/oauth2-proxy-authentication) for the Entra-specific configuration.
+
 ## Conclusion
 
 Integrating OpenID Connect (OIDC) authentication with Microsoft Entra in AWS EKS is a powerful way to enhance security and streamline user access management. By leveraging the capabilities of SSO, OIDC, and Microsoft Entra, organizations can simplify authentication processes, enforce access controls, and ensure secure navigation across cloud-native environments. Whether you're managing user identities, enhancing compliance, or improving user experience, this integration provides a robust solution to meet your identity and access management needs. By following the steps outlined in this guide, you can configure Microsoft Entra as an Identity Provider in AWS EKS, authenticate users using OIDC, and secure access to your EKS clusters and KubeRocketCI Portal effectively.
+
+**Related reading:**
+
+- [Advanced AWS EKS Management: Implementing SSO via OIDC and Keycloak](/blog/advanced-aws-eks-management-oidc-keycloak) - the same OIDC pattern for AWS EKS, using Keycloak as the identity provider instead of Microsoft Entra.
+- [Keycloak OIDC for EKS](/docs/operator-guide/auth/configure-keycloak-oidc-eks) - the docs reference for the Keycloak-based setup.
+- [OAuth2 Proxy](/docs/operator-guide/auth/oauth2-proxy) and [Microsoft Entra OAuth2 Proxy Authentication](/docs/operator-guide/microsoft-entra/oauth2-proxy-authentication) - securing the KubeRocketCI Portal behind an OAuth2 proxy.
 
 ---
 
@@ -34804,7 +34882,7 @@ KubeRocketCI is open-source under Apache License 2.0. The testbed, platform sour
 
 ---
 
-## Ephemeral Environments on Kubernetes: Feature Branch Preview Walkthrough
+## Ephemeral Preview Environments on Kubernetes
 
 
 An ephemeral preview environment is an isolated, temporary Kubernetes deployment created from a single feature branch and torn down when the work is done. Every branch gets its own namespace, its own image, its own URL - and zero of it lingers afterward. Ephemeral environments on Kubernetes make this pattern available on your own cluster - but a hands-on, open-source, portal-native version - feature branch to isolated namespace to one-click destroy, backed by real Tekton CI and Argo CD GitOps - is conspicuously missing from the public record.

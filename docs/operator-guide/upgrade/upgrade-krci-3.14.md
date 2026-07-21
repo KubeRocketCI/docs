@@ -155,11 +155,11 @@ There are **no new breaking changes** in 3.14. Deprecations carried over from 3.
   ```yaml title="clusters/core/addons/kuberocketci/Chart.yaml"
   apiVersion: v2
   name: edp-install
-  version: 3.14.0
-  appVersion: 3.14.0
+  version: 3.14.1
+  appVersion: 3.14.1
   dependencies:
     - name: edp-install
-      version: 3.14.0
+      version: 3.14.1
       repository: https://epam.github.io/edp-helm-charts/stable
   ```
 
@@ -178,17 +178,17 @@ There are **no new breaking changes** in 3.14. Deprecations carried over from 3.
   helm repo update
 
   # Confirm the target chart version is available
-  helm search repo epamedp/edp-install --versions | grep 3.14.0
+  helm search repo epamedp/edp-install --versions | grep 3.14.1
 
   # Preview changes against your values
   helm diff upgrade <release-name> epamedp/edp-install \
-    --version 3.14.0 \
+    --version 3.14.1 \
     -f values.yaml \
     -n <namespace>
 
   # Run the upgrade
   helm upgrade --install <release-name> epamedp/edp-install \
-    --version 3.14.0 \
+    --version 3.14.1 \
     -f values.yaml \
     -n <namespace> \
     --timeout 10m \

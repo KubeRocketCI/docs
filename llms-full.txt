@@ -7883,7 +7883,7 @@ Tekton Results is deployed as part of the Tekton Pipelines installation. For ins
 ## Configuration
 
 :::note
-We use Postgres operator to connect to Tekton results, but you can use any other external databases supported. Please align configuration accordingly to Tekton result [documentation](https://github.com/tektoncd/results/blob/v0.18.0/docs/external-database.md).
+We use Postgres operator to connect to Tekton results, but you can use any other external databases supported. Please align configuration accordingly to Tekton result [documentation](https://github.com/tektoncd/results/blob/v0.19.0/docs/external-database.md).
 :::
 
 To configure long-term log storage for pipelines in the KubeRocketCI Portal, follow the steps below:
@@ -13577,7 +13577,7 @@ To install Tekton resources, follow the steps below:
   [Install and set up Tekton Triggers](https://tekton.dev/docs/installation/triggers/) sections for details.
 :::
 
-1. Install Tekton pipelines v1.6.0 using the release file:
+1. Install Tekton pipelines v1.6.2 using the release file:
 
     :::note
       Tekton Pipeline resources are used for managing and running KubeRocketCI Tekton Pipelines and Tasks.
@@ -13586,10 +13586,10 @@ To install Tekton resources, follow the steps below:
     :::
 
     ```bash
-    kubectl apply -f https://storage.googleapis.com/tekton-releases/pipeline/previous/v1.6.0/release.yaml
+    kubectl apply -f https://infra.tekton.dev/tekton-releases/pipeline/previous/v1.6.2/release.yaml
     ```
 
-2. Install Tekton Triggers v0.34.0 using the release file:
+2. Install Tekton Triggers v0.36.0 using the release file:
 
     :::note
       Tekton Trigger resources are used for managing and running KubeRocketCI Tekton EventListeners, Triggers, TriggerBindings and TriggerTemplates.
@@ -13597,29 +13597,29 @@ To install Tekton resources, follow the steps below:
     :::
 
     ```bash
-    kubectl apply -f https://storage.googleapis.com/tekton-releases/triggers/previous/v0.34.0/release.yaml
+    kubectl apply -f https://infra.tekton.dev/tekton-releases/triggers/previous/v0.36.0/release.yaml
     ```
 
-3. Install Tekton Interceptors v0.34.0 using the release file:
+3. Install Tekton Interceptors v0.36.0 using the release file:
 
     :::note
       The Platform uses GitLab, GitHub and Cel ClusterInterceptors for processing requests from webhooks.
     :::
 
     ```bash
-    kubectl apply -f https://storage.googleapis.com/tekton-releases/triggers/previous/v0.34.0/interceptors.yaml
+    kubectl apply -f https://infra.tekton.dev/tekton-releases/triggers/previous/v0.36.0/interceptors.yaml
     ```
 
-4. Install Tekton Chains v0.26.0 using the release file:
+4. Install Tekton Chains v0.28.1 using the release file:
 
     ```bash
-    kubectl apply -f https://storage.googleapis.com/tekton-releases/chains/previous/v0.26.0/release.yaml
+    kubectl apply -f https://infra.tekton.dev/tekton-releases/chains/previous/v0.28.1/release.yaml
     ```
 
-5. Install Tekton Results v0.17.2 using the release file:
+5. Install Tekton Results v0.19.0 using the release file:
 
     ```bash
-    kubectl apply -f https://storage.googleapis.com/tekton-releases/results/previous/v0.17.2/release.yaml
+    kubectl apply -f https://infra.tekton.dev/tekton-releases/results/previous/v0.19.0/release.yaml
     ```
 
 ## Installation on OKD cluster
@@ -25120,9 +25120,9 @@ KubeRocketCI relies on Tekton resources, including Tasks, Pipelines, Triggers, a
 To install Tekton, run the commands below:
 
   ```bash
-  kubectl apply -f https://storage.googleapis.com/tekton-releases/pipeline/previous/v1.6.0/release.yaml
-  kubectl apply -f https://storage.googleapis.com/tekton-releases/triggers/previous/v0.34.0/release.yaml
-  kubectl apply -f https://storage.googleapis.com/tekton-releases/triggers/previous/v0.34.0/interceptors.yaml
+  kubectl apply -f https://infra.tekton.dev/tekton-releases/pipeline/previous/v1.6.2/release.yaml
+  kubectl apply -f https://infra.tekton.dev/tekton-releases/triggers/previous/v0.36.0/release.yaml
+  kubectl apply -f https://infra.tekton.dev/tekton-releases/triggers/previous/v0.36.0/interceptors.yaml
   ```
 
 ## Install platform

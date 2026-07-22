@@ -254,6 +254,7 @@ For provision secret using manifest, KubeRocketCI portal or with the externalSec
 
 ## Related Articles
 
+* [Publish SonarQube Reports to Pull Requests](sonarqube-pr-decoration.md)
 * [Sonarqube Project Properties for Application](../../user-guide/application-sonarqube-project-properties.md)
 * [Install KubeRocketCI With Values File](../install-kuberocketci.md)
 * [Install External Secrets Operator](../secrets-management/install-external-secrets-operator.md)

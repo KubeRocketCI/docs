@@ -199,6 +199,7 @@ const sidebars: SidebarsConfig = {
               items: [
                 'operator-guide/code-quality/sonarqube',
                 'operator-guide/code-quality/sonarqube-visibility',
+                'operator-guide/code-quality/sonarqube-pr-decoration',
               ],
             },
           ],

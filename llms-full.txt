@@ -8312,7 +8312,26 @@ The comment links to the full pull request analysis in SonarQube, and the commit
 |---------|-------|------------|
 | `Could not validate GitLab url. Got an unexpected answer.` | SonarQube cannot complete the TLS handshake with a self-signed Git provider, or the URL/token is wrong. | Trust the provider CA as described in [Trust the Git Provider Certificate](#trust-the-git-provider-certificate). Confirm the API URL ends with `/api/v4` and the token has the `api` scope. |
 | Decoration links point to `localhost` or fail to open | `sonar.core.serverBaseURL` is unset. | Set the server base URL as shown above. |
-| No comment appears on the merge request | The analysis did not run in pull request mode, or the project is not bound. | Ensure the analysis was triggered by a review pipeline and that the project binding references the correct GitLab project ID. |
+| No comment appears on the merge request | The analysis ran in **branch mode**, not pull request mode (most common), or the project is not bound. | Confirm pull request mode as described below, and check the project binding references the correct GitLab project ID. |
+
+### Confirm the Analysis Ran in Pull Request Mode
+
+When both integrations are green but no comment appears, the scanner almost always submitted a **branch** analysis instead of a **pull request** analysis. Two quick checks:
+
+- In SonarQube, open the project's branch/pull request selector. A pull request analysis is listed under **Pull Requests** with the merge request number. If you only see entries named after commit SHAs under **Branches**, the run was a branch analysis.
+- In the generated `sonar-project.properties` (or the scanner log), a decorating run sets `sonar.pullrequest.key`, `sonar.pullrequest.branch`, and `sonar.pullrequest.base`, and **no** `sonar.branch.name`. Seeing `sonar.branch.name=<commit-sha>` instead confirms the pull request parameters were not provided.
+
+To fix, make the review (merge request) pipeline pass the three pull request parameters and **omit** the branch parameter — `sonar.branch.name` and `sonar.pullrequest.*` are mutually exclusive:
+
+```properties
+sonar.pullrequest.key=<merge request IID>
+sonar.pullrequest.branch=<source branch>
+sonar.pullrequest.base=<target branch>
+```
+
+:::note
+  In KubeRocketCI Tekton pipelines these map to the `sonarqube-general` task inputs `key-id`, `source-branch`, and `target-branch`. If the task is given only `branch`, it runs a branch analysis and no decoration is posted.
+:::
 
 ## Related Articles
 

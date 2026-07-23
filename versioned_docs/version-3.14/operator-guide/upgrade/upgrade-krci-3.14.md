@@ -1,6 +1,6 @@
 ---
 title: "Upgrade KubeRocketCI v3.13 to 3.14"
-description: "Guide on upgrading KubeRocketCI to version 3.14. Covers optional Envoy Gateway / HTTPRoute exposure (off by default), cancel-in-progress review pipelines, clusterName configuration for pipeline URLs, Service Account token login, and post-upgrade verification."
+description: "Guide on upgrading KubeRocketCI to version 3.14. Covers optional Envoy Gateway / HTTPRoute exposure, cancel-in-progress review pipelines, krci-audit, in-app notifications, the review pipeline reporter, clusterName configuration, and post-upgrade verification."
 sidebar_label: "v3.13 to 3.14"
 ---
 <!-- markdownlint-disable MD025 -->
@@ -114,30 +114,87 @@ edp-tekton:
 The cutover is reversible and per-gitServer. The `Ingress` continues to render as a fallback while `httproute.enabled: true`, so the webhook keeps working during cutover. To roll back, set `ingressController: nginx` and `httproute.enabled: false` — the `HTTPRoute` disappears on the next reconcile and the `Ingress` remains the active path. External reachability additionally requires the edge (ALB or load balancer) to route the host to Envoy.
 :::
 
-## Step 5. (Informational) New Portal Capabilities
+## Step 5. (Optional) Enable Kubernetes Audit Trail
 
-`krci-portal` `0.6.0` adds the following capabilities, which require **no upgrade action**:
+The portal **Admin → Audit Events** page and the **Triggered By** field on PipelineRun details depend on the **krci-audit** add-on. The add-on is **disabled by default**. Upgrading to 3.14 does not enable it automatically.
+
+To turn it on:
+
+1. Follow [Audit Trails Setup](../monitoring-and-observability/audit-trails-setup.md): create the database credentials Secret, set `krci-audit.enable: true` in your add-ons values, and sync the add-on.
+2. Ensure the portal can reach the read API. The default in-cluster URL is:
+
+    ```yaml title="krci-portal values (configEnv)"
+    configEnv:
+      KRCI_AUDIT_URL: http://krci-audit-api.krci-audit:8080
+    ```
+
+3. To open **Administration → Audit Events**, sign in with **OIDC** as a user in a Keycloak group mapped to the portal `administrator` role (default group name: `administrator`, overridable with `PORTAL_ADMIN_GROUPS`). Service Account token sessions do not receive portal admin roles, so that menu is hidden for token login.
+
+Skip this step if you do not need an in-platform audit trail yet. Without krci-audit, **Triggered By** shows **N/A** for runs that have no initiator in the trail.
+
+## Step 6. (Optional) Enable In-App Notifications
+
+3.14.1 adds an in-app notifications hub (header bell, unread badge, toasts) for platform events such as failed PipelineRuns. The UI can appear after upgrade, but ingestion stays off until you configure it.
+
+1. Add a shared secret to the portal Secret wired through `extraEnvFrom` (see the portal chart `secrets-example`):
+
+    ```yaml title="portal-secret (excerpt)"
+    stringData:
+      INTERNAL_EVENTS_TOKEN: "<generate-a-long-random-secret>"
+    ```
+
+2. Deploy or update an in-cluster **Argo Events** Sensor that `POST`s to the portal internal events endpoint and sends the same value in the `x-internal-events-token` header. Until `INTERNAL_EVENTS_TOKEN` is set, the portal responds `503` on that endpoint and no events are stored.
+
+3. After rotating the token, update both the portal Secret and the Sensor copy, then restart the portal Deployment so the new environment variable is loaded.
+
+:::note
+Notifications are an **alpha** capability: storage is local SQLite on a single portal replica, and every authenticated portal user currently sees the same event stream. Skip this step if you are not ready to operate the Sensor and token.
+:::
+
+## Step 7. (Informational) Review Pipeline Reporter
+
+From 3.14.1, finished review PipelineRuns can publish a self-updating pull or merge request comment (per-task status table plus trailing logs of failed steps) via **tekton-reporter** inside `edp-tekton` / the pipelines-library chart.
+
+- The reporter ships **enabled by default** (`reporter.enabled: true`). No upgrade action is required to keep the feature.
+- To disable it, set:
+
+    ```yaml title="values.yaml"
+    edp-tekton:
+      # Path may be under the pipelines-library / edp-tekton values your umbrella chart exposes
+      reporter:
+        enabled: false
+    ```
+
+- Comment links into the portal use `portalHost` and `clusterName`. Set `clusterName` as in [Step 2](#step-2-recommended-configure-clustername-for-pipeline-urls) so those URLs resolve correctly.
+
+Published logs come from steps that run pull request code. Secret masking is best-effort; enable the reporter only where that risk is acceptable for your pipelines.
+
+## Step 8. (Informational) New Portal Capabilities
+
+`krci-portal` `0.6.0` (and the 3.14.1 portal updates) add the following capabilities. Most require **no upgrade action** beyond installing the new chart version:
 
 - **Service Account token login** — operators can sign in with a Kubernetes Service Account token; OIDC configuration is now optional.
 - **Expanded Kubernetes mode** — redesigned cluster overview, Custom Resource and CRD browsing for users without cluster-wide CRD access, and scale / restart / rollback actions for Deployments, StatefulSets, and DaemonSets.
 - **GitLab CI** — a dedicated pipeline list and log viewer for codebases with `ciTool: gitlab`.
-- **Networking tab** on stage details showing Gateways, HTTPRoutes, and Ingresses, plus HTTPRoute-derived external URLs in the Applications table.
-- **Admin audit events** page (role-based access control, date-range filter) and a **Monitoring** tab on PipelineRun details with per-step CPU and memory metrics from Prometheus.
-- **Triggered By** actor on PipelineRun details, current deployed version in the CD stage deploy dropdown, a branch column on the applications table, and a stale badge for branches missing in git.
+- **Networking tab** on stage details showing Gateways, HTTPRoutes, and Ingresses, plus HTTPRoute-derived external URLs in the Applications table. HTTPRoute data is most useful when [Step 4](#step-4-optional-enable-envoy-gateway-and-httproute-exposure) is enabled.
+- **Monitoring tab** on PipelineRun details (per-step CPU and memory from Prometheus). Set `krci-portal.configEnv.PROMETHEUS_URL` to your in-cluster Prometheus base URL (for example `http://prometheus.monitoring.svc:9090`). If unset, the tab returns a precondition error.
+- **Current deployed version** in the CD stage deploy dropdown, a **branch** column on the applications table, and a **stale** badge for branches missing in git.
 
-## Step 6. (Informational) Resource Migrations
+**Admin → Audit Events** and **Triggered By** are covered in [Step 5](#step-5-optional-enable-kubernetes-audit-trail). The notifications hub is covered in [Step 6](#step-6-optional-enable-in-app-notifications).
+
+## Step 9. (Informational) Resource Migrations
 
 **No Custom Resource migrations or configuration-schema / label changes are required for this upgrade.** `Codebase`, `CodebaseBranch`, `CDPipeline`, `Stage`, Tekton resources, and Argo CD `ApplicationSet` definitions created under 3.13 remain valid under 3.14. The 3.14 chart applies the updated CRDs in place, and existing resources are reconciled without manual conversion.
 
 If you maintain **custom** Tekton pipelines or resource templates, no parameter or API changes are required in 3.14. The `tekton.dev/v1` migration and the security-task parameter renames were completed in 3.13 — see [Upgrade v3.12 to 3.13](./upgrade-krci-3.13.md).
 
-## Step 7. (Informational) Breaking Changes and Deprecations
+## Step 10. (Informational) Breaking Changes and Deprecations
 
 There are **no new breaking changes** in 3.14. Deprecations carried over from 3.13 remain in effect:
 
 - `edp-headlamp` stays disabled and is replaced by `krci-portal`. If you completed the 3.13 portal migration, no further action is needed.
 
-## Step 8. Upgrade
+## Step 11. Upgrade
 
 <Tabs
   defaultValue="addons"
@@ -155,15 +212,15 @@ There are **no new breaking changes** in 3.14. Deprecations carried over from 3.
   ```yaml title="clusters/core/addons/kuberocketci/Chart.yaml"
   apiVersion: v2
   name: edp-install
-  version: 3.14.0
-  appVersion: 3.14.0
+  version: 3.14.1
+  appVersion: 3.14.1
   dependencies:
     - name: edp-install
-      version: 3.14.0
+      version: 3.14.1
       repository: https://epam.github.io/edp-helm-charts/stable
   ```
 
-  **2.** Apply any optional values changes from Steps 2-4 to `clusters/core/addons/kuberocketci/values.yaml`.
+  **2.** Apply any optional values changes from Steps 2-7 to `clusters/core/addons/kuberocketci/values.yaml` (and enable `krci-audit` in your add-ons apps values if you follow [Step 5](#step-5-optional-enable-kubernetes-audit-trail)).
 
   **3.** Commit and push the changes. ArgoCD will detect the diff and sync automatically, or trigger a manual sync from the ArgoCD UI.
 
@@ -178,17 +235,17 @@ There are **no new breaking changes** in 3.14. Deprecations carried over from 3.
   helm repo update
 
   # Confirm the target chart version is available
-  helm search repo epamedp/edp-install --versions | grep 3.14.0
+  helm search repo epamedp/edp-install --versions | grep 3.14.1
 
   # Preview changes against your values
   helm diff upgrade <release-name> epamedp/edp-install \
-    --version 3.14.0 \
+    --version 3.14.1 \
     -f values.yaml \
     -n <namespace>
 
   # Run the upgrade
   helm upgrade --install <release-name> epamedp/edp-install \
-    --version 3.14.0 \
+    --version 3.14.1 \
     -f values.yaml \
     -n <namespace> \
     --timeout 10m \
@@ -200,7 +257,7 @@ There are **no new breaking changes** in 3.14. Deprecations carried over from 3.
 
 The upgrade applies the updated CRDs and rolls the operators, `edp-tekton`, `gitfusion`, and `krci-portal` to their 3.14 versions. Allow 3-5 minutes for all pods to reach the Running state.
 
-## Step 9. Post-Upgrade Verification
+## Step 12. Post-Upgrade Verification
 
 ```bash title="Verify pods and component versions"
 # All pods should return to Running
@@ -220,3 +277,6 @@ Then verify in the browser:
 - [ ] Pipeline URLs open the correct cluster path `/c/<clusterName>/...` (see [Step 2](#step-2-recommended-configure-clustername-for-pipeline-urls))
 - [ ] A superseded review pipeline run cancels correctly — only if `cancelInProgress: true` was enabled (see [Step 3](#step-3-optional-enable-cancel-in-progress-for-review-pipelines))
 - [ ] (If Envoy Gateway was enabled) the stage details **Networking** tab lists Gateways and HTTPRoutes, and the webhook still reaches the EventListener
+- [ ] (If krci-audit was enabled) **Triggered By** resolves on a new PipelineRun, and an **OIDC administrator** can open **Administration → Audit Events** (see [Step 5](#step-5-optional-enable-kubernetes-audit-trail))
+- [ ] (If notifications were enabled) the header bell receives a test or real platform event (see [Step 6](#step-6-optional-enable-in-app-notifications))
+- [ ] (If the review reporter is enabled) a finished review PipelineRun updates the pull or merge request comment (see [Step 7](#step-7-informational-review-pipeline-reporter))

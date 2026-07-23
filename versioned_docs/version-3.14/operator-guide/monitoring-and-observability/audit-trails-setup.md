@@ -85,6 +85,24 @@ A scheduled CronJob (nightly at `02:00` by default) drops audit history older th
 
 The read API is exposed only inside the cluster (a `ClusterIP` Service, no Ingress); consumers reach it by in-cluster DNS. It connects to the database as a SELECT-only role, so it cannot alter the trail. Network exposure is the interim access boundary; API authentication and authorization are planned.
 
+## Portal integration
+
+The portal uses the read API for two features:
+
+* **Triggered By** on PipelineRun details — initiator lookup for who created the run.
+* **Administration → Audit Events** — the filterable audit events UI for portal administrators.
+
+Wire the portal to the in-cluster API (adjust host if your release or namespace differs):
+
+```yaml title="krci-portal values (configEnv)"
+configEnv:
+  KRCI_AUDIT_URL: http://krci-audit-api.krci-audit:8080
+```
+
+**Administration → Audit Events** is shown only when the signed-in user has the portal `administrator` role. That role is resolved from OIDC group membership (default Keycloak group: `administrator`; override with `PORTAL_ADMIN_GROUPS`). Sessions that use a Kubernetes Service Account token do not receive portal roles, so the Administration section stays hidden for token login even when krci-audit is running.
+
+Without the add-on or without a reachable `KRCI_AUDIT_URL`, Triggered By shows **N/A** when no initiator can be resolved, and the Audit Events API returns a configuration error.
+
 ## Querying the audit trail
 
 The read API is reachable in-cluster at `<release>-api.<namespace>:8080`. To query it from your workstation, port-forward the Service:
@@ -120,6 +138,7 @@ The audit trail provides evidence for compliance frameworks such as **SOC 2**, *
 
 ## Related Articles
 
+* [Upgrade KubeRocketCI v3.13 to 3.14](../upgrade/upgrade-krci-3.14.md)
 * [Install via Add-Ons](../add-ons-overview.md)
 * [Authentication and Authorization](../auth/platform-auth-model.md)
 * [Pipelines Overview](../../user-guide/pipelines.md)

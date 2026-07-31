@@ -416,6 +416,7 @@ const sidebars: SidebarsConfig = {
           items: [
             'user-guide/pipelines',
             'user-guide/tekton-pipelines',
+            'user-guide/customize-ci-triggers',
           ],
         },
         {

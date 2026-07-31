@@ -389,7 +389,8 @@
           "collapsed": false,
           "items": [
             "user-guide/pipelines",
-            "user-guide/tekton-pipelines"
+            "user-guide/tekton-pipelines",
+            "user-guide/customize-ci-triggers"
           ]
         },
         {

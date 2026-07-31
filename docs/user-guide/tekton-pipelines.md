@@ -86,6 +86,12 @@ Two approaches are available for defining review and build pipelines:
 * Ideal for enabling different pipelines for different branches of a project.
 * Pipelines are explicitly defined for specific branches.
 
+Beyond the stock review and build flows, custom Tekton Triggers can be registered with a
+Git server's EventListener declaratively by labeling them with
+`app.edp.epam.com/gitServer: <gitserver-name>`, or served by a dedicated EventListener
+with its own manually created webhook — see
+[Add Custom Tekton Triggers](customize-ci-triggers.md).
+
 ### Deploy and Clean Pipelines (CD)
 
 Deploy and Clean pipelines require the creation of a TriggerTemplate resource with appropriate labels:

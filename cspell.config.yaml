@@ -134,8 +134,10 @@ words:
   - GITFUSION
   - gitops
   - godev
+  - eventlistener
   - gitrevision
   - Gitserver
+  - gitservers
   - gitsha
   - GITTAG
   - GOPATH

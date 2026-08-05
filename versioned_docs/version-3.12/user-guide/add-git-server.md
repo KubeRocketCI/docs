@@ -120,6 +120,7 @@ For [Bitbucket](https://support.atlassian.com/bitbucket-cloud/docs/create-an-api
         - `read:repository:bitbucket` - to read repository data.
         - `read:pullrequest:bitbucket` - to read pull request information.
         - `read:webhook:bitbucket` - to read webhook configurations.
+        - `read:workspace:bitbucket` - to enable Git resource discovery in the KubeRocketCI portal.
         - `write:webhook:bitbucket` - to create and manage webhooks.
 
         ![Select scopes](../assets/operator-guide/git-servers/bitbucket-select-scopes.png "Select scopes")

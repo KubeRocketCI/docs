@@ -6263,7 +6263,7 @@ KubeRocketCI also supports deploying Argo CD applications to a remote cluster. T
     BEAR_TOKEN=$(kubectl get secret <serviceaccount-secret-name> -o jsonpath='{.data.token}' | base64 --decode)
     ```
 
-3. Create ArgoCD secret for remote cluster:
+3. Create ArgoCD secret for remote cluster in the ArgoCD namespace (Argo CD only discovers cluster secrets in its own control-plane namespace):
 
     ```yaml title="manifest"
     apiVersion: v1
@@ -6271,17 +6271,29 @@ KubeRocketCI also supports deploying Argo CD applications to a remote cluster. T
     metadata:
       name: krci-remote-cluster
       namespace: argocd
-    data:
-      # Remote cluster config
-      config: {"bearerToken":"<BEAR_TOKEN>","tlsClientConfig":{"insecure":false,"caData":"<certificate-authority-data>"}}
-      # Remote cluster name
+      labels:
+        argocd.argoproj.io/secret-type: cluster
+    type: Opaque
+    stringData:
+      # Remote cluster name. Must exactly match the cluster name used in the
+      # Environment (Stage) and in the 'available_clusters' parameter of the
+      # krci-config ConfigMap: the generated Argo CD Applications reference
+      # the destination cluster by this name.
       name: "krci-remote-cluster"
       # Cluster endpoint URL
       server: "https://xxxxxxxxxxxxxxxxxxxx.sk1.eu-central-1.eks.amazonaws.com"
-    type: stringData
+      # Remote cluster config
+      config: |
+        {
+          "bearerToken": "<BEAR_TOKEN>",
+          "tlsClientConfig": {
+            "insecure": false,
+            "caData": "<certificate-authority-data>"
+          }
+        }
     ```
 
-4. Update an Argo CD Project (KubeRocketCI Tenant), with the `krci` name:
+4. Update an Argo CD Project (KubeRocketCI Tenant), with the `krci` name. Without this step, deployments to the remote cluster fail with `InvalidSpecError: application destination server 'krci-remote-cluster' and namespace 'krci-...' do not match any of the allowed destinations`:
 
     ```yaml title="AppProject"
     apiVersion: argoproj.io/v1alpha1
@@ -6298,6 +6310,10 @@ KubeRocketCI also supports deploying Argo CD applications to a remote cluster. T
     ```
 
 5. Add a remote cluster in the KubeRocketCI portal. Please refer to the [Add Cluster](../../user-guide/add-cluster.md) page for details.
+
+:::note
+  When a cluster is added through the KubeRocketCI portal with the Bearer credentials type, the cd-pipeline-operator generates an equivalent Argo CD cluster secret in the platform namespace after the connectivity check succeeds. Its name is the cluster Secret name with the `-argocd-cluster` suffix appended: a cluster added as `dev2` is stored as Secret `dev2-cluster` and produces `dev2-cluster-argocd-cluster`. You can copy that secret into the ArgoCD namespace instead of composing the manifest above manually.
+:::
 
 ## Keycloak Integration (Optional)
 
@@ -7339,7 +7355,6 @@ To configure application deployment in remote cluster using the Capsule tool, fo
     kind: Tenant
     metadata:
       name: krci-deployer
-      namespace: <deploy_namespace>
     spec:
       owners:
         - clusterRoles:
@@ -28602,8 +28617,8 @@ To deploy an application to a remote cluster, follow the steps below:
 
         <TabItem value="bearer">
 
-            * **Cluster Name**: a unique and descriptive name for the external cluster;
-            * **Cluster Host**: the cluster’s endpoint URL (e.g., example-cluster-domain.com);
+            * **Cluster Name**: a unique and descriptive name for the external cluster (e.g., dev2). The platform stores the cluster as a Kubernetes Secret named `<cluster-name>-cluster` — this Secret name is the identifier used in all further configuration steps;
+            * **Cluster Host**: the cluster’s Kubernetes API endpoint. The value must be a full HTTPS URL (e.g., `https://example-cluster-domain.com:6443`) — a bare host name without the `https://` scheme does not pass the form validation;
             * **Cluster Token**: a [Kubernetes token](../operator-guide/cd/deploy-application-in-remote-cluster-via-token.md#get-kubernetes-token) with permissions to access the cluster. This token is required for proper authorization;
             * **Skip TLS verification**: allows connect to cluster without cluster certificate verification;
             * **Cluster Certificate**: a Kubernetes certificate essential for authentication. Obtain this certificate from the configuration file of the user account you intend to use for accessing the cluster.
@@ -28616,8 +28631,8 @@ To deploy an application to a remote cluster, follow the steps below:
 
         <TabItem value="irsa">
 
-            * **Cluster Name**: a unique and descriptive name for the external cluster (e.g., prod-cluster);
-            * **Cluster Host**: the cluster’s endpoint URL (e.g., example-cluster-domain.com);
+            * **Cluster Name**: a unique and descriptive name for the external cluster (e.g., prod);
+            * **Cluster Host**: the cluster’s Kubernetes API endpoint. The value must be a full HTTPS URL (e.g., `https://example-cluster-domain.com:6443`) — a bare host name without the `https://` scheme does not pass the form validation;
             * **Certificate Authority Data**: base64-encoded Kubernetes certificate essential for authentication. Obtain this certificate from the configuration file of the user account you intend to use for accessing the cluster;
             * **Role ARN**: arn:aws:iam::\<AWS_ACCOUNT_B_ID\>:role/AWSIRSA_\{cluster_name\}_CDPipelineAgent.
 
@@ -28628,22 +28643,34 @@ To deploy an application to a remote cluster, follow the steps below:
         </TabItem>
     </Tabs>
 
-3. As soon as the cluster is added, open the terminal which has access to the cluster that runs the KubeRocketCI deployment.
+3. Wait for the platform to confirm the connection. Clicking **Save** only creates a Kubernetes Secret named `<cluster-name>-cluster` in the platform namespace — the actual connectivity check runs asynchronously in the cd-pipeline-operator (usually under a minute). The cluster card then shows a **Connected** or **Disconnected** badge together with the error message, based on the `app.edp.epam.com/cluster-connected` and `app.edp.epam.com/cluster-error` annotations the operator sets on the Secret. A "Secret has been created" notification does **not** mean the credentials are valid — always wait for the **Connected** badge before proceeding:
 
-4. Open the `krci-config` ConfigMap edit menu using the `kubectl edit` command:
+    ![Cluster connection status](../assets/user-guide/clusters/cluster-connection-status.png "Cluster connection status")
+
+    :::note
+      Add the cluster while the KubeRocketCI platform namespace (e.g., `krci`) is selected in the Portal. The Secret is created in the currently selected namespace, and the operator only processes cluster Secrets in the platform namespace.
+    :::
+
+4. As soon as the cluster is connected, open the terminal which has access to the cluster that runs the KubeRocketCI deployment.
+
+5. Open the `krci-config` ConfigMap edit menu using the `kubectl edit` command:
 
 ```bash
 kubectl edit ConfigMap krci-config -n krci
 ```
 
-5. In the YAML file, add the `available_clusters` parameter, insert the cluster name, and click **Save & apply**:
+6. In the YAML file, add the `available_clusters` parameter and insert the **Secret name** of the cluster — the cluster name you entered in the Portal with the `-cluster` suffix appended:
 
-    ```yaml title="edp-config.yaml"
+    ```yaml title="krci-config ConfigMap"
     data:
-      available_clusters: <cluster-name>
+      available_clusters: <cluster-name>-cluster
     ```
 
-6. Ensure the `available_clusters` parameter is added into the config map:
+    :::warning
+      The value must exactly match the name of the cluster Secret (`<cluster-name>-cluster` for Bearer clusters), because it becomes the `clusterName` of the Environment (Stage) and is resolved as a Secret name by the cd-pipeline-operator. Using the plain cluster name without the suffix results in an Environment that fails with `failed to get cluster secret: secrets "<cluster-name>" not found`. For clusters added with the IRSA credentials type, use the name **without** the `-cluster` suffix — the operator derives a kubeconfig Secret named `<cluster-name>` from the IRSA configuration. To list several clusters, separate the values with a comma followed by a space, e.g. `available_clusters: dev2-cluster, prod-cluster`.
+    :::
+
+7. Ensure the `available_clusters` parameter is added into the config map:
 
 ```
 kubectl get ConfigMap krci-config -n krci -o yaml
@@ -28651,7 +28678,15 @@ kubectl get ConfigMap krci-config -n krci -o yaml
 
 ## Integrate ArgoCD with External Cluster
 
-To integrate ArgoCD with an external cluster, you need to register the target cluster’s credentials with ArgoCD so that ArgoCD can securely connect to and manage resources in that cluster. This process typically involves creating a Kubernetes Secret in the ArgoCD namespace containing the cluster connection configuration. Depending on your platform and security requirements, authentication can be configured via a static token or by using an AWS IAM Role for Service Accounts (IRSA).
+To integrate ArgoCD with an external cluster, you need to register the target cluster’s credentials with ArgoCD so that ArgoCD can securely connect to and manage resources in that cluster. This process involves creating a Kubernetes Secret **in the ArgoCD namespace** containing the cluster connection configuration — Argo CD only discovers cluster Secrets in its own control-plane namespace (typically `argocd`); the apps-in-any-namespace feature does not apply to cluster Secrets. Depending on your platform and security requirements, authentication can be configured via a static token or by using an AWS IAM Role for Service Accounts (IRSA).
+
+:::tip
+  For clusters added with the Bearer credentials type, the cd-pipeline-operator already generates a ready-to-use Argo CD cluster Secret next to the source Secret in the platform namespace as soon as the connectivity check succeeds. Its name is the cluster Secret name with the `-argocd-cluster` suffix appended: a cluster added as `dev2` is stored as Secret `dev2-cluster` and produces `dev2-cluster-argocd-cluster`. Instead of composing the Secret manually, you can copy that generated Secret into the ArgoCD namespace (keep the `argocd.argoproj.io/secret-type: cluster` label).
+:::
+
+:::warning
+  The `name` field inside the Secret must exactly match the value you added to `available_clusters` (e.g., `<cluster-name>-cluster`). The Argo CD Applications generated by the platform reference the destination cluster **by name**, taken from the Environment's `clusterName` — if the names differ, deployments fail with a "cluster not found" error. Also make sure the `krci` AppProject allows the new destination, as described in the [Argo CD Integration](../operator-guide/cd/argocd-integration.md#deploy-argo-cd-application-to-remote-cluster-optional) page; otherwise deployments fail with `InvalidSpecError: application destination server '<cluster-name>-cluster' ... do not match any of the allowed destinations`.
+:::
 
 Choose the configuration method that matches your external cluster's authentication mechanism and follow the relevant steps below to prepare your cluster for use with ArgoCD.
 
@@ -28672,17 +28707,18 @@ Choose the configuration method that matches your external cluster's authenticat
     namespace: argocd
     labels:
       argocd.argoproj.io/secret-type: cluster
+  type: Opaque
   stringData:
-    config: |
-    {
-      "tlsClientConfig": {
-        "insecure": false,
-        "caData": ""
-      },
-      "bearerToken": ""
-    }
-    name: "<cluster-name>"
+    name: "<cluster-name>-cluster"
     server: "https://EXAMPLED539D4633E53DE1B71EXAMPLE.gr7.<AWS_REGION>.eks.amazonaws.com"
+    config: |
+      {
+        "tlsClientConfig": {
+          "insecure": false,
+          "caData": ""
+        },
+        "bearerToken": ""
+      }
   ```
   </TabItem>
 
@@ -28753,6 +28789,19 @@ After applying the configuration, you can verify the cluster connection `ArgoCD`
 To create a Deployment with an Environment, follow the instructions specified in the [Add Deployment](./add-cd-pipeline.md) page.
 
 When creating an Environment, specify your new cluster name in the **Cluster** field.
+
+## Remove External Cluster
+
+To disconnect an external cluster from the platform, remove the resources in the following order:
+
+1. Delete (or migrate) all Environments that reference the cluster.
+2. Remove the cluster name from the `available_clusters` parameter in the `krci-config` ConfigMap.
+3. Delete the cluster in the Portal (**Configuration** -> **Deployment** -> **Clusters**) — this deletes the cluster Secret together with the generated Argo CD Secret owned by it.
+4. Delete the Argo CD cluster Secret you created in the ArgoCD namespace and remove the destination from the `krci` AppProject.
+
+:::warning
+  Always delete Environments **before** the cluster Secret. If the Secret is removed first, the cd-pipeline-operator can no longer reach the cluster during Environment deletion and skips the remote cleanup, leaving orphaned namespaces and RBAC objects on the external cluster.
+:::
 
 ## Related Articles
 

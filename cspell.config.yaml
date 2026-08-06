@@ -19,6 +19,7 @@ words:
   - applicationset
   - applicationsetcontroller
   - applicationsets
+  - appproject
   - ATATT
   - authc
   - auths
@@ -335,6 +336,7 @@ words:
   - usermodel
   - vacuumdb
   - validatingwebhookconfigurations
+  - vcluster
   - velero
   - Veracode
   - verion

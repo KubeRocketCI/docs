@@ -109,7 +109,6 @@ To configure application deployment in remote cluster using the Capsule tool, fo
     kind: Tenant
     metadata:
       name: krci-deployer
-      namespace: <deploy_namespace>
     spec:
       owners:
         - clusterRoles:

@@ -385,7 +385,7 @@ KubeRocketCI also supports deploying Argo CD applications to a remote cluster. T
     BEAR_TOKEN=$(kubectl get secret <serviceaccount-secret-name> -o jsonpath='{.data.token}' | base64 --decode)
     ```
 
-3. Create ArgoCD secret for remote cluster:
+3. Create ArgoCD secret for remote cluster in the ArgoCD namespace (Argo CD only discovers cluster secrets in its own control-plane namespace):
 
     ```yaml title="manifest"
     apiVersion: v1
@@ -393,14 +393,25 @@ KubeRocketCI also supports deploying Argo CD applications to a remote cluster. T
     metadata:
       name: krci-remote-cluster
       namespace: argocd
-    data:
-      # Remote cluster config
-      config: {"bearerToken":"<BEAR_TOKEN>","tlsClientConfig":{"insecure":false,"caData":"<certificate-authority-data>"}}
-      # Remote cluster name
+      labels:
+        argocd.argoproj.io/secret-type: cluster
+    type: Opaque
+    stringData:
+      # Remote cluster name. Must exactly match the cluster name used in the
+      # Environment (Stage) and in the 'available_clusters' parameter of the
+      # krci-config ConfigMap.
       name: "krci-remote-cluster"
       # Cluster endpoint URL
       server: "https://xxxxxxxxxxxxxxxxxxxx.sk1.eu-central-1.eks.amazonaws.com"
-    type: stringData
+      # Remote cluster config
+      config: |
+        {
+          "bearerToken": "<BEAR_TOKEN>",
+          "tlsClientConfig": {
+            "insecure": false,
+            "caData": "<certificate-authority-data>"
+          }
+        }
     ```
 
 4. Update an Argo CD Project (KubeRocketCI Tenant), with the `krci` name:

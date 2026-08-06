@@ -133,6 +133,7 @@ words:
   - gitfusion
   - GITFUSION
   - gitops
+  - GORM
   - godev
   - eventlistener
   - gitrevision
@@ -254,6 +255,7 @@ words:
   - Qovery
   - rabbitmq
   - rabbitmqctl
+  - recordsummary
   - regcred
   - Rego
   - rekor

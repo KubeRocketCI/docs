@@ -59,7 +59,7 @@ Tekton Results is deployed as part of the Tekton Pipelines installation. For ins
 ## Configuration
 
 :::note
-We use Postgres operator to connect to Tekton results, but you can use any other external databases supported. Please align configuration accordingly to Tekton result [documentation](https://github.com/tektoncd/results/blob/v0.19.0/docs/external-database.md).
+We use Postgres operator to connect to Tekton results, but you can use any other external databases supported. Please align configuration accordingly to Tekton result [documentation](https://github.com/tektoncd/results/blob/v0.20.0/docs/external-database.md).
 :::
 
 To configure long-term log storage for pipelines in the KubeRocketCI Portal, follow the steps below:
@@ -112,6 +112,82 @@ The retention policy agent removes only database records from PostgreSQL. It doe
 :::note
 In this example, the PGO (PostgreSQL Operator) is used for the Tekton Results database. 
 :::
+
+## Database Performance Indexes
+
+Tekton Results creates its schema through GORM auto-migration, which adds no indexes beyond the primary keys. As the
+history grows, the queries behind the KubeRocketCI Portal pipeline run history fall back to sequential scans and the
+history views become progressively slower to load. Create the indexes below to keep those queries on index scans.
+
+:::note
+`CREATE INDEX CONCURRENTLY` builds the index without locking the table for writes, so these statements are safe to run
+against a live database. They cannot run inside a transaction block, which is why each statement is applied separately.
+:::
+
+1. Find the primary PostgreSQL pod:
+
+    ```bash
+    PG_POD=$(kubectl get pods -n tekton-pipelines \
+      -l postgres-operator.crunchydata.com/cluster=results,postgres-operator.crunchydata.com/role=master \
+      -o jsonpath='{.items[0].metadata.name}')
+    ```
+
+2. Create the index covering list queries that filter by parent and type and sort by time:
+
+    ```bash
+    kubectl exec -it -n tekton-pipelines "$PG_POD" -c database -- \
+      psql -U postgres -d results -c \
+      "CREATE INDEX CONCURRENTLY IF NOT EXISTS idx_records_parent_type_created ON records (parent, type, created_time DESC);"
+    ```
+
+3. Create the index covering JSONB containment queries (`@>`) used for codebase and name filtering:
+
+    ```bash
+    kubectl exec -it -n tekton-pipelines "$PG_POD" -c database -- \
+      psql -U postgres -d results -c \
+      "CREATE INDEX CONCURRENTLY IF NOT EXISTS results_annotations ON results USING GIN (annotations jsonb_path_ops);"
+    ```
+
+4. Create the index covering summary annotation filtering, which the DORA metrics views rely on:
+
+    ```bash
+    kubectl exec -it -n tekton-pipelines "$PG_POD" -c database -- \
+      psql -U postgres -d results -c \
+      "CREATE INDEX CONCURRENTLY IF NOT EXISTS record_summary_annotations ON results USING GIN (recordsummary_annotations jsonb_path_ops);"
+    ```
+
+5. Verify that the indexes exist:
+
+    ```bash
+    kubectl exec -it -n tekton-pipelines "$PG_POD" -c database -- \
+      psql -U postgres -d results -c "\di+"
+    ```
+
+6. Confirm that queries use them. The plan should report an `Index Scan` or `Bitmap Index Scan` on
+   `idx_records_parent_type_created` rather than a `Seq Scan`:
+
+    ```bash
+    kubectl exec -it -n tekton-pipelines "$PG_POD" -c database -- \
+      psql -U postgres -d results -c "
+        EXPLAIN ANALYZE
+        SELECT * FROM records
+        WHERE parent LIKE 'tekton-pipelines/results/%'
+          AND type = 'tekton.dev/v1.PipelineRun'
+        ORDER BY created_time DESC
+        LIMIT 10;
+      "
+    ```
+
+To remove the indexes, drop them by name:
+
+```bash
+kubectl exec -it -n tekton-pipelines "$PG_POD" -c database -- \
+  psql -U postgres -d results -c "
+    DROP INDEX IF EXISTS idx_records_parent_type_created;
+    DROP INDEX IF EXISTS results_annotations;
+    DROP INDEX IF EXISTS record_summary_annotations;
+  "
+```
 
 ## Related Articles
 

@@ -70,11 +70,30 @@ To install Tekton resources, follow the steps below:
     kubectl apply -f https://infra.tekton.dev/tekton-releases/chains/previous/v0.28.1/release.yaml
     ```
 
-5. Install Tekton Results v0.19.0 using the release file:
+5. Install Tekton Results v0.20.0 using the KubeRocketCI manifest:
+
+    :::warning
+      Unlike the components above, Tekton Results **must not** be installed from the plain upstream release file.
+      The Platform customizes it, and the upstream `release.yaml` bundles its own PostgreSQL instance that conflicts
+      with the Platform database. Use the [results.yaml](https://github.com/epam/edp-cluster-add-ons/blob/main/clusters/core/addons/tekton/results.yaml)
+      manifest from the [edp-cluster-add-ons](https://github.com/epam/edp-cluster-add-ons) repository instead.
+    :::
 
     ```bash
-    kubectl apply -f https://infra.tekton.dev/tekton-releases/results/previous/v0.19.0/release.yaml
+    kubectl apply -f https://raw.githubusercontent.com/epam/edp-cluster-add-ons/main/clusters/core/addons/tekton/results.yaml
     ```
+
+    The manifest is based on the upstream `release_base.yaml` (the variant without a bundled database) and adds the
+    following Platform customizations:
+
+    - **External database.** Connection settings point to the PostgreSQL cluster defined in
+      [results-pg.yaml](https://github.com/epam/edp-cluster-add-ons/blob/main/clusters/core/addons/tekton/results-pg.yaml),
+      which must be deployed first. See [Tekton Long-Term Storage](./ci/tekton-long-term-storage.md) for details.
+    - **Summary labels.** The watcher runs with `-summary_labels`, which records the codebase, branch, pipeline type,
+      and CD pipeline labels on archived runs. The KubeRocketCI Portal relies on these to render the pipeline run
+      history, so omitting the flag leaves history entries without their metadata.
+    - **Log storage.** The Results API serves pipeline logs from a persistent volume, and a CronJob prunes entries
+      older than 30 days.
 
 ## Installation on OKD cluster
 

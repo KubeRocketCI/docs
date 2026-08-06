@@ -46,7 +46,7 @@ To deploy an application to a remote cluster, follow the steps below:
         <TabItem value="bearer">
 
             * **Cluster Name**: a unique and descriptive name for the external cluster;
-            * **Cluster Host**: the cluster’s endpoint URL (e.g., example-cluster-domain.com);
+            * **Cluster Host**: the cluster’s Kubernetes API endpoint. The value must be a full HTTPS URL (e.g., `https://example-cluster-domain.com:6443`) — a bare host name without the `https://` scheme does not pass the form validation;
             * **Cluster Token**: a [Kubernetes token](../operator-guide/cd/deploy-application-in-remote-cluster-via-token.md#get-kubernetes-token) with permissions to access the cluster. This token is required for proper authorization;
             * **Skip TLS verification**: allows connect to cluster without cluster certificate verification;
             * **Cluster Certificate**: a Kubernetes certificate essential for authentication. Obtain this certificate from the configuration file of the user account you intend to use for accessing the cluster.
@@ -62,7 +62,7 @@ To deploy an application to a remote cluster, follow the steps below:
         <TabItem value="irsa">
 
             * **Cluster Name**: a unique and descriptive name for the external cluster (e.g., prod-cluster);
-            * **Cluster Host**: the cluster’s endpoint URL (e.g., example-cluster-domain.com);
+            * **Cluster Host**: the cluster’s Kubernetes API endpoint. The value must be a full HTTPS URL (e.g., `https://example-cluster-domain.com:6443`) — a bare host name without the `https://` scheme does not pass the form validation;
             * **Certificate Authority Data**: base64-encoded Kubernetes certificate essential for authentication. Obtain this certificate from the configuration file of the user account you intend to use for accessing the cluster;
             * **Role ARN**: arn:aws:iam::\<AWS_ACCOUNT_B_ID\>:role/AWSIRSA_\{cluster_name\}_CDPipelineAgent.
 
@@ -93,12 +93,16 @@ To deploy an application to a remote cluster, follow the steps below:
 
     ![Edit config map](../assets/user-guide/add-cluster-edit-config-map.png "Edit config map")
 
-7. In the YAML file, add the `available_clusters` parameter, insert the cluster name, and click **Save & apply**:
+7. In the YAML file, add the `available_clusters` parameter, insert the **Secret name** of the cluster — the cluster name you entered in the Portal with the `-cluster` suffix appended — and click **Save & apply**:
 
-    ```yaml title="edp-config.yaml"
+    ```yaml title="krci-config ConfigMap"
     data:
-      available_clusters: <cluster-name>
+      available_clusters: <cluster-name>-cluster
     ```
+
+    :::warning
+      The value must exactly match the name of the cluster Secret (`<cluster-name>-cluster` for Bearer clusters), because it becomes the `clusterName` of the Environment (Stage) and is resolved as a Secret name by the cd-pipeline-operator. For clusters added with the IRSA credentials type, use the name **without** the `-cluster` suffix. To list several clusters, separate the values with a comma followed by a space.
+    :::
 
     ![Add new parameter](../assets/user-guide/add-available-clusters.png "Add new parameter")
 
@@ -126,17 +130,18 @@ To deploy an application to a remote cluster, follow the steps below:
     namespace: argocd
     labels:
       argocd.argoproj.io/secret-type: cluster
+  type: Opaque
   stringData:
-    config: |
-    {
-      "tlsClientConfig": {
-        "insecure": false,
-        "caData": ""
-      },
-      "bearerToken": ""
-    }
-    name: "<cluster-name>"
+    name: "<cluster-name>-cluster"
     server: "https://EXAMPLED539D4633E53DE1B71EXAMPLE.gr7.<AWS_REGION>.eks.amazonaws.com"
+    config: |
+      {
+        "tlsClientConfig": {
+          "insecure": false,
+          "caData": ""
+        },
+        "bearerToken": ""
+      }
   ```
 
   </TabItem>

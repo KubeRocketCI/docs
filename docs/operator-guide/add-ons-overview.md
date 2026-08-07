@@ -213,6 +213,7 @@ The list of the available Add-Ons:
 |Sonar Operator|An operator that simplifies the management and configuration of SonarQube.|false|
 |StorageClass|A Kubernetes resource that provides a way to define different classes of storage with different performance characteristics for persistent volumes.|false|
 |Tekton|A flexible and cloud-native framework for building, testing, and deploying applications using Kubernetes-native workflows.|false|
+|Tekton Monitoring|Prometheus ServiceMonitors and Grafana dashboards for the Tekton stack, covering pipeline throughput, task duration, queueing, and control plane health.|false|
 |Tekton-cache||false|
 |Vault|An open-source secrets management solution that provides secure storage, encryption, and access control for sensitive data in Kubernetes clusters.|false|
 |Velero|An open source tool to safely backup and restore, perform disaster recovery, and migrate Kubernetes cluster resources and persistent volumes.|false|

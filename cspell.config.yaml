@@ -51,8 +51,8 @@ words:
   - changeit
   - changemerged
   - Checkmarx
-  - cicd
   - CIBA
+  - cicd
   - ciuser
   - Civo
   - clastix
@@ -73,6 +73,7 @@ words:
   - configmap
   - control
   - Coverity
+  - Cowork
   - credrequests
   - creds
   - crossplane
@@ -80,28 +81,26 @@ words:
   - csanchez
   - cutover
   - daniilnedostup
-  - Cowork
   - dbchecker
   - dbcleaner
   - deepcopy
   - defectdojo
   - dependencytrack
   - deployers
-  - drillable
   - DEPTRACK
   - Djava
   - Djgroups
   - Dkeycloak
-  - Dskip
-  - DskipTests
-  - Dsonar
   - dockerbuild
   - dockerconfigjson
   - dockerhub
   - dogfooding
+  - drillable
   - dropdb
+  - Dskip
+  - DskipTests
+  - Dsonar
   - dumpall
-  - EPMDEDP
   - EBSCSI
   - edpcomponent
   - edpcomponents
@@ -113,16 +112,19 @@ words:
   - EPAM
   - epamedp
   - epmd
+  - EPMDEDP
+  - eventlistener
+  - eventlisteners
   - externalsecret
   - extrasecrets
   - fasapi
   - fastapi
   - Filebeat
   - filesystems
-  - Flexera
   - finalizer
   - finalizers
   - Firstname
+  - Flexera
   - fluentbit
   - fullname
   - Fzcw
@@ -134,15 +136,14 @@ words:
   - gitfusion
   - GITFUSION
   - gitops
-  - GORM
-  - godev
-  - eventlistener
   - gitrevision
   - Gitserver
   - gitservers
   - gitsha
   - GITTAG
+  - godev
   - GOPATH
+  - GORM
   - GOROOT
   - Grype
   - hadolint
@@ -155,9 +156,9 @@ words:
   - hyperthreading
   - idpbuilder
   - importcert
-  - inspectable
   - ingresscontroller
   - initdb
+  - inspectable
   - issueadmin
   - jobservice
   - junitxml
@@ -250,10 +251,10 @@ words:
   - psql
   - pullrequest
   - pwjps
+  - Qovery
   - qualitygate
   - Qualys
   - Quarkus
-  - Qovery
   - rabbitmq
   - rabbitmqctl
   - recordsummary
@@ -285,6 +286,7 @@ words:
   - serviceanalyzertrain
   - serviceapi
   - serviceindex
+  - servicemonitor
   - serviceui
   - SETGID
   - SETUID
@@ -310,7 +312,6 @@ words:
   - Taskrun
   - tekton
   - tektoncd
-  - tokenomics
   - tfenv
   - tflint
   - Tflint
@@ -318,16 +319,16 @@ words:
   - Tfsec
   - tfstate
   - tfvars
+  - tokenomics
   - tolerations
   - tomap
   - toolset
   - traefik
   - trgm
+  - triaging
   - triggertemplate
   - triggertemplates
-  - triaging
   - trustcacerts
-  - VULNS
   - truststore
   - Uffizzi
   - usedomainname
@@ -340,11 +341,13 @@ words:
   - velero
   - Veracode
   - verion
+  - VULNS
   - wafv
   - waynesun
   - webhookconfigurations
   - wildfly
   - Wildfly
+  - workqueue
   - xlarge
   - zwpj
 enableFiletypes:

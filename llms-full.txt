@@ -1792,6 +1792,7 @@ The list of the available Add-Ons:
 |Sonar Operator|An operator that simplifies the management and configuration of SonarQube.|false|
 |StorageClass|A Kubernetes resource that provides a way to define different classes of storage with different performance characteristics for persistent volumes.|false|
 |Tekton|A flexible and cloud-native framework for building, testing, and deploying applications using Kubernetes-native workflows.|false|
+|Tekton Monitoring|Prometheus ServiceMonitors and Grafana dashboards for the Tekton stack, covering pipeline throughput, task duration, queueing, and control plane health.|false|
 |Tekton-cache||false|
 |Vault|An open-source secrets management solution that provides secure storage, encryption, and access control for sensitive data in Kubernetes clusters.|false|
 |Velero|An open source tool to safely backup and restore, perform disaster recovery, and migrate Kubernetes cluster resources and persistent volumes.|false|
@@ -8036,108 +8037,168 @@ kubectl exec -it -n tekton-pipelines "$PG_POD" -c database -- \
 
 ---
 
-## Pipeline Monitoring with Prometheus and Grafana
+## Tekton Pipeline Monitoring with Prometheus and Grafana
 
 <!-- markdownlint-disable MD025 -->
 
-# Pipeline Monitoring with Prometheus and Grafana
+# Tekton Pipeline Monitoring with Prometheus and Grafana
 
 <head>
   <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/ci/tekton-monitoring" />
 </head>
 
-This documentation describes how to integrate tekton-pipelines metrics with Prometheus and Grafana monitoring stack.
+Tekton already exposes Prometheus metrics for pipeline runs, task runs, webhooks and its own
+control plane. This page explains how to collect them and read them in Grafana using the
+`tekton-monitoring` add-on, which ships the scrape configuration and the dashboards together so
+neither has to be assembled by hand.
 
 ## Prerequisites
 
-Ensure the following requirements are met first before moving ahead:
+Ensure the following requirements are met before moving ahead:
 
-- [Kube prometheus stack](https://prometheus-community.github.io/helm-charts) is installed
-- [Tekton pipeline](https://github.com/tektoncd/pipeline/releases) is installed
+- The [tekton](https://github.com/epam/edp-cluster-add-ons/tree/main/clusters/core/addons/tekton)
+  add-on is deployed, so Tekton Pipelines, Triggers and Results are running.
+- The **prometheus-operator** custom resource definitions are installed, since the add-on creates
+  `ServiceMonitor` resources.
+- [kube-prometheus-stack](https://prometheus-community.github.io/helm-charts) is installed with
+  its Grafana sidecar enabled. The sidecar discovers dashboards in every namespace, so the
+  add-on can ship them from `tekton-pipelines`.
+- The legacy integration is not in use. If Tekton metrics were configured before this add-on was
+  introduced, follow [Migrate From the Legacy Integration](#migrate-from-the-legacy-integration)
+  first.
 
-## Integration Overview
+## Set the Prometheus Release Label
 
-Currently, there are two methods for integrating tekton-pipelines metrics with the Prometheus and Grafana monitoring stack.
+Prometheus picks up `ServiceMonitor` resources by release label: `kube-prometheus-stack` sets
+`serviceMonitorSelectorNilUsesHelmValues: true` by default, which limits Prometheus to monitors
+carrying its own release label. Set this value first, so the monitors are collected as soon as
+the add-on is deployed.
 
-- [Integration via Service Monitor](#integration-via-service-monitor)
-- [Integration via edp-install Helm Chart](#integration-via-edp-install-helm-chart)
+Run `helm list -n monitoring` to get the release name of your `kube-prometheus-stack`
+installation, then set it in `clusters/core/addons/tekton-monitoring/values.yaml`:
 
-## Integration via Service Monitor
+```yaml values.yaml
+serviceMonitor:
+  additionalLabels:
+    release: kube-prometheus
+```
 
-To implement Pipeline Monitoring using the Service Monitor resource, follow the steps below:
+If your Prometheus sets `serviceMonitorSelectorNilUsesHelmValues: false`, the label is not
+required and the value can be cleared.
 
-1. Create a Service Monitor resource file with the following configuration:
+## Enable the Add-On
 
-    ```yaml service-monitor.yaml
-    apiVersion: monitoring.coreos.com/v1
-    kind: ServiceMonitor
-    metadata:
-      labels:
-        release: prom               # kube-prometheus-stack release name
-      name: tekton-overview
-    spec:
-      endpoints:
-        - interval: 10s
-          path: /metrics
-          port: http-metrics
-          scrapeTimeout: 10s
-      namespaceSelector:
-        matchNames:
-          - tekton-pipelines
-      selector:
-        matchLabels:
-          app.kubernetes.io/component: controller
-          app.kubernetes.io/part-of: tekton-pipelines
-    ```
+The add-on is disabled by default. Enable it in `clusters/core/apps/values.yaml`:
 
-2. Apply the created resource to the `tekton-pipelines` namespace:
+```yaml values.yaml
+tekton-monitoring:
+  createNamespace: false
+  enable: true
+  namespace: tekton-pipelines
+```
 
-    ```bash
-    kubectl apply -f service-monitor.yaml -n tekton-pipelines
-    ```
+Commit the change and let Argo CD synchronize the `tekton-monitoring` application. Because the
+add-on deploys into the namespace owned by the `tekton` add-on, it never creates that namespace
+itself.
 
-3. Download the [KubeRocketCi](https://grafana.com/grafana/dashboards/18321) dashboard:
+Once the application is synchronized, the Tekton targets appear under **Status → Targets** in
+Prometheus, and the six dashboards appear in Grafana under titles starting with `Tekton /`.
 
-    a. Click on the dashboard menu.
+## What the Add-On Deploys
 
-    b. In the upper right corner, click on the `New` button. In the dropdown menu, click the `Import`:
+### Metrics Collection
 
-    ![Import dashboard grafana](../../assets/operator-guide/grafana-tekton-dasboard-import.png "Import Grafana dashboard")
+Six `ServiceMonitor` resources point Prometheus at the endpoints Tekton already exposes:
 
-    c. Select the downloaded `18321_rev*.json` file:
+| ServiceMonitor | Component | What it provides |
+|:-|:-|:-|
+| `tekton-pipelines-controller` | Pipelines controller | Pipeline and task run counts, durations, throttling, reconciler and workqueue health |
+| `tekton-events-controller` | Events controller | CloudEvents emission |
+| `tekton-triggers-controller` | Triggers controller | Reconciliation of `EventListener` and `Trigger` resources |
+| `tekton-results-api` | Results API | gRPC server metrics |
+| `tekton-results-watcher` | Results watcher | Archival and pruning of completed runs |
+| `tekton-eventlisteners` | All EventListeners | Webhook volume, latency and triggered resources |
 
-    ![Import dashboard grafana options](../../assets/operator-guide/grafana-tekton-dasboard-import-options.png "Import Grafana dashboard: Options")
+The EventListener monitor is deliberately cluster-wide: KubeRocketCI creates an `EventListener`
+in each delivery namespace rather than in `tekton-pipelines`, and every one of them is labelled
+by the EventListener controller, so a single monitor covers them all.
 
-    d. Type the name of the dashboard.
+### Dashboards
 
-    e. Select the folder for the dashboard.
+Six dashboards are delivered as ConfigMaps and picked up by the Grafana sidecar:
 
-    f. Change the UID if necessary.
+| Dashboard | Answers |
+|:-|:-|
+| Pipeline Overview | How many pipelines ran, how many failed, and how long they took |
+| Task Analytics | Which tasks are slowest and which fail most often |
+| Queue and Scheduling | Whether runs are waiting on quota, node capacity or resolution |
+| EventListener Traffic | Whether webhooks arrive and convert into pipeline runs |
+| Platform Health | Whether the Tekton control plane itself is healthy |
+| Resource Consumption | How much CPU and memory pipelines consume |
 
-    g. Click the `Import` button.
+## Required Tekton Metrics Settings
 
-As soon as the dashboard procedure is completed, you can track the newcoming metrics in the dashboard menu:
+Two panels depend on metric labels that Tekton omits by default. The `tekton` add-on already sets
+both keys in its `config-observability` ConfigMap, so a standard installation needs no action.
+Re-apply them if that manifest is re-vendored from an upstream Tekton release, or if Tekton was
+installed from another source:
 
-    ![Tekton dashboard](../../assets/operator-guide/tekton-dashboard.png "Tekton dashboard")
+| Key | Value | Without it |
+|:-|:-|:-|
+| `metrics.count.enable-reason` | `true` | The `reason` label is absent, so **Timeouts** reads `0` permanently and **Failure reasons** collapses into a single unnamed slice |
+| `metrics.running-pipelinerun.level` | `pipeline` | The running-pipelines gauge has no `pipeline` label, so **Running now** is empty once a pipeline filter is applied |
 
-## Integration via edp-install Helm Chart
+Both keys belong in the `data` block of the ConfigMap. The `_example` block lists the same keys
+but is inert documentation, so values placed there have no effect.
 
-The [edp-install](https://github.com/epam/edp-install/) helm chart allows to integrate tekton-pipelines metrics with the Prometheus and Grafana stack through the `edp-tekton.grafana.enabled` field in [values.yaml](https://github.com/epam/edp-install/blob/d149baeb9756bdf113996620630f9b04f896e08d/deploy-templates/values.yaml#L309) file.
-To enable integration, set the `edp-tekton.grafana.enabled` field to `true` and apply the changes to the cluster.
+## Reading the Dashboards
 
-  ```yaml values.yaml
-  edp-tekton:
-    grafana:
-      enabled: true
-  ```
+Two conventions are worth knowing before drawing conclusions from a panel:
 
-After the changes are applied, the tekton-pipelines metrics will be available in the `KRCI Tekton overview` Grafana dashboard:
+- **Prefer p50 and p95 over the average.** A Tekton task that fails usually hangs until its
+  timeout instead of failing fast, so a handful of failed runs pull the mean far above what a
+  healthy run costs. A large gap between **Avg** and **p50** means the task hangs when it fails,
+  not that it is slow.
+- **Counts cover completed runs.** A run is counted when it finishes, so a pipeline still in
+  flight appears under **Running now** rather than in the range totals.
 
-    ![Tekton dashboard](../../assets/operator-guide/grafana-dashboard-is-created.png "Tekton dashboard is created")
+## Migrate From the Legacy Integration
+
+Earlier releases integrated Tekton metrics either by applying a single `ServiceMonitor` named
+`tekton-overview` by hand and importing a community Grafana dashboard, or by setting
+`edp-tekton.grafana.enabled` in the `edp-install` chart. Both approaches covered only the
+pipelines controller and a single dashboard. The add-on replaces them.
+
+:::warning
+Do not run the add-on and the legacy integration at the same time. The `tekton-overview`
+ServiceMonitor and the add-on's `tekton-pipelines-controller` ServiceMonitor select the **same**
+Kubernetes Service, so Prometheus scrapes it twice and every panel that sums across targets
+roughly doubles.
+:::
+
+To migrate:
+
+1. Set `edp-tekton.grafana.enabled` to `false`, or remove the value, and apply the change.
+2. Delete a hand-applied ServiceMonitor if one exists:
+   `kubectl delete servicemonitor tekton-overview -n tekton-pipelines`.
+3. Remove any manually imported Tekton dashboard from Grafana to avoid duplicates.
+4. Enable the add-on as described above.
+
+## Troubleshooting
+
+| Symptom | Cause |
+|:-|:-|
+| All panels empty | The `release` label does not match the `kube-prometheus-stack` release name |
+| Targets missing in Prometheus | The prometheus-operator CRDs are absent, or the add-on has not synchronized |
+| Dashboards missing in Grafana | The Grafana sidecar is disabled or not searching all namespaces |
+| **Timeouts** always `0` | `metrics.count.enable-reason` is not enabled |
+| **Running now** empty when filtering by pipeline | `metrics.running-pipelinerun.level` is not set to `pipeline` |
+| Counts roughly doubled | The legacy integration is still enabled alongside the add-on |
 
 ## Related Articles
 
 * [Install Tekton](../install-tekton.md)
+* [Add-Ons Overview](../add-ons-overview.md)
 * [Install KubeRocketCI](../install-kuberocketci.md)
 
 ---
@@ -37093,3 +37154,203 @@ Next steps from here:
 KubeRocketCI is open source under Apache License 2.0. The platform, Helm charts, and the local testbed are all on [GitHub](https://github.com/KubeRocketCI/try-kuberocketci).
 
 {/* cspell:ignore pipelineruns dockerbuild 2p446 8th5r 7fb8e40 5ffb585 COMPLETIONTIME glab Ftest */}
+
+---
+
+## Isolate Deployment Environments with vcluster: Multi-Cluster CD Without a Second Cluster
+
+
+Every platform team hits the same wall: the `qa` environment needs a different CRD version than `dev`, a teammate's experiment needs cluster-admin, or a preview environment needs to be disposable without a change-advisory meeting. Kubernetes namespaces don't isolate any of that - CRDs, admission webhooks, and cluster-scoped RBAC are shared by every namespace on the cluster. The textbook answer is a second cluster, but a second cluster means a second control plane to pay for, patch, and secure.
+
+[vcluster](https://www.vcluster.com/) sits exactly in that gap: a certified Kubernetes distribution that runs *inside* a namespace of your existing cluster, with its own API server, its own CRDs, and its own RBAC - while the pods it schedules land on the host nodes you already own. That makes it a perfect deployment target for a CI/CD platform: real cluster isolation, zero new hardware.
+
+This post walks through the complete flow on KubeRocketCI: create a vcluster, register it through the Portal, wire Argo CD, and promote an application into it. Everything below - every command, screenshot, and error message - is from a real run on the local [try-kuberocketci](/blog/try-kuberocketci-locally) testbed.
+
+<!--truncate-->
+
+## Why a Virtual Cluster Instead of a Namespace or a Real Cluster?
+
+| | Namespace | vcluster | Separate cluster |
+|---|---|---|---|
+| Workload isolation | Yes | Yes | Yes |
+| Own CRDs & API versions | No - shared | Yes | Yes |
+| Own RBAC / cluster-admin | No - shared cluster scope | Yes | Yes |
+| Blast radius of a bad operator | Whole cluster | The vcluster | The other cluster |
+| Extra infrastructure cost | None | ~1 pod (control plane) | Full control plane + nodes |
+| Setup time | Seconds | Minutes | Hours to days |
+| Teardown | `kubectl delete ns` | `vcluster delete` | Ticket to infra team |
+
+If you need hard isolation of the *control plane* - separate cloud account, separate failure domain, compliance boundary - use a real cluster. For everything else (per-team sandboxes, qa environments with diverging CRDs, disposable preview targets like the ones in our [ephemeral environments post](/blog/ephemeral-preview-environments-kubernetes-feature-branch)), a vcluster gives you cluster-grade isolation at namespace-grade cost.
+
+## Spin Up the vcluster and Mint a Deployer Token
+
+Two commands stand up the virtual cluster next to the platform (the testbed runs KubeRocketCI in a kind cluster, but the flow is identical on any Kubernetes):
+
+```bash
+vcluster create dev2 --namespace vcluster-dev2 --connect=false
+```
+
+The vcluster's API server is now reachable from inside the host cluster at a stable Service URL: `https://dev2.vcluster-dev2.svc:443`. That in-cluster address is all the platform needs - no ingress, no load balancer.
+
+Next, create a ServiceAccount inside the vcluster for the platform to deploy with, following the [remote cluster via token](/docs/operator-guide/cd/deploy-application-in-remote-cluster-via-token) guide:
+
+```bash
+vcluster connect dev2 --namespace vcluster-dev2 -- bash -c '
+kubectl create sa krci-deployer -n kube-system
+kubectl create clusterrolebinding krci-deployer-admin \
+  --clusterrole=cluster-admin --serviceaccount=kube-system:krci-deployer
+kubectl apply -f - <<EOF
+apiVersion: v1
+kind: Secret
+metadata:
+  name: krci-deployer-token
+  namespace: kube-system
+  annotations:
+    kubernetes.io/service-account.name: krci-deployer
+type: kubernetes.io/service-account-token
+EOF
+kubectl -n kube-system get secret krci-deployer-token \
+  -o jsonpath="{.data.token}" | base64 -d'
+```
+
+One detail that makes vcluster unusually friendly for CI/CD: pods scheduled in the vcluster are synced to the host nodes, so image pulls reuse the host's registry access. No new registry credentials, mirrors, or CA bundles to configure on a "new" cluster.
+
+## Add the Cluster Through the Portal
+
+In the Portal, navigate to **Configuration** -> **Deployment** -> **Clusters**, click **+ Add Cluster**, and fill in the Bearer form: name `dev2`, host `https://dev2.vcluster-dev2.svc:443`, the token from above, and **Skip TLS verification** for the first pass (you can wire the CA properly later).
+
+![KubeRocketCI Portal Add Cluster form filled with the vcluster name dev2, in-cluster HTTPS endpoint and bearer token, Skip TLS verification enabled](../assets/vcluster-deployment-isolation-kuberocketci/add-cluster-form.png "The whole registration: name, endpoint, token")
+
+Here is what actually happens when you click Save - understanding it will save you a debugging session later:
+
+1. The Portal creates **one Secret** named `dev2-cluster` (your name plus a `-cluster` suffix) in the platform namespace, containing a kubeconfig.
+2. The cd-pipeline-operator picks it up, performs a **live connectivity probe** against the API endpoint, and stamps the result on the Secret as annotations (`app.edp.epam.com/cluster-connected`, `app.edp.epam.com/cluster-error`).
+3. Only after the probe succeeds, it generates a ready-to-use **Argo CD cluster secret** next to it, named `dev2-cluster-argocd-cluster`.
+
+The "Secret has been created" toast therefore does *not* mean your credentials work. The truth is on the cluster card, which flips to **Connected** or **Disconnected** about a minute later:
+
+![KubeRocketCI Portal cluster cards showing the vcluster Connected and a misconfigured cluster Disconnected with the connection error displayed](../assets/vcluster-deployment-isolation-kuberocketci/cluster-connected-disconnected.png "Trust the badge, not the toast: the operator probes the cluster asynchronously")
+
+That Disconnected card on the left is a deliberate demo - a cluster registered with an unreachable host. The Portal accepts it silently; the badge and error text are the only signals. Always wait for **Connected** before moving on.
+
+## Wire Argo CD: Three Steps and One Golden Rule
+
+The Portal registration alone is not enough to deploy. Three pieces of glue connect the new cluster to the delivery machinery, and all three must agree on **one string: the cluster Secret name** (`dev2-cluster`). This is the part where most integrations go sideways, so here is the full naming chain from our live run:
+
+| Step | Object | Value |
+|---|---|---|
+| You type in the Portal | form field | `dev2` |
+| Portal creates | Secret (platform ns) | `dev2-cluster` |
+| Operator generates | Argo CD Secret (platform ns) | `dev2-cluster-argocd-cluster`, `data.name: dev2-cluster` |
+| You add | `krci-config` ConfigMap | `available_clusters: dev2-cluster` |
+| Environment wizard writes | `Stage.spec.clusterName` | `dev2-cluster` |
+| Operator renders | Argo CD Application destination | `name: dev2-cluster` |
+| Deploy pipeline receives | `KUBECONFIG_SECRET_NAME` param | `dev2-cluster` |
+
+The `clusterName` is resolved *as a Secret name* by the operator and *as a destination name* by Argo CD - one string, two lookups. With that in mind, the three steps:
+
+**1. Offer the cluster to the Environment wizard** - add the Secret name to the `krci-config` ConfigMap:
+
+```bash
+kubectl -n krci patch configmap krci-config --type merge \
+  -p '{"data":{"available_clusters":"dev2-cluster"}}'
+```
+
+**2. Let Argo CD see the cluster.** Argo CD only discovers cluster secrets in its own control-plane namespace, so copy the generated secret there (keep the `argocd.argoproj.io/secret-type: cluster` label):
+
+```bash
+kubectl -n krci get secret dev2-cluster-argocd-cluster -o json \
+  | jq '.metadata = {"name":"dev2-cluster","namespace":"argocd",
+        "labels":{"argocd.argoproj.io/secret-type":"cluster"}}' \
+  | kubectl apply -f -
+```
+
+**3. Allow the destination in the Argo CD AppProject** - without this, the first deploy fails (we will meet the exact error below):
+
+```bash
+kubectl -n argocd patch appproject krci --type json \
+  -p '[{"op":"add","path":"/spec/destinations/-",
+        "value":{"name":"dev2-cluster","namespace":"krci-*"}}]'
+```
+
+Full reference for these steps lives in the [Add Cluster](/docs/user-guide/add-cluster) guide.
+
+## Create the Environment on the Virtual Cluster
+
+Back in the Portal, open your Deployment Flow and create a new Environment. The **Cluster** dropdown now offers `dev2-cluster` next to `in-cluster` - pick it, and the wizard derives the deploy namespace as usual:
+
+![KubeRocketCI Portal Create Environment wizard with the dev2-cluster virtual cluster selected and the deploy namespace prefilled](../assets/vcluster-deployment-isolation-kuberocketci/create-environment-wizard.png "Same wizard, different cluster: environment qa targets the vcluster")
+
+The moment the Environment is created, the operator reaches into the vcluster and prepares everything a tenant needs: the namespace (labelled with the tenant name), a `tenant-admin` RoleBinding, and a copy of the registry pull secret. You can verify from outside:
+
+```bash
+vcluster connect dev2 --namespace vcluster-dev2 -- \
+  kubectl -n krci-demo-qa get rolebinding,secret
+```
+
+```text
+NAME                                                 ROLE                AGE
+rolebinding.rbac.authorization.k8s.io/tenant-admin   ClusterRole/admin   24s
+
+NAME             TYPE                             DATA   AGE
+secret/regcred   kubernetes.io/dockerconfigjson   1      24s
+```
+
+## Deploy and Prove the Isolation
+
+Open the environment's **Applications** tab, click **Configure Deploy**, pick the image version, and hit **Start Deploy**:
+
+![KubeRocketCI Portal Configure Deploy view with the latest built image version selected for deployment to the vcluster environment](../assets/vcluster-deployment-isolation-kuberocketci/configure-deploy-version.png "Promote the latest verified build to the vcluster environment")
+
+The regular deploy pipeline runs, Argo CD resolves the destination by name, and the application lands *inside* the virtual cluster:
+
+```bash
+vcluster connect dev2 --namespace vcluster-dev2 -- \
+  kubectl -n krci-demo-qa get deploy,pods
+```
+
+```text
+NAME                          READY   UP-TO-DATE   AVAILABLE
+deployment.apps/test-go-app   1/1     1            1
+
+NAME                              READY   STATUS    RESTARTS
+pod/test-go-app-84cd86f69-5xj4c   1/1     Running   0
+```
+
+From the host cluster's point of view, this workload lives in the vcluster's namespace under synthetic names; from the vcluster's point of view, it is a normal Deployment in a normal namespace with its own RBAC universe around it. Install a conflicting CRD version in there, grant someone cluster-admin, delete the whole thing - the host cluster and every other environment never notice.
+
+![KubeRocketCI Portal environment Applications tab showing the test-go-app application deployed and healthy on the vcluster](../assets/vcluster-deployment-isolation-kuberocketci/environment-applications-tab.png "Deployed, synced, healthy - and fully isolated")
+
+## The Three Errors You Will Actually Hit
+
+Every one of these appeared during our validation run - deliberately or not. Search engines love exact error strings, and so do humans at 2 a.m.
+
+### `failed to get cluster secret: secrets "dev2" not found`
+
+The Environment's `clusterName` does not match the cluster Secret name. Almost always this means `available_clusters` contains the plain name you typed in the Portal (`dev2`) instead of the Secret name (`dev2-cluster`). Fix the ConfigMap value; the Environment reconciles on the next loop.
+
+### `InvalidSpecError: application destination server 'dev2-cluster' ... do not match any of the allowed destinations in project 'krci'`
+
+The Argo CD AppProject does not allow the new cluster as a destination - step 3 above was skipped. Patch the AppProject, then re-run the deploy; the Application resolves immediately.
+
+### The cluster card stays "Disconnected" (or "Unknown" forever)
+
+Read the error on the card - it is the operator's live probe result. Wrong token, unreachable host, and TLS failures all surface there within a minute. If the badge never changes at all, check that the Secret was created in the platform namespace: the Portal writes it to whatever namespace is currently selected, and the operator only watches its own.
+
+## Tear It Down in the Right Order
+
+Order matters, because the operator needs the cluster Secret to clean up the remote side:
+
+1. Delete the Environments that target the cluster.
+2. Remove the name from `available_clusters`.
+3. Delete the cluster in the Portal (the generated Argo CD secret is owned by it and goes too).
+4. Delete your copy in the `argocd` namespace and the AppProject destination.
+5. `vcluster delete dev2 --namespace vcluster-dev2`
+
+Delete the Secret before the Environments and the operator silently skips the remote cleanup, leaving orphaned namespaces inside the vcluster - harmless here, since step 5 vaporizes the whole thing, but a real remote cluster would keep the litter.
+
+## Wrap-Up
+
+A vcluster turns "we need another environment" from an infrastructure request into a two-command operation - and to KubeRocketCI it is just another remote cluster: registered in the Portal, deployed to by the same pipelines, governed by the same [GitOps machinery](/blog/kubernetes-native-cicd-tekton-kuberocketci). The only real tax is the naming chain, and now you have the map.
+
+Try the whole flow yourself on the [local testbed](/blog/try-kuberocketci-locally), and check the [Add Cluster](/docs/user-guide/add-cluster) guide for the reference procedure, including IRSA-based clusters on EKS.

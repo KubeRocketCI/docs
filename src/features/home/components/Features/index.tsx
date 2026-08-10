@@ -13,7 +13,8 @@ export const Features = () => {
           Platform Capabilities
         </Heading>
         <p className={styles.sectionSubheading}>
-          Everything you need to ship on Kubernetes — from first commit to production, with security built in.
+          Everything you need to ship on Kubernetes — from first commit to production, with security built in,
+          whether the commit comes from an engineer or an AI agent.
         </p>
 
         <div className={styles.bento}>

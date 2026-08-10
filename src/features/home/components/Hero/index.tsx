@@ -64,11 +64,11 @@ export const Hero = () => {
               <p className={styles.heroBannerSubtitle}>{siteConfig.tagline}</p>
             </div>
             <p className={styles.heroBannerDescription}>
-              KubeRocketCI is an open-source CI/CD platform for Kubernetes teams.
-              It gives you a full delivery pipeline — from code commit to live deploy.
+              KubeRocketCI is an open-source CI/CD platform for Kubernetes teams —
+              delivery infrastructure for your engineers and their AI agents, from code commit to live deploy.
             </p>
             <p className={styles.heroBannerDescription}>
-              Get Tekton builds, Argo CD GitOps, and security scans ready to use.
+              Get Tekton builds, Argo CD GitOps, quality gates, and security scans ready to use.
               Browse the Quick&nbsp;Start guide or dive into the Operator and User guides.
             </p>
           </div>

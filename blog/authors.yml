@@ -28,3 +28,13 @@ daniilnedostup:
   socials:
     linkedin: daniil-nedostup
     github: daniil-nedostup
+
+vladyslavplishchenko:
+  name: Vladyslav Plishchenko
+  title: Junior Systems Engineer
+  url: https://github.com/geekhubuser
+  image_url: https://docs.kuberocketci.io/img/profile_vladyslavplishchenko.webp
+  page: true
+  socials:
+    linkedin: userid1
+    github: geekhubuser

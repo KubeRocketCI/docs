@@ -159,7 +159,7 @@ const config: Config = {
           },
           versions: {
             current: {
-              label: '3.15-dev',
+              label: '3.16-dev',
               path: 'next',
             },
           },

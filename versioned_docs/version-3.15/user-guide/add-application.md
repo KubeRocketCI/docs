@@ -1,0 +1,154 @@
+---
+
+title: "Add Application"
+sidebar_label: "Add Application"
+description: "Master application creation in KubeRocketCI, from cloning repositories to importing projects, for streamlined software development."
+
+---
+
+<!-- markdownlint-disable MD025 -->
+
+# Add Application
+
+<head>
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/user-guide/add-application" />
+</head>
+
+KubeRocketCI portal allows you to create an application, clone an existing repository with the application to your Version Control System (VCS), or using an external repository and importing an application to the environment. When an application is created or cloned, the system automatically generates a corresponding repository within the integrated Version Control System.
+
+Before following these guidelines, be sure to [add Git Server](./add-git-server.md) to the platform.
+
+The **Create Application** wizard contains four steps:
+
+* Initial Setup
+* Git & Project Info
+* Build Config
+* Review
+
+
+To add an application, navigate to the **Projects** section on the navigation bar and click **+ Create Project**.
+
+## Initial Setup
+
+Once clicked, the **Create new project** wizard will appear. In this dialog, you can make a choice:
+
+* **Select Ready Template** - this option allows you to select a preconfigured, ready-to-go application (e.g., Antora documentation or Echo server).
+* **Custom Configuration** - this option allows you create any of the supported Project type. In this case, you should select **Application**.
+
+Choose one of the strategies and click **Continue**:
+
+* **Create** – creates a sample Project on the pattern in accordance with an application language, a build tool, and a framework. This strategy is recommended for projects that start developing their applications from scratch.
+
+* **Import** - allows using existing VCS repository to integrate with KubeRocketCI. While importing the existing repository, select the Git server from the drop-down list and define the relative path to the repository, such as `epmd-edp/python-python-flask`.
+
+* **Clone** – clones the indicated repository into KubeRocketCI. While cloning the existing repository, it is required to fill in the **Repository URL** field and specify the credentials if needed:
+
+## Git & Project Info
+
+In our example, we will use the **Create** strategy:
+
+Select all the settings that define how the application will be added to Git server:
+
+  * **Git server** - the pre-configured server where the component will be hosted. Select one from the drop-down list. Please refer to the [Manage Git Servers](git-server-overview.md) page to learn how to create the one.
+  * **Owner** - the relative path to the Git repository where Project will be created (e.g., `MyGithubUsername123` or `my-github-username`).
+  * **Repository name** - the name of the repository that will store code for this Project. Must be at least two characters using the lower-case letters, numbers and inner dashes.
+  * **Default branch** - the default branch the Project will be created with. The default branch cannot be deleted.
+  * **Project name** - the name of the Project. Must be at least two characters using the lower-case letters, numbers and inner dashes.
+  * **Description** - brief and concise description that explains the purpose of the application.
+  * **Private** - by default, all the created Projects have private visibility settings in your Git account. Uncheck this option to create a public Git repository.
+  * **Empty project** - check this box to create an application with an empty repository. The empty repository option is available only for the **Create** strategy.
+
+
+## Build Config
+
+Specify the application language and versioning properties:
+
+  * **Code Language** - defines the code language with its supported frameworks:
+
+    * Java – selecting a specific Java version (17, 21, and 25 are available; Java 8 and 11 have been deprecated starting from KubeRocketCI version 3.12).
+    * JavaScript - selecting JavaScript allows using React, Vue, Angular, Express, Next.js and Antora frameworks.
+    * Python - selecting Python allows using the Python v.3.8, FastAPI, Flask frameworks.
+    * Go - selecting Go allows using the Beego, Gin and Operator SDK frameworks.
+    * C# - selecting C# allows using the .Net v.3.1 and .Net v.6.0 frameworks.
+    * Helm - selecting Helm allows using the Helm framework.
+    * Other - selecting Other allows extending the default code languages when creating a codebase with the clone/import strategy.
+
+    :::note
+      The **Create from template** strategy does not allow to customize the default code language set.
+    :::
+
+    * **Language version/framework** - defines the specific framework or language version of the application. The field depends on the selected code language.
+    * **Build Tool** -  allows to choose the build tool to use. A set tools and can be changed in accordance with the selected code language.
+
+      * Java - selecting Java allows using the Gradle or Maven tool.
+      * JavaScript - selecting JavaScript allows using the NPM or PNPM tool.
+      * C# - selecting C# allows using the .Net tool.
+      * Python - selecting Python allows using Python tool.
+      * Go - selecting Go allows using Go tool.
+      * Helm - selecting Helm allows using Helm tool.
+
+      :::note
+        The **Select Build Tool** field disposes of the default tools and can be changed in accordance with the selected code language.
+      :::
+
+:::info
+  Tekton pipelines offer built-in support for Java Maven Multi-Module projects. These pipelines are capable of recognizing Java deployable modules based on the information in the **pom.xml** file and performing relevant deployment actions. It's important to note that although the Dockerfile is typically located in the root directory, Kaniko, the tool used for building container images, uses the targets folder within the deployable module's context. For a clear illustration of a Multi-Module project structure, please refer to this [example](https://github.com/epmd-edp/java-maven-java17-multimodule.git) on GitHub, which showcases a commonly used structure for Java Maven Multi-Module projects.
+:::
+
+* **Codebase versioning type** - defines how will the application tag be changed once the new image version is built. There are two versioning types:
+  * **default**: Using the `default` versioning type, in order to specify the version of the current artifacts, images, and tags in the Version Control System, a developer should navigate to the corresponding file and change the version **manually**.
+  * **semver**: Using the `semver` versioning type, a developer indicates the version number from which all the artifacts will be versioned and, as a result, **automatically** registered in the corresponding file (e.g. pom.xml). When selecting the `semver` versioning type, the extra fields will appear, type the version number from which you want the artifacts to be versioned. This versioning type is recommended and selected by default.
+
+      :::note
+        The **Start Version From** field should be filled out in compliance with the semantic versioning rules, e.g. 1.2.3 or 10.10.10 (0.1.0 by default). The **Suffix** field is also mandatory and has the **SNAPSHOT** value by default. Please refer to the [Semantic Versioning](https://semver.org/) page for details.
+      :::
+
+* **Deployment Options** - select the deployment option available.
+  * **helm-chart**: Application will be deployed as a Helm chart using the Argo CD tool.
+  * **rpm-package**: Application will be deployed as an rpm package using the Ansible tool. For more details, please refer to the [Deploy RPM Packages](../operator-guide/cd/deploy-rpm.md) page.
+
+* **CI Pipelines** - select the available CI pipelines provider. Tekton is used by default.
+
+* **Specify the pattern to validate a commit message** - the regular expression used to indicate the pattern that is followed on the project to validate a commit message in the code review pipeline. An example of the pattern: `^[PROJECT_NAME-d{4}]:.*$`.
+
+* **Integrate with Jira server** - this check box is used in case it is required to connect Jira tickets with the commits
+and have a respective label in the **Fix Version** field.
+
+    :::note
+      To adjust the Jira integration functionality, first apply the necessary changes described on the [Adjust Jira Integration](../operator-guide/project-management-and-reporting/jira-integration.md) page.
+    :::
+
+* **Jira Server** - the integrated Jira server with related Jira tasks.
+
+* **Specify the pattern to find a Jira ticket number in a commit message** - based on this pattern, the value from KubeRocketCI will be displayed in Jira.
+
+
+* **Mapping field name** - the section where the additional Jira fields are specified the names of the Jira fields that should be filled in with attributes from KubeRocketCI:
+
+  * Select the name of the field in a Jira ticket. The available fields are the following: _Fix Version/s_, _Component/s_ and _Labels_.
+
+  * Click the **Add** button to add the mapping field name.
+
+  * Enter Jira pattern for the field name:
+
+    * For the **Fix Version/s** field, select the **EDP_VERSION** variable that represents an EDP upgrade version, as in _2.7.0-SNAPSHOT_.Combine variables to make the value more informative. For example, the pattern **EDP_VERSION-EDP_COMPONENT** will be displayed as _2.7.0-SNAPSHOT-nexus-operator_ in Jira.
+    * For the **Component/s** field select the **EDP_COMPONENT** variable that defines the name of the existing repository. For example, _nexus-operator_.
+    * For the **Labels** field select the **EDP_GITTAG** variable that defines a tag assigned to the commit in Git Hub. For example, _build/2.7.0-SNAPSHOT.59_.
+
+  * Click the bin icon to remove the Jira field name.
+
+
+## Review and Create
+
+The **Review an Create** window allows to ensure the application configuration suits your needs and verify you entered specifications correctly.
+
+:::note
+  After the complete adding of the application, inspect the [Manage Applications](application.md) page to learn how you can operate applications.
+:::
+
+## Related Articles
+
+* [Manage Applications](application.md)
+* [Add CD Pipeline](add-cd-pipeline.md)
+* [Adjust Jira Integration](../operator-guide/project-management-and-reporting/jira-integration.md)
+* [Manage Git Providers](../user-guide/add-git-server.md)

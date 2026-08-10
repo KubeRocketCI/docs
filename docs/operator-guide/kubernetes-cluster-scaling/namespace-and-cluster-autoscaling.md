@@ -209,7 +209,7 @@ You can install and configure KEDA-tenant either using the [add-ons approach](ht
 
   - **`namespaces`** – List of namespaces where the KRCI platform is installed.
   - **`timeInterval`** – Idle time after which the platform will automatically scale down to **0 replicas**.
-  - **`gitProviders`** – List of Git providers configured to work with the platform (this list must match the configuration set during the installation of the [`edp-install`](https://github.com/epam/edp-install/blob/release/3.11/deploy-templates/values.yaml#L32) Helm chart).
+  - **`gitProviders`** – List of Git providers configured to work with the platform (this list must match the configuration set during the installation of the [`edp-install`](https://github.com/epam/edp-install/blob/v3.15.0/deploy-templates/values.yaml#L35) Helm chart).
 
   Below are the key parameters for configuring the KEDA Tenants Helm chart:
 

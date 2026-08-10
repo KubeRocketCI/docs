@@ -80,6 +80,7 @@ words:
   - crunchydata
   - csanchez
   - cutover
+  - dagandersen
   - daniilnedostup
   - dbchecker
   - dbcleaner
@@ -261,6 +262,7 @@ words:
   - recordsummary
   - regcred
   - Rego
+  - refspec
   - rekor
   - reponame
   - reportportal
@@ -332,6 +334,7 @@ words:
   - trustcacerts
   - truststore
   - Uffizzi
+  - unparseable
   - usedomainname
   - USEDOMAINNAME
   - userinfo

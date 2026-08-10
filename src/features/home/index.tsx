@@ -7,8 +7,8 @@ import { RecentBlogPosts } from './components/RecentBlogPosts';
 export const Home = () => {
   return (
     <Layout
-      title="Cloud-Native CI/CD on Kubernetes"
-      description="Documentation for KubeRocketCI — an open-source CI/CD platform on Kubernetes. Quick-start, operator and user guides, and references for Tekton, Argo CD and DevSecOps."
+      title="Cloud-Native CI/CD for Engineers and AI Agents"
+      description="Documentation for KubeRocketCI — CI/CD on Kubernetes for engineers and AI agents. Quick-start, operator and user guides, Tekton, Argo CD and DevSecOps."
     >
       <Hero />
       <GetStarted />

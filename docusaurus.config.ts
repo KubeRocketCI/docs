@@ -11,7 +11,7 @@ const siteStructuredData = {
       url: 'https://docs.kuberocketci.io',
       name: 'KubeRocketCI Documentation',
       description:
-        'Explore KubeRocketCI Documentation for detailed guides, tutorials, and insights into KubeRocketCI CI/CD flow, platform components, and add-ons. Learn how to enhance your DevOps practices with KubeRocketCI.',
+        'KubeRocketCI documentation — guides, tutorials, and references for the open-source CI/CD platform on Kubernetes, serving engineers and their AI agents.',
       sameAs: [
         'https://medium.com/kuberocketci',
         'https://hub.docker.com/u/epamedp',
@@ -53,7 +53,7 @@ const siteStructuredData = {
 
 const config: Config = {
   title: 'KubeRocketCI',
-  tagline: 'Build Your Delivery Rocket',
+  tagline: 'The harness for your AI fabric',
   favicon: 'img/favicon.ico',
 
   // Set the production url of your site here
@@ -265,7 +265,7 @@ const config: Config = {
         addMdExtension: false,
         title: 'KubeRocketCI Documentation',
         description:
-          'Explore KubeRocketCI Documentation for CI/CD, operator and user guides, quick start, and API. Learn how to enhance your DevOps practices with KubeRocketCI.',
+          'KubeRocketCI documentation for CI/CD on Kubernetes — quick start, operator, user, and developer guides. Delivery infrastructure for engineers and AI agents.',
         includeBlog: true,
         ignoreFiles: ['faq/**', 'api/**'], // api/ — custom CRs for operators, they bloat llms-full.txt
         excludeImports: true,
@@ -279,7 +279,7 @@ const config: Config = {
       {
         name: 'keywords',
         content:
-          'KubeRocketCI, CI/CD, DevOps, Kubernetes, Tekton, Helm Charts, AWS, Argo CD, Add-Ons, Installation Guide, User Guide, Developer Guide, Operator Guide',
+          'KubeRocketCI, CI/CD, DevOps, Kubernetes, Tekton, Helm Charts, AWS, Argo CD, Add-Ons, Installation Guide, User Guide, Developer Guide, Operator Guide, AI Agents, Agentic AI, Quality Gates, Golden Path, Ephemeral Environments',
       },
       { name: 'author', content: 'KubeRocketCI Team' },
       // Open Graph (use `property=` per the OG spec). Per-page `og:title`,
@@ -295,7 +295,7 @@ const config: Config = {
       { name: 'twitter:image', content: 'https://docs.kuberocketci.io/img/kuberocketci-social-card.jpg' },
     ],
     description:
-      'KubeRocketCI is an open-source CI/CD platform for Kubernetes teams. It gives you a full delivery pipeline — from code commit to live deploy. Get Tekton builds, Argo CD GitOps, and security scans ready to use out of the box.',
+      'Open-source CI/CD platform for Kubernetes — delivery infrastructure for engineers and their AI agents. Tekton, Argo CD GitOps, and quality gates out of the box.',
     videoTeaser: 'https://www.youtube.com/watch?v=wiAaAHu17mw',
     mailTo: 'mailto:SupportEPMD-EDP@epam.com?subject=KubeRocketCI Demo Request',
     announcementBar: {

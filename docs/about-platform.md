@@ -15,6 +15,8 @@ sidebar_label: "About KubeRocketCI"
 
 KubeRocketCI, which is also called **"The Rocket"**, is a platform that allows shortening the time that is passed before an active development can start from several months to several hours.
 
+The same pipelines, quality gates, and RBAC guardrails serve both your engineers and AI coding agents. On top of this well-defined baseline, KubeRocketCI equips agents with the skills and tools they need, so their effort goes into business features rather than delivery plumbing. Every change — human- or agent-authored — follows one golden path through validation to production.
+
 The platform consists of the following blocks:
 
 - The platform is based on managed infrastructure and container orchestration

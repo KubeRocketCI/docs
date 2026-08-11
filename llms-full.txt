@@ -1,6 +1,6 @@
 # KubeRocketCI Documentation
 
-> Explore KubeRocketCI Documentation for CI/CD, operator and user guides, quick start, and API. Learn how to enhance your DevOps practices with KubeRocketCI.
+> KubeRocketCI documentation for CI/CD on Kubernetes — quick start, operator, user, and developer guides. Delivery infrastructure for engineers and AI agents.
 
 This file contains all documentation content in a single document following the llmstxt.org standard.
 
@@ -17,6 +17,8 @@ This file contains all documentation content in a single document following the 
 **KubeRocketCI (previously known as EPAM Delivery Platform)** is an **open-source** cloud-agnostic SaaS/PaaS solution for software development, licensed under **Apache License 2.0**. It provides a pre-defined set of CI/CD patterns and tools, which allow a user to start product development quickly with established **code review**, **release**, **versioning**, **branching**, **build** processes. These processes include static code analysis, security checks, linters, validators, dynamic feature environments provisioning. Platform consolidates the top Open-Source CI/CD tools by running them on Kubernetes/OpenShift, enabling web/app development in isolated (on-prem) or cloud environments.
 
 KubeRocketCI, which is also called **"The Rocket"**, is a platform that allows shortening the time that is passed before an active development can start from several months to several hours.
+
+The same pipelines, quality gates, and RBAC guardrails serve both your engineers and AI coding agents. On top of this well-defined baseline, KubeRocketCI equips agents with the skills and tools they need, so their effort goes into business features rather than delivery plumbing. Every change — human- or agent-authored — follows one golden path through validation to production.
 
 The platform consists of the following blocks:
 
@@ -13491,7 +13493,7 @@ There are multiple ways to deploy KubeRocketCI:
     ```bash
     helm search repo epamedp/edp-install
     NAME                    CHART VERSION   APP VERSION     DESCRIPTION
-    epamedp/edp-install     3.14.1          3.14.1           A Helm chart for KubeRocketCI Platform
+    epamedp/edp-install     3.15.0          3.15.0           A Helm chart for KubeRocketCI Platform
     ```
 
     :::note
@@ -13658,11 +13660,11 @@ There are multiple ways to deploy KubeRocketCI:
 
 7. Install platform in the **krci** namespace with the Helm tool:
 
-    Check the parameters in the installation chart [values.yaml](https://github.com/epam/edp-install/blob/v3.14.1/deploy-templates/values.yaml) file.
+    Check the parameters in the installation chart [values.yaml](https://github.com/epam/edp-install/blob/v3.15.0/deploy-templates/values.yaml) file.
 
     ```bash
     helm install krci epamedp/edp-install --wait --timeout=900s \
-    --version 3.14.1 \
+    --version 3.15.0 \
     --values values.yaml \
     --namespace krci \
     --create-namespace
@@ -14278,7 +14280,7 @@ You can install and configure KEDA-tenant either using the [add-ons approach](ht
 
   - **`namespaces`** – List of namespaces where the KRCI platform is installed.
   - **`timeInterval`** – Idle time after which the platform will automatically scale down to **0 replicas**.
-  - **`gitProviders`** – List of Git providers configured to work with the platform (this list must match the configuration set during the installation of the [`edp-install`](https://github.com/epam/edp-install/blob/release/3.11/deploy-templates/values.yaml#L32) Helm chart).
+  - **`gitProviders`** – List of Git providers configured to work with the platform (this list must match the configuration set during the installation of the [`edp-install`](https://github.com/epam/edp-install/blob/v3.15.0/deploy-templates/values.yaml#L35) Helm chart).
 
   Below are the key parameters for configuring the KEDA Tenants Helm chart:
 
@@ -19429,7 +19431,7 @@ Failed to create an environment due to the following error:
 
 ## Cause
 
-KubeRocketCI offers several approaches for namespace management: namespaces can be created by users, by KubeRocketCI itself, or by Argo CD. If you expect KubeRocketCI to handle namespace creation, ensure that the [cd-pipeline-operator](https://github.com/epam/edp-cd-pipeline-operator), a component of KubeRocketCI, has the necessary permissions. This permission is managed by the `manageNamespace` parameter of the [values.yaml](https://github.com/epam/edp-install/blob/v3.14.0/deploy-templates/values.yaml#L288) file.
+KubeRocketCI offers several approaches for namespace management: namespaces can be created by users, by KubeRocketCI itself, or by Argo CD. If you expect KubeRocketCI to handle namespace creation, ensure that the [cd-pipeline-operator](https://github.com/epam/edp-cd-pipeline-operator), a component of KubeRocketCI, has the necessary permissions. This permission is managed by the `manageNamespace` parameter of the [values.yaml](https://github.com/epam/edp-install/blob/v3.15.0/deploy-templates/values.yaml#L288) file.
 
 If the `manageNamespace` parameter is set to false, it means the KubeRocketCI does not have permission to create namespaces and the procedure of creating namespaces in your project is delegated to a concrete person.
 
@@ -25947,7 +25949,7 @@ To deploy the platform, follow the steps below:
 2. Deploy the platform using the `helm install` command:
 
     ```bash
-    helm install krci epamedp/edp-install --version 3.14.1 --create-namespace --atomic -n krci --set global.dnsWildCard=example.com
+    helm install krci epamedp/edp-install --version 3.15.0 --create-namespace --atomic -n krci --set global.dnsWildCard=example.com
     ```
 
 3. Upon successful deployment of the KubeRocketCI Helm Chart, run the `kubectl port-forward` command:

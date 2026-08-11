@@ -1,6 +1,6 @@
 # KubeRocketCI Documentation
 
-> Explore KubeRocketCI Documentation for CI/CD, operator and user guides, quick start, and API. Learn how to enhance your DevOps practices with KubeRocketCI.
+> KubeRocketCI documentation for CI/CD on Kubernetes — quick start, operator, user, and developer guides. Delivery infrastructure for engineers and AI agents.
 
 This file contains links to documentation sections following the llmstxt.org standard.
 

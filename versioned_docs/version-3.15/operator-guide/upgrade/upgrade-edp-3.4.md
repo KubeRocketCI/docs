@@ -16,7 +16,7 @@ sidebar_label: "v3.3 to 3.4"
 :::
 
 :::note
-  Pay attention that the following components: `perf-operator`, `edp-admin-console`, `edp-admin-console-operator`, and `edp-jenkins-operator` are deprecated and should be additionally migrated in order to avoid their deletion. For migration details, please refer to the [Migrate CI Pipelines From Jenkins to Tekton](migrate-ci-pipelines-from-jenkins-to-tekton.md) instruction.
+  Pay attention that the following components: `perf-operator`, `edp-admin-console`, `edp-admin-console-operator`, and `edp-jenkins-operator` are deprecated and should be additionally migrated in order to avoid their deletion.
 :::
 
 This section provides the details on the EDP upgrade to v3.4.1. Explore the actions and requirements below.

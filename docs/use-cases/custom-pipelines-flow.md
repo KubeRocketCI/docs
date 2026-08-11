@@ -418,3 +418,4 @@ This section demonstrates how to replace existing build, review, deploy, and cle
 - [Add Deployment](../user-guide/add-cd-pipeline.md)
 - [Argo CD Overview](../quick-start/integrate-argocd.md)
 - [Cluster Add-Ons Overview](../operator-guide/add-ons-overview.md)
+- [Align Custom Tekton Pipelines with 3.15](../operator-guide/upgrade/migrate-custom-tekton-pipelines-3.15.md)

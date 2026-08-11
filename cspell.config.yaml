@@ -29,6 +29,7 @@ words:
   - autotests
   - awsdns
   - AWSIRSA
+  - IRSA
   - azuread
   - AZUREAD
   - backchannel
@@ -59,6 +60,9 @@ words:
   - clusterissuer
   - clusterrole
   - clusterrolebinding
+  - codebaseimagestreams
+  - taskruns
+  - cdpipelines
   - cmctl
   - CNOE
   - codebasebranch

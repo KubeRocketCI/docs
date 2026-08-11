@@ -440,3 +440,4 @@ This chart will be using the core of `common-library` and `pipelines-library` an
 
 - [Tekton Overview](../operator-guide/ci/tekton-overview.md)
 - [Add Application using KubeRocketCI Portal](../user-guide/add-application.md)
+- [Align Custom Tekton Pipelines with 3.15](../operator-guide/upgrade/migrate-custom-tekton-pipelines-3.15.md)

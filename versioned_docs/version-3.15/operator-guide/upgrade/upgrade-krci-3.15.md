@@ -42,6 +42,10 @@ Review pipelines now default to the unprivileged `tekton-unprivileged` ServiceAc
 
 **Action is required only for custom pipelines** referenced from `CodebaseBranch.spec.pipelines` whose tasks call the Kubernetes API (`kubectl`, `tkn`, client libraries). After the upgrade such pipelines run under `tekton-unprivileged`, which has no role bindings and no mounted API token, so those calls fail. Choose one of:
 
+:::important
+Annotating a custom pipeline with `tekton` does **not** restore its pre-3.15 permissions: the `tekton` ServiceAccount's own Role was narrowed in this release (it loses `configmaps`, `cdpipelines`, `stages`, `applicationsets`, and `taskruns` access), and a dedicated ServiceAccount needs more than RBAC — the old `tekton` account also carried the IRSA role annotation, the `kaniko-docker-config` secret link, and `imagePullSecrets`, without which registry pushes fail. For the full custom-pipeline migration checklist, including how to sequence the cutover so nothing breaks before the upgrade, see [Align Custom Tekton Pipelines with 3.15](./migrate-custom-tekton-pipelines-3.15.md).
+:::
+
 - **Per pipeline (recommended):** define a ServiceAccount scoped to what the pipeline actually needs and annotate the Pipeline:
 
     ```yaml title="Custom pipeline with a dedicated ServiceAccount"
@@ -348,7 +352,7 @@ As of `edp-tekton` release/0.27, build-type Tekton pipelines (`github`/`gitlab`/
 
 The `JiraServer` CR, the "Integrate with Jira server" codebase setting, and the underlying `Codebase.spec.jiraServer`/`ticketNamePattern`/`jiraIssueMetadataPayload` fields are unchanged; only the build-pipeline automation that consumed them was removed.
 
-Build pipelines also stop declaring/passing the now-dead `gitsha` param, and VCS status reporting on build pipelines switched from a guarded set-success/set-failure task pair to a single unguarded finally task — both purely internal, no action needed.
+Build pipelines also stop declaring/passing the now-dead `gitsha` param, and VCS status reporting on build pipelines switched from a guarded set-success/set-failure task pair to a single unguarded finally task. For the platform-shipped pipelines these are internal changes with no action needed — but **custom build pipelines mirroring the 0.26 shipped ones must be updated**: a required `gitsha` (or `TICKET_NAME_PATTERN`/`JIRA_*`) parameter with no default fails every run at admission once the trigger templates stop passing it, and `push-to-jira` task references no longer resolve. See [Align Custom Tekton Pipelines with 3.15](./migrate-custom-tekton-pipelines-3.15.md).
 
 ## Step 14. (Informational) codebase-operator Provisioning Retries No Longer Silently Overwrite Pushed History
 
@@ -386,7 +390,7 @@ Several smaller, no-action-required improvements land in 3.15.
 
 ## Step 17. (Informational) Breaking Changes and Deprecations
 
-- `edp-tekton`'s least-privilege ServiceAccount/RBAC and GitHub trigger-ACL defaults change what custom pipelines and external contributors can do — see [Step 2](#step-2-required-review-tekton-pipeline-security-hardening-defaults-edp-tekton).
+- `edp-tekton`'s least-privilege ServiceAccount/RBAC and GitHub trigger-ACL defaults change what custom pipelines and external contributors can do — see [Step 2](#step-2-required-review-tekton-pipeline-security-hardening-defaults-edp-tekton) and [Align Custom Tekton Pipelines with 3.15](./migrate-custom-tekton-pipelines-3.15.md).
 - SSH host key verification in `edp-codebase-operator` is now mandatory and cannot be disabled — see [Step 3](#step-3-required-pin-ssh-host-keys-for-self-hosted-gitservers-edp-codebase-operator).
 - TLS certificate verification for `edp-codebase-operator`'s integration secret connection checks is now mandatory and cannot be disabled — integrations behind a self-signed or private-CA certificate report `connected: false` until their CA is mounted via `caCerts` — see [Step 4](#step-4-required-if-applicable-verify-tls-trust-for-integration-secret-connections-edp-codebase-operator).
 - `krci-portal`'s pod and container security contexts now default to non-root, unconditionally — see [Step 5](#step-5-recommended-review-krci-portal-persistence-and-non-root-security-defaults).

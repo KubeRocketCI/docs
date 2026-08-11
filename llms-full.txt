@@ -2175,7 +2175,7 @@ Creating custom certificates is a necessary but not sufficient condition for app
 
     :::warning
       Before moving ahead, be aware that starting from version 3.3.0, our development team has officially deprecated the Jenkins deploy scenario. This means that as of version 3.3.0 and in all subsequent versions (3.3.x and above), the Jenkins deploy scenario is no longer supported.
-      For users running versions 3.3.x and below, the Jenkins deploy scenario remains available. However, we encourage you to plan for the transition to a supported deployment method to ensure continued compatibility and access to the latest features and enhancements. To perform migration, please familiarize yourself with the [Migrate CI Pipelines From Jenkins to Tekton](../upgrade/migrate-ci-pipelines-from-jenkins-to-tekton.md).
+      For users running versions 3.3.x and below, the Jenkins deploy scenario remains available. However, we encourage you to plan for the transition to a supported deployment method to ensure continued compatibility and access to the latest features and enhancements.
       For those who still use EDP v3.3.x and below, the information below remains valid and applicable.
     :::
 
@@ -19758,109 +19758,96 @@ To uninstall platform, perform the following steps:
 
 ---
 
-## Migrate CI Pipelines From Jenkins to Tekton
+## Align Custom Tekton Pipelines with 3.15
 
 <!-- markdownlint-disable MD025 -->
 
-# Migrate CI Pipelines From Jenkins to Tekton
+# Align Custom Tekton Pipelines with 3.15
 
 <head>
-  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/upgrade/migrate-ci-pipelines-from-jenkins-to-tekton" />
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/upgrade/migrate-custom-tekton-pipelines-3.15" />
 </head>
 
-To migrate the CI pipelines for a codebase from Jenkins to Tekton, follow the steps below:
+This page applies if you maintain your own Tekton pipeline library — custom `Pipeline` resources referenced from `CodebaseBranch.spec.pipelines`, typically modeled on the platform's shipped pipelines (see [Create and Use Custom Tekton Pipelines](../../use-cases/custom-pipelines-flow.md)). The `edp-tekton` `0.27.0` chart shipped with 3.15 changes several contracts such pipelines rely on. Every item below can be applied **before** the platform upgrade — each change is compatible with both the 3.14 (`0.26`) and 3.15 (`0.27`) releases — so custom pipelines keep working through the upgrade instead of breaking with it.
 
-- Migrate CI Pipelines From Jenkins to Tekton
-- [Deploy a Custom EDP Scenario With Tekton and Jenkins CI Tools](#deploy-a-custom-edp-scenario-with-tekton-and-jenkins-ci-tools)
-- [Disable Jenkins Triggers](#disable-jenkins-triggers)
-- [Manage Tekton Triggers the Codebase(s)](#manage-tekton-triggers-the-codebases)
-- [Switch CI Tool for Codebase(s)](#switch-ci-tool-for-codebases)
+## What Changed for Pipeline Authors
 
-## Deploy a Custom EDP Scenario With Tekton and Jenkins CI Tools
+- **ServiceAccount resolution.** Webhook-triggered PipelineRuns no longer run as the privileged `tekton` ServiceAccount. The interceptor reads the `app.edp.epam.com/service-account` annotation from the Pipeline named in `CodebaseBranch.spec.pipelines.{build,review}` and passes it to the trigger templates; a missing annotation, a missing Pipeline, or any lookup error silently falls back to `tekton.defaultServiceAccount` (`tekton-unprivileged` — no role bindings and no mounted API token). See [Upgrade v3.14 to 3.15, Step 2](./upgrade-krci-3.15.md#step-2-required-review-tekton-pipeline-security-hardening-defaults-edp-tekton).
+- **The `tekton` ServiceAccount's Role was narrowed.** It loses access to `configmaps`, `codebases` (broad reads), `cdpipelines`, `stages`, `applicationsets`, and `taskruns`; those capabilities moved to the new `tekton-cd` and `tekton-security` accounts bound only to the CD and security trigger templates. Annotating a custom pipeline with `tekton` therefore does **not** restore its pre-3.15 permissions.
+- **Build trigger templates pass fewer parameters.** The `gitsha` parameter is no longer passed to build PipelineRuns (GitHub and Bitbucket), and the Jira parameters (`TICKET_NAME_PATTERN`, `JIRA_ISSUE_METADATA_PAYLOAD`, `JIRA_SERVER`) are no longer passed by any provider's build template. The `push-to-jira` Task was removed entirely.
+- **Status voting was consolidated.** Shipped pipelines vote on `$(tasks.fetch-repository.results.commit)` — the commit the clone actually checked out — and report the final status through a single unguarded finally task driven by `PIPELINE_STATUS: $(tasks.status)`, which also reports cancelled and timed-out runs the legacy success/failure task pair silently missed.
 
-Make sure that Tekton stack is deployed according to the [documentation](../../operator-guide/prerequisites.md).
-Enable Tekton as sub component during platform installation:
+## Migration Checklist
 
-```yaml title="values.yaml"
-edp-tekton:
-  enabled: true
+### 1. Annotate every custom Pipeline with a dedicated ServiceAccount
+
+Create a ServiceAccount per pipeline family, scoped to what the pipelines actually need, and annotate both build and review Pipelines:
+
+```yaml title="Custom pipeline with a dedicated ServiceAccount"
+apiVersion: tekton.dev/v1
+kind: Pipeline
+metadata:
+  name: my-app-build
+  annotations:
+    app.edp.epam.com/service-account: my-team-pipelines
 ```
 
-## Disable Jenkins Triggers
+The annotation is inert on `0.26` (trigger templates there hardcode `tekton`), so it can be merged ahead of the upgrade. Do not skip review pipelines whose tasks call the Kubernetes API — without the annotation they run as `tekton-unprivileged` after the upgrade and fail with authorization errors.
 
-To disable Jenkins Triggers for the codebase, add the following code to the provisioner:
+### 2. Audit the ServiceAccount's RBAC against real task API calls
 
-```groovy title="job-provisioner"
-def tektonCodebaseList = ["<codebase_name>"]
-if (!tektonCodebaseList.contains(codebaseName.toString())){
-    triggers {
-        gerrit {
-            events {
-                if (pipelineName.contains("Build"))
-                    changeMerged()
-                else
-                    patchsetCreated()
-            }
-            project("plain:${codebaseName}", ["plain:${watchBranch}"])
-        }
-    }
-}
+Walk every task your pipelines reference and list its Kubernetes API calls (`kubectl` invocations including `--subresource`, `tkn`, client libraries), then grant exactly those. Typical needs for build pipelines modeled on the shipped ones: `codebasebranches` get and `codebasebranches/status` get/patch (version bumping), `codebaseimagestreams` get/list/patch (image stream tags), `taskruns` list (wait-style tasks). Do not point custom pipelines at `tekton` and assume parity — its Role no longer covers `configmaps`, `cdpipelines`, `stages`, `applicationsets`, or `taskruns`.
+
+### 3. Carry the credential channels the `tekton` ServiceAccount provided
+
+RBAC is not the only thing the old ServiceAccount carried. Mirror the relevant channels onto the dedicated account, or image pushes fail even with perfect RBAC:
+
+```yaml title="Dedicated ServiceAccount with the tekton SA's credential channels"
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: my-team-pipelines
+  annotations:
+    # ECR via IRSA: same role as kaniko.roleArn in the pipelines-library values
+    eks.amazonaws.com/role-arn: arn:aws:iam::<ACCOUNT_ID>:role/<KANIKO_ROLE>
+secrets:
+  # non-ECR registries: Tekton creds-init merges this into the step's docker config
+  - name: kaniko-docker-config
+imagePullSecrets:
+  - name: <pull-secret-if-used>
 ```
 
-:::note
-  The sample above shows the usage of Gerrit VCS where the `<codebase_name>` value is your codebase name.
-:::
+On EKS, also extend the IAM role's trust policy with the new ServiceAccount (`system:serviceaccount:<namespace>:my-team-pipelines`) — the annotation alone does not authenticate.
 
-- If using GitHub or GitLab, additionally remove the webhook from the relevant repository.
-- If webhooks generation for new codebase(s) is not required, correct the code above so that it creates a webhook in the job-provisioner.
-- To recreate the pipeline in Jenkins, trigger the job-provisioner.
-- Check that the new pipeline is created without triggering Gerrit events.
+### 4. Fix the trigger template parameter contract
 
-## Manage Tekton Triggers the Codebase(s)
+Audit custom build pipelines for parameters the `0.27` templates no longer pass:
 
-By default, each Gerrit project inherits configuration from the **All-Projects** repository.
+- A required `gitsha` parameter (no `default`) fails every build run at admission after the upgrade with `pipelineRun missing parameters: [gitsha]`. Migrate to the shipped pattern: remove the parameter and vote on `$(tasks.fetch-repository.results.commit)` in the status tasks. Consuming the clone's `commit` result also orders the status task after the clone and skips it structurally when nothing was cloned, replacing any manual `when` guards. Review pipelines keep `gitsha` — the review templates still pass it.
+- Remove or default the Jira parameters (`TICKET_NAME_PATTERN`, `JIRA_ISSUE_METADATA_PAYLOAD`, `JIRA_SERVER`) and drop any `push-to-jira` task references — the Task no longer exists.
 
-To exclude triggering in Jenkins and Tekton CI tools simultaneously, edit the configuration in the **All-Projects** repository or in the project which inherits rights from your project.
+Both fixes are safe on `0.26`: Tekton explicitly ignores extra PipelineRun parameters, so templates still passing the old values do no harm.
 
-Edit the **webhooks.config** file in the **refs/meta/config** and remove all context from this configuration.
+### 5. Sequence the cutover
 
-:::warning
-  The clearance of the **webhooks.config** file will disable the pipeline trigger in Tekton.
-:::
+The two mechanisms activate at different times, and mixing them up breaks pipelines **before** the upgrade:
 
-To use Tekton pipelines, add the configuration to the corresponding Gerrit project (**webhooks.config** file in the **refs/meta/config**):
+- `serviceAccountName` pinned in your **own** TriggerTemplates, CronJobs, or tasks that create PipelineRuns switches the moment your chart deploys — those ServiceAccounts and their RBAC must be complete on day one.
+- The Pipeline **annotation** waits for the `0.27` interceptor — webhook-triggered build/review runs stay on `tekton` until the platform upgrade completes.
 
-```yaml title="webhooks.config"
-[remote "changemerged"]
-  url = http://el-gerrit-listener:8080
-  event = change-merged
-[remote "patchsetcreated"]
-  url = http://el-gerrit-listener:8080
-  event = patchset-created
-[remote "commentadded"]
-  url = http://el-gerrit-listener:8080
-  event = comment-added
-```
+Consequently, if you move RoleBindings from `tekton` to the new account (for example a namespace-admin binding used by e2e tasks), keep `tekton` as a second subject until the upgrade lands, then remove it. Dropping it early revokes access from runs that still execute as `tekton`.
 
-Configure webhooks plugin in Gerrit configuration (typically located at  **/var/gerrit/review_site/etc/gerrit.config**):
+## Verification
 
-```yaml title="gerrit.config"
-[plugin "webhooks"]
-        connectionTimeout = 3000
-        socketTimeout = 2500
-        maxTries = 1
-        retryInterval = 5000
-        threadPoolSize = 3
-```
-
-## Switch CI Tool for Codebase(s)
-
-Go to the codebase Custom Resource and change the `spec.ciTool` field from `jenkins` to `tekton`.
+- `CodebaseBranch.spec.pipelines.{build,review}` is populated for every codebase using custom pipelines — the interceptor resolves the annotation through that map, and an empty map silently downgrades runs to `tekton-unprivileged`.
+- After the upgrade, a webhook-triggered run shows the dedicated account in `spec.taskRunTemplate.serviceAccountName`.
+- A build run votes the commit status on the cloned commit and reports a final status even when cancelled.
 
 ## Related Articles
 
-* [Install KubeRocketCI](../install-kuberocketci.md)
-* [Install Tekton](../install-tekton.md)
+- [Upgrade KubeRocketCI v3.14 to 3.15](./upgrade-krci-3.15.md)
+- [Create and Use Custom Tekton Pipelines](../../use-cases/custom-pipelines-flow.md)
+- [Deploy Application With Custom Build Tool/Framework](../../use-cases/tekton-custom-pipelines.md)
 
 ---
 
@@ -20000,8 +19987,6 @@ This section provides the details on upgrading EDP to 3.0. Explore the actions a
   :::
 
 ## Related Articles
-
-* [Migrate CI Pipelines From Jenkins to Tekton](migrate-ci-pipelines-from-jenkins-to-tekton.md)
 
 ---
 
@@ -21310,7 +21295,7 @@ To enable the re-trigger feature for applications that were added before the upg
 :::
 
 :::note
-  Pay attention that the following components: `perf-operator`, `edp-admin-console`, `edp-admin-console-operator`, and `edp-jenkins-operator` are deprecated and should be additionally migrated in order to avoid their deletion. For migration details, please refer to the [Migrate CI Pipelines From Jenkins to Tekton](migrate-ci-pipelines-from-jenkins-to-tekton.md) instruction.
+  Pay attention that the following components: `perf-operator`, `edp-admin-console`, `edp-admin-console-operator`, and `edp-jenkins-operator` are deprecated and should be additionally migrated in order to avoid their deletion.
 :::
 
 This section provides the details on the EDP upgrade to v3.4.1. Explore the actions and requirements below.
@@ -24821,6 +24806,10 @@ Review pipelines now default to the unprivileged `tekton-unprivileged` ServiceAc
 
 **Action is required only for custom pipelines** referenced from `CodebaseBranch.spec.pipelines` whose tasks call the Kubernetes API (`kubectl`, `tkn`, client libraries). After the upgrade such pipelines run under `tekton-unprivileged`, which has no role bindings and no mounted API token, so those calls fail. Choose one of:
 
+:::important
+Annotating a custom pipeline with `tekton` does **not** restore its pre-3.15 permissions: the `tekton` ServiceAccount's own Role was narrowed in this release (it loses `configmaps`, `cdpipelines`, `stages`, `applicationsets`, and `taskruns` access), and a dedicated ServiceAccount needs more than RBAC — the old `tekton` account also carried the IRSA role annotation, the `kaniko-docker-config` secret link, and `imagePullSecrets`, without which registry pushes fail. For the full custom-pipeline migration checklist, including how to sequence the cutover so nothing breaks before the upgrade, see [Align Custom Tekton Pipelines with 3.15](./migrate-custom-tekton-pipelines-3.15.md).
+:::
+
 - **Per pipeline (recommended):** define a ServiceAccount scoped to what the pipeline actually needs and annotate the Pipeline:
 
     ```yaml title="Custom pipeline with a dedicated ServiceAccount"
@@ -25127,7 +25116,7 @@ As of `edp-tekton` release/0.27, build-type Tekton pipelines (`github`/`gitlab`/
 
 The `JiraServer` CR, the "Integrate with Jira server" codebase setting, and the underlying `Codebase.spec.jiraServer`/`ticketNamePattern`/`jiraIssueMetadataPayload` fields are unchanged; only the build-pipeline automation that consumed them was removed.
 
-Build pipelines also stop declaring/passing the now-dead `gitsha` param, and VCS status reporting on build pipelines switched from a guarded set-success/set-failure task pair to a single unguarded finally task — both purely internal, no action needed.
+Build pipelines also stop declaring/passing the now-dead `gitsha` param, and VCS status reporting on build pipelines switched from a guarded set-success/set-failure task pair to a single unguarded finally task. For the platform-shipped pipelines these are internal changes with no action needed — but **custom build pipelines mirroring the 0.26 shipped ones must be updated**: a required `gitsha` (or `TICKET_NAME_PATTERN`/`JIRA_*`) parameter with no default fails every run at admission once the trigger templates stop passing it, and `push-to-jira` task references no longer resolve. See [Align Custom Tekton Pipelines with 3.15](./migrate-custom-tekton-pipelines-3.15.md).
 
 ## Step 14. (Informational) codebase-operator Provisioning Retries No Longer Silently Overwrite Pushed History
 
@@ -25165,7 +25154,7 @@ Several smaller, no-action-required improvements land in 3.15.
 
 ## Step 17. (Informational) Breaking Changes and Deprecations
 
-- `edp-tekton`'s least-privilege ServiceAccount/RBAC and GitHub trigger-ACL defaults change what custom pipelines and external contributors can do — see [Step 2](#step-2-required-review-tekton-pipeline-security-hardening-defaults-edp-tekton).
+- `edp-tekton`'s least-privilege ServiceAccount/RBAC and GitHub trigger-ACL defaults change what custom pipelines and external contributors can do — see [Step 2](#step-2-required-review-tekton-pipeline-security-hardening-defaults-edp-tekton) and [Align Custom Tekton Pipelines with 3.15](./migrate-custom-tekton-pipelines-3.15.md).
 - SSH host key verification in `edp-codebase-operator` is now mandatory and cannot be disabled — see [Step 3](#step-3-required-pin-ssh-host-keys-for-self-hosted-gitservers-edp-codebase-operator).
 - TLS certificate verification for `edp-codebase-operator`'s integration secret connection checks is now mandatory and cannot be disabled — integrations behind a self-signed or private-CA certificate report `connected: false` until their CA is mounted via `caCerts` — see [Step 4](#step-4-required-if-applicable-verify-tls-trust-for-integration-secret-connections-edp-codebase-operator).
 - `krci-portal`'s pod and container security contexts now default to non-root, unconditionally — see [Step 5](#step-5-recommended-review-krci-portal-persistence-and-non-root-security-defaults).
@@ -27545,6 +27534,7 @@ This section demonstrates how to replace existing build, review, deploy, and cle
 - [Add Deployment](../user-guide/add-cd-pipeline.md)
 - [Argo CD Overview](../quick-start/integrate-argocd.md)
 - [Cluster Add-Ons Overview](../operator-guide/add-ons-overview.md)
+- [Align Custom Tekton Pipelines with 3.15](../operator-guide/upgrade/migrate-custom-tekton-pipelines-3.15.md)
 
 ---
 
@@ -28805,6 +28795,7 @@ This chart will be using the core of `common-library` and `pipelines-library` an
 
 - [Tekton Overview](../operator-guide/ci/tekton-overview.md)
 - [Add Application using KubeRocketCI Portal](../user-guide/add-application.md)
+- [Align Custom Tekton Pipelines with 3.15](../operator-guide/upgrade/migrate-custom-tekton-pipelines-3.15.md)
 
 ---
 

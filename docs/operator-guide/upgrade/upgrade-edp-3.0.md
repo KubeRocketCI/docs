@@ -138,4 +138,3 @@ This section provides the details on upgrading EDP to 3.0. Explore the actions a
 
 ## Related Articles
 
-* [Migrate CI Pipelines From Jenkins to Tekton](migrate-ci-pipelines-from-jenkins-to-tekton.md)

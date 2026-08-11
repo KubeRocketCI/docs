@@ -141,3 +141,19 @@ This functionality is enabled by default. To disable it, you need to update the 
 githubOwners:
   enabled: false
 ```
+
+---
+
+### Why Does My Pipeline Fail with "cannot use result expressions ... as PipelineRun parameter values"?
+
+The EventListener could not create the PipelineRun at all, and the pull/merge request shows no pipeline. The EventListener log contains:
+
+```text
+admission webhook "validation.webhook.pipeline.tekton.dev" denied the request: validation failed:
+invalid value: cannot use result expressions in [tasks.<task>.results.<result>] as PipelineRun
+parameter values: spec.params[COMMIT_MESSAGE].value
+```
+
+The review and build trigger templates inject the commit message into the PipelineRun as the `COMMIT_MESSAGE` parameter, and Tekton's admission webhook rejects any PipelineRun parameter whose value contains a result-expression string. So a commit message (or merge request title) that quotes Tekton syntax literally — for example `$(tasks.fetch-repository.results.commit)` — blocks pipeline creation for that change. This most often happens when committing changes to Tekton pipelines themselves.
+
+To resolve it, amend the commit message to avoid the literal `$( )` wrapper (for example, write `tasks.fetch-repository.results.commit` instead) and re-push. The pipeline definitions themselves are unaffected.

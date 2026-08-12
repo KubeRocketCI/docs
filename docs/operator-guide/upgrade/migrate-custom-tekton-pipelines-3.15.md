@@ -64,12 +64,13 @@ On EKS, also extend the IAM role's trust policy with the new ServiceAccount (`sy
 
 ### 4. Fix the trigger template parameter contract
 
-Audit custom build pipelines for parameters the `0.27` templates no longer pass:
+Audit custom build pipelines for parameters the `0.27` templates no longer pass, and for task results they no longer produce:
 
 - A required `gitsha` parameter (no `default`) fails every build run at admission after the upgrade with `pipelineRun missing parameters: [gitsha]`. Migrate to the shipped pattern: remove the parameter and vote on `$(tasks.fetch-repository.results.commit)` in the status tasks. Consuming the clone's `commit` result also orders the status task after the clone and skips it structurally when nothing was cloned, replacing any manual `when` guards. Review pipelines keep `gitsha` — the review templates still pass it.
 - Remove or default the Jira parameters (`TICKET_NAME_PATTERN`, `JIRA_ISSUE_METADATA_PAYLOAD`, `JIRA_SERVER`) and drop any `push-to-jira` task references — the Task no longer exists.
+- The `init-values` Task no longer emits the `TENANT_NAME` result, so any `$(tasks.init-values.results.TENANT_NAME)` reference fails to resolve. Drop it, or supply the value from your own task or a pipeline parameter.
 
-Both fixes are safe on `0.26`: Tekton explicitly ignores extra PipelineRun parameters, so templates still passing the old values do no harm.
+All three fixes are safe on `0.26`: Tekton explicitly ignores extra PipelineRun parameters, so templates still passing the old values do no harm, and a result that is no longer referenced is simply left unused.
 
 ### 5. Sequence the cutover
 

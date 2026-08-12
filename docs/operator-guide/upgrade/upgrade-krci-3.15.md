@@ -57,7 +57,7 @@ Annotating a custom pipeline with `tekton` does **not** restore its pre-3.15 per
         app.edp.epam.com/service-account: my-team-sa
     ```
 
-- **Install-wide fallback:** restore the pre-3.15 behavior for every non-annotated pipeline and migrate gradually. Nest under `edp-tekton:` when editing edp-install's umbrella `values.yaml` (the Helm dependency alias for this chart is `edp-tekton`, not `pipelines-library`):
+- **Install-wide fallback:** put every non-annotated build and review pipeline back on `tekton` and migrate gradually. This does not restore pre-3.15 permissions — as noted above, the `tekton` Role itself was narrowed — and it does not affect deploy, clean, security-scan or autotest runs, whose ServiceAccount is pinned in their trigger templates. Nest under `edp-tekton:` when editing edp-install's umbrella `values.yaml` (the Helm dependency alias for this chart is `edp-tekton`, not `pipelines-library`):
 
     ```yaml title="edp-install umbrella values.yaml"
     edp-tekton:
@@ -479,6 +479,7 @@ Then verify in the browser and cluster:
 - [ ] Pipeline history and live logs load (requires Tekton Results)
 - [ ] Pull Request / Merge Request browsing works (requires GitFusion)
 - [ ] A review pipeline for an external (non-OWNER/MEMBER/COLLABORATOR) contributor no longer auto-triggers unless `allowedAssociations` was widened (see [Step 2](#step-2-required-review-tekton-pipeline-security-hardening-defaults-edp-tekton))
+- [ ] Completed PipelineRuns are still cleaned up now that the chart pruner CronJob is gone — Tekton Results retention owns this, so confirm its grace period is configured (see [Step 2](#step-2-required-review-tekton-pipeline-security-hardening-defaults-edp-tekton))
 - [ ] An SSH-based self-hosted GitServer connects successfully after host-key pinning, or reports a clear connection error if not yet pinned (see [Step 3](#step-3-required-pin-ssh-host-keys-for-self-hosted-gitservers-edp-codebase-operator))
 - [ ] Integration secrets (SonarQube, Nexus, Dependency-Track, DefectDojo, registry, Argo CD) behind a self-signed or private-CA certificate report `connected: true` once their CA is mounted via `caCerts`, instead of an x509 verification error (see [Step 4](#step-4-required-if-applicable-verify-tls-trust-for-integration-secret-connections-edp-codebase-operator))
 - [ ] `krci-portal` pods start successfully under the new non-root security context (see [Step 5](#step-5-recommended-review-krci-portal-persistence-and-non-root-security-defaults))
@@ -489,6 +490,7 @@ Then verify in the browser and cluster:
 - [ ] (If enabled) an Argo CD diff preview comment appears on a GitOps MR and/or the reporter `recreate` strategy posts a single comment (see [Step 10](#step-10-optional-new-opt-in-tekton-pipeline-features-argo-cd-diff-preview-and-reporter-recreate-strategy))
 - [ ] (If enabled) the portal HTTPRoute resolves at the new `krci-portal-<namespace>.<dnsWildcard>` host (see [Step 11](#step-11-recommended-portal-httproute-hostname-correction))
 - [ ] A build pipeline for a helm-chart Codebase on an Envoy Gateway platform passes its `helm-docs` diff-check step (see [Step 12](#step-12-required-if-applicable-regenerate-stale-readme-for-helm-chart-codebases-scaffolded-under-envoy-gateway))
+- [ ] A build pipeline completes without running `push-to-jira`, and no new `JiraIssueMetadata` resources appear (see [Step 13](#step-13-informational-jira-automation-removed-from-build-pipelines))
 - [ ] (If applicable) a codebase using the **Create** strategy that hit an interrupted provisioning now recovers automatically instead of losing history, and a provisioning collision against a non-empty default branch fails with the explicit refusal error instead of silently overwriting it (see [Step 14](#step-14-informational-codebase-operator-provisioning-retries-no-longer-silently-overwrite-pushed-history))
 - [ ] (If applicable) onboarding a codebase with the **Clone** strategy no longer intermittently fails with `a branch named <name> already exists` (see [Step 15](#step-15-informational-clone-strategy-onboarding-reliability-fix-edp-codebase-operator))
 - [ ] Deleting a Codebase still referenced by a CDPipeline is rejected with a `403` naming the referencing resource (see [Step 16](#step-16-informational-new-portal-capabilities-and-safeguards))

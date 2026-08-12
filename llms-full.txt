@@ -181,7 +181,7 @@ The table below contains the key annotations used in KubeRocketCI:
 | :------------------------------ | :----------------------------- | :-------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | app.edp.epam.com/service-account | Pipeline                       | `<service_account_name>`, e.g. `tekton` | Selects the ServiceAccount the resulting PipelineRuns run under. If unset, falls back to the `tekton.defaultServiceAccount` chart value, which defaults to the unprivileged `tekton-unprivileged` ServiceAccount. Library build pipelines ship annotated with `tekton` so they keep running under the privileged ServiceAccount; review pipelines fall back to `tekton-unprivileged` unless annotated otherwise.                                            |
 | app.edp.epam.com/reporter-logs   | PipelineRun, GitServer         | `"true"`, `"false"`   | Overrides the chart-wide `reporter.logsReporting` value (default `false`) per PipelineRun or per GitServer, controlling whether the Tekton pipeline-run reporter republishes trailing log lines of failed steps in pull/merge request report comments. The PipelineRun annotation takes precedence over the GitServer one. The pass/fail status comment itself is always published regardless of this setting.                                             |
-| app.edp.epam.com/queue-cancel-reason | PipelineRun                | `user-cancelled`, `superseded` | Set on a PipelineRun to record why it was gracefully cancelled: the portal writes `user-cancelled` when a user cancels a run, and the `tekton-pipeline-queue` operator writes `superseded` when a queued run is displaced by a newer commit in the same lane. Read via the Kubernetes downward API by the `github-set-status`, `gitlab-set-status`, and `bitbucket-set-status` finally tasks, which report a cancellation-specific commit status instead of a plain failure: GitHub uses the `error` state, GitLab uses `canceled`, and Bitbucket uses `STOPPED`, each described as "SUPERSEDED BY NEWER COMMIT" or "CANCELED" according to the recorded reason. Must be stripped when a PipelineRun is rerun, or a stale value will disguise a genuine failure as a cancellation.                                            |
+| app.edp.epam.com/queue-cancel-reason | PipelineRun                | `user-cancelled`, `superseded` | Set on a PipelineRun to record why it was gracefully cancelled: the portal writes `user-cancelled` when a user cancels a run, and the KRCI interceptor writes `superseded` when a newer commit on the same change supersedes an in-progress review run, which requires `pipelines.cancelInProgress` (disabled by default). The optional `tekton-pipeline-queue` operator, which is not part of the platform chart, stamps the same `superseded` value on the runs it displaces. Read via the Kubernetes downward API by the `github-set-status`, `gitlab-set-status`, and `bitbucket-set-status` finally tasks, which report a cancellation-specific commit status instead of a plain failure: GitHub uses the `error` state, GitLab uses `canceled`, and Bitbucket uses `STOPPED`, each described as "SUPERSEDED BY NEWER COMMIT" or "CANCELED" according to the recorded reason. Must be stripped when a PipelineRun is rerun, or a stale value will disguise a genuine failure as a cancellation.                                            |
 
 ## Labels
 
@@ -19821,12 +19821,13 @@ On EKS, also extend the IAM role's trust policy with the new ServiceAccount (`sy
 
 ### 4. Fix the trigger template parameter contract
 
-Audit custom build pipelines for parameters the `0.27` templates no longer pass:
+Audit custom build pipelines for parameters the `0.27` templates no longer pass, and for task results they no longer produce:
 
 - A required `gitsha` parameter (no `default`) fails every build run at admission after the upgrade with `pipelineRun missing parameters: [gitsha]`. Migrate to the shipped pattern: remove the parameter and vote on `$(tasks.fetch-repository.results.commit)` in the status tasks. Consuming the clone's `commit` result also orders the status task after the clone and skips it structurally when nothing was cloned, replacing any manual `when` guards. Review pipelines keep `gitsha` — the review templates still pass it.
 - Remove or default the Jira parameters (`TICKET_NAME_PATTERN`, `JIRA_ISSUE_METADATA_PAYLOAD`, `JIRA_SERVER`) and drop any `push-to-jira` task references — the Task no longer exists.
+- The `init-values` Task no longer emits the `TENANT_NAME` result, so any `$(tasks.init-values.results.TENANT_NAME)` reference fails to resolve. Drop it, or supply the value from your own task or a pipeline parameter.
 
-Both fixes are safe on `0.26`: Tekton explicitly ignores extra PipelineRun parameters, so templates still passing the old values do no harm.
+All three fixes are safe on `0.26`: Tekton explicitly ignores extra PipelineRun parameters, so templates still passing the old values do no harm, and a result that is no longer referenced is simply left unused.
 
 ### 5. Sequence the cutover
 
@@ -24821,7 +24822,7 @@ Annotating a custom pipeline with `tekton` does **not** restore its pre-3.15 per
         app.edp.epam.com/service-account: my-team-sa
     ```
 
-- **Install-wide fallback:** restore the pre-3.15 behavior for every non-annotated pipeline and migrate gradually. Nest under `edp-tekton:` when editing edp-install's umbrella `values.yaml` (the Helm dependency alias for this chart is `edp-tekton`, not `pipelines-library`):
+- **Install-wide fallback:** put every non-annotated build and review pipeline back on `tekton` and migrate gradually. This does not restore pre-3.15 permissions — as noted above, the `tekton` Role itself was narrowed — and it does not affect deploy, clean, security-scan or autotest runs, whose ServiceAccount is pinned in their trigger templates. Nest under `edp-tekton:` when editing edp-install's umbrella `values.yaml` (the Helm dependency alias for this chart is `edp-tekton`, not `pipelines-library`):
 
     ```yaml title="edp-install umbrella values.yaml"
     edp-tekton:
@@ -25243,6 +25244,7 @@ Then verify in the browser and cluster:
 - [ ] Pipeline history and live logs load (requires Tekton Results)
 - [ ] Pull Request / Merge Request browsing works (requires GitFusion)
 - [ ] A review pipeline for an external (non-OWNER/MEMBER/COLLABORATOR) contributor no longer auto-triggers unless `allowedAssociations` was widened (see [Step 2](#step-2-required-review-tekton-pipeline-security-hardening-defaults-edp-tekton))
+- [ ] Completed PipelineRuns are still cleaned up now that the chart pruner CronJob is gone — Tekton Results retention owns this, so confirm its grace period is configured (see [Step 2](#step-2-required-review-tekton-pipeline-security-hardening-defaults-edp-tekton))
 - [ ] An SSH-based self-hosted GitServer connects successfully after host-key pinning, or reports a clear connection error if not yet pinned (see [Step 3](#step-3-required-pin-ssh-host-keys-for-self-hosted-gitservers-edp-codebase-operator))
 - [ ] Integration secrets (SonarQube, Nexus, Dependency-Track, DefectDojo, registry, Argo CD) behind a self-signed or private-CA certificate report `connected: true` once their CA is mounted via `caCerts`, instead of an x509 verification error (see [Step 4](#step-4-required-if-applicable-verify-tls-trust-for-integration-secret-connections-edp-codebase-operator))
 - [ ] `krci-portal` pods start successfully under the new non-root security context (see [Step 5](#step-5-recommended-review-krci-portal-persistence-and-non-root-security-defaults))
@@ -25253,6 +25255,7 @@ Then verify in the browser and cluster:
 - [ ] (If enabled) an Argo CD diff preview comment appears on a GitOps MR and/or the reporter `recreate` strategy posts a single comment (see [Step 10](#step-10-optional-new-opt-in-tekton-pipeline-features-argo-cd-diff-preview-and-reporter-recreate-strategy))
 - [ ] (If enabled) the portal HTTPRoute resolves at the new `krci-portal-<namespace>.<dnsWildcard>` host (see [Step 11](#step-11-recommended-portal-httproute-hostname-correction))
 - [ ] A build pipeline for a helm-chart Codebase on an Envoy Gateway platform passes its `helm-docs` diff-check step (see [Step 12](#step-12-required-if-applicable-regenerate-stale-readme-for-helm-chart-codebases-scaffolded-under-envoy-gateway))
+- [ ] A build pipeline completes without running `push-to-jira`, and no new `JiraIssueMetadata` resources appear (see [Step 13](#step-13-informational-jira-automation-removed-from-build-pipelines))
 - [ ] (If applicable) a codebase using the **Create** strategy that hit an interrupted provisioning now recovers automatically instead of losing history, and a provisioning collision against a non-empty default branch fails with the explicit refusal error instead of silently overwriting it (see [Step 14](#step-14-informational-codebase-operator-provisioning-retries-no-longer-silently-overwrite-pushed-history))
 - [ ] (If applicable) onboarding a codebase with the **Clone** strategy no longer intermittently fails with `a branch named <name> already exists` (see [Step 15](#step-15-informational-clone-strategy-onboarding-reliability-fix-edp-codebase-operator))
 - [ ] Deleting a Codebase still referenced by a CDPipeline is rejected with a `403` naming the referencing resource (see [Step 16](#step-16-informational-new-portal-capabilities-and-safeguards))

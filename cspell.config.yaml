@@ -58,6 +58,8 @@ words:
   - Civo
   - clastix
   - clusterissuer
+  - clusterkeycloakrealms
+  - clusterkeycloaks
   - clusterrole
   - clusterrolebinding
   - codebaseimagestreams
@@ -81,6 +83,7 @@ words:
   - credrequests
   - creds
   - crossplane
+  - customresourcedefinitions
   - crunchydata
   - csanchez
   - cutover
@@ -252,6 +255,7 @@ words:
   - pipelineruns
   - pipelinetype
   - PKCS
+  - portforward
   - preconfigured
   - printenv
   - psql
@@ -309,6 +313,7 @@ words:
   - sshport
   - statefulset
   - storageclass
+  - storageclasses
   - storepass
   - struct
   - subresource

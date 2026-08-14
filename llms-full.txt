@@ -5316,16 +5316,24 @@ The table below provides an overview of the `shared` realm roles and their types
 
 KubeRocketCI uses the `shared` realm for group management. The [groups](https://github.com/epam/edp-install/tree/master/deploy-templates/templates/rbac) are designed to control access to various components such as Argo CD, the KubeRocketCI portal, and the EKS cluster.
 
-| Group Name                    | Purpose                                                             |
-| ----------------------------- | ------------------------------------------------------------------- |
-| `ArgoCDAdmins`                | Administrator access to Argo CD instance                            |
-| `ArgoCD-${platform}-users`    | Access to the Argo CD project mapped to the `${platform}` tenant    |
-| `oidc-cluster-admins`         | Full administrator (cluster-admin) access to the kubernetes cluster |
-| `${platform}-oidc-admins`     | Administrator access to KubeRocketCI                                |
-| `${platform}-oidc-developers` | Developer access to KubeRocketCI                                    |
-| `${platform}-oidc-viewers`    | Read-only access to view resources in KubeRocketCI                  |
+| Group Name                    | Purpose                                                             | Grants access to          |
+| ----------------------------- | ------------------------------------------------------------------- | ------------------------- |
+| `ArgoCDAdmins`                | Administrator access to Argo CD instance                            | Argo CD only              |
+| `ArgoCD-${platform}-users`    | Access to the Argo CD project mapped to the `${platform}` tenant    | Argo CD only              |
+| `oidc-cluster-admins`         | Full administrator (cluster-admin) access to the kubernetes cluster | Kubernetes, cluster-wide  |
+| `${platform}-oidc-admins`     | Administrator access to KubeRocketCI                                | Kubernetes and the Portal |
+| `${platform}-oidc-developers` | Developer access to KubeRocketCI                                    | Kubernetes and the Portal |
+| `${platform}-oidc-viewers`    | Read-only access to view resources in KubeRocketCI                  | Kubernetes and the Portal |
 
 These groups simplify the management of permissions and ensure that users have the appropriate level of access based on their roles and responsibilities.
+
+:::warning
+  Platform groups and tool groups are independent of each other. Membership in `${platform}-oidc-admins`, `${platform}-oidc-developers` or `${platform}-oidc-viewers` grants **no** access to Argo CD, SonarQube, Nexus or Report Portal. Those tools are authorized separately: Argo CD through its own groups and AppProject roles, SonarQube through the `sonar-administrators` and `sonar-developers` roles, and the remaining tools through their own configuration. A user normally needs membership in a platform group **and** in the relevant tool group or role.
+:::
+
+:::note
+  Only a `developer` role, mapped to the `ArgoCD-${platform}-users` group, is defined in the reference AppProject. Argo CD does not ship a read-only role, so granting a user read-only access to Argo CD requires adding a dedicated role and group to the AppProject.
+:::
 
 ## SonarQube OIDC
 
@@ -5476,13 +5484,40 @@ Both the KubeRocketCI Portal and the Kubernetes cluster use Keycloak groups for 
 
 ### Keycloak Groups
 
-Each Keycloak group corresponds to a specific level of access within the Kubernetes cluster and the KubeRocketCI portal. The table below summarizes the groups and their associated permissions.
+Each Keycloak group corresponds to a specific level of access within the Kubernetes cluster and the KubeRocketCI portal. Access is always granted **per namespace**: apart from `oidc-cluster-admins`, every group is bound with a namespaced RoleBinding rather than a cluster-wide ClusterRoleBinding. The effective permissions of a group therefore depend on which of the following three tiers is being considered:
 
-| Group Name                    |        View        |       Build        |       Deploy       | Full Namespace Access |
-|-------------------------------|:------------------:|:------------------:|:------------------:|:---------------------:|
-| `${platform}-oidc-admins`     | :white_check_mark: | :white_check_mark: | :white_check_mark: |  :white_check_mark:   |
-| `${platform}-oidc-developers` | :white_check_mark: | :white_check_mark: | :white_check_mark: |          :x:          |
-| `${platform}-oidc-viewers`    | :white_check_mark: |        :x:         |        :x:         |          :x:          |
+* **Platform namespace** (`${platform}`) - where KubeRocketCI itself runs, and where Codebases, CDPipelines, Stages, PipelineRuns and platform configuration live.
+* **Environment namespaces** - the namespaces the `cd-pipeline-operator` creates for each Stage, where applications are actually deployed.
+* **Cluster scope** - cluster-scoped resources such as `namespaces`, `nodes`, `customresourcedefinitions` or `clusterkeycloaks`.
+
+#### Group-to-Namespace Mapping
+
+| Group Name                    | Platform namespace `${platform}`   | Environment namespaces | Cluster scope   |
+| ----------------------------- | ---------------------------------- | ---------------------- | --------------- |
+| `oidc-cluster-admins`         | `cluster-admin`                    | `cluster-admin`        | `cluster-admin` |
+| `${platform}-oidc-admins`     | `cluster-admin` (namespace-scoped) | `admin`                | no access       |
+| `${platform}-oidc-developers` | `view` + `tenant-developer`        | `admin`                | no access       |
+| `${platform}-oidc-viewers`    | `view`                             | **no access**          | no access       |
+
+:::warning
+  `${platform}-oidc-viewers` is bound **only** in the platform namespace. Users in this group can see Codebases, CDPipelines, Stages, PipelineRuns and build logs in `${platform}`, but they cannot list pods, read logs or view any workload in the environment namespaces. If read-only users need to observe deployed applications, an additional RoleBinding to the `view` ClusterRole has to be created in each environment namespace.
+:::
+
+:::note
+  Group membership is additive. `${platform}-oidc-developers` is a subject of both the `tenant-viewer` and the `tenant-developer` RoleBindings, so the developer permission set is the viewer permission set plus the write rules described below.
+:::
+
+:::info
+  Because every binding except `oidc-cluster-admins` is a namespaced RoleBinding, the cluster-scoped resources that appear in the underlying ClusterRoles cannot be reached. This includes `namespaces`, `nodes`, `persistentvolumes`, `storageclasses`, `customresourcedefinitions`, and the cluster-scoped KubeRocketCI custom resources `clusterkeycloaks` and `clusterkeycloakrealms`. Only `oidc-cluster-admins` can read them.
+:::
+
+The table below summarizes the groups and their associated permissions.
+
+| Group Name                    |        View        |       Build        |       Deploy       | Full Access to the Platform Namespace | Full Access to Environment Namespaces |
+|-------------------------------|:------------------:|:------------------:|:------------------:|:-------------------------------------:|:-------------------------------------:|
+| `${platform}-oidc-admins`     | :white_check_mark: | :white_check_mark: | :white_check_mark: |          :white_check_mark:           |          :white_check_mark:           |
+| `${platform}-oidc-developers` | :white_check_mark: | :white_check_mark: | :white_check_mark: |                :x:                    |          :white_check_mark:           |
+| `${platform}-oidc-viewers`    | :white_check_mark: |        :x:         |        :x:         |                :x:                    |                :x:                    |
 
 #### View Permissions
 
@@ -5493,6 +5528,10 @@ In the KubeRocketCI portal, the following **View** permissions are granted to us
 | `${platform}-oidc-admins`     | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |
 | `${platform}-oidc-developers` | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |
 | `${platform}-oidc-viewers`    | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |
+
+:::note
+  These permissions describe the Portal pages, which are rendered from the KubeRocketCI custom resources stored in the platform namespace. **View Deployments** and **View Environments** therefore mean that a user can see the CDPipeline, Stage and CDStageDeployment resources and their status. Drilling down into a deployed application - its pods, containers and logs in an environment namespace - additionally requires access to that namespace, which `${platform}-oidc-viewers` does not have.
+:::
 
 #### Permissions for the Configuration sections and Kubernetes resources
 
@@ -5511,6 +5550,10 @@ Permissions for the most common Kubernetes resources:
 | `${platform}-oidc-admins`     | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |  :white_check_mark:  | :white_check_mark: |  :white_check_mark:  |
 | `${platform}-oidc-developers` | :white_check_mark: |        :x:         |        :x:         |        :x:         | :white_check_mark: |        :x:         |        :x:         |        :x:         | :white_check_mark: |        :x:         |        :x:         |        :x:         | :white_check_mark: |        :x:         |        :x:         |        :x:         | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |        :x:         |        :x:         |        :x:         |        :x:         |        :x:         |        :x:         |        :x:         |        :x:         |        :x:         |        :x:         |        :x:         |        :x:         |         :x:          |        :x:         |         :x:          |
 | `${platform}-oidc-viewers`    | :white_check_mark: |        :x:         |        :x:         |        :x:         | :white_check_mark: |        :x:         |        :x:         |        :x:         | :white_check_mark: |        :x:         |        :x:         |        :x:         | :white_check_mark: |        :x:         |        :x:         |        :x:         | :white_check_mark: |        :x:         |        :x:         |        :x:         | :white_check_mark: |        :x:         |        :x:         |        :x:         |        :x:         |        :x:         |        :x:         |        :x:         |        :x:         |        :x:         |        :x:         |        :x:         |        :x:         |         :x:          |        :x:         |         :x:          |
+
+:::note
+  The permissions in the table above apply to the **platform namespace**. In environment namespaces the `${platform}-oidc-admins` and `${platform}-oidc-developers` groups are bound to the `admin` ClusterRole and therefore have full access to every resource listed, including Secrets, Roles and Role Bindings, while `${platform}-oidc-viewers` has no access at all. See [Sensitive Capabilities](#sensitive-capabilities).
+:::
 
 #### Build Permissions
 
@@ -5532,15 +5575,47 @@ The following **Deploy** permissions are granted to users based on their group m
 | `${platform}-oidc-developers` |  :white_check_mark:   |   :white_check_mark:   |  :white_check_mark:  |   :white_check_mark:   | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |      :white_check_mark:      |
 | `${platform}-oidc-viewers`    |          :x:          |          :x:           |         :x:          |          :x:           |        :x:         |        :x:         |        :x:         |        :x:         |        :x:         |             :x:              |
 
+#### Sensitive Capabilities
+
+The capabilities below are the ones most often examined during an access review. `PF` stands for the platform namespace and `ENV` for the environment namespaces.
+
+| Capability                                    |  Viewers PF  | Viewers ENV  | Developers PF      | Developers ENV     | Admins PF / ENV    |
+| --------------------------------------------- | :----------: | :----------: | :----------------: | :----------------: | :----------------: |
+| Read Secrets                                  |     :x:      |     :x:      |        :x:         | :white_check_mark: | :white_check_mark: |
+| Create or modify Secrets                      |     :x:      |     :x:      |        :x:         | :white_check_mark: | :white_check_mark: |
+| Exec into a pod (`pods/exec`)                 |     :x:      |     :x:      |        :x:         | :white_check_mark: | :white_check_mark: |
+| Port-forward to a pod (`pods/portforward`)    |     :x:      |     :x:      |        :x:         | :white_check_mark: | :white_check_mark: |
+| Create ServiceAccount tokens                  |     :x:      |     :x:      |        :x:         | :white_check_mark: | :white_check_mark: |
+| Create Roles and Role Bindings                |     :x:      |     :x:      |        :x:         | :white_check_mark: | :white_check_mark: |
+| Delete workloads                              |     :x:      |     :x:      |        :x:         | :white_check_mark: | :white_check_mark: |
+| Read build logs (`pods/log`, Tekton Results)  | :white_check_mark: | :x:    | :white_check_mark: | :white_check_mark: | :white_check_mark: |
+| Approve or reject ApprovalTasks               |     :x:      |     :x:      | :white_check_mark: |        n/a         | :white_check_mark: |
+
+:::warning
+  In environment namespaces `${platform}-oidc-developers` is bound to the `admin` ClusterRole, which permits creating ServiceAccount tokens and impersonating ServiceAccounts inside that namespace. If a ServiceAccount in an environment namespace holds permissions wider than `admin`, a developer can assume that identity. Kubernetes privilege-escalation prevention still applies - a developer cannot `escalate` or `bind` roles they do not already hold - but the ServiceAccounts present in environment namespaces should be reviewed.
+:::
+
 ### Cluster RBAC Resources
 
-The platform defines five RoleBindings that grant the necessary permissions to the corresponding Keycloak groups mentioned above.
+RBAC is created in two places. The Helm chart creates the bindings in the platform namespace, and the `cd-pipeline-operator` creates the binding in every environment namespace while reconciling a Stage.
+
+Created by the Helm chart in the platform namespace `${platform}`:
 
 | RoleBinding Name | Role Name        | Groups                                                     |
 | ---------------- | ---------------- | ---------------------------------------------------------- |
 | tenant-admin     | cluster-admin    | `${platform}-oidc-admins`                                  |
 | tenant-developer | tenant-developer | `${platform}-oidc-developers`                              |
 | tenant-viewer    | view             | `${platform}-oidc-viewers` , `${platform}-oidc-developers` |
+
+Created by the `cd-pipeline-operator` in every environment namespace:
+
+| RoleBinding Name | Role Name | Groups                                                    |
+| ---------------- | --------- | --------------------------------------------------------- |
+| tenant-admin     | admin     | `${platform}-oidc-admins` , `${platform}-oidc-developers` |
+
+:::note
+  The `tenant-admin` RoleBinding in the platform namespace references the `cluster-admin` ClusterRole, but as a namespaced RoleBinding its effect is limited to that namespace. The `tenant-admin` RoleBinding created in environment namespaces references the `admin` ClusterRole instead. No viewer RoleBinding is created in environment namespaces.
+:::
 
 Platform includes RBAC settings for the full cluster administration privileges.
 
@@ -5549,16 +5624,56 @@ Platform includes RBAC settings for the full cluster administration privileges.
 | cluster-admin             | cluster-admin     | `oidc-cluster-admins` |
 
 :::note
-  KubeRocketCI provides an [aggregated](https://kubernetes.io/docs/reference/access-authn-authz/rbac/#aggregated-clusterroles) ClusterRole `edp-aggregate-view-${platform}` with the permissions to view the KubeRocketCI [custom resources](../../api/overview.md).
+  KubeRocketCI provides an [aggregated](https://kubernetes.io/docs/reference/access-authn-authz/rbac/#aggregated-clusterroles) ClusterRole `edp-aggregate-view-${platform}` with the permissions to view the KubeRocketCI [custom resources](../../api/overview.md). It carries the `rbac.authorization.k8s.io/aggregate-to-view: "true"` label, so its rules are merged into the built-in `view` ClusterRole and are inherited by the viewer and developer groups alike.
 :::
 
-:::info
-  The `tenant-admin` RoleBinding is created in a namespace by the `cd-pipeline-operator`. The `tenant-admin` RoleBinding assigns the `admin` role to the `${platform}-oidc-admins` and `${platform}-oidc-developers` groups.
+#### Customizing Group Names
+
+Group names default to the platform namespace prefix but can be overridden:
+
+| Value                       | Default                       | Applies to                                    |
+| --------------------------- | ----------------------------- | --------------------------------------------- |
+| `global.adminGroupName`     | `${platform}-oidc-admins`     | Platform namespace and environment namespaces |
+| `global.developerGroupName` | `${platform}-oidc-developers` | Platform namespace and environment namespaces |
+| `global.viewerGroupName`    | `${platform}-oidc-viewers`    | Platform namespace only                       |
+
+The admin and developer values are passed to the `cd-pipeline-operator` as the `OIDC_ADMIN_GROUP_NAME` and `OIDC_DEVELOPER_GROUP_NAME` environment variables, so a custom name is honoured in environment namespaces as well. `global.viewerGroupName` has no effect outside the platform namespace, because no viewer RoleBinding is created in environment namespaces.
+
+:::warning
+  The configured group name must exactly match the group name that reaches the Kubernetes API server in the token's groups claim. If the OIDC configuration applies a group prefix, that prefix has to be part of the value.
 :::
 
 ### Grant User Access to the Created Namespaces
 
 To provide users with admin or developer privileges for project namespaces, they need to be added to the `${platform}-oidc-admins` and `${platform}-oidc-developers` groups in Keycloak.
+
+Adding a user to `${platform}-oidc-viewers` does **not** grant access to project namespaces. Read-only access to deployed applications requires an additional RoleBinding to the `view` ClusterRole in each project namespace.
+
+### Verifying Effective Permissions
+
+After assigning a group, verify that the group name reaches the cluster and that the resulting permissions are the expected ones. Run the following as the user:
+
+```bash
+# every rule the user has in the platform namespace
+kubectl auth can-i --list -n <platform-namespace>
+
+# access to a deployed application in an environment namespace
+kubectl auth can-i get pods -n <environment-namespace>
+kubectl auth can-i get pods/log -n <environment-namespace>
+
+# capabilities that must not be granted to read-only users
+kubectl auth can-i get secrets -n <platform-namespace>
+kubectl auth can-i create pods/exec -n <environment-namespace>
+```
+
+A cluster administrator can check a group before onboarding anyone to it, without needing a real user, by impersonating the group:
+
+```bash
+kubectl auth can-i --list -n <platform-namespace> \
+  --as=test-user --as-group=<platform-namespace>-oidc-viewers
+```
+
+If every check returns `no`, the group name carried in the token most likely does not match the RoleBinding subject.
 
 ## Argo CD
 

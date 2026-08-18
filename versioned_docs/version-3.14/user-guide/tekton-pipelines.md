@@ -231,8 +231,21 @@ To trigger a security, test, and release pipeline, follow the steps below:
       </TabItem>
     </Tabs>
 
+### Trigger via CLI
+
+Every pipeline type above can also be triggered from a terminal with the [krci CLI](../operator-guide/advanced-installation/krci-cli.md). This is the one command in the CLI that changes anything on the cluster, everything else is read-only:
+
+```bash
+krci pipelinerun start <pipeline-name> --param git-source-url=<repository-url> \
+  --param git-source-revision=<branch> \
+  --param CODEBASE_NAME=<codebase-name>
+```
+
+Add `--dry-run -o yaml` to render the resulting PipelineRun without creating it, useful for checking the parameters before triggering a real run, or `-o json` so an AI agent can start a pipeline and read back the resolved run name.
+
 ## Related Articles
 
 * [Pipelines Overview](../user-guide/pipelines.md)
 * [Add Library](../user-guide/add-library.md)
 * [Add Autotest](../user-guide/add-autotest.md)
+* [krci CLI](../operator-guide/advanced-installation/krci-cli.md)

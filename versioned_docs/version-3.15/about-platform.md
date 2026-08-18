@@ -50,7 +50,8 @@ The platform consists of the following blocks:
 As of KubeRocketCI version 3.12, Java 8 and Java 11 frameworks have been deprecated.
 :::
 
-- [Portal UI](./user-guide/index.md) as a single entry point
+- [Portal UI](./user-guide/index.md) as the browser-based entry point
+- [krci CLI](./operator-guide/advanced-installation/krci-cli.md) as the terminal-based entry point to the same platform state
 - [Deployment Flows](./user-guide/add-cd-pipeline.md) for Microservice Deployment
 - Kubernetes native approach ([CRD, CR](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/)) to declare CI/CD pipelines
 
@@ -82,6 +83,8 @@ On top of the primary architectural pillars, KubeRocketCI integrates several key
 
 **Pipelines**: Covering the end-to-end CI/CD process, pipelines in KubeRocketCI automate the integration and delivery workflows, connecting the above components seamlessly.
 
+**[krci CLI](./operator-guide/advanced-installation/krci-cli.md)**: A terminal client for the Portal API that exposes projects, deployments, environments, and security findings as structured output. The same command works interactively, in a script, in a pipeline, or in the shell session of an AI coding agent.
+
 ### Technology Stack
 
 KubeRocketCI's technology stack is adaptable to most popular public clouds such as AWS, Azure, and GCP, with support for private/hybrid clouds based on OpenStack. The containerization layer is powered by Kubernetes or OpenShift, offering flexibility and choice in deployment options.
@@ -103,3 +106,4 @@ There is **no limitation** to run KubeRocketCI on vanilla Kubernetes.
 - [Basic Concepts](basic-concepts.md)
 - [Glossary](glossary.md)
 - [Supported Versions and Compatibility](supported-versions.md)
+- [krci CLI](./operator-guide/advanced-installation/krci-cli.md)

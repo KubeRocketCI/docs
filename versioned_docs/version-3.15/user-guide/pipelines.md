@@ -56,6 +56,17 @@ Alternatively, you can enter the PipelineRun and delete/restart the pipeline usi
 There is also an option to store the long-term logs using the OpenSearch tool. You can install OpenSearch using our [cluster add-ons](https://github.com/epam/edp-cluster-add-ons/blob/main/clusters/core/apps/values.yaml#L227) repository.
 :::
 
+### Inspect via CLI
+
+The same PipelineRuns can be listed and inspected from a terminal with the [krci CLI](../operator-guide/advanced-installation/krci-cli.md):
+
+```bash
+krci pipelinerun list --project <project> --status=failed
+krci pipelinerun get <pipelinerun-name> --reason
+```
+
+`--reason` on `pipelinerun get` returns the task tree and failure diagnosis directly, without opening the Details or Diagram tab. Add `-o json` to either command to feed the result into a script or an AI agent.
+
 ## Edit Pipelines/Tasks
 
 KubeRocketCI portal allows to edit the existing Tekton Pipelines and Tasks directly in the Pipelines section. In our example, we will show how to edit a Task but the same procedure applies to Pipelines:
@@ -75,3 +86,4 @@ Now you know how to view and manage pipelines in KubeRocketCI.
 * [Marketplace Overview](./marketplace.md)
 * [Manage Deployment Flows](./manage-environments.md)
 * [Manage Applications](./application.md)
+* [krci CLI](../operator-guide/advanced-installation/krci-cli.md)

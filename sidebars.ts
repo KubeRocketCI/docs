@@ -115,6 +115,7 @@ const sidebars: SidebarsConfig = {
                 'operator-guide/advanced-installation/overview',
                 'operator-guide/advanced-installation/capsule',
                 'operator-guide/advanced-installation/custom-certificates',
+                'operator-guide/advanced-installation/krci-cli',
               ],
             },
             {

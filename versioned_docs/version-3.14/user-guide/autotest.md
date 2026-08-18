@@ -93,9 +93,26 @@ You can run autotests locally using an IDE (such as IntelliJ or NetBeans). To ru
 3. Paste the copied command value into the Command line field and run it with the necessary values and namespace.
 4. All the launched tests will be executed.
 
+## Inspect via CLI
+
+The same Projects list is available from a terminal with the [krci CLI](../operator-guide/advanced-installation/krci-cli.md).
+
+List the existing autotests:
+
+```bash
+krci project list -o json | jq -r '.[] | select(.type == "autotest") | .name'
+```
+
+Get the details of a specific autotest:
+
+```
+krci project get <autotest-name>
+```
+
 ## Related Articles
 
 * [Add Autotest](add-autotest.md)
 * [Manage Branches](manage-branches.md)
 * [Add CD Pipeline](add-cd-pipeline.md)
 * [Adjust Jira Integration](../operator-guide/project-management-and-reporting/jira-integration.md)
+* [krci CLI](../operator-guide/advanced-installation/krci-cli.md)

@@ -65,7 +65,26 @@ To enable Jira integration, in the **Edit Project** dialog do the following:
 
 4. To create, edit and delete application branches, please refer to the [Manage Branches](../user-guide/manage-branches.md) page.
 
+## Inspect via CLI
+
+The same Projects list is available from a terminal with the [krci CLI](../operator-guide/advanced-installation/krci-cli.md).
+
+List the existing applications:
+
+```bash
+krci project list -o json | jq -r '.[] | select(.type == "application") | .name'
+```
+
+Get the details of a specific application:
+
+```
+krci project get <application-name>
+```
+
+`project get` returns the same status and Git server details shown in the Projects list, in a form a script or an AI agent can parse directly.
+
 ## Related Articles
 
 * [Add Application](add-application.md)
 * [Manage Branches](../user-guide/manage-branches.md)
+* [krci CLI](../operator-guide/advanced-installation/krci-cli.md)

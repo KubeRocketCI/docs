@@ -68,8 +68,25 @@ To disable Jira integration, in the **Edit Project** dialog do the following:
 
 To create, edit and delete infrastructure branches, please refer to the [Manage Branches](manage-branches.md) page.
 
+## Inspect via CLI
+
+The same Projects list is available from a terminal with the [krci CLI](../operator-guide/advanced-installation/krci-cli.md).
+
+List the existing infrastructures:
+
+```bash
+krci project list -o json | jq -r '.[] | select(.type == "infrastructure") | .name'
+```
+
+Get the details of a specific infrastructure:
+
+```
+krci project get <infrastructure-name>
+```
+
 ## Related Articles
 
 * [Add Infrastructure](add-infrastructure.md)
 * [Manage Branches](manage-branches.md)
 * [Adjust Jira Integration](../operator-guide/project-management-and-reporting/jira-integration.md)
+* [krci CLI](../operator-guide/advanced-installation/krci-cli.md)

@@ -52,7 +52,32 @@ Tabs let you switch between:
 * **Policy Violations by State** — Chart or list of violations by state (e.g. Fail, Warn, Info).
 * **Policy Violations by Classification** — Breakdown by classification (e.g. Security Risk, License Risk, Operational Risk) with counts and percentages.
 
+## Inspect via CLI
+
+The same SCA data is available from a terminal with the [krci CLI](../../operator-guide/advanced-installation/krci-cli.md).
+
+List the existing SCA projects:
+
+```bash
+krci sca list
+```
+
+Get the details of a specific project (add `--branch` if the project has no default branch registered on the platform):
+
+```
+krci sca get <project-name> --branch=<branch>
+```
+
+List the components driving its high-severity findings:
+
+```
+krci sca components <project-name> --branch=<branch> --severity=high
+```
+
+`sca get` returns the same risk score and severity counts shown in Project Details, and `sca components` lists the dependencies driving them.
+
 ## Related Articles
 
 * [SCA Overview](./sca-overview.md)
 * [Security](../security.md)
+* [krci CLI](../../operator-guide/advanced-installation/krci-cli.md)

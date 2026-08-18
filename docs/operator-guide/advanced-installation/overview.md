@@ -29,6 +29,7 @@ Find below the list of the key components used by KubeRocketCI:
 |[External Secrets](../secrets-management/install-external-secrets-operator.md)|Optional|Manages external secret storage like AWS Secrets Manager, integrating with Kubernetes.|
 |[Nexus](../artifacts-management/nexus-sonatype.md)|Optional|A repository manager supporting various formats including Docker, npm, and Helm charts.|
 |[Harbor](../artifacts-management/harbor-installation.md)|Optional|An open-source trusted cloud native registry project that stores, signs, and scans content.|
+|[krci CLI](krci-cli.md)|Optional|A terminal client for the Portal API, also usable as a tool surface for AI agents.|
 
 Although we have dedicated instructions for all of these third-party tools, we recommend installing them via [add-ons approach](../add-ons-overview.md).
 

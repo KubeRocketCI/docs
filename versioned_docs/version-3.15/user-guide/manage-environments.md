@@ -193,8 +193,33 @@ KubeRocketCI provides an intuitive and streamlined pipeline by default. Initiall
 
 For more details on how to create a custom delete pipeline, navigate to the [Customize Environment Cleanup](../operator-guide/cd/customize-environment-deletion.md)
 
+## Inspect via CLI
+
+The same Deployments and Environments data is available from a terminal with the [krci CLI](../operator-guide/advanced-installation/krci-cli.md).
+
+List the existing deployments:
+
+```bash
+krci deployment list
+```
+
+Get the details of a specific deployment:
+
+```
+krci deployment get <deployment-name>
+```
+
+Get the details of a specific environment within a deployment:
+
+```
+krci env get <deployment-name> <environment-name>
+```
+
+`deployment list` mirrors the health and sync status shown in the Deployments list, and `env get` mirrors the Environment details view, including which applications are deployed there and their status.
+
 ## Related Articles
 
 * [Customize Environment Cleanup](../operator-guide/cd/customize-environment-deletion.md)
 * [Add Deployment Flow](add-cd-pipeline.md)
 * [Add Quality Gate](../user-guide/add-quality-gate.md)
+* [krci CLI](../operator-guide/advanced-installation/krci-cli.md)

@@ -1,6 +1,6 @@
 ---
-title: "Install Capsule"
-description: "Learn how to install and configure Capsule for resource isolation in KubeRocketCI, ensuring secure and flexible environment management."
+title: "Install Capsule for Kubernetes Multi-Tenancy"
+description: "Install and configure Capsule in KubeRocketCI for Kubernetes multi-tenancy: tenant isolation, resource quotas, and per-environment limits for deploy stages."
 sidebar_label: "Install Capsule"
 ---
 <!-- markdownlint-disable MD025 -->

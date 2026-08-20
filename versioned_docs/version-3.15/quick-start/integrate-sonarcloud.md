@@ -1,23 +1,21 @@
 ---
 
-title: "Integrate SonarQube"
-description: "Guide on integrating SonarQube with KubeRocketCI for code quality analysis in build and review pipelines, including steps for setting up SonarCloud."
-sidebar_label: "Integrate SonarQube"
+title: "Integrate SonarCloud with KubeRocketCI Pipelines"
+description: "Connect SonarCloud, the SonarQube SaaS, to KubeRocketCI: create the token, add the secret, and enable the sonar step in build and code-review pipelines."
+sidebar_label: "Integrate SonarCloud"
 
 ---
 <!-- markdownlint-disable MD025 -->
 
-# Integrate SonarQube
+# Integrate SonarCloud with KubeRocketCI
 
 <head>
   <link rel="canonical" href="https://docs.kuberocketci.io/docs/quick-start/integrate-sonarcloud" />
 </head>
 
-It is essential for KubeRocketCI to have SonarQube integrated with the platform as all the pipelines include the `sonar` step.
+To integrate SonarCloud with KubeRocketCI, create a SonarCloud token, store it as a secret on the platform, and the `sonar` step included in every build and code-review pipeline starts reporting code quality automatically. This guide walks through that configuration.
 
-SonarQube is a powerful tool used in build and code review pipelines to enhance code quality by identifying and reporting issues, as well as providing recommendations for improvement. SonarCloud, the SaaS solution offered by SonarQube, serves this purpose.
-
-This guide will walk you through the configuration process of SonarCloud for your project.
+SonarCloud is the SaaS edition of SonarQube. It identifies and reports code issues and provides recommendations for improvement without requiring you to host a SonarQube server.
 
 :::note
   An alternative option is to use an independent [SonarQube instance](../operator-guide/code-quality/sonarqube.md).

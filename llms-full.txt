@@ -9584,7 +9584,7 @@ After the AWS EKS cluster is installed and configured, you can proceed with inst
 
 <!-- markdownlint-disable MD025 -->
 
-# Integrate DefectDojo
+# Install and Integrate DefectDojo
 
 <head>
   <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/devsecops/defectdojo" />
@@ -9605,14 +9605,13 @@ Install DefectDojo on Kubernetes with Helm and integrate it into KubeRocketCI pi
 - Kubectl version 1.34.0+ is installed. Please refer to the [Kubernetes official website](https://kubernetes.io/releases/download/) for details.
 - [Helm](https://helm.sh) version 3.19.0+ is installed. Please refer to the [Helm page](https://github.com/helm/helm/releases) on GitHub for details.
 
-## Installation
+## Installation Options
 
-:::info
-  Please refer to the [DefectDojo Helm Chart](https://github.com/DefectDojo/django-DefectDojo/tree/master/helm/defectdojo)
-  and [Deploy DefectDojo into the Kubernetes cluster](https://github.com/DefectDojo/django-DefectDojo/blob/dev/readme-docs/KUBERNETES.md) sections for details.
-:::
+To install DefectDojo on Kubernetes, deploy the official [DefectDojo Helm chart](https://github.com/DefectDojo/django-DefectDojo/tree/master/helm/defectdojo), which ships the application with its PostgreSQL database and RabbitMQ message broker. KubeRocketCI supports two paths: a GitOps deployment through the [Cluster Add-Ons](https://github.com/epam/edp-cluster-add-ons) repository (recommended, managed by Argo CD), or a direct `helm upgrade --install` with your own values.
 
-## Installation DefectDojo Cluster Add-On Approach
+Upstream reference: [Deploy DefectDojo into the Kubernetes cluster](https://github.com/DefectDojo/django-DefectDojo/blob/dev/readme-docs/KUBERNETES.md).
+
+## Install DefectDojo via Cluster Add-Ons
 
 To install DefectDojo in environment, it's recommended to use the resources provided in the [Cluster Add-Ons](https://github.com/epam/edp-cluster-add-ons) repository. Leveraging the Cluster Add-Ons simplifies the deployment and management process, providing a streamlined method to integrate DefectDojo into infrastructure.
 
@@ -9630,7 +9629,7 @@ To install DefectDojo in environment, it's recommended to use the resources prov
 
     ![DefectDojo ArgoCD applications](../../assets/operator-guide/devsecops/defectdojo-addons-deploy.png "DefectDojo ArgoCD applications")
 
-## Installation DefectDojo Helm Chart Approach
+## Install DefectDojo with the Helm Chart
 
 1. Check that a security namespace is created. If not, run the following command to create it:
 
@@ -9817,7 +9816,7 @@ To install DefectDojo in environment, it's recommended to use the resources prov
 
     </details>
 
-## Configuration DefectDojo ci-user
+## Configure the DefectDojo ci-user
 
 To prepare DefectDojo for integration with KubeRocketCI, follow the steps below:
 
@@ -9849,7 +9848,7 @@ To prepare DefectDojo for integration with KubeRocketCI, follow the steps below:
 
       ![DefectDojo api key](../../assets/operator-guide/devsecops/defectdojo-api-key.png "DefectDojo api-key")
 
-## Integration DefectDojo with KubeRocketCI
+## Integrate DefectDojo with KubeRocketCI
 
 Provision the secret using `KubeRocketCI portal`, `Manifest` or with the `externalSecrets` operator:
 

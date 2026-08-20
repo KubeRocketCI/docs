@@ -1,6 +1,6 @@
 ---
-title: "Argo CD Deployment Preview: Visualize Changes Before Deployment"
-description: "Learn how to use Argo CD's diff preview feature in KubeRocketCI deploy pipelines to inspect, verify, and approve Kubernetes manifests before deployment for enhanced GitOps safety."
+title: "Argo CD Diff Preview in Deploy Pipelines"
+description: "Use Argo CD diff preview in KubeRocketCI deploy pipelines to inspect and verify Kubernetes manifest changes before deployment for safer GitOps releases."
 sidebar_label: "Argo CD Deployment Preview"
 ---
 <!-- markdownlint-disable MD025 -->

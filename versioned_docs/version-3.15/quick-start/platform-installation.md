@@ -1,6 +1,6 @@
 ---
-title: "Install KubeRocketCI"
-description: "Quick start guide for installing KubeRocketCI, including prerequisites like Tekton installation, deploying the platform with Helm, and accessing the Portal UI."
+title: "Install KubeRocketCI: Helm Quick Start on Kubernetes"
+description: "Install KubeRocketCI on any Kubernetes cluster: Tekton prerequisite, Helm deployment, and first login to the Portal UI. A step-by-step quick start."
 sidebar_label: "Install KubeRocketCI"
 ---
 <!-- markdownlint-disable MD025 -->
@@ -10,7 +10,7 @@ sidebar_label: "Install KubeRocketCI"
 
 # Install KubeRocketCI
 
-This page serves as the starting point for the quick start guide, where we will install Tekton as a prerequisite and then proceed to install the KubeRocketCI itself.
+To install KubeRocketCI, deploy Tekton as the CI engine prerequisite and then install the platform itself with Helm on any Kubernetes cluster. This quick start walks through both steps and ends with your first login to the KubeRocketCI Portal — no prior platform experience required.
 
 <div style={{ display: 'flex', justifyContent: 'center' }}>
 <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/ILlY4niCWeU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen"></iframe>

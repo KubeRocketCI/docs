@@ -1,7 +1,7 @@
 ---
 
-title: "Create and Use Custom Tekton Pipelines"
-description: "Learn how to create and integrate custom Tekton pipelines in KubeRocketCI to meet unique project requirements, enhancing flexibility and efficiency in development workflows."
+title: "Create Custom Tekton Pipelines in KubeRocketCI"
+description: "Build and register custom Tekton pipelines in KubeRocketCI: store them in a git repository, wire triggers, and run them for your codebase — a full worked scenario."
 sidebar_label: "Create and Use Custom Tekton Pipelines"
 
 ---

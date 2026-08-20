@@ -1,9 +1,9 @@
 ---
 title: "Ephemeral Preview Environments on Kubernetes"
-description: "Spin up per-feature-branch preview environments on Kubernetes with KubeRocketCI, Tekton, and Argo CD — isolated namespaces, auto-cleanup, no SaaS bill."
+description: "Spin up per-feature-branch preview environments on Kubernetes with KubeRocketCI, Tekton, and Argo CD — isolated namespaces, auto-cleanup, and measured cost-at-scale numbers."
 slug: ephemeral-preview-environments-kubernetes-feature-branch
 tags: [KubeRocketCI, Preview Environments, Ephemeral Environments, GitOps, Argo CD, Tekton, Kubernetes, Feature Branch, CD, Platform Engineering, CI/CD, Open Source]
-keywords: [ephemeral environments kubernetes, preview environments kubernetes, feature branch deployment kubernetes, self-hosted preview environments kubernetes, open source preview environments kubernetes, pull request preview environment kubernetes, per-PR environments kubernetes, dynamic environments kubernetes, on-demand environments kubernetes, GitOps preview environments Argo CD, Tekton Argo CD preview environment, kubernetes namespace isolation per feature branch, per environment values override gitops helm, internal developer platform preview environments, destroy kubernetes namespace zero residual cost, open source alternative okteto uffizzi bunnyshell]
+keywords: [ephemeral environments kubernetes, preview environments kubernetes, feature branch deployment kubernetes, self-hosted preview environments kubernetes, open source preview environments kubernetes, pull request preview environment kubernetes, per-PR environments kubernetes, dynamic environments kubernetes, on-demand environments kubernetes, GitOps preview environments Argo CD, Tekton Argo CD preview environment, kubernetes namespace isolation per feature branch, per environment values override gitops helm, internal developer platform preview environments, destroy kubernetes namespace zero residual cost, open source alternative okteto uffizzi bunnyshell, cost of ephemeral preview environments at scale, preview environment cost kubernetes, jvm startup time preview environments microservices]
 image: https://docs.kuberocketci.io/img/kuberocketci-social-card.jpg
 authors: [sergk]
 hide_table_of_contents: false
@@ -315,19 +315,54 @@ test-go-app-feature-tt-123-0afaf   created   feature-tt-123     # still here
 
 The Stage, the `CodebaseBranch`, the Git branch, and the GitOps values file are independent lifecycle objects. To fully clean up after a feature, delete the branch on the **Branches** tab and remove the `<deployment>/<environment>/` entry from the GitOps repo. That independence is a feature: you can spin a preview environment up and down repeatedly for the same branch without ever touching Git history.
 
+## How Much Do Preview Environments Cost at Scale?
+
+A preview environment on the namespace-per-branch model costs the compute its pods request, for the hours the namespace exists. There is no per-environment fee and no per-environment control plane. That makes the cost model a short formula:
+
+```text
+cost per preview = node $/hour x (pod requests / node capacity) x hours alive
+```
+
+### What a Real Java Preview Environment Measures
+
+To put real numbers behind the formula, we measured a Java service built by the platform's own pipeline on this testbed — a Spring Boot 3.5.6 application on Java 17 (Eclipse Temurin 17.0.19):
+
+- Container image: 136 MB; cold pull on the node took 4.5 s.
+- Startup: `Started CiJava17MvnApplication in 0.955 seconds` (JVM process up at 1.2 s).
+- Idle memory: 192 MB JVM RSS, 182 MB cgroup working set.
+- Requests used: `cpu: 100m`, `memory: 384Mi`, limit `memory: 512Mi`.
+
+### Compute Cost per Preview, from 10 to 1,000 a Day
+
+On an AWS `m6a.large` node (2 vCPU, 8 GiB, [$0.0864/hour on-demand in us-east-1, as of Aug 2026](https://aws.amazon.com/ec2/pricing/on-demand/)), a `384Mi`/`100m` pod occupies about 5% of the node — roughly **$0.004–0.005 per preview-hour**. Spot capacity roughly halves that. With an 8-hour working-day lifetime per preview and 22 working days a month:
+
+| Previews per day | Compute per month | Control-plane fees added |
+|------------------|-------------------|--------------------------|
+| 10               | ~$8               | $0                       |
+| 100              | ~$77              | $0                       |
+| 1,000            | ~$770             | $0                       |
+
+The control-plane column is the structural point. Namespaces share one cluster, so the [EKS control-plane fee of $0.10 per cluster-hour](https://aws.amazon.com/eks/pricing/) (~$73/month; [GKE charges the same](https://cloud.google.com/kubernetes-engine/pricing)) is paid **once**, not per environment. A cluster-per-preview model would add that $73/month for every concurrent environment; the namespace model's scaling term is pod compute alone.
+
+### How SaaS Preview Pricing Compares
+
+For comparison, managed preview SaaS products price the orchestration, not just the compute (as of Aug 2026): [Bunnyshell](https://www.bunnyshell.com/pricing/) bills $0.007 per minute per running environment ($0.42/hour), [Uffizzi](https://www.uffizzi.com/pricing) bills per member with a cap of 2 concurrent environments each, and [Okteto](https://www.okteto.com/pricing/) quotes team pricing through sales. Those products bundle management you would otherwise operate yourself — the comparison to make is their per-environment rate against your pod compute plus the platform-team time you already pay for.
+
+Two costs this math excludes, honestly: the CI compute that builds the image before each preview (a Tekton pipeline run — [cancelling superseded runs](/blog/cancel-in-progress-pipelines-tekton-kuberocketci) keeps this from multiplying on busy branches), and registry storage for per-branch image tags — both are shared-infrastructure costs that do not scale linearly with preview count.
+
 ## KubeRocketCI vs. Other Preview Environment Approaches
 
-| Capability | KubeRocketCI | Argo CD ApplicationSet (PR generator) | Uffizzi | Okteto / Qovery / Vercel (SaaS) |
-|---|---|---|---|---|
-| License | Apache-2.0 | Apache-2.0 | Proprietary (SaaS only since 2024) | Proprietary / freemium |
-| Self-hosted | Yes | Yes | No | Control plane is SaaS |
-| Builds the image | Yes (Tekton) | **No** - deploy only | Yes | Yes |
-| GitOps CD | Yes (Argo CD) | Yes (Argo CD) | No (Compose/Helm) | Varies |
-| Developer Portal UI | Yes | No (YAML) | Limited | Yes |
-| Per-branch namespace | Yes | Yes | Yes | Yes |
-| Per-env values override | Yes (GitOps) | Manual | Limited | Yes |
-| One-click destroy | Yes | Manual | Yes | Yes |
-| Cost per environment | Compute only | Compute only | Compute only | Per-env / per-seat fees |
+| Capability              | KubeRocketCI  | Argo CD ApplicationSet (PR generator) | Uffizzi                            | Okteto / Qovery / Vercel (SaaS) |
+|-------------------------|---------------|---------------------------------------|------------------------------------|---------------------------------|
+| License                 | Apache-2.0    | Apache-2.0                            | Proprietary (SaaS only since 2024) | Proprietary / freemium          |
+| Self-hosted             | Yes           | Yes                                   | No                                 | Control plane is SaaS           |
+| Builds the image        | Yes (Tekton)  | **No** - deploy only                  | Yes                                | Yes                             |
+| GitOps CD               | Yes (Argo CD) | Yes (Argo CD)                         | No (Compose/Helm)                  | Varies                          |
+| Developer Portal UI     | Yes           | No (YAML)                             | Limited                            | Yes                             |
+| Per-branch namespace    | Yes           | Yes                                   | Yes                                | Yes                             |
+| Per-env values override | Yes (GitOps)  | Manual                                | Limited                            | Yes                             |
+| One-click destroy       | Yes           | Manual                                | Yes                                | Yes                             |
+| Cost per environment    | Compute only  | Compute only                          | Compute only                       | Per-env / per-seat fees         |
 
 ### The Argo CD ApplicationSet PR Generator: Powerful, but Incomplete
 
@@ -365,7 +400,11 @@ No. It is a deployment tool that watches open pull requests and creates Argo CD 
 
 ### How much does it cost to run ephemeral environments on Kubernetes with KubeRocketCI?
 
-The software cost is zero - KubeRocketCI is Apache-2.0 with no per-environment fee. The only cost is the compute the environment consumes while it runs, and because preview environments are destroyed when the branch work is done, they do not accumulate idle compute the way permanent staging environments do. On the local kind testbed in this post, the preview environment cost nothing beyond the Docker Desktop resources already allocated.
+The cost of an ephemeral environment is its pod compute for the hours it exists: node price multiplied by the share of the node the pods request, multiplied by lifetime. KubeRocketCI is Apache-2.0, so there is no per-environment or per-seat fee, and namespaces share one cluster, so the control-plane fee (about $73/month on EKS or GKE, as of Aug 2026) is paid once regardless of environment count. Measured on this testbed, a Spring Boot 3.5 / Java 17 service idles at 192 MB RSS; with `384Mi`/`100m` requests on an on-demand `m6a.large` node that works out to roughly $0.004–0.005 per preview-hour — about $77/month of compute for 100 previews a day at an 8-hour lifetime. The [cost-at-scale section above](#how-much-do-preview-environments-cost-at-scale) shows the formula, the table, and the SaaS per-environment rates to compare against.
+
+### Our CI spins up a full preview environment of 40 Java microservices per pull request, and JVM startup makes every preview take 15 minutes. What can we do?
+
+Stop deploying all 40. A preview environment only needs the services the pull request changed: in KubeRocketCI the environment's content is the application list of its deployment flow, so a preview can contain just the changed service (plus direct dependencies), with cross-service calls pointed at the stable shared environment through per-environment [GitOps values overrides](#step-7-per-environment-config-via-gitops-values-override). That turns a 40-service cold start into a one-service deploy — measured here, a Spring Boot 3.5 service starts in under a second and its 136 MB image pulls in 4.5 s cold. For the JVM startup itself, [CDS archives and unpacked-jar packaging](https://docs.spring.io/spring-boot/reference/packaging/efficient.html), [Spring AOT](https://docs.spring.io/spring-boot/reference/packaging/aot.html), [JVM checkpoint/restore (CRaC)](https://docs.spring.io/spring-boot/reference/packaging/checkpoint-restore.html), or GraalVM native images are application-level fixes that also pay off in production, and [cancelling superseded pipeline runs](/blog/cancel-in-progress-pipelines-tekton-kuberocketci) stops stale previews from consuming build capacity while a newer commit is already on the way.
 
 ## Summary
 

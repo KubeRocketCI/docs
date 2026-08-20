@@ -227,4 +227,4 @@ If `aud` does not include your Kubernetes OIDC client ID, revisit **Configure Au
 * [Install Keycloak](keycloak.md)
 * [EKS OIDC With Keycloak](configure-keycloak-oidc-eks.md)
 * [OIDC Integration With EKS](eks-oidc-integration.md)
-* [Headlamp OIDC Configuration](ui-portal-oidc.md)
+* [Portal OIDC Configuration](ui-portal-oidc.md)

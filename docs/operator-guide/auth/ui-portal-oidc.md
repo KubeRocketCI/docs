@@ -46,7 +46,7 @@ To proceed with the Keycloak configuration, perform the following:
 
     Make sure to define the following Keycloak client values as indicated:
 
-    ![Keycloak client configuration](../../assets/operator-guide/headlamp-oidc-keycloak-2.png "Keycloak client configuration")
+    ![Keycloak client configuration](../../assets/operator-guide/portal-oidc-keycloak-client.png "Keycloak client configuration")
 
 2. Configure the Keycloak client key in Kubernetes using the Kubernetes secrets or the [External Secrets Operator](../secrets-management/external-secrets-operator-integration.md). The portal reads the client secret from the `OIDC_CLIENT_SECRET` key of the `portal-secret` Secret:
 
@@ -91,7 +91,7 @@ Portal is integrated in Kubernetes in three steps:
 
 2. Navigate to KubeRocketCI portal and log in by clicking the `Sign In` button:
 
-    ![Portal login page](../../assets/operator-guide/headlamp-oidc-headlamp-1.png "Portal login page")
+    ![Portal login page](../../assets/operator-guide/portal-oidc-login-page.png "Portal login page")
 
 3. Upon logging in, ensure the namespace for KubeRocketCI is specified by clicking the **Manage Namespaces** button:
 

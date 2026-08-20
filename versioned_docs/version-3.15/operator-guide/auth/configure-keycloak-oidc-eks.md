@@ -298,5 +298,5 @@ For application-level OIDC via OAuth2-Proxy rather than cluster `kubectl` access
 
 ## Related Articles
 
-* [Headlamp OIDC Configuration](ui-portal-oidc.md)
+* [Portal OIDC Configuration](ui-portal-oidc.md)
 * [Provision Keycloak Resources for EKS OIDC](eks-oidc-integration.md)

@@ -3,12 +3,14 @@ import Head from '@docusaurus/Head';
 import Metadata from '@theme-original/DocItem/Metadata';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import { useDoc } from '@docusaurus/plugin-content-docs/client';
+import { useCanonicalPath } from '../../canonicalUrl';
 
 export default function MetadataWrapper(props) {
   const { siteConfig } = useDocusaurusContext();
   const { metadata, frontMatter } = useDoc();
 
-  const canonical = `${siteConfig.url}${metadata.permalink}`;
+  // JSON-LD must carry the same canonical URL as <link rel="canonical">
+  const canonical = `${siteConfig.url}${useCanonicalPath(metadata.permalink)}`;
   const lastUpdate = metadata.lastUpdatedAt;
   const isoDate =
     lastUpdate != null

@@ -7,43 +7,16 @@
  * normalizes the canonical (and og:url) to the unversioned /docs/* path so
  * every canonical signal on the site agrees.
  */
-import React, { useMemo } from 'react';
+import React from 'react';
 import Head from '@docusaurus/Head';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import useBaseUrl from '@docusaurus/useBaseUrl';
 import { PageMetadata, useThemeConfig } from '@docusaurus/theme-common';
 import { DEFAULT_SEARCH_TAG, useAlternatePageUtils } from '@docusaurus/theme-common/internal';
-import { useAllDocsData } from '@docusaurus/plugin-content-docs/client';
 import { useLocation } from '@docusaurus/router';
 import { applyTrailingSlash } from '@docusaurus/utils-common';
 import SearchMetadata from '@theme/SearchMetadata';
-
-// Versioned and next docs URLs canonicalize to the unversioned latest URL:
-// /docs/3.14/foo -> /docs/foo, /docs/next/foo -> /docs/foo, /docs/next -> /docs
-function toLatestDocsPath(pathname: string): string {
-  return pathname.replace(/^\/docs\/(?:next|\d+\.\d+)(?=\/|$)/, '/docs');
-}
-
-function useLatestDocsPaths(): Set<string> {
-  const allDocsData = useAllDocsData();
-  return useMemo(() => {
-    const latest = allDocsData.default?.versions.find(v => v.isLast);
-    return new Set(latest ? latest.docs.map(d => d.path) : []);
-  }, [allDocsData]);
-}
-
-// Rewrite to the latest URL only when the page actually exists in the latest
-// version — otherwise the canonical would point at a 404 and the page could
-// be deindexed. Pages without a latest counterpart keep self-canonicals.
-function useCanonicalPathname(): string {
-  const { pathname } = useLocation();
-  const latestPaths = useLatestDocsPaths();
-  const candidate = toLatestDocsPath(pathname);
-  if (candidate === pathname) {
-    return pathname;
-  }
-  return latestPaths.has(candidate) ? candidate : pathname;
-}
+import { useCanonicalPath } from '../canonicalUrl';
 
 function AlternateLangHeaders(): React.JSX.Element {
   const {
@@ -88,7 +61,8 @@ function useDefaultCanonicalUrl(): string {
   const {
     siteConfig: { url: siteUrl, baseUrl, trailingSlash },
   } = useDocusaurusContext();
-  const canonicalPathname = applyTrailingSlash(useBaseUrl(useCanonicalPathname()), {
+  const { pathname } = useLocation();
+  const canonicalPathname = applyTrailingSlash(useBaseUrl(useCanonicalPath(pathname)), {
     trailingSlash,
     baseUrl,
   });

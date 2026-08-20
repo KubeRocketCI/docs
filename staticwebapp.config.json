@@ -61,6 +61,18 @@
       }
     },
     {
+      "route": "/docs/next",
+      "headers": {
+        "X-Robots-Tag": "noindex"
+      }
+    },
+    {
+      "route": "/docs/next/*",
+      "headers": {
+        "X-Robots-Tag": "noindex"
+      }
+    },
+    {
       "route": "/page/*",
       "headers": {
         "X-Robots-Tag": "noindex"

@@ -1162,7 +1162,7 @@ The following deployment diagram illustrates the platform's core components, whi
 * **Codebase Operator:** Responsible for managing git repositories, versioning, and branching. It also implements Jira integration controller.
 * **CD Pipeline Operator:** Manages Continuous Delivery (CD) pipelines and CD stages (which is an abstraction of Kubernetes Namespace). Operator acts as the bridge between the artifact and deployment tools, like Argo CD. It defines the CD pipeline structure, artifacts promotion logic and triggers the pipeline execution.
 * **Tekton Pipelines:** Manages Tekton pipelines and processes events (EventListener, Interceptor) from Version Control Systems. The pipelines are integrated with external tools like SonarQube, Nexus, etc.
-* **KubeRocketCI:** This is the User Interface (UI) component, built on top of Headlamp.
+* **KubeRocketCI Portal:** This is the User Interface (UI) component — a web application (React SPA with an API server) for managing codebases, pipelines, and environments.
 
 **Business applications** are deployed on the platform using the CD Pipeline Operator and Argo CD. By default, the CD Pipeline Operator uses Argo CD as a deployment tool. However, it can be replaced with any other tool, like FluxCD, Spinnaker, etc. The target environment for the application deployment is a Kubernetes cluster where KubeRocketCI is deployed, but it can be any other Kubernetes cluster.
 
@@ -4249,7 +4249,7 @@ For application-level OIDC via OAuth2-Proxy rather than cluster `kubectl` access
 
 ## Related Articles
 
-* [Headlamp OIDC Configuration](ui-portal-oidc.md)
+* [Portal OIDC Configuration](ui-portal-oidc.md)
 * [Provision Keycloak Resources for EKS OIDC](eks-oidc-integration.md)
 
 ---
@@ -5107,7 +5107,7 @@ If `aud` does not include your Kubernetes OIDC client ID, revisit **Configure Au
 * [Install Keycloak](keycloak.md)
 * [EKS OIDC With Keycloak](configure-keycloak-oidc-eks.md)
 * [OIDC Integration With EKS](eks-oidc-integration.md)
-* [Headlamp OIDC Configuration](ui-portal-oidc.md)
+* [Portal OIDC Configuration](ui-portal-oidc.md)
 
 ---
 
@@ -5872,7 +5872,7 @@ To proceed with the Keycloak configuration, perform the following:
 
     Make sure to define the following Keycloak client values as indicated:
 
-    ![Keycloak client configuration](../../assets/operator-guide/headlamp-oidc-keycloak-2.png "Keycloak client configuration")
+    ![Keycloak client configuration](../../assets/operator-guide/portal-oidc-keycloak-client.png "Keycloak client configuration")
 
 2. Configure the Keycloak client key in Kubernetes using the Kubernetes secrets or the [External Secrets Operator](../secrets-management/external-secrets-operator-integration.md). The portal reads the client secret from the `OIDC_CLIENT_SECRET` key of the `portal-secret` Secret:
 
@@ -5917,7 +5917,7 @@ Portal is integrated in Kubernetes in three steps:
 
 2. Navigate to KubeRocketCI portal and log in by clicking the `Sign In` button:
 
-    ![Portal login page](../../assets/operator-guide/headlamp-oidc-headlamp-1.png "Portal login page")
+    ![Portal login page](../../assets/operator-guide/portal-oidc-login-page.png "Portal login page")
 
 3. Upon logging in, ensure the namespace for KubeRocketCI is specified by clicking the **Manage Namespaces** button:
 

@@ -9,9 +9,6 @@ sidebar_label: "Migrate Jenkins to Tekton"
 
 # Migrate CI Pipelines From Jenkins to Tekton
 
-<head>
-  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/upgrade/migrate-ci-pipelines-from-jenkins-to-tekton" />
-</head>
 
 To migrate the CI pipelines for a codebase from Jenkins to Tekton, follow the steps below:
 

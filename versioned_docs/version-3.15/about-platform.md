@@ -106,4 +106,5 @@ There is **no limitation** to run KubeRocketCI on vanilla Kubernetes.
 - [Basic Concepts](basic-concepts.md)
 - [Glossary](glossary.md)
 - [Supported Versions and Compatibility](supported-versions.md)
+- [Ephemeral preview environments per feature branch](https://docs.kuberocketci.io/blog/ephemeral-preview-environments-kubernetes-feature-branch)
 - [krci CLI](./operator-guide/advanced-installation/krci-cli.md)

@@ -220,6 +220,7 @@ krci env get <deployment-name> <environment-name>
 ## Related Articles
 
 * [Customize Environment Cleanup](../operator-guide/cd/customize-environment-deletion.md)
+* [Ephemeral preview environments per feature branch](https://docs.kuberocketci.io/blog/ephemeral-preview-environments-kubernetes-feature-branch)
 * [Add Deployment Flow](add-cd-pipeline.md)
 * [Add Quality Gate](../user-guide/add-quality-gate.md)
 * [krci CLI](../operator-guide/advanced-installation/krci-cli.md)

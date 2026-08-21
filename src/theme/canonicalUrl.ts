@@ -22,11 +22,22 @@ export function useLatestDocsPaths(): Set<string> {
   }, [allDocsData]);
 }
 
-export function useCanonicalPath(pathname: string): string {
+// Hooks cannot be called per item, so callers that canonicalize a list of
+// paths (breadcrumb trails) take the resolver and apply it themselves.
+export function useCanonicalPathResolver(): (pathname: string) => string {
   const latestPaths = useLatestDocsPaths();
-  const candidate = toLatestDocsPath(pathname);
-  if (candidate === pathname) {
-    return pathname;
-  }
-  return latestPaths.has(candidate) ? candidate : pathname;
+  return useMemo(
+    () => (pathname: string) => {
+      const candidate = toLatestDocsPath(pathname);
+      if (candidate === pathname) {
+        return pathname;
+      }
+      return latestPaths.has(candidate) ? candidate : pathname;
+    },
+    [latestPaths]
+  );
+}
+
+export function useCanonicalPath(pathname: string): string {
+  return useCanonicalPathResolver()(pathname);
 }

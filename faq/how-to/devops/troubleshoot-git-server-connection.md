@@ -1,9 +1,5 @@
 # How to Troubleshoot Git Server Connection?
 
-<head>
-  <link rel="canonical" href="https://docs.kuberocketci.io/faq/how-to/developer/troubleshoot-git-server-connection" />
-</head>
-
 The reason why you can't connect to the Git server could be the following:
 
 * Incorrect host;

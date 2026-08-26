@@ -14,7 +14,7 @@
     "@azure/functions": "^4.0.0"
   },
   "devDependencies": {
-    "@types/node": "^20.x",
+    "@types/node": "^22.x",
     "azure-functions-core-tools": "^4.0.7030"
   },
   "main": "dist/src/{index.js,functions/*.js}"

@@ -1,7 +1,7 @@
 {
   "trailingSlash": "never",
   "platform": {
-    "apiRuntime": "node:18"
+    "apiRuntime": "node:22"
   },
   "navigationFallback": {
     "rewrite": "/api/fallback",

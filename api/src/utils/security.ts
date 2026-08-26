@@ -1,10 +1,77 @@
-/**
- * Security utility functions for URL handling and prevention of common attacks
- */
+/** Fallback used whenever the client-supplied origin is not trusted. */
+const CANONICAL_ORIGIN = 'https://docs.kuberocketci.io';
 
 /**
- * List of known malicious path fragments that are commonly used in attacks
+ * Origins this site is served from. The `x-ms-original-url` header and the
+ * request Host header are client-controlled: match any origin taken from them
+ * against this list before using it in a fetch or a Location header.
+ * Keep separate from the handlers' redirect-target allowlists, which permit
+ * outbound destinations rather than origins this app answers as.
+ * Extend per environment via the comma-separated `TRUSTED_ORIGINS` app setting.
  */
+const DEFAULT_TRUSTED_ORIGINS = [
+  CANONICAL_ORIGIN,
+  'https://www.docs.kuberocketci.io',
+];
+
+function toOrigin(value: string): string | null {
+  try {
+    const { origin } = new URL(value);
+    return origin === 'null' ? null : origin;
+  } catch {
+    return null;
+  }
+}
+
+const TRUSTED_ORIGINS: string[] = [
+  ...DEFAULT_TRUSTED_ORIGINS,
+  ...(process.env.TRUSTED_ORIGINS || '')
+    .split(',')
+    .map(entry => toOrigin(entry.trim()))
+    .filter((origin): origin is string => origin !== null),
+];
+
+/**
+ * Resolves the origin of a client-supplied URL to a trusted origin.
+ * @param url The client-supplied URL
+ * @returns The origin if it is allowlisted, CANONICAL_ORIGIN otherwise
+ */
+export function resolveTrustedOrigin(url: string): string {
+  const origin = toOrigin(url);
+  return origin !== null && TRUSTED_ORIGINS.includes(origin) ? origin : CANONICAL_ORIGIN;
+}
+
+/**
+ * Domains an absolute `redirectMaps` entry may point to, subdomains included.
+ * Covers outbound destinations only; origins this app answers as are governed
+ * by DEFAULT_TRUSTED_ORIGINS above. Both handlers must apply the same list, so
+ * declare it here rather than per handler.
+ */
+const ALLOWED_REDIRECT_DOMAINS = [
+  'docs.kuberocketci.io',
+  'www.docs.kuberocketci.io',
+  'kuberocketci.io',
+  'www.kuberocketci.io',
+];
+
+/**
+ * Checks an absolute redirect target against the outbound allowlist.
+ * @param url The absolute redirect target
+ * @returns True if the hostname is an allowed domain or a subdomain of one
+ */
+export function isAllowedRedirectTarget(url: string): boolean {
+  let hostname: string;
+  try {
+    hostname = new URL(url).hostname;
+  } catch {
+    return false;
+  }
+
+  return ALLOWED_REDIRECT_DOMAINS.some(
+    domain => hostname === domain || hostname.endsWith(`.${domain}`)
+  );
+}
+
 const MALICIOUS_PATH_FRAGMENTS = [
   'wp-admin',
   'wp-includes',
@@ -44,7 +111,6 @@ export function isMaliciousPath(path: string): boolean {
  * @returns The sanitized URL
  */
 export function sanitizeUrl(url: string): string {
-  // Trim the URL and convert to lowercase for safer checks
   const sanitizedUrl = url.trim();
   const lowercaseUrl = sanitizedUrl.toLowerCase();
 
@@ -78,29 +144,16 @@ export function sanitizeUrl(url: string): string {
 }
 
 /**
- * Makes a URL path safe for use in HTML output
- * @param path The path to escape
- * @returns The escaped path
- */
-export function escapeHtmlContent(content: string): string {
-  return content
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;')
-    .replace(/'/g, '&#39;');
-}
-
-/**
- * Normalizes URL paths by removing duplicate slashes, resolving relative paths, etc.
+ * Normalizes a path for redirectMaps lookups: collapses duplicate slashes,
+ * strips a trailing slash (except root), and strips the leading slash.
+ * Does not resolve `.` or `..` segments.
  * @param path The path to normalize
- * @returns The normalized path
+ * @returns The normalized path, without a leading slash
  */
 export function normalizePath(path: string): string {
-  // Remove duplicate slashes (important to do this first)
+  // Collapse duplicate slashes first; the later checks assume single slashes.
   let normalized = path.replace(/\/+/g, '/');
 
-  // Remove trailing slash if not the root path
   if (normalized.length > 1 && normalized.endsWith('/')) {
     normalized = normalized.slice(0, -1);
   }

@@ -4,7 +4,8 @@ import {
   sanitizeUrl,
   isMaliciousPath,
   normalizePath,
-  escapeHtmlContent
+  resolveTrustedOrigin,
+  isAllowedRedirectTarget
 } from "../utils/security";
 
 /**
@@ -17,11 +18,9 @@ export async function redirectHandler(request: HttpRequest, context: InvocationC
   try {
     context.log(`Redirect function processed request for url "${request.url}"`);
 
-    // Get the path from the request URL
     const requestUrl = new URL(request.url);
     let requestPath = requestUrl.pathname;
 
-    // First, let's clean up any double slashes in the original path
     requestPath = requestPath.replace(/\/+/g, '/');
 
     context.log(`Path after removing double slashes: "${requestPath}"`);
@@ -43,7 +42,6 @@ export async function redirectHandler(request: HttpRequest, context: InvocationC
       }
     }
 
-    // Check for malicious path patterns
     if (isMaliciousPath(requestPath)) {
       context.log(`Blocked malicious path: "${requestPath}"`);
       return {
@@ -52,22 +50,14 @@ export async function redirectHandler(request: HttpRequest, context: InvocationC
       };
     }
 
-    // Remove 'api/redirect' prefix from the path
-    // Use regex to remove the api/redirect part regardless of exact format
     requestPath = requestPath.replace(/^\/?api\/redirect\/?/, '');
-
-    // Log path after removing API prefix
     context.log(`Path after removing API prefix: "${requestPath}"`);
 
-    // Now normalize the path - this will remove any remaining leading/trailing slashes and handle duplicates
     requestPath = normalizePath(requestPath);
-
-    // Log the normalized path
     context.log(`Normalized path: "${requestPath}"`);
 
     context.log(`Looking for redirect for path: "${requestPath}"`);
 
-    // Check if we have a redirect for this path in our static mapping
     if (redirectMaps[requestPath]) {
       const redirectTo = redirectMaps[requestPath];
       context.log(`Redirecting to "${redirectTo}"`);
@@ -75,23 +65,8 @@ export async function redirectHandler(request: HttpRequest, context: InvocationC
       // Sanitize the redirect URL to prevent open redirect vulnerabilities
       const sanitizedRedirectTo = sanitizeUrl(redirectTo);
 
-      // Check if it's an external URL
       if (sanitizedRedirectTo.startsWith('http')) {
-        // Verify that the URL is in our allowlist of valid external domains
-        const allowedExternalDomains = ['docs.kuberocketci.io', 'www.docs.kuberocketci.io', 'kuberocketci.io', 'www.kuberocketci.io'];
-
-        let isAllowedDomain = false;
-        try {
-          const redirectUrl = new URL(sanitizedRedirectTo);
-          isAllowedDomain = allowedExternalDomains.some(domain =>
-            redirectUrl.hostname === domain || redirectUrl.hostname.endsWith(`.${domain}`)
-          );
-        } catch (error) {
-          context.log(`Invalid redirect URL: ${error}`);
-          isAllowedDomain = false;
-        }
-
-        if (!isAllowedDomain) {
+        if (!isAllowedRedirectTarget(sanitizedRedirectTo)) {
           context.log(`Blocked potential open redirect to non-allowlisted domain: ${sanitizedRedirectTo}`);
           return {
             status: 400,
@@ -114,8 +89,8 @@ export async function redirectHandler(request: HttpRequest, context: InvocationC
           }
         };
       } else {
-        // For internal redirects, we need to keep the base URL
-        const baseUrl = `${requestUrl.protocol}//${requestUrl.host}`;
+        // Internal redirects are relative to redirectMaps; prepend the trusted origin.
+        const baseUrl = resolveTrustedOrigin(request.url);
         const redirectUrl = `${baseUrl}/${sanitizedRedirectTo}`;
         context.log(`Redirecting to internal URL: "${redirectUrl}"`);
 
@@ -135,7 +110,7 @@ export async function redirectHandler(request: HttpRequest, context: InvocationC
     // If no redirect found, redirect to the Docusaurus default 404 page
     context.log(`No redirect found for path: "${requestPath}"`);
 
-    const baseUrl = `${requestUrl.protocol}//${requestUrl.host}`;
+    const baseUrl = resolveTrustedOrigin(request.url);
     const notFoundUrl = `${baseUrl}/404`;
 
     return {

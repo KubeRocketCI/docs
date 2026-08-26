@@ -4,7 +4,8 @@ import {
   sanitizeUrl,
   isMaliciousPath,
   normalizePath,
-  escapeHtmlContent
+  resolveTrustedOrigin,
+  isAllowedRedirectTarget
 } from "../utils/security";
 
 // The built 404 page is a static asset served by SWA, so it is fetched once
@@ -69,7 +70,6 @@ export async function fallbackHandler(request: HttpRequest, context: InvocationC
 
     context.log(`Fallback handler processing request for original URL: "${originalUrl}"`);
 
-    // Check for common hack attempts
     if (isMaliciousPath(originalUrl)) {
       context.log(`Blocked malicious path: "${originalUrl}"`);
       return {
@@ -80,20 +80,19 @@ export async function fallbackHandler(request: HttpRequest, context: InvocationC
         },
         body: 'Forbidden'
       };
-    }    // Parse the URL to get the path
-    let requestPath = '';    try {      // Sanitize the URL to prevent security issues
+    }
+
+    let requestPath = '';
+    try {
       const safeUrl = sanitizeUrl(originalUrl);
       const parsedURL = new URL(safeUrl);
       requestPath = parsedURL.pathname;
 
-      // First, let's clean up any double slashes in the path
       requestPath = requestPath.replace(/\/+/g, '/');
       context.log(`Path after removing double slashes: "${requestPath}"`);
 
-      // Normalize the path - this will remove the leading slash to match our mapping format
+      // normalizePath strips the leading slash; redirectMaps keys have none.
       requestPath = normalizePath(requestPath);
-
-      // Log the normalized path for debugging
       context.log(`Normalized path: "${requestPath}"`);
     } catch (error) {
       context.log(`Failed to parse original URL: ${error}`);
@@ -115,7 +114,7 @@ export async function fallbackHandler(request: HttpRequest, context: InvocationC
     // equity by permanently redirecting to the unversioned latest URL.
     const droppedVersionMatch = requestPath.match(/^docs\/\d+\.\d+(?:\/(.+))?$/);
     if (droppedVersionMatch) {
-      const baseUrl = new URL(originalUrl).origin;
+      const baseUrl = resolveTrustedOrigin(originalUrl);
       const rest = droppedVersionMatch[1];
       const redirectUrl = rest ? `${baseUrl}/docs/${rest}` : `${baseUrl}/docs`;
       context.log(`Dropped docs version, redirecting to: "${redirectUrl}"`);
@@ -132,7 +131,6 @@ export async function fallbackHandler(request: HttpRequest, context: InvocationC
       };
     }
 
-    // Check if we have a redirect for this path
     if (redirectMaps[requestPath]) {
       const redirectTo = redirectMaps[requestPath];
       context.log(`Redirecting to "${redirectTo}"`);
@@ -140,23 +138,8 @@ export async function fallbackHandler(request: HttpRequest, context: InvocationC
       // Sanitize the redirect URL to prevent open redirect vulnerabilities
       const sanitizedRedirectTo = sanitizeUrl(redirectTo);
 
-      // Check if it's an external URL
       if (sanitizedRedirectTo.startsWith('http')) {
-        // Verify that the URL is in our allowlist of valid external domains
-        const allowedExternalDomains = ['docs.kuberocketci.io', 'www.docs.kuberocketci.io', 'kuberocketci.io', 'www.kuberocketci.io'];
-
-        let isAllowedDomain = false;
-        try {
-          const redirectUrl = new URL(sanitizedRedirectTo);
-          isAllowedDomain = allowedExternalDomains.some(domain =>
-            redirectUrl.hostname === domain || redirectUrl.hostname.endsWith(`.${domain}`)
-          );
-        } catch (error) {
-          context.log(`Invalid redirect URL: ${error}`);
-          isAllowedDomain = false;
-        }
-
-        if (!isAllowedDomain) {
+        if (!isAllowedRedirectTarget(sanitizedRedirectTo)) {
           context.log(`Blocked potential open redirect to non-allowlisted domain: ${sanitizedRedirectTo}`);
           return {
             status: 400,
@@ -179,8 +162,8 @@ export async function fallbackHandler(request: HttpRequest, context: InvocationC
           }
         };
       } else {
-        // For internal redirects
-        const baseUrl = new URL(originalUrl).origin;
+        // Internal redirects are relative to redirectMaps; prepend the trusted origin.
+        const baseUrl = resolveTrustedOrigin(originalUrl);
         const redirectUrl = `${baseUrl}/${sanitizedRedirectTo}`;
         context.log(`Redirecting to internal URL: "${redirectUrl}"`);
 
@@ -203,7 +186,7 @@ export async function fallbackHandler(request: HttpRequest, context: InvocationC
     // from analytics) and send crawlers a redirect instead of a 404.
     context.log(`No redirect found for path: "${requestPath}"`);
 
-    const baseUrl = new URL(originalUrl).origin;
+    const baseUrl = resolveTrustedOrigin(originalUrl);
     const notFoundHtml = await getNotFoundPage(baseUrl, context);
 
     return {

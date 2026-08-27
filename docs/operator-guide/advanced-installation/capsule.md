@@ -50,18 +50,29 @@ The installation procedure consists of two steps:
         forceTenantPrefix: true
         # enable capsule for KubeRocketCI tenant and cd-pipeline-operator
         # NOTE: Capsule cannot manage cluster system namespaces
-        capsuleUserGroups:
-          - capsule.clastix.io
+        users:
+          - kind: Group
+            name: capsule.clastix.io
           # enable for cd-pipeline-operator https://github.com/epam/edp-cd-pipeline-operator/blob/release/2.17/deploy-templates/values.yaml#L10
-          - system:serviceaccounts:krci  # krci - Namespace where KubeRocketCI will be installed.
-          - masters                     # Kubernetes group that manages the KubeRocketCI tenant.
+          - kind: Group
+            name: system:serviceaccounts:krci  # krci - Namespace where KubeRocketCI will be installed.
+          - kind: Group
+            name: masters                      # Kubernetes group that manages the KubeRocketCI tenant.
           # uncomment if Argo CD manage main KubeRocketCI tenant
-          #- system:serviceaccounts:argocd
+          #- kind: Group
+          #  name: system:serviceaccounts:argocd
           # uncomment if edp-oidc-admins group manage main KubeRocketCI tenant
-          #- edp-oidc-admins
+          #- kind: Group
+          #  name: edp-oidc-admins
     ```
 
-2. To install the Capsule tool, use the [Cluster Add-Ons](https://github.com/epam/edp-cluster-add-ons) approach. For more details, please refer to the [Capsule](https://capsule.clastix.io/docs/general) official page.
+    :::note
+
+    `manager.options.users` is Capsule's current API for declaring the users, groups, and service accounts it recognizes as tenant members. The older `capsuleUserGroups` and `userNames` keys still work but are deprecated in favor of `users`; new installations should use `users`.
+
+    :::
+
+2. To install the Capsule tool, use the [Cluster Add-Ons](https://github.com/epam/edp-cluster-add-ons) approach, which pins the Capsule chart version used across the platform. For more details, please refer to the [Capsule](https://capsule.clastix.io/docs/general) official page.
 
 ## Configuration
 
@@ -99,7 +110,7 @@ After installing Capsule, the next crucial step is configuration. Follow the gui
       ...
     ```
 
-    `system:masters` Group that manages the KubeRocketCI tenant. Must be declared in the above configuration of the `capsuleUserGroups`.
+    `system:masters` Group that manages the KubeRocketCI tenant. Must be declared as a `Group` entry in the above `users` configuration.
 
     The following example includes additional specifications that can be used to manage the KubeRocketCI tenant:
 
@@ -218,6 +229,16 @@ After installing Capsule, the next crucial step is configuration. Follow the gui
           size: 1
           state: Active
         ```
+
+    :::caution Capsule does not adopt pre-existing namespaces
+
+    The `kubectl create namespace krci` command above works because it creates a **new** namespace while logged in as a Tenant owner (`system:masters`) - Capsule's admission webhook intercepts the creation and binds the namespace to the tenant at that moment.
+
+    Capsule does not allow binding an **already-existing** namespace to a Tenant this way. Adopting a pre-existing namespace requires the acting identity to be listed in `CapsuleConfiguration.spec.administrators` (Helm value `manager.options.administrators`, empty by default) - being a Tenant owner, or even having cluster-admin RBAC, is not sufficient, since Capsule checks its own `CapsuleConfiguration`, not Kubernetes RBAC.
+
+    This matters for `cd-pipeline-operator`: when `tenancyEngine: capsule` is combined with `manageNamespace: false` (the operator expects a pre-created namespace instead of creating one itself), the target namespace must already have been created under the Tenant - for example using the same `kubectl create namespace` flow as a Tenant owner - **before** the operator reconciles a Stage against it. There is no supported way for the operator, or any Tenant owner, to adopt a namespace that already exists outside the Tenant without an administrator manually configuring `CapsuleConfiguration.spec.administrators` and performing the adoption out-of-band.
+
+    :::
 
 4. Enable Capsule in the values.yaml file to make it possible to manage deployable environments:
 

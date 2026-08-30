@@ -68,6 +68,9 @@ jobs:
       - name: Run tsc
         run: npm run typecheck
 
+      - name: Validate redirect destinations
+        run: npm run validate-redirects
+
       - name: Copy Azure config
         run: cp staticwebapp.config.json build/staticwebapp.config.json
 

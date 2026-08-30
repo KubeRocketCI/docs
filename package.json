@@ -18,6 +18,7 @@
     "format": "prettier -w src",
     "format:docs": "prettier -w docs",
     "typecheck": "tsc",
+    "validate-redirects": "node scripts/validate-redirects.js",
     "spell-check": "npx cspell --config cspell.config.yaml '{docs,blog}/**/*.{md,mdx}'"
   },
   "dependencies": {

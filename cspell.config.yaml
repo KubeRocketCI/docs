@@ -63,6 +63,8 @@ words:
   - clusterrole
   - clusterrolebinding
   - codebaseimagestreams
+  - projectcapsule
+  - subresources
   - taskruns
   - cdpipelines
   - cmctl

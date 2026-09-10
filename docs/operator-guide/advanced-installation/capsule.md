@@ -39,7 +39,7 @@ graph LR;
 
 ## Installation
 
-The installation procedure consists of two steps:
+The installation procedure consists of three steps:
 
 1. Define the namespace where KubeRocketCI will be installed in Capsule values:
 
@@ -50,18 +50,50 @@ The installation procedure consists of two steps:
         forceTenantPrefix: true
         # enable capsule for KubeRocketCI tenant and cd-pipeline-operator
         # NOTE: Capsule cannot manage cluster system namespaces
-        capsuleUserGroups:
-          - capsule.clastix.io
+        users:
+          # Capsule 0.14 default group, kept because this list replaces the chart default
+          - kind: Group
+            name: projectcapsule.dev
+          - kind: Group
+            name: capsule.clastix.io
           # enable for cd-pipeline-operator https://github.com/epam/edp-cd-pipeline-operator/blob/release/2.17/deploy-templates/values.yaml#L10
-          - system:serviceaccounts:krci  # krci - Namespace where KubeRocketCI will be installed.
-          - masters                     # Kubernetes group that manages the KubeRocketCI tenant.
+          - kind: Group
+            name: system:serviceaccounts:krci  # krci - Namespace where KubeRocketCI will be installed.
+          - kind: Group
+            name: masters                      # Kubernetes group that manages the KubeRocketCI tenant.
           # uncomment if Argo CD manage main KubeRocketCI tenant
-          #- system:serviceaccounts:argocd
+          #- kind: Group
+          #  name: system:serviceaccounts:argocd
           # uncomment if edp-oidc-admins group manage main KubeRocketCI tenant
-          #- edp-oidc-admins
+          #- kind: Group
+          #  name: edp-oidc-admins
     ```
 
-2. To install the Capsule tool, use the [Cluster Add-Ons](https://github.com/epam/edp-cluster-add-ons) approach. For more details, please refer to the [Capsule](https://capsule.clastix.io/docs/general) official page.
+2. If you run Capsule 0.14 or later, keep its metadata webhook away from objects that are already being deleted:
+
+    ```yaml title="values.yaml"
+    webhooks:
+      hooks:
+        metadata:
+          matchConditions:
+            # The first two conditions are the chart defaults. Helm replaces lists, so keep them.
+            - name: ignore-subresources
+              expression: '!has(request.subResource) || request.subResource == ""'
+            - name: ignore-events
+              expression: 'request.resource.resource != "events"'
+            - name: skip-objects-being-deleted
+              expression: 'request.operation != "UPDATE" || !has(object.metadata.deletionTimestamp)'
+    ```
+
+    :::warning
+      Without the last condition, a Role or RoleBinding created before Capsule 0.14 can get stuck in the `Terminating` state when it is deleted, together with the Argo CD Application that owns it.
+
+      Capsule 0.14 adds a webhook that labels every object created or updated in a tenant namespace. When such an object is deleted with foreground propagation, the Kubernetes garbage collector finishes the deletion with an update that only removes a finalizer. The webhook adds its labels to that update, so Kubernetes no longer treats it as a finalizer-only change, checks the garbage collector's RBAC permissions, and rejects the request.
+
+      Argo CD uses foreground propagation by default when it prunes resources and when it deletes an Application. This covers KubeRocketCI stage deployments in Capsule tenants, deleting an environment, and removing a Role from an application chart. Deletions made with `kubectl delete` or Helm use background propagation and are not affected.
+    :::
+
+3. To install the Capsule tool, use the [Cluster Add-Ons](https://github.com/epam/edp-cluster-add-ons) approach. The Capsule add-on already includes the condition from the previous step. For more details, please refer to the [Capsule](https://capsule.clastix.io/docs/general) official page.
 
 ## Configuration
 
@@ -99,7 +131,7 @@ After installing Capsule, the next crucial step is configuration. Follow the gui
       ...
     ```
 
-    `system:masters` Group that manages the KubeRocketCI tenant. Must be declared in the above configuration of the `capsuleUserGroups`.
+    `system:masters` Group that manages the KubeRocketCI tenant. Must be declared in the `users` list of the Capsule values above.
 
     The following example includes additional specifications that can be used to manage the KubeRocketCI tenant:
 
@@ -227,6 +259,23 @@ After installing Capsule, the next crucial step is configuration. Follow the gui
     ```
 
 By following these instructions, Capsule policies are utilized to manage the KubeRocketCI core components and deployable environments. By adhering to these guidelines, you should successfully install KubeRocketCI with Capsule enabled as the `tenancyEngine`.
+
+## Troubleshooting
+
+### Roles or RoleBindings Stuck in Terminating After a Capsule Upgrade
+
+An Argo CD Application stays in deletion, or a stage cannot be redeployed, while Roles or RoleBindings in a tenant namespace keep a deletion timestamp. List them with the following command:
+
+```bash
+kubectl get roles,rolebindings -A \
+  -o jsonpath='{range .items[?(@.metadata.deletionTimestamp)]}{.metadata.namespace}/{.kind}/{.metadata.name}{"\n"}{end}'
+```
+
+Add the `skip-objects-being-deleted` condition described in the [Installation](#installation) section and apply the Capsule values. Objects that are already stuck do not need manual action: the garbage collector retries them and completes the deletion within about 17 minutes. To release an object immediately, remove its finalizer as a cluster administrator:
+
+```bash
+kubectl patch rolebinding <name> -n <namespace> --type=merge -p '{"metadata":{"finalizers":null}}'
+```
 
 ## Related Articles
 

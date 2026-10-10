@@ -100,7 +100,37 @@ To install Dependency-Track use [KubeRocketCI addons](../add-ons-overview.md) ap
 
 </Tabs>
 
-After following the instructions provided, you should be able to integrate your Dependency-Track with the KubeRocketCI.
+The `ci-dependency-track` secret is used by the security pipelines to upload SBOMs.
+
+## Configure the KubeRocketCI Portal
+
+The KubeRocketCI Portal and the `krci sca` CLI commands read Dependency-Track with a separate, read-only API key. The pipeline key above is not enough: Dependency-Track requires `VIEW_VULNERABILITY` to list findings and `VIEW_POLICY_VIOLATION` to list policy violations, and answers `403` without them.
+
+1. Open **Administration** -> **Access Management** -> **Teams**. Click **Create Team**, name it `krci-portal`, and click **Create**.
+
+2. Click **+** in **Permissions** and add:
+
+    ```bash
+    VIEW_PORTFOLIO
+    VIEW_VULNERABILITY
+    VIEW_POLICY_VIOLATION
+    ```
+
+3. Click **+** in **API keys** to create an API key for the team.
+
+4. Set the Dependency-Track URL in the `krci-portal` values:
+
+    ```yaml
+    krci-portal:
+      configEnv:
+        DEPENDENCY_TRACK_URL: https://dependency-track.example.com
+        # Optional: browser-facing URL, when it differs from DEPENDENCY_TRACK_URL
+        DEPENDENCY_TRACK_WEB_URL: https://dependency-track.example.com
+    ```
+
+5. Add the API key to the Portal secret as `DEPENDENCY_TRACK_API_KEY` (see [Create the portal-secret Kubernetes Secret](../upgrade/upgrade-krci-3.13.md#62-create-the-portal-secret-kubernetes-secret)). With the External Secrets Operator, store it under the Portal `eso.secretPath`. Restart the Portal to apply the key.
+
+6. Verify the integration: `krci sca list` lists the Dependency-Track projects, and `krci sca findings <codebase>` lists the findings of a codebase after its first security scan.
 
 ## Related Articles
 

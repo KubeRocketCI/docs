@@ -1,7 +1,7 @@
 ---
 
 title: "Overview"
-description: "Prerequisites for KubeRocketCI installation, including Kubernetes or OpenShift setup, Nginx ingress, Tekton, and Argo CD."
+description: "Prerequisites for KubeRocketCI installation, including Kubernetes or OpenShift setup, Nginx ingress, cert-manager, Tekton, and Argo CD."
 sidebar_label: "Prerequisites Overview"
 
 ---
@@ -17,6 +17,7 @@ Before installing KubeRocketCI via Helm Chart, make sure to complete the followi
 
 - Install and configure [Kubernetes](kubernetes-cluster-settings.md) or [OpenShift](openshift-cluster-settings.md) cluster
 - Install the [Nginx ingress controller](install-ingress-nginx.md)
+- Install [cert-manager](https://cert-manager.io/docs/installation/), which issues the TLS certificates for the admission webhooks of the KubeRocketCI operators
 - Install [Tekton](install-tekton.md)
 - Install [Argo CD](install-argocd.md)
 

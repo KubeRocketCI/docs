@@ -211,7 +211,20 @@ There are multiple ways to deploy KubeRocketCI:
         url: "harbor.example.com"
     ```
 
-7. Install platform in the **krci** namespace with the Helm tool:
+7. Create the `krci` namespace, if it does not exist yet, and the `portal-secret` secret in it. The KubeRocketCI Portal reads its sensitive settings from this secret and does not start without the `SERVER_SECRET` key:
+
+    :::note
+      If Single Sign-On is enabled, the secret also needs the `OIDC_CLIENT_SECRET` key. In this case, replace the `kubectl create secret` command below with the one from the [Portal OIDC Configuration](./auth/ui-portal-oidc.md#configure-keycloak) page.
+    :::
+
+    ```bash
+    kubectl create namespace krci
+    kubectl create secret generic portal-secret \
+      --namespace krci \
+      --from-literal=SERVER_SECRET="$(openssl rand -base64 32)"
+    ```
+
+8. Install platform in the **krci** namespace with the Helm tool:
 
     Check the parameters in the installation chart [values.yaml](https://github.com/epam/edp-install/blob/v3.15.0/deploy-templates/values.yaml) file.
 
@@ -277,12 +290,20 @@ There are multiple ways to deploy KubeRocketCI:
     krci-portal:
       ingress:
         enabled: true
-
-    configEnv:
-      PORTAL_URL: https://krci-portal.example.com
-      GITFUSION_URL: http://gitfusion.<namespace>:8080
-      DEFAULT_CLUSTER_NAMESPACE: <namespace>
-      DEFAULT_CLUSTER_NAME: core
+        # DNS wildcard for the Portal Ingress host: krci-portal-<namespace>.<dnsWildcard>
+        dnsWildcard: "example.com"
+      # The Portal reads its configuration from the portal-secret Secret
+      # and from the portal-config ConfigMap, which the chart renders from configEnv
+      extraEnvFrom:
+        - secretRef:
+            name: portal-secret
+        - configMapRef:
+            name: portal-config
+      configEnv:
+        PORTAL_URL: https://krci-portal-<namespace>.example.com
+        GITFUSION_URL: http://gitfusion.<namespace>:8080
+        DEFAULT_CLUSTER_NAMESPACE: <namespace>
+        DEFAULT_CLUSTER_NAME: core
     ```
 
     :::note
@@ -293,7 +314,7 @@ There are multiple ways to deploy KubeRocketCI:
       The full installation with integration between tools will take at least 5 minutes.
     :::
 
-8. To check if the installation is successful, run the command below:
+9. To check if the installation is successful, run the command below:
 
     ```bash
     helm status krci -n krci
@@ -302,10 +323,10 @@ There are multiple ways to deploy KubeRocketCI:
     You can also check ingress endpoints to get the Portal endpoint to enter KubeRocketCI portal:
 
     ```bash
-    kubectl get ingress portal -n krci
+    kubectl get ingress krci-portal -n krci
     ```
 
-9. Once KubeRocketCI is successfully installed, you can explore our [Use Cases](../use-cases/index.md) to try out the functionality of the KubeRocketCI platform.
+10. Once KubeRocketCI is successfully installed, you can explore our [Use Cases](../use-cases/index.md) to try out the functionality of the KubeRocketCI platform.
 
 ## Related Articles
 

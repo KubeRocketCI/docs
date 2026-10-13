@@ -57,7 +57,7 @@ To proceed with the Keycloak configuration, perform the following:
       --from-literal=OIDC_CLIENT_SECRET="<keycloak_client_secret_key>"
     ```
 
-    The chart only injects a Secret's keys as environment variables when it is wired via `extraEnvFrom`, so also reference the `portal-secret` Secret from the `krci-portal` chart's `values.yaml`:
+    The chart passes environment variables to the Portal only from the sources listed in `extraEnvFrom`. In the `krci-portal` chart's `values.yaml`, reference both the `portal-secret` Secret and the `portal-config` ConfigMap, which the chart renders from `configEnv`:
 
     :::note values.yaml
 
@@ -66,6 +66,8 @@ To proceed with the Keycloak configuration, perform the following:
         extraEnvFrom:
           - secretRef:
               name: portal-secret
+          - configMapRef:
+              name: portal-config
       ```
 
     :::

@@ -311,6 +311,14 @@ krci-portal:
         hosts:
           - portal.example.com
 
+  # The portal reads its configuration from the portal-secret Secret
+  # and from the portal-config ConfigMap, which the chart renders from configEnv
+  extraEnvFrom:
+    - secretRef:
+        name: portal-secret
+    - configMapRef:
+        name: portal-config
+
   configEnv:
     API_PREFIX: /api
     SERVER_PORT: "3000"

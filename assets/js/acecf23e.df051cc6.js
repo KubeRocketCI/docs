@@ -1,0 +1,1 @@
+"use strict";(globalThis.webpackChunkkuberocketci_docs||=[]).push([[81903],{1912(s){s.exports=JSON.parse('{"blogBasePath":"/blog","blogTitle":"Blog: CI/CD Insights, DevOps and Kubernetes Guides","authorsListPath":"/blog/authors"}')}}]);

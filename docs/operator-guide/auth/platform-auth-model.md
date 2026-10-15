@@ -428,6 +428,20 @@ The following **Deploy** permissions are granted to users based on their group m
 | `${platform}-oidc-developers` |  :white_check_mark:   |   :white_check_mark:   |  :white_check_mark:  |   :white_check_mark:   | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |      :white_check_mark:      |
 | `${platform}-oidc-viewers`    |          :x:          |          :x:           |         :x:          |          :x:           |        :x:         |        :x:         |        :x:         |        :x:         |        :x:         |             :x:              |
 
+#### Tekton Pipeline Permissions
+
+The following permissions apply to Tekton resources in the platform namespace, both in the **CI/CD Pipelines** section of the KubeRocketCI portal and through the Kubernetes API:
+
+| Group Name                    |    Run Pipeline    |  Stop PipelineRun  | Delete PipelineRun |   Create TaskRun   | Create, Edit, or Delete Pipelines and Tasks | Create or Modify Triggers |
+|-------------------------------|:------------------:|:------------------:|:------------------:|:------------------:|:-------------------------------------------:|:-------------------------:|
+| `${platform}-oidc-admins`     | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |             :white_check_mark:              |    :white_check_mark:     |
+| `${platform}-oidc-developers` | :white_check_mark: | :white_check_mark: |        :x:         |        :x:         |                     :x:                     |            :x:            |
+| `${platform}-oidc-viewers`    |        :x:         |        :x:         |        :x:         |        :x:         |                     :x:                     |            :x:            |
+
+:::note
+  Pipelines, Tasks, and trigger resources (Triggers, TriggerBindings, TriggerTemplates, and EventListeners) are platform configuration. Developers cannot modify them on the cluster, so every change goes through a single, auditable source of truth: a reviewed Git repository applied through GitOps, for example with Argo CD (see [Create and Use Custom Tekton Pipelines](../../use-cases/custom-pipelines-flow.md#deliver-custom-tekton-pipelines-to-the-cluster)). Developers still start and stop PipelineRuns; the Tekton controller creates the TaskRuns of each PipelineRun. In environment namespaces, `${platform}-oidc-developers` is bound to the `admin` ClusterRole, which includes the Tekton resources.
+:::
+
 #### Sensitive Capabilities
 
 The capabilities below are the ones most often examined during an access review. `PF` stands for the platform namespace and `ENV` for the environment namespaces.
@@ -443,6 +457,7 @@ The capabilities below are the ones most often examined during an access review.
 | Delete workloads                              |     :x:      |     :x:      |        :x:         | :white_check_mark: | :white_check_mark: |
 | Read build logs (`pods/log`, Tekton Results)  | :white_check_mark: | :x:    | :white_check_mark: | :white_check_mark: | :white_check_mark: |
 | Approve or reject ApprovalTasks               |     :x:      |     :x:      | :white_check_mark: |        n/a         | :white_check_mark: |
+| Create or modify Tekton Pipelines, Tasks, and Triggers | :x: |  :x:  |        :x:         | :white_check_mark: | :white_check_mark: |
 
 :::warning
   In environment namespaces `${platform}-oidc-developers` is bound to the `admin` ClusterRole, which permits creating ServiceAccount tokens and impersonating ServiceAccounts inside that namespace. If a ServiceAccount in an environment namespace holds permissions wider than `admin`, a developer can assume that identity. Kubernetes privilege-escalation prevention still applies - a developer cannot `escalate` or `bind` roles they do not already hold - but the ServiceAccounts present in environment namespaces should be reviewed.

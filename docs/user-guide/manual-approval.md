@@ -66,6 +66,10 @@ graph LR;
 
 To create a deploy pipeline with a manual approval task, follow the steps below:
 
+:::note
+Creating TriggerTemplate and Pipeline resources in the platform namespace requires administrator rights. Keep them in a Git repository and deliver them to the cluster through GitOps, as described in [Create and Use Custom Tekton Pipelines](../use-cases/custom-pipelines-flow.md#deliver-custom-tekton-pipelines-to-the-cluster).
+:::
+
 1. Create and apply the **TriggerTemplate** custom resource. Refer to the example [TriggerTemplate](https://github.com/epam/edp-tekton/blob/v0.13.0/charts/pipelines-library/templates/triggers/cd/deploy-with-approve.yaml). Make sure to specify the correct pipeline type in the labels and provide the pipeline reference in the specifications:
 
   ```bash

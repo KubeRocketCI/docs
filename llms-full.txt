@@ -5884,7 +5884,7 @@ To proceed with the Keycloak configuration, perform the following:
       --from-literal=OIDC_CLIENT_SECRET="<keycloak_client_secret_key>"
     ```
 
-    The chart only injects a Secret's keys as environment variables when it is wired via `extraEnvFrom`, so also reference the `portal-secret` Secret from the `krci-portal` chart's `values.yaml`:
+    The chart passes environment variables to the Portal only from the sources listed in `extraEnvFrom`. In the `krci-portal` chart's `values.yaml`, reference both the `portal-secret` Secret and the `portal-config` ConfigMap, which the chart renders from `configEnv`:
 
     :::note values.yaml
 
@@ -5893,6 +5893,8 @@ To proceed with the Keycloak configuration, perform the following:
         extraEnvFrom:
           - secretRef:
               name: portal-secret
+          - configMapRef:
+              name: portal-config
       ```
 
     :::
@@ -13914,7 +13916,20 @@ There are multiple ways to deploy KubeRocketCI:
         url: "harbor.example.com"
     ```
 
-7. Install platform in the **krci** namespace with the Helm tool:
+7. Create the `krci` namespace, if it does not exist yet, and the `portal-secret` secret in it. The KubeRocketCI Portal reads its sensitive settings from this secret and does not start without the `SERVER_SECRET` key:
+
+    :::note
+      If Single Sign-On is enabled, the secret also needs the `OIDC_CLIENT_SECRET` key. In this case, replace the `kubectl create secret` command below with the one from the [Portal OIDC Configuration](./auth/ui-portal-oidc.md#configure-keycloak) page.
+    :::
+
+    ```bash
+    kubectl create namespace krci
+    kubectl create secret generic portal-secret \
+      --namespace krci \
+      --from-literal=SERVER_SECRET="$(openssl rand -base64 32)"
+    ```
+
+8. Install platform in the **krci** namespace with the Helm tool:
 
     Check the parameters in the installation chart [values.yaml](https://github.com/epam/edp-install/blob/v3.15.0/deploy-templates/values.yaml) file.
 
@@ -13980,12 +13995,20 @@ There are multiple ways to deploy KubeRocketCI:
     krci-portal:
       ingress:
         enabled: true
-
-    configEnv:
-      PORTAL_URL: https://krci-portal.example.com
-      GITFUSION_URL: http://gitfusion.<namespace>:8080
-      DEFAULT_CLUSTER_NAMESPACE: <namespace>
-      DEFAULT_CLUSTER_NAME: core
+        # DNS wildcard for the Portal Ingress host: krci-portal-<namespace>.<dnsWildcard>
+        dnsWildcard: "example.com"
+      # The Portal reads its configuration from the portal-secret Secret
+      # and from the portal-config ConfigMap, which the chart renders from configEnv
+      extraEnvFrom:
+        - secretRef:
+            name: portal-secret
+        - configMapRef:
+            name: portal-config
+      configEnv:
+        PORTAL_URL: https://krci-portal-<namespace>.example.com
+        GITFUSION_URL: http://gitfusion.<namespace>:8080
+        DEFAULT_CLUSTER_NAMESPACE: <namespace>
+        DEFAULT_CLUSTER_NAME: core
     ```
 
     :::note
@@ -13996,7 +14019,7 @@ There are multiple ways to deploy KubeRocketCI:
       The full installation with integration between tools will take at least 5 minutes.
     :::
 
-8. To check if the installation is successful, run the command below:
+9. To check if the installation is successful, run the command below:
 
     ```bash
     helm status krci -n krci
@@ -14005,10 +14028,10 @@ There are multiple ways to deploy KubeRocketCI:
     You can also check ingress endpoints to get the Portal endpoint to enter KubeRocketCI portal:
 
     ```bash
-    kubectl get ingress portal -n krci
+    kubectl get ingress krci-portal -n krci
     ```
 
-9. Once KubeRocketCI is successfully installed, you can explore our [Use Cases](../use-cases/index.md) to try out the functionality of the KubeRocketCI platform.
+10. Once KubeRocketCI is successfully installed, you can explore our [Use Cases](../use-cases/index.md) to try out the functionality of the KubeRocketCI platform.
 
 ## Related Articles
 
@@ -18083,6 +18106,7 @@ Before installing KubeRocketCI via Helm Chart, make sure to complete the followi
 
 - Install and configure [Kubernetes](kubernetes-cluster-settings.md) or [OpenShift](openshift-cluster-settings.md) cluster
 - Install the [Nginx ingress controller](install-ingress-nginx.md)
+- Install [cert-manager](https://cert-manager.io/docs/installation/), which issues the TLS certificates for the admission webhooks of the KubeRocketCI operators
 - Install [Tekton](install-tekton.md)
 - Install [Argo CD](install-argocd.md)
 
@@ -19555,8 +19579,7 @@ In order to [Install KubeRocketCI](../install-kuberocketci.md), a list of passwo
     helm upgrade --install krci epamedp/edp-install --wait --timeout=900s \
     --version <edp_version> \
     --values values.yaml \
-    --namespace krci \
-    --atomic
+    --namespace krci
     ```
 
 ## Related Articles
@@ -24647,6 +24670,14 @@ krci-portal:
         hosts:
           - portal.example.com
 
+  # The portal reads its configuration from the portal-secret Secret
+  # and from the portal-config ConfigMap, which the chart renders from configEnv
+  extraEnvFrom:
+    - secretRef:
+        name: portal-secret
+    - configMapRef:
+        name: portal-config
+
   configEnv:
     API_PREFIX: /api
     SERVER_PORT: "3000"
@@ -25873,7 +25904,7 @@ To install Argo CD, follow the steps below:
 3. Apply the argocd-values.yaml file using the `helm install` command:
 
     ```bash
-    helm install argo-cd argocd/argo-cd --values argocd-values.yaml --version 9.3.4 --create-namespace --atomic -n argocd
+    helm install argo-cd argocd/argo-cd --values argocd-values.yaml --version 9.3.4 --create-namespace --wait -n argocd
     ```
 
 :::info
@@ -26201,7 +26232,7 @@ After completing the SonarQube integration, proceed to integrate the platform wi
 
 # Install KubeRocketCI
 
-To install KubeRocketCI, deploy Tekton as the CI engine prerequisite and then install the platform itself with Helm on any Kubernetes cluster. This quick start walks through both steps and ends with your first login to the KubeRocketCI Portal — no prior platform experience required.
+To install KubeRocketCI, deploy the prerequisites (Tekton, cert-manager, and the NGINX Ingress Controller) and then install the platform itself with Helm on any Kubernetes cluster. This quick start walks through these steps and ends with your first login to the KubeRocketCI Portal — no prior platform experience required.
 
 <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/ILlY4niCWeU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen"></iframe>
 
@@ -26217,38 +26248,102 @@ To install Tekton, run the commands below:
   kubectl apply -f https://infra.tekton.dev/tekton-releases/triggers/previous/v0.36.0/interceptors.yaml
   ```
 
+## Install cert-manager
+
+The KubeRocketCI operators rely on [cert-manager](https://cert-manager.io/) to issue the TLS certificates for their admission webhooks.
+
+To install cert-manager, run the command below:
+
+  ```bash
+  kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.21.2/cert-manager.yaml
+  ```
+
+## Install NGINX Ingress Controller
+
+The KubeRocketCI Portal sends its session cookie over HTTPS only. The NGINX Ingress Controller provides the HTTPS endpoint for opening the Portal.
+
+To install the NGINX Ingress Controller, run the command below:
+
+  ```bash
+  kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.15.1/deploy/static/provider/cloud/deploy.yaml
+  ```
+
 ## Install platform
 
 To deploy the platform, follow the steps below:
 
-1. Add a Helm Chart repository:
+1. Wait until the prerequisites are ready:
+
+    ```bash
+    kubectl wait deployment --all --for=condition=Available --timeout=300s -n tekton-pipelines
+    kubectl wait deployment --all --for=condition=Available --timeout=300s -n cert-manager
+    kubectl wait pod --selector=app.kubernetes.io/component=controller --for=condition=Ready --timeout=300s -n ingress-nginx
+    ```
+
+2. Add a Helm Chart repository:
 
     ```bash
     helm repo add epamedp https://epam.github.io/edp-helm-charts/stable
     helm repo update
     ```
 
-2. Deploy the platform using the `helm install` command:
+3. Create the `krci` namespace and the `portal-secret` secret. The Portal uses the `SERVER_SECRET` key of this secret to protect user sessions:
 
     ```bash
-    helm install krci epamedp/edp-install --version 3.15.0 --create-namespace --atomic -n krci --set global.dnsWildCard=example.com
+    kubectl create namespace krci
+    kubectl create secret generic portal-secret -n krci --from-literal=SERVER_SECRET="$(openssl rand -base64 32)"
     ```
 
-3. Upon successful deployment of the KubeRocketCI Helm Chart, run the `kubectl port-forward` command:
+4. Create the `values.yaml` file with the following content:
+
+    ```yaml title="values.yaml"
+    global:
+      # Wildcard DNS name that resolves to the local machine
+      dnsWildCard: 127.0.0.1.nip.io
+
+    krci-portal:
+      ingress:
+        className: nginx
+        # The Portal host is krci-portal-<namespace>.<dnsWildcard>: krci-portal-krci.127.0.0.1.nip.io
+        dnsWildcard: 127.0.0.1.nip.io
+      # The Portal reads its configuration from the portal-secret Secret
+      # and from the portal-config ConfigMap, which the chart renders from configEnv
+      extraEnvFrom:
+        - secretRef:
+            name: portal-secret
+        - configMapRef:
+            name: portal-config
+      configEnv:
+        # No identity provider is used in this guide,
+        # so the Portal offers only the service account token login
+        OIDC_ISSUER_URL: ""
+    ```
+
+5. Deploy the platform using the `helm install` command:
 
     ```bash
-    kubectl port-forward service/krci-portal 59480:80 -n krci
+    helm install krci epamedp/edp-install --version 3.15.0 --wait -n krci --values values.yaml
     ```
 
-4. Enter the localhost in your browser to access the login menu and click **Use Token**:
+6. Upon successful deployment of the KubeRocketCI Helm Chart, run the `kubectl port-forward` command to reach the ingress controller:
 
     ```bash
-    localhost:59480
+    kubectl port-forward service/ingress-nginx-controller 8443:443 -n ingress-nginx
     ```
 
-    ![Portal login menu](../assets/quick-start/edp_portal_login_menu.png "Portal login menu")
+7. Open the Portal in your browser to access the login menu and click **Use Service Account Token**:
 
-5. Create the edp-admin service account and generate an access token to open the KubeRocketCI:
+    ```bash
+    https://krci-portal-krci.127.0.0.1.nip.io:8443
+    ```
+
+    :::note
+      The ingress controller serves a self-signed certificate, so the browser shows a security warning. Accept it to proceed to the Portal.
+    :::
+
+    ![Portal login menu](../assets/quick-start/krci_portal_login_menu.png "Portal login menu")
+
+8. Create the edp-admin service account and generate its token to open the KubeRocketCI:
 
     ```bash
     kubectl -n krci create serviceaccount edp-admin
@@ -26256,13 +26351,13 @@ To deploy the platform, follow the steps below:
     kubectl create token edp-admin -n krci
     ```
 
-6. In the login menu, paste the generated token in the **Access token** field and click the **Sign in** button.
+9. In the login menu, paste the generated token in the **Service Account Token** field and click the **Sign In** button.
 
-7. Upon logging in, open the namespaces window by clicking the **Manage Namespaces** button in the top right corner of the page:
+10. Upon logging in, open the namespaces window by clicking the **Manage Namespaces** button in the top right corner of the page:
 
     ![Specify namespaces](../assets/quick-start/edp_portal_ui.png "Specify namespaces")
 
-8. Ensure the `krci` namespace is specified in both default and allowed namespaces. If not, define them manually:
+11. Ensure the `krci` namespace is specified in both default and allowed namespaces. If not, define them manually:
 
     * Default namespace: `krci`
     * Allowed namespaces: `krci`
@@ -26318,7 +26413,7 @@ Before deploying KubeRocketCI, it is important to ensure that a local Kubernetes
 
 ## Starting Point
 
-The first step of the guide is to prepare the cluster environment for the KubeRocketCI setup process by installing the Tekton tool. Once this is done, you can proceed with the installation of the platform itself. Detailed guidelines for the platform installation can be found in the [Platform Installation](./platform-installation.md) page. Alternatively, you can watch our [video tutorial](https://www.youtube.com/watch?v=QjZoPnIKDtA) which provides a clear demonstration of the installation process.
+The first step of the guide is to prepare the cluster environment for the KubeRocketCI setup process by installing Tekton, cert-manager, and the NGINX Ingress Controller. Once this is done, you can proceed with the installation of the platform itself. Detailed guidelines for the platform installation can be found in the [Platform Installation](./platform-installation.md) page. Alternatively, you can watch our [video tutorial](https://www.youtube.com/watch?v=QjZoPnIKDtA) which provides a clear demonstration of the installation process.
 
 Good luck with your installation!
 

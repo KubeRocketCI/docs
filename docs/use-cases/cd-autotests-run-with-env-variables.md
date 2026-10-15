@@ -28,6 +28,7 @@ Teams can dynamically adjust parameters by adding, modifying, or removing them w
 - KubeRocketCI instance with GitHub is [configured](../operator-guide/prerequisites.md).
 - Developer has access to the KubeRocketCI instance using the Single-Sign-On approach.
 - Developer has `Write` permissions for GitHub repository to merge the code.
+- Administrator rights in the platform namespace (`${platform}-oidc-admins`) to install the Tekton chart, or the chart is delivered to the cluster through [GitOps](./custom-pipelines-flow.md#deliver-custom-tekton-pipelines-to-the-cluster).
 
 ## Scenario
 

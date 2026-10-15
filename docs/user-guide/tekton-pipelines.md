@@ -64,7 +64,7 @@ KubeRocketCI includes a library component for managing Tekton resources declarat
 Below is the recommended flow for creating comprehensive and efficient Tekton pipelines:
 
 1. Start by modifying an existing pipeline example from the library to suit your needs.
-2. Test changes by applying resources directly to the cluster.
+2. Test changes by applying resources directly to the cluster. Applying Tekton resources to the platform namespace requires administrator rights; developers have read-only access to them.
 3. Once verified, commit changes to the repository to ensure they are tracked and version-controlled.
 4. Check/apply changes in Argo CD.
 

@@ -56,7 +56,7 @@ Quality gate pipeline is a usual Tekton pipeline but with a specific label: `app
             name: promote-images
     ```
 
-4. Create a new pipeline with a unique name or modify your created pipeline with the command below. Please be aware that the `edp` value is the name of the KubeRocketCI tenant:
+4. Create a new pipeline with a unique name or modify your created pipeline with the command below. Please be aware that the `edp` value is the name of the KubeRocketCI tenant. Applying a Pipeline to the platform namespace requires administrator rights; the recommended approach is to keep the Pipeline in a Git repository and [deliver it through GitOps](../use-cases/custom-pipelines-flow.md#deliver-custom-tekton-pipelines-to-the-cluster):
 
     ```bash
     kubectl apply -f <file>.yaml --namespace edp

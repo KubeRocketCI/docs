@@ -20,8 +20,8 @@ Pipelines are an integral part of any CI/CD. They are involved in code build, re
 To see the CI/CD Pipelines section, open the KubeRocketCI portal and select the **CI/CD Pipelines** section:
 
 * **PipelineRuns** - Shows the recent PipelineRuns. You can search PipelineRuns and filter them by status, type, and Codebase they launched for;
-* **Pipelines** - This tab allows to view and edit all the Tekton Pipelines created in the platform;
-* **Tasks** - This tab allows to view and edit all the Tekton Tasks created in the platform.
+* **Pipelines** - This tab lists all the Tekton Pipelines created in the platform. Users with administrator rights can also edit them;
+* **Tasks** - This tab lists all the Tekton Tasks created in the platform. Users with administrator rights can also edit them.
 
 ![PipelineRuns list](../assets/user-guide/pipelines/pipelineruns-list.png "PipelineRuns list")
 
@@ -42,13 +42,13 @@ You can also view the build pipeline results from the codebase details page and 
 
 ## Operate With Pipelines
 
-The Pipelines section allows you to track, restart, and delete pipelines.
+The Pipelines section allows you to track, restart, stop, and delete pipelines.
 
 To restart the PipelineRun, click the actions button and select **Run again**.
 
 To restart the PipelineRun using different parameters, click the actions button and select **Run with params**.
 
-To delete the PipelineRun, click the actions button and select **Delete**.
+To delete the PipelineRun, click the actions button and select **Delete**. Deleting PipelineRuns requires administrator rights.
 
 Alternatively, you can enter the PipelineRun and delete/restart the pipeline using the corresponding buttons.
 
@@ -70,6 +70,10 @@ krci pipelinerun get <pipelinerun-name> --reason
 ## Edit Pipelines/Tasks
 
 KubeRocketCI portal allows to edit the existing Tekton Pipelines and Tasks directly in the Pipelines section. In our example, we will show how to edit a Task but the same procedure applies to Pipelines:
+
+:::note
+Starting with KubeRocketCI 3.16, only members of the `${platform}-oidc-admins` group can edit Pipelines and Tasks; for other users the **Edit** action is unavailable. Pipelines and Tasks are platform configuration: change them in the Git repository that delivers them to the cluster, so that every change is reviewed and tracked (see [Create and Use Custom Tekton Pipelines](../use-cases/custom-pipelines-flow.md#deliver-custom-tekton-pipelines-to-the-cluster)). If a Pipeline or Task is managed by Helm or Argo CD, a direct edit is reverted on the next upgrade or sync. For details, see [Tekton Pipeline Permissions](../operator-guide/auth/platform-auth-model.md#tekton-pipeline-permissions).
+:::
 
 1. Navigate to the **Tasks** tab.
 

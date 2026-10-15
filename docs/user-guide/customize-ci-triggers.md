@@ -29,6 +29,15 @@ Pick option 1 when your pipeline reacts to the standard code-review events. Pick
 when you need other event types (tags, releases, pipeline events) or want your custom CI
 fully isolated from the platform flow.
 
+:::note
+Both options create Tekton trigger resources (Triggers, TriggerBindings, TriggerTemplates,
+and, for option 2, an EventListener and its Ingress) in the platform namespace. Developers
+have read-only access to these resources, so creating them requires administrator rights.
+Keep them in a Git repository and deliver them to the cluster through GitOps, as described in
+[Create and Use Custom Tekton Pipelines](../use-cases/custom-pipelines-flow.md#deliver-custom-tekton-pipelines-to-the-cluster),
+or ask a platform administrator to apply them.
+:::
+
 ## Option 1: Attach to the Platform EventListener
 
 :::note

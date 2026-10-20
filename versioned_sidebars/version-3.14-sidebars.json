@@ -369,7 +369,10 @@
             "operator-guide/troubleshooting/environment-creation",
             "operator-guide/troubleshooting/forbidden-messages",
             "operator-guide/troubleshooting/review-pipeline-is-failed",
-            "operator-guide/troubleshooting/modify-gitops-repo-path"
+            "operator-guide/troubleshooting/modify-gitops-repo-path",
+            "operator-guide/troubleshooting/sonarqube-upstream-failure",
+            "operator-guide/troubleshooting/dependency-track-project-not-found",
+            "operator-guide/troubleshooting/dependency-track-zero-vulnerabilities"
           ]
         }
       ]

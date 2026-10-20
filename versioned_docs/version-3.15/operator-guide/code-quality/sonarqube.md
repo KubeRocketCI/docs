@@ -241,6 +241,30 @@ For provision secret using manifest, KubeRocketCI portal or with the externalSec
 
 </Tabs>
 
+## Configure the KubeRocketCI Portal
+
+The KubeRocketCI Portal reads SonarQube data for the **Code Quality** tab of a project and for the SAST pages. It uses its own connection, separate from the `ci-sonarqube` secret that pipelines use.
+
+1. Use a SonarQube token of a user that has the `Browse` and `View Issues` permissions on the projects. The `ci-user` token from the previous section can be used.
+
+2. Set the SonarQube URL in the `krci-portal` values:
+
+    ```yaml
+    krci-portal:
+      configEnv:
+        SONAR_HOST_URL: https://sonarqube.example.com
+        # Optional: browser-facing URL, when it differs from SONAR_HOST_URL
+        SONAR_WEB_URL: https://sonarqube.example.com/
+    ```
+
+3. Add the token to the Portal secret as `SONAR_TOKEN` (see [Create the portal-secret Kubernetes Secret](../upgrade/upgrade-krci-3.13.md#62-create-the-portal-secret-kubernetes-secret)). With the External Secrets Operator, store it under the Portal `eso.secretPath`; change the value in the external store, because the Operator overwrites manual changes of the Secret. Restart the Portal to apply the token.
+
+4. Run a build pipeline for the codebase, then open **Projects** -> *the project* -> **Code Quality** to verify the data. The portal looks up the SonarQube project by the codebase name:
+
+    ![SonarQube Code Quality widget](../../assets/operator-guide/code-quality/sonarqube-widget-working.png "SonarQube Code Quality widget")
+
+If the tab shows `SONAR_HOST_URL environment variable is not configured` or `SONAR_TOKEN environment variable is not configured`, set the missing variable and restart the Portal. If the tab shows `SonarQube upstream failure`, see [SonarQube Upstream Failure](../troubleshooting/sonarqube-upstream-failure.md).
+
 ## Project Analysis Flow
 
 1. SonarQube analysis is seamlessly integrated into KubeRocketCI pipelines, triggered during both review and build pipelines:
@@ -254,6 +278,7 @@ For provision secret using manifest, KubeRocketCI portal or with the externalSec
 
 ## Related Articles
 
+* [KubeRocketCI Widgets](../../user-guide/widgets.md)
 * [Publish SonarQube Reports to Pull Requests](sonarqube-pr-decoration.md)
 * [Sonarqube Project Properties for Application](../../user-guide/application-sonarqube-project-properties.md)
 * [Install KubeRocketCI With Values File](../install-kuberocketci.md)

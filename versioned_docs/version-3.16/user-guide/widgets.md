@@ -58,22 +58,34 @@ Additionally, users can track any specific application status and deployed versi
 
 ## SonarQube & Dependency-Track Widgets
 
-KubeRocketCI also offers widgets to track codebases' code quality directly from the KubeRocketCI portal. These widgets pull codebase-related data from SonarQube and Dependency-Track tools.
+KubeRocketCI also offers widgets to track codebases' code quality directly from the KubeRocketCI portal. These widgets pull codebase-related data from SonarQube and Dependency-Track tools. To view them, open **Projects**, select a project, and open the following tabs:
 
-To enable these widgets, you need to pass the following steps:
+* **Code Quality** — SonarQube quality gate status and metrics for the project.
+* **Dependencies** — Dependency-Track vulnerability metrics and findings for the project.
 
-1. Integrate platform with [SonarQube](../operator-guide/code-quality/sonarqube.md) and/or [Dependency-Track](../operator-guide/devsecops/dependency-track.md).
-2. Trigger the review pipeline in a codebase, allowing SonarQube and Dependency-Track to scan your code.
+The widgets use a separate connection from the one that pipelines use. Pipelines upload scan results with the `ci-sonarqube` and `ci-dependency-track` secrets. The portal reads the results back with its own credentials, which you configure in the portal deployment. Integrating the tools with pipelines is therefore not enough for the widgets to work.
+
+To enable these widgets, complete the following steps:
+
+1. Integrate the platform with [SonarQube](../operator-guide/code-quality/sonarqube.md) and/or [Dependency-Track](../operator-guide/devsecops/dependency-track.md) so that pipelines can upload scan results.
+2. Configure the portal to read the results:
+    * SonarQube: set `SONAR_HOST_URL` and `SONAR_TOKEN`. See [Configure the KubeRocketCI Portal](../operator-guide/code-quality/sonarqube.md#configure-the-kuberocketci-portal).
+    * Dependency-Track: set `DEPENDENCY_TRACK_URL` and `DEPENDENCY_TRACK_API_KEY`, and grant the API key team the required permissions. See [Configure the KubeRocketCI Portal](../operator-guide/devsecops/dependency-track.md#configure-the-kuberocketci-portal).
+3. Run the pipelines that feed each widget:
+    * **Code Quality** — run a build pipeline for the codebase. The SonarQube scan is part of the build and review pipelines.
+    * **Dependencies** — run a [security pipeline](./tekton-pipelines.md#security-test-and-release-pipeline) for the codebase. It generates the SBOM and uploads it to Dependency-Track. Build and review pipelines do not upload SBOMs.
 
 :::note
-At least one build pipeline must be run for the codebase to activate the widgets.
+At least one successful run of the corresponding pipeline is required for the widget to show data.
 :::
 
-3. Verify the widgets started working for the codebase.
+4. Open the **Code Quality** and **Dependencies** tabs of the project and verify that the data is displayed.
 
 :::note
-The SonarQube and Dependency-Track widgets only track the default branch.
+The SonarQube and Dependency-Track widgets only track the default branch. Dependency-Track looks up the project by the codebase name and the default branch name as the project version, for example `my-app` and `main`.
 :::
+
+If a widget shows an error or zero vulnerabilities, refer to the following troubleshooting pages: [SonarQube Upstream Failure](../operator-guide/troubleshooting/sonarqube-upstream-failure.md), [Dependency-Track Project Not Found](../operator-guide/troubleshooting/dependency-track-project-not-found.md), and [Dependencies Tab Shows Zero Vulnerabilities](../operator-guide/troubleshooting/dependency-track-zero-vulnerabilities.md).
 
 ## Resource Quota Widget
 

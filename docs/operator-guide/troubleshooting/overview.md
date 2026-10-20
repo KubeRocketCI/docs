@@ -23,3 +23,6 @@ Currently, this section covers the following issues:
 - [Forbidden Messages on the Overview Page](forbidden-messages.md)
 - [Review Pipeline is Failed](review-pipeline-is-failed.md)
 - [Modify GitOps Repository Path](modify-gitops-repo-path.md)
+- [SonarQube Upstream Failure](sonarqube-upstream-failure.md)
+- [Dependency-Track Project Not Found](dependency-track-project-not-found.md)
+- [Dependencies Tab Shows Zero Vulnerabilities](dependency-track-zero-vulnerabilities.md)

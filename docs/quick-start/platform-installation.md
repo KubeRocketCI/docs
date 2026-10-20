@@ -102,7 +102,7 @@ To deploy the platform, follow the steps below:
 5. Deploy the platform using the `helm install` command:
 
     ```bash
-    helm install krci epamedp/edp-install --version 3.15.0 --wait -n krci --values values.yaml
+    helm install krci epamedp/edp-install --version 3.16.0 --wait -n krci --values values.yaml
     ```
 
 6. Upon successful deployment of the KubeRocketCI Helm Chart, run the `kubectl port-forward` command to reach the ingress controller:

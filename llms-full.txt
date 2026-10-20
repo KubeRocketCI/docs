@@ -13815,7 +13815,7 @@ There are multiple ways to deploy KubeRocketCI:
     ```bash
     helm search repo epamedp/edp-install
     NAME                    CHART VERSION   APP VERSION     DESCRIPTION
-    epamedp/edp-install     3.15.0          3.15.0           A Helm chart for KubeRocketCI Platform
+    epamedp/edp-install     3.16.0          3.16.0           A Helm chart for KubeRocketCI Platform
     ```
 
     :::note
@@ -13995,11 +13995,11 @@ There are multiple ways to deploy KubeRocketCI:
 
 8. Install platform in the **krci** namespace with the Helm tool:
 
-    Check the parameters in the installation chart [values.yaml](https://github.com/epam/edp-install/blob/v3.15.0/deploy-templates/values.yaml) file.
+    Check the parameters in the installation chart [values.yaml](https://github.com/epam/edp-install/blob/v3.16.0/deploy-templates/values.yaml) file.
 
     ```bash
     helm install krci epamedp/edp-install --wait --timeout=900s \
-    --version 3.15.0 \
+    --version 3.16.0 \
     --values values.yaml \
     --namespace krci \
     --create-namespace
@@ -14623,7 +14623,7 @@ You can install and configure KEDA-tenant either using the [add-ons approach](ht
 
   - **`namespaces`** – List of namespaces where the KRCI platform is installed.
   - **`timeInterval`** – Idle time after which the platform will automatically scale down to **0 replicas**.
-  - **`gitProviders`** – List of Git providers configured to work with the platform (this list must match the configuration set during the installation of the [`edp-install`](https://github.com/epam/edp-install/blob/v3.15.0/deploy-templates/values.yaml#L35) Helm chart).
+  - **`gitProviders`** – List of Git providers configured to work with the platform (this list must match the configuration set during the installation of the [`edp-install`](https://github.com/epam/edp-install/blob/v3.16.0/deploy-templates/values.yaml#L35) Helm chart).
 
   Below are the key parameters for configuring the KEDA Tenants Helm chart:
 
@@ -19810,7 +19810,7 @@ Failed to create an environment due to the following error:
 
 ## Cause
 
-KubeRocketCI offers several approaches for namespace management: namespaces can be created by users, by KubeRocketCI itself, or by Argo CD. If you expect KubeRocketCI to handle namespace creation, ensure that the [cd-pipeline-operator](https://github.com/epam/edp-cd-pipeline-operator), a component of KubeRocketCI, has the necessary permissions. This permission is managed by the `manageNamespace` parameter of the [values.yaml](https://github.com/epam/edp-install/blob/v3.15.0/deploy-templates/values.yaml#L288) file.
+KubeRocketCI offers several approaches for namespace management: namespaces can be created by users, by KubeRocketCI itself, or by Argo CD. If you expect KubeRocketCI to handle namespace creation, ensure that the [cd-pipeline-operator](https://github.com/epam/edp-cd-pipeline-operator), a component of KubeRocketCI, has the necessary permissions. This permission is managed by the `manageNamespace` parameter of the [values.yaml](https://github.com/epam/edp-install/blob/v3.16.0/deploy-templates/values.yaml#L288) file.
 
 If the `manageNamespace` parameter is set to false, it means the KubeRocketCI does not have permission to create namespaces and the procedure of creating namespaces in your project is delegated to a concrete person.
 
@@ -26595,7 +26595,7 @@ To deploy the platform, follow the steps below:
 5. Deploy the platform using the `helm install` command:
 
     ```bash
-    helm install krci epamedp/edp-install --version 3.15.0 --wait -n krci --values values.yaml
+    helm install krci epamedp/edp-install --version 3.16.0 --wait -n krci --values values.yaml
     ```
 
 6. Upon successful deployment of the KubeRocketCI Helm Chart, run the `kubectl port-forward` command to reach the ingress controller:
@@ -26711,7 +26711,10 @@ gantt
     title Release Schedule and Lifecycle
 
     section (Under Development)
-    KubeRocketCI 3.16 SNAPSHOT: crit, r46, 2026-08-10, 2026-12-14
+    KubeRocketCI 3.17 SNAPSHOT: crit, r47, 2026-10-20, 2026-12-14
+
+    section (Supported)
+    KubeRocketCI 3.16 Release: active, r46, 2026-10-20, 2026-12-14
 
     section (Supported)
     KubeRocketCI 3.15 Release: active, r45, 2026-08-10, 2026-12-14
@@ -26719,23 +26722,14 @@ gantt
     section (Supported)
     KubeRocketCI 3.14 Release: active, r44, 2026-07-14, 2026-12-14
 
-    section (Supported)
-    KubeRocketCI 3.13 Release: active, r43, 2026-03-27, 2026-12-14
+    section (Unsupported)
+    KubeRocketCI 3.13 Release: active, r43, 2026-03-27, 2026-10-20
 
     section (Unsupported)
     KubeRocketCI 3.12 Release: active, r42, 2025-07-22, 2026-08-10
 
     section (Unsupported)
     KubeRocketCI 3.11 Release: active, r41, 2025-03-21, 2026-07-14
-
-    section (Unsupported)
-    KubeRocketCI 3.10 Release: active, r40, 2024-10-18, 2026-03-27
-
-    section (Unsupported)
-    KubeRocketCI 3.9 Release: r39, 2024-06-13, 2025-07-21
-
-    section (Unsupported)
-    KubeRocketCI 3.8 Release: r38, 2024-03-12, 2025-03-21
 
 ```
 
@@ -26751,9 +26745,10 @@ Get acquainted with the list of the latest releases and component versions on wh
 
 |[Release Version](https://github.com/epam/edp-install/blob/master/RELEASES.md)|Release Date|[EKS Version](https://aws.amazon.com/eks/)|[OpenShift Version](https://github.com/okd-project/okd/releases)|
 |:-:|:-:|:-:|:-:|
+|3.16 |Oct 20, 2026|1.34+|N/A|
 |3.15 |Aug 10, 2026|1.34+|N/A|
 |3.14 |Jul 14, 2026|1.34+|N/A|
-|3.13 |Mar 27, 2026|1.34+|N/A|
+|3.13  |Mar 27, 2026|1.34+|N/A|
 |3.12  |Jul 22, 2025|1.32+|N/A|
 |3.11 |Mar 21, 2025|1.29+|N/A|
 |3.9  |Jun 13, 2024|1.26+|4.12|

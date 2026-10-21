@@ -20,12 +20,12 @@ The [cd-pipeline-operator](https://github.com/epam/edp-cd-pipeline-operator) sho
 
 ## Disable Automatic Namespace Creation
 
-In certain scenarios, the automatic generation of namespaces might be restricted. For instance, project-specific security protocols might necessitate disabling this feature. This can be achieved by adjusting the `manageNamespace` parameter within the [values.yaml](https://github.com/epam/edp-cd-pipeline-operator/blob/release/2.20/deploy-templates/values.yaml#L96) file.
+In certain scenarios, the automatic generation of namespaces might be restricted. For instance, project-specific security protocols might necessitate disabling this feature. This can be achieved by adjusting the `manageNamespace` parameter within the [values.yaml](https://github.com/epam/edp-cd-pipeline-operator/blob/v2.33.1/deploy-templates/values.yaml#L117) file.
 By default, `manageNamespace` is enabled (true), but it can be toggled off (false). Consequently, users might encounter issues when attempting to deploy applications through the KubeRocketCI portal due to permission constraints:
 
   ![Namespace creation error](../../assets/operator-guide/failed_cd_pipeline_creation.png)
 
-The error highlighted above indicates the necessity for users to manually create a namespace following the `<platform-namespace>-<application-name>-<stage-name>` naming convention prior to stage creation. Moreover, the cd-pipeline-operator requires administrative rights to manage the namespace effectively. For instructions on manually creating a namespace, proceed with the steps outlined below:
+The error highlighted above indicates the necessity for users to manually create a namespace following the `<platform-namespace>-<application-name>-<stage-name>` naming convention prior to stage creation. For instructions on manually creating a namespace, proceed with the steps outlined below:
 
 1. Create the namespace by running the command below:
 
@@ -37,7 +37,7 @@ The error highlighted above indicates the necessity for users to manually create
       The `<platform-namespace>-<application-name>-<stage-name>` format for namespaces is set by default but is not mandatory. You can set your custom namespace when creating an Environment.
     :::
 
-2. Create the administrator RoleBinding resource by applying the file below with the `kubectl apply -f grant_admin_permissions.yaml` command:
+2. Since KubeRocketCI 3.16, skip this step on Kubernetes with `tenancyEngine: none` (the default). Otherwise, create the administrator RoleBinding resource by applying the file below with the `kubectl apply -f grant_admin_permissions.yaml` command:
 
     :::note grant_admin_permissions.yaml
 
@@ -59,13 +59,17 @@ The error highlighted above indicates the necessity for users to manually create
 
     :::
 
-3. Restart the cd-pipeline-operator deployment, to speedup reconciliation.
+The operator then retries the Environment on its own.
 
 ## CD Pipeline Operator RBAC Model
 
 The `manageNamespace` parameter also defines the resources that will be created depending on the cluster deployed whether it is OpenShift or Kubernetes. This scheme displays the nesting of operator input parameters:
 
 ![CD Pipeline Operator Input Parameter Scheme](../../assets/operator-guide/manage-namespace.png)
+
+:::note
+  The scheme predates KubeRocketCI 3.16; for the operator permissions since 3.16, see [Upgrade KubeRocketCI v3.15 to 3.16](../upgrade/upgrade-krci-3.16.md).
+:::
 
 :::note
   When deploying application on the OpenShift cluster, the `registry-view` RoleBinding is created in the main namespace.

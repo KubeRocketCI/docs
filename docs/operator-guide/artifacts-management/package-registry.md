@@ -152,7 +152,7 @@ For example, the following configuration map contains the `settings.xml` file wi
 ### Customizing NPM Settings
 
 A new custom configuration map should contain the `.npmrc-ci`, `.npmrc-publish-snapshots` and `.npmrc-publish-releases` files,
-which override the default npm configuration.
+which override the default npm configuration. Set the `tekton.configs.npmConfigMap` value of the `edp-tekton` chart to its name. Since KubeRocketCI 3.16, pnpm builds also read `.npmrc-ci`.
 
 For example, the following configuration map contains the `.npmrc-ci`, `.npmrc-publish-snapshots` and `.npmrc-publish-releases` files
 with the following settings:
@@ -165,13 +165,13 @@ with the following settings:
 - **Secrets**:
   - `CI_AZURE_DEVOPS_USERNAME` and `CI_AZURE_DEVOPS_PASSWORD_IN_BASE64` - these environment variables are taken from the `package-registries-auth-secret` secret.
 
-:::note Example: custom-npm-settings.yaml
+:::note Example: new-custom-npm-settings.yaml
 
   ```yaml
   apiVersion: v1
   kind: ConfigMap
   metadata:
-    name: custom-npm-settings
+    name: new-custom-npm-settings
   data:
     .npmrc-ci: |
       registry=${NEXUS_HOST_URL}/repository/krci-npm-group
@@ -196,22 +196,21 @@ with the following settings:
 ### Customizing Python Configurations
 
 For customizing python settings, a new configuration map can be prepared to replace the default pythonConfigMap.
-This custom configuration map should contain the PIP_TRUSTED_HOST, PIP_INDEX, PIP_INDEX_URL, REPOSITORY_URL_SNAPSHOTS and REPOSITORY_URL_RELEASES environment variables, which overrides the default python configuration.
+This custom configuration map must contain the `PIP_INDEX_PATH`, `PIP_INDEX_URL_PATH`, `REPOSITORY_SNAPSHOTS_PATH`, and `REPOSITORY_RELEASES_PATH` keys, which the `python` task appends to the `url` of the `ci-nexus` secret. Set the `tekton.configs.pythonConfigMap` value of the `edp-tekton` chart to its name.
 
 For example, the following configuration map contains the following settings:
 
 - **Proxy registry**: Azure DevOps registry.
 - **Snapshots/Releases registry**: Azure DevOps registry.
-- **Authentication**:
-  - 'upBase64' (`"${CI_USERNAME}:${CI_PASSWORD}"` string in base64) - this environment variable is used for authentication to Azure DevOps registry.
+- **Authentication**: the `username` and `password` of the `ci-nexus` secret; in this example, Azure DevOps credentials, with the secret `url` set to `https://pkgs.dev.azure.com`.
 
-:::note Example: custom-python-settings.yaml
+:::note Example: new-custom-python-settings.yaml
 
   ```yaml
   apiVersion: v1
   kind: ConfigMap
   metadata:
-    name: custom-python-settings
+    name: new-custom-python-settings
   data:
     PIP_INDEX_PATH: "/<ORGANIZATION_NAME>/<PROJECT_NAME>/_packaging/<FEED_NAME>/pypi"
     PIP_INDEX_URL_PATH: "/<ORGANIZATION_NAME>/<PROJECT_NAME>/_packaging/<FEED_NAME>/pypi/simple"

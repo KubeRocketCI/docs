@@ -36,10 +36,10 @@ To view the current Git Server, you can open Portal **Configuration** -> **Git S
 
 ## View Authentication Data
 
-To view authentication data that is used to connect to the Git server, click the **eye** icon in the corresponding field or use the `kubectl describe` command as follows:
+To view the authentication data used to connect to the Git server, click the **eye** icon in the corresponding field, or read the Secret that the Git Server names in its `spec.nameSshKeySecret` field:
 
   ```bash
-  kubectl get secret ci-<git_server_name> -n krci -o yaml
+  kubectl get secret "$(kubectl get gitserver <git_server_name> -n krci -o jsonpath='{.spec.nameSshKeySecret}')" -n krci -o yaml
   ```
 
 ## Delete Git Server

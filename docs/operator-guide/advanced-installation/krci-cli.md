@@ -74,7 +74,7 @@ group carries over to the next:
 | Group | Purpose |
 |:-|:-|
 | `auth` | Log in, check session status, log out. |
-| `project` | Inspect registered codebases (applications, libraries, autotests, infrastructures). |
+| `project` | Inspect registered codebases (applications, libraries, autotests, infrastructures), or build a branch with `project build`. |
 | `deployment` | Inspect CD pipelines (CDPipelines) and their deployed state. |
 | `env` | Inspect environments (Stages): health, sync status, quality gates. |
 | `pipelinerun` | Inspect pipeline run history, or start one with `pipelinerun start`. |
@@ -82,9 +82,11 @@ group carries over to the next:
 | `sonar` | Inspect SonarQube projects, quality gates, and issues. |
 | `version` | Print the CLI's own version. |
 
-Almost every command in the CLI is read-only. The one exception is `krci pipelinerun start`, which
-triggers a Tekton pipeline by name, everything else (creating a codebase, editing a CDPipeline, and
-similar) remains the Portal's job.
+Almost every command in the CLI is read-only. The exceptions are `krci pipelinerun start`, which
+triggers a Tekton pipeline by name, and `krci project build` (KubeRocketCI 3.16 or later and krci
+0.15.0 or later), which starts the build pipeline of a project branch like the Portal's **Build**
+button. Everything else (creating a codebase, editing a CDPipeline, and similar) remains the
+Portal's job.
 
 Every data-producing command accepts `-o json` in addition to the default table, so the same output a
 person reads at a glance is also what a script or an AI agent can parse without a separate parser.

@@ -67,14 +67,14 @@ To deploy the platform, follow the steps below:
     helm repo update
     ```
 
-3. Create the `krci` namespace and the `portal-secret` secret. The Portal uses the `SERVER_SECRET` key of this secret to protect user sessions:
+3. Create the `krci` namespace and the `portal-secret` secret. The Portal reads this secret by default, uses its `SERVER_SECRET` key to protect user sessions, and does not start without it:
 
     ```bash
     kubectl create namespace krci
     kubectl create secret generic portal-secret -n krci --from-literal=SERVER_SECRET="$(openssl rand -base64 32)"
     ```
 
-4. Create the `values.yaml` file with the following content:
+4. Create the `values.yaml` file with the following content. The platform chart creates no Ingress by default, so the file enables the Portal Ingress for the NGINX Ingress Controller installed above:
 
     ```yaml title="values.yaml"
     global:
@@ -83,16 +83,9 @@ To deploy the platform, follow the steps below:
 
     krci-portal:
       ingress:
+        # Its host is krci-portal-<namespace>.<dnsWildCard>: krci-portal-krci.127.0.0.1.nip.io
+        enabled: true
         className: nginx
-        # The Portal host is krci-portal-<namespace>.<dnsWildcard>: krci-portal-krci.127.0.0.1.nip.io
-        dnsWildcard: 127.0.0.1.nip.io
-      # The Portal reads its configuration from the portal-secret Secret
-      # and from the portal-config ConfigMap, which the chart renders from configEnv
-      extraEnvFrom:
-        - secretRef:
-            name: portal-secret
-        - configMapRef:
-            name: portal-config
       configEnv:
         # No identity provider is used in this guide,
         # so the Portal offers only the service account token login

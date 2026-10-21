@@ -465,7 +465,7 @@ The capabilities below are the ones most often examined during an access review.
 
 ### Cluster RBAC Resources
 
-RBAC is created in two places. The Helm chart creates the bindings in the platform namespace, and the `cd-pipeline-operator` creates the binding in every environment namespace while reconciling a Stage.
+RBAC is created in two places. The Helm chart creates the bindings in the platform namespace, and the `cd-pipeline-operator` creates the binding in every environment namespace while reconciling a Stage. With the default settings on Kubernetes, the operator can do this only in namespaces with the `app.edp.epam.com/tenant` label, which it sets on the namespaces it creates (see [Environment Creation Issues](../troubleshooting/environment-creation.md)).
 
 Created by the Helm chart in the platform namespace `${platform}`:
 

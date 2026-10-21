@@ -78,7 +78,7 @@ Environments are created the following way:
 
   * **Cluster** - Choose the cluster to deploy the stage in;
   * **Environment name** - Enter the Environment name;
-  * **Deploy Namespace** - Specify the Kubernetes namespace where the resources will be deployed in. By default, this field is pre-populated automatically but keep in mind that the namespace name must be no longer than 63 symbols;
+  * **Deploy Namespace** - Specify the Kubernetes namespace where the resources will be deployed in. By default, this field is pre-populated automatically but keep in mind that the namespace name must be no longer than 63 symbols. With the default platform settings, a namespace that already exists must have the `app.edp.epam.com/tenant` label (see [Environment Creation Issues](../operator-guide/troubleshooting/environment-creation.md));
   * **Description** - Enter the description for this stage;
 
 3. Click **Continue**.

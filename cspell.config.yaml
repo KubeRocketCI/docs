@@ -8,6 +8,7 @@ dictionaries:
 words:
   - AADSTS
   - addopts
+  - admissionregistration
   - adoptopenjdk
   - alnum
   - Anchore
@@ -57,6 +58,7 @@ words:
   - ciuser
   - Civo
   - clastix
+  - clusterbinding
   - clusterissuer
   - clusterkeycloakrealms
   - clusterkeycloaks
@@ -80,6 +82,7 @@ words:
   - commentadded
   - configmap
   - control
+  - Couldnt
   - Coverity
   - Cowork
   - credrequests
@@ -127,6 +130,7 @@ words:
   - eventlistener
   - eventlisteners
   - externalsecret
+  - externalsecrets
   - extrasecrets
   - fasapi
   - fastapi
@@ -159,6 +163,7 @@ words:
   - Grype
   - hadolint
   - harborkeycloakclient
+  - healthz
   - hostedzone
   - Hostnames
   - hotspots
@@ -270,6 +275,7 @@ words:
   - Quarkus
   - rabbitmq
   - rabbitmqctl
+  - readyz
   - recordsummary
   - regcred
   - Rego
@@ -354,6 +360,7 @@ words:
   - userinfo
   - usermodel
   - vacuumdb
+  - validatingadmissionpolicies
   - validatingwebhookconfigurations
   - vcluster
   - velero

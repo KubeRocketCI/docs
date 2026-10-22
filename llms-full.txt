@@ -9139,6 +9139,30 @@ For provision secret using manifest, KubeRocketCI portal or with the externalSec
 
 </Tabs>
 
+## Configure the KubeRocketCI Portal
+
+The KubeRocketCI Portal reads SonarQube data for the **Code Quality** tab of a project and for the SAST pages. It uses its own connection, separate from the `ci-sonarqube` secret that pipelines use.
+
+1. Use a SonarQube token of a user that has the `Browse` and `View Issues` permissions on the projects. The `ci-user` token from the previous section can be used.
+
+2. Set the SonarQube URL in the `krci-portal` values:
+
+    ```yaml
+    krci-portal:
+      configEnv:
+        SONAR_HOST_URL: https://sonarqube.example.com
+        # Optional: browser-facing URL, when it differs from SONAR_HOST_URL
+        SONAR_WEB_URL: https://sonarqube.example.com/
+    ```
+
+3. Add the token to the Portal secret as `SONAR_TOKEN` (see [Create the portal-secret Kubernetes Secret](../upgrade/upgrade-krci-3.13.md#62-create-the-portal-secret-kubernetes-secret)). With the External Secrets Operator, store it under the Portal `eso.secretPath`; change the value in the external store, because the Operator overwrites manual changes of the Secret. Restart the Portal to apply the token.
+
+4. Run a build pipeline for the codebase, then open **Projects** -> *the project* -> **Code Quality** to verify the data. The portal looks up the SonarQube project by the codebase name:
+
+    ![SonarQube Code Quality widget](../../assets/operator-guide/code-quality/sonarqube-widget-working.png "SonarQube Code Quality widget")
+
+If the tab shows `SONAR_HOST_URL environment variable is not configured` or `SONAR_TOKEN environment variable is not configured`, set the missing variable and restart the Portal. If the tab shows `SonarQube upstream failure`, see [SonarQube Upstream Failure](../troubleshooting/sonarqube-upstream-failure.md).
+
 ## Project Analysis Flow
 
 1. SonarQube analysis is seamlessly integrated into KubeRocketCI pipelines, triggered during both review and build pipelines:
@@ -9152,6 +9176,7 @@ For provision secret using manifest, KubeRocketCI portal or with the externalSec
 
 ## Related Articles
 
+* [KubeRocketCI Widgets](../../user-guide/widgets.md)
 * [Publish SonarQube Reports to Pull Requests](sonarqube-pr-decoration.md)
 * [Sonarqube Project Properties for Application](../../user-guide/application-sonarqube-project-properties.md)
 * [Install KubeRocketCI With Values File](../install-kuberocketci.md)
@@ -10091,10 +10116,13 @@ The KubeRocketCI Portal and the `krci sca` CLI commands read Dependency-Track wi
 2. Click **+** in **Permissions** and add:
 
     ```bash
+    VIEW_BADGES
+    VIEW_POLICY_VIOLATION
     VIEW_PORTFOLIO
     VIEW_VULNERABILITY
-    VIEW_POLICY_VIOLATION
     ```
+
+    ![Dependency-Track portal team permissions](../../assets/operator-guide/devsecops/dependency-track-portal-team-permissions.png "Dependency-Track portal team permissions")
 
 3. Click **+** in **API keys** to create an API key for the team.
 
@@ -10110,10 +10138,27 @@ The KubeRocketCI Portal and the `krci sca` CLI commands read Dependency-Track wi
 
 5. Add the API key to the Portal secret as `DEPENDENCY_TRACK_API_KEY` (see [Create the portal-secret Kubernetes Secret](../upgrade/upgrade-krci-3.13.md#62-create-the-portal-secret-kubernetes-secret)). With the External Secrets Operator, store it under the Portal `eso.secretPath`. Restart the Portal to apply the key.
 
-6. Verify the integration: `krci sca list` lists the Dependency-Track projects, and `krci sca findings <codebase>` lists the findings of a codebase after its first security scan.
+6. Open **Projects** -> *the project* -> **Dependencies** to verify the widget. The portal looks up the Dependency-Track project by the codebase name and the default branch as the project version, so a [security pipeline](../../user-guide/tekton-pipelines.md#security-test-and-release-pipeline) must run for the default branch first and upload the SBOM. Build and review pipelines do not upload SBOMs. If the tab shows `DEPENDENCY_TRACK_URL environment variable is not configured` or `DEPENDENCY_TRACK_API_KEY environment variable is not configured`, set the missing variable and restart the Portal. For other errors, see [Dependency-Track Project Not Found](../troubleshooting/dependency-track-project-not-found.md) and [Dependencies Tab Shows Zero Vulnerabilities](../troubleshooting/dependency-track-zero-vulnerabilities.md).
+
+    ![Dependency-Track Dependencies widget](../../assets/operator-guide/devsecops/dependency-track-widget-working.png "Dependency-Track Dependencies widget")
+
+7. Verify the integration: `krci sca list` lists the Dependency-Track projects, and `krci sca findings <codebase>` lists the findings of a codebase after its first security scan.
+
+## Enable Vulnerability Analysis
+
+Dependency-Track shows vulnerabilities only when an analyzer matches the components of an SBOM with known vulnerabilities. Without a working analyzer, the **Dependencies** tab shows the components but zero vulnerabilities.
+
+1. Open **Administration** -> **Analyzers** and make sure that the **Internal** analyzer is enabled.
+
+2. Enable the **Sonatype OSS Index** analyzer and fill in the **Registered email address** and **API token** fields. Create the token in your Sonatype account on the [Sonatype Guide token page](https://guide.sonatype.com/settings/tokens).
+
+3. Run a [security pipeline](../../user-guide/tekton-pipelines.md#security-test-and-release-pipeline) for a codebase and open its **Dependencies** tab after a few minutes. The analysis runs asynchronously.
+
+If the vulnerabilities do not appear, see [Dependencies Tab Shows Zero Vulnerabilities](../troubleshooting/dependency-track-zero-vulnerabilities.md).
 
 ## Related Articles
 
+* [KubeRocketCI Widgets](../../user-guide/widgets.md)
 * [Install External Secrets Operator](../secrets-management/install-external-secrets-operator.md)
 * [External Secrets Operator Integration](../secrets-management/external-secrets-operator-integration.md)
 * [Cluster Add-Ons Overview](../add-ons-overview.md)
@@ -19799,6 +19844,97 @@ The user credentials are incorrect.
 
 ---
 
+## Dependency-Track Project Not Found
+
+<!-- markdownlint-disable MD025 -->
+
+# Dependency-Track Project Not Found
+
+<head>
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/troubleshooting/dependency-track-project-not-found" />
+</head>
+
+This troubleshooting page covers the error on the **Dependencies** tab of a project in the KubeRocketCI portal.
+
+## Problem
+
+The **Dependencies** tab shows `Failed to load DependencyTrack data` and `project <codebase> (version: <branch>) not found`:
+
+  ![Dependency-Track project not found](../../assets/operator-guide/troubleshooting/dependency-track-widget-project-not-found.png "Dependency-Track project not found")
+
+## Cause
+
+Dependency-Track has no project with the codebase name and the default branch as a version. The portal looks up the project by this pair. Dependency-Track receives the SBOM only from the [security pipeline](../../user-guide/tekton-pipelines.md#security-test-and-release-pipeline). Build and review pipelines do not upload it.
+
+## Solution
+
+1. Run a [security pipeline](../../user-guide/tekton-pipelines.md#security-test-and-release-pipeline) for the codebase on its default branch.
+
+2. Check that the `ci-dependency-track` secret exists and is not empty. Without it, the SBOM upload step is skipped.
+
+3. In Dependency-Track, open **Projects** and check that the project name equals the codebase name and the version equals the default branch, for example `my-app` and `main`.
+
+## Related Articles
+
+* [KubeRocketCI Widgets](../../user-guide/widgets.md)
+* [Integrate Dependency-Track](../devsecops/dependency-track.md)
+* [Security Scanning Pipelines](../devsecops/security-pipelines.md)
+
+---
+
+## Dependencies Tab Shows Zero Vulnerabilities
+
+<!-- markdownlint-disable MD025 -->
+
+# Dependencies Tab Shows Zero Vulnerabilities
+
+<head>
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/troubleshooting/dependency-track-zero-vulnerabilities" />
+</head>
+
+This troubleshooting page covers the missing vulnerabilities on the **Dependencies** tab of a project in the KubeRocketCI portal.
+
+## Problem
+
+The **Dependencies** tab shows components, but all vulnerability counters are `0` although the project uses vulnerable libraries:
+
+  ![Dependency-Track widget with zero vulnerabilities](../../assets/operator-guide/troubleshooting/dependency-track-widget-zero-vulnerabilities.png "Dependency-Track widget with zero vulnerabilities")
+
+## Cause
+
+The SBOM is uploaded, but Dependency-Track has no working analyzer to match the components with known vulnerabilities. For example, the OSS Index analyzer is enabled but its API token cannot be decrypted, so the analyzer is skipped. The Dependency-Track log contains the following error:
+
+```text
+ERROR [OssIndexAnalysisTask] An error occurred decrypting the OSS Index API Token; Skipping
+```
+
+The message appears when the token was encrypted with a different key than the one the server uses now.
+
+:::note
+The vulnerability analysis runs asynchronously. Right after the upload, the counters can stay `0` for a few minutes.
+:::
+
+## Solution
+
+1. Check the Dependency-Track log:
+
+    ```bash
+    kubectl -n <dependency-track-namespace> logs <api-server-pod> | grep OssIndexAnalysisTask
+    ```
+
+2. In Dependency-Track, open **Administration** -> **Analyzers**. Make sure that the **Internal** analyzer and at least one source of vulnerabilities are enabled. Changing these settings requires administrator permissions in Dependency-Track.
+
+3. If the OSS Index analyzer logs the decryption error, enter the **Registered email address** and **API token** again and save the settings. Create the token in your Sonatype account on the [Sonatype Guide token page](https://guide.sonatype.com/settings/tokens).
+
+4. Run the [security pipeline](../../user-guide/tekton-pipelines.md#security-test-and-release-pipeline) for the codebase again and open the **Dependencies** tab after a few minutes.
+
+## Related Articles
+
+* [KubeRocketCI Widgets](../../user-guide/widgets.md)
+* [Integrate Dependency-Track](../devsecops/dependency-track.md)
+
+---
+
 ## Environment Creation Issues
 
 <!-- markdownlint-disable MD025 -->
@@ -20042,6 +20178,9 @@ Currently, this section covers the following issues:
 - [Forbidden Messages on the Overview Page](forbidden-messages.md)
 - [Review Pipeline is Failed](review-pipeline-is-failed.md)
 - [Modify GitOps Repository Path](modify-gitops-repo-path.md)
+- [SonarQube Upstream Failure](sonarqube-upstream-failure.md)
+- [Dependency-Track Project Not Found](dependency-track-project-not-found.md)
+- [Dependencies Tab Shows Zero Vulnerabilities](dependency-track-zero-vulnerabilities.md)
 
 ---
 
@@ -20080,6 +20219,95 @@ This error occurs because SonarQube does not have complete source code data and 
 ## Related Articles
 
 * [Create Application](../../quick-start/create-application.md)
+* [SonarQube Integration](../code-quality/sonarqube.md)
+
+---
+
+## SonarQube Upstream Failure
+
+<!-- markdownlint-disable MD025 -->
+
+# SonarQube Upstream Failure
+
+<head>
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/troubleshooting/sonarqube-upstream-failure" />
+</head>
+
+This troubleshooting page covers the error on the **Code Quality** tab of a project in the KubeRocketCI portal.
+
+## Problem
+
+The **Code Quality** tab shows `Failed to load SonarQube data` and `SonarQube upstream failure for <codebase>`:
+
+  ![SonarQube upstream failure](../../assets/operator-guide/troubleshooting/sonarqube-widget-upstream-failure.png "SonarQube upstream failure")
+
+## Cause
+
+The portal reads SonarQube with its own credentials, separate from the `ci-sonarqube` secret that pipelines use. The portal sent a request to SonarQube and did not get a valid answer. Typical reasons are:
+
+| Reason | Description |
+|--------|-------------|
+| Invalid or expired token | The `SONAR_TOKEN` of the portal is wrong, expired, or revoked. SonarQube answers with the `401` status. |
+| Insufficient permissions | The token user lacks the `Browse` and `View Issues` permissions on the project. SonarQube answers with the `403` status. |
+| Wrong URL or network problem | The `SONAR_HOST_URL` is wrong, or a TLS, DNS, or network policy problem blocks the connection. |
+
+:::note
+If SonarQube is reachable but has no project with the codebase name as a key, the tab shows `project <codebase> not found` instead. In this case, run a build pipeline for the codebase.
+:::
+
+## Solution
+
+1. Find the real reason in the portal log:
+
+    ```bash
+    kubectl logs -n <krci-namespace> deploy/krci-portal | grep "\[SonarQube\]"
+    ```
+
+2. Send the same request from the portal pod. The portal image has no `curl`, so use `node`:
+
+    ```bash
+    kubectl -n <krci-namespace> exec deploy/krci-portal -- node -e '
+    const base = (process.env.SONAR_HOST_URL || "").replace(/\/+$/, "");
+    console.log("SONAR_HOST_URL:", base || "(empty)", "| token set:", !!process.env.SONAR_TOKEN);
+    fetch(base + "/api/components/show?component=<codebase>", {
+      headers: { Authorization: "Basic " + Buffer.from(process.env.SONAR_TOKEN + ":").toString("base64") },
+      signal: AbortSignal.timeout(10000),
+    }).then(async r => console.log(r.status, (await r.text()).slice(0, 300)))
+      .catch(e => console.log("ERROR:", e.cause?.code || e.message));
+    '
+    ```
+
+    The command prints the portal URL, whether a token is set, and the answer of SonarQube. Use the HTTP status to find the cause:
+
+    | Status | Meaning |
+    |--------|---------|
+    | `200` | SonarQube and the token are fine. Check the portal log for another reason. |
+    | `401` | The token is invalid or expired. Generate a new token and replace it. |
+    | `403` | The token user lacks the `Browse` or `View Issues` permission on the project. |
+    | `404` | SonarQube has no project with this key. |
+    | Network error | Check the URL, DNS, TLS, and network policies between the portal and SonarQube. |
+
+3. Replace the token. Generate a new one as described in [Configuration SonarQube ci-user](../code-quality/sonarqube.md#configuration-sonarqube-ci-user-without-sonar-operator), and update `SONAR_TOKEN`:
+    - If the `portal-secret` Secret is created manually, update the `SONAR_TOKEN` key in it.
+    - If the Secret is managed by the External Secrets Operator, update the value in the external store under the Portal `eso.secretPath`. The Operator overwrites manual changes of the Secret. To apply the new value without waiting for the refresh interval, run:
+
+        ```bash
+        kubectl -n <krci-namespace> annotate externalsecret portal-secret force-sync=$(date +%s) --overwrite
+        ```
+
+        :::warning
+        Do not delete the `ExternalSecret` resource. The Secret it creates is removed together with it, and the portal loses all its secret values.
+        :::
+
+4. Restart the portal to apply the new token and open the tab again:
+
+    ```bash
+    kubectl -n <krci-namespace> rollout restart deploy/krci-portal
+    ```
+
+## Related Articles
+
+* [KubeRocketCI Widgets](../../user-guide/widgets.md)
 * [SonarQube Integration](../code-quality/sonarqube.md)
 
 ---
@@ -35738,22 +35966,34 @@ Additionally, users can track any specific application status and deployed versi
 
 ## SonarQube & Dependency-Track Widgets
 
-KubeRocketCI also offers widgets to track codebases' code quality directly from the KubeRocketCI portal. These widgets pull codebase-related data from SonarQube and Dependency-Track tools.
+KubeRocketCI also offers widgets to track codebases' code quality directly from the KubeRocketCI portal. These widgets pull codebase-related data from SonarQube and Dependency-Track tools. To view them, open **Projects**, select a project, and open the following tabs:
 
-To enable these widgets, you need to pass the following steps:
+* **Code Quality** — SonarQube quality gate status and metrics for the project.
+* **Dependencies** — Dependency-Track vulnerability metrics and findings for the project.
 
-1. Integrate platform with [SonarQube](../operator-guide/code-quality/sonarqube.md) and/or [Dependency-Track](../operator-guide/devsecops/dependency-track.md).
-2. Trigger the review pipeline in a codebase, allowing SonarQube and Dependency-Track to scan your code.
+The widgets use a separate connection from the one that pipelines use. Pipelines upload scan results with the `ci-sonarqube` and `ci-dependency-track` secrets. The portal reads the results back with its own credentials, which you configure in the portal deployment. Integrating the tools with pipelines is therefore not enough for the widgets to work.
+
+To enable these widgets, complete the following steps:
+
+1. Integrate the platform with [SonarQube](../operator-guide/code-quality/sonarqube.md) and/or [Dependency-Track](../operator-guide/devsecops/dependency-track.md) so that pipelines can upload scan results.
+2. Configure the portal to read the results:
+    * SonarQube: set `SONAR_HOST_URL` and `SONAR_TOKEN`. See [Configure the KubeRocketCI Portal](../operator-guide/code-quality/sonarqube.md#configure-the-kuberocketci-portal).
+    * Dependency-Track: set `DEPENDENCY_TRACK_URL` and `DEPENDENCY_TRACK_API_KEY`, and grant the API key team the required permissions. See [Configure the KubeRocketCI Portal](../operator-guide/devsecops/dependency-track.md#configure-the-kuberocketci-portal).
+3. Run the pipelines that feed each widget:
+    * **Code Quality** — run a build pipeline for the codebase. The SonarQube scan is part of the build and review pipelines.
+    * **Dependencies** — run a [security pipeline](./tekton-pipelines.md#security-test-and-release-pipeline) for the codebase. It generates the SBOM and uploads it to Dependency-Track. Build and review pipelines do not upload SBOMs.
 
 :::note
-At least one build pipeline must be run for the codebase to activate the widgets.
+At least one successful run of the corresponding pipeline is required for the widget to show data.
 :::
 
-3. Verify the widgets started working for the codebase.
+4. Open the **Code Quality** and **Dependencies** tabs of the project and verify that the data is displayed.
 
 :::note
-The SonarQube and Dependency-Track widgets only track the default branch.
+The SonarQube and Dependency-Track widgets only track the default branch. Dependency-Track looks up the project by the codebase name and the default branch name as the project version, for example `my-app` and `main`.
 :::
+
+If a widget shows an error or zero vulnerabilities, refer to the following troubleshooting pages: [SonarQube Upstream Failure](../operator-guide/troubleshooting/sonarqube-upstream-failure.md), [Dependency-Track Project Not Found](../operator-guide/troubleshooting/dependency-track-project-not-found.md), and [Dependencies Tab Shows Zero Vulnerabilities](../operator-guide/troubleshooting/dependency-track-zero-vulnerabilities.md).
 
 ## Resource Quota Widget
 

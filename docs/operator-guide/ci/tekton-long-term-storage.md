@@ -113,6 +113,79 @@ The retention policy agent removes only database records from PostgreSQL. It doe
 In this example, the PGO (PostgreSQL Operator) is used for the Tekton Results database. 
 :::
 
+## Authentication and TLS
+
+From KubeRocketCI 3.16.1, the [results.yaml](https://github.com/epam/edp-cluster-add-ons/blob/main/clusters/core/addons/tekton/results.yaml) manifest turns on authentication and TLS for the Tekton Results API (`tekton-results-api-service` in `tekton-pipelines`, port `8080`):
+
+- **Authentication.** The API validates each bearer token (TokenReview) and authorizes each request with Kubernetes RBAC on the `results.tekton.dev` API group, per namespace (SubjectAccessReview). The `tekton-results-readonly` ClusterRole grants read access to results, records, logs, and summaries, and aggregates to the `view` and `edit` ClusterRoles.
+- **TLS.** cert-manager issues the certificates, so it must be installed first. A self-signed CA (`tekton-results-ca`, valid for 5 years) signs the 1-year serving certificate in the `tekton-results-tls` Secret, which holds `tls.crt`, `tls.key`, and `ca.crt`. The watcher connects over TLS with its ServiceAccount token. The metrics port `9090` stays plain HTTP.
+
+:::warning
+Clients that call the API over `http://` get `400 Client sent an HTTP request to an HTTPS server`. Until the portal is configured as shown below, it shows no pipeline history, logs, or metrics from Tekton Results.
+:::
+
+### Configure the Portal for the Tekton Results API
+
+With an `https://` URL, the portal authenticates to the API with its own ServiceAccount token, never with the token of the signed-in user.
+
+1. Copy the public CA certificate to a ConfigMap in the platform namespace:
+
+    ```bash
+    kubectl -n tekton-pipelines get secret tekton-results-tls -o jsonpath='{.data.ca\.crt}' | base64 -d > ca.crt
+    kubectl -n <platform-namespace> create configmap tekton-results-ca --from-file=ca.crt=ca.crt
+    ```
+
+    :::warning
+    Copy only `ca.crt`. Never copy the `tekton-results-ca-key-pair` Secret: it holds the CA private key.
+    :::
+
+2. Set the portal values under the `krci-portal` key of the `edp-install` values. If you already set `volumes` or `volumeMounts`, add these items to your lists:
+
+    ```yaml title="edp-install values.yaml"
+    krci-portal:
+      configEnv:
+        TEKTON_RESULTS_URL: https://tekton-results-api-service.tekton-pipelines.svc:8080
+        NODE_EXTRA_CA_CERTS: /etc/tekton-results-ca/ca.crt
+      volumes:
+        - name: tekton-results-ca
+          configMap:
+            name: tekton-results-ca
+      volumeMounts:
+        - name: tekton-results-ca
+          mountPath: /etc/tekton-results-ca
+          readOnly: true
+      tektonResults:
+        rbac:
+          enabled: true
+    ```
+
+    `tektonResults.rbac.enabled` binds the portal ServiceAccount to `tekton-results-readonly` in the platform namespace. The chart fails to render if the ServiceAccount is `default` or `serviceAccount.automount` is `false`; keep the default `true`.
+
+Limitations:
+
+- The portal reads Tekton Results of the platform namespace only.
+- Every portal user can read the Tekton Results of the platform namespace through the portal. For the access model, see [Sensitive Capabilities](../auth/platform-auth-model.md#sensitive-capabilities).
+
+### Certificate Renewal
+
+- cert-manager renews the serving certificate about every 11 months, but the API and the watcher read it only at startup. After each renewal, restart both:
+
+    ```bash
+    kubectl -n tekton-pipelines rollout restart deploy/tekton-results-api deploy/tekton-results-watcher
+    ```
+
+- cert-manager renews the CA at about two-thirds of its lifetime with a new private key. The serving certificate keeps the old CA until it is issued again. After a CA renewal, issue the serving certificate again, restart the API and the watcher, then update the portal ConfigMap and restart the portal:
+
+    ```bash
+    kubectl -n tekton-pipelines delete secret tekton-results-tls
+    kubectl -n tekton-pipelines wait certificate tekton-results-serving-cert --for=condition=Ready --timeout=120s
+    kubectl -n tekton-pipelines rollout restart deploy/tekton-results-api deploy/tekton-results-watcher
+    kubectl -n tekton-pipelines get secret tekton-results-tls -o jsonpath='{.data.ca\.crt}' | base64 -d > ca.crt
+    kubectl -n <platform-namespace> create configmap tekton-results-ca --from-file=ca.crt=ca.crt \
+      --dry-run=client -o yaml | kubectl apply -f -
+    kubectl -n <platform-namespace> rollout restart deploy/krci-portal
+    ```
+
 ## Database Performance Indexes
 
 Tekton Results creates its schema through GORM auto-migration, which adds no indexes beyond the primary keys. As the

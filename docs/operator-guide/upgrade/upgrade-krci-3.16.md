@@ -28,7 +28,7 @@ import TabItem from '@theme/TabItem';
 Follow these steps to upgrade KubeRocketCI from version 3.15 to 3.16.
 
 :::important
-Before upgrading, back up the KubeRocketCI environment and review every `(Required)` step and the [Breaking Changes and Deprecations](#step-15-informational-breaking-changes-and-deprecations) summary.
+Before upgrading, back up the KubeRocketCI environment and review every `(Required)` step and the [Breaking Changes and Deprecations](#step-16-informational-breaking-changes-and-deprecations) summary.
 :::
 
 :::note
@@ -161,7 +161,38 @@ for ns in $UNLABELLED; do
 done
 ```
 
-## Step 4. (Required if applicable) Enable the Portal Ingress and Check the Portal Secret (edp-install)
+## Step 4. (Required) Enable Authentication and TLS for Tekton Results (edp-cluster-add-ons, krci-portal)
+
+3.16.1 turns on authentication and TLS for the Tekton Results API in the `edp-cluster-add-ons` [results.yaml](https://github.com/epam/edp-cluster-add-ons/blob/main/clusters/core/addons/tekton/results.yaml) manifest; cert-manager issues its certificates and must be installed. Once a cluster applies the updated manifest, clients that call the API over `http://` get `400 Client sent an HTTP request to an HTTPS server`, and the portal shows no pipeline history, logs, or metrics from Tekton Results. For details, see [Authentication and TLS](../ci/tekton-long-term-storage.md#authentication-and-tls).
+
+Copy only the public `ca.crt` to a ConfigMap in the platform namespace; never copy the `tekton-results-ca-key-pair` Secret, which holds the CA private key. Create the ConfigMap before the portal upgrade, or the portal pod does not start:
+
+```bash title="Create the Tekton Results CA ConfigMap"
+kubectl -n tekton-pipelines get secret tekton-results-tls -o jsonpath='{.data.ca\.crt}' | base64 -d > ca.crt
+kubectl -n <namespace> create configmap tekton-results-ca --from-file=ca.crt=ca.crt
+```
+
+Then point the portal to the HTTPS endpoint and let its ServiceAccount read Tekton Results. If you already set `krci-portal.volumes` or `krci-portal.volumeMounts`, add these items to your lists:
+
+```yaml title="edp-install values.yaml"
+krci-portal:
+  configEnv:
+    TEKTON_RESULTS_URL: https://tekton-results-api-service.tekton-pipelines.svc:8080
+    NODE_EXTRA_CA_CERTS: /etc/tekton-results-ca/ca.crt
+  volumes:
+    - name: tekton-results-ca
+      configMap:
+        name: tekton-results-ca
+  volumeMounts:
+    - name: tekton-results-ca
+      mountPath: /etc/tekton-results-ca
+      readOnly: true
+  tektonResults:
+    rbac:
+      enabled: true
+```
+
+## Step 5. (Required if applicable) Enable the Portal Ingress and Check the Portal Secret (edp-install)
 
 **a. The portal Ingress is now disabled by default** (`edp-install` 3.13–3.15 enabled it). Unless your values set `krci-portal.ingress.enabled: true`, the upgrade deletes the `krci-portal` Ingress: the portal is no longer served at `https://krci-portal-<namespace>.<dnsWildcard>`, but pipeline links in pull request comments and PipelineRun URLs still point there. You are not affected if the portal is served through `krci-portal.httproute` or if you use the `edp-cluster-add-ons` values, which set `enabled: false` explicitly.
 
@@ -193,7 +224,7 @@ kubectl get secret portal-secret -n <namespace> \
 
 If the Secret is missing, create it as described in [Install KubeRocketCI](../install-kuberocketci.md). With OIDC, it also holds `OIDC_CLIENT_SECRET` (see [Portal OIDC Configuration](../auth/ui-portal-oidc.md)).
 
-## Step 5. (Required if applicable) Check GitFusion Probe Overrides (gitfusion)
+## Step 6. (Required if applicable) Check GitFusion Probe Overrides (gitfusion)
 
 In the `gitfusion` 0.7.0 chart, `livenessProbe` and `readinessProbe` default to `httpGet` on `/healthz` instead of `tcpSocket`, and the readiness probe no longer waits 20 seconds (`initialDelaySeconds`). Helm merges your `gitfusion.livenessProbe` and `gitfusion.readinessProbe` overrides into these defaults, so an override that sets `tcpSocket`, `exec`, or `grpc` gives the probe two handlers, and the upgrade fails with `may not specify more than 1 handler type`.
 
@@ -205,7 +236,7 @@ helm get values <release-name> -n <namespace> -o json | jq '.gitfusion | {livene
 
 Remove such handlers from your overrides; the chart's HTTP probe replaces them. Overrides that only tune timing (`initialDelaySeconds`, `periodSeconds`, `timeoutSeconds`, `failureThreshold`) need no change.
 
-## Step 6. (Required if applicable) Review External Secrets for Environments (edp-cd-pipeline-operator)
+## Step 7. (Required if applicable) Review External Secrets for Environments (edp-cd-pipeline-operator)
 
 This step applies only if `cd-pipeline-operator.secretManager` is `eso`. The `edp-system` SecretStore that the operator creates in each Environment namespace now reads only the `regcred` Secret of the platform namespace; in 3.15, it read every Secret there. ExternalSecrets that read other Secrets through `edp-system` stop syncing after the upgrade. Find them and move them to their own SecretStore, as described in [Secured Secrets Management for Application Deployment](../../use-cases/external-secrets.md):
 
@@ -229,7 +260,7 @@ comm -23 \
       -o jsonpath='{range .items[*]}{.spec.namespace}{"\n"}{end}' | sort -u)
 ```
 
-## Step 7. (Required if applicable) Check the pnpm, Python, and .NET Build Settings (edp-tekton)
+## Step 8. (Required if applicable) Check the pnpm, Python, and .NET Build Settings (edp-tekton)
 
 `edp-tekton` 0.28.0 changes three build paths that can make builds fail after the upgrade. Installations without pnpm codebases, an overridden Python settings ConfigMap, or .NET builds need no action.
 
@@ -257,7 +288,7 @@ data:
 - Git tags and image tags do not change, and builds started before 10:00 by the build pod's clock no longer fail with `MSB4018`.
 - Tell .NET teams that packages published before the upgrade have a higher major version (for example, `20261021`) than the new ones, so consumers that float to the latest version keep resolving the old packages.
 
-## Step 8. (Required if applicable) GitFusion API Errors and Repository Lists (gitfusion)
+## Step 9. (Required if applicable) GitFusion API Errors and Repository Lists (gitfusion)
 
 Only your own GitFusion API clients need an update: the 3.16 portal handles the new responses and shows the request ID with each error.
 
@@ -274,7 +305,7 @@ Repository lists also change, with no action needed:
 - **GitHub repositories of the token user.** When the owner selected in the portal is the GitHub token user, GitFusion also lists that user's private repositories; other user accounts still show only public repositories.
 - **GitLab groups with more than 100 projects.** The repository list of such a group now loads completely; in 3.15, the request timed out.
 
-## Step 9. (Required if applicable) Codebase Deletion Waits for Deployment Deletion (edp-codebase-operator)
+## Step 10. (Required if applicable) Codebase Deletion Waits for Deployment Deletion (edp-codebase-operator)
 
 `edp-codebase-operator` 2.36.0 treats a deployment (CDPipeline) that is being deleted as still using its codebases. Until it is gone, deleting a Codebase or CodebaseBranch that it references fails with a `403` error that names the deployment and, when every referencing deployment is being deleted, asks you to wait, for example:
 
@@ -284,9 +315,9 @@ Codebase app cannot be deleted because it is used by CDPipeline demo (applicatio
 
 Scripts that delete a deployment and then its codebases must wait until the CDPipeline is gone, for example with `kubectl wait --for=delete cdpipeline/<name> -n <namespace> --timeout=10m`. The stale-branch cleanup of a Codebase with the `app.edp.epam.com/branch-cleanup-strategy: auto` annotation also keeps branches that such a CDPipeline still references.
 
-## Step 10. (Recommended) Remove RBAC Objects That the Charts No Longer Render (edp-cluster-add-ons)
+## Step 11. (Recommended) Remove RBAC Objects That the Charts No Longer Render (edp-cluster-add-ons)
 
-The 3.16 charts no longer render these objects (see [Step 11](#step-11-informational-least-privilege-rbac-for-platform-components)):
+The 3.16 charts no longer render these objects (see [Step 12](#step-12-informational-least-privilege-rbac-for-platform-components)):
 
 | Object | Kind | Granted |
 | ------ | ---- | ------- |
@@ -297,16 +328,16 @@ The 3.16 charts no longer render these objects (see [Step 11](#step-11-informati
 
 `helm upgrade` deletes them. Argo CD deletes them only in a sync with **Prune** enabled; until then, nothing breaks, but the components keep their 3.15 permissions.
 
-## Step 11. (Informational) Least-Privilege RBAC for Platform Components
+## Step 12. (Informational) Least-Privilege RBAC for Platform Components
 
-3.16 cuts most permissions of the platform components down to the calls they make. Apart from Steps 3 and 6, platform functions keep working without value changes; custom automation that used these ServiceAccounts needs its own Role.
+3.16 cuts most permissions of the platform components down to the calls they make. Apart from Steps 3 and 7, platform functions keep working without value changes; custom automation that used these ServiceAccounts needs its own Role.
 
 - **`edp-codebase-operator` 2.36.0:** the operator runs with the `edp-codebase-operator` Role and RoleBinding in the platform namespace instead of the `admin` ClusterRole, and its chart creates no cluster-scoped RBAC. It can create only PipelineRuns from a TriggerTemplate, so a custom deploy TriggerTemplate must create PipelineRuns.
 - **`edp-cd-pipeline-operator` 2.33.1:** the operator no longer holds the `admin` ClusterRole in every namespace. On Kubernetes with `tenancyEngine: none`, the chart grants the permissions that the operator uses in Environment namespaces, and the admission policy from [Step 3](#step-3-required-label-environment-namespaces-created-outside-the-platform-edp-cd-pipeline-operator) limits them to labelled namespaces (with `manageNamespace: false`, no policy limits them). The operator now uses leader election (Lease `edp-cd-pipeline-operator-lock` in the platform namespace) and, with webhooks enabled, becomes ready only when its webhook server serves TLS.
 - **`gitfusion` 0.7.0:** the `gitfusion-role` Role grants `get` on Secrets and `get` and `list` on GitServers.
 - **`edp-tekton` 0.28.0:** the EventListener ServiceAccount `tekton-triggers-sa-<namespace>` no longer reads Secrets; its `edp-tekton-eventlistener-<namespace>` ClusterRole only reads ClusterTriggerBindings and ClusterInterceptors. Webhooks and [custom Tekton triggers](../../user-guide/customize-ci-triggers.md) keep working: the GitHub, GitLab, and Bitbucket interceptors of Tekton Triggers read the webhook secrets under their own ServiceAccount.
 
-## Step 12. (Optional) New Tekton Task Parameters (edp-tekton)
+## Step 13. (Optional) New Tekton Task Parameters (edp-tekton)
 
 Library pipelines do not pass these parameters; use them in custom pipelines. The `save-cache` and `gitlab-set-status` defaults keep the previous behavior, and the `npm` default now also applies to the publish steps of npm and pnpm build pipelines:
 
@@ -330,12 +361,12 @@ Library pipelines do not pass these parameters; use them in custom pipelines. Th
       subPath: cache
 ```
 
-## Step 13. (Informational) Pipeline Behavior Changes (edp-tekton)
+## Step 14. (Informational) Pipeline Behavior Changes (edp-tekton)
 
 - **Security scans succeed without DefectDojo.** Without the `ci-defectdojo` Secret, `<git-provider>-security-scan` PipelineRuns used to end `Failed` with `CouldntGetPipelineResult`, although every task succeeded. Now they succeed, with an empty `SCAN_REPORT_URL` result.
 - **Review reports: once per run, none for cancelled runs.** The Tekton reporter publishes the report of a finished GitHub, GitLab, or Bitbucket review PipelineRun once; before, it could post it twice. Cancelled or stopped runs (superseded with `edp-tekton.pipelines.cancelInProgress: true`, stopped in the portal, or cancelled with `kubectl`) get no report and the `app.edp.epam.com/pipeline-reported: skipped` annotation; commit statuses are unchanged. **Run again** and **Run with params** in the portal no longer copy this annotation, so re-runs are reported.
 
-## Step 14. (Informational) New Portal Capabilities (krci-portal)
+## Step 15. (Informational) New Portal Capabilities (krci-portal)
 
 `krci-portal` 0.9.0 adds these changes; none of them requires action:
 
@@ -348,19 +379,20 @@ Library pipelines do not pass these parameters; use them in custom pipelines. Th
 - **Tables and metrics:** columns can be resized, and the **Pipeline Metrics** page keeps the selected codebase and time range in its URL.
 - **Libraries:** Next.js is offered as a JavaScript framework.
 
-## Step 15. (Informational) Breaking Changes and Deprecations
+## Step 16. (Informational) Breaking Changes and Deprecations
 
 - With the default values, Kubernetes 1.30 or later is required — see [Step 1](#step-1-required-verify-prerequisites).
 - Developers have read-only access to Tekton Pipelines, Tasks, TaskRuns, Triggers, and TriggerBindings in the platform namespace, and the portal **Stop** action requires `patch` on PipelineRuns — see [Step 2](#step-2-required-review-developer-permissions-for-tekton-resources-edp-install).
 - On Kubernetes with the default values, Environments whose namespace has no `app.edp.epam.com/tenant` label fail — see [Step 3](#step-3-required-label-environment-namespaces-created-outside-the-platform-edp-cd-pipeline-operator).
-- `edp-install` no longer enables the portal Ingress, and the portal reads `portal-secret` by default — see [Step 4](#step-4-required-if-applicable-enable-the-portal-ingress-and-check-the-portal-secret-edp-install).
-- GitFusion probe overrides that set `tcpSocket`, `exec`, or `grpc` fail the upgrade — see [Step 5](#step-5-required-if-applicable-check-gitfusion-probe-overrides-gitfusion).
-- With `secretManager: eso`, the `edp-system` SecretStore of each Environment reads only the `regcred` Secret — see [Step 6](#step-6-required-if-applicable-review-external-secrets-for-environments-edp-cd-pipeline-operator).
-- pnpm builds install through the registry of the npm settings ConfigMap, an overridden Python settings ConfigMap must exist and hold all four keys, and .NET builds with default versioning fail without a `<Version>` in the deployable `.csproj` — see [Step 7](#step-7-required-if-applicable-check-the-pnpm-python-and-net-build-settings-edp-tekton).
-- Custom GitFusion API clients must handle the new error format and status codes — see [Step 8](#step-8-required-if-applicable-gitfusion-api-errors-and-repository-lists-gitfusion).
-- Scripts that delete a deployment and then its codebases must wait until the deployment is gone — see [Step 9](#step-9-required-if-applicable-codebase-deletion-waits-for-deployment-deletion-edp-codebase-operator).
+- From 3.16.1, the Tekton Results API of `edp-cluster-add-ons` requires authentication and TLS, so the portal needs an `https://` URL, the CA certificate, and RBAC to show pipeline history and logs — see [Step 4](#step-4-required-enable-authentication-and-tls-for-tekton-results-edp-cluster-add-ons-krci-portal).
+- `edp-install` no longer enables the portal Ingress, and the portal reads `portal-secret` by default — see [Step 5](#step-5-required-if-applicable-enable-the-portal-ingress-and-check-the-portal-secret-edp-install).
+- GitFusion probe overrides that set `tcpSocket`, `exec`, or `grpc` fail the upgrade — see [Step 6](#step-6-required-if-applicable-check-gitfusion-probe-overrides-gitfusion).
+- With `secretManager: eso`, the `edp-system` SecretStore of each Environment reads only the `regcred` Secret — see [Step 7](#step-7-required-if-applicable-review-external-secrets-for-environments-edp-cd-pipeline-operator).
+- pnpm builds install through the registry of the npm settings ConfigMap, an overridden Python settings ConfigMap must exist and hold all four keys, and .NET builds with default versioning fail without a `<Version>` in the deployable `.csproj` — see [Step 8](#step-8-required-if-applicable-check-the-pnpm-python-and-net-build-settings-edp-tekton).
+- Custom GitFusion API clients must handle the new error format and status codes — see [Step 9](#step-9-required-if-applicable-gitfusion-api-errors-and-repository-lists-gitfusion).
+- Scripts that delete a deployment and then its codebases must wait until the deployment is gone — see [Step 10](#step-10-required-if-applicable-codebase-deletion-waits-for-deployment-deletion-edp-codebase-operator).
 
-## Step 16. Upgrade
+## Step 17. Upgrade
 
 <Tabs
   defaultValue="addons"
@@ -386,9 +418,9 @@ Library pipelines do not pass these parameters; use them in custom pipelines. Th
       repository: https://epam.github.io/edp-helm-charts/stable
   ```
 
-  **2.** Make the values changes from Steps 2, 4, and 5 that apply to you in `clusters/core/addons/kuberocketci/values.yaml`, under `edp-install:`.
+  **2.** Make the values changes from Steps 2, 4, 5, and 6 that apply to you in `clusters/core/addons/kuberocketci/values.yaml`, under `edp-install:`.
 
-  **3.** If an Argo CD AppProject restricts cluster-scoped kinds, allow `ValidatingAdmissionPolicy` and `ValidatingAdmissionPolicyBinding` in the `admissionregistration.k8s.io` group; the `core` project of `edp-cluster-add-ons` already allows all cluster-scoped kinds. Commit and push the changes, then sync the `in-cluster-kuberocketci` Application with **Prune** enabled (see [Step 10](#step-10-recommended-remove-rbac-objects-that-the-charts-no-longer-render-edp-cluster-add-ons)).
+  **3.** If an Argo CD AppProject restricts cluster-scoped kinds, allow `ValidatingAdmissionPolicy` and `ValidatingAdmissionPolicyBinding` in the `admissionregistration.k8s.io` group; the `core` project of `edp-cluster-add-ons` already allows all cluster-scoped kinds. Commit and push the changes, then sync the `in-cluster-kuberocketci` Application with **Prune** enabled (see [Step 11](#step-11-recommended-remove-rbac-objects-that-the-charts-no-longer-render-edp-cluster-add-ons)).
 
   </TabItem>
 
@@ -425,7 +457,7 @@ Library pipelines do not pass these parameters; use them in custom pipelines. Th
 
 No CRD step is needed: 3.16 changes only the description of the GitServer `spec.gitProvider` field, and `helm upgrade` does not install or update the CRDs of an existing release. Allow 3-5 minutes for all pods to reach the Running state.
 
-## Step 17. Post-Upgrade Verification
+## Step 18. Post-Upgrade Verification
 
 ```bash title="Verify pods and component versions"
 # All pods should return to Running
@@ -458,16 +490,16 @@ The default 3.16 images are:
 Then verify in the browser and cluster:
 
 - [ ] The portal loads at `<PORTAL_URL>`, and authentication completes
-- [ ] Pipeline history and live logs load (requires Tekton Results)
+- [ ] Pipeline history and live logs load (requires Tekton Results), and the history and logs of a PipelineRun deleted from the cluster still load from Tekton Results (see [Step 4](#step-4-required-enable-authentication-and-tls-for-tekton-results-edp-cluster-add-ons-krci-portal))
 - [ ] Pull Request / Merge Request browsing works (requires GitFusion)
 - [ ] A member of the developer group can start a PipelineRun and stop a running one from the portal (see [Step 2](#step-2-required-review-developer-permissions-for-tekton-resources-edp-install))
 - [ ] Unless editing was restored through `extraObjects`, developers do not see the **Edit** action on Pipelines and Tasks, and for their group, `kubectl auth can-i update pipelines` returns `no` in the platform namespace (see [Step 2](#step-2-required-review-developer-permissions-for-tekton-resources-edp-install))
 - [ ] Every Environment shows `AVAILABLE` `true` (see [Step 3](#step-3-required-label-environment-namespaces-created-outside-the-platform-edp-cd-pipeline-operator))
-- [ ] `kubectl get ingress krci-portal -n <namespace>` shows the portal host, unless the portal is exposed another way, and the `krci-portal` pod is Running (see [Step 4](#step-4-required-if-applicable-enable-the-portal-ingress-and-check-the-portal-secret-edp-install))
-- [ ] The `gitfusion` Deployment is available (see [Step 5](#step-5-required-if-applicable-check-gitfusion-probe-overrides-gitfusion))
-- [ ] (If `secretManager` is `eso`) the `regcred` Secret appears in the namespace of a new Environment (see [Step 6](#step-6-required-if-applicable-review-external-secrets-for-environments-edp-cd-pipeline-operator))
-- [ ] (If used) a pnpm build, a Python build with an overridden settings ConfigMap, and a .NET build with default versioning pass (see [Step 7](#step-7-required-if-applicable-check-the-pnpm-python-and-net-build-settings-edp-tekton))
-- [ ] (If used) custom GitFusion API clients handle the new error format and status codes (see [Step 8](#step-8-required-if-applicable-gitfusion-api-errors-and-repository-lists-gitfusion))
-- [ ] (If used) scripts that delete a deployment and then its codebases finish without a `403` error (see [Step 9](#step-9-required-if-applicable-codebase-deletion-waits-for-deployment-deletion-edp-codebase-operator))
-- [ ] `kubectl get clusterrolebinding edp-cd-pipeline-operator-<namespace>-admin tekton-triggers-eventlistener-clusterbinding-<namespace>` returns `NotFound` for both (see [Step 10](#step-10-recommended-remove-rbac-objects-that-the-charts-no-longer-render-edp-cluster-add-ons))
-- [ ] `kubectl auth can-i list secrets --all-namespaces --as=system:serviceaccount:<namespace>:tekton-triggers-sa-<namespace>` returns `no`, and a webhook still starts a review PipelineRun (see [Step 11](#step-11-informational-least-privilege-rbac-for-platform-components))
+- [ ] `kubectl get ingress krci-portal -n <namespace>` shows the portal host, unless the portal is exposed another way, and the `krci-portal` pod is Running (see [Step 5](#step-5-required-if-applicable-enable-the-portal-ingress-and-check-the-portal-secret-edp-install))
+- [ ] The `gitfusion` Deployment is available (see [Step 6](#step-6-required-if-applicable-check-gitfusion-probe-overrides-gitfusion))
+- [ ] (If `secretManager` is `eso`) the `regcred` Secret appears in the namespace of a new Environment (see [Step 7](#step-7-required-if-applicable-review-external-secrets-for-environments-edp-cd-pipeline-operator))
+- [ ] (If used) a pnpm build, a Python build with an overridden settings ConfigMap, and a .NET build with default versioning pass (see [Step 8](#step-8-required-if-applicable-check-the-pnpm-python-and-net-build-settings-edp-tekton))
+- [ ] (If used) custom GitFusion API clients handle the new error format and status codes (see [Step 9](#step-9-required-if-applicable-gitfusion-api-errors-and-repository-lists-gitfusion))
+- [ ] (If used) scripts that delete a deployment and then its codebases finish without a `403` error (see [Step 10](#step-10-required-if-applicable-codebase-deletion-waits-for-deployment-deletion-edp-codebase-operator))
+- [ ] `kubectl get clusterrolebinding edp-cd-pipeline-operator-<namespace>-admin tekton-triggers-eventlistener-clusterbinding-<namespace>` returns `NotFound` for both (see [Step 11](#step-11-recommended-remove-rbac-objects-that-the-charts-no-longer-render-edp-cluster-add-ons))
+- [ ] `kubectl auth can-i list secrets --all-namespaces --as=system:serviceaccount:<namespace>:tekton-triggers-sa-<namespace>` returns `no`, and a webhook still starts a review PipelineRun (see [Step 12](#step-12-informational-least-privilege-rbac-for-platform-components))

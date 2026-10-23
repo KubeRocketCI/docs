@@ -94,6 +94,9 @@ To install Tekton resources, follow the steps below:
       history, so omitting the flag leaves history entries without their metadata.
     - **Log storage.** The Results API serves pipeline logs from a persistent volume, and a CronJob prunes entries
       older than 30 days.
+    - **Authentication and TLS.** The Results API checks the token and Kubernetes RBAC of every request and serves
+      HTTPS with certificates issued by cert-manager, which must be installed first. To configure the KubeRocketCI
+      Portal for it, see [Authentication and TLS](./ci/tekton-long-term-storage.md#authentication-and-tls).
 
 ## Installation on OKD cluster
 

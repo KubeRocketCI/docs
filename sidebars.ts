@@ -569,6 +569,7 @@ const sidebars: SidebarsConfig = {
               ],
             },
             'user-guide/gitops',
+            'user-guide/webhook-triggers',
             {
               type: 'category',
               label: 'Container Registry',

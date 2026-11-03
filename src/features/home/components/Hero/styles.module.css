@@ -28,36 +28,90 @@
   z-index: 1;
   top: 0;
   left: 0;
-  background-blend-mode: color-dodge;
-  background: linear-gradient(77.36deg, rgba(0, 152, 254, 0.4) -2.14%, rgba(173, 152, 246, 0.4) 90.87%);
-  background: linear-gradient(180deg, rgba(20, 153, 254, 0.4) 0%, rgba(20, 153, 254, 0) 100%);
   background: #1d225533;
   pointer-events: none;
 }
 
+.heroLogoFrame {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 101px;
+}
+
+/* 2s drift 3px up-right and back. */
+.heroLogo {
+  width: 58px;
+  height: 58px;
+  animation: heroLogoDrift 2s ease-in-out infinite;
+}
+
+/* Overrides the brand gradient fill of static/img/logo.svg. */
+.heroLogo path {
+  fill: var(--ifm-color-white);
+}
+
+@keyframes heroLogoDrift {
+  50% {
+    transform: translate(3px, -3px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .heroLogo {
+    animation: none;
+  }
+}
+
+.heroCopy {
+  margin-bottom: 1.5rem;
+}
+
 .heroBannerTitle {
-  font-size: 3rem;
+  margin: 0 0 0.5rem;
+  font-size: clamp(1.875rem, 1rem + 4.5vw, 3rem);
   font-weight: 600;
+  text-wrap: balance;
 }
 
 .heroBannerSubtitle {
+  margin: 0 0 1rem;
   font-size: 1.375rem;
   font-weight: 700;
+  text-wrap: balance;
 }
 
 .heroBannerDescription {
+  max-width: 65ch;
+  margin: 0 auto;
   font-size: 1.125rem;
+  text-wrap: pretty;
 }
 
 .heroBannerButtons {
   display: flex;
   flex-wrap: wrap;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
-  gap: 1.5rem;
+  gap: 1rem 1.5rem;
+}
+
+.heroPath {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.375rem;
+}
+
+.heroPathCaption {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.85);
 }
 
 .heroBannerBtn {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.75rem;
   padding: 0.5rem 1.375rem;
   font-weight: 500;
   font-size: 0.83rem;
@@ -65,19 +119,43 @@
   text-transform: uppercase;
 }
 
-.heroBannerBtnContained {
-  background-color: var(--kuberocket-color-primary-light);
+.heroBannerBtn:focus-visible,
+.heroBannerLink:focus-visible,
+.heroRelease a:focus-visible,
+.heroBannerVideoToggle:focus-visible {
+  outline: 2px solid var(--ifm-color-white);
+  outline-offset: 2px;
 }
 
-.heroBannerBtnContained:hover {
+.heroBannerBtnContained {
+  background-color: var(--kuberocket-cta-background);
+  border-color: var(--kuberocket-cta-background);
+}
+
+.heroBannerBtnContained:hover,
+.heroBannerBtnContained:focus-visible {
   background-color: var(--kuberocket-color-primary-dark);
+  border-color: var(--kuberocket-color-primary-dark);
   color: var(--ifm-color-white);
 }
 
-/* Secondary actions are plain links, not buttons — only Request Demo is a CTA. */
+.heroBannerBtnOutline {
+  background-color: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.8);
+}
+
+.heroBannerBtnOutline:hover,
+.heroBannerBtnOutline:focus-visible {
+  background-color: var(--kuberocket-color-primary-dark);
+  border-color: var(--ifm-color-white);
+  color: var(--ifm-color-white);
+}
+
+/* Matches the button--lg height so the link aligns with the button row. */
 .heroBannerLink {
   display: inline-flex;
   align-items: center;
+  min-height: 3rem;
   gap: 0.375rem;
   font-weight: 500;
   font-size: 0.83rem;
@@ -88,6 +166,84 @@
 .heroBannerLink:hover {
   color: var(--ifm-color-white);
   text-decoration: underline;
+}
+
+.heroRelease {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  column-gap: 0.5rem;
+  margin: 0.75rem 0 0;
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.heroRelease a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.75rem;
+  white-space: nowrap;
+  color: var(--ifm-color-white);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.heroRelease a:hover {
+  color: var(--ifm-color-white);
+  text-decoration-thickness: 2px;
+}
+
+@media (max-width: 576px) {
+  /* Bottom padding clears the video toggle in the corner. */
+  .heroBannerContent {
+    padding: 1.25rem 1rem 4rem;
+  }
+
+  .heroLogoFrame {
+    height: 64px;
+  }
+
+  .heroLogo {
+    width: 40px;
+    height: 40px;
+  }
+
+  .heroBannerSubtitle {
+    font-size: 1.125rem;
+  }
+
+  .heroBannerDescription {
+    font-size: 1rem;
+  }
+
+  .heroBannerButtons {
+    flex-direction: column;
+    align-items: stretch;
+    max-width: 22rem;
+    margin: 0 auto;
+  }
+
+  .heroPath {
+    align-items: stretch;
+    text-align: center;
+  }
+
+  .heroBannerBtn {
+    justify-content: center;
+  }
+
+  .heroBannerLink {
+    justify-content: center;
+  }
+
+  .heroRelease {
+    column-gap: 1rem;
+  }
+
+  .heroReleaseSep {
+    display: none;
+  }
 }
 
 .heroBannerVideoToggle {
@@ -106,7 +262,16 @@
   color: rgba(255, 255, 255, 0.8);
   cursor: pointer;
   padding: 0;
-  transition: background 0.2s, color 0.2s;
+  transition:
+    background 0.2s,
+    color 0.2s;
+}
+
+/* Expands the 32px control to a 44px hit area without changing its size. */
+.heroBannerVideoToggle::before {
+  content: '';
+  position: absolute;
+  inset: -6px;
 }
 
 .heroBannerVideoToggle:hover {

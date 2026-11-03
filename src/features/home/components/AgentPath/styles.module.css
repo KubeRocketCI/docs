@@ -1,0 +1,46 @@
+.section {
+  padding: 3.5rem 0;
+  border-top: 1px solid var(--ifm-color-emphasis-200);
+}
+
+/* Dark theme: a faint accent wash separates this section from the navy canvas. */
+:global([data-theme='dark']) .section {
+  background-color: rgba(var(--kuberocket-accent-rgb), 0.05);
+  border-top-color: rgba(255, 255, 255, 0.08);
+}
+
+.inner {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  align-items: center;
+}
+
+.copyColumn {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  min-width: 0;
+}
+
+.heading {
+  margin: 0;
+}
+
+.lead {
+  margin: 0;
+  max-width: 34rem;
+  color: var(--ifm-color-emphasis-700);
+  text-wrap: pretty;
+}
+
+@media (min-width: 997px) {
+  .inner {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
+    gap: 3rem;
+  }
+}
+
+.gateError {
+  color: var(--kuberocket-terminal-error);
+}

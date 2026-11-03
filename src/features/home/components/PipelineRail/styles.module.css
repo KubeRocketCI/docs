@@ -1,0 +1,133 @@
+/* Pipeline rail with stage nodes and a single "run" spark. */
+/* --stage-count is set inline; equal-width nodes put the outer icon centers half a node in from each edge. */
+.pipeline {
+  --node-size: 2.2rem;
+  --rail-inset: calc(50% / var(--stage-count));
+  position: relative;
+}
+
+.stages {
+  display: flex;
+  align-items: flex-start;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.rail {
+  position: absolute;
+  top: calc(var(--node-size) / 2 - 1px);
+  left: var(--rail-inset);
+  right: var(--rail-inset);
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    rgba(var(--kuberocket-accent-rgb), 0.15),
+    rgba(var(--kuberocket-accent-rgb), 0.5),
+    rgba(var(--kuberocket-accent-rgb), 0.15)
+  );
+}
+
+/* Rail-wide track slid from -100% to 0; its ::after is the spark at the leading edge. */
+.sparkTrack {
+  position: absolute;
+  top: calc(var(--node-size) / 2);
+  left: var(--rail-inset);
+  right: var(--rail-inset);
+  height: 0;
+  opacity: 0;
+  transform: translateX(-100%);
+}
+
+.sparkTrack::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--kuberocket-color-primary-light);
+  box-shadow:
+    0 0 0 3px rgba(var(--kuberocket-accent-rgb), 0.25),
+    0 0 12px 2px rgba(var(--kuberocket-accent-rgb), 0.6);
+  transform: translate(50%, -50%);
+}
+
+.pipeline[data-run] .sparkTrack {
+  animation: travel 3.2s cubic-bezier(0.22, 1, 0.36, 1) 0.3s 1 both;
+}
+
+@keyframes travel {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 0;
+  }
+}
+
+.node {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  flex: 1;
+}
+
+.nodeIcon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--node-size);
+  height: var(--node-size);
+  border-radius: 50%;
+  /* Card tint over the page color: opaque, so the rail stops at the node edge. */
+  background: linear-gradient(var(--kuberocket-card-color), var(--kuberocket-card-color)), var(--ifm-background-color);
+  border: 1px solid rgba(var(--kuberocket-accent-rgb), 0.35);
+  color: var(--kuberocket-color-primary-light);
+}
+
+.icon {
+  width: 1.1rem;
+  height: 1.1rem;
+  fill: currentColor;
+}
+
+.nodeLabel {
+  font-family: var(--ifm-font-family-monospace);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--ifm-color-emphasis-700);
+  text-align: center;
+}
+
+.nodeTool {
+  font-size: 0.75rem;
+  color: var(--ifm-color-emphasis-800);
+  text-align: center;
+  white-space: nowrap;
+}
+
+@media (max-width: 480px) {
+  .pipeline {
+    --node-size: 1.9rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pipeline[data-run] .sparkTrack {
+    animation: none;
+  }
+}

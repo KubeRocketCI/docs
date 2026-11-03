@@ -1,0 +1,128 @@
+.section {
+  padding: 3.5rem 0 2.5rem;
+}
+
+.heading {
+  margin: 0 0 1.5rem;
+}
+
+.rows {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-bottom: 1px solid var(--ifm-color-emphasis-200);
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  margin: 0;
+  padding: 1.5rem 0;
+  border-top: 1px solid var(--ifm-color-emphasis-200);
+}
+
+.groupInfo {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+}
+
+.iconWrap {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 8px;
+  background: rgba(var(--kuberocket-accent-rgb), 0.1);
+  color: var(--kuberocket-color-primary-light);
+}
+
+.icon {
+  width: 1.4rem;
+  height: 1.4rem;
+  fill: currentColor;
+}
+
+.groupTitle {
+  margin: 0 0 0.25rem;
+  font-size: 1.15rem;
+  font-weight: 600;
+  line-height: 1.25;
+  scroll-margin-top: calc(var(--ifm-navbar-height) + 0.5rem);
+}
+
+.purpose {
+  margin: 0;
+  font-size: 0.85rem;
+  line-height: 1.55;
+  color: var(--ifm-color-emphasis-700);
+  text-wrap: pretty;
+}
+
+.links {
+  display: grid;
+  grid-template-columns: 1fr;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.links li {
+  margin: 0;
+}
+
+.link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 2.75rem;
+  font-weight: 500;
+  color: var(--kuberocket-accent-text);
+}
+
+.link:hover {
+  color: var(--kuberocket-accent-text);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.link:focus-visible {
+  outline: 2px solid var(--kuberocket-accent-text);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+.arrow {
+  width: 1.1rem;
+  height: 1.1rem;
+  flex-shrink: 0;
+  transition: transform 0.2s ease;
+}
+
+.link:hover .arrow {
+  transform: translateX(3px);
+}
+
+@media (min-width: 576px) {
+  .links {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 1.5rem;
+  }
+}
+
+@media (min-width: 997px) {
+  .row {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+    gap: 2.5rem;
+    align-items: start;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .arrow {
+    transition: none;
+  }
+}

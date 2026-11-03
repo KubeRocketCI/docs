@@ -12,6 +12,15 @@
   --kuberocket-color-secondary-dark: rgba(89, 109, 128, 1);
   --kuberocket-card-color: var(--ifm-color-white);
   --kuberocket-card-color-hover: rgba(33, 150, 243, 0.08);
+  /* Accent channels for translucent tints: rgba(var(--kuberocket-accent-rgb), <alpha>). */
+  --kuberocket-accent-rgb: 0, 148, 255;
+  /* Accent for small text and thin strokes; #0094ff is 3.1:1 on white, below AA. */
+  --kuberocket-accent-text: var(--ifm-color-primary-darkest);
+  /* Filled call-to-action; white label at 5.7:1. Theme-independent: sits on the hero image. */
+  --kuberocket-cta-background: #0068b3;
+  /* Terminal surfaces stay dark in both themes. */
+  --kuberocket-terminal-background: #0a1020;
+  --kuberocket-terminal-error: #ffb4a8;
 
   /* ifm color overrides */
   --ifm-table-stripe-background: rgba(248, 249, 255, 1);
@@ -39,6 +48,7 @@
   /* custom variables */
   --kuberocket-card-color: var(--kuberocket-color-primary-dark-secondary);
   --kuberocket-card-color-hover: var(--kuberocket-color-primary-dark-secondary);
+  --kuberocket-accent-text: var(--ifm-color-primary-lighter);
 
   /* ifm color overrides */
   --ifm-table-stripe-background: rgba(0, 148, 255, 0.05) !important;
@@ -77,6 +87,12 @@
   }
 }
 
+/* Infima sets width: max-content; cap it so long labels wrap on narrow viewports. */
+.footer__link-item {
+  max-width: 100%;
+  text-wrap: pretty;
+}
+
 .footer-container {
   border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
@@ -85,6 +101,25 @@
   background-color: var(--kuberocket-color-primary-dark);
   border-top: 1px solid rgba(255, 255, 255, 0.1);
   padding: 1rem 0;
+}
+
+.footer-solidarity {
+  max-width: 64rem;
+  margin: 0 auto 0.75rem;
+  font-size: 0.85rem;
+  text-align: center;
+  text-wrap: pretty;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.footer-solidarity a {
+  color: var(--ifm-color-white);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.footer-solidarity a:hover {
+  color: var(--ifm-color-primary-lighter);
 }
 
 .footer-subfooter-content {

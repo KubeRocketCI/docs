@@ -1,0 +1,13 @@
+.heading {
+  text-align: center;
+  margin: 0 0 0.5rem;
+}
+
+.subheading {
+  text-align: center;
+  margin: 0 auto 2.25rem;
+  max-width: 42rem;
+  color: var(--ifm-color-emphasis-700);
+  font-size: 1rem;
+  text-wrap: pretty;
+}

@@ -1,0 +1,190 @@
+.terminal {
+  border-radius: 10px;
+  overflow: hidden;
+  background: var(--kuberocket-terminal-background);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 24px 60px -24px rgba(0, 0, 0, 0.7);
+}
+
+.bar {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 0.85rem;
+  background: rgba(255, 255, 255, 0.04);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Window-chrome dots: fixed macOS colors, not brand tokens. */
+.dot {
+  width: 0.7rem;
+  height: 0.7rem;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.dot[data-variant='red'] {
+  background: #ff5f56;
+}
+
+.dot[data-variant='amber'] {
+  background: #ffbd2e;
+}
+
+.dot[data-variant='green'] {
+  background: #27c93f;
+}
+
+.title {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  margin-left: 0.5rem;
+  font-family: var(--ifm-font-family-monospace);
+  font-size: 0.78rem;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.titleIcon {
+  width: 0.95rem;
+  height: 0.95rem;
+}
+
+.copyBtn {
+  position: relative;
+  margin-left: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.25rem 0.6rem;
+  border-radius: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: transparent;
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.copyBtn:hover,
+.copyBtn:focus-visible {
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--ifm-color-white);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.copyBtn:focus-visible {
+  outline: 2px solid var(--ifm-color-primary-lighter);
+  outline-offset: 2px;
+}
+
+.copyBtn[data-state='failed'] {
+  color: var(--kuberocket-terminal-error);
+  border-color: var(--kuberocket-terminal-error);
+}
+
+/* Expands the 24px-tall control to a 44px hit area within the bar. */
+.copyBtn::before {
+  content: '';
+  position: absolute;
+  inset: -10px -4px;
+}
+
+.copyIcon {
+  width: 0.9rem;
+  height: 0.9rem;
+}
+
+.body {
+  margin: 0;
+  padding: 1.1rem 1.1rem 1.25rem;
+  background: transparent;
+  font-family: var(--ifm-font-family-monospace);
+  font-size: 0.85rem;
+  line-height: 1.7;
+  /* Commands never wrap; a wrapped URL reads as two commands. */
+  white-space: pre;
+  overflow-x: auto;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.25) transparent;
+}
+
+.body:focus-visible {
+  outline: 2px solid var(--ifm-color-primary-lighter);
+  outline-offset: -2px;
+}
+
+.bodyFrame {
+  position: relative;
+}
+
+/* Right-edge fade while a line is clipped; clears at the scroll end. */
+.bodyFrame::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 2.5rem;
+  background: linear-gradient(to right, transparent, var(--kuberocket-terminal-background));
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+}
+
+.bodyFrame[data-clipped]::after {
+  opacity: 1;
+}
+
+.step {
+  display: block;
+}
+
+.line,
+.output,
+.comment {
+  display: block;
+  width: max-content;
+  background: transparent;
+  border: none;
+  padding: 0;
+  font-size: inherit;
+}
+
+.line {
+  color: rgba(255, 255, 255, 0.92);
+}
+
+.output {
+  font-family: inherit;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.prompt {
+  color: var(--kuberocket-color-primary-light);
+  font-weight: 700;
+  user-select: none;
+}
+
+.comment {
+  margin-top: 0.4rem;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.status {
+  margin: 0;
+  padding: 0 1.1rem 1rem;
+  font-size: 0.85rem;
+  color: var(--kuberocket-terminal-error);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .copyBtn,
+  .bodyFrame::after {
+    transition: none;
+  }
+}

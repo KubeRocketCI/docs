@@ -298,11 +298,6 @@ const config: Config = {
       'Open-source CI/CD platform for Kubernetes — delivery infrastructure for engineers and their AI agents. Tekton, Argo CD GitOps, and quality gates out of the box.',
     videoTeaser: 'https://www.youtube.com/watch?v=wiAaAHu17mw',
     mailTo: 'mailto:SupportEPMD-EDP@epam.com?subject=KubeRocketCI Demo Request',
-    announcementBar: {
-      id: 'announcement', // Increment on change
-      content: `KubeRocketCI Team Supports Ukraine 🇺🇦. In solidarity, we ask that you consider financially supporting the organizations below: <a href="https://epamuafund.rengiving.com/causes/159bdd2f71854adf8ed5251fe26d2fe0" target="_blank">EPAM’s Global Partners for the Ukraine Humanitarian Crisis</a>`,
-      isCloseable: true,
-    },
 
     algolia: {
       appId: 'ZYN6QI47ZW',
@@ -398,83 +393,49 @@ const config: Config = {
       style: 'dark',
       links: [
         {
-          title: 'Readings',
+          title: 'Operate',
           items: [
-            {
-              label: 'What is KubeRocketCI',
-              to: '/docs/about-platform/',
-            },
-            {
-              label: 'Blogs: Interesting Facts From The DevSecOps Life',
-              to: '/blog/',
-            },
-            {
-              label: 'User Guide: How To Use KubeRocketCI',
-              to: '/docs/user-guide/',
-            },
-            {
-              label: 'Developer Guide: How We Build KubeRocketCI',
-              to: '/docs/developer-guide/',
-            },
-            {
-              label: 'API Reference: Use KubeRocketCI To Build Your Solutions',
-              to: '/docs/api/overview',
-            },
+            { label: 'Operator Guide', to: '/docs/operator-guide/' },
+            { label: 'Install KubeRocketCI', to: '/docs/operator-guide/installation-overview' },
+            { label: 'Supported versions', to: '/docs/supported-versions' },
+            { label: 'Release notes', href: 'https://github.com/epam/edp-install/blob/master/RELEASES.md' },
           ],
         },
         {
-          title: 'Get Started',
+          title: 'Build and deploy',
           items: [
-            {
-              label: 'Main Site',
-              href: 'https://kuberocketci.io',
-            },
-            {
-              label: 'Pricing',
-              href: 'https://kuberocketci.io/pricing',
-            },
+            { label: 'Quick Start', to: '/docs/quick-start/quick-start-overview' },
+            { label: 'User Guide', to: '/docs/user-guide/' },
+            { label: 'Use Cases', to: '/docs/use-cases/' },
+            { label: 'API Reference', to: '/docs/api/overview' },
           ],
         },
         {
-          title: 'Our Community',
+          title: 'Evaluate',
           items: [
-            {
-              label: 'YouTube',
-              href: 'https://www.youtube.com/@theplatformteam',
-            },
-            {
-              label: 'Medium',
-              href: 'https://medium.com/kuberocketci',
-            },
+            { label: 'What is KubeRocketCI', to: '/docs/about-platform' },
+            { label: 'Try it locally', to: '/blog/try-kuberocketci-locally' },
+            { label: 'FAQ', to: '/faq/general-questions' },
+            { label: 'Blog', to: '/blog/' },
           ],
         },
         {
-          title: 'Learn More',
+          title: 'Community',
           items: [
-            {
-              label: 'KubeRocketCI on the GitHub',
-              href: 'https://github.com/kuberocketci/docs',
-            },
-            {
-              label: 'KubeRocketCI on the ArtifactHub',
-              href: 'https://artifacthub.io/packages/search?repo=epmdedp',
-            },
-            {
-              label: 'KubeRocketCI on the OperatorHub',
-              href: 'https://operatorhub.io/?keyword=edp',
-            },
-            {
-              label: 'Docker Hub',
-              href: 'https://hub.docker.com/u/epamedp',
-            },
-            {
-              label: 'RSS feed',
-              href: 'https://docs.kuberocketci.io/blog/rss.xml',
-            },
-            {
-              label: 'Atom feed',
-              href: 'https://docs.kuberocketci.io/blog/atom.xml',
-            },
+            { label: 'YouTube', href: 'https://www.youtube.com/@theplatformteam' },
+            { label: 'Medium', href: 'https://medium.com/kuberocketci' },
+            { label: 'Developer Guide', to: '/docs/developer-guide/' },
+            { label: 'Docs source on GitHub', href: 'https://github.com/kuberocketci/docs' },
+            { label: 'RSS feed', href: 'https://docs.kuberocketci.io/blog/rss.xml' },
+            { label: 'Atom feed', href: 'https://docs.kuberocketci.io/blog/atom.xml' },
+          ],
+        },
+        {
+          title: 'Packages',
+          items: [
+            { label: 'Artifact Hub', href: 'https://artifacthub.io/packages/search?repo=epmdedp' },
+            { label: 'OperatorHub', href: 'https://operatorhub.io/?keyword=edp' },
+            { label: 'Docker Hub', href: 'https://hub.docker.com/u/epamedp' },
           ],
         },
       ],

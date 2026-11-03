@@ -1,7 +1,8 @@
-import Heading from '@theme/Heading';
 import Link from '@docusaurus/Link';
 import { usePluginData } from '@docusaurus/useGlobalData';
 import clsx from 'clsx';
+import { SectionHeader } from '../SectionHeader';
+import { TerminalCard } from '../TerminalCard';
 import styles from './styles.module.css';
 
 type RecentPost = {
@@ -23,35 +24,31 @@ export const RecentBlogPosts = () => {
   return (
     <section className={styles.sectionWrapper}>
       <div className="container">
-        <Heading as="h2" className={styles.sectionHeading}>
-          From the Blog
-        </Heading>
-        <p className={styles.sectionSubheading}>
+        <SectionHeader title="From the Blog">
           CI/CD, DevOps, and Kubernetes insights from the team building KubeRocketCI.
-        </p>
+        </SectionHeader>
         <div className="row">
-          {posts.map((post, idx) => (
-            <div key={`post:${idx}`} className={clsx('col col--4', styles.gridItem)}>
-              <Link href={post.permalink} className={styles.card}>
+          {posts.map(post => {
+            const titleId = `post-title-${post.permalink.replace(/[^a-z0-9]+/gi, '-')}`;
+            return (
+              <div key={post.permalink} className={clsx('col col--4', styles.gridItem)}>
                 <article className={styles.article}>
-                  {post.formattedDate && (
-                    <time className={styles.date} dateTime={post.date}>
-                      {post.formattedDate}
-                    </time>
-                  )}
-                  <Heading as="h3" className={styles.title}>
-                    {post.title}
-                  </Heading>
-                  {post.description && <p className={styles.description}>{post.description}</p>}
-                  <span className={styles.cmd}>
-                    <span className={styles.cmdPrompt}>▸</span>
-                    <span className={styles.cmdText}>read</span>
-                    <span className={styles.caret} aria-hidden="true" />
-                  </span>
+                  <TerminalCard href={post.permalink} command="read" labelledBy={titleId}>
+                    {post.formattedDate && (
+                      <time className={styles.date} dateTime={post.date}>
+                        {post.formattedDate}
+                      </time>
+                    )}
+                    {/* Plain h3: Docusaurus Heading adds an anchor link, which cannot nest inside the card link. */}
+                    <h3 id={titleId} className={styles.title}>
+                      {post.title}
+                    </h3>
+                    {post.description && <p className={styles.description}>{post.description}</p>}
+                  </TerminalCard>
                 </article>
-              </Link>
-            </div>
-          ))}
+              </div>
+            );
+          })}
         </div>
         <div className={styles.viewAll}>
           <Link href="/blog" className={clsx('button', 'button--lg', styles.viewBtn)}>

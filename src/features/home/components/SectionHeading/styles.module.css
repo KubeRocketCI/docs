@@ -1,0 +1,6 @@
+.heading {
+  font-size: 2rem;
+  font-weight: 700;
+  text-wrap: balance;
+  scroll-margin-top: calc(var(--ifm-navbar-height) + 0.5rem);
+}

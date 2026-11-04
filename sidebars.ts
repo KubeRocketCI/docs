@@ -356,6 +356,7 @@ const sidebars: SidebarsConfig = {
               type: 'category',
               label: 'KubeRocketCI',
               items: [
+                'operator-guide/upgrade/upgrade-krci-3.17',
                 'operator-guide/upgrade/upgrade-krci-3.16',
                 'operator-guide/upgrade/upgrade-krci-3.15',
                 'operator-guide/upgrade/upgrade-krci-3.14',

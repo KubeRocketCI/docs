@@ -166,7 +166,7 @@ For [Bitbucket](https://support.atlassian.com/bitbucket-cloud/docs/create-an-api
 
     * **Git provider** – select the Git hosting service: GitHub, GitLab, or Bitbucket.
     * **Name** – a unique name for this Git Server integration (e.g., `my-github` or `company-gitlab`). Used to identify the server when creating codebases.
-    * **Host** – the base URL of your Git server (e.g., `https://github.com`, `https://gitlab.com`, or your self-hosted GitLab/GitHub/Bitbucket URL).
+    * **Host** – the hostname of your Git server, without a scheme (e.g., `github.com`, `gitlab.com`, `bitbucket.org`, or your self-hosted GitLab/GitHub/Bitbucket hostname).
     * **User** – the username or account name used to access the Git server (e.g., your GitHub username or GitLab user name).
     * **SSH port** – the port used for SSH connections to the Git server. Default is usually `22`; change only if your server uses a different SSH port.
     * **HTTPS port** – the port used for HTTPS connections. Default is usually `443`; change only if your server uses a different HTTPS port.
@@ -177,7 +177,11 @@ For [Bitbucket](https://support.atlassian.com/bitbucket-cloud/docs/create-an-api
     * **Token** – the token you generated in step 2.
 
     :::note
-    When the Git Server credentials secret contains an `id_rsa` key, `edp-codebase-operator` verifies the server's SSH host key against the operator's `ssh-known-hosts` ConfigMap before connecting. The host keys for `github.com`, `gitlab.com`, and `bitbucket.org` are pre-seeded by default. For self-hosted Git servers, add the host key to the `knownHosts.entries` Helm value of the `edp-codebase-operator` chart before adding the Git Server, otherwise the Git Server reports a connection error over SSH. This verification cannot be disabled.
+    When the Git Server credentials secret contains an `id_rsa` key, `edp-codebase-operator` verifies the server's SSH host key against the operator's `ssh-known-hosts` ConfigMap before connecting. The host keys for `github.com`, `gitlab.com`, `bitbucket.org`, and `ssh.bitbucket.org` are pre-seeded by default. For self-hosted Git servers, add the host key to the `knownHosts.entries` Helm value of the `edp-codebase-operator` chart before adding the Git Server, otherwise the Git Server reports a connection error over SSH. This verification cannot be disabled.
+    :::
+
+    :::info
+    Bitbucket Cloud: set **Host** to `bitbucket.org`, and allow outbound TCP port `22` to `ssh.bitbucket.org`. Requires KubeRocketCI 3.16.1 or later, see [Upgrade KubeRocketCI v3.15 to 3.16](../operator-guide/upgrade/upgrade-krci-3.16.md).
     :::
 
     Click **Save** to create the Git Server. As a result, you will be able to create codebases using an integrated Version Control System.

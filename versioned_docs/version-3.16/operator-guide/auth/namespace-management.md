@@ -33,6 +33,12 @@ The error highlighted above indicates the necessity for users to manually create
       kubectl create namespace <platform-namespace>-<application-name>-<stage-name>
     ```
 
+    From KubeRocketCI 3.16.1, on Kubernetes with `tenancyEngine: none` or on a remote cluster, label the namespace with the platform namespace. Without the label, the Environment fails with `namespace is not owned by the tenant`:
+
+    ```bash
+      kubectl label namespace <platform-namespace>-<application-name>-<stage-name> app.edp.epam.com/tenant=<platform-namespace>
+    ```
+
     :::note
       The `<platform-namespace>-<application-name>-<stage-name>` format for namespaces is set by default but is not mandatory. You can set your custom namespace when creating an Environment.
     :::

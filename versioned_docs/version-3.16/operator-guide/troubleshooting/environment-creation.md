@@ -35,10 +35,11 @@ If you are allowed to create namespaces, create it manually:
 
 1. Open the terminal. Ensure you have access to the cluster from your kubeconfig.
 
-2. Create a namespace using the `kubectl create namespace` command:
+2. Create the namespace, and label it with the platform namespace. From 3.16.1, on Kubernetes with `tenancyEngine: none` or on a remote cluster, the operator does not provision an Environment in an existing namespace without this label (see [Environment Fails in a Namespace Without the Tenant Label](#environment-fails-in-a-namespace-without-the-tenant-label)):
 
 ```bash
 kubectl create namespace <ns>
+kubectl label namespace <ns> app.edp.epam.com/tenant=<platform-namespace>
 ```
 
 Usually, the required namespace is shown on the Overview tab of the Environment:
@@ -47,22 +48,28 @@ Usually, the required namespace is shown on the Overview tab of the Environment:
 
 ## Environment Fails in a Namespace Without the Tenant Label
 
-**Problem:** since KubeRocketCI 3.16, an Environment in a namespace that was created before it shows the following message, or deleting the Environment or its Deployment does not finish:
+**Problem:** an Environment in a namespace that was created before it shows one of these messages:
 
 ```text
-... denied request: edp-cd-pipeline-operator may act only on its own namespace and namespaces it provisioned (label app.edp.epam.com/tenant).
+namespace is not owned by the tenant: namespace <environment-namespace> exists but is not owned by tenant <platform-namespace>: label app.edp.epam.com/tenant must be <platform-namespace>
 ```
 
-**Cause:** with the default settings on Kubernetes (`tenancyEngine: none`, `manageNamespace: true`), an admission policy lets the cd-pipeline-operator configure and delete only namespaces labelled `app.edp.epam.com/tenant`. The operator labels the namespaces it creates, but not a namespace created before its Environment, for example by a user or Argo CD.
+```text
+... denied request: edp-cd-pipeline-operator may act only on its own namespace and namespaces it was delegated (label app.edp.epam.com/tenant=<platform-namespace>).
+```
 
-**Solution:** label the namespace with the name of the platform namespace, as the operator does; it then retries the Environment on its own.
+KubeRocketCI 3.16.0 shows the second message as `... namespaces it provisioned (label app.edp.epam.com/tenant).`, and deleting the Environment does not finish.
+
+**Cause:** on Kubernetes, the cd-pipeline-operator provisions an Environment only in a namespace that does not exist, or that carries the label `app.edp.epam.com/tenant=<platform-namespace>`. The operator labels the namespaces it creates, but not a namespace created before its Environment, for example by a user or Argo CD. In 3.16.0, this applies to the local cluster with `tenancyEngine: none` and `manageNamespace: true`. From 3.16.1, it also applies with `manageNamespace: false` and to remote clusters. It does not apply on OpenShift or to the local cluster with `tenancyEngine: capsule`.
+
+**Solution:** label the namespace with the name of the platform namespace. The operator then retries the Environment. For a namespace that Argo CD manages, set the label in its source manifest.
 
 :::warning
-Label only a namespace that holds nothing but this Environment: when the Environment is deleted, the operator deletes the labelled namespace with everything in it.
+With `manageNamespace: true`, the operator deletes a labelled namespace with everything in it when its Environment is deleted. Label only a namespace that holds nothing but this Environment. Do not label the platform namespace.
 :::
 
 ```bash
-kubectl label namespace <environment-namespace> app.edp.epam.com/tenant=<platform-namespace>
+kubectl label namespace <environment-namespace> app.edp.epam.com/tenant=<platform-namespace> --overwrite
 ```
 
 To find all affected namespaces, see [Upgrade KubeRocketCI v3.15 to 3.16](../upgrade/upgrade-krci-3.16.md).

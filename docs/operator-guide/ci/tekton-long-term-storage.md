@@ -128,36 +128,32 @@ Clients that call the API over `http://` get `400 Client sent an HTTP request to
 
 With an `https://` URL, the portal authenticates to the API with its own ServiceAccount token, never with the token of the signed-in user.
 
-1. Copy the public CA certificate to a ConfigMap in the platform namespace:
+1. Read the public CA certificate:
 
     ```bash
     kubectl -n tekton-pipelines get secret tekton-results-tls -o jsonpath='{.data.ca\.crt}' | base64 -d > ca.crt
-    kubectl -n <platform-namespace> create configmap tekton-results-ca --from-file=ca.crt=ca.crt
     ```
 
     :::warning
     Copy only `ca.crt`. Never copy the `tekton-results-ca-key-pair` Secret: it holds the CA private key.
     :::
 
-2. Set the portal values under the `krci-portal` key of the `edp-install` values. If you already set `volumes` or `volumeMounts`, add these items to your lists:
+2. Set the portal values under the `krci-portal` key of the `edp-install` values. With Helm, you can use `--set-file krci-portal.tektonResults.caCert=ca.crt`.
 
     ```yaml title="edp-install values.yaml"
     krci-portal:
       configEnv:
         TEKTON_RESULTS_URL: https://tekton-results-api-service.tekton-pipelines.svc:8080
-        NODE_EXTRA_CA_CERTS: /etc/tekton-results-ca/ca.crt
-      volumes:
-        - name: tekton-results-ca
-          configMap:
-            name: tekton-results-ca
-      volumeMounts:
-        - name: tekton-results-ca
-          mountPath: /etc/tekton-results-ca
-          readOnly: true
       tektonResults:
         rbac:
           enabled: true
+        caCert: |
+          -----BEGIN CERTIFICATE-----
+          <contents of ca.crt>
+          -----END CERTIFICATE-----
     ```
+
+    `tektonResults.caCert` creates the `krci-portal-tekton-results-ca` ConfigMap and mounts it into the portal. The chart fails to render if the value has a private key.
 
     `tektonResults.rbac.enabled` binds the portal ServiceAccount to `tekton-results-readonly` in the platform namespace. The chart fails to render if the ServiceAccount is `default` or `serviceAccount.automount` is `false`; keep the default `true`.
 
@@ -174,16 +170,13 @@ Limitations:
     kubectl -n tekton-pipelines rollout restart deploy/tekton-results-api deploy/tekton-results-watcher
     ```
 
-- cert-manager renews the CA at about two-thirds of its lifetime with a new private key. The serving certificate keeps the old CA until it is issued again. After a CA renewal, issue the serving certificate again, restart the API and the watcher, then update the portal ConfigMap and restart the portal:
+- cert-manager renews the CA at about two-thirds of its lifetime with a new private key. The serving certificate keeps the old CA until it is issued again. After a CA renewal, issue the serving certificate again, restart the API and the watcher, then set the new `ca.crt` in `krci-portal.tektonResults.caCert` and upgrade the platform. The portal restarts on the change:
 
     ```bash
     kubectl -n tekton-pipelines delete secret tekton-results-tls
     kubectl -n tekton-pipelines wait certificate tekton-results-serving-cert --for=condition=Ready --timeout=120s
     kubectl -n tekton-pipelines rollout restart deploy/tekton-results-api deploy/tekton-results-watcher
     kubectl -n tekton-pipelines get secret tekton-results-tls -o jsonpath='{.data.ca\.crt}' | base64 -d > ca.crt
-    kubectl -n <platform-namespace> create configmap tekton-results-ca --from-file=ca.crt=ca.crt \
-      --dry-run=client -o yaml | kubectl apply -f -
-    kubectl -n <platform-namespace> rollout restart deploy/krci-portal
     ```
 
 ## Database Performance Indexes

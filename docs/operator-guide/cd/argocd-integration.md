@@ -123,7 +123,7 @@ for GitHub, GitLab, Bitbucket, or Gerrit integrations. The credential template m
 
       ```bash
       KRCI_NAMESPACE="krci"
-      VCS_HOST="<github.com_or_gitlab.com_or_bitbucket.org>"
+      VCS_HOST="<github.com_or_gitlab.com_or_ssh.bitbucket.org>"
       ACCOUNT_NAME="<ACCOUNT_NAME>"
       URL="ssh://git@${VCS_HOST}:22/${ACCOUNT_NAME}"
 
@@ -132,6 +132,8 @@ for GitHub, GitLab, Bitbucket, or Gerrit integrations. The credential template m
         --from-literal=url="${URL}"
       kubectl label --overwrite secret ${KRCI_NAMESPACE} -n argocd "argocd.argoproj.io/secret-type=repo-creds"
       ```
+
+      For Bitbucket Cloud, use `ssh.bitbucket.org`. For an existing secret, see [Upgrade KubeRocketCI v3.15 to 3.16](../upgrade/upgrade-krci-3.16.md).
 
       </TabItem>
 
@@ -160,7 +162,7 @@ for GitHub, GitLab, Bitbucket, or Gerrit integrations. The credential template m
       ]}>
 
       <TabItem value="github">
-        Add GitHub, GitLab, or Bitbucket host to Argo CD config map with known hosts.
+        Add GitHub, GitLab, or Bitbucket host to Argo CD config map with known hosts. For Bitbucket Cloud, set `VCS_HOST` to `ssh.bitbucket.org`.
 
         ```bash
         KRCI_NAMESPACE="krci"

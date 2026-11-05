@@ -8,7 +8,7 @@ The reason why you can't connect to the Git server could be the following:
 To ensure that you specified the correct host, verify that your host is one of these:
 
 * **GitHub** - github.com;
-* **Bitbucket** - bitbucket.org;
+* **Bitbucket** - bitbucket.org (allow outbound TCP port 22 to ssh.bitbucket.org);
 * **Gerrit** - your Gerrit endpoint;
 * **Gitlab** - your GitLab endpoint.
 

@@ -847,23 +847,29 @@ Before starting the development, please check the project rules:
 
     c. Comments resolution.
 
-    d. One GitHub task should have one Pull Request (PR) if it doesn't change multiple operators. If there are many changes within one PR, amend the commit.
+    d. One GitHub task should have one Pull Request (PR) if it doesn't change multiple operators. A Pull Request must contain only one commit. If it contains more than one commit, squash them into one. To add later changes to the Pull Request, amend that commit with `git commit --amend`.
 
 2. Only the Assignee is responsible for the PR merger and Jira task status.
 
 3. Every PR should be merged in a timely manner.
 
-4. Log time to Jira ticket.
+4. (optional) Log time to Jira ticket.
+
+5. If a QA specialist cannot verify your change, you are responsible for verifying it.
 
 ## Working Process
 
-With KubeRocketCI, the main workflow is based on the getting a Jira task and creating a Pull Request according to the rules described below.
+With KubeRocketCI, the main workflow is based on getting a task and creating a Pull Request according to the rules described below.
 
 :::info Workflow
-  Get Jira task → implement, verify by yourself the results → create Pull Request (PR) → send for review → resolve comments/add changes, ask colleagues for the final review → track the PR merge → verify by yourself the results → change the status in the Jira ticket to CODE COMPLETE or RESOLVED → share necessary links with a QA specialist in the QA Verification channel → QA specialist closes the Jira task after his verification → Jira task should be CLOSED.
+  Get a Jira or GitHub task → implement and verify the results yourself → create a Pull Request (PR) → send it for review → resolve comments and ask colleagues for the final review → track the PR merge → verify the results yourself.
+
+  When the task is in Jira, set its status to CODE COMPLETE or RESOLVED, log the time, and share the necessary links with a QA specialist in the QA Verification channel. The QA specialist closes the Jira task after verification. If a QA specialist cannot verify the change, you verify it yourself.
 :::
 
 ### Commit Flow
+
+To have your commit merged, stick to the following guidelines: 
 
 1. Get a task in the Jira/GitHub dashboard. Please be aware of the following points:
 
@@ -889,9 +895,9 @@ With KubeRocketCI, the main workflow is based on the getting a Jira task and cre
 
           - Code review and the final merge.
 
-          - MS Teams chats - ping other colleagues, answer questions, etc.
+          - (optional) MS Teams chats - ping other colleagues, answer questions, etc.
 
-          - Verification by a QA specialist.
+          - (optional) Verification by a QA specialist.
 
           - Bug fixing.
 
@@ -916,9 +922,9 @@ With KubeRocketCI, the main workflow is based on the getting a Jira task and cre
 
           - Code review and the final merge.
 
-          - MS Teams chats - ping other colleagues, answer questions, etc.
+          - (optional) MS Teams chats - ping other colleagues, answer questions, etc.
 
-          - Verification by a QA specialist.
+          - (optional) Verification by a QA specialist.
 
           - Bug fixing.
 
@@ -930,7 +936,7 @@ With KubeRocketCI, the main workflow is based on the getting a Jira task and cre
 
 2. Implement feature, improvement, fix and check the results on your own. If it is impossible to check the results of your work before the merge, verify all later.
 
-3. When committing, use the pattern: commit type: Commit message (#GitHub ticket number).
+3. When committing, use the pattern: commit type: Commit message.
 
     a. commit type:
 
@@ -950,7 +956,7 @@ With KubeRocketCI, the main workflow is based on the getting a Jira task and cre
 
     `!`: (added to other commit types to mark breaking changes) For example:
 
-        feat!: Add ingress links column into Applications table on stage page (#77)
+        feat!: Add ingress links column into Applications table on stage page
 
         BREAKING CHANGE: Ingress links column has been added into the Applications table on the stage details page
 
@@ -958,14 +964,16 @@ With KubeRocketCI, the main workflow is based on the getting a Jira task and cre
 
         * brief, for example:
 
-          `fix: Remove secretKey duplication from registry secrets (#63)`
+          ```bash
+          fix: Remove secretKey duplication from registry secrets
+          ```
 
           or
 
         * descriptive, for example:
 
           ```bash
-          feat: Provide the ability to configure hadolint check (#88)
+          feat: Provide the ability to configure hadolint check
 
           * Add configuration files .hadolint.yaml and .hadolint.yml to stash
           ```
@@ -979,7 +987,7 @@ With KubeRocketCI, the main workflow is based on the getting a Jira task and cre
     :::note
       Make sure there is a descriptive commit message for a breaking change Pull Request. For example:
         ```bash
-          feat!: Add ingress links column into Applications table on stage page (#77)
+          feat!: Add ingress links column into Applications table on stage page
 
           BREAKING CHANGE: Ingress links column has been added into the Applications
           table on the stage details page

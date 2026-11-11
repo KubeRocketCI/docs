@@ -102,6 +102,7 @@ words:
   - dependencytrack
   - deployers
   - DEPTRACK
+  - distroless
   - Djava
   - Djgroups
   - Dkeycloak

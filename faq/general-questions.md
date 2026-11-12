@@ -196,6 +196,6 @@ For more details on how to trigger the pipelines, read the [KubeRocketCI: Tekton
 
 ---
 
-### What are Deployment Flows and Their Relation to Environments?
+### What Is a Deployment and Its Relation to Environments?
 
-Deployment Flow is a business entity that manages the delivery process of the selected application set via environments. For more information about Deployment Flows and Environments in KubeRocketCI, read the [Add Deployment Flow](/docs/user-guide/add-cd-pipeline) page.
+A Deployment, also called a Deployment Flow or a CD pipeline, is a business entity that manages the delivery process of the selected application set via environments. The portal lists Deployments in the **Deployments** section of the sidebar. For more information about Deployments and Environments in KubeRocketCI, read the [Add Deployment](/docs/user-guide/add-cd-pipeline) page.

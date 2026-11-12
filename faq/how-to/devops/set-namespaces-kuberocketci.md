@@ -4,35 +4,39 @@
   <link rel="canonical" href="https://docs.kuberocketci.io/faq/how-to/devops/set-namespaces-kuberocketci" />
 </head>
 
-There are three ways to define namespaces in KubeRocketCI:
+There are two ways to define namespaces in KubeRocketCI: an administrator sets the initial value for all users, and each user can change it for their own browser.
 
-## 1. During Helm Chart Installation
+## 1. Set the Initial Value in the Helm Values
 
-When [installing KubeRocketCI via Helm Chart](/docs/operator-guide/install-kuberocketci), you can specify the namespace during installation:
+The `DEFAULT_CLUSTER_NAMESPACE` parameter of the portal defines the namespace that new users get on their first login. Set it in the `edp-install` values file, either [during the installation](/docs/operator-guide/install-kuberocketci) or later:
 
-```bash
-helm install krci epamedp/edp-install --wait --timeout=900s \
---version 3.12.3 \
---values values.yaml \
---namespace krci \
---create-namespace
+```yaml title="values.yaml"
+krci-portal:
+  configEnv:
+    DEFAULT_CLUSTER_NAMESPACE: krci
 ```
 
-The `krci` namespace will be automatically set in the KubeRocketCI portal.
+The default value is `krci`. Set it to the namespace where KubeRocketCI is installed. After you upgrade the release, the portal restarts and serves the new value.
 
-## 2. Via Keycloak User Attributes
+:::note
+The new value reaches only the users whose browser has no saved namespaces. Everyone else keeps the namespaces they selected before.
+:::
 
-If Keycloak is configured and integrated with the platform, you can set the namespace in the Keycloak user attributes:
+## 2. Set the Namespaces in the Portal
 
-![Keycloak user attributes](../../../docs/assets/user-guide/portal/keycloak-user-default-namespace.png "Keycloak user attributes")
+Each user can set the namespaces manually:
 
-This method allows you to configure namespaces on a per-user basis through Keycloak's user management interface.
+1. Click the cluster name in the upper left corner of the portal and select **Namespaces**. You can also click **Manage Namespaces** in the **Quick Actions** section of the **Home** page.
 
-## 3. Manual Configuration
+2. In the **Namespaces** window, set the following fields:
 
-You can also set namespaces manually through the KubeRocketCI portal. For detailed instructions on manual namespace configuration, refer to the [Portal Settings](/docs/user-guide/portal-settings) page.
+    * **Default Namespace** – the namespace used when you apply a resource without specifying a namespace. Permission checks for buttons also use this namespace.
+    * **Allowed namespaces** – the namespaces whose resources the portal lists.
+
+3. Click **Save**.
+
+The portal keeps these values in the browser, so you set them again after clearing the site data or in another browser. For more details, refer to the [Portal Settings](/docs/user-guide/portal-settings#manage-namespaces) page.
 
 :::tip
 For information about how KubeRocketCI determines the default namespace on first login, see [How Does KubeRocketCI Determine the Default Namespace on First Login?](/faq/how-to/devops/determine-default-namespace-first-login)
 :::
-

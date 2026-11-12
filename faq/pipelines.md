@@ -44,9 +44,9 @@ This design choice ensures that KubeRocketCI remains `vendor-neutral` and `cloud
 
 If you need to re-trigger a pipeline due to a failed run or to incorporate new changes, you have several options available:
 
-- **KubeRocketCI Portal**: Navigate to the **Pipelines** section or the **Component details** -> **Branches** section, identify the failed pipeline, and select the action **Run again**.
+- **KubeRocketCI Portal**: Navigate to **CI/CD Pipelines** -> **PipelineRuns**, or open a project from **Projects** and go to its **Branches** tab. Identify the failed run, open its **Actions** menu, and select **Run again**. The portal creates a new PipelineRun with the parameters of the selected one, and the original run stays unchanged. To change the parameters before the start, select **Run with params**: the portal opens the new PipelineRun in the YAML editor, and the run starts after you save it.
 
-- **Tekton Dashboard**: If Tekton Dashboard is integrated. In the KubeRocketCI Portal navigate **Overview** -> **Links** and click on **Tekton**. In the Tekton Dashboard navigate to the **PipelineRuns** section, identify the failed pipeline, and select the action **Rerun**.
+- **Tekton Dashboard**: If Tekton Dashboard is integrated. In the KubeRocketCI Portal navigate **Configuration** -> **Quick Access** -> **Links** and click on **Tekton**. In the Tekton Dashboard navigate to the **PipelineRuns** section, identify the failed pipeline, and select the action **Rerun**.
 
 - **Through VCS (GitHub/GitLab)**: Add a comment that begins with `/recheck` or `/ok-to-test` to your Pull Request (PR) or Merge Request (MR), and the pipeline will be triggered automatically.
 
@@ -157,3 +157,17 @@ parameter values: spec.params[COMMIT_MESSAGE].value
 The review and build trigger templates inject the commit message into the PipelineRun as the `COMMIT_MESSAGE` parameter, and Tekton's admission webhook rejects any PipelineRun parameter whose value contains a result-expression string. So a commit message (or merge request title) that quotes Tekton syntax literally — for example `$(tasks.fetch-repository.results.commit)` — blocks pipeline creation for that change. This most often happens when committing changes to Tekton pipelines themselves.
 
 To resolve it, amend the commit message to avoid the literal `$( )` wrapper (for example, write `tasks.fetch-repository.results.commit` instead) and re-push. The pipeline definitions themselves are unaffected.
+
+---
+
+### What Does the Stop Run Action Do?
+
+The **Stop run** action is in the **Actions** menu of a running PipelineRun, on the **PipelineRuns** page and on the page of the run. It asks Tekton to cancel the run: the running tasks are stopped, and the `finally` tasks still run, so the commit status in the Git provider is reported as usual. The portal shows the run as **Cancelling** and then as **Cancelled** when Tekton finishes.
+
+The action is not available for a run that is already finished or already stopping, and for a run that is archived in Tekton Results. If you have no permission to patch PipelineRuns in the namespace, the action is disabled, and its tooltip shows the reason.
+
+---
+
+### Why Does the Pull Requests Tab Say That Pull Requests Are Not Supported for Gerrit?
+
+The **Pull Requests** tab of a project reads the open pull requests through the Git provider API of GitHub, GitLab, or Bitbucket. Gerrit has no pull requests: it uses *changes* for code review. For a project hosted in Gerrit, the tab shows `Pull Requests are not supported for Gerrit projects`. Open the changes in the Gerrit web interface. The review pipelines still start for each change, and you find them on the **PipelineRuns** page.

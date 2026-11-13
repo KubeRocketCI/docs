@@ -4,33 +4,35 @@
   <link rel="canonical" href="https://docs.kuberocketci.io/faq/how-to/devops/determine-default-namespace-first-login" />
 </head>
 
-On the very first login to the platform, KubeRocketCI will attempt to automatically define both default and allowed namespace. The platform follows a specific priority order to determine which namespace to use.
+The portal needs two settings to show resources: the **default namespace** and the list of **allowed namespaces**. On the first login, the portal picks the default namespace in the following priority order.
 
-## 1. Deployment Namespace
+## 1. Value Saved in the Browser
 
-When installing KubeRocketCI, the platform writes the target namespace into the `DEFAULT_NAMESPACE` parameter of the **portal** deployment:
+The portal stores the namespaces you choose in the **Namespaces** window in the local storage of your browser, separately for each cluster. If the browser already holds a saved value, the portal uses it and ignores everything below.
 
-```bash
-- name: DEFAULT_NAMESPACE
-  valueFrom:
-    fieldRef:
-      apiVersion: v1
-      fieldPath: metadata.namespace
+Because the value lives in the browser, it is not shared between browsers, devices, or users. Clearing the site data or opening the portal in another browser or in a private window brings you back to the next step.
+
+## 2. Value From the Portal Configuration
+
+If the browser holds no saved value, the portal asks the server for the `DEFAULT_CLUSTER_NAMESPACE` parameter and uses it as both the default namespace and the only allowed namespace. The parameter is set in the `edp-install` Helm values:
+
+```yaml title="values.yaml"
+krci-portal:
+  configEnv:
+    DEFAULT_CLUSTER_NAME: core
+    DEFAULT_CLUSTER_NAMESPACE: krci
 ```
 
-This is the first place the platform checks the namespace to pre-populate it in the KubeRocketCI portal.
+The default value is `krci`. Set it to the namespace where KubeRocketCI is installed. Changing the value later does not affect users whose browser already holds a saved value, see step 1.
 
-## 2. Keycloak Configuration
-
-If the `DEFAULT_NAMESPACE` parameter is empty for some reason, the platform will try to get the default namespace from the Keycloak attribute.
-
-If Keycloak is configured and integrated to the platform, the KubeRocketCI portal receives a Keycloak token that contains the namespace specified in the **default_namespace** attribute:
-
-![Keycloak user attributes](../../../docs/assets/user-guide/portal/keycloak-user-default-namespace.png "Keycloak user attributes")
-
-When the `DEFAULT_NAMESPACE` parameter is not empty, you are expected to see the namespace in this user attribute. Redefining the Keycloak user attribute doesn't overwrite the default namespace in the portal. This method works only if the `DEFAULT_NAMESPACE` parameter is not defined from the beginning.
+:::note
+The portal does not read the namespace from Keycloak user attributes, so the `default_namespace` attribute has no effect.
+:::
 
 ## 3. Manual Setting
 
-If both deployment and Keycloak configuration are empty or missing, there will be no namespace specified in the portal. The only available option left is to set namespaces manually. Refer to the [Portal Settings](/docs/user-guide/portal-settings#manage-namespaces) page for more details on cluster settings.
+If the server returns an empty value and the browser holds nothing, no namespace is specified, and the portal shows no resources. In this case, set the namespaces manually. Click the cluster name in the upper left corner of the portal and select **Namespaces**, or click **Manage Namespaces** in the **Quick Actions** section of the **Home** page. Refer to the [Portal Settings](/docs/user-guide/portal-settings#manage-namespaces) page for more details.
 
+:::tip
+If the portal shows empty lists or `Forbidden` messages after the login, see [Empty Widgets on the Overview Page](/docs/operator-guide/troubleshooting/forbidden-messages).
+:::

@@ -12,4 +12,4 @@ There are two ways to access the Grafana service:
 
 You might be asked to log in to the service.
 
-2. You can also get a built-in Grafana Dashboard for the deployed application. Refer to the [Manage Deployment Flows](/docs/user-guide/manage-environments#monitor-application) page for more details.
+2. You can also get a built-in Grafana Dashboard for the deployed application. Refer to the [Manage Deployments](/docs/user-guide/manage-environments#monitor-application) page for more details.

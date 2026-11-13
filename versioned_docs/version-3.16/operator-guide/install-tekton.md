@@ -70,7 +70,7 @@ To install Tekton resources, follow the steps below:
     kubectl apply -f https://infra.tekton.dev/tekton-releases/chains/previous/v0.28.1/release.yaml
     ```
 
-5. Install Tekton Results v0.20.0 using the KubeRocketCI manifest:
+5. Install Tekton Results v0.21.0 using the KubeRocketCI manifest:
 
     :::warning
       Unlike the components above, Tekton Results **must not** be installed from the plain upstream release file.
@@ -97,6 +97,9 @@ To install Tekton resources, follow the steps below:
     - **Authentication and TLS.** The Results API checks the token and Kubernetes RBAC of every request and serves
       HTTPS with certificates issued by cert-manager, which must be installed first. To configure the KubeRocketCI
       Portal for it, see [Authentication and TLS](./ci/tekton-long-term-storage.md#authentication-and-tls).
+    - **Authentication cache.** The Results API caches the token and RBAC check results (`AUTH_CACHE_ENABLED=true`),
+      so repeated requests with the same token do not call the Kubernetes API again. This reduces the load on the
+      Kubernetes API server when the Portal reads many pipeline runs and logs.
 
 ## Installation on OKD cluster
 

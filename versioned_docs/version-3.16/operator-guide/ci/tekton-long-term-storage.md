@@ -59,7 +59,7 @@ Tekton Results is deployed as part of the Tekton Pipelines installation. For ins
 ## Configuration
 
 :::note
-We use Postgres operator to connect to Tekton results, but you can use any other external databases supported. Please align configuration accordingly to Tekton result [documentation](https://github.com/tektoncd/results/blob/v0.20.0/docs/external-database.md).
+We use Postgres operator to connect to Tekton results, but you can use any other external databases supported. Please align configuration accordingly to Tekton result [documentation](https://github.com/tektoncd/results/blob/v0.21.0/docs/external-database.md).
 :::
 
 To configure long-term log storage for pipelines in the KubeRocketCI Portal, follow the steps below:
@@ -117,7 +117,7 @@ In this example, the PGO (PostgreSQL Operator) is used for the Tekton Results da
 
 From KubeRocketCI 3.16.1, the [results.yaml](https://github.com/epam/edp-cluster-add-ons/blob/main/clusters/core/addons/tekton/results.yaml) manifest turns on authentication and TLS for the Tekton Results API (`tekton-results-api-service` in `tekton-pipelines`, port `8080`):
 
-- **Authentication.** The API validates each bearer token (TokenReview) and authorizes each request with Kubernetes RBAC on the `results.tekton.dev` API group, per namespace (SubjectAccessReview). The `tekton-results-readonly` ClusterRole grants read access to results, records, logs, and summaries, and aggregates to the `view` and `edit` ClusterRoles.
+- **Authentication.** The API validates each bearer token (TokenReview) and authorizes each request with Kubernetes RBAC on the `results.tekton.dev` API group, per namespace (SubjectAccessReview). The `tekton-results-readonly` ClusterRole grants read access to results, records, logs, and summaries, and aggregates to the `view` and `edit` ClusterRoles. The API caches the results of both checks for repeated requests with the same token (`AUTH_CACHE_ENABLED=true`: 5 minutes for allowed requests and 1 minute for denied ones), so an RBAC change can take up to that long to apply.
 - **TLS.** cert-manager issues the certificates, so it must be installed first. A self-signed CA (`tekton-results-ca`, valid for 5 years) signs the 1-year serving certificate in the `tekton-results-tls` Secret, which holds `tls.crt`, `tls.key`, and `ca.crt`. The watcher connects over TLS with its ServiceAccount token. The metrics port `9090` stays plain HTTP.
 
 :::warning

@@ -20100,11 +20100,134 @@ To find all affected namespaces, see [Upgrade KubeRocketCI v3.15 to 3.16](../upg
 
 ---
 
-## Forbidden Messages on the Overview Page
+## Feature Is Not Configured
 
 <!-- markdownlint-disable MD025 -->
 
-# Forbidden Messages on the Overview Page
+# Feature Is Not Configured
+
+<head>
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/troubleshooting/feature-not-configured" />
+</head>
+
+This troubleshooting page covers the portal pages that show an error because the portal has no address or credentials of an external service.
+
+## Problem
+
+A page of the KubeRocketCI portal shows one of the following messages instead of data:
+
+  ![SonarQube](../../assets/operator-guide/troubleshooting/variable-not-configured-sq.png "SonarQube")
+
+  ![DepTrack](../../assets/operator-guide/troubleshooting/variable-not-configured-dt.png "DepTrack")
+
+  ![Prometheus (PipelineRun)](../../assets/operator-guide/troubleshooting/metrics-not-configured.png "Prometheus (PipelineRun)")
+
+| Where | Message |
+|-------|---------|
+| The **Code Quality** tab of a project | `Failed to load SonarQube data` with the description `SONAR_HOST_URL environment variable is not configured` or `SONAR_TOKEN environment variable is not configured` |
+| The **Dependencies** tab of a project | `Failed to load DependencyTrack data` with the description `DEPENDENCY_TRACK_URL environment variable is not configured` or `DEPENDENCY_TRACK_API_KEY environment variable is not configured` |
+| The **Pipeline Metrics** page | `Failed to load metrics` with the description `TEKTON_RESULTS_URL environment variable is not configured` |
+| The **Monitoring** tab of a PipelineRun or a stage | `Metrics are not configured. Set PROMETHEUS_URL on the server.` |
+| The whole portal, instead of any page | `Configuration Error` and `Failed to load server configuration. Please check your deployment environment variables.` |
+
+Other pages use a common error block that hides the reason. It shows only a general message:
+
+* `Something went wrong. Contact your administrator.`
+* `The service is temporarily unavailable. Please try again later.`
+* `Oops! Something went wrong. Please try again later.`
+
+When the upstream service sends a request identifier, the block also shows `Request ID`. Use it to find the request in the log of the service.
+
+## Cause
+
+The portal reads the addresses of external services from environment variables of the portal Deployment. The non-sensitive values come from the `portal-config` ConfigMap, which Helm renders from the `krci-portal.configEnv` values. The tokens come from the `portal-secret` Secret. If a variable is missing or empty, the portal does not send the request and returns the `... is not configured` message.
+
+The following table lists the variables and the features that depend on them:
+
+| Variable | Stored in | Feature |
+|----------|-----------|---------|
+| `SONAR_HOST_URL`, `SONAR_TOKEN` | ConfigMap, Secret | Code Quality tab, SAST pages |
+| `DEPENDENCY_TRACK_URL`, `DEPENDENCY_TRACK_API_KEY` | ConfigMap, Secret | Dependencies tab, SCA pages |
+| `TEKTON_RESULTS_URL` | ConfigMap | Pipeline history, logs, and metrics |
+| `PROMETHEUS_URL` | ConfigMap | **Monitoring** tab |
+| `GITFUSION_URL` | ConfigMap | Repository and branch discovery through GitFusion |
+| `KRCI_AUDIT_URL` | ConfigMap | **Triggered By** field and **Audit Events** page |
+
+The `Configuration Error` screen has another meaning. The browser could not get the configuration from the portal server, so the server is unavailable, or the request failed. It does not mean that a specific variable is empty.
+
+:::note
+The default Helm values contain sample addresses, for example, `https://sonar.example.com/`. A sample address is not empty, so the portal sends the request to it and shows an error of the connection, not the `... is not configured` message. In this case, see [SonarQube Upstream Failure](sonarqube-upstream-failure.md) and [Dependency-Track Project Not Found](dependency-track-project-not-found.md).
+:::
+
+## Solution
+
+1. Find the variable in the message. For the **Monitoring** tab, it is `PROMETHEUS_URL`.
+
+2. For a variable from the ConfigMap, check its value:
+
+    ```bash
+    kubectl -n <krci-namespace> get configmap portal-config -o yaml | grep -E "SONAR_HOST_URL|DEPENDENCY_TRACK_URL|TEKTON_RESULTS_URL|PROMETHEUS_URL|GITFUSION_URL|KRCI_AUDIT_URL"
+    ```
+
+    If the value is empty or absent, set it in the Helm values and upgrade the release:
+
+    ```yaml title="values.yaml"
+    krci-portal:
+      configEnv:
+        PROMETHEUS_URL: http://prometheus.monitoring.svc:9090
+    ```
+
+    The portal Pod restarts by itself when the ConfigMap changes.
+
+3. For a variable from the Secret (`SONAR_TOKEN`, `DEPENDENCY_TRACK_API_KEY`), check that the Secret contains the key. The command prints only the key names:
+
+    ```bash
+    kubectl -n <krci-namespace> get secret portal-secret -o jsonpath='{.data}' | jq 'keys'
+    ```
+
+    If the key is absent, add it:
+    - If the `portal-secret` Secret is created manually, add the key to it, and restart the portal:
+
+        ```bash
+        kubectl -n <krci-namespace> rollout restart deploy/krci-portal
+        ```
+
+    - If the Secret is managed by the External Secrets Operator, add the key to the external store under the Portal `eso.secretPath`. The `ExternalSecret` resource copies all keys of that path, so the key name in the store must equal the variable name. To apply the value without waiting for the refresh interval, run:
+
+        ```bash
+        kubectl -n <krci-namespace> annotate externalsecret portal-secret force-sync=$(date +%s) --overwrite
+        kubectl -n <krci-namespace> rollout restart deploy/krci-portal
+        ```
+
+        :::warning
+        Do not delete the `ExternalSecret` resource. The Secret it creates is removed together with it, and the portal loses all its secret values, including the session secret. The portal Pod then cannot start after a restart.
+        :::
+
+    :::note
+    By default, the portal stores sessions in a non-persistent database, so users sign in again after a restart. To avoid it, see [Portal Login and Session Issues](portal-login-issues.md).
+    :::
+
+4. If the **Configuration Error** screen appears, check that the portal Pod is running and read its log:
+
+    ```bash
+    kubectl -n <krci-namespace> get pods | grep krci-portal
+    kubectl -n <krci-namespace> logs deploy/krci-portal --tail=100
+    ```
+
+## Related Articles
+
+* [Upgrade KubeRocketCI v3.13](../upgrade/upgrade-krci-3.13.md)
+* [Upgrade KubeRocketCI v3.14](../upgrade/upgrade-krci-3.14.md)
+* [SonarQube Upstream Failure](sonarqube-upstream-failure.md)
+* [Portal Login and Session Issues](portal-login-issues.md)
+
+---
+
+## Empty Widgets on the Overview Page
+
+<!-- markdownlint-disable MD025 -->
+
+# Empty Widgets on the Overview Page
 
 <head>
   <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/troubleshooting/forbidden-messages" />
@@ -20112,13 +20235,13 @@ To find all affected namespaces, see [Upgrade KubeRocketCI v3.15 to 3.16](../upg
 
 ## Problem
 
-Users can't see resources within the KubeRocketCI dedicated namespace via KubeRocketCI portal:
+Users can't see resources within the KubeRocketCI dedicated namespace via KubeRocketCI portal. Depending on the cause, the pages are either empty, with all counters equal to zero, or the portal shows `Forbidden` messages. The following screenshot shows the empty **Overview** page:
 
   ![Resource observability issue](../../assets/operator-guide/resource_observability_issue.png "Resource observability issue")
 
 ## Cause
 
-The problem might be caused by several factors. First of all, default and allowed namespaces may be either unset or set incorrectly. Secondly, service account used for browsing the KubeRocketCI portal may have insufficient permission set. Thirdly, if Keycloak is used for as an authentication mechanism, then the problem might be related to improper group membership.
+The problem might be caused by several factors. First of all, default and allowed namespaces may be either unset or set incorrectly. For example, if the default namespace points to a namespace that does not exist in the cluster, the portal does not report an error and shows empty pages. Secondly, service account used for browsing the KubeRocketCI portal may have insufficient permission set. Thirdly, if Keycloak is used for as an authentication mechanism, then the problem might be related to improper group membership.
 
 ## Solution
 
@@ -20126,9 +20249,13 @@ Solution can vary depending on the way users log into the platform, whether it i
 
 ### Solution 1 (Configure Default namespace)
 
-This solution suits those who to log into the KubeRocketCI portal Keycloak.
+This solution suits those who log into the KubeRocketCI portal via Keycloak.
 
-To fix the problem, check both default and allowed namespace by navigating to the **KubeRocketCI** portal -> **Account Settings** -> **Cluster**. Refer to the [KubeRocketCI portal](../../user-guide/portal-settings.md#manage-namespaces) page for more details.
+To fix the problem, check both default and allowed namespaces. Click the cluster name in the upper left corner of the portal and select **Namespaces**, or click **Manage Namespaces** in the **Quick Actions** section of the **Home** page. Make sure that the KubeRocketCI namespace is set as the default one and is included in the allowed namespaces. To check that the namespace exists in the cluster, run `kubectl get namespace <namespace>`. Refer to the [KubeRocketCI portal](../../user-guide/portal-settings.md#manage-namespaces) page for more details.
+
+:::note
+The portal keeps the namespaces in the browser. If the namespaces were never set in this browser, the portal uses the `DEFAULT_CLUSTER_NAMESPACE` value from the portal configuration. For more details, see [How Does KubeRocketCI Determine the Default Namespace on First Login?](/faq/how-to/devops/determine-default-namespace-first-login)
+:::
 
 ### Solution 2 (Service Account Token)
 
@@ -20270,12 +20397,232 @@ Currently, this section covers the following issues:
 - [Container Registry Error](container-registry-error.md)
 - [Sync and Health Status Unknown](sync-health-status-unknown.md)
 - [Codebase Creation Issues](codebase-creation-issues.md)
-- [Forbidden Messages on the Overview Page](forbidden-messages.md)
+- [Portal Login and Session Issues](portal-login-issues.md)
+- [Empty Widgets on the Overview Page](forbidden-messages.md)
+- [Feature Is Not Configured](feature-not-configured.md)
+- [PipelineRun History and Logs Are Missing](pipelinerun-history-missing.md)
+- [Triggered By Is N/A or Administration Is Missing](triggered-by-and-administration.md)
 - [Review Pipeline is Failed](review-pipeline-is-failed.md)
 - [Modify GitOps Repository Path](modify-gitops-repo-path.md)
 - [SonarQube Upstream Failure](sonarqube-upstream-failure.md)
 - [Dependency-Track Project Not Found](dependency-track-project-not-found.md)
 - [Dependencies Tab Shows Zero Vulnerabilities](dependency-track-zero-vulnerabilities.md)
+
+---
+
+## PipelineRun History and Logs Are Missing
+
+<!-- markdownlint-disable MD025 -->
+
+# PipelineRun History and Logs Are Missing
+
+<head>
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/troubleshooting/pipelinerun-history-missing" />
+</head>
+
+This troubleshooting page covers the problems with the history of PipelineRuns, the logs of completed runs, and the pipeline metrics in the KubeRocketCI portal.
+
+## Problem
+
+The portal shows only the PipelineRuns that still exist in the cluster, or it shows one of the following messages:
+
+* Under the list of PipelineRuns, the portal shows `Older runs didn't load` and the **Retry** button:
+
+  ![Older runs didn't load](../../assets/operator-guide/troubleshooting/pipelinerun-history-error.png "Older runs didn't load")
+
+* In the logs of a completed PipelineRun, the portal shows `Archiving in progress — logs will appear shortly...` and then, after one minute, `Logs may not be available` with the description `The pipeline has completed, but logs were not archived. Pod logs may have been garbage-collected.`
+* The **Pipeline Metrics** page shows `Failed to load metrics`.
+* The PipelineRun list shows no history for a namespace other than the default one.
+
+## Cause
+
+The portal keeps no history of its own. It shows the PipelineRuns that exist in the cluster, and it reads the completed runs, their logs, and the metrics from the Tekton Results API. The following table lists the causes and how they look in the portal log:
+
+| Message in the portal log or error | Cause |
+|------------------------------------|-------|
+| `[Tekton Results] Status: 401` | The API requires a token, and the portal sent none or an invalid one. |
+| `[Tekton Results] Status: 403` | The API accepted the token, but the portal ServiceAccount has no access to the Tekton Results of the namespace. |
+| `[Tekton Results] Status: 400` and `Client sent an HTTP request to an HTTPS server` | The `TEKTON_RESULTS_URL` parameter starts with `http://`, but the API works over TLS. |
+| `TEKTON_RESULTS_URL is not an https:// URL: the ServiceAccount token is not sent` | The portal sends its token only over HTTPS. |
+| `No ServiceAccount token mounted: requests are sent unauthenticated` | The portal Pod has no ServiceAccount token because `serviceAccount.automount` is `false`. |
+| `Tekton Results is unreachable` | The portal cannot connect to the API, for example, because of DNS, a network policy, or a certificate that the portal does not trust. |
+| `TEKTON_RESULTS_URL environment variable is not configured` | The parameter is empty. See [Feature Is Not Configured](feature-not-configured.md). |
+
+Other situations are not errors:
+
+* **A run is not archived yet.** A PipelineRun is stored in Tekton Results shortly after it completes. If the Tekton Results watcher does not work or lags, the logs stay unavailable. If the Pod of the run is already deleted, the logs are lost.
+* **History covers only the default namespace.** The portal reads Tekton Results of the default namespace only. If you filter the list by another namespace, only the live runs are shown.
+* **An archived run cannot be selected.** The rows of the history have the `PipelineRun is archived` tooltip and are not selectable, because the run no longer exists in the cluster.
+
+## Solution
+
+1. Read the reason in the portal log:
+
+    ```bash
+    kubectl -n <krci-namespace> logs deploy/krci-portal | grep "Tekton Results"
+    ```
+
+2. Check the address and the portal values:
+
+    ```bash
+    kubectl -n <krci-namespace> get configmap portal-config -o yaml | grep TEKTON_RESULTS_URL
+    ```
+
+    Since KubeRocketCI 3.16.1, the Tekton Results API works over `https://` with authentication. The portal needs the `https://` address, the CA certificate of the API, and the read access of its ServiceAccount. Set the values as described in [Configure the Portal for the Tekton Results API](../ci/tekton-long-term-storage.md#configure-the-portal-for-the-tekton-results-api):
+
+    ```yaml title="values.yaml"
+    krci-portal:
+      configEnv:
+        TEKTON_RESULTS_URL: https://tekton-results-api-service.tekton-pipelines.svc:8080
+      tektonResults:
+        rbac:
+          enabled: true
+        caCert: |
+          -----BEGIN CERTIFICATE-----
+          <contents of ca.crt>
+          -----END CERTIFICATE-----
+    ```
+
+    :::note
+    If you did not enable the authentication and TLS for Tekton Results, the API still works over plain HTTP without a token. In this case, the `http://` address is correct, the portal shows the history, and the warning about the missing `https://` address in the log is harmless.
+    :::
+
+    To check which mode the API uses, send a request from the portal Pod. The command sends no token:
+
+    ```bash
+    kubectl -n <krci-namespace> exec deploy/krci-portal -- node -e '
+    fetch(process.env.TEKTON_RESULTS_URL + "/apis/results.tekton.dev/v1alpha2/parents/<namespace>/results?page_size=10", { signal: AbortSignal.timeout(10000) })
+      .then(async r => console.log(r.status, (await r.text()).slice(0, 200)))
+      .catch(e => console.log("ERROR:", e.cause?.code || e.message))
+    '
+    ```
+
+    The `200` status means that the API needs no token. The `401` or `403` status means that the API requires authentication, so the portal needs the `https://` address and the values above. The `400` status with the `Client sent an HTTP request to an HTTPS server` message means that the API works over TLS, so use the `https://` address.
+
+3. If the API is unreachable, check that the Tekton Results Pods are running, and that the address from step 2 resolves from the portal namespace:
+
+    ```bash
+    kubectl -n tekton-pipelines get pods | grep tekton-results
+    kubectl -n tekton-pipelines get svc tekton-results-api-service
+    ```
+
+4. If the logs of new runs never appear, check that the watcher archives them. Read the log of the watcher Pod from the output of the previous step, for example:
+
+    ```bash
+    kubectl -n tekton-pipelines logs <tekton-results-watcher-pod> --tail=100
+    ```
+
+5. After you change a Helm value, the portal Pod restarts by itself. Open the **PipelineRuns** page again, or click **Retry** under the list.
+
+## Related Articles
+
+* [Tekton Long-Term Log Storage](../ci/tekton-long-term-storage.md)
+* [Feature Is Not Configured](feature-not-configured.md)
+* [Empty Widgets on the Overview Page](forbidden-messages.md)
+
+---
+
+## Portal Login and Session Issues
+
+<!-- markdownlint-disable MD025 -->
+
+# Portal Login and Session Issues
+
+<head>
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/troubleshooting/portal-login-issues" />
+</head>
+
+This troubleshooting page covers the problems that occur when users sign in to the KubeRocketCI portal or when the portal ends their session.
+
+## Problem
+
+The sign-in fails in one of the following ways:
+
+* After you click **Sign In** and authenticate in Keycloak, the portal returns you to the login page and shows the red **Error** message `Something went wrong. Please try again.`:
+
+  ![Login error](../../assets/operator-guide/troubleshooting/portal-login-error.png "Login error")
+
+* The login page shows the **Session Expired** message `Your session has expired. Please sign in again to continue.`, or the portal shows the `Session expired. Please log in again.` notification:
+
+  ![Session expired](../../assets/operator-guide/troubleshooting/portal-session-expired.png "Session expired")
+
+* After the sign-in, the portal opens the login page again and again.
+
+* All users are signed out after the portal is updated or restarted.
+
+* The **Use Service Account Token** form rejects a token.
+
+## Cause
+
+The portal shows the same generic message for most of the sign-in failures, so the real reason is visible only in the portal log. The following table lists the messages that the portal writes there and what they mean:
+
+| Message in the portal log or token form | Cause |
+|-----------------------------------------|-------|
+| `Invalid callback URL origin` | The address in the browser differs from the `PORTAL_URL` parameter of the portal. |
+| `No pending login session` | The browser did not send the session cookie back after the redirect from Keycloak. The portal sets the cookie with the `Secure` and `SameSite=Strict` attributes, so the browser does not keep it when you open the portal over plain HTTP. The cookie is also lost when the portal pod restarts between the redirect to Keycloak and the return. |
+| `Invalid or mismatched state parameter` | The sign-in was started in another browser tab or session, or the cookie was replaced during the sign-in. |
+| `Failed to connect to the identity provider.` | The portal pod cannot reach the `OIDC_ISSUER_URL` address, for example, because of DNS, a network policy, or a TLS certificate that is not trusted. |
+| `Server could not initialize OIDC client.` | At least one of the `OIDC_ISSUER_URL`, `OIDC_CLIENT_ID`, `OIDC_SCOPE`, `OIDC_CODE_CHALLENGE_METHOD` parameters or the `OIDC_CLIENT_SECRET` secret value is empty. |
+| `Your account does not have an email address, which is required to sign in.` | The Keycloak user has no email address. |
+| `Sign-in failed: the identity provider did not return the required profile information` | The `OIDC_SCOPE` parameter lacks the `profile` or `email` scope, or the Keycloak client does not add the claims to the token. |
+
+A session also ends by itself:
+
+* The session cookie lives for 24 hours. After that, you sign in again.
+* The portal stores sessions in a local SQLite database. By default, the database is not persistent, so every restart of the portal pod, for example, after an upgrade, deletes all sessions.
+* A session started with a token has no refresh token, so it ends when the token expires. A Service Account token created with `kubectl create token` lives for one hour by default. A session lasts no longer than 24 hours, even if the token is valid longer.
+* The identity provider can refuse to refresh the session, for example, when the user's session in Keycloak is closed.
+
+## Solution
+
+1. Read the reason in the portal log:
+
+    ```bash
+    kubectl logs -n <krci-namespace> deploy/krci-portal | grep -i "oidc\|session\|login"
+    ```
+
+2. Make sure the portal opens over HTTPS, and the address in the browser matches the `PORTAL_URL` parameter exactly, including the scheme and the host name, without a trailing path. Set the parameter in the Helm values:
+
+    ```yaml title="values.yaml"
+    krci-portal:
+      configEnv:
+        PORTAL_URL: https://portal.example.com
+    ```
+
+3. In Keycloak, open the portal client and check that **Valid redirect URIs** contains the portal address with the wildcard, for example, `https://portal.example.com/*`. The portal sends the user back to the `/auth/callback` path. For more details, see [Portal OIDC Configuration](../auth/ui-portal-oidc.md).
+
+4. Check that the `portal-secret` Secret contains the `OIDC_CLIENT_SECRET` and `SERVER_SECRET` keys, and that the `extraEnvFrom` parameter references both the secret and the `portal-config` ConfigMap:
+
+    ```bash
+    kubectl -n <krci-namespace> get secret portal-secret -o jsonpath='{.data}' | jq 'keys'
+    ```
+
+5. Check that the Keycloak user has an email address, and that the client delivers the `profile` and `email` scopes. The portal requests the scopes from the `OIDC_SCOPE` parameter, which is `openid profile email` by default.
+
+6. To keep users signed in after the portal restarts, enable the persistent storage for the session database:
+
+    ```yaml title="values.yaml"
+    krci-portal:
+      persistence:
+        enabled: true
+    ```
+
+    :::note
+    The persistent volume forces the portal Deployment to use the `Recreate` update strategy, so the portal is unavailable for a short time during an update.
+    :::
+
+7. If the **Use Service Account Token** form shows an error, find it in the table:
+
+    | Message | Solution |
+    |---------|----------|
+    | `The service account token was rejected by the cluster. Verify the token is valid and not expired.` | Create a new token: `kubectl create token <service-account> -n <namespace> --duration=24h`. |
+    | `The cluster does not support SelfSubjectReview. This requires Kubernetes 1.28+ (GA) or 1.26+ (beta).` | The portal validates the token with the SelfSubjectReview API. Update the cluster, or use the Keycloak sign-in. |
+    | `Failed to validate the service account token against the cluster.` | The portal cannot reach the Kubernetes API. Check the portal log and the network connection. |
+
+## Related Articles
+
+* [Portal OIDC Configuration](../auth/ui-portal-oidc.md)
+* [Empty Widgets on the Overview Page](forbidden-messages.md)
 
 ---
 
@@ -20438,6 +20785,98 @@ Incorrect Configuration of ArgoCD Integration
 ## Related Articles
 
 * [Argo CD Integration](../../operator-guide/cd/argocd-integration.md)
+
+---
+
+## Triggered By Is N/A or Administration Is Missing
+
+<!-- markdownlint-disable MD025 -->
+
+# Triggered By Is N/A or Administration Is Missing
+
+<head>
+  <link rel="canonical" href="https://docs.kuberocketci.io/docs/operator-guide/troubleshooting/triggered-by-and-administration" />
+</head>
+
+This troubleshooting page covers three questions about the identity of users in the KubeRocketCI portal: why a PipelineRun has no initiator, why the **Administration** section is not in the sidebar, and why the **My Activity** card is empty.
+
+## Problem
+
+The portal shows one of the following:
+
+* The header of a PipelineRun shows `Triggered By: N/A`. The tooltip of the value says `No creator recorded for this run. Ensure krci-audit is enabled and configured properly.`:
+
+  ![Triggered By N/A](../../assets/operator-guide/troubleshooting/triggered-by-na.png "Triggered By N/A")
+
+* The sidebar has no **Administration** section, so the **Audit Events** page is not available:
+
+  ![No Administration section](../../assets/operator-guide/troubleshooting/administration-missing.png "No Administration section")
+
+* The **My Activity** card on the **Overview** page shows `No pipeline runs found for your account`.
+
+## Cause
+
+Each of the three items has its own cause:
+
+| Item | Cause |
+|------|-------|
+| `Triggered By: N/A` | The portal reads the creator of a run from the **krci-audit** add-on. The value is `N/A` when the add-on is not installed, the `KRCI_AUDIT_URL` parameter is empty or wrong, the add-on is not reachable, or it has no creation record for the run. |
+| No **Administration** section | The portal shows the section only to users with the `administrator` role. The role comes from the OIDC groups of the user: the user must belong to the `administrator` group in Keycloak, or to a group listed in the `PORTAL_ADMIN_GROUPS` parameter. A session that uses a Service Account token never gets the role. |
+| Empty **My Activity** | The card does not use `Triggered By`. It compares the Git author of the runs with your name, your email, or the part of your email before `@`. It lists only the five latest runs that exist in the cluster now, so older archived runs are not included. |
+
+## Solution
+
+### Triggered By Is N/A
+
+1. Check the address of the add-on and that its Pods are running:
+
+    ```bash
+    kubectl -n <krci-namespace> get configmap portal-config -o yaml | grep KRCI_AUDIT_URL
+    kubectl get pods -A | grep krci-audit
+    ```
+
+    The default address is `http://krci-audit-api.krci-audit:8080`. If the add-on is installed in another namespace, set its address:
+
+    ```yaml title="values.yaml"
+    krci-portal:
+      configEnv:
+        KRCI_AUDIT_URL: http://krci-audit-api.krci-audit:8080
+    ```
+
+2. If the add-on is not installed, install it as described in [Audit Trails Setup](../monitoring-and-observability/audit-trails-setup.md). The add-on records only the runs created after its installation, so the older runs keep the `N/A` value.
+
+### Administration Is Missing
+
+1. Sign in with OIDC. The Service Account token login never shows the section.
+
+2. Check which groups the portal received. In the browser, open the developer tools, switch to the **Network** tab, reload the portal page, and open the response of the `auth.me` request. The `groups` field lists the groups from the token, and the `roles` field lists the portal roles. The section is shown only when `roles` contains `administrator`. Do not share this response, because it also contains your name and email. The membership in a group that gives access to the cluster, for example, a `cluster-admins` group, does not give the portal role. Only the `administrator` group or the groups from the `PORTAL_ADMIN_GROUPS` parameter do:
+
+    ![The auth.me response](../../assets/operator-guide/troubleshooting/auth-me-response.png "The auth.me response")
+
+3. In Keycloak, add the user to the `administrator` group. If your administrators use another group, set its name in the Helm values. To list several groups, separate them with commas:
+
+    ```yaml title="values.yaml"
+    krci-portal:
+      configEnv:
+        PORTAL_ADMIN_GROUPS: administrator,platform-admins
+    ```
+
+    The portal Pod restarts by itself when the ConfigMap changes.
+
+4. Sign out and sign in again, so that the portal reads the groups of the user again. After that, the **Administration** section with the **Audit Events** page appears in the sidebar:
+
+    ![The Administration section](../../assets/operator-guide/troubleshooting/administration-visible.png "The Administration section")
+
+### My Activity Is Empty
+
+1. Check the name and the email in the Git commits of your runs. They must match your name or email in the portal. The match ignores the letter case.
+2. Remember that the card shows only the runs that still exist in the cluster. To see the older runs, open the **PipelineRuns** page.
+
+## Related Articles
+
+* [Audit Trails Setup](../monitoring-and-observability/audit-trails-setup.md)
+* [Portal Login and Session Issues](portal-login-issues.md)
+* [Feature Is Not Configured](feature-not-configured.md)
 
 ---
 

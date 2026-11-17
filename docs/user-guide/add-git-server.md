@@ -164,8 +164,7 @@ For [Bitbucket](https://support.atlassian.com/bitbucket-cloud/docs/create-an-api
 
     Navigate to the **Configuration** section and select the **Git Servers** under **Version Control System**. Click the **Add Git Server** button and fill in the following fields in the opened dialog:
 
-    * **Git provider** – select the Git hosting service: GitHub, GitLab, or Bitbucket.
-    * **Name** – a unique name for this Git Server integration (e.g., `my-github` or `company-gitlab`). Used to identify the server when creating codebases.
+    * **Git provider** – select the Git hosting service: GitHub, GitLab, or Bitbucket. KubeRocketCI supports one Git Server per provider, so a provider that already has a Git Server is disabled in the list. GitHub is preselected when it is free; otherwise, the first free provider is preselected.
     * **Host** – the hostname of your Git server, without a scheme (e.g., `github.com`, `gitlab.com`, `bitbucket.org`, or your self-hosted GitLab/GitHub/Bitbucket hostname).
     * **User** – the username or account name used to access the Git server (e.g., your GitHub username or GitLab user name).
     * **SSH port** – the port used for SSH connections to the Git server. Default is usually `22`; change only if your server uses a different SSH port.
@@ -185,6 +184,23 @@ For [Bitbucket](https://support.atlassian.com/bitbucket-cloud/docs/create-an-api
     :::
 
     Click **Save** to create the Git Server. As a result, you will be able to create codebases using an integrated Version Control System.
+
+    :::note
+    The portal has no **Name** field. It names the Git Server after its provider (`github`, `gitlab`, `bitbucket`, or `gerrit`) and stores the credentials in a Secret named `ci-<provider>`, for example `ci-github`. For Gerrit, the Secret is `gerrit-ciuser-sshkey`. The Tekton triggers and pipelines look up the credentials by these names.
+
+    For example, adding a GitHub Git Server creates the following objects:
+
+    ```text
+    Secret    ci-github   data: id_rsa, token, username   label: app.edp.epam.com/secret-type=repository
+    GitServer github      spec.gitProvider: github, spec.nameSshKeySecret: ci-github
+    ```
+
+    When all providers already have a Git Server, the **Add Git Server** button is disabled, and its tooltip reads *Every Git provider already has a Git Server.*
+    :::
+
+    :::warning
+    If the `ci-<provider>` or `gerrit-ciuser-sshkey` Secret already exists, for example, it is managed by External Secrets, the portal fails to create the Git Server with a `409 Conflict` error and leaves no Git Server behind. Delete the Secret (or the External Secret that manages it) and retry, or edit the existing Git Server instead.
+    :::
 
 ## Bitbucket Default Branch Management
 

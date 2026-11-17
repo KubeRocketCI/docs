@@ -201,6 +201,7 @@ The list of the available Add-Ons:
 |Keycloak|An open-source Identity and Access Management (IAM) solution that enables authentication, authorization, and user management in Kubernetes clusters.|false|
 |Keycloak PostgreSQL|A PostgreSQL database operator that simplifies the deployment and management of PostgreSQL instances in Kubernetes clusters.|false|
 |krci-audit|An append-only admission audit trail (capture, store, and read API) recording who created, updated, or deleted KubeRocketCI resources.|false|
+|krci-cache|An HTTP cache for Tekton pipeline artifacts that several KubeRocketCI instances can share.|false|
 |MinIO Operator|An operator that simplifies the deployment and management of MinIO, a high-performance object storage server compatible with Amazon S3, in Kubernetes clusters.|false|
 |Nexus|Serves as a repository manager, enabling the proxying, aggregation, and management of dependencies, as well as the storage of artifacts.|false|
 |Nexus Operator|A tool designed to streamline the handling of Nexus resources and configurations, facilitating the proxying, collection, and management of dependencies within a repository manager.|false|
@@ -215,6 +216,5 @@ The list of the available Add-Ons:
 |StorageClass|A Kubernetes resource that provides a way to define different classes of storage with different performance characteristics for persistent volumes.|false|
 |Tekton|A flexible and cloud-native framework for building, testing, and deploying applications using Kubernetes-native workflows.|false|
 |Tekton Monitoring|Prometheus ServiceMonitors and Grafana dashboards for the Tekton stack, covering pipeline throughput, task duration, queueing, and control plane health.|false|
-|Tekton-cache||false|
 |Vault|An open-source secrets management solution that provides secure storage, encryption, and access control for sensitive data in Kubernetes clusters.|false|
 |Velero|An open source tool to safely backup and restore, perform disaster recovery, and migrate Kubernetes cluster resources and persistent volumes.|false|

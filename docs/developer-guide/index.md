@@ -110,11 +110,11 @@ Our DockerHub repository hosts Docker images for various platform components:
 - [EDP Gerrit](https://hub.docker.com/r/epamedp/edp-gerrit)
 - [Gerrit Operator](https://hub.docker.com/r/epamedp/gerrit-operator)
 - [Keycloak Operator](https://hub.docker.com/r/epamedp/keycloak-operator/)
+- [KubeRocketCI Cache](https://hub.docker.com/r/epamedp/krci-cache/)
 - [KubeRocketCI Portal](https://hub.docker.com/r/epamedp/krci-portal/)
 - [Nexus Operator](https://hub.docker.com/r/epamedp/nexus-operator/)
 - [Sonar Operator](https://hub.docker.com/r/epamedp/sonar-operator/)
 - [Tekton](https://hub.docker.com/r/epamedp/edp-tekton/)
-- [Tekton Cache](https://hub.docker.com/r/epamedp/tekton-cache/)
 - [Tekton Custom Task](https://hub.docker.com/r/epamedp/tekton-custom-task/)
 - [GitFusion](https://hub.docker.com/r/epamedp/gitfusion)
 

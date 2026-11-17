@@ -34,6 +34,16 @@ To view the current Git Server, you can open Portal **Configuration** -> **Git S
 * **+ Add Git Server** - add a new blank to specify the new Git Server's parameters.
 * **Delete a Git Server** - deletes the Git Server after confirmation.
 
+KubeRocketCI supports one Git Server per provider: GitHub, GitLab, Bitbucket, and Gerrit, so the platform has up to four Git Servers. A Git Server created in the portal is named after its provider, for example `github`.
+
+## Edit Git Server
+
+Open a Git Server in the list to change its host, ports, token, and SSH keys. The Git Server name is not shown and cannot be changed.
+
+:::warning
+Portal 0.9.0 (KubeRocketCI 3.16.0) let you name a Git Server freely, and stored its credentials in a `ci-<git-server-name>` Secret. The Tekton triggers look up `ci-<provider>`, so webhooks of a Git Server whose name differs from its provider do not start pipelines. Such a Git Server stays visible and editable, but the portal no longer creates one. See [Upgrade 3.16.0 to 3.16.1](../operator-guide/upgrade/upgrade-krci-3.16.md).
+:::
+
 ## View Authentication Data
 
 To view the authentication data used to connect to the Git server, click the **eye** icon in the corresponding field, or read the Secret that the Git Server names in its `spec.nameSshKeySecret` field:

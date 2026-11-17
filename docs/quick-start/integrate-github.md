@@ -61,7 +61,7 @@ To integrate KubeRocketCI with GitHub, follow the steps below:
 
 4. In UI Portal, navigate to **Configuration** -> **Version Control System** -> **Git Servers**. Define the following values and click **Save**:
 
-    - Git provider: select `GitHub`
+    - Git provider: select `GitHub`. The portal names the Git Server `github`.
     - Host: `github.com`
     - User: `git`
     - SSH port: `22`

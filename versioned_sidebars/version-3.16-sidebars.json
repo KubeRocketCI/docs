@@ -225,6 +225,7 @@
           "items": [
             "operator-guide/devsecops/overview",
             "operator-guide/devsecops/security-pipelines",
+            "operator-guide/devsecops/runtime-security-findings",
             "operator-guide/devsecops/dependency-track",
             "operator-guide/devsecops/defectdojo"
           ]

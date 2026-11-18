@@ -93,6 +93,7 @@ words:
   - crunchydata
   - csanchez
   - cutover
+  - daemonset
   - dagandersen
   - daniilnedostup
   - dbchecker
@@ -282,7 +283,9 @@ words:
   - regcred
   - Rego
   - refspec
+  - reimports
   - rekor
+  - replicaset
   - reponame
   - reportportal
   - resourcetemplates
@@ -291,6 +294,7 @@ words:
   - rolebinding
   - rolebindings
   - rolesmapping
+  - rollouts
   - rpuser
   - SAMEORIGIN
   - SDLC
@@ -364,6 +368,7 @@ words:
   - vacuumdb
   - validatingadmissionpolicies
   - validatingwebhookconfigurations
+  - valkey
   - vcluster
   - velero
   - Veracode

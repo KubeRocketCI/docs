@@ -227,16 +227,16 @@ This is the primary approach, used in all security-scan pipelines. It renders th
 
 | Step | Description |
 |------|-------------|
-| **discover-image-repository** | Queries Kubernetes for the `CodebaseImageStream` CR to extract the image repository and latest tag |
-| **helm-template-and-extract** | Runs `helm template` with image overrides from the previous step, then parses rendered manifests for all `image:` references |
+| **discover-image-repository** | Queries Kubernetes for the `CodebaseImageStream` CR to extract the image repository (`spec.imageName`) and the last tag in `spec.tags` |
+| **helm-template-and-extract** | Runs `helm template` with image overrides, then parses rendered manifests for all `image:` references. The tag is the `IMAGE_TAG` pipeline parameter when it is set, otherwise the tag from the previous step |
 | **trivy** | Scans each discovered image using [Trivy](https://github.com/aquasecurity/trivy) in client/server mode, producing a JSON report per image |
 | **grype** | Scans each discovered image using [Anchore Grype](https://github.com/anchore/grype), producing a JSON report per image |
 | **upload-report** | Uploads all Trivy and Grype reports to DefectDojo with per-image engagements |
 
 Key details:
 
-- **CodebaseImageStream lookup** normalizes the branch name (lowercase, non-alphanumeric characters replaced with `-`) to locate the correct resource.
-- **Helm template** uses `--set image.repository` and `--set image.tag` overrides so rendered manifests contain real production image references.
+- **CodebaseImageStream lookup** reads the resource `{CODEBASE_NAME}-{branch}`. The branch is the `git-source-revision` of the run, lowercased, with every character other than a letter, digit, or `.` replaced with `-`.
+- **Helm template** uses `--set image.repository` and `--set image.tag` overrides so rendered manifests contain real production image references. The webhook trigger templates do not set `IMAGE_TAG`, so a triggered run scans the last tag of the CodebaseImageStream. If no CodebaseImageStream exists, the chart defaults are used.
 - If no Helm chart exists at `deploy-templates/`, the scan is skipped gracefully.
 - **Trivy** runs in client/server mode by default (server at `http://trivy-service.trivy-system:4954`) for performance. It falls back to standalone mode if no server is configured.
 - **Grype** always runs standalone (no server mode).
@@ -248,7 +248,7 @@ For scanning images that already exist in a remote registry, without needing sou
 
 #### Build-Time TAR Scanning (image-scan)
 
-For scanning container images saved as TAR archives (e.g., output of `kaniko --tarPath`). Runs both Trivy and Grype. Uses a fixed DefectDojo engagement name `container-security`.
+For scanning container images saved as TAR archives (e.g., output of `kaniko --tarPath`). Runs both Trivy and Grype. The DefectDojo engagement name is the `DD_ENGAGEMENT_NAME` task parameter, default `container-security`. The test version and branch come from the `DD_VERSION` and `DD_BRANCH_TAG` parameters. No pipeline of the `pipelines-library` chart uses this task.
 
 #### Standalone Trivy Check (trivy-scan)
 
@@ -284,29 +284,37 @@ Product Type: "KubeRocketCI"
        │    └─ Test: "Gitleaks Scan"
        │         └─ Findings: [...]
        │
-       ├─ Engagement: "image:registry.example.com/myapp:1.0.0"
-       │    ├─ Test: "Trivy Scan"
+       ├─ Engagement: "image:registry.example.com/myapp"
+       │    ├─ Test: "Trivy Scan" (version: 1.0.0)
        │    │    └─ Findings: [...]
-       │    └─ Test: "Anchore Grype"
+       │    └─ Test: "Anchore Grype" (version: 1.0.0)
        │         └─ Findings: [...]
        │
-       └─ Engagement: "image:nginx:1.25"
-            ├─ Test: "Trivy Scan"
-            └─ Test: "Anchore Grype"
+       └─ Engagement: "image:nginx"
+            ├─ Test: "Trivy Scan" (version: 1.25)
+            └─ Test: "Anchore Grype" (version: 1.25)
 ```
 
-- **Product Type** — `KubeRocketCI` (configurable via `DD_PRODUCT_TYPE_NAME`). Groups all platform codebases.
+- **Product Type** — `KubeRocketCI`, the default of the `DD_PRODUCT_TYPE_NAME` task parameter. The pipelines of the chart do not pass this parameter, so they always use the default. Groups all platform codebases.
 - **Product** — one per KubeRocketCI Codebase. Named after the Codebase (e.g., `my-java-app`).
 - **Engagement** — groups related scans. Naming depends on the scan source (see table below).
-- **Test** — one per scanner execution. Holds the actual findings.
+- **Test** — one per scanner in an engagement, titled with the scan type. Each reimport updates this test. Holds the actual findings.
+
+The image tests store the image tag as the test `version`. In the security-scan pipelines, the code security tests and the image tests store the `git-source-revision` of the run as the test branch (`branch_tag`). The code security tests have no version, because the pipelines do not pass `DD_VERSION`.
 
 ### Engagement Naming Strategy
 
 | Scan Source | Engagement Name | Rationale |
 |:----------:|----------------|-----------|
-| Code security scans | `code-security` or `code-security-{branch}` | One engagement per branch for SAST and secret findings |
-| Container image scans | `image:{full-image-reference}` | One engagement per image to prevent `close_old_findings` from cross-contaminating findings between different images |
-| TAR image scans | `container-security` | Fixed engagement for build-time scanning |
+| Code security scans | `code-security-{branch}`, where `{branch}` is the `git-source-revision` of the run (`code-security` when the task gets no branch) | One engagement per branch for SAST and secret findings |
+| Container image scans | `image:{image-reference-without-tag}`: the image reference with the text after its last `:` removed | Reimport selects the test by engagement, scan type, and test title, and `close_old_findings` closes findings only inside that test. One engagement per image repository keeps each image in its own test. The text after the last `:`, the image tag, is stored as the test `version`. Every scan of the repository, from any branch or of any tag, and by the security-scan or the image-scan-remote pipeline, replaces the findings of the previous scan |
+| TAR image scans | `container-security` | Default of the `DD_ENGAGEMENT_NAME` parameter of the `image-scan` task |
+
+The pipelines do not normalize the image reference. A reference with a digest, a registry port without a tag, a `docker.io/` or `library/` prefix, or upper case in the host gives an engagement name that differs from the plain `<registry>/<repository>`. For examples, refer to [Link CI Image Scans to Running Containers](./runtime-security-findings.md#link-ci-image-scans-to-running-containers).
+
+:::note Planned change
+  The image engagement name will be normalized in the same way as the runtime `oci-image` test tag: without the digest, with the registry port kept, without the Docker Hub `docker.io/` and `library/` prefixes, and with the host in lower case.
+:::
 
 ### Upload Mechanism
 
@@ -318,7 +326,7 @@ Authorization: Token {DD_TOKEN}
 Content-Type: multipart/form-data
 ```
 
-Standard parameters sent with every upload:
+Parameters sent with every upload:
 
 | Parameter | Value | Purpose |
 |-----------|-------|---------|
@@ -326,12 +334,27 @@ Standard parameters sent with every upload:
 | `minimum_severity` | `Info` | Import all severity levels |
 | `active` | `true` | Mark findings as active |
 | `verified` | `false` | Findings require human verification |
-| `auto_create_context` | `true` | Auto-create product, engagement, and test if missing |
+| `scan_type` | `Semgrep JSON Report`, `Gitleaks Scan`, `Trivy Scan`, or `Anchore Grype` | Report parser and test type |
+| `file` | The JSON report of the scanner | Scan results |
+| `auto_create_context` | `true` | Auto-create product type, product, engagement, and test if missing |
 | `close_old_findings` | `true` | Close findings from previous scans that are no longer present |
 | `push_to_jira` | `false` | No automatic Jira integration |
 | `environment` | `Development` | Environment classification |
-| `product_type_name` | `KubeRocketCI` | Product type grouping |
+| `product_type_name` | `DD_PRODUCT_TYPE_NAME` task parameter, default `KubeRocketCI` | Product type grouping |
 | `product_name` | `{CODEBASE_NAME}` | Maps to the KubeRocketCI Codebase |
+| `engagement_name` | See [Engagement Naming Strategy](#engagement-naming-strategy) | Engagement of the test |
+| `test_title` | The scan type, for example `Trivy Scan` | Test title. Reimport selects the test by engagement, scan type, and title |
+
+Parameters sent only when they have a value:
+
+| Parameter | Value | Sent by |
+|-----------|-------|---------|
+| `version` | The image tag: the text after the last `:` of the image reference | `image-scan-chart`, `image-scan-remote` |
+| `version` | The `DD_VERSION` task parameter. The pipelines do not pass it | `security`, `image-scan` |
+| `branch_tag` | The `CODEBASE_BRANCH` task parameter: the `git-source-revision` of the security-scan pipeline run | `security`, `image-scan-chart` |
+| `branch_tag` | The `DD_BRANCH_TAG` task parameter | `image-scan` |
+
+The `image-scan-remote` task sends no `branch_tag`. A response other than `2xx` fails the task.
 
 ### Result URLs
 
@@ -354,7 +377,7 @@ These URLs appear in the KubeRocketCI portal pipeline run details.
 | `ci-nexus` | `username`, `password` | `sonarqube-maven`, `sonarqube-gradle` tasks | Maven/Gradle artifact resolution during Sonar analysis |
 
 :::tip
-  All security-related secrets are optional at the task level. If a secret is missing, the corresponding step is skipped gracefully. This means you can incrementally adopt tools: start with SonarQube only, then add DefectDojo, then Dependency-Track.
+  The `ci-defectdojo` and `ci-dependency-track` secrets are optional in the security-scan pipeline. If a secret is missing, the corresponding upload is skipped gracefully. This means you can incrementally adopt tools: start with SonarQube only, then add DefectDojo, then Dependency-Track. The `sonarqube-*` tasks require the `ci-sonarqube` secret, and the `image-scan-remote` and `image-scan` tasks require the `ci-defectdojo` secret: without it, the step that reads the secret does not start and the task fails.
 :::
 
 For secret provisioning instructions, refer to:
@@ -540,17 +563,17 @@ Product: payment-service
   ├─ Engagement: "code-security-main"
   │    └─ (Semgrep + Gitleaks findings from Task A)
   │
-  ├─ Engagement: "image:registry.example.com/payment-service:0.1.0-SNAPSHOT.42"
+  ├─ Engagement: "image:registry.example.com/payment-service"
   │    ├─ Test: "Trivy Scan" (version: 0.1.0-SNAPSHOT.42, branch: main)
   │    │    ├─ Finding: CVE-2024-32002 — git 2.43.0 [HIGH]
   │    │    └─ Finding: CVE-2024-6345 — setuptools 69.0.3 [HIGH]
   │    └─ Test: "Anchore Grype" (version: 0.1.0-SNAPSHOT.42, branch: main)
   │         └─ Finding: CVE-2024-32002 — git 2.43.0 [High]
   │
-  └─ Engagement: "image:nginx:1.25-alpine"
-       ├─ Test: "Trivy Scan"
+  └─ Engagement: "image:nginx"
+       ├─ Test: "Trivy Scan" (version: 1.25-alpine, branch: main)
        │    └─ Finding: CVE-2024-24790 — Go standard library [CRITICAL]
-       └─ Test: "Anchore Grype"
+       └─ Test: "Anchore Grype" (version: 1.25-alpine, branch: main)
             └─ Finding: CVE-2024-24790 — Go standard library [Critical]
 ```
 
@@ -565,7 +588,7 @@ params:
   CODEBASE_NAME: "payment-service"
 ```
 
-This runs Trivy against the remote registry and uploads results to the existing `payment-service` product in DefectDojo, updating the per-image engagement.
+This runs Trivy against the remote registry and uploads results to the existing `payment-service` product in DefectDojo. The upload goes to the `Trivy Scan` test of the `image:registry.example.com/payment-service` engagement, the same test that the security-scan pipeline writes, and replaces its findings and version. The `Anchore Grype` test does not change.
 
 ### Security Coverage Summary
 

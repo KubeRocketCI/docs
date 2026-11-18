@@ -28,9 +28,13 @@ The following tools are built into KubeRocketCI Tekton pipelines and run automat
 | [Hadolint](https://github.com/hadolint/hadolint) | Dockerfile Linting | Review pipelines | Pipeline log |
 | [Helm chart-testing](https://github.com/helm/chart-testing) | Helm Chart Linting | Review pipelines | Pipeline log |
 
+## Runtime Scanning
+
+The pipelines scan images before deployment. To track the vulnerabilities and exposed secrets of the workloads that run in your clusters, install [Trivy Operator](https://aquasecurity.github.io/trivy-operator/) and the KubeRocketCI Security Operator on each cluster. The operator imports the Trivy Operator reports of every namespace into DefectDojo as namespace products, next to the codebase products of the pipelines. For the layout, filters, and close rules, refer to the [Runtime Security Findings in DefectDojo](./runtime-security-findings.md) page.
+
 ## Required Integrations
 
-To enable the full security scanning stack, provision the following integration secrets. Each secret is optional — if missing, the corresponding scanning step is skipped gracefully, allowing incremental tool adoption.
+To enable the full security scanning stack, provision the following integration secrets. In the Security-Scan pipeline, `ci-defectdojo` and `ci-dependency-track` are optional — if one is missing, the corresponding upload is skipped gracefully, allowing incremental tool adoption. The SonarQube tasks of the Build and Review pipelines require `ci-sonarqube`, and the Image-Scan-Remote pipeline requires `ci-defectdojo`.
 
 | Secret | Keys | Integration Guide |
 |:------:|------|:-----------------:|
@@ -113,6 +117,7 @@ Beyond the tools integrated into default pipelines, KubeRocketCI supports the in
 ## Related Articles
 
 * [Security Scanning Pipelines](./security-pipelines.md)
+* [Runtime Security Findings in DefectDojo](./runtime-security-findings.md)
 * [Integrate DefectDojo](./defectdojo.md)
 * [Integrate Dependency-Track](./dependency-track.md)
 * [SonarQube Integration](../code-quality/sonarqube.md)

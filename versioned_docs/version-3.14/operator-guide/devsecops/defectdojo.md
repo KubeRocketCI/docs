@@ -21,19 +21,20 @@ Install DefectDojo on Kubernetes with Helm and integrate it into KubeRocketCI pi
 :::
 
 :::note
-  For details on how KubeRocketCI pipelines report findings to DefectDojo, including the data model, engagement naming, and scan types, refer to [Security Scanning Pipelines](./security-pipelines.md).
+  For details on how KubeRocketCI pipelines report findings to DefectDojo, including the data model, engagement naming, and scan types, refer to [Security Scanning Pipelines](./security-pipelines.md). For the runtime findings of the cluster workloads, refer to [Runtime Security Findings in DefectDojo](./runtime-security-findings.md).
 :::
 
 ## Prerequisites
 
 - Kubectl version 1.34.0+ is installed. Please refer to the [Kubernetes official website](https://kubernetes.io/releases/download/) for details.
 - [Helm](https://helm.sh) version 3.19.0+ is installed. Please refer to the [Helm page](https://github.com/helm/helm/releases) on GitHub for details.
+- DefectDojo 3.5.200 is the tested and recommended version; earlier versions may work but are not tested.
 
 ## Installation
 
 :::info
-  Please refer to the [DefectDojo Helm Chart](https://github.com/DefectDojo/django-DefectDojo/tree/master/helm/defectdojo)
-  and [Deploy DefectDojo into the Kubernetes cluster](https://github.com/DefectDojo/django-DefectDojo/blob/dev/readme-docs/KUBERNETES.md) sections for details.
+  Please refer to the [DefectDojo Helm Chart](https://github.com/DefectDojo/django-DefectDojo/tree/master/helm/defectdojo), which ships the application with its PostgreSQL database and Valkey message broker,
+  and the [DefectDojo Helm chart 1.9.70 README](https://github.com/DefectDojo/django-DefectDojo/blob/3.5.200/helm/defectdojo/README.md) for details.
 :::
 
 ## Installation DefectDojo Cluster Add-On Approach
@@ -107,7 +108,7 @@ To install DefectDojo in environment, it's recommended to use the resources prov
             type: RunAsAny
           users:
           - system:serviceaccount:defectdojo:defectdojo
-          - system:serviceaccount:defectdojo:defectdojo-rabbitmq
+          - system:serviceaccount:defectdojo:defectdojo-valkey
           - system:serviceaccount:defectdojo:default
           volumes:
           - configMap
@@ -139,18 +140,15 @@ To install DefectDojo in environment, it's recommended to use the resources prov
       The `postgresql_password` and `postgresql_postgres_password` passwords must be 16 characters long.
     :::
 
-4. Create Rabbitmq admin secret:
+4. Create Valkey secret:
 
     ```bash
-    kubectl -n defectdojo create secret generic defectdojo-rabbitmq-specific \
-    --from-literal=rabbitmq-password=<rabbitmq_password> \
-    --from-literal=rabbitmq-erlang-cookie=<rabbitmq_erlang_cookie>
+    kubectl -n defectdojo create secret generic defectdojo-valkey-specific \
+    --from-literal=valkey-password=<valkey_password>
     ```
 
     :::note
-      The `rabbitmq_password` password must be 10 characters long.
-
-      The `rabbitmq_erlang_cookie` password must be 32 characters long.
+      The `valkey_password` password must be 10 characters long.
     :::
 
 5. Create DefectDojo admin secret:
@@ -173,42 +171,36 @@ To install DefectDojo in environment, it's recommended to use the resources prov
       The `metric_http_auth_password` password must be 32 characters long.
     :::
 
-6. Install DefectDojo v.2.22.4 using [defectdojo/defectdojo](https://github.com/DefectDojo/django-DefectDojo/tree/master/helm/defectdojo) Helm chart v.1.6.69:
+6. Install DefectDojo 3.5.200 using the [defectdojo/defectdojo](https://github.com/DefectDojo/django-DefectDojo/tree/3.5.200/helm/defectdojo) Helm chart 1.9.70:
 
     ```bash
     helm upgrade --install \
     defectdojo \
-    --version 1.6.69 \
+    --version 1.9.70 \
     defectdojo/defectdojo \
     --namespace defectdojo \
     --values values.yaml
     ```
 
-    Check out the *values.yaml* file sample of the DefectDojo customization:
+    The chart uses the DefectDojo images of its app version, 3.5.200, so the *values.yaml* file sets no image tag. Check out the *values.yaml* file sample of the DefectDojo customization:
 
     <details>
     <summary><b>View: values.yaml</b></summary>
 
       ```yaml
-      tag: 2.22.4
       fullnameOverride: defectdojo
       host: defectdojo.<ROOT_DOMAIN>
-      site_url: https://defectdojo.<ROOT_DOMAIN>
+      siteUrl: https://defectdojo.<ROOT_DOMAIN>
       alternativeHosts:
         - defectdojo-django.defectdojo
 
       initializer:
-        # should be false after initial installation was performed
+        # runs the database migrations on install and upgrade; keep it enabled
         run: true
       django:
         ingress:
           enabled: true # change to 'false' for OpenShift
           activateTLS: false
-        uwsgi:
-          livenessProbe:
-            # Enable liveness checks on uwsgi container. Those values are use on nginx readiness checks as well.
-            # default value is 120, so in our case 20 is just fine
-            initialDelaySeconds: 20
       ```
 
     </details>
@@ -243,11 +235,11 @@ To install DefectDojo in environment, it's recommended to use the resources prov
 
 ## Configuration DefectDojo ci-user
 
-To prepare DefectDojo for integration with KubeRocketCI, follow the steps below:
+DefectDojo 3.5.200 has no global roles. A user gets access either as a staff user or as an authorized user of a Product Type, shown as an **Organization** in the UI. The KubeRocketCI pipelines write to the `KubeRocketCI` Organization by default. To prepare DefectDojo for integration with KubeRocketCI, follow the steps below:
 
-1. Create ci user in DefectDojo UI:
+1. Create the ci user in the DefectDojo UI:
 
-    - Login to DefectDojo UI using `admin` credentials:
+    - Log in to the DefectDojo UI with the `admin` credentials:
 
       ```bash
       echo "DefectDojo admin password: $(kubectl \
@@ -257,17 +249,23 @@ To prepare DefectDojo for integration with KubeRocketCI, follow the steps below:
       | base64 --decode)"
       ```
 
-    - Go to User section
+    - Go to **Users**, click **New User**, and create the user, for example `ci-user`.
 
-    - Create new user Global role `Maintainer` permission:
+    - Grant the user access with one of these options:
 
-      ![DefectDojo update manual secret](../../assets/operator-guide/devsecops/defectdojo-createuser.png "DefectDojo set user permission")
+      - **Staff user**: select **Staff status** when you create the user. Only a superuser, such as `admin`, can set it.
+
+      - **Authorized user of the `KubeRocketCI` Organization**: leave **Staff status** cleared. Go to **Organizations** -> **Add Organization** and create the `KubeRocketCI` Organization. Open it, and in the **Authorized Users** panel, click **Add Users** and add the user.
+
+    :::warning
+      With the second option, create the `KubeRocketCI` Organization before the first pipeline run. A user without the staff status has access only to the Organizations that list it in **Authorized Users**. DefectDojo does not add the user there when its import creates the Organization.
+    :::
 
 2. Get a token of the DefectDojo user:
 
-    - Login to the DefectDojo UI using the credentials from previous steps.
+    - Log in to the DefectDojo UI with the credentials of the user from the previous step.
 
-    - Click on profile button select the `API v2 key`.
+    - Open the user menu and select **API v2 Key**.
 
     - Copy the API key.
 
@@ -329,6 +327,7 @@ After following the instructions provided, you should be able to integrate your 
 
 ## Related Articles
 
+* [Runtime Security Findings in DefectDojo](./runtime-security-findings.md)
 * [Install External Secrets Operator](../secrets-management/install-external-secrets-operator.md)
 * [External Secrets Operator Integration](../secrets-management/external-secrets-operator-integration.md)
 * [Install Harbor](../artifacts-management/harbor-installation.md)

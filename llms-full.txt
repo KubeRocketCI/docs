@@ -10402,8 +10402,8 @@ The operator reads only Kubernetes and Trivy Operator objects: namespaces, workl
 - The `krci-security-operator` chart version 0.2.0 or later.
 - Trivy Operator 0.34.0 or later is installed in the cluster and produces `VulnerabilityReport` and `ExposedSecretReport` objects.
 - DefectDojo is reachable from the operator pod.
-- DefectDojo 3.5.200 is the tested and recommended version; earlier versions may work but are not tested.
-- A DefectDojo API token with the permissions listed in [DefectDojo Token Permissions](#defectdojo-token-permissions).
+- DefectDojo 3.5.200 or later. Earlier versions may work but are not tested.
+- A DefectDojo API token of a user for the operator. See [DefectDojo API Token](#defectdojo-api-token).
 - A cluster name that is unique in this DefectDojo. See [Cluster Name](#cluster-name).
 
 ## Full View: CI and Runtime Products
@@ -10635,30 +10635,53 @@ Findings stay open in these cases:
 
 ## Install and Configure
 
-### DefectDojo Token Permissions
+### DefectDojo API Token
 
-Create a DefectDojo user for the operator and grant it access with one of the options below. To copy its API v2 key, follow step 2 of [Configure the DefectDojo ci-user](./defectdojo.md#configure-the-defectdojo-ci-user). The token needs these permissions:
+The operator uses its own DefectDojo user and API token. It does not use the `ci-user` of the pipelines or the DefectDojo integration of the KubeRocketCI Portal. The operator reads the token from a Secret in its namespace, see [Install the Operator](#install-the-operator).
+
+The token needs these permissions:
 
 | Permission | Used for |
 |---|---|
 | Read product types, products, engagements, tests, and findings | Lookups and the active findings of a test |
 | Import scans | Reimport of the reports |
 | Edit products | Product tags |
+| Edit tests | The `build_id` of a test, which records the last uploaded report |
 | Edit findings | Closing findings |
-| Add product types, products, and engagements | Creation on first use |
+| Add products and engagements | Creation of the namespace products and the `trivy-operator` engagement on first use |
+| Add product types | Creation of the Product Type on first use, only when it does not exist |
 
-DefectDojo grants access by the staff status of the user or by the authorized users of a Product Type (an **Organization** in the UI). Use one of these options:
+The operator deletes nothing in DefectDojo.
 
-- **Staff user**: a staff user has all the permissions above, including the permission to add the Product Type. Only a superuser can give a user the staff status.
-- **Authorized user of a Product Type created in advance**: create the Product Type with the `defectdojo.productType` name, for example `KubeRocketCI`, and add the operator user to its **Authorized Users**. The user then has all the permissions above for the products of this Product Type, and can create products only in this Product Type.
+DefectDojo 3.5.200 grants access by the superuser or staff status of the user, or by the authorized users of a Product Type. The UI shows a Product Type as an **Organization** and a product as an **Asset**. An authorized user of a Product Type has access to all its products and to nothing else. Choose one of these options:
+
+| Option | Access of the token | Product Type | Use |
+|---|---|---|---|
+| **Authorized user of a Product Type created in advance** (recommended) | The products of this Product Type only | Created in advance by a DefectDojo superuser | Production clusters |
+| **Staff user** | All Product Types and products, including their deletion | Created by the operator on the first import | When least privilege is not required. Only a superuser can give a user the staff status |
+| **Superuser** | All of DefectDojo | Created by the operator on the first import | Test environments only |
 
 :::warning
-  Do not let a non-staff user create the Product Type through the first import. DefectDojo does not add that user to the authorized users of the new Product Type, so later requests of the token to the Product Type and its products are denied. Create the Product Type in advance and add the user to its authorized users.
+  Do not let a non-staff user create the Product Type through the first import. DefectDojo does not add that user to the authorized users of the new Product Type, so every later request of the token is denied with HTTP 403 and the operator retries without end. Create the Product Type in advance and add the user to its authorized users.
 :::
+
+To set up the recommended option, log in to the DefectDojo UI as a superuser, such as `admin`, and follow the steps below:
+
+1. Go to **Organizations** -> **Add Organization** and create the Organization with the `defectdojo.productType` name, `KubeRocketCI` by default.
+
+2. Go to **Users**, click **New User**, and create a user for the operator, for example `krci-security-operator-<cluster-name>`. Leave **Staff status** cleared. Use one user per cluster, so that you can revoke the token of one cluster alone.
+
+3. Open the Organization, and in the **Authorized Users** panel, click **Add Users** and add the user.
+
+4. Log in as the new user, open the user menu, select **API v2 Key**, and copy the API key.
+
+5. Create the Secret with this key, see [Install the Operator](#install-the-operator).
+
+To change the token, update the Secret. The operator reads the Secret again within one minute; no restart is needed.
 
 ### Install the Operator
 
-1. Create a namespace and a Secret with the DefectDojo URL and the API token under the keys `url` and `token`:
+1. Create a namespace and a Secret with the DefectDojo URL and the API token under the keys `url` and `token`. The URL is the base address of DefectDojo, without `/api/v2`. The token is the API v2 key from [DefectDojo API Token](#defectdojo-api-token):
 
     ```bash
     kubectl create namespace krci-security

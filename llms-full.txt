@@ -28049,7 +28049,7 @@ To integrate KubeRocketCI with GitHub, follow the steps below:
 
 4. In UI Portal, navigate to **Configuration** -> **Version Control System** -> **Git Servers**. Define the following values and click **Save**:
 
-    - Git provider: select `GitHub`
+    - Git provider: select `GitHub`. The portal names the Git Server `github`.
     - Host: `github.com`
     - User: `git`
     - SSH port: `22`
@@ -31873,8 +31873,7 @@ For [Bitbucket](https://support.atlassian.com/bitbucket-cloud/docs/create-an-api
 
     Navigate to the **Configuration** section and select the **Git Servers** under **Version Control System**. Click the **Add Git Server** button and fill in the following fields in the opened dialog:
 
-    * **Git provider** – select the Git hosting service: GitHub, GitLab, or Bitbucket.
-    * **Name** – a unique name for this Git Server integration (e.g., `my-github` or `company-gitlab`). Used to identify the server when creating codebases.
+    * **Git provider** – select the Git hosting service: GitHub, GitLab, or Bitbucket. KubeRocketCI supports one Git Server per provider, so a provider that already has a Git Server is disabled in the list. GitHub is preselected when it is free; otherwise, the first free provider is preselected.
     * **Host** – the hostname of your Git server, without a scheme (e.g., `github.com`, `gitlab.com`, `bitbucket.org`, or your self-hosted GitLab/GitHub/Bitbucket hostname).
     * **User** – the username or account name used to access the Git server (e.g., your GitHub username or GitLab user name).
     * **SSH port** – the port used for SSH connections to the Git server. Default is usually `22`; change only if your server uses a different SSH port.
@@ -31894,6 +31893,23 @@ For [Bitbucket](https://support.atlassian.com/bitbucket-cloud/docs/create-an-api
     :::
 
     Click **Save** to create the Git Server. As a result, you will be able to create codebases using an integrated Version Control System.
+
+    :::note
+    The portal has no **Name** field. It names the Git Server after its provider (`github`, `gitlab`, `bitbucket`, or `gerrit`) and stores the credentials in a Secret named `ci-<provider>`, for example `ci-github`. For Gerrit, the Secret is `gerrit-ciuser-sshkey`. The Tekton triggers and pipelines look up the credentials by these names.
+
+    For example, adding a GitHub Git Server creates the following objects:
+
+    ```text
+    Secret    ci-github   data: id_rsa, token, username   label: app.edp.epam.com/secret-type=repository
+    GitServer github      spec.gitProvider: github, spec.nameSshKeySecret: ci-github
+    ```
+
+    When all providers already have a Git Server, the **Add Git Server** button is disabled, and its tooltip reads *Every Git provider already has a Git Server.*
+    :::
+
+    :::warning
+    If the `ci-<provider>` or `gerrit-ciuser-sshkey` Secret already exists, for example, it is managed by External Secrets, the portal fails to create the Git Server with a `409 Conflict` error and leaves no Git Server behind. Delete the Secret (or the External Secret that manages it) and retry, or edit the existing Git Server instead.
+    :::
 
 ## Bitbucket Default Branch Management
 
@@ -33849,6 +33865,16 @@ To view the current Git Server, you can open Portal **Configuration** -> **Git S
 * **Undo/Save changes** - these buttons apply or revert changes made to the Git Server.
 * **+ Add Git Server** - add a new blank to specify the new Git Server's parameters.
 * **Delete a Git Server** - deletes the Git Server after confirmation.
+
+KubeRocketCI supports one Git Server per provider: GitHub, GitLab, Bitbucket, and Gerrit, so the platform has up to four Git Servers. A Git Server created in the portal is named after its provider, for example `github`.
+
+## Edit Git Server
+
+Open a Git Server in the list to change its host, ports, token, and SSH keys. The Git Server name is not shown and cannot be changed.
+
+:::warning
+Portal 0.9.0 (KubeRocketCI 3.16.0) let you name a Git Server freely, and stored its credentials in a `ci-<git-server-name>` Secret. The Tekton triggers look up `ci-<provider>`, so webhooks of a Git Server whose name differs from its provider do not start pipelines. Such a Git Server stays visible and editable, but the portal no longer creates one. See [Upgrade 3.16.0 to 3.16.1](../operator-guide/upgrade/upgrade-krci-3.16.md).
+:::
 
 ## View Authentication Data
 

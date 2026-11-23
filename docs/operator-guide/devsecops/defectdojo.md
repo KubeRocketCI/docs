@@ -28,13 +28,17 @@ Install DefectDojo on Kubernetes with Helm and integrate it into KubeRocketCI pi
 
 - Kubectl version 1.34.0+ is installed. Please refer to the [Kubernetes official website](https://kubernetes.io/releases/download/) for details.
 - [Helm](https://helm.sh) version 3.19.0+ is installed. Please refer to the [Helm page](https://github.com/helm/helm/releases) on GitHub for details.
-- DefectDojo 3.5.200 is the tested and recommended version; earlier versions may work but are not tested.
+- DefectDojo 3.5.0 is the tested and recommended version (chart 1.9.65); earlier versions may work but are not tested.
 
 ## Installation Options
 
 To install DefectDojo on Kubernetes, deploy the official [DefectDojo Helm chart](https://github.com/DefectDojo/django-DefectDojo/tree/master/helm/defectdojo), which ships the application with its PostgreSQL database and Valkey message broker. KubeRocketCI supports two paths: a GitOps deployment through the [Cluster Add-Ons](https://github.com/epam/edp-cluster-add-ons) repository (recommended, managed by Argo CD), or a direct `helm upgrade --install` with your own values.
 
-Upstream reference: [DefectDojo Helm chart 1.9.70 README](https://github.com/DefectDojo/django-DefectDojo/blob/3.5.200/helm/defectdojo/README.md).
+Upstream reference: [DefectDojo Helm chart 1.9.65 README](https://github.com/DefectDojo/django-DefectDojo/blob/3.5.0/helm/defectdojo/README.md).
+
+:::warning Open Source SSO Limitation
+  DefectDojo 3.x open source has **no SSO support**. Keycloak/OIDC integration is available only in DefectDojo Pro. The [DefectDojo Microsoft Entra OIDC SSO Setup](../microsoft-entra/defectdojo-oidc-authentication.md) guide applies to DefectDojo 2.x or DefectDojo Pro only. For open source 3.x, only local username/password login is supported.
+:::
 
 ## Install DefectDojo via Cluster Add-Ons
 

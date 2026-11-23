@@ -300,20 +300,37 @@ Product Type: "KubeRocketCI"
 - **Engagement** — groups related scans. Naming depends on the scan source (see table below).
 - **Test** — one per scanner in an engagement, titled with the scan type. Each reimport updates this test. Holds the actual findings.
 
-The image tests store the image tag as the test `version`. In the security-scan pipelines, the code security tests and the image tests store the `git-source-revision` of the run as the test branch (`branch_tag`). The code security tests have no version, because the pipelines do not pass `DD_VERSION`.
+The image tests store the image tag as the test `version`, or `sha256:` and the first 12 characters of the digest when the reference has a digest and no tag. In the security-scan pipelines, the code security tests and the image tests store the `git-source-revision` of the run as the test branch (`branch_tag`). The code security tests have no version, because the pipelines do not pass `DD_VERSION`.
 
 ### Engagement Naming Strategy
 
 | Scan Source | Engagement Name | Rationale |
 |:----------:|----------------|-----------|
 | Code security scans | `code-security-{branch}`, where `{branch}` is the `git-source-revision` of the run (`code-security` when the task gets no branch) | One engagement per branch for SAST and secret findings |
-| Container image scans | `image:{image-reference-without-tag}`: the image reference with the text after its last `:` removed | Reimport selects the test by engagement, scan type, and test title, and `close_old_findings` closes findings only inside that test. One engagement per image repository keeps each image in its own test. The text after the last `:`, the image tag, is stored as the test `version`. Every scan of the repository, from any branch or of any tag, and by the security-scan or the image-scan-remote pipeline, replaces the findings of the previous scan |
+| Container image scans | `image:{image-name}`, where `{image-name}` is the normalized image reference. See [Image Name Normalization](#image-name-normalization) | Reimport selects the test by engagement, scan type, and test title, and `close_old_findings` closes findings only inside that test. One engagement per image keeps each image in its own test, whatever form its reference is written in. The image tag, or `sha256:` and 12 characters of the digest for an image with a digest and no tag, is stored as the test `version`. Every scan of the image, from any branch or of any tag, and by the security-scan or the image-scan-remote pipeline, replaces the findings of the previous scan |
 | TAR image scans | `container-security` | Default of the `DD_ENGAGEMENT_NAME` parameter of the `image-scan` task |
 
-The pipelines do not normalize the image reference. A reference with a digest, a registry port without a tag, a `docker.io/` or `library/` prefix, or upper case in the host gives an engagement name that differs from the plain `<registry>/<repository>`. For examples, refer to [Link CI Image Scans to Running Containers](./runtime-security-findings.md#link-ci-image-scans-to-running-containers).
+#### Image Name Normalization
 
-:::note Planned change
-  The image engagement name will be normalized in the same way as the runtime `oci-image` test tag: without the digest, with the registry port kept, without the Docker Hub `docker.io/` and `library/` prefixes, and with the host in lower case.
+The `image-scan-chart` and `image-scan-remote` tasks of edp-tekton 0.30.0 and later build the image name in the same way as krci-security-operator builds the `oci-image` test tag of [runtime findings](./runtime-security-findings.md#link-ci-image-scans-to-running-containers). Whatever form the image reference has, the image gets one engagement. The tasks do the following:
+
+1. Remove the digest and the tag. The registry port stays.
+2. Write the value in lowercase.
+3. Remove the Docker Hub host (`docker.io/`, `index.docker.io/`, or `registry-1.docker.io/`) and the `library/` prefix. A reference without a registry host, such as `library/nginx:1.27`, is a Docker Hub image.
+
+The test `version` is the tag. When the reference has a digest and no tag, the version is `sha256:` and the first 12 characters of the digest. When it has neither, the task sends no version. A reference with both a tag and a digest has the tag as the version.
+
+| Image reference | Engagement | Test version |
+|---|---|---|
+| `registry.example.com/shop/app:2.4.1` | `image:registry.example.com/shop/app` | `2.4.1` |
+| `registry.example.com/shop/app@sha256:<digest>` | `image:registry.example.com/shop/app` | `sha256:` and 12 characters of the digest |
+| `registry.example.com:5000/shop/app` | `image:registry.example.com:5000/shop/app` | None |
+| `docker.io/library/nginx:1.27` | `image:nginx` | `1.27` |
+| `docker.io/bitnami/redis:7.4` | `image:bitnami/redis` | `7.4` |
+| `Registry.example.com/Shop/App:1.0` | `image:registry.example.com/shop/app` | `1.0` |
+
+:::note
+  When an image gets a new engagement name after the update to edp-tekton 0.30.0, its next scan writes the new engagement. The engagement under the old name stays in DefectDojo, no scan updates it, and its findings stay active and are counted with the others.
 :::
 
 ### Upload Mechanism
@@ -349,7 +366,7 @@ Parameters sent only when they have a value:
 
 | Parameter | Value | Sent by |
 |-----------|-------|---------|
-| `version` | The image tag: the text after the last `:` of the image reference | `image-scan-chart`, `image-scan-remote` |
+| `version` | The image tag, or `sha256:` and the first 12 characters of the digest when the image reference has a digest and no tag. See [Image Name Normalization](#image-name-normalization) | `image-scan-chart`, `image-scan-remote` |
 | `version` | The `DD_VERSION` task parameter. The pipelines do not pass it | `security`, `image-scan` |
 | `branch_tag` | The `CODEBASE_BRANCH` task parameter: the `git-source-revision` of the security-scan pipeline run | `security`, `image-scan-chart` |
 | `branch_tag` | The `DD_BRANCH_TAG` task parameter | `image-scan` |

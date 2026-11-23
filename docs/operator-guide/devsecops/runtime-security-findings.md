@@ -219,21 +219,17 @@ To find where a scanned image runs:
 
 To go the other way, read the `oci-image` tag of a runtime test and open the engagement `image:<value>` of the codebase product.
 
-The comparison is plain text, and the two sides derive the name differently:
+The comparison is plain text. The CI pipeline takes the image reference as written in the rendered Helm chart, or in the `IMAGE_NAMES` parameter of the remote image scan. The operator takes the registry and repository from the Trivy Operator report. Both build the name by the same rule, so one image gets one name, whichever form its reference is written in:
 
-- The CI pipeline takes the image reference as written in the rendered Helm chart, or in the `IMAGE_NAMES` parameter of the remote image scan, and cuts the text after the last `:`. It changes nothing else.
-- The operator takes the registry and repository from the Trivy Operator report, drops the tag and digest, writes Docker Hub images without the host and the `library/` prefix, and lowercases the value.
+- Remove the digest and the tag. The registry port stays.
+- Write the value in lowercase.
+- Write Docker Hub images without the host and without the `library/` prefix.
 
-The names match when the image reference is `<registry>/<repository>:<tag>` in lowercase, with no digest, and a Docker Hub reference has no `docker.io/` and no `library/`. For other references the names do not match, and you map them by hand:
+For example, `docker.io/library/nginx:1.27`, `library/nginx:1.27`, and `nginx:1.27` all give `nginx`, and `Registry.example.com:5000/Shop/Checkout@sha256:<digest>` gives `registry.example.com:5000/shop/checkout`. The test version follows the same rule on both sides: the tag, or `sha256:` and the first 12 characters of the digest when the reference has a digest and no tag. For the full rule, refer to [Image Name Normalization](./security-pipelines.md#image-name-normalization).
 
-| Image reference | CI engagement | Operator test tag |
-|---|---|---|
-| With a digest: `registry.example.com/shop/checkout@sha256:<digest>` | `image:registry.example.com/shop/checkout@sha256` | `oci-image:registry.example.com/shop/checkout` |
-| Without a tag, on a registry with a port: `registry.example.com:5000/shop/checkout` | `image:registry.example.com` | `oci-image:registry.example.com:5000/shop/checkout` |
-| Docker Hub with the host or `library/`: `docker.io/library/nginx:1.27` | `image:docker.io/library/nginx` | `oci-image:nginx` |
-| Upper case in the host: `Registry.example.com/shop/checkout:2.4.1` | `image:Registry.example.com/shop/checkout` | `oci-image:registry.example.com/shop/checkout` |
-
-Write image references in your Helm charts as `<registry>/<repository>:<tag>` in lowercase, and Docker Hub images without `docker.io/` and `library/`, for example `nginx:1.27` or `bitnami/redis:7.4`. For a third-party chart, set its image values the same way where the chart allows it. The CI pipelines are planned to normalize the engagement name; see [Planned Changes](#planned-changes).
+:::note
+  The CI pipelines normalize the name from edp-tekton 0.30.0. Earlier versions cut the image reference at its last `:`, so for a reference with a digest, a registry port without a tag, a Docker Hub host or `library/`, or upper case, the engagement name differs from the `oci-image` tag.
+:::
 
 ## When Findings Close
 
@@ -355,12 +351,6 @@ Repeat these steps on every cluster with its own cluster name and the same `defe
 | `concurrency` | `2` | Number of namespaces processed in parallel |
 
 For the full list of values, refer to the [chart README](https://github.com/KubeRocketCI/krci-security-operator/blob/main/deploy-templates/README.md).
-
-## Planned Changes
-
-The following change is planned and is not available yet:
-
-- **Normalized CI image engagement names.** The CI pipelines will build the `image:` engagement name in the same way as the operator builds the `oci-image` test tag: without the digest, with the registry port kept, without the Docker Hub `docker.io/` and `library/` prefixes, and with the host in lower case. The references in [Link CI Image Scans to Running Containers](#link-ci-image-scans-to-running-containers) will then match without mapping by hand.
 
 ## Related Articles
 

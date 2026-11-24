@@ -67,7 +67,7 @@ Having created the Go application, proceed to build it by performing the followi
 
     ![Organizations page](../assets/quick-start/sonar_org_page.png "Organizations page")
 
-3. In SonarCloud, open the project and go to **Project Information**. Copy the **Project key** exactly as shown (spelling and casing matter). For projects created from GitHub, it is often `<organization-name>_<codebase-name>` (for this guide the codebase name is `my-go-gin-app`):
+3. In SonarCloud, open the project and go to **Project Information**. Copy the **Project key** exactly as shown (spelling and casing matter). For projects imported from GitHub, it is `<owner>_<codebase-name>`, where `<owner>` is the name of the GitHub account or organization written exactly as on GitHub, including the letter case (it can differ from the SonarCloud organization key). For this guide the codebase name is `my-go-gin-app`:
 
     ![Project information](../assets/quick-start/sonarcloud_project_information.png "Project information")
 
@@ -78,7 +78,7 @@ Having created the Go application, proceed to build it by performing the followi
 5. In the repository on the `main` branch, edit `sonar-project.properties`. Set `sonar.projectKey` to the **Project key** from the previous step, `sonar.organization` to your **organization key**, and keep the rest aligned with the codebase name `my-go-gin-app`:
 
     ```ini
-    sonar.projectKey=<organization-name>_my-go-gin-app
+    sonar.projectKey=<owner>_my-go-gin-app
     sonar.projectName=my-go-gin-app
     sonar.go.coverage.reportPaths=coverage.out
     sonar.branch.name=main
@@ -91,34 +91,20 @@ Having created the Go application, proceed to build it by performing the followi
     ![Sonar project properties](../assets/quick-start/sonar-project-properties.png "Sonar project properties")
 
     :::note
-      Replace `<organization-key>` with your real organization key from SonarCloud. If SonarCloud shows a **Project key** that does not follow `<organization-key>_my-go-gin-app`, use the value from **Project Information** verbatim for `sonar.projectKey`.
+      Replace `<organization-key>` with your real organization key from SonarCloud. Use the value from **Project Information** verbatim for `sonar.projectKey`.
     :::
 
 6. Commit and push the `sonar-project.properties` changes to the main branch.
-
-7. (Optional) Select the SonarCloud-specific pipeline:
-
-  On the Project details page, select the **Branches tab**, click the actions button and select **Configure**:
-
-    ![Edit branch](../assets/quick-start/edit-main.png "Edit branch")
-
-    :::note
-      If this Pipeline is managed by Helm or Argo CD, apply the same change in the GitOps manifest or chart values so the cluster object is not reverted on sync.
-    :::
 
     :::note
       If you use a self-hosted SonarQube instance instead of SonarCloud, follow [SonarQube integration](../operator-guide/code-quality/sonarqube.md); project key rules may differ.
     :::
 
-  In the **Edit** window, select the **github-build-edp-sonarcloud** build Pipeline and click **Apply**:
-
-    ![Change build pipeline](../assets/quick-start/change-build-pipeline.png "Change build pipeline")
-
-8. In the Project details page, click **Build**:
+7. In the Project details page, click **Build**:
 
     ![Triggering pipeline run](../assets/quick-start/trigger_pipeline_run.png "Triggering pipeline run")
 
-9. Open the PipelineRun and wait until it finishes. Many small starter projects pass on the first run:
+8. Open the PipelineRun and wait until it finishes. Many small starter projects pass on the first run:
 
     ![Pipelinerun logs](../assets/quick-start/pipelinerun_status.png "Pipelinerun logs")
 

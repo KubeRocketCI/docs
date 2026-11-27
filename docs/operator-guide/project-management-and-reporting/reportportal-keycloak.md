@@ -91,6 +91,87 @@ To apply the Keycloak configuration, the Keycloak Operator is required. For inst
 
     ![Report portal login page](../../assets/operator-guide/project-management-and-reporting/reportportal-keycloak-7.png "Report portal login page")
 
+## Sign SAML Requests (ReportPortal 26.0.x)
+
+Keycloak requires service providers to sign SAML authentication requests (`WantAuthnRequestsSigned="true"` in its SAML metadata). By default, ReportPortal 26.0.x does not sign them, so **Login with SAML** fails and the `uat` pod logs the following error:
+
+```text
+IllegalArgumentException: Failed to resolve any signing credential
+```
+
+To enable SAML request signing, provide the `uat` service with a keystore that contains a signing key, and set the signing parameters.
+
+:::note
+  This procedure applies to ReportPortal `26.0.x`, where authentication runs in the separate `uat` deployment. The values below have no effect on versions that do not include that deployment.
+:::
+
+1. Generate a JKS keystore with the `report-portal-sp` key alias:
+
+    ```bash
+    keytool -genkeypair -alias report-portal-sp -keyalg RSA -keysize 2048 -validity 3650 \
+      -dname "CN=report.portal.sp.id" -keystore keystore.jks -storetype JKS \
+      -storepass '<keystore-password>' -keypass '<keystore-password>'
+    ```
+
+    :::warning
+      The keystore must use the `JKS` type, as ReportPortal loads it in that format. Use a strong random password, and do not commit the keystore or the password to Git.
+    :::
+
+2. Create a Secret with the keystore and both passwords:
+
+    ```bash
+    kubectl -n <report-portal-namespace> create secret generic reportportal-saml-keystore \
+      --from-file=keystore.jks=keystore.jks \
+      --from-literal=keystore-password='<keystore-password>' \
+      --from-literal=key-password='<keystore-password>'
+    ```
+
+    When using the External Secrets Operator, store the keystore Base64-encoded in the secret store and decode it with `decodingStrategy: Base64`.
+
+3. Add the following to the ReportPortal Helm values:
+
+    ```yaml
+    reportportal:
+      uat:
+        extraEnvs:
+          - name: RP_AUTH_SAML_SIGNED-REQUESTS
+            value: "true"
+          - name: RP_AUTH_SAML_KEY-STORE
+            value: "file:///etc/saml/keystore.jks"
+          - name: RP_AUTH_SAML_KEY-ALIAS
+            value: "report-portal-sp"
+          - name: RP_AUTH_SAML_KEY-STORE-PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: reportportal-saml-keystore
+                key: keystore-password
+          - name: RP_AUTH_SAML_KEY-PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: reportportal-saml-keystore
+                key: key-password
+        extraVolumes:
+          - name: saml-keystore
+            secret:
+              secretName: reportportal-saml-keystore
+              items:
+                - key: keystore.jks
+                  path: keystore.jks
+        extraVolumeMounts:
+          - name: saml-keystore
+            mountPath: /etc/saml
+            readOnly: true
+    ```
+
+4. Wait for the `uat` pod to restart, and then check its log. The following messages must **not** appear:
+
+    ```text
+    Skipping SAML provider
+    No valid SAML providers registered
+    ```
+
+5. Log in with SAML as a user that already exists in ReportPortal. ReportPortal matches the user by email, signs in to the existing account, and does not create a duplicate account.
+
 ## Related Articles
 
 * [Install ReportPortal](../project-management-and-reporting/install-reportportal.md)

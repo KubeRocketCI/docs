@@ -105,6 +105,7 @@ words:
   - DEPTRACK
   - distroless
   - Djava
+  - dname
   - Djgroups
   - Dkeycloak
   - dockerbuild
@@ -148,6 +149,7 @@ words:
   - Fzcw
   - gantt
   - gcpsm
+  - genkeypair
   - Gerrit
   - gitcloneurl
   - Gitea
@@ -180,6 +182,7 @@ words:
   - inspectable
   - issueadmin
   - jobservice
+  - JKS
   - junitxml
   - Kaniko
   - karpenter
@@ -197,7 +200,10 @@ words:
   - keycloakrealmuser
   - keycloakx
   - Keycloakx
+  - keyalg
   - keyid
+  - keypass
+  - keysize
   - keytool
   - kibanaserver
   - kibanauser
@@ -330,6 +336,7 @@ words:
   - storageclass
   - storageclasses
   - storepass
+  - storetype
   - struct
   - subresource
   - sunsetting
